@@ -1,13 +1,13 @@
-# Seata Official Website
+# Higress Official Website
 
-[![CI Status](https://github.com/seata/seata.github.io/workflows/CI/badge.svg)](https://github.com/seata/seata.github.io/actions)
+[![CI Status](https://github.com/higress-group/higress-group.github.io/workflows/CI/badge.svg)](https://github.com/higress-group/higress-group.github.io/actions)
 
-All website material  of https://seata.io
+All website material  of https://higress.io
 
 
 ## Prerequisite
 
-seata.github.io is powered by [docsite](https://github.com/txd-team/docsite).please read [https://docsite.js.org](https://docsite.js.org) 
+higress-group.github.io is powered by [docsite](https://github.com/txd-team/docsite).please read [https://docsite.js.org](https://docsite.js.org) 
 If your version of docsite is less than `1.3.3`, please upgrade to `1.3.3`.
 Please also make sure your node version is 8.x, versions higher than 8.x is not supported by docsite yet.
 
@@ -77,7 +77,6 @@ date: 2018-12-29
 + If you want to add `search in site`，see [https://docsite.js.org/zh-cn/docs/search.html](https://docsite.js.org/zh-cn/docs/search.html)
 + This is docsite docs :[https://docsite.js.org/zh-cn/docs/path.html](https://docsite.js.org/zh-cn/docs/path.html)
 
-+ If you want to update saga statemachine designer, rebuild it, see [https://github.com/seata/seata/tree/develop/saga/seata-saga-statemachine-designer](https://github.com/seata/seata/tree/develop/saga/seata-saga-statemachine-designer), and copy `index.html` and `dist/` directory to  `seata.github.io/saga_designer/` directory.
 
 
 
