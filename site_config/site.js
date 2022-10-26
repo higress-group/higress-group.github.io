@@ -126,7 +126,7 @@ export default {
             {
                 key: 'docs',
                 text: '文档',
-                link: '/zh-cn/docs/overview/what-is-seata.html',
+                link: '/zh-cn/docs/overview/what-is-higress.html',
             },
             {
                 key: 'solution',
