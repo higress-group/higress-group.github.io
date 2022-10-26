@@ -26,7 +26,7 @@ const searchSwitch = {
     url: 'https://www.google.com/search?q=',
   },
 };
-const noop = () => {};
+const noop = () => { };
 const propTypes = {
   currentKey: PropTypes.string,
   logo: PropTypes.string.isRequired,
@@ -131,41 +131,41 @@ class Header extends React.Component {
           </a>
           {
             siteConfig.defaultSearch ?
-            (
-              <div
-                className={classnames({
-                  search: true,
-                  [`search-${type}`]: true,
-                })}
-              >
-                <span className="icon-search" onClick={this.toggleSearch} />
-                {
-                  searchVisible ?
-                  (
-                    <div className="search-input">
-                      <img src={searchSwitch[search].logo} onClick={this.switchSearch} />
-                      <input autoFocus onChange={this.onInputChange} onKeyDown={this.onKeyDown} />
-                    </div>
-                  ) : null
-                }
-              </div>
-            ) : null
+              (
+                <div
+                  className={classnames({
+                    search: true,
+                    [`search-${type}`]: true,
+                  })}
+                >
+                  <span className="icon-search" onClick={this.toggleSearch} />
+                  {
+                    searchVisible ?
+                      (
+                        <div className="search-input">
+                          <img src={searchSwitch[search].logo} onClick={this.switchSearch} />
+                          <input autoFocus onChange={this.onInputChange} onKeyDown={this.onKeyDown} />
+                        </div>
+                      ) : null
+                  }
+                </div>
+              ) : null
           }
           {
             onLanguageChange !== noop ?
-            (<span
-              className={
-                classnames({
-                  'language-switch': true,
-                  [`language-switch-${type}`]: true,
-                })
-              }
-              onClick={this.switchLang}
-            >
-              {languageSwitch.find(lang => lang.value === language).text}
-            </span>)
-            :
-            null
+              (<span
+                className={
+                  classnames({
+                    'language-switch': true,
+                    [`language-switch-${type}`]: true,
+                  })
+                }
+                onClick={this.switchLang}
+              >
+                {languageSwitch.find(lang => lang.value === language).text}
+              </span>)
+              :
+              null
           }
           <div
             className={
@@ -178,19 +178,20 @@ class Header extends React.Component {
             <img
               className="header-menu-toggle"
               onClick={this.toggleMenu}
-              src={type === 'primary' ? getLink('/img/system/menu_white.png') : getLink('/img/system/menu_gray.png')}
+              src={type === 'primary' ? getLink('https://img.alicdn.com/tfs/TB1xDggwWL7gK0jSZFBXXXZZpXa-38-32.png') : getLink('https://img.alicdn.com/tfs/TB14eEmw7P2gK0jSZPxXXacQpXa-38-32.png')}
             />
             <ul>
               {siteConfig[language].pageMenu.map(item => (
                 <li
+                  key={item.key}
                   className={classnames({
                     'menu-item': true,
                     [`menu-item-${type}`]: true,
                     [`menu-item-${type}-active`]: currentKey === item.key,
                   })}
-                  key={item.key}
                 >
-                  <a href={getLink(item.link)} target={item.target || '_self'}>{item.text}</a>
+                  {item.link ? <span><a href={getLink(item.link)}>{item.text}</a>{item.imgUrl ? <img className={"menu-img"} src={item.imgUrl} /> : null}</span> : null}
+                  {item.children ? <div className="nav-container"><div className="word"><a >{item.text}</a>{item.imgUrl ? <img className={"menu-img"} src={item.imgUrl} /> : null}</div><ul className="sub-nav-container" style={{ width: language === 'zh-cn' ? 220 : 290 }}>{item.children.map((child) => <li><a href={child.link} target="_blank">{child.text}</a></li>)}</ul> </div> : null}
                 </li>))}
             </ul>
           </div>
