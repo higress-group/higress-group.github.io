@@ -15,13 +15,7 @@ export default {
             {
                 key: 'docs',
                 text: 'DOCS',
-                link: '/en-us/docs/overview/what-is-seata.html',
-            },
-            {
-                key: 'enterprise',
-                text: 'SEATA IN CLOUD',
-                link: 'https://cn.aliyun.com/product/aliware/mse?spm=seata-website.topbar.0.0.0',
-                imgUrl: 'https://img.alicdn.com/imgextra/i4/O1CN01iksJGI1TOscjbXlOD_!!6000000002373-2-tps-30-30.png'
+                link: '/en-us/docs/overview/what-is-higress.html',
             },
             {
                 key: 'solution',
@@ -84,14 +78,14 @@ export default {
         ],
         vision: {
             title: 'Vision',
-            content: 'Seata is an Alibaba open source distributed transaction solution that delivers high performance and easy to use distributed transaction services under a microservices architecture.',
+            content: 'Higress is ...',
         },
         documentation: {
             title: 'Documentation',
             list: [
                 {
-                    text: 'What is Seata?',
-                    link: '/en-us/docs/overview/what-is-seata.html',
+                    text: 'What is Higress?',
+                    link: '/en-us/docs/overview/what-is-higress.html',
                 },
                 {
                     text: 'Quick Start',
@@ -120,7 +114,7 @@ export default {
                 },
             ],
         },
-        copyright: 'Copyright © 2022 Seata',
+        copyright: 'Copyright © 2022 Higress',
     },
     'zh-cn': {
         pageMenu: [
@@ -133,12 +127,6 @@ export default {
                 key: 'docs',
                 text: '文档',
                 link: '/zh-cn/docs/overview/what-is-seata.html',
-            },
-            {
-                key: 'enterprise',
-                text: 'Seata企业版',
-                link: 'https://cn.aliyun.com/product/aliware/mse?spm=seata-website.topbar.0.0.0',
-                imgUrl: 'https://img.alicdn.com/imgextra/i4/O1CN01iksJGI1TOscjbXlOD_!!6000000002373-2-tps-30-30.png'
             },
             {
                 key: 'solution',
@@ -201,14 +189,14 @@ export default {
         ],
         vision: {
             title: '愿景',
-            content: 'Seata 是一款阿里巴巴开源的分布式事务解决方案，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。',
+            content: 'Higress 是...',
         },
         documentation: {
             title: '文档',
             list: [
                 {
-                    text: 'Seata 是什么？',
-                    link: '/zh-cn/docs/overview/what-is-seata.html',
+                    text: 'Higress 是什么？',
+                    link: '/zh-cn/docs/overview/what-is-higress.html',
                 },
                 {
                     text: '快速开始',
@@ -237,6 +225,6 @@ export default {
                 },
             ],
         },
-        copyright: 'Copyright © 2022 Seata',
+        copyright: 'Copyright © 2022 Higress',
     },
 };
