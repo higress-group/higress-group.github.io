@@ -2,7 +2,7 @@
 export default {
     rootPath: '',
     port: 8080,
-    domain: 'seata.io', // 站点部署域名，无需协议和path等
+    domain: 'higress.io', // 站点部署域名，无需协议和path等
     defaultSearch: 'baidu', // 默认搜索引擎，baidu或者google
     defaultLanguage: 'en-us',
     'en-us': {
@@ -93,11 +93,11 @@ export default {
                 },
                 {
                     text: 'Report a doc issue',
-                    link: 'https://github.com/seata/seata.github.io/issues/new',
+                    link: 'https://github.com/higress-group/higress-group.github.io/issues/new',
                 },
                 {
                     text: 'Edit This Page on GitHub',
-                    link: 'https://github.com/seata/seata.github.io',
+                    link: 'https://github.com/higress-group/higress-group.github.io',
                 }
             ],
         },
@@ -204,11 +204,11 @@ export default {
                 },
                 {
                     text: '报告文档问题',
-                    link: 'https://github.com/seata/seata.github.io/issues/new',
+                    link: 'https://github.com/higress-group/higress-group.github.io/issues/new',
                 },
                 {
                     text: '在Github上编辑此文档',
-                    link: 'https://github.com/seata/seata.github.io',
+                    link: 'https://github.com/higress-group/higress-group.github.io',
                 }
             ],
         },

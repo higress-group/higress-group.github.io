@@ -9,7 +9,7 @@ export default {
         {
           img: 'https://img.alicdn.com/tfs/TB1isb2wYj1gK0jSZFuXXcrHpXa-4300-2867.jpg',
           title: 'title',
-          content: 'seata',
+          content: 'Higress',
           dateStr: 'May 12nd，2018',
           link: '/en-us/blog/blog1.html',
         },
@@ -28,7 +28,7 @@ export default {
         {
           img: '//img.alicdn.com/tfs/TB1OTCISET1gK0jSZFrXXcNCXXa-344-346.jpg',
           imgHover: '//img.alicdn.com/tfs/TB1OTCISET1gK0jSZFrXXcNCXXa-344-346.jpg',
-          title: 'Seata WeChat Official Account(Recommend)',
+          title: 'Higress WeChat Official Account(Recommend)',
         },
         {
           img: '//img.alicdn.com/tfs/TB1nccZi79l0K4jSZFKXXXFjpXa-614-614.jpg',
@@ -44,7 +44,7 @@ export default {
     },
     contributorGuide: {
       title: 'Contributor Guide',
-      desc: 'You can always contribute to Seata.',
+      desc: 'You can always contribute to Higress.',
       list: [
         {
           img: '/img/channels/email_gray.svg',

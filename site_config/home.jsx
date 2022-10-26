@@ -20,7 +20,7 @@ export default {
         },
         introduction: {
             title: 'Higress 是什么？',
-            desc: 'Seata ...',
+            desc: 'Higress ...',
             img: 'https://img.alicdn.com/tfs/TB1rDpkJAvoK1RjSZPfXXXPKFXa-794-478.png',
         },
         features: {
