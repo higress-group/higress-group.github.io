@@ -13,8 +13,8 @@ export default {
                 },
             ],
             versionNote: {
-                text: 'Release Note of 1.5.2',
-                link: 'https://github.com/seata/seata/releases/tag/v1.5.2',
+                text: 'Release Note of 0.1.0',
+                link: 'https://github.com/alibaba/higress/releases/tag/v1.5.2',
             },
             releaseDate: 'Released on Jul 12, 2022',
         },
@@ -61,7 +61,7 @@ export default {
         users: {
             title: '谁在使用 Higress',
             desc: <span>请在 <a rel="noopener noreferrer" target="_blank"
-                              href="https://github.com/seata/seata/issues/1246">Wanted: who&#39;s using Higress</a> 上提供信息来帮助 Higress 做的更好。</span>,
+                              href="https://github.com/alibaba/higress/issues/1">Wanted: who&#39;s using Higress</a> 上提供信息来帮助 Higress 做的更好。</span>,
             list: [
                 'https://img.alicdn.com/imgextra/i1/O1CN01TleQq128FAP8POtL5_!!6000000007902-2-tps-241-42.png' ,
                 'https://img.alicdn.com/imgextra/i4/O1CN01IOIk0s1bWgJ05f4HF_!!6000000003473-2-tps-1200-699.png' ,
@@ -83,8 +83,8 @@ export default {
                 }
             ],
             versionNote: {
-                text: 'Release Note of 1.5.2',
-                link: 'https://github.com/seata/seata/releases/tag/v1.5.2',
+                text: 'Release Note of 0.1.0',
+                link: 'https://github.com/alibaba/higress/releases/tag/v0.1.0',
             },
             releaseDate: 'Released on Jul 17, 2022',
         },
@@ -131,7 +131,7 @@ export default {
         users: {
             title: 'Who is using Higress?',
             desc: <span>请在 <a rel="noopener noreferrer" target="_blank"
-                              href="https://github.com/seata/seata/issues/1246">Wanted: who&#39;s using Higress</a> to help improving Higress better.</span>,
+                              href="https://github.com/alibaba/higress/issues/1246">Wanted: who&#39;s using Higress</a> to help improving Higress better.</span>,
             list: [
                 'https://img.alicdn.com/imgextra/i1/O1CN01TleQq128FAP8POtL5_!!6000000007902-2-tps-241-42.png' ,
                 'https://img.alicdn.com/imgextra/i4/O1CN01IOIk0s1bWgJ05f4HF_!!6000000003473-2-tps-1200-699.png' ,

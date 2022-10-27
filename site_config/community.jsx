@@ -23,7 +23,7 @@ export default {
           img: '/img/mailinglist.png',
           imgHover: '/img/mailinglist_hover.png',
           title: 'Mailing List',
-          link: 'mailto:dev-seata+subscribe@googlegroups.com'
+          link: 'mailto:dev-higress+subscribe@googlegroups.com'
         },
         {
           img: '//img.alicdn.com/tfs/TB1OTCISET1gK0jSZFrXXcNCXXa-344-346.jpg',
@@ -54,17 +54,17 @@ export default {
         {
           img: '/img/channels/github_gray.svg',
           title: 'Issue',
-          content: <span>Submit a <a href="https://github.com/seata/seata/issues/new">new issue</a>.</span>,
+          content: <span>Submit a <a href="https://github.com/alibaba/higress/issues/new">new issue</a>.</span>,
         },
         {
           img: '/img/documents.png',
           title: 'Documents',
-          content: <span>Improve the <a href="https://github.com/seata/seata.github.io">documentation</a>.</span>,
+          content: <span>Improve the <a href="https://github.com/higress-group/higress-group.github.io">documentation</a>.</span>,
         },
         {
           img: '/img/pullrequest.png',
           title: 'Pull Request',
-          content: <span>Create a brilliant <a href="https://github.com/seata/seata/pulls">pull request</a>.  </span>,
+          content: <span>Create a brilliant <a href="https://github.com/alibaba/higress/pulls">pull request</a>.  </span>,
         },
       ],
     },
@@ -76,17 +76,10 @@ export default {
       list: [
         {
           img: 'https://img.alicdn.com/tfs/TB1qH2YwVP7gK0jSZFjXXc5aXXa-2002-901.jpg',
-          title: 'Seata Meetup·杭州站成功举办',
-          content: 'Seata Community Meetup·杭州站,于12月21号在杭州市梦想小镇浙江青年众创空间完美举办',
+          title: 'Higress XXX',
+          content: 'Higress XXX',
           dateStr: 'Dec 25nd，2019',
-          link: '/zh-cn/blog/seata-meetup-hangzhou.html',
-        },
-        {
-          img: '/img/blog/20191218210552.png',
-          title: 'Seata Community Meetup·杭州站',
-          content: 'Seata Community Meetup·杭州站,将于12月21号在杭州市梦想小镇浙江青年众创空间正式召开',
-          dateStr: 'Dec 18nd，2019',
-          link: '/zh-cn/blog/seata-community-meetup-hangzhou-ready.html',
+          link: '/zh-cn/blog/higress-meetup-hangzhou.html',
         },
       ]
     },
@@ -98,12 +91,12 @@ export default {
                 img: '/img/mailinglist.png',
                 imgHover: '/img/mailinglist_hover.png',
                 title: '邮件列表',
-                link: 'mailto:dev-seata+subscribe@googlegroups.com'
+                link: 'mailto:dev-higress+subscribe@googlegroups.com'
             },
             {
                 img: '//img.alicdn.com/tfs/TB1OTCISET1gK0jSZFrXXcNCXXa-344-346.jpg',
                 imgHover: '//img.alicdn.com/tfs/TB1OTCISET1gK0jSZFrXXcNCXXa-344-346.jpg',
-                title: 'Seata 微信官方公众号(强烈推荐)',
+                title: 'Higress 微信官方公众号(强烈推荐)',
             },
             {
                 img: '//img.alicdn.com/tfs/TB1nccZi79l0K4jSZFKXXXFjpXa-614-614.jpg',
@@ -119,7 +112,7 @@ export default {
     },
     contributorGuide: {
       title: '贡献指南',
-      desc: '欢迎为 Seata 做贡献！',
+      desc: '欢迎为 Higress 做贡献！',
       list: [
         {
           img: '/img/channels/email_gray.svg',
@@ -129,17 +122,17 @@ export default {
         {
           img: '/img/channels/github_gray.svg',
           title: '报告问题',
-          content: <span>提交<a href="https://github.com/seata/seata/issues/new">新问题</a>。</span>,
+          content: <span>提交<a href="https://github.com/alibaba/higress/issues/new">新问题</a>。</span>,
         },
         {
           img: '/img/documents.png',
           title: '改进文档',
-          content: <span>改进<a href="https://github.com/seata/seata.github.io">文档</a>。</span>,
+          content: <span>改进<a href="https://github.com/higress-group/higress-group.github.io">文档</a>。</span>,
         },
         {
           img: '/img/pullrequest.png',
           title: '提交 PR',
-          content: <span>创建一个<a href="https://github.com/seata/seata/pulls">PR</a>。</span>,
+          content: <span>创建一个<a href="https://github.com/alibaba/higress/pulls">PR</a>。</span>,
         },
       ],
     },
