@@ -99,7 +99,7 @@ class BlogDetail extends Language {
         <Header
           type="normal"
           currentKey={currentKey}
-          logo="//img.alicdn.com/tfs/TB1gqL1w4D1gK0jSZFyXXciOVXa-1497-401.png"
+          logo="//img.alicdn.com/imgextra/i1/O1CN015n2gG9211hXjnNPy3_!!6000000006925-2-tps-960-258.png"
           language={language}
           onLanguageChange={this.onLanguageChange}
         />
@@ -108,7 +108,7 @@ class BlogDetail extends Language {
           ref={(node) => { this.markdownContainer = node; }}
           dangerouslySetInnerHTML={{ __html }}
         />
-        <Footer logo="//img.alicdn.com/tfs/TB1dGrSwVT7gK0jSZFpXXaTkpXa-4802-1285.png" language={language} />
+        <Footer logo="//img.alicdn.com/imgextra/i4/O1CN01jRnodS1PtKWFvPpP3_!!6000000001898-2-tps-960-258.png" language={language} />
       </div>
     );
   }
