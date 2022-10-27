@@ -57,7 +57,7 @@ class Blog extends Language {
             </ul>
           </div>
         </section>
-        <Footer logo="//img.alicdn.com/imgextra/i4/O1CN01jRnodS1PtKWFvPpP3_!!6000000001898-2-tps-960-258.png" language={language} />
+        <Footer logo="//img.alicdn.com/imgextra/i3/O1CN018Uhbjp1e3mAzv0Lt2_!!6000000003816-2-tps-961-258.png" language={language} />
       </div>
     );
   }

@@ -28,32 +28,32 @@ export default {
             list: [
                 {
                     icon: 'feature-1',
-                    title: '微服务框架支持',
+                    title: 'XXX1',
                     content: 'XXX1',
                 },
                 {
                     icon: 'feature-2',
-                    title: 'AT 模式',
+                    title: 'XXX2',
                     content: 'XXX2',
                 },
                 {
                     icon: 'feature-3',
-                    title: 'TCC 模式',
+                    title: 'XXX3',
                     content: 'XXX3',
                 },
                 {
                     icon: 'feature-4',
-                    title: 'SAGA 模式',
+                    title: 'XXX4',
                     content: 'XXX4',
                 },
                 {
                     icon: 'feature-5',
-                    title: 'XA 模式',
+                    title: 'XXX5',
                     content: 'XXX5',
                 },
                 {
                     icon: 'feature-6',
-                    title: '高可用',
+                    title: 'XXX6',
                     content: 'XXX6',
                 },
             ],
@@ -64,10 +64,7 @@ export default {
                               href="https://github.com/alibaba/higress/issues/1">Wanted: who&#39;s using Higress</a> 上提供信息来帮助 Higress 做的更好。</span>,
             list: [
                 'https://img.alicdn.com/imgextra/i1/O1CN01TleQq128FAP8POtL5_!!6000000007902-2-tps-241-42.png' ,
-                'https://img.alicdn.com/imgextra/i4/O1CN01IOIk0s1bWgJ05f4HF_!!6000000003473-2-tps-1200-699.png' ,
                 'https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png' ,
-                'https://img.alicdn.com/imgextra/i3/O1CN01Hohqhm1JvGPE4cSD4_!!6000000001090-1-tps-436-84.gif' ,
-                'https://img.alicdn.com/tfs/TB1hvabw9f2gK0jSZFPXXXsopXa-174-100.png' ,
             ],
         },
     },
@@ -98,32 +95,32 @@ export default {
             list: [
                 {
                     icon: 'feature-1',
-                    title: 'Microservices Framework Support',
+                    title: 'XXX1',
                     content: 'XXX1',
                 },
                 {
                     icon: 'feature-2',
-                    title: 'AT mode',
+                    title: 'XXX2',
                     content: 'XXX2.',
                 },
                 {
                     icon: 'feature-3',
-                    title: 'TCC mode',
+                    title: 'XXX3',
                     content: 'XXX3.',
                 },
                 {
                     icon: 'feature-4',
-                    title: 'SAGA mode',
+                    title: 'XXX4',
                     content: 'XXX4.',
                 },
                 {
                     icon: 'feature-5',
-                    title: 'XA mode',
+                    title: 'XXX5',
                     content: 'XXX5',
                 },
                 {
                     icon: 'feature-6',
-                    title: 'High availability',
+                    title: 'XXX6',
                     content: 'XXX6.',
                 },
             ]
@@ -134,10 +131,7 @@ export default {
                               href="https://github.com/alibaba/higress/issues/1246">Wanted: who&#39;s using Higress</a> to help improving Higress better.</span>,
             list: [
                 'https://img.alicdn.com/imgextra/i1/O1CN01TleQq128FAP8POtL5_!!6000000007902-2-tps-241-42.png' ,
-                'https://img.alicdn.com/imgextra/i4/O1CN01IOIk0s1bWgJ05f4HF_!!6000000003473-2-tps-1200-699.png' ,
                 'https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png' ,
-                'https://img.alicdn.com/imgextra/i3/O1CN01Hohqhm1JvGPE4cSD4_!!6000000001090-1-tps-436-84.gif' ,
-                'https://img.alicdn.com/tfs/TB1hvabw9f2gK0jSZFPXXXsopXa-174-100.png' ,
             ],
         },
     },
