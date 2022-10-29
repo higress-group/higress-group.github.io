@@ -50,7 +50,7 @@ class Home extends Language {
     const language = this.getLanguage();
     const dataSource = homeConfig[language];
     const { headerType } = this.state;
-    const headerLogo = headerType === 'primary' ? '//img.alicdn.com/imgextra/i4/O1CN01jRnodS1PtKWFvPpP3_!!6000000001898-2-tps-960-258.png' : '//img.alicdn.com/imgextra/i1/O1CN015n2gG9211hXjnNPy3_!!6000000006925-2-tps-960-258.png';
+    const headerLogo = headerType === 'primary' ? '//img.alicdn.com/imgextra/i4/O1CN01OqNc6z1lJ4iVP8izh_!!6000000004797-2-tps-960-290.png' : '//img.alicdn.com/imgextra/i1/O1CN01I7WjVs1K33EQjInid_!!6000000001107-2-tps-960-290.png';
     return (
       <div className="home-page">
         <section className="top-section">
@@ -159,7 +159,7 @@ class Home extends Language {
             }
           </div>
         </section>
-        <Footer logo="//img.alicdn.com/imgextra/i3/O1CN018Uhbjp1e3mAzv0Lt2_!!6000000003816-2-tps-961-258.png" language={language} />
+        <Footer logo="//img.alicdn.com/imgextra/i2/O1CN01oNTGgE1lfW7oEPIzP_!!6000000004846-2-tps-960-290.png" language={language} />
       </div>
     );
   }

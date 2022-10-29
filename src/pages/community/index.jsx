@@ -22,7 +22,7 @@ class Community extends Language {
         <Header
           currentKey="community"
           type="normal"
-          logo="//img.alicdn.com/imgextra/i1/O1CN015n2gG9211hXjnNPy3_!!6000000006925-2-tps-960-258.png"
+          logo="//img.alicdn.com/imgextra/i1/O1CN01I7WjVs1K33EQjInid_!!6000000001107-2-tps-960-290.png"
           language={language}
           onLanguageChange={this.onLanguageChange}
         />
@@ -57,7 +57,7 @@ class Community extends Language {
           }
           </div>
         </section>
-        <Footer logo="//img.alicdn.com/imgextra/i3/O1CN018Uhbjp1e3mAzv0Lt2_!!6000000003816-2-tps-961-258.png" language={language} />
+        <Footer logo="//img.alicdn.com/imgextra/i2/O1CN01oNTGgE1lfW7oEPIzP_!!6000000004846-2-tps-960-290.png" language={language} />
       </div>
     );
   }
