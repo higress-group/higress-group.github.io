@@ -1,6 +1,15 @@
 {
   "en-us": [
     {
+      "filename": "architecture.md",
+      "link": "/en-us/docs/dev/architecture.html",
+      "meta": {
+        "title": "Higress architecture description",
+        "keywords": "Higress",
+        "description": "Higress architecture description."
+      }
+    },
+    {
       "filename": "label-an-issue-guide_dev.md",
       "link": "/en-us/docs/developers/committer-guide/label-an-issue-guide_dev.html",
       "meta": {
@@ -69,6 +78,24 @@
       }
     },
     {
+      "filename": "deploy-by-helm.md",
+      "link": "/en-us/docs/ops/deploy-by-helm.html",
+      "meta": {
+        "title": "Deploy Higress By Helm",
+        "keywords": "kubernetes,helm,ops",
+        "description": "Deploy Higress By Helm."
+      }
+    },
+    {
+      "filename": "deploy-guide-beginner.md",
+      "link": "/en-us/docs/ops/deploy-guide-beginner.html",
+      "meta": {
+        "title": "Higress deploy guide",
+        "keywords": "Higress",
+        "description": "Higress deploy guide."
+      }
+    },
+    {
       "filename": "faq.md",
       "link": "/en-us/docs/overview/faq.html",
       "meta": {
@@ -94,9 +121,45 @@
         "keywords": "Higress",
         "description": "Higress is xxx."
       }
+    },
+    {
+      "filename": "configurations.md",
+      "link": "/en-us/docs/user/configurations.html",
+      "meta": {
+        "title": "Higress Parameters Guide",
+        "keywords": "Higress",
+        "description": "Higress Parameters Guide。"
+      }
+    },
+    {
+      "filename": "nginx-ingress.md",
+      "link": "/en-us/docs/user/nginx-ingress.html",
+      "meta": {
+        "title": "Nginx Ingress compatibility description",
+        "keywords": "ingress,nginx",
+        "description": "Nginx Ingress compatibility description."
+      }
+    },
+    {
+      "filename": "quickstart.md",
+      "link": "/en-us/docs/user/quickstart.html",
+      "meta": {
+        "title": "Quick Start",
+        "keywords": "Higress",
+        "description": "Quick Start."
+      }
     }
   ],
   "zh-cn": [
+    {
+      "filename": "architecture.md",
+      "link": "/zh-cn/docs/dev/architecture.html",
+      "meta": {
+        "title": "Higress 架构说明",
+        "keywords": "Higress",
+        "description": "Higress 架构说明."
+      }
+    },
     {
       "filename": "label-an-issue-guide_dev.md",
       "link": "/zh-cn/docs/developers/committer-guide/label-an-issue-guide_dev.html",
@@ -170,6 +233,24 @@
       }
     },
     {
+      "filename": "deploy-by-helm.md",
+      "link": "/zh-cn/docs/ops/deploy-by-helm.html",
+      "meta": {
+        "title": "Higress Helm部署",
+        "keywords": "Higress",
+        "description": "Higress Helm部署."
+      }
+    },
+    {
+      "filename": "deploy-guide-beginner.md",
+      "link": "/zh-cn/docs/ops/deploy-guide-beginner.html",
+      "meta": {
+        "title": "Higress 新人文档",
+        "keywords": "Higress",
+        "description": "Higress 新人文档."
+      }
+    },
+    {
       "filename": "faq.md",
       "link": "/zh-cn/docs/overview/faq.html",
       "meta": {
@@ -191,9 +272,36 @@
       "filename": "what-is-higress.md",
       "link": "/zh-cn/docs/overview/what-is-higress.html",
       "meta": {
-        "title": "What Is Higress",
+        "title": "Higress是什么",
         "keywords": "Higress",
-        "description": "Higress is xxx."
+        "description": "Higress是什么"
+      }
+    },
+    {
+      "filename": "configurations.md",
+      "link": "/zh-cn/docs/user/configurations.html",
+      "meta": {
+        "title": "Higress 参数配置",
+        "keywords": "Higress",
+        "description": "Higress 参数配置。"
+      }
+    },
+    {
+      "filename": "nginx-ingress.md",
+      "link": "/zh-cn/docs/user/nginx-ingress.html",
+      "meta": {
+        "title": "兼容Nginx Ingress说明",
+        "keywords": "ingress,nginx",
+        "description": "兼容Nginx Ingress说明。"
+      }
+    },
+    {
+      "filename": "quickstart.md",
+      "link": "/zh-cn/docs/user/quickstart.html",
+      "meta": {
+        "title": "Higress 快速开始",
+        "keywords": "Higress",
+        "description": "Higress 快速开始."
       }
     }
   ]
