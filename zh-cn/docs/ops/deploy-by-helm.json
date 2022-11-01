@@ -1,0 +1,10 @@
+{
+  "filename": "deploy-by-helm.md",
+  "__html": "<h1>Higress Helm部署</h1>\n<p>TBD</p>\n",
+  "link": "/zh-cn/docs/ops/deploy-by-helm.html",
+  "meta": {
+    "title": "Higress Helm部署",
+    "keywords": "Higress",
+    "description": "Higress Helm部署."
+  }
+}
