@@ -18,39 +18,6 @@ export default {
                 link: '/en-us/docs/overview/what-is-higress.html',
             },
             {
-                key: 'solution',
-                text: 'SOLUTIONS',
-                link: '',
-                imgUrl: 'https://img.alicdn.com/tfs/TB1esl_m.T1gK0jSZFrXXcNCXXa-200-200.png',
-                children: [{
-                    key: 'gts',
-                    text: 'Distributed transaction solution',
-                    link: 'https://www.aliyun.com/aliware/txc?spm=higress-website.topbar.0.0.0'
-                }, {
-                    key: 'micoservice',
-                    text: 'Microservice solutions',
-                    link: 'https://cn.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0'
-                }, {
-                    key: 'msha',
-                    text: 'High-availability solution',
-                    link: 'https://www.aliyun.com/product/ahas?spm=higress-website.topbar.0.0.0'
-                }, {
-                    key: 'serverless',
-                    text: 'Serverless solution for miscoservices',
-                    link: 'https://cn.aliyun.com/product/aliware/sae?spm=higress-website.topbar.0.0.0'
-                },
-                {
-                    key: 'appas',
-                    text: 'PaaS solution',
-                    link: 'https://www.aliyun.com/product/edas?spm=higress-website.topbar.0.0.0'
-                }, {
-                    key: 'mesh',
-                    text: 'Service mesh solution',
-                    link: 'https://www.aliyun.com/product/servicemesh?spm=higress-website.topbar.0.0.0',
-                }
-                ]
-            },
-            {
                 key: 'developers',
                 text: 'DEVELOPERS',
                 link: '/en-us/docs/developers/developers_dev.html',
@@ -122,39 +89,6 @@ export default {
                 key: 'docs',
                 text: '文档',
                 link: '/zh-cn/docs/overview/what-is-higress.html',
-            },
-            {
-                key: 'solution',
-                text: '解决方案',
-                link: '',
-                imgUrl: 'https://img.alicdn.com/tfs/TB1esl_m.T1gK0jSZFrXXcNCXXa-200-200.png',
-                children: [{
-                    key: 'seata',
-                    text: '分布式事务解决方案',
-                    link: 'https://cn.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0'
-                }, {
-                    key: 'micoservice',
-                    text: '微服务解决方案',
-                    link: 'https://cn.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0'
-                }, {
-                    key: 'msha',
-                    text: '高可用解决方案',
-                    link: 'https://www.aliyun.com/product/ahas?spm=higress-website.topbar.0.0.0'
-                }, {
-                    key: 'serverless',
-                    text: '微服务Serverless解决方案',
-                    link: 'https://cn.aliyun.com/product/aliware/sae?spm=higress-website.topbar.0.0.0'
-                },
-                {
-                    key: 'appas',
-                    text: 'PaaS解决方案',
-                    link: 'https://www.aliyun.com/product/edas?spm=higress-website.topbar.0.0.0'
-                }, {
-                    key: 'mesh',
-                    text: '服务网格解决方案',
-                    link: 'https://www.aliyun.com/product/servicemesh?spm=higress-website.topbar.0.0.0',
-                }
-                ]
             },
             {
                 key: 'developers',
