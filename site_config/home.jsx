@@ -4,7 +4,7 @@ export default {
     'zh-cn': {
         brand: {
             brandName: 'Higress',
-            briefIntroduction: 'Higress ...',
+            briefIntroduction: 'Higress是一款开源的集流量网关、微服务网关、安全网关三合一的高集成网关，遵循Kubernetes的Ingress与Gateway API规范，致力于帮助用户构建高集成、低运维成本的一站式全流量调度网关。',
             buttons: [
                 {
                     text: '快速入门',
@@ -20,41 +20,41 @@ export default {
         },
         introduction: {
             title: 'Higress 是什么？',
-            desc: 'Higress ...',
-            img: 'https://img.alicdn.com/tfs/TB1rDpkJAvoK1RjSZPfXXXPKFXa-794-478.png',
+            desc: 'Higress是基于阿里内部的Envoy Gateway实践沉淀、以开源Istio + Envoy为核心构建的下一代云原生网关，实现了流量网关 + 微服务网关 + 安全网关三合一的高集成能力，深度集成Dubbo、Nacos、Sentinel等微服务技术栈，能够帮助用户极大的降低网关的部署及运维成本且能力不打折；在标准上全面支持Ingress与Gateway API，积极拥抱云原生下的标准API规范；同时，Higress Controller也支持Nginx Ingress平滑迁移，帮助用户零成本快速迁移到Higress。',
+            img: 'https://img.alicdn.com/imgextra/i4/O1CN01dqXHDi27RhjAtZyNp_!!6000000007794-0-tps-1794-1446.jpg',
         },
         features: {
             title: '特色功能',
             list: [
                 {
                     icon: 'feature-1',
-                    title: 'XXX1',
-                    content: 'XXX1',
+                    title: '多种类型注册中心支持',
+                    content: '提供多注册中心组件，支持Nacos、ZooKeeper、Consul，同时基于该组件可添加更多其他类型注册中心',
                 },
                 {
                     icon: 'feature-2',
-                    title: 'XXX2',
-                    content: 'XXX2',
+                    title: '多Kubernetes集群支持',
+                    content: '一个Higress Controller可同时监听多个Kubernetes集群，方便跨多集群的统一路由管理',
                 },
                 {
                     icon: 'feature-3',
-                    title: 'XXX3',
-                    content: 'XXX3',
+                    title: '多种扩展方式支持',
+                    content: '支持Wasm插件、Lua插件、进程外插件，通过丰富的插件扩展机制，用户可以使用多语言编写扩展插件，有效降低插件编写门槛，满足用户自定义的扩展诉求',
                 },
                 {
                     icon: 'feature-4',
-                    title: 'XXX4',
-                    content: 'XXX4',
+                    title: 'Dubbo协议转换',
+                    content: '提供HTTP协议到Dubbo协议的转换能力，降低用户对外暴露Dubbo服务的接入成本，满足传统Dubbo微服务用户希望提供对外请求访问的场景',
                 },
                 {
                     icon: 'feature-5',
-                    title: 'XXX5',
-                    content: 'XXX5',
+                    title: 'Sentinel支持',
+                    content: '深度集成Sentinel，一站式的满足传统微服务用户对限流、降级、熔断等高可用能力的诉求',
                 },
                 {
                     icon: 'feature-6',
-                    title: 'XXX6',
-                    content: 'XXX6',
+                    title: 'Modsecurity',
+                    content: '深度集成开源Web应用防火墙，满足网关用户对安全的首要防护诉求',
                 },
             ],
         },
