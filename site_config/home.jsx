@@ -4,12 +4,17 @@ export default {
     'zh-cn': {
         brand: {
             brandName: 'Higress',
-            briefIntroduction: 'Higress是一款开源的集流量网关、微服务网关、安全网关三合一的高集成网关，遵循Kubernetes的Ingress与Gateway API规范，致力于帮助用户构建高集成、低运维成本的一站式全流量调度网关。',
+            briefIntroduction: '一个遵循开源Ingress/Gateway API标准，提供流量调度、微服务治理、安全防护三合一的高集成，易扩展、热更新的下一代云原生网关。',
             buttons: [
                 {
                     text: '快速入门',
                     link: '/zh-cn/docs/overview/what-is-higress.html',
                     type: 'primary',
+                },
+                {
+                  text: 'Github',
+                  link: 'https://github.com/alibaba/higress',
+                  type: 'normal',
                 },
             ],
             versionNote: {
@@ -21,7 +26,7 @@ export default {
         introduction: {
             title: 'Higress 是什么？',
             desc: 'Higress是基于阿里内部的Envoy Gateway实践沉淀、以开源Istio + Envoy为核心构建的下一代云原生网关，实现了流量网关 + 微服务网关 + 安全网关三合一的高集成能力，深度集成Dubbo、Nacos、Sentinel等微服务技术栈，能够帮助用户极大的降低网关的部署及运维成本且能力不打折；在标准上全面支持Ingress与Gateway API，积极拥抱云原生下的标准API规范；同时，Higress Controller也支持Nginx Ingress平滑迁移，帮助用户零成本快速迁移到Higress。',
-            img: 'https://img.alicdn.com/imgextra/i4/O1CN01dqXHDi27RhjAtZyNp_!!6000000007794-0-tps-1794-1446.jpg',
+            img: 'https://img.alicdn.com/imgextra/i4/O1CN010IwrMv1mKHNInqsKW_!!6000000004935-0-tps-2188-876.jpg',
         },
         features: {
             title: '特色功能',
@@ -64,9 +69,11 @@ export default {
                               href="https://github.com/alibaba/higress/issues/1">Wanted: who&#39;s using Higress</a> 上提供信息来帮助 Higress 做的更好。</span>,
             list: [
                 'https://img.alicdn.com/imgextra/i1/O1CN01TleQq128FAP8POtL5_!!6000000007902-2-tps-241-42.png' ,
+                'https://img.alicdn.com/imgextra/i4/O1CN01IOIk0s1bWgJ05f4HF_!!6000000003473-2-tps-1200-699.png' ,
                 'https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png' ,
                 'https://img.alicdn.com/imgextra/i3/O1CN01pH2InM1iuDzpDxxox_!!6000000004472-0-tps-228-82.jpg' ,
                 'https://img.alicdn.com/imgextra/i3/O1CN013OMegK1xQCGX3CQNQ_!!6000000006437-0-tps-178-88.jpg' ,
+                'https://img.alicdn.com/imgextra/i1/O1CN01vrxF2I1rfs7rihLdy_!!6000000005659-0-tps-310-160.jpg' ,
             ],
         },
     },
@@ -79,7 +86,12 @@ export default {
                     text: 'Get Started',
                     link: '/en-us/docs/user/quickstart.html',
                     type: 'primary',
-                }
+                },
+                {
+                  text: 'Github',
+                  link: 'https://github.com/alibaba/higress',
+                  type: 'normal',
+                },
             ],
             versionNote: {
                 text: 'Release Note of 0.1.0',
@@ -133,9 +145,11 @@ export default {
                               href="https://github.com/alibaba/higress/issues/1246">Wanted: who&#39;s using Higress</a> to help improving Higress better.</span>,
             list: [
                 'https://img.alicdn.com/imgextra/i1/O1CN01TleQq128FAP8POtL5_!!6000000007902-2-tps-241-42.png' ,
+                'https://img.alicdn.com/imgextra/i4/O1CN01IOIk0s1bWgJ05f4HF_!!6000000003473-2-tps-1200-699.png' ,
                 'https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png' ,
                 'https://img.alicdn.com/imgextra/i3/O1CN01pH2InM1iuDzpDxxox_!!6000000004472-0-tps-228-82.jpg' ,
                 'https://img.alicdn.com/imgextra/i3/O1CN013OMegK1xQCGX3CQNQ_!!6000000006437-0-tps-178-88.jpg' ,
+                'https://img.alicdn.com/imgextra/i1/O1CN01vrxF2I1rfs7rihLdy_!!6000000005659-0-tps-310-160.jpg' ,
             ],
         },
     },

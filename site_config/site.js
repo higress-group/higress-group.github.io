@@ -113,7 +113,7 @@ export default {
         ],
         vision: {
             title: '愿景',
-            content: 'Higress 是...',
+            content: '致力于为用户提供一站式的集流量网关、微服务网关、安全网关三合一的高集成流量调度解决方案，帮助用户在享受高性能网关能力的基础上极大的降低网关部署运维成本.',
         },
         documentation: {
             title: '文档',
