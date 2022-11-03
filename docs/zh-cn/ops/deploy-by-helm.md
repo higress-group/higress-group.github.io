@@ -1,9 +1,9 @@
 ---
-title: Higress Helm部署
-keywords: Higress
+title: 安装部署
+keywords: Deploy
 description: Higress Helm部署.
 ---
 
-# Higress Helm部署
+# 安装部署
 
 TBD

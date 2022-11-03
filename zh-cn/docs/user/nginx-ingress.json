@@ -1,10 +1,10 @@
 {
   "filename": "nginx-ingress.md",
-  "__html": "<h1>兼容Nginx Ingress说明</h1>\n<p>TBD</p>\n",
+  "__html": "<h1>Nginx Ingress 兼容说明</h1>\n<p>TBD</p>\n",
   "link": "/zh-cn/docs/user/nginx-ingress.html",
   "meta": {
-    "title": "兼容Nginx Ingress说明",
+    "title": "Nginx Ingress 兼容说明",
     "keywords": "ingress,nginx",
-    "description": "兼容Nginx Ingress说明。"
+    "description": "Nginx Ingress 兼容说明。"
   }
 }

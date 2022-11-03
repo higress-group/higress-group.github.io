@@ -1,0 +1,10 @@
+{
+  "filename": "kruise-rollout.md",
+  "__html": "<h1>通过 OpenKruise Rollout 实现灰度发布</h1>\n<p>TBD</p>\n",
+  "link": "/zh-cn/docs/user/kruise-rollout.html",
+  "meta": {
+    "title": "通过 OpenKruise Rollout 实现灰度发布",
+    "keywords": "rollout,gray",
+    "description": "通过 OpenKruise Rollout 实现灰度发布"
+  }
+}

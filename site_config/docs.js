@@ -90,26 +90,77 @@ export default {
                 ],
             },
             {
-              title: '用户文档',
+              title: '用户指南',
               children: [
                   {
-                      title: '快速启动',
+                      title: '快速开始',
                       link: '/zh-cn/docs/user/quickstart.html',
                   },
                   {
-                      title: '参数配置',
-                      link: '/zh-cn/docs/user/configurations.html',
-                  },
-                  {
-                      title: 'Ingress指南',
+                      title: '最佳实践示例',
                       children: [
                           {
-                              title: 'Nginx Ingress兼容说明',
+                              title: '从 Nginx Ingress Controller 平滑迁移',
+                              link: '/zh-cn/docs/user/nginx-ingress-migrate.html',
+                          },
+                          {
+                              title: '实现 SpringCloud 服务发现和路由',
+                              link: '/zh-cn/docs/user/spring-cloud.html',
+                          },
+                          {
+                              title: '实现 Dubbo 服务发现和路由',
+                              link: '/zh-cn/docs/user/dubbo.html',
+                          },
+                          {
+                              title: '基于 Prometheus 实现入口流量观测',
+                              link: '/zh-cn/docs/user/prometheus.html',
+                          },
+                          {
+                              title: '通过 OpenKruise Rollout 实现灰度发布',
+                              link: '/zh-cn/docs/user/kruise-rollout.html',
+                          },
+                          {
+                              title: '对接 OpenSergo 实现全链路灰度',
+                              link: '/zh-cn/docs/user/opensergo-gray.html',
+                          },
+                      ],
+                  },
+                  {
+                      title: '参考手册',
+                      children: [
+                          {
+                              title: '运维参数配置说明',
+                              link: '/zh-cn/docs/user/configurations.html',
+                          },
+                          {
+                              title: 'Ingress Annotaion 配置说明',
+                              link: '/zh-cn/docs/user/annotation.html',
+                          },
+                          {
+                              title: 'Mcp Brdige 配置说明',
+                              link: '/zh-cn/docs/user/mcp-bridge.html',
+                          },
+                          {
+                              title: 'Nginx Ingress 兼容说明',
                               link: '/zh-cn/docs/user/nginx-ingress.html',
                           },
                       ]
                   },
                 ]
+            },
+            {
+              title: '运维指南',
+              children: [
+                {
+                  title: '安装部署',
+                  link: '/zh-cn/docs/ops/deploy-by-helm.html',
+                },
+                {
+                  title: '版本升级',
+                  link: '/zh-cn/docs/ops/upgrade.html',
+                },
+              ]
+
             },
             {
               title: '开发者指南',
@@ -120,25 +171,6 @@ export default {
                   },
               ],
             },
-            {
-              title: '运维指南',
-              children: [
-                  {
-                      title: '部署',
-                      children: [
-                          {
-                              title: '新人文档',
-                              link: '/zh-cn/docs/ops/deploy-guide-beginner.html',
-                          },
-                          {
-                              title: 'Helm 部署',
-                              link: '/zh-cn/docs/ops/deploy-by-helm.html',
-                          },
-                      ]
-                  }
-              ]
-
-          },
         ],
         barText: '文档',
     },
