@@ -4,7 +4,7 @@ export default {
     'zh-cn': {
         brand: {
             brandName: 'Higress',
-            briefIntroduction: '一个遵循开源Ingress/Gateway API标准，提供流量调度、微服务治理、安全防护三合一的高集成，易扩展、热更新的下一代云原生网关。',
+            briefIntroduction: '一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成，易使用、易扩展、热更新的下一代云原生网关。',
             buttons: [
                 {
                     text: '快速入门',
@@ -25,41 +25,46 @@ export default {
         },
         introduction: {
             title: 'Higress 是什么？',
-            desc: 'Higress是基于阿里内部的Envoy Gateway实践沉淀、以开源Istio + Envoy为核心构建的下一代云原生网关，实现了流量网关 + 微服务网关 + 安全网关三合一的高集成能力，深度集成Dubbo、Nacos、Sentinel等微服务技术栈，能够帮助用户极大的降低网关的部署及运维成本且能力不打折；在标准上全面支持Ingress与Gateway API，积极拥抱云原生下的标准API规范；同时，Higress Controller也支持Nginx Ingress平滑迁移，帮助用户零成本快速迁移到Higress。',
+            desc: 'Higress是基于阿里内部两年多的Envoy Gateway实践沉淀，以开源Istio + Envoy为核心构建的下一代云原生网关，实现了流量调度 + 服务治理 + 安全防护三合一的高集成能力，深度集成Dubbo、Nacos、Sentinel等微服务技术栈，能够为您带来低成本的网关部署运维及高性能、易使用、易扩展、功能丰富的一站式网关解决方案。',
             img: 'https://img.alicdn.com/imgextra/i4/O1CN010IwrMv1mKHNInqsKW_!!6000000004935-0-tps-2188-876.jpg',
         },
         features: {
             title: '特色功能',
             list: [
                 {
-                    icon: 'feature-1',
-                    title: '多种类型注册中心支持',
-                    content: '提供多注册中心组件，支持Nacos、ZooKeeper、Consul，同时基于该组件可添加更多其他类型注册中心',
+                  icon: 'feature-1',
+                  title: '易于使用',
+                  content: ['提供流量调度、服务治理、安全防护、限流降级的一站式网关解决方案，默认提供轻量级Console，也支持K8s原生Ingress、Gateway API的标准配置方式'],
                 },
                 {
-                    icon: 'feature-2',
-                    title: '多Kubernetes集群支持',
-                    content: '一个Higress Controller可同时监听多个Kubernetes集群，方便跨多集群的统一路由管理',
+                  icon: 'feature-2',
+                  title: '生产等级',
+                  content: ['脱胎于历经阿里巴巴2年多生产验证的内部产品，支持每秒请求量达数十万级的大规模场景，具备企业级SLA的开源产品'],
                 },
                 {
-                    icon: 'feature-3',
-                    title: '多种扩展方式支持',
-                    content: '支持Wasm插件、Lua插件、进程外插件，通过丰富的插件扩展机制，用户可以使用多语言编写扩展插件，有效降低插件编写门槛，满足用户自定义的扩展诉求',
+                  icon: 'feature-3',
+                  title: '便于扩展',
+                  content: '提供Wasm、Lua、进程外三种插件扩展机制，让多语言编写插件不再成为障碍，插件生效粒度既支持全局级、域名级，也支持细粒度的路由级',
                 },
                 {
-                    icon: 'feature-4',
-                    title: 'Dubbo协议转换',
-                    content: '提供HTTP协议到Dubbo协议的转换能力，降低用户对外暴露Dubbo服务的接入成本，满足传统Dubbo微服务用户希望提供对外请求访问的场景',
+                  icon: 'feature-1',
+                  title: '动态热更新',
+                  content: '彻底摆脱reload引起的流量抖动，配置变更毫秒级生效且业务无感，Wasm插件热更新且流量无损',
                 },
                 {
-                    icon: 'feature-5',
-                    title: 'Sentinel支持',
-                    content: '深度集成Sentinel，一站式的满足传统微服务用户对限流、降级、熔断等高可用能力的诉求',
+                  icon: 'feature-4',
+                  title: '平滑升级',
+                  content: '兼容Nginx Ingress Annotation 80%+ 的使用场景，且提供功能更丰富的注解，简单一步轻松搞定Nginx Ingress迁移',
+                },
+                {
+                  icon: 'feature-4',
+                  title: '协议转换',
+                  content: '提供HTTP到Dubbo协议的转换功能，一键配置轻松完成HTTP到Dubbo服务的协议映射，享受高性能网关处理能力的同时极大的降低Dubbo服务的接入成本',
                 },
                 {
                     icon: 'feature-6',
-                    title: 'Modsecurity',
-                    content: '深度集成开源Web应用防火墙，满足网关用户对安全的首要防护诉求',
+                    title: '安全防护',
+                    content: '提供JWT、OIDC、自定义认证鉴权，深度集成开源Web应用防火墙，让安全防护成为标配',
                 },
             ],
         },
