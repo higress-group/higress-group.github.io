@@ -10,7 +10,7 @@ Higress在消除其软件项目中的安全性问题方面采取严格的立场�
 
 ## 报告漏洞
 
-如果您对Higress的安全性有担心，或者发现漏洞或潜在威胁，请发送电子邮件至[dev-higress@googlegroups.com](mailto:dev-higress@googlegroups.com)
+如果您对Higress的安全性有担心，或者发现漏洞或潜在威胁，请发送电子邮件至[higress@googlegroups.com](mailto:higress@googlegroups.com)
 与Higress安全团队联系。在邮件中，指定问题或潜在威胁的描述。还敦促您推荐重现和复制问题的方法。Higress社区会在评估和分析调查结果之后与您联系。  请先注意在安全电子邮件中报告安全问题，然后再在公共领域公开该问题。  
 
 ## 漏洞处理  
