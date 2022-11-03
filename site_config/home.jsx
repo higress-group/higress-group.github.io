@@ -18,10 +18,10 @@ export default {
                 },
             ],
             versionNote: {
-                text: 'Release Note of 0.1.0',
-                link: 'https://github.com/alibaba/higress/releases/tag/v1.5.2',
+                text: 'Release Note of 0.5.0',
+                link: 'https://github.com/alibaba/higress/releases/tag/v0.5.0',
             },
-            releaseDate: 'Released on Jul 12, 2022',
+            releaseDate: 'Released on Nov 12, 2022',
         },
         introduction: {
             title: 'Higress 是什么？',
@@ -94,10 +94,10 @@ export default {
                 },
             ],
             versionNote: {
-                text: 'Release Note of 0.1.0',
-                link: 'https://github.com/alibaba/higress/releases/tag/v0.1.0',
+                text: 'Release Note of 0.5.0',
+                link: 'https://github.com/alibaba/higress/releases/tag/v0.5.0',
             },
-            releaseDate: 'Released on Jul 17, 2022',
+            releaseDate: 'Released on Nov 1, 2022',
         },
         introduction: {
             title: 'What is Higress?',
