@@ -6,13 +6,6 @@ export default {
     events: {
       title: 'Events & News',
       list: [
-        {
-          img: 'https://img.alicdn.com/tfs/TB1isb2wYj1gK0jSZFuXXcrHpXa-4300-2867.jpg',
-          title: 'title',
-          content: 'Higress',
-          dateStr: 'May 12nd，2018',
-          link: '/en-us/blog/blog1.html',
-        },
       ]
     },
     contacts: {
@@ -26,19 +19,9 @@ export default {
           link: 'mailto:higress+subscribe@googlegroups.com'
         },
         {
-          img: '//img.alicdn.com/tfs/TB1OTCISET1gK0jSZFrXXcNCXXa-344-346.jpg',
-          imgHover: '//img.alicdn.com/tfs/TB1OTCISET1gK0jSZFrXXcNCXXa-344-346.jpg',
-          title: 'Higress WeChat Official Account(Recommend)',
-        },
-        {
-          img: '//img.alicdn.com/tfs/TB1nccZi79l0K4jSZFKXXXFjpXa-614-614.jpg',
-          imgHover: '//img.alicdn.com/tfs/TB1nccZi79l0K4jSZFKXXXFjpXa-614-614.jpg',
-          title: 'Wechat group assistant',
-        },
-        {
-          img: '//img.alicdn.com/imgextra/i1/O1CN01TlIbgM1JSrtYmHNIw_!!6000000001028-0-tps-458-456.jpg',
-          imgHover: '//img.alicdn.com/imgextra/i1/O1CN01TlIbgM1JSrtYmHNIw_!!6000000001028-0-tps-458-456.jpg',
-          title: 'dingTalk③(Recommend)',
+          img: '//img.alicdn.com/imgextra/i1/O1CN01ACdB5r1JZHUeUgyrJ_!!6000000001042-0-tps-1022-1040.jpg',
+          imgHover: '//img.alicdn.com/imgextra/i1/O1CN01ACdB5r1JZHUeUgyrJ_!!6000000001042-0-tps-1022-1040.jpg',
+          title: 'dingTalk',
         }
       ],
     },
@@ -74,13 +57,6 @@ export default {
     events: {
       title: '事件 & 新闻',
       list: [
-        {
-          img: 'https://img.alicdn.com/tfs/TB1qH2YwVP7gK0jSZFjXXc5aXXa-2002-901.jpg',
-          title: 'Higress XXX',
-          content: 'Higress XXX',
-          dateStr: 'Dec 25nd，2019',
-          link: '/zh-cn/blog/higress-meetup-hangzhou.html',
-        },
       ]
     },
     contacts: {
@@ -94,19 +70,9 @@ export default {
                 link: 'mailto:higress+subscribe@googlegroups.com'
             },
             {
-                img: '//img.alicdn.com/tfs/TB1OTCISET1gK0jSZFrXXcNCXXa-344-346.jpg',
-                imgHover: '//img.alicdn.com/tfs/TB1OTCISET1gK0jSZFrXXcNCXXa-344-346.jpg',
-                title: 'Higress 微信官方公众号(强烈推荐)',
-            },
-            {
-                img: '//img.alicdn.com/tfs/TB1nccZi79l0K4jSZFKXXXFjpXa-614-614.jpg',
-                imgHover: '//img.alicdn.com/tfs/TB1nccZi79l0K4jSZFKXXXFjpXa-614-614.jpg',
-                title: '微信群拉取小助手',
-            },
-            {
-                img: '//img.alicdn.com/imgextra/i1/O1CN01TlIbgM1JSrtYmHNIw_!!6000000001028-0-tps-458-456.jpg',
-                imgHover: '//img.alicdn.com/imgextra/i1/O1CN01TlIbgM1JSrtYmHNIw_!!6000000001028-0-tps-458-456.jpg',
-                title: '钉钉③群(推荐)',
+                img: '//img.alicdn.com/imgextra/i1/O1CN01ACdB5r1JZHUeUgyrJ_!!6000000001042-0-tps-1022-1040.jpg',
+                imgHover: '//img.alicdn.com/imgextra/i1/O1CN01ACdB5r1JZHUeUgyrJ_!!6000000001042-0-tps-1022-1040.jpg',
+                title: '钉钉群(推荐)',
             },
       ],
     },
