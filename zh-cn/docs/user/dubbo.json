@@ -1,0 +1,10 @@
+{
+  "filename": "dubbo.md",
+  "__html": "<h1>实现 Dubbo 服务发现和路由</h1>\n<p>TBD</p>\n",
+  "link": "/zh-cn/docs/user/dubbo.html",
+  "meta": {
+    "title": "实现 Dubbo 服务发现和路由",
+    "keywords": "Dubbo,discovery",
+    "description": "实现 Dubbo 服务发现和路由"
+  }
+}

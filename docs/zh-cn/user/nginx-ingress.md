@@ -1,9 +1,9 @@
 ---
-title: 兼容Nginx Ingress说明
+title: Nginx Ingress 兼容说明
 keywords: ingress,nginx
-description: 兼容Nginx Ingress说明。
+description: Nginx Ingress 兼容说明。
 ---
 
-# 兼容Nginx Ingress说明
+# Nginx Ingress 兼容说明
 
 TBD

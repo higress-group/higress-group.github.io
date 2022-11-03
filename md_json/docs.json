@@ -236,18 +236,18 @@
       "filename": "deploy-by-helm.md",
       "link": "/zh-cn/docs/ops/deploy-by-helm.html",
       "meta": {
-        "title": "Higress Helm部署",
-        "keywords": "Higress",
+        "title": "安装部署",
+        "keywords": "Deploy",
         "description": "Higress Helm部署."
       }
     },
     {
-      "filename": "deploy-guide-beginner.md",
-      "link": "/zh-cn/docs/ops/deploy-guide-beginner.html",
+      "filename": "upgrade.md",
+      "link": "/zh-cn/docs/ops/upgrade.html",
       "meta": {
-        "title": "Higress 新人文档",
-        "keywords": "Higress",
-        "description": "Higress 新人文档."
+        "title": "版本升级",
+        "keywords": "Upgrade",
+        "description": "Higress 版本升级."
       }
     },
     {
@@ -278,6 +278,15 @@
       }
     },
     {
+      "filename": "annotation.md",
+      "link": "/zh-cn/docs/user/annotation.html",
+      "meta": {
+        "title": "Ingress Annotaion 配置说明",
+        "keywords": "Ingress",
+        "description": "Higress Ingress Annotaion 配置说明。"
+      }
+    },
+    {
       "filename": "configurations.md",
       "link": "/zh-cn/docs/user/configurations.html",
       "meta": {
@@ -287,12 +296,66 @@
       }
     },
     {
+      "filename": "dubbo.md",
+      "link": "/zh-cn/docs/user/dubbo.html",
+      "meta": {
+        "title": "实现 Dubbo 服务发现和路由",
+        "keywords": "Dubbo,discovery",
+        "description": "实现 Dubbo 服务发现和路由"
+      }
+    },
+    {
+      "filename": "kruise-rollout.md",
+      "link": "/zh-cn/docs/user/kruise-rollout.html",
+      "meta": {
+        "title": "通过 OpenKruise Rollout 实现灰度发布",
+        "keywords": "rollout,gray",
+        "description": "通过 OpenKruise Rollout 实现灰度发布"
+      }
+    },
+    {
+      "filename": "mcp-bridge.md",
+      "link": "/zh-cn/docs/user/mcp-bridge.html",
+      "meta": {
+        "title": "Mcp Bridge 配置说明",
+        "keywords": "discovery",
+        "description": "Higress Mcp Bridge 配置说明。"
+      }
+    },
+    {
+      "filename": "nginx-ingress-migrate.md",
+      "link": "/zh-cn/docs/user/nginx-ingress-migrate.html",
+      "meta": {
+        "title": "从 Nginx Ingress Controller 平滑迁移",
+        "keywords": "Ingress",
+        "description": "从 Nginx Ingress Controller 平滑迁移"
+      }
+    },
+    {
       "filename": "nginx-ingress.md",
       "link": "/zh-cn/docs/user/nginx-ingress.html",
       "meta": {
-        "title": "兼容Nginx Ingress说明",
+        "title": "Nginx Ingress 兼容说明",
         "keywords": "ingress,nginx",
-        "description": "兼容Nginx Ingress说明。"
+        "description": "Nginx Ingress 兼容说明。"
+      }
+    },
+    {
+      "filename": "opensergo-gray.md",
+      "link": "/zh-cn/docs/user/opensergo-gray.html",
+      "meta": {
+        "title": "对接 OpenSergo 实现全链路灰度",
+        "keywords": "opensergo,gray",
+        "description": "对接 OpenSergo 实现全链路灰度"
+      }
+    },
+    {
+      "filename": "prometheus.md",
+      "link": "/zh-cn/docs/user/prometheus.html",
+      "meta": {
+        "title": "Higress 快速开始",
+        "keywords": "Higress",
+        "description": "Higress 快速开始."
       }
     },
     {
@@ -302,6 +365,15 @@
         "title": "Higress 快速开始",
         "keywords": "Higress",
         "description": "Higress 快速开始."
+      }
+    },
+    {
+      "filename": "spring-cloud.md",
+      "link": "/zh-cn/docs/user/spring-cloud.html",
+      "meta": {
+        "title": "实现 SpringCloud 服务发现和路由",
+        "keywords": "SpringCloud,discovery",
+        "description": "实现 SpringCloud 服务发现和路由."
       }
     }
   ]
