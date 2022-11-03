@@ -21,7 +21,7 @@ It is warmly welcomed if you have interest to hack on Higress. First, we encoura
 
 Security issues are always treated seriously. As our usual principle, we discourage anyone to spread security issues.
 If you find a security issue of Higress, please do not discuss it in public and even do not open a public issue. 
-Instead we encourage you to send us a private email to  [dev-higress@googlegroups.com](mailto:dev-higress@googlegroups.
+Instead we encourage you to send us a private email to  [higress@googlegroups.com](mailto:higress@googlegroups.
 com)
 to report this.
 

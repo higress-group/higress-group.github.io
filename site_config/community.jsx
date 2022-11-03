@@ -23,7 +23,7 @@ export default {
           img: '/img/mailinglist.png',
           imgHover: '/img/mailinglist_hover.png',
           title: 'Mailing List',
-          link: 'mailto:dev-higress+subscribe@googlegroups.com'
+          link: 'mailto:higress+subscribe@googlegroups.com'
         },
         {
           img: '//img.alicdn.com/tfs/TB1OTCISET1gK0jSZFrXXcNCXXa-344-346.jpg',
@@ -91,7 +91,7 @@ export default {
                 img: '/img/mailinglist.png',
                 imgHover: '/img/mailinglist_hover.png',
                 title: '邮件列表',
-                link: 'mailto:dev-higress+subscribe@googlegroups.com'
+                link: 'mailto:higress+subscribe@googlegroups.com'
             },
             {
                 img: '//img.alicdn.com/tfs/TB1OTCISET1gK0jSZFrXXcNCXXa-344-346.jpg',
