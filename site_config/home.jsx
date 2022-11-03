@@ -26,7 +26,7 @@ export default {
         introduction: {
             title: 'Higress 是什么？',
             desc: 'Higress是基于阿里内部两年多的Envoy Gateway实践沉淀，以开源Istio + Envoy为核心构建的下一代云原生网关，实现了流量调度 + 服务治理 + 安全防护三合一的高集成能力，深度集成Dubbo、Nacos、Sentinel等微服务技术栈，能够为您带来低成本的网关部署运维及高性能、易使用、易扩展、功能丰富的一站式网关解决方案。',
-            img: 'https://img.alicdn.com/imgextra/i4/O1CN010IwrMv1mKHNInqsKW_!!6000000004935-0-tps-2188-876.jpg',
+            img: 'https://img.alicdn.com/imgextra/i3/O1CN01dIuRnx1Cmpu5HLs0V_!!6000000000124-0-tps-1134-453.jpg',
         },
         features: {
             title: '特色功能',
