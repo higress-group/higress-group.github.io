@@ -104,6 +104,14 @@ export default {
                               link: '/zh-cn/docs/user/nginx-ingress-migrate.html',
                           },
                           {
+                              title: '使用 GO 语言开发 WASM 插件',
+                              link: '/zh-cn/docs/user/wasm-go.html',
+                          },
+                          {
+                              title: '配置 Ingress 转发给注册在 Nacos 的服务',
+                              link: '/zh-cn/docs/user/nacos-route.html',
+                          },
+                          {
                               title: '实现 SpringCloud 服务发现和路由',
                               link: '/zh-cn/docs/user/spring-cloud.html',
                           },
@@ -120,8 +128,16 @@ export default {
                               link: '/zh-cn/docs/user/kruise-rollout.html',
                           },
                           {
+                              title: '开启 WAF 防护的最佳实践',
+                              link: '/zh-cn/docs/user/waf.html',
+                          },
+                          {
                               title: '对接 OpenSergo 实现全链路灰度',
                               link: '/zh-cn/docs/user/opensergo-gray.html',
+                          },
+                          {
+                              title: '基于 Sentinel 实现入口熔断限流',
+                              link: '/zh-cn/docs/user/sentinel.html',
                           },
                       ],
                   },
