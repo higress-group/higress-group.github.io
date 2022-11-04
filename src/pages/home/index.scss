@@ -21,8 +21,9 @@
   .top-section {
     height: 720px;
     background-color: #E8F3FE;
+    background-image: url("https://img.alicdn.com/imgextra/i2/O1CN01J3KuwB25Adjq8TeBL_!!6000000007486-2-tps-1440-900.png");
+    background-size: cover;
     .top-body {
-      background-image: url("https://img.alicdn.com/imgextra/i2/O1CN01J3KuwB25Adjq8TeBL_!!6000000007486-2-tps-1440-900.png");
       position: relative;
       overflow: hidden;
       height: 100%;
@@ -31,9 +32,9 @@
     }
     .vertical-middle {
       position: absolute;
-      left: 10%;
+      left: 0;
       top: 50%;
-      transform: translateY(-50%);
+      transform:translateY(-50%);
       box-sizing: border-box;
       width: 50%;
       z-index: 5;
@@ -55,6 +56,7 @@
       }
     }
     .product-desc {
+      padding: 0 8px;
       font-family: Avenir-Medium;
       font-size: 24px;
       color: #444;
@@ -250,7 +252,7 @@
           background-clip: text;
           -webkit-background-clip: text;
           color: transparent;
-          text-align: center;
+
         }
         p {
           line-height: 28px;
