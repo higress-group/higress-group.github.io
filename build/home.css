@@ -1962,7 +1962,8 @@ h1, h2, h3, h4, h5, h6 {
         background-image: linear-gradient(#2de2ff, #8b67fb);
         background-clip: text;
         -webkit-background-clip: text;
-        color: transparent; }
+        color: transparent;
+        text-align: center; }
       .home-page .introduction-section .introduction-body .introduction p {
         line-height: 28px;
         opacity: 0.56;
