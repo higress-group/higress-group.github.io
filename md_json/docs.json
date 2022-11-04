@@ -323,6 +323,15 @@
       }
     },
     {
+      "filename": "nacos-route.md",
+      "link": "/zh-cn/docs/user/nacos-route.html",
+      "meta": {
+        "title": "配置 Ingress 转发给注册在 Nacos 的服务",
+        "keywords": "ingress,nacos",
+        "description": "配置 Ingress 转发给注册在 Nacos 的服务"
+      }
+    },
+    {
       "filename": "nginx-ingress-migrate.md",
       "link": "/zh-cn/docs/user/nginx-ingress-migrate.html",
       "meta": {
@@ -368,12 +377,39 @@
       }
     },
     {
+      "filename": "sentinel.md",
+      "link": "/zh-cn/docs/user/sentinel.html",
+      "meta": {
+        "title": "基于 Sentinel 实现入口熔断限流",
+        "keywords": "sentinel",
+        "description": "基于 Sentinel 实现入口熔断限流"
+      }
+    },
+    {
       "filename": "spring-cloud.md",
       "link": "/zh-cn/docs/user/spring-cloud.html",
       "meta": {
         "title": "实现 SpringCloud 服务发现和路由",
         "keywords": "SpringCloud,discovery",
         "description": "实现 SpringCloud 服务发现和路由."
+      }
+    },
+    {
+      "filename": "waf.md",
+      "link": "/zh-cn/docs/user/waf.html",
+      "meta": {
+        "title": "开启 WAF 防护的最佳实践",
+        "keywords": "waf",
+        "description": "开启 WAF 防护的最佳实践"
+      }
+    },
+    {
+      "filename": "wasm-go.md",
+      "link": "/zh-cn/docs/user/wasm-go.html",
+      "meta": {
+        "title": "使用 GO 语言开发 WASM 插件",
+        "keywords": "wasm",
+        "description": "使用 GO 语言开发 WASM 插件"
       }
     }
   ]
