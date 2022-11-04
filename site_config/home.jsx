@@ -34,7 +34,7 @@ export default {
                 {
                   icon: 'feature-1',
                   title: '易于使用',
-                  content: ['提供流量调度、服务治理、安全防护、限流降级的一站式网关解决方案，默认提供轻量级Console，也支持K8s原生Ingress、Gateway API的标准配置方式'],
+                  content: ['提供流量调度、服务治理、安全防护、限流降级的一站式网关解决方案，默认提供轻量级Console，也支持K8s原生Ingress、Gateway API的标准配置方式，也支持HTTP到Dubbo协议的转换功能，一键配置轻松完成HTTP到Dubbo服务的协议映射。'],
                 },
                 {
                   icon: 'feature-2',
@@ -55,11 +55,6 @@ export default {
                   icon: 'feature-4',
                   title: '平滑升级',
                   content: '兼容Nginx Ingress Annotation 80%+ 的使用场景，且提供功能更丰富的注解，简单一步轻松搞定Nginx Ingress迁移',
-                },
-                {
-                  icon: 'feature-4',
-                  title: '协议转换',
-                  content: '提供HTTP到Dubbo协议的转换功能，一键配置轻松完成HTTP到Dubbo服务的协议映射，享受高性能网关处理能力的同时极大的降低Dubbo服务的接入成本',
                 },
                 {
                     icon: 'feature-6',
