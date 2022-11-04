@@ -1822,9 +1822,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .home-page .top-section {
   height: 720px;
-  background-color: #E8F3FE; }
+  background-color: #E8F3FE;
+  background-image: url(https://img.alicdn.com/imgextra/i2/O1CN01J3KuwB25Adjq8TeBL_!!6000000007486-2-tps-1440-900.png);
+  background-size: cover; }
   .home-page .top-section .top-body {
-    background-image: url(https://img.alicdn.com/imgextra/i2/O1CN01J3KuwB25Adjq8TeBL_!!6000000007486-2-tps-1440-900.png);
     position: relative;
     overflow: hidden;
     height: 100%;
@@ -1832,7 +1833,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto; }
   .home-page .top-section .vertical-middle {
     position: absolute;
-    left: 10%;
+    left: 0;
     top: 50%;
     transform: translateY(-50%);
     box-sizing: border-box;
@@ -1852,6 +1853,7 @@ h1, h2, h3, h4, h5, h6 {
       -webkit-background-clip: text;
       color: transparent; }
   .home-page .top-section .product-desc {
+    padding: 0 8px;
     font-family: Avenir-Medium;
     font-size: 24px;
     color: #444;
@@ -1962,8 +1964,7 @@ h1, h2, h3, h4, h5, h6 {
         background-image: linear-gradient(#2de2ff, #8b67fb);
         background-clip: text;
         -webkit-background-clip: text;
-        color: transparent;
-        text-align: center; }
+        color: transparent; }
       .home-page .introduction-section .introduction-body .introduction p {
         line-height: 28px;
         opacity: 0.56;
