@@ -20,8 +20,9 @@
 .home-page {
   .top-section {
     height: 720px;
-    background-color: $brandColor;
+    background-color: #E8F3FE;
     .top-body {
+      background-image: url("https://img.alicdn.com/imgextra/i2/O1CN01J3KuwB25Adjq8TeBL_!!6000000007486-2-tps-1440-900.png");
       position: relative;
       overflow: hidden;
       height: 100%;
@@ -30,7 +31,7 @@
     }
     .vertical-middle {
       position: absolute;
-      left: 0;
+      left: 10%;
       top: 50%;
       transform: translateY(-50%);
       box-sizing: border-box;
@@ -44,15 +45,19 @@
         font-family: Avenir-Medium;
         font-weight: 700;
         font-size: 46px;
-        color: #FFF;
         word-break: break-word;
         margin: 0;
+        background-image: linear-gradient(#2de2ff,#8b67fb);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+
       }
     }
     .product-desc {
       font-family: Avenir-Medium;
       font-size: 24px;
-      color: #FFF;
+      color: #444;
       margin: 12px auto 0;
       max-width: 730px;
     }
@@ -84,9 +89,9 @@
           height: 24px;
           line-height: 24px;
           padding-left: 10px;
-          color: #fff;
+          color: #333;
           font-size: 0;
-          background: rgba(255, 255, 255, 0.2);
+          background: #a5d0fc;
           img {
             width: 16px;
             height: 16px;
@@ -120,8 +125,8 @@
         display: inline-block;
         font-family: Avenir-Heavy;
         font-size: 14px;
-        color: #FFF;
-        background: rgba(255, 2255, 255, 0.2);
+        color: #333;
+        background: #a5d0fc;
         border-radius: 2px;
         line-height: 24px;
         padding: 0 6px;
@@ -134,7 +139,7 @@
     .release-date {
       font-family: Avenir-Medium;
       font-size: 12px;
-      color: #fff;
+      color: #333;
     }
     .animation {
       width: 546px;
@@ -145,66 +150,66 @@
       img {
         position: absolute;
       }
-      .img1 {
-        width: 351px;
-        height: 156px;
-        left: calc(50% - 175px);
-        top: 0;
-        animation: updown 2s ease-in-out infinite alternate;
-      }
-      .img2 {
-        width: 457px;
-        height: 578px;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 0;
-        z-index: 2;
-      }
-      .img3 {
-        width: 457px;
-        height: 578px;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 0;
-        z-index: 1;
-      }
-      .img4 {
-        width: 93px;
-        height: 39px;
-        left: 0;
-        bottom: 88px;
-        animation: updown 2s ease-in-out infinite alternate;
-      }
-      .img5 {
-        width: 93px;
-        height: 39px;
-        right: 0;
-        bottom: 129px;
-        animation: updown 2s ease-in-out infinite alternate; 
-      }
-      .outer-circle {
-        opacity: 0.1;
-        border: 2px solid #11BAFA;
-        width: 512px;
-        height: 208px;
-        border-radius: 50%;
-        position: absolute;
-        z-index: 1;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 145px;
-      }
-      .rotate-circle {
-        position: absolute;
-        left: calc(50% - 202px);
-        top: 126px;
-        width: 404px;
-        height: 404px;
-        transform: rotateX(66deg);
-        svg {
-          animation: rotate-circle 1.2s linear infinite;
-        }
-      }
+      // .img1 {
+      //   width: 351px;
+      //   height: 156px;
+      //   left: calc(50% - 175px);
+      //   top: 0;
+      //   animation: updown 2s ease-in-out infinite alternate;
+      // }
+      // .img2 {
+      //   width: 457px;
+      //   height: 578px;
+      //   left: 50%;
+      //   transform: translateX(-50%);
+      //   top: 0;
+      //   z-index: 2;
+      // }
+      // .img3 {
+      //   width: 457px;
+      //   height: 578px;
+      //   left: 50%;
+      //   transform: translateX(-50%);
+      //   top: 0;
+      //   z-index: 1;
+      // }
+      // .img4 {
+      //   width: 93px;
+      //   height: 39px;
+      //   left: 0;
+      //   bottom: 88px;
+      //   animation: updown 2s ease-in-out infinite alternate;
+      // }
+      // .img5 {
+      //   width: 93px;
+      //   height: 39px;
+      //   right: 0;
+      //   bottom: 129px;
+      //   animation: updown 2s ease-in-out infinite alternate; 
+      // }
+      // .outer-circle {
+      //   opacity: 0.1;
+      //   border: 2px solid #11BAFA;
+      //   width: 512px;
+      //   height: 208px;
+      //   border-radius: 50%;
+      //   position: absolute;
+      //   z-index: 1;
+      //   left: 50%;
+      //   transform: translateX(-50%);
+      //   bottom: 145px;
+      // }
+      // .rotate-circle {
+      //   position: absolute;
+      //   left: calc(50% - 202px);
+      //   top: 126px;
+      //   width: 404px;
+      //   height: 404px;
+      //   transform: rotateX(66deg);
+      //   svg {
+      //     animation: rotate-circle 1.2s linear infinite;
+      //   }
+      // }
     }
     @media screen and (max-width: 768px) {
       .vertical-middle {
@@ -233,20 +238,26 @@
         display: inline-block;
         width: calc(100% - 530px);
         min-width: 300px;
-        max-width: 590px;
+        max-width: 650px;
         h3 {
           font-family: Avenir-Medium;
           font-weight: 700;
           font-size: 36px;
-          color: #333;
+          // color: #333;
           margin-bottom: 20px;
           word-break: break-word;
+          background-image: linear-gradient(#2de2ff,#8b67fb);
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+
         }
         p {
+          line-height: 28px;
           opacity: 0.56;
           font-family: Avenir-Medium;
           font-size: 18px;
-          color: #999;
+          color: #333;
           margin-bottom: 20px;
         }
         ul {
@@ -277,7 +288,7 @@
       }
       img {
         width: 1134px;
-        height: 453px;
+        height: 553px;
         // margin: 0 82px;
         max-width: 100%;
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.05);
