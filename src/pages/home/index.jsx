@@ -50,30 +50,44 @@ class Home extends Language {
     const language = this.getLanguage();
     const dataSource = homeConfig[language];
     const { headerType } = this.state;
-    const headerLogo = headerType === 'primary' ? '//img.alicdn.com/imgextra/i4/O1CN01OqNc6z1lJ4iVP8izh_!!6000000004797-2-tps-960-290.png' : '//img.alicdn.com/imgextra/i1/O1CN01I7WjVs1K33EQjInid_!!6000000001107-2-tps-960-290.png';
+    // const headerLogo = headerType === 'primary' ? '//img.alicdn.com/imgextra/i4/O1CN01OqNc6z1lJ4iVP8izh_!!6000000004797-2-tps-960-290.png' : '//img.alicdn.com/imgextra/i1/O1CN01I7WjVs1K33EQjInid_!!6000000001107-2-tps-960-290.png';
+    const headerLogo = '//img.alicdn.com/imgextra/i1/O1CN01I7WjVs1K33EQjInid_!!6000000001107-2-tps-960-290.png';
     return (
       <div className="home-page">
+        <Header
+          currentKey="home"
+          type={headerType}
+          logo={headerLogo}
+          language={language}
+          onLanguageChange={this.onLanguageChange}
+        />
         <section className="top-section">
-          <Header
-            currentKey="home"
-            type={headerType}
-            logo={headerLogo}
-            language={language}
-            onLanguageChange={this.onLanguageChange}
-          />
           <div className="top-body">
             <div className="vertical-middle">
               <div className="product-name">
                 <h2>{dataSource.brand.brandName}</h2>
               </div>
-              <p className="product-desc">{dataSource.brand.briefIntroduction}</p>
+              <p className="product-desc">
+                {dataSource.brand.briefIntroduction}
+              </p>
               <div className="button-area">
-              {
-                dataSource.brand.buttons.map(b => <Button type={b.type} key={b.text} link={b.link} target={b.target}>{b.text}</Button>)
-              }
+                {dataSource.brand.buttons.map((b) => (
+                  <Button
+                    type={b.type}
+                    key={b.text}
+                    link={b.link}
+                    target={b.target}
+                  >
+                    {b.text}
+                  </Button>
+                ))}
               </div>
               <div className="github-buttons">
-                <a href="https://github.com/alibaba/higress" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://github.com/alibaba/higress"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className="star">
                     <img src="https://img.alicdn.com/tfs/TB1FlB1JwHqK1RjSZFPXXcwapXa-32-32.png" />
                     <span className="type">Star</span>
@@ -81,21 +95,31 @@ class Home extends Language {
                     <span className="count">{starCount}</span>
                   </div>
                 </a>
-                <a href="https://github.com/alibaba/higress/fork" target="_blank" rel="noopener noreferrer">
-                <div className="fork">
-                  <img src="https://img.alicdn.com/tfs/TB1zbxSJwDqK1RjSZSyXXaxEVXa-32-32.png" />
-                  <span className="type">Fork</span>
-                  <span className="line" />
-                  <span className="count">{forkCount}</span>
-                </div>
+                <a
+                  href="https://github.com/alibaba/higress/fork"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="fork">
+                    <img src="https://img.alicdn.com/tfs/TB1zbxSJwDqK1RjSZSyXXaxEVXa-32-32.png" />
+                    <span className="type">Fork</span>
+                    <span className="line" />
+                    <span className="count">{forkCount}</span>
+                  </div>
                 </a>
               </div>
               <div className="version-note">
-                <a target="_blank" rel="noopener noreferrer" href={getLink(dataSource.brand.versionNote.link)}>{dataSource.brand.versionNote.text}</a>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={getLink(dataSource.brand.versionNote.link)}
+                >
+                  {dataSource.brand.versionNote.text}
+                </a>
               </div>
               <div className="release-date">{dataSource.brand.releaseDate}</div>
             </div>
-            <div className="animation">
+            {/* <div className="animation">
             <img className="img1" src="//img.alicdn.com/tfs/TB1evnpJhnaK1RjSZFBXXcW7VXa-702-312.png" />
             <img className="img2" src="//img.alicdn.com/tfs/TB1iau9JcbpK1RjSZFyXXX_qFXa-914-1156.png" />
             <div className="outer-circle" />
@@ -121,7 +145,7 @@ class Home extends Language {
             <img className="img3" src="//img.alicdn.com/tfs/TB1EBu.JgHqK1RjSZJnXXbNLpXa-914-1156.png" />
             <img className="img4" src="//img.alicdn.com/tfs/TB115i2JmzqK1RjSZPxXXc4tVXa-186-78.png" />
             <img className="img5" src="//img.alicdn.com/tfs/TB115i2JmzqK1RjSZPxXXc4tVXa-186-78.png" />
-          </div>
+          </div> */}
           </div>
         </section>
         <section className="introduction-section">
@@ -137,11 +161,9 @@ class Home extends Language {
           <div className="feature-container">
             <h3>{dataSource.features.title}</h3>
             <ul>
-            {
-              dataSource.features.list.map((feature, i) => (
+              {dataSource.features.list.map((feature, i) => (
                 <Item feature={feature} key={i} />
-              ))
-            }
+              ))}
             </ul>
           </div>
         </section>
@@ -150,16 +172,17 @@ class Home extends Language {
           <Bone type="dark" />
           <p>{dataSource.users.desc}</p>
           <div className="users">
-            {
-              dataSource.users.list.map((user, i) => (
-                  <div className="user-item" key={i}>
-                    <img src={user} />
-                  </div>
-              ))
-            }
+            {dataSource.users.list.map((user, i) => (
+              <div className="user-item" key={i}>
+                <img src={user} />
+              </div>
+            ))}
           </div>
         </section>
-        <Footer logo="//img.alicdn.com/imgextra/i2/O1CN01oNTGgE1lfW7oEPIzP_!!6000000004846-2-tps-960-290.png" language={language} />
+        <Footer
+          logo="//img.alicdn.com/imgextra/i2/O1CN01oNTGgE1lfW7oEPIzP_!!6000000004846-2-tps-960-290.png"
+          language={language}
+        />
       </div>
     );
   }
