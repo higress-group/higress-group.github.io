@@ -20,7 +20,8 @@
 两种模式下的能力对比可以参考<a href="../user/annotation.md">Higress Anntotaion 支持说明</a>。</p>
 <h3>选项1. 安装 Higress Istio（推荐）</h3>
 <p>安装后，<code>istiod</code> 需要等待 Higress 完成部署完成，才会处于就绪状态。</p>
-<pre><code class="language-bash">helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
+<pre><code class="language-bash">kubectl create ns istio-system
+helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
 </code></pre>
 <h2><strong>注意</strong></h2>
 <p>若 Higress 网关没有安装在默认的 <code>higress-system</code> 的命名空间，需要在安装 Higress Istio 时指定通过 <code>--set global.higressNamespace=</code> 指定命名空间，如:</p>
@@ -53,7 +54,8 @@
 <h2>第二步：安装 Higress</h2>
 <p>Higress 网关由控制面组件 <code>higress-controller</code> 和数据面组件 <code>higress-gateway</code> 组成。Istio 负责管理<strong>数据平面的 API 配置</strong>，<code>higress-controller</code> 负责管理<strong>控制平面的 API 配置</strong>。</p>
 <h3>Helm 安装命令</h3>
-<pre><code class="language-bash">helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
+<pre><code class="language-bash">kubectl create ns higress-system
+helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
 </code></pre>
 <h3>安装参数</h3>
 <ol>

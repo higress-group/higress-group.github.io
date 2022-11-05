@@ -117,18 +117,20 @@ nodes:
 Mac & Linux 系统执行:
 ```bash
 kind create cluster --name higress --config=cluster.conf
-kubectl cluster-info --context higress
+kubectl config use-context kind-higress
 ```
 Windows 系统执行:
 ```bash
 kind.exe create cluster --name higress --config=cluster.conf
-kubectl.exe cluster-info --context higress
+kubectl.exe config use-context kind-higress
 ```
 
 ### 第三步、 安装 istio & higress
 
 ```bash
+kubectl create ns istio-system
 helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio-local
+kubectl create ns higress-system
 helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress-local
 ```
 
