@@ -4,7 +4,7 @@ export default {
     'zh-cn': {
         brand: {
             brandName: 'Higress',
-            briefIntroduction: '一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成，易使用、易扩展、热更新的下一代云原生网关。',
+            briefIntroduction: '一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成、易使用、易扩展、热更新的下一代云原生网关。',
             buttons: [
                 {
                     text: '快速入门',
@@ -12,7 +12,7 @@ export default {
                     type: 'primary',
                 },
                 {
-                  text: 'Github',
+                  text: 'GitHub',
                   link: 'https://github.com/alibaba/higress',
                   type: 'normal',
                 },
