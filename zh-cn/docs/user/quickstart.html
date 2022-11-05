@@ -94,14 +94,16 @@ sudo mv ./kind ./kubectl /usr/<span class="hljs-built_in">local</span>/bin/kind
 </code></pre>
 <p>Mac &amp; Linux 系统执行:</p>
 <pre><code class="language-bash">kind create cluster --name higress --config=cluster.conf
-kubectl cluster-info --context higress
+kubectl config use-context kind-higress
 </code></pre>
 <p>Windows 系统执行:</p>
 <pre><code class="language-bash">kind.exe create cluster --name higress --config=cluster.conf
-kubectl.exe cluster-info --context higress
+kubectl.exe config use-context kind-higress
 </code></pre>
 <h3>第三步、 安装 istio &amp; higress</h3>
-<pre><code class="language-bash">helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio-local
+<pre><code class="language-bash">kubectl create ns istio-system
+helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio-local
+kubectl create ns higress-system
 helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress-local
 </code></pre>
 <h3>第四步、 创建 Ingress 资源并测试</h3>
