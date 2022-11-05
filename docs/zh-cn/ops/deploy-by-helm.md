@@ -18,6 +18,7 @@ Higress 网关基于[Istio](https://istio.io/) 管理数据平面的 API 配置�
 安装后，`istiod` 需要等待 Higress 完成部署完成，才会处于就绪状态。
 
 ```bash
+kubectl create ns istio-system
 helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
 ```
 
@@ -71,6 +72,7 @@ Higress 网关由控制面组件 `higress-controller` 和数据面组件 `higres
 ### Helm 安装命令
 
 ```bash
+kubectl create ns higress-system
 helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
 ```
 
