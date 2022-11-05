@@ -2090,6 +2090,43 @@ h1, h2, h3, h4, h5, h6 {
       .home-page .users-section .users .user-item img {
         width: 100%; }
 
+.home-page .community-section {
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 40px 40px;
+  position: relative; }
+  .home-page .community-section .bone {
+    margin: 0 auto 40px; }
+  .home-page .community-section h3 {
+    font-family: Avenir-Heavy;
+    font-size: 26px;
+    color: #333;
+    text-align: center; }
+  .home-page .community-section p {
+    font-family: Avenir-Medium;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin: 0 0 40px; }
+    .home-page .community-section p a {
+      color: #1e6bb8;
+      text-decoration: none; }
+  .home-page .community-section .community {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; }
+    .home-page .community-section .community .community-item {
+      display: flex;
+      width: 82px;
+      height: 86px;
+      margin: 10px;
+      padding: 4px;
+      justify-content: center;
+      align-items: center; }
+      .home-page .community-section .community .community-item img {
+        width: 100%; }
+
 .home-page .footer-container {
   background: #fff; }
 
