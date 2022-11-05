@@ -76,6 +76,13 @@ export default {
                 'https://img.alicdn.com/imgextra/i1/O1CN01vrxF2I1rfs7rihLdy_!!6000000005659-0-tps-310-160.jpg' ,
             ],
         },
+        community: {
+            title: '搭把手，共建Higress',
+            list: [
+                'https://img.alicdn.com/imgextra/i4/O1CN01lP4p411R49V3tQpFH_!!6000000002057-0-tps-1062-1410.jpg' ,
+                'https://img.alicdn.com/imgextra/i3/O1CN01iGlPgu1xmdfvqpaWp_!!6000000006486-0-tps-1126-1522.jpg' ,
+            ],
+        },
     },
     'en-us': {
         brand: {
@@ -102,7 +109,7 @@ export default {
         introduction: {
             title: 'What is Higress?',
             desc: 'Higress is ...',
-            img: 'https://img.alicdn.com/tfs/TB1rDpkJAvoK1RjSZPfXXXPKFXa-794-478.png',
+            img: 'https://img.alicdn.com/imgextra/i2/O1CN01Tm5Bi51dQqVvZABEp_!!6000000003731-2-tps-2396-1214.png',
         },
         features: {
             title: 'Feature List',
@@ -152,5 +159,12 @@ export default {
                 'https://img.alicdn.com/imgextra/i1/O1CN01vrxF2I1rfs7rihLdy_!!6000000005659-0-tps-310-160.jpg' ,
             ],
         },
+        community: {
+          title: 'community',
+          list: [
+              'https://img.alicdn.com/imgextra/i4/O1CN01lP4p411R49V3tQpFH_!!6000000002057-0-tps-1062-1410.jpg' ,
+              'https://img.alicdn.com/imgextra/i3/O1CN01iGlPgu1xmdfvqpaWp_!!6000000006486-0-tps-1126-1522.jpg' ,
+          ],
+      },
     },
 };

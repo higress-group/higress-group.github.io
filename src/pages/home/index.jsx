@@ -179,6 +179,16 @@ class Home extends Language {
             ))}
           </div>
         </section>
+        <section className="community-section">
+          <h3>{dataSource.community.title}</h3>
+          <div className="community">
+            {dataSource.community.list.map((community, i) => (
+              <div className="community-item" key={i}>
+                <img src={community} />
+              </div>
+            ))}
+          </div>
+        </section>
         <Footer
           logo="//img.alicdn.com/imgextra/i2/O1CN01oNTGgE1lfW7oEPIzP_!!6000000004846-2-tps-960-290.png"
           language={language}
