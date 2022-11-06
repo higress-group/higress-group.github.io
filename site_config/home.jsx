@@ -80,7 +80,7 @@ export default {
             title: '搭把手，共建Higress',
             list: [
                 'https://img.alicdn.com/imgextra/i4/O1CN01lP4p411R49V3tQpFH_!!6000000002057-0-tps-1062-1410.jpg' ,
-                'https://img.alicdn.com/imgextra/i3/O1CN01iGlPgu1xmdfvqpaWp_!!6000000006486-0-tps-1126-1522.jpg' ,
+                'https://img.alicdn.com/imgextra/i1/O1CN01UfZyN31zNZE4P1cES_!!6000000006702-0-tps-1008-1240.jpg' ,
             ],
         },
     },
@@ -163,7 +163,7 @@ export default {
           title: 'community',
           list: [
               'https://img.alicdn.com/imgextra/i4/O1CN01lP4p411R49V3tQpFH_!!6000000002057-0-tps-1062-1410.jpg' ,
-              'https://img.alicdn.com/imgextra/i3/O1CN01iGlPgu1xmdfvqpaWp_!!6000000006486-0-tps-1126-1522.jpg' ,
+              'https://img.alicdn.com/imgextra/i1/O1CN01UfZyN31zNZE4P1cES_!!6000000006702-0-tps-1008-1240.jpg' ,
           ],
       },
     },
