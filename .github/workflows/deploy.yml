@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - master
 
 jobs:
   Build-Deploy:
@@ -17,12 +18,12 @@ jobs:
           node-version: 10.x
       - name: Build
         run: |
-          npm install && npm run build && mkdir deploy-dist && cp -R zh-cn/ en-us/ build/ img/ md_json/ site_config/ schema/ deploy-dist/ && mv .htaccess *.html deploy-dist/
+          npm install && npm run build && mkdir deploy-dist && cp -R zh-cn/ en-us/ build/ img/ md_json/ site_config/ deploy-dist/ && mv .htaccess *.html deploy-dist/
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v2.8.0
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          PUBLISH_BRANCH: master
+          PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./deploy-dist
         with:
           keepFiles: true
