@@ -36,16 +36,16 @@ helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyunc
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">install.istio.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">IstioOperator</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">values:</span>
-    <span class="hljs-attr">global:</span>
+<span class="hljs-attr">  values:</span>
+<span class="hljs-attr">    global:</span>
       <span class="hljs-comment"># 用于 Istio 控制面鉴权，当前 Higress 支持 first-party-jwt</span>
-      <span class="hljs-attr">jwtPolicy:</span> <span class="hljs-string">"first-party-jwt"</span>
-  <span class="hljs-attr">meshConfig:</span>
-    <span class="hljs-attr">configSources:</span>
+<span class="hljs-attr">      jwtPolicy:</span> <span class="hljs-string">"first-party-jwt"</span>
+<span class="hljs-attr">  meshConfig:</span>
+<span class="hljs-attr">    configSources:</span>
     <span class="hljs-comment"># 当有多个配置来源时，需要显示指定 k8s 来源</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-attr">address:</span> <span class="hljs-string">"k8s://"</span>
+<span class="hljs-attr">    - address:</span> <span class="hljs-string">"k8s://"</span>
     <span class="hljs-comment"># 假设 Higress 安装在 higress-system 命名空间</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-attr">address:</span> <span class="hljs-string">"xds://higress-controller.higress-system:15051"</span>
+<span class="hljs-attr">    - address:</span> <span class="hljs-string">"xds://higress-controller.higress-system:15051"</span>
     <span class="hljs-comment"># 若在不同命名空间安装了多个 Higress ，可以继续添加</span>
 </code></pre>
 <p>执行安装操作：</p>
