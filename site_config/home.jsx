@@ -34,12 +34,12 @@ export default {
                 {
                   icon: 'feature-1',
                   title: '易于使用',
-                  content: ['提供流量调度、服务治理、安全防护、限流降级的一站式网关解决方案，默认提供轻量级Console，也支持K8s原生Ingress、Gateway API的标准配置方式，也支持HTTP到Dubbo协议的转换功能，一键配置轻松完成HTTP到Dubbo服务的协议映射。'],
+                  content: ['提供流量调度、服务治理、安全防护一站式网关解决方案，支持Console与K8s Ingress、Gateway API配置方式，也支持HTTP到Dubbo协议转换，一键轻松完成协议映射配置。'],
                 },
                 {
                   icon: 'feature-2',
                   title: '生产等级',
-                  content: ['脱胎于历经阿里巴巴2年多生产验证的内部产品，支持每秒请求量达数十万级的大规模场景，具备企业级SLA的开源产品'],
+                  content: ['脱胎于阿里巴巴生产验证的内部产品，经历双十一洪峰锤炼，具备企业级SLA的开源产品'],
                 },
                 {
                   icon: 'feature-3',
