@@ -19,7 +19,7 @@
 
 .home-page {
   .top-section {
-    height: 720px;
+    height: 100vh;
     background-color: #E8F3FE;
     background-image: url("https://img.alicdn.com/imgextra/i2/O1CN01J3KuwB25Adjq8TeBL_!!6000000007486-2-tps-1440-900.png");
     background-size: cover;
@@ -48,10 +48,7 @@
         font-size: 46px;
         word-break: break-word;
         margin: 0;
-        background-image: linear-gradient(#2de2ff,#8b67fb);
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
+        color: #5381fd;
 
       }
     }
@@ -245,13 +242,9 @@
           font-family: Avenir-Medium;
           font-weight: 700;
           font-size: 36px;
-          // color: #333;
           margin-bottom: 20px;
           word-break: break-word;
-          background-image: linear-gradient(#2de2ff,#8b67fb);
-          background-clip: text;
-          -webkit-background-clip: text;
-          color: transparent;
+          color: #5381fd;
 
         }
         p {
@@ -288,13 +281,17 @@
           }
         }
       }
-      img {
-        width: 1134px;
-        height: 553px;
-        // margin: 0 82px;
-        max-width: 100%;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.05);
+      .img-wrapper{
+        width: 100vw;
+        img {
+          width: 100%;
+          height: auto;
+          // width: 1134px;
+          // height: 553px;
+          // max-width: 100%;
+        }
       }
+    
       @media screen and (max-width: 1106px){
         .introduction {
           display: inline-block;

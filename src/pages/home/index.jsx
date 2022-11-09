@@ -16,7 +16,7 @@ class Home extends Language {
   constructor(props) {
     super(props);
     this.state = {
-      headerType: 'primary',
+      headerType: "primary",
       starCount: 0,
       forkCount: 0,
     };
@@ -154,7 +154,9 @@ class Home extends Language {
               <h3>{dataSource.introduction.title}</h3>
               <p>{dataSource.introduction.desc}</p>
             </div>
-            <img src={getLink(dataSource.introduction.img)} />
+            <div className="img-wrapper">
+              <img src={getLink(dataSource.introduction.img)} />
+            </div>
           </div>
         </section>
         <section className="feature-section">
