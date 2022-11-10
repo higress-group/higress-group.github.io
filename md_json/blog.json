@@ -1,27 +1,27 @@
 {
   "en-us": [
     {
-      "filename": "first-higress-blog.md",
-      "link": "/en-us/blog/first-higress-blog.html",
+      "filename": "higress.md",
+      "link": "/en-us/blog/higress.html",
       "meta": {
-        "title": "first-higress-blog",
+        "title": "Alibaba Open Source Cloud Native Gateway: Higress",
         "keywords": "higress",
-        "description": "first-higress-blog",
-        "author": "higress",
-        "date": "2019-02-13"
+        "description": "This paper introduces the background and development stages of Higress",
+        "author": "gengleilei",
+        "date": "2022-11-04"
       }
     }
   ],
   "zh-cn": [
     {
-      "filename": "first-higress-blog.md",
-      "link": "/zh-cn/blog/first-higress-blog.html",
+      "filename": "higress.md",
+      "link": "/zh-cn/blog/higress.html",
       "meta": {
-        "title": "first-higress-blog",
+        "title": "阿里巴巴重磅开源云原生网关: Higress",
         "keywords": "higress",
-        "description": "first-higress-blog",
-        "author": "higress",
-        "date": "2019-02-13"
+        "description": "介绍Higress的诞生背景与发展历程",
+        "author": "gengleilei",
+        "date": "2022-11-04"
       }
     }
   ]
