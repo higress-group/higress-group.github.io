@@ -4,11 +4,11 @@
         postsTitle: 'All posts',
         list: [
             {
-                title: 'first-higress-blog',
-                author: '@slievrly',
-                dateStr: 'Jan 17th, 2019',
-                desc: 'first-higress-blog',
-                link: '/en-us/blog/first-higress-blog.html',
+                title: 'Alibaba Open Source Cloud Native Gateway: Higress',
+                author: '@gengleilei',
+                dateStr: 'Nov 4th, 2022',
+                desc: 'higress',
+                link: '/en-us/blog/higress.html',
             }
         ]
     },
@@ -17,11 +17,11 @@
         postsTitle: '所有文章',
         list: [
             {
-                title: '第一篇 higress blog',
-                author: '@slievrly',
-                dateStr: 'Jan 17th, 2019',
-                desc: 'first-higress-blog',
-                link: '/zh-cn/blog/first-higress-blog.html',
+                title: '阿里巴巴重磅开源云原生网关 Higress',
+                author: '@gengleilei',
+                dateStr: '2022年11月4日',
+                desc: 'higress',
+                link: '/zh-cn/blog/higress.html',
             }
         ]
     },
