@@ -4,12 +4,12 @@ pages:
   # 首页配置
   zh-cn:
    title: 'Higress'
-   keywords: '官网,首页'
+   keywords: 'higress,higress官网,云原生网关'
    description: 'Higress官网'
   # home config
   en-us:
    title: 'Higress'
-   keywords: 'Official,Higress'
+   keywords: 'higress,higress official,cloud native gateway'
    description: 'Higress Official Website'
  community:
   # 社区页配置
