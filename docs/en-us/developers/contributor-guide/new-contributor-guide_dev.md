@@ -24,7 +24,7 @@ If you are reporting regular issues, like raise an question, you can open an [re
 
 ### Sending pull request
 
-* Follow the checklist in the [pull request template](https://github.com/alibaba/higress/blob/develop/.github/PULL_REQUEST_TEMPLATE.md)
+* Follow the checklist in the [pull request template](https://github.com/alibaba/higress/blob/main/.github/PULL_REQUEST_TEMPLATE.md)
 * Before you sending out the pull request, please sync your forked repository with remote repository, this will make your pull request simple and clear. See guide below:
 
 ```sh
@@ -38,4 +38,4 @@ git push origin your_awesome_patch
 
 ### Code convention
 
-Please check the [CONTRIBUTING.md](https://github.com/alibaba/higress/blob/develop/CONTRIBUTING.md) for code convention.
+Please check the [CONTRIBUTING.md](https://github.com/alibaba/higress/blob/main/CONTRIBUTING_EN.md) for code convention.
