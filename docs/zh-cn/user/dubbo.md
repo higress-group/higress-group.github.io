@@ -8,6 +8,11 @@ description: 实现 Dubbo 服务发现和路由
 
 Higress提供了从HTTP协议到Dubbo协议进行转换的功能，用户通过配置协议转换，可以将一个Dubbo服务以HTTP接口暴露出来，从而用HTTP请求实现对Dubbo接口的调用。本文将通过示例来介绍如何用Higress配置HTTP到Dubbo的协议转换。
 
+## 前提条件
+Higress目前支持的Dubbo框架的版本为2.x。若您使用Dubbo3.0，要求使用dubbo协议（目前暂不支持Triple协议）。
+
+---
+
 假设我们有如下一个Dubbo服务，并指定了该服务的version为“1.0.0”，group为“dev”，下面我们将介绍如何为该服务配置协议转换。
 
 ```java
