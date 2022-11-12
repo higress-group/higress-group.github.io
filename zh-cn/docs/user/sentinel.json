@@ -1,6 +1,6 @@
 {
   "filename": "sentinel.md",
-  "__html": "<h1>基于 Sentinel 实现入口熔断限流</h1>\n",
+  "__html": "<h1>基于 Sentinel 实现入口熔断限流</h1>\n<p>文档计划推出时间：2022.03.15</p>\n",
   "link": "/zh-cn/docs/user/sentinel.html",
   "meta": {
     "title": "基于 Sentinel 实现入口熔断限流",

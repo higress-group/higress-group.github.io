@@ -1,6 +1,6 @@
 {
   "filename": "nacos-route.md",
-  "__html": "<h1>配置 Ingress 转发给注册在 Nacos 的服务</h1>\n",
+  "__html": "<h1>配置 Ingress 转发给注册在 Nacos 的服务</h1>\n<p>文档计划推出时间：2022.11.18</p>\n",
   "link": "/zh-cn/docs/user/nacos-route.html",
   "meta": {
     "title": "配置 Ingress 转发给注册在 Nacos 的服务",
