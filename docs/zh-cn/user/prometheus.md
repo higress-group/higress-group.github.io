@@ -1,9 +1,9 @@
 ---
-title: Higress 快速开始
-keywords: Higress
-description: Higress 快速开始.
+title: 基于 Prometheus 实现入口流量观测
+keywords: Higress,Prometheus
+description: 基于 Prometheus 实现入口流量观测
 ---
 
 # 快速开始
 
-TBD
+文档计划推出时间：2022.11.18

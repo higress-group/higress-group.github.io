@@ -155,9 +155,18 @@
       "filename": "architecture.md",
       "link": "/zh-cn/docs/dev/architecture.html",
       "meta": {
-        "title": "Higress 架构说明",
-        "keywords": "Higress",
-        "description": "Higress 架构说明."
+        "title": "组件编译说明",
+        "keywords": "higress,architecture",
+        "description": "Higress 组件编译说明."
+      }
+    },
+    {
+      "filename": "code.md",
+      "link": "/zh-cn/docs/dev/code.html",
+      "meta": {
+        "title": "源码阅读指引",
+        "keywords": "higress,coding",
+        "description": "Higress 源码阅读指引."
       }
     },
     {
@@ -242,6 +251,15 @@
       }
     },
     {
+      "filename": "log.md",
+      "link": "/zh-cn/docs/ops/log.html",
+      "meta": {
+        "title": "日志说明",
+        "keywords": "higress,log",
+        "description": "Higress 日志说明."
+      }
+    },
+    {
       "filename": "upgrade.md",
       "link": "/zh-cn/docs/ops/upgrade.html",
       "meta": {
@@ -257,6 +275,15 @@
         "title": "Higress FAQ",
         "keywords": "Higress",
         "description": "Higress FAQ."
+      }
+    },
+    {
+      "filename": "roadmap.md",
+      "link": "/zh-cn/docs/overview/roadmap.html",
+      "meta": {
+        "title": "Higress Roadmap",
+        "keywords": "Higress,roadmap",
+        "description": "Higress Roadmap."
       }
     },
     {
@@ -362,9 +389,9 @@
       "filename": "prometheus.md",
       "link": "/zh-cn/docs/user/prometheus.html",
       "meta": {
-        "title": "Higress 快速开始",
-        "keywords": "Higress",
-        "description": "Higress 快速开始."
+        "title": "基于 Prometheus 实现入口流量观测",
+        "keywords": "Higress,Prometheus",
+        "description": "基于 Prometheus 实现入口流量观测"
       }
     },
     {

@@ -6,4 +6,4 @@ description: 对接 OpenSergo 实现全链路灰度
 
 # 对接 OpenSergo 实现全链路灰度
 
-TBD
+文档计划推出时间：2022.01.15

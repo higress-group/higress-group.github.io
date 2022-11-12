@@ -1,9 +1,30 @@
 ---
-title: Higress 架构说明
-keywords: Higress
-description: Higress 架构说明.
+title: 组件编译说明
+keywords: higress,architecture
+description: Higress 组件编译说明.
 ---
 
-# Higress 架构说明
+# 组件编译说明
 
-TBD...
+## Higress Controller
+
+Higress 的控制面程序，会连接 Istio ，用于生成 Istio API 对象，通过 xDS 协议发送给 Istio。
+
+在 higress 仓库目录下执行 `make build` 即可进行本地环境能运行的二进制编译
+
+若需要编译 docker 镜像，请执行 `make docker-build`
+
+
+## Higress istio
+
+同属于 Higress 的控制面程序，直接连接 Higress Gateway，用于生成 Envoy API 对象，通过 xDS 协议发送给 Higress Gateway。
+
+
+在 higress 仓库目录下执行 `make build-istio` 会编译出 istio 的镜像。
+
+
+## Higress Gateway
+
+Higress 的数据面程序，用于实现网关路由转发等能力。
+
+在 higress 仓库目录下执行 `make build-gateway` 会编译出 Higress Gateway 的镜像。

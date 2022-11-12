@@ -1,6 +1,6 @@
 {
   "filename": "upgrade.md",
-  "__html": "<h1>版本升级</h1>\n<p>TBD</p>\n",
+  "__html": "<h1>版本升级</h1>\n<h2>基于 helm 实现版本升级</h2>\n<ol>\n<li>先升级 Istio</li>\n</ol>\n<p>可以用 <code>--version</code> 参数指定升级到特定版本，不指定则更新最新版本</p>\n<pre><code class=\"language-bash\">helm upgrade istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio\n</code></pre>\n<ol start=\"2\">\n<li>再升级 Higress</li>\n</ol>\n<pre><code class=\"language-bash\">helm upgrade higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress\n</code></pre>\n<h2>基于 hictl 实现版本升级</h2>\n<p>TBD</p>\n",
   "link": "/zh-cn/docs/ops/upgrade.html",
   "meta": {
     "title": "版本升级",

@@ -1,10 +1,10 @@
 {
   "filename": "architecture.md",
-  "__html": "<h1>Higress 架构说明</h1>\n<p>TBD...</p>\n",
+  "__html": "<h1>组件编译说明</h1>\n<h2>Higress Controller</h2>\n<p>Higress 的控制面程序，会连接 Istio ，用于生成 Istio API 对象，通过 xDS 协议发送给 Istio。</p>\n<p>在 higress 仓库目录下执行 <code>make build</code> 即可进行本地环境能运行的二进制编译</p>\n<p>若需要编译 docker 镜像，请执行 <code>make docker-build</code></p>\n<h2>Higress istio</h2>\n<p>同属于 Higress 的控制面程序，直接连接 Higress Gateway，用于生成 Envoy API 对象，通过 xDS 协议发送给 Higress Gateway。</p>\n<p>在 higress 仓库目录下执行 <code>make build-istio</code> 会编译出 istio 的镜像。</p>\n<h2>Higress Gateway</h2>\n<p>Higress 的数据面程序，用于实现网关路由转发等能力。</p>\n<p>在 higress 仓库目录下执行 <code>make build-gateway</code> 会编译出 Higress Gateway 的镜像。</p>\n",
   "link": "/zh-cn/docs/dev/architecture.html",
   "meta": {
-    "title": "Higress 架构说明",
-    "keywords": "Higress",
-    "description": "Higress 架构说明."
+    "title": "组件编译说明",
+    "keywords": "higress,architecture",
+    "description": "Higress 组件编译说明."
   }
 }
