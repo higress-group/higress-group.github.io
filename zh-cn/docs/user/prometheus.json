@@ -1,10 +1,10 @@
 {
   "filename": "prometheus.md",
-  "__html": "<h1>快速开始</h1>\n<p>TBD</p>\n",
+  "__html": "<h1>快速开始</h1>\n<p>文档计划推出时间：2022.11.18</p>\n",
   "link": "/zh-cn/docs/user/prometheus.html",
   "meta": {
-    "title": "Higress 快速开始",
-    "keywords": "Higress",
-    "description": "Higress 快速开始."
+    "title": "基于 Prometheus 实现入口流量观测",
+    "keywords": "Higress,Prometheus",
+    "description": "基于 Prometheus 实现入口流量观测"
   }
 }

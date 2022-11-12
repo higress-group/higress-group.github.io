@@ -10,12 +10,20 @@ description: 如果您有兴趣攻克Higress，欢迎您。首先，我们非常
 
 ## 话题
 
+* [贡献插件](#贡献插件) 
 * [报告安全问题](#报告安全问题) 
 * [报告一般问题](#报告一般问题) 
 * [代码和文档贡献](#代码和文档贡献) 
 * [测试用例贡献](#测试用例贡献)
 * [致力于帮助任何事情](#致力于帮助任何事情)
-* [代码风格](#代码风格)
+
+
+## 贡献插件
+
+Higress 基于 WASM 等方式具备了很好的可扩展性，具体贡献方式请参考此处[说明](https://github.com/alibaba/higress/tree/main/plugins)
+
+对于使用 GO 语言开发 WASM 插件，可以参考这篇[文档](../user/wasm-go.md)
+
 
 ## 报告安全问题
 
@@ -159,10 +167,6 @@ PR是更改Higress项目文件的唯一方法。为了帮助审稿人更好地�
 
 任何测试用例都将受到欢迎。当前，Higress功能测试用例是高度优先的。
 
-*   对于单元测试，您需要创建一个`xxxTest.java`在同一模块的测试目录中命名的测试文件。推荐您使用junit5 UT框架
-
-*   对于集成测试，您可以将集成测试放在测试目录或Higress-test模块中。建议使用 mockito 测试框架。
-
 ## 致力于帮助任何事情
 
 我们选择GitHub作为Higress合作的主要场所。因此，Higress的最新更新始终在这里。尽管通过PR捐款是一种明确的帮助方式，但我们仍然呼吁其他方式。
@@ -175,23 +179,3 @@ PR是更改Higress项目文件的唯一方法。为了帮助审稿人更好地�
 *   在GitHub之外倡导Higress技术;
 *   在Higress上写博客，等等。
 
-## 代码风格
-
-Higress代码样式符合阿里巴巴Java编码准则。
-
-### 指导方针
-
-[阿里巴巴Java编码指南](https://alibaba.github.io/Alibaba-Java-Coding-Guidelines/)
-
-### IDE插件安装（不必要）
-
-_如果要在编码时发现问题，则无需安装。_
-
-#### idea IDE
-
-[p3c-idea-plugin-install](https://github.com/alibaba/p3c/blob/master/idea-plugin/README.md)
-
-#### eclipse IDE
-
-[p3c-eclipse-plugin-install](https://github.com/alibaba/p3c/blob/master/eclipse-plugin/README.md)
-总之，**任何帮助都是贡献。**
