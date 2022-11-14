@@ -8,11 +8,29 @@ All website material  of https://higress.io
 ## Prerequisite
 
 higress-group.github.io is powered by [docsite](https://github.com/txd-team/docsite).please read [https://docsite.js.org](https://docsite.js.org) 
+
+## Build instruction
+
+### Docker deploy (Recommand)
+1. Docker build the target image.
+```
+docker build -t higress-docsite .
+```
+2. Docker run the target image.
+```
+docker run -p 8080:8080 higress-docsite
+```
+3. Now you can view the changed document in your local machine.
+```
+localhost:8080/
+```
+
+> Note: When the dependencies changes, the code owners of this project should rebuild the higress-docsite-base by Dockerfile named Dockerfile-Base.
+
+### Local deploy
 If your version of docsite is less than `1.3.3`, please upgrade to at least `1.3.3`,`1.3.8` is recommended.
 
 Please also make sure your node version is 8.x, versions higher than 8.x is not supported by docsite yet.
-
-## Build instruction
 
 1. Run `npm install docsite -g` to install the dev tool.
 2. Run `npm i` in the root directory to install the dependencies.
