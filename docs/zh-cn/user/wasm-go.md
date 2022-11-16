@@ -96,7 +96,7 @@ go env -w GOPROXY=https://proxy.golang.com.cn,direct
 4. 下载构建插件的依赖
 ```bash
 go get github.com/tetratelabs/proxy-wasm-go-sdk
-go get github.com/mse-group/wasm-extensions-go
+go get github.com/alibaba/higress/plugins/wasm-go@main
 go get github.com/tidwall/gjson
 ```
 <a name="Z2lFM"></a>
@@ -131,13 +131,13 @@ type MyConfig struct {
 }
 
 // 在控制台插件配置中填写的yaml配置会自动转换为json，此处直接从json这个参数里解析配置即可
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.LogWrapper) error {
+func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
         // 解析出配置，更新到config中
     	config.mockEnable = json.Get("mockEnable").Bool()
         return nil
 }
 
-func onHttpRequestHeaders(ctx *wrapper.CommonHttpCtx[MyConfig], config MyConfig, needBody *bool, log wrapper.LogWrapper) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
         proxywasm.AddHttpRequestHeader("hello", "world")
         if config.mockEnable {
                 proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
@@ -224,7 +224,7 @@ func main() {
 
 type MyConfig struct {}
 
-func onHttpRequestHeaders(ctx *wrapper.CommonHttpCtx[MyConfig], config MyConfig, needBody *bool, log wrapper.LogWrapper) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
         proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
         return types.ActionContinue
 }
@@ -263,7 +263,7 @@ type MyConfig struct {
 	tokenHeader string
 }
 
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.LogWrapper) error {
+func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
 	config.tokenHeader = json.Get("tokenHeader").String()
 	if config.tokenHeader == "" {
 		return errors.New("missing tokenHeader in config")
@@ -316,7 +316,7 @@ func parseConfig(json gjson.Result, config *MyConfig, log wrapper.LogWrapper) er
 	}
 }
 
-func onHttpRequestHeaders(ctx *wrapper.CommonHttpCtx[MyConfig] config MyConfig, needBody *bool, log wrapper.LogWrapper) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
     // 使用client的Get方法发起HTTP Get调用，此处省略了timeout参数，默认超时时间500毫秒
 	config.client.Get(config.requestPath, nil,
         // 回调函数，将在响应异步返回时被执行
