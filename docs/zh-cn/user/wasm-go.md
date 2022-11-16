@@ -96,7 +96,7 @@ go env -w GOPROXY=https://proxy.golang.com.cn,direct
 4. 下载构建插件的依赖
 ```bash
 go get github.com/tetratelabs/proxy-wasm-go-sdk
-go get github.com/mse-group/wasm-extensions-go
+go get github.com/alibaba/higress/plugins/wasm-go@main
 go get github.com/tidwall/gjson
 ```
 <a name="Z2lFM"></a>
