@@ -108,7 +108,7 @@ sudo dpkg -i tinygo_0.25.0_amd64.deb
 <li>下载构建插件的依赖</li>
 </ol>
 <pre><code class="language-bash">go get github.com/tetratelabs/proxy-wasm-go-sdk
-go get github.com/mse-group/wasm-extensions-go
+go get github.com/alibaba/higress/plugins/wasm-go@main
 go get github.com/tidwall/gjson
 </code></pre>
 <p><a name="Z2lFM"></a></p>
@@ -143,13 +143,13 @@ go get github.com/tidwall/gjson
 }
 
 <span class="hljs-comment">// 在控制台插件配置中填写的yaml配置会自动转换为json，此处直接从json这个参数里解析配置即可</span>
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseConfig</span><span class="hljs-params">(json gjson.Result, config *MyConfig, log wrapper.LogWrapper)</span> <span class="hljs-title">error</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseConfig</span><span class="hljs-params">(json gjson.Result, config *MyConfig, log wrapper.Log)</span> <span class="hljs-title">error</span></span> {
         <span class="hljs-comment">// 解析出配置，更新到config中</span>
     	config.mockEnable = json.Get(<span class="hljs-string">"mockEnable"</span>).Bool()
         <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
 }
 
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx *wrapper.CommonHttpCtx[MyConfig], config MyConfig, needBody *<span class="hljs-keyword">bool</span>, log wrapper.LogWrapper)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
         proxywasm.AddHttpRequestHeader(<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>)
         <span class="hljs-keyword">if</span> config.mockEnable {
                 proxywasm.SendHttpResponse(<span class="hljs-number">200</span>, <span class="hljs-literal">nil</span>, []<span class="hljs-keyword">byte</span>(<span class="hljs-string">"hello world"</span>), <span class="hljs-number">-1</span>)
@@ -398,7 +398,7 @@ go get github.com/tidwall/gjson
 
 <span class="hljs-keyword">type</span> MyConfig <span class="hljs-keyword">struct</span> {}
 
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx *wrapper.CommonHttpCtx[MyConfig], config MyConfig, needBody *<span class="hljs-keyword">bool</span>, log wrapper.LogWrapper)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
         proxywasm.SendHttpResponse(<span class="hljs-number">200</span>, <span class="hljs-literal">nil</span>, []<span class="hljs-keyword">byte</span>(<span class="hljs-string">"hello world"</span>), <span class="hljs-number">-1</span>)
         <span class="hljs-keyword">return</span> types.ActionContinue
 }
@@ -436,7 +436,7 @@ go get github.com/tidwall/gjson
 	tokenHeader <span class="hljs-keyword">string</span>
 }
 
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseConfig</span><span class="hljs-params">(json gjson.Result, config *MyConfig, log wrapper.LogWrapper)</span> <span class="hljs-title">error</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseConfig</span><span class="hljs-params">(json gjson.Result, config *MyConfig, log wrapper.Log)</span> <span class="hljs-title">error</span></span> {
 	config.tokenHeader = json.Get(<span class="hljs-string">"tokenHeader"</span>).String()
 	<span class="hljs-keyword">if</span> config.tokenHeader == <span class="hljs-string">""</span> {
 		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">"missing tokenHeader in config"</span>)
@@ -489,7 +489,7 @@ go get github.com/tidwall/gjson
 	}
 }
 
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx *wrapper.CommonHttpCtx[MyConfig] config MyConfig, needBody *<span class="hljs-keyword">bool</span>, log wrapper.LogWrapper)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
     <span class="hljs-comment">// 使用client的Get方法发起HTTP Get调用，此处省略了timeout参数，默认超时时间500毫秒</span>
 	config.client.Get(config.requestPath, <span class="hljs-literal">nil</span>,
         <span class="hljs-comment">// 回调函数，将在响应异步返回时被执行</span>
