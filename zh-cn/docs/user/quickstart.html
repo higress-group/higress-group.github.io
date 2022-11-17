@@ -46,7 +46,7 @@
 <span class="hljs-attr">              number:</span> <span class="hljs-number">80</span>
 </code></pre>
 <p>测试能访问到该服务：</p>
-<pre><code class="language-bash">curl <span class="hljs-string">"<span class="hljs-variable">$(k get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')</span>"</span>/foo -H <span class="hljs-string">'host: foo.bar.com'</span>
+<pre><code class="language-bash">curl <span class="hljs-string">"<span class="hljs-variable">$(kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')</span>"</span>/foo -H <span class="hljs-string">'host: foo.bar.com'</span>
 </code></pre>
 <h2>在本地环境中使用</h2>
 <h3>第一步、 安装 kubectl &amp; kind</h3>
