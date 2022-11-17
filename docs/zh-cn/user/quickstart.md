@@ -56,7 +56,7 @@ spec:
 测试能访问到该服务：
 
 ```bash
-curl "$(k get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"/foo -H 'host: foo.bar.com'
+curl "$(kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"/foo -H 'host: foo.bar.com'
 ```
 
 ## 在本地环境中使用
