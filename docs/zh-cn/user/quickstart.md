@@ -15,6 +15,7 @@ description: Higress 快速开始.
 安装后，`istiod` 需要等待 Higress 完成部署完成，才会处于就绪状态。
 
 ```bash
+kubectl create ns istio-system
 helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
 ```
 
@@ -27,6 +28,7 @@ helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyunc
 #### Helm 安装命令
 
 ```bash
+kubectl create ns higress-system
 helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
 ```
 
