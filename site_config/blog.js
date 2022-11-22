@@ -22,6 +22,18 @@
                 dateStr: '2022年11月4日',
                 desc: 'higress',
                 link: '/zh-cn/blog/higress.html',
+            },
+            {
+                title: 'Higress实战: 30行代码写一个Wasm Go插件',
+                author: '@澄潭',
+                dateStr: '2022年11月22日',
+                link: '/zh-cn/blog/30-line-wasm.html',
+            },
+            {
+                title: '欢迎报名Higress首次线下Meetup',
+                author: '@澄潭',
+                dateStr: '2022年11月22日',
+                link: '/zh-cn/blog/first-meetup.html',
             }
         ]
     },
