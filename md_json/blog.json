@@ -14,6 +14,28 @@
   ],
   "zh-cn": [
     {
+      "filename": "30-line-wasm.md",
+      "link": "/zh-cn/blog/30-line-wasm.html",
+      "meta": {
+        "title": "Higress实战: 30行代码写一个Wasm Go插件",
+        "keywords": "higress,wasm",
+        "description": "对《Higress 开源背后的发展历程和上手 Demo 演示》直播演示 demo 的详细说明",
+        "author": "澄潭",
+        "date": "2022-11-22"
+      }
+    },
+    {
+      "filename": "first-meetup.md",
+      "link": "/zh-cn/blog/first-meetup.html",
+      "meta": {
+        "title": "欢迎报名Higress首次线下Meetup",
+        "keywords": "higress,meetup",
+        "description": "",
+        "author": "澄潭",
+        "date": "2022-11-22"
+      }
+    },
+    {
       "filename": "higress.md",
       "link": "/zh-cn/blog/higress.html",
       "meta": {
