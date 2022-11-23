@@ -1,23 +1,28 @@
 edition: 1.0.0
 name: deploy-oss
-access: default
+access: higress
 vars:
   region: cn-hangzhou
   oss:
     bucketName: 'higress-website-cn-hangzhou'
 services:
   portal-www: # 静态资源
-    component: oss
+    component: oss@dev
+    actions:
+      post-deploy:
+        - plugin: cdn-cache-plugin@dev
+          args:
+            operateType: refresh
+            objectPath: http://cdn.alijam.top/
     props:
       region: ${vars.region}
       bucket: ${vars.oss.bucketName} # OSS bucket 自动生成
-      # subDir: ${vars.oss.bucketObject2}
       acl: public-read # 读写权限
       codeUri: ./deploy-dist # 指定本地要上传目录文件地址
       website: # OSS 静态网站配置
         index: index.html # 默认首页
         error: 404.html # 默认 404 页
         subDirType: redirect # 子目录首页 404 规则
-      customDomains: # OSS 绑定域名
-        - domainName: auto
-          protocol: HTTP
+      # customDomains: # OSS 绑定域名
+      #   - domainName: auto
+      #     protocol: HTTP
