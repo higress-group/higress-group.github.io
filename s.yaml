@@ -7,7 +7,7 @@ vars:
     bucketName: 'higress-website-cn-hangzhou'
 services:
   portal-www: # 静态资源
-    component: oss@dev
+    component: oss
     actions:
       post-deploy:
         - plugin: cdn-cache-plugin@dev
@@ -23,6 +23,3 @@ services:
         index: index.html # 默认首页
         error: 404.html # 默认 404 页
         subDirType: redirect # 子目录首页 404 规则
-      # customDomains: # OSS 绑定域名
-      #   - domainName: auto
-      #     protocol: HTTP
