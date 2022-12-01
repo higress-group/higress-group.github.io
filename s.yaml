@@ -13,7 +13,7 @@ services:
         - plugin: cdn-cache-plugin
           args:
             operateType: refresh
-            objectPath: http://cdn.alijam.top/
+            objectPath: https://higress.io/
     props:
       region: ${vars.region}
       bucket: ${vars.oss.bucketName} # OSS bucket 自动生成
