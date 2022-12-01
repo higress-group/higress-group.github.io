@@ -18,13 +18,15 @@
 <h3>第一步：安装 Istio</h3>
 <h4>选项1. 安装 Higress Istio（推荐）</h4>
 <p>安装后，<code>istiod</code> 需要等待 Higress 完成部署完成，才会处于就绪状态。</p>
-<pre><code class="language-bash">helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
+<pre><code class="language-bash">kubectl create ns istio-system
+helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
 </code></pre>
 <h4>选项2. 安装标准版 Istio</h4>
 <p>请参考<a href="../ops/deploy-by-helm.md">安装部署文档</a>了解详情</p>
 <h3>第二步：安装 Higress</h3>
 <h4>Helm 安装命令</h4>
-<pre><code class="language-bash">helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
+<pre><code class="language-bash">kubectl create ns higress-system
+helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
 </code></pre>
 <h3>第三步：创建并测试 Ingress 路由</h3>
 <p>假设在 default 命名空间下已经部署了一个 test service，服务端口为 80 ，则创建下面这个 K8s Ingress</p>
@@ -46,7 +48,7 @@
               <span class="hljs-attr">number:</span> <span class="hljs-number">80</span>
 </code></pre>
 <p>测试能访问到该服务：</p>
-<pre><code class="language-bash">curl <span class="hljs-string">"<span class="hljs-variable">$(k get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')</span>"</span>/foo -H <span class="hljs-string">'host: foo.bar.com'</span>
+<pre><code class="language-bash">curl <span class="hljs-string">"<span class="hljs-variable">$(kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')</span>"</span>/foo -H <span class="hljs-string">'host: foo.bar.com'</span>
 </code></pre>
 <h2>在本地环境中使用</h2>
 <h3>第一步、 安装 kubectl &amp; kind</h3>
