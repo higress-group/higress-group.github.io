@@ -3,7 +3,7 @@ name: higress.io deploy
 on:
   push:
     branches:
-      - gh-pages
+      - master
 
 jobs:
   Build-Deploy:
