@@ -2,9 +2,9 @@ edition: 1.0.0
 name: deploy-oss
 access: higress
 vars:
-  region: cn-hangzhou
+  region: cn-hongkong
   oss:
-    bucketName: 'higress-website-cn-hangzhou'
+    bucketName: 'higress-website-cn-hongkong'
 services:
   portal-www: # 静态资源
     component: oss
