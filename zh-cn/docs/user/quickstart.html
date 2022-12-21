@@ -33,19 +33,19 @@ helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.al
 <pre><code class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">simple-example</span>
+<span class="hljs-attr">  name:</span> <span class="hljs-string">simple-example</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">rules:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">host:</span> <span class="hljs-string">foo.bar.com</span>
-    <span class="hljs-attr">http:</span>
-      <span class="hljs-attr">paths:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">path:</span> <span class="hljs-string">/foo</span>
-        <span class="hljs-attr">pathType:</span> <span class="hljs-string">Prefix</span>
-        <span class="hljs-attr">backend:</span>
-          <span class="hljs-attr">service:</span>
-            <span class="hljs-attr">name:</span> <span class="hljs-string">test</span>
-            <span class="hljs-attr">port:</span>
-              <span class="hljs-attr">number:</span> <span class="hljs-number">80</span>
+<span class="hljs-attr">  rules:</span>
+<span class="hljs-attr">  - host:</span> <span class="hljs-string">foo.bar.com</span>
+<span class="hljs-attr">    http:</span>
+<span class="hljs-attr">      paths:</span>
+<span class="hljs-attr">      - path:</span> <span class="hljs-string">/foo</span>
+<span class="hljs-attr">        pathType:</span> <span class="hljs-string">Prefix</span>
+<span class="hljs-attr">        backend:</span>
+<span class="hljs-attr">          service:</span>
+<span class="hljs-attr">            name:</span> <span class="hljs-string">test</span>
+<span class="hljs-attr">            port:</span>
+<span class="hljs-attr">              number:</span> <span class="hljs-number">80</span>
 </code></pre>
 <p>测试能访问到该服务：</p>
 <pre><code class="language-bash">curl <span class="hljs-string">"<span class="hljs-variable">$(kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')</span>"</span>/foo -H <span class="hljs-string">'host: foo.bar.com'</span>
@@ -79,20 +79,20 @@ sudo mv ./kind ./kubectl /usr/<span class="hljs-built_in">local</span>/bin/kind
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Cluster</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">kind.x-k8s.io/v1alpha4</span>
 <span class="hljs-attr">nodes:</span>
-<span class="hljs-bullet">-</span> <span class="hljs-attr">role:</span> <span class="hljs-string">control-plane</span>
-  <span class="hljs-attr">kubeadmConfigPatches:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-string">|
-    kind: InitConfiguration
-    nodeRegistration:
-      kubeletExtraArgs:
-        node-labels: "ingress-ready=true"
-</span>  <span class="hljs-attr">extraPortMappings:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">containerPort:</span> <span class="hljs-number">80</span>
-    <span class="hljs-attr">hostPort:</span> <span class="hljs-number">80</span>
-    <span class="hljs-attr">protocol:</span> <span class="hljs-string">TCP</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">containerPort:</span> <span class="hljs-number">443</span>
-    <span class="hljs-attr">hostPort:</span> <span class="hljs-number">443</span>
-    <span class="hljs-attr">protocol:</span> <span class="hljs-string">TCP</span>
+<span class="hljs-attr">- role:</span> <span class="hljs-string">control-plane</span>
+<span class="hljs-attr">  kubeadmConfigPatches:</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">|
+</span><span class="hljs-attr">    kind:</span> <span class="hljs-string">InitConfiguration</span>
+<span class="hljs-attr">    nodeRegistration:</span>
+<span class="hljs-attr">      kubeletExtraArgs:</span>
+<span class="hljs-attr">        node-labels:</span> <span class="hljs-string">"ingress-ready=true"</span>
+<span class="hljs-attr">  extraPortMappings:</span>
+<span class="hljs-attr">  - containerPort:</span> <span class="hljs-number">80</span>
+<span class="hljs-attr">    hostPort:</span> <span class="hljs-number">80</span>
+<span class="hljs-attr">    protocol:</span> <span class="hljs-string">TCP</span>
+<span class="hljs-attr">  - containerPort:</span> <span class="hljs-number">443</span>
+<span class="hljs-attr">    hostPort:</span> <span class="hljs-number">443</span>
+<span class="hljs-attr">    protocol:</span> <span class="hljs-string">TCP</span>
 </code></pre>
 <p>Mac &amp; Linux 系统执行:</p>
 <pre><code class="language-bash">kind create cluster --name higress --config=cluster.conf

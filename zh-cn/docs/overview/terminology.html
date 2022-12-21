@@ -19,21 +19,21 @@
 <pre><code class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">ingress-example</span>
-  <span class="hljs-attr">annotations:</span>
-    <span class="hljs-attr">higress.io/enable-cors:</span> <span class="hljs-string">"true"</span>
+<span class="hljs-attr">  name:</span> <span class="hljs-string">ingress-example</span>
+<span class="hljs-attr">  annotations:</span>
+    <span class="hljs-string">higress.io/enable-cors:</span> <span class="hljs-string">"true"</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">ingressClassName:</span> <span class="hljs-string">nginx-example</span>
-  <span class="hljs-attr">rules:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">http:</span>
-      <span class="hljs-attr">paths:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">path:</span> <span class="hljs-string">/test</span>
-        <span class="hljs-attr">pathType:</span> <span class="hljs-string">Prefix</span>
-        <span class="hljs-attr">backend:</span>
-          <span class="hljs-attr">service:</span>
-            <span class="hljs-attr">name:</span> <span class="hljs-string">test</span>
-            <span class="hljs-attr">port:</span>
-              <span class="hljs-attr">number:</span> <span class="hljs-number">80</span>
+<span class="hljs-attr">  ingressClassName:</span> <span class="hljs-string">nginx-example</span>
+<span class="hljs-attr">  rules:</span>
+<span class="hljs-attr">  - http:</span>
+<span class="hljs-attr">      paths:</span>
+<span class="hljs-attr">      - path:</span> <span class="hljs-string">/test</span>
+<span class="hljs-attr">        pathType:</span> <span class="hljs-string">Prefix</span>
+<span class="hljs-attr">        backend:</span>
+<span class="hljs-attr">          service:</span>
+<span class="hljs-attr">            name:</span> <span class="hljs-string">test</span>
+<span class="hljs-attr">            port:</span>
+<span class="hljs-attr">              number:</span> <span class="hljs-number">80</span>
 </code></pre>
 <p>Higress 支持的其他注解配置方式，请参考<a href="../user/annotation.md">Ingress Annotation 配置说明</a></p>
 <h2>下游(Downstream)</h2>
