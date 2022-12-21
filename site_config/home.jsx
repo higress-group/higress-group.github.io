@@ -4,6 +4,7 @@ export default {
     'zh-cn': {
         brand: {
             brandName: 'Higress',
+            brandLogoUrl: 'https://img.alicdn.com/imgextra/i1/O1CN01bmdCFQ1Zupzs0XIKc_!!6000000003255-55-tps-288-86.svg',
             briefIntroduction: '一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成、易使用、易扩展、热更新的下一代云原生网关。',
             buttons: [
                 {
@@ -26,7 +27,7 @@ export default {
         introduction: {
             title: 'Higress 是什么？',
             desc: 'Higress是基于阿里内部两年多的Envoy Gateway实践沉淀，以开源Istio + Envoy为核心构建的下一代云原生网关，实现了流量调度 + 服务治理 + 安全防护三合一的高集成能力，深度集成Dubbo、Nacos、Sentinel等微服务技术栈，能够为您带来低成本的网关部署运维及高性能、易使用、易扩展、功能丰富的一站式网关解决方案。',
-            img: 'https://img.alicdn.com/imgextra/i2/O1CN01Tm5Bi51dQqVvZABEp_!!6000000003731-2-tps-2396-1214.png',
+            img: 'https://img.alicdn.com/imgextra/i4/O1CN01goCCMC1HBLZend9Gl_!!6000000000719-2-tps-3201-1561.png',
         },
         features: {
             title: '特色功能',
@@ -88,6 +89,7 @@ export default {
     'en-us': {
         brand: {
             brandName: 'Higress',
+            brandLogoUrl: 'https://img.alicdn.com/imgextra/i1/O1CN01bmdCFQ1Zupzs0XIKc_!!6000000003255-55-tps-288-86.svg',
             briefIntroduction: 'Higress is ...',
             buttons: [
                 {
@@ -110,7 +112,7 @@ export default {
         introduction: {
             title: 'What is Higress?',
             desc: 'Higress is ...',
-            img: 'https://img.alicdn.com/imgextra/i2/O1CN01Tm5Bi51dQqVvZABEp_!!6000000003731-2-tps-2396-1214.png',
+            img: 'https://img.alicdn.com/imgextra/i4/O1CN01goCCMC1HBLZend9Gl_!!6000000000719-2-tps-3201-1561.png',
         },
         features: {
             title: 'Feature List',
