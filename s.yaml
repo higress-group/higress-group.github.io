@@ -13,7 +13,7 @@ services:
         - plugin: cdn-cache-plugin
           args:
             operateType: refresh
-            objectPath: https://higress.io/
+            objectPath: https://higress.cn/
     props:
       region: ${vars.region}
       bucket: ${vars.oss.bucketName} # OSS bucket 自动生成
