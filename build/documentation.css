@@ -319,7 +319,7 @@
           color: #0054D1; }
     .footer-container .footer-body .copyright {
       border-top: 1px solid #ccc;
-      min-height: 60px;
+      min-height: 40px;
       line-height: 20px;
       text-align: center;
       font-family: Avenir-Medium;
@@ -330,6 +330,19 @@
       .footer-container .footer-body .copyright span {
         display: inline-block;
         margin: 0 auto; }
+    .footer-container .footer-body .record {
+      line-height: 20px;
+      min-height: 40px;
+      text-align: center;
+      font-family: Avenir-Medium;
+      font-size: 12px;
+      color: #999;
+      display: flex;
+      align-items: center; }
+      .footer-container .footer-body .record a {
+        display: inline-block;
+        margin: 0 auto;
+        color: #999; }
 
 @media screen and (max-width: 640px) {
   .footer-container .footer-body .cols-container .col {
