@@ -53,11 +53,6 @@ class Home extends Language {
     const { headerType } = this.state;
     // const headerLogo = headerType === 'primary' ? '//img.alicdn.com/imgextra/i4/O1CN01OqNc6z1lJ4iVP8izh_!!6000000004797-2-tps-960-290.png' : '//img.alicdn.com/imgextra/i1/O1CN01I7WjVs1K33EQjInid_!!6000000001107-2-tps-960-290.png';
     const headerLogo = '//img.alicdn.com/imgextra/i1/O1CN01I7WjVs1K33EQjInid_!!6000000001107-2-tps-960-290.png';
-    const mseArcUrl =
-      "//img.alicdn.com/imgextra/i2/O1CN01mFrO8X1EYIZp0DMnv_!!6000000000363-2-tps-2880-1512.png";
-    const IS_SAFARI =
-      /Safari/.test(navigator.userAgent) &&
-      /Apple Computer/.test(navigator.vendor);
     return (
       <div className="home-page">
         <Header
@@ -168,14 +163,7 @@ class Home extends Language {
         <section className="msemap-section">
           <div className="msemap-container">
             <h3>微服务全景图</h3>
-            {IS_SAFARI ? (
-              <img
-                src={getLink(mseArcUrl)}
-                style={{ width: "100%", height: "100%" }}
-              />
-            ) : (
-              <div id="mse-arc-container"></div>
-            )}
+            <div id="mse-arc-container"></div>
           </div>
         </section>
         <section className="feature-section">
