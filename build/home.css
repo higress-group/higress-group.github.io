@@ -291,7 +291,7 @@
           color: #0054D1; }
     .footer-container .footer-body .copyright {
       border-top: 1px solid #ccc;
-      min-height: 60px;
+      min-height: 40px;
       line-height: 20px;
       text-align: center;
       font-family: Avenir-Medium;
@@ -302,6 +302,19 @@
       .footer-container .footer-body .copyright span {
         display: inline-block;
         margin: 0 auto; }
+    .footer-container .footer-body .record {
+      line-height: 20px;
+      min-height: 40px;
+      text-align: center;
+      font-family: Avenir-Medium;
+      font-size: 12px;
+      color: #999;
+      display: flex;
+      align-items: center; }
+      .footer-container .footer-body .record a {
+        display: inline-block;
+        margin: 0 auto;
+        color: #999; }
 
 @media screen and (max-width: 640px) {
   .footer-container .footer-body .cols-container .col {
@@ -1998,6 +2011,13 @@ h1, h2, h3, h4, h5, h6 {
         max-width: 100%; }
       .home-page .introduction-section .introduction-body img {
         margin: 0; } }
+
+.home-page .msemap-section .msemap-container h3 {
+  font-family: Avenir-Medium;
+  font-weight: 700;
+  font-size: 36px;
+  color: #333;
+  text-align: center; }
 
 .home-page .feature-section {
   background: #F9FAFA; }
