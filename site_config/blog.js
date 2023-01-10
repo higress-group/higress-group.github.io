@@ -34,6 +34,12 @@
                 author: '@澄潭',
                 dateStr: '2022年11月22日',
                 link: '/zh-cn/blog/first-meetup.html',
+            },
+            {
+                title: 'Higress + Nacos 微服务网关最佳实践',
+                author: '@澄潭',
+                dateStr: '2023年1月10日',
+                link: '/zh-cn/blog/nacos.html',
             }
         ]
     },
