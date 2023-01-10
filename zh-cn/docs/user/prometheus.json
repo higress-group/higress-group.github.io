@@ -1,6 +1,6 @@
 {
   "filename": "prometheus.md",
-  "__html": "<h1>快速开始</h1>\n<p>文档计划推出时间：2022.11.18</p>\n",
+  "__html": "<h1>快速开始</h1>\n<p>文档计划推出时间：2022.01.18</p>\n",
   "link": "/zh-cn/docs/user/prometheus.html",
   "meta": {
     "title": "基于 Prometheus 实现入口流量观测",

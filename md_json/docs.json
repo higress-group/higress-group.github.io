@@ -354,7 +354,7 @@
       "link": "/zh-cn/docs/user/nacos-route.html",
       "meta": {
         "title": "配置 Ingress 转发给注册在 Nacos 的服务",
-        "keywords": "ingress,nacos",
+        "keywords": "ingress,higress nacos",
         "description": "配置 Ingress 转发给注册在 Nacos 的服务"
       }
     },
