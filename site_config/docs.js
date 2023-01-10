@@ -108,6 +108,18 @@ export default {
                               link: '/zh-cn/docs/user/wasm-go.html',
                           },
                           {
+                              title: '通过 OpenKruise Rollout 实现灰度发布',
+                              link: '/zh-cn/docs/user/kruise-rollout.html',
+                          },
+                          {
+                              title: '配置 Ingress 转发给注册在 Nacos 的服务',
+                              link: '/zh-cn/docs/user/nacos-route.html',
+                          },
+                          {
+                              title: '实现 SpringCloud 服务发现和路由',
+                              link: '/zh-cn/docs/user/spring-cloud.html',
+                          },
+                          {
                               title: '实现 Dubbo 服务发现和路由',
                               link: '/zh-cn/docs/user/dubbo.html',
                           },
@@ -117,20 +129,8 @@ export default {
                     title: '文档陆续增加中...',
                     children: [
                       {
-                        title: '配置 Ingress 转发给注册在 Nacos 的服务',
-                        link: '/zh-cn/docs/user/nacos-route.html',
-                      },
-                      {
-                        title: '实现 SpringCloud 服务发现和路由',
-                        link: '/zh-cn/docs/user/spring-cloud.html',
-                      },
-                      {
                         title: '基于 Prometheus 实现入口流量观测',
                         link: '/zh-cn/docs/user/prometheus.html',
-                      },
-                      {
-                        title: '通过 OpenKruise Rollout 实现灰度发布',
-                        link: '/zh-cn/docs/user/kruise-rollout.html',
                       },
                       {
                         title: '对接 OpenSergo 实现全链路灰度',

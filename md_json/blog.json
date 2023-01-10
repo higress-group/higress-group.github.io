@@ -45,6 +45,17 @@
         "author": "gengleilei",
         "date": "2022-11-04"
       }
+    },
+    {
+      "filename": "nacos.md",
+      "link": "/zh-cn/blog/nacos.html",
+      "meta": {
+        "title": "Higress + Nacos 微服务网关最佳实践",
+        "keywords": "higress,wasm",
+        "description": "Higress：Nacos的最佳拍档",
+        "author": "澄潭",
+        "date": "2023-01-10"
+      }
     }
   ]
 }
