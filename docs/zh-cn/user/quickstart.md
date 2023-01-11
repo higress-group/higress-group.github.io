@@ -92,7 +92,7 @@ chmod +x ./kind ./kubectl
 sudo mv ./kind ./kubectl /usr/local/bin/kind
 ```
 
-### 第二步、 创建并启用 kind 
+### 第二步、 创建并启用 kind
 
 首先创建一个集群配置文件: `cluster.conf`
 
@@ -145,8 +145,8 @@ kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/usage.yaml
 测试 Ingress 生效：
 
 ```bash
-# should output "foo"
-curl localhost/foo
-# should output "bar"
-curl localhost/bar
+# should output "foo-app"
+curl localhost/foo/hostname
+# should output "bar-app"
+curl localhost/bar/hostname
 ```
