@@ -92,7 +92,7 @@ chmod +x ./kind ./kubectl
 sudo mv ./kind ./kubectl /usr/local/bin/kind
 ```
 
-### 第二步、 创建并启用 kind 
+### 第二步、 创建并启用 kind
 
 首先创建一个集群配置文件: `cluster.conf`
 
@@ -139,7 +139,7 @@ helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.ali
 ### 第四步、 创建 Ingress 资源并测试
 
 ```bash
-kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/usage.yaml
+kubectl apply -f https://github.com/alibaba/higress/releases/download/v0.5.2/quickstart.yaml
 ```
 
 测试 Ingress 生效：
