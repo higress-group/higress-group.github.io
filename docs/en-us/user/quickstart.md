@@ -139,7 +139,7 @@ helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.ali
 ### Step 4: Create Ingress Resource and Test
 
 ```bash
-kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/usage.yaml
+kubectl apply -f https://github.com/alibaba/higress/releases/download/v0.5.2/quickstart.yaml
 ```
 
 Test Ingress routes:
