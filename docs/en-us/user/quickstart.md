@@ -145,8 +145,8 @@ kubectl apply -f https://github.com/alibaba/higress/releases/download/v0.5.2/qui
 Test Ingress routes:
 
 ```bash
-# should output "foo-app"
-curl localhost/foo/hostname
-# should output "bar-app"
-curl localhost/bar/hostname
+# should output "foo"
+curl localhost/foo
+# should output "bar"
+curl localhost/bar
 ```

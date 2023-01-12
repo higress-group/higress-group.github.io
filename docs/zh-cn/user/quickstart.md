@@ -139,14 +139,14 @@ helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.ali
 ### 第四步、 创建 Ingress 资源并测试
 
 ```bash
-kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/usage.yaml
+kubectl apply -f https://github.com/alibaba/higress/releases/download/v0.5.2/quickstart.yaml
 ```
 
 测试 Ingress 生效：
 
 ```bash
-# should output "foo-app"
-curl localhost/foo/hostname
-# should output "bar-app"
-curl localhost/bar/hostname
+# should output "foo"
+curl localhost/foo
+# should output "bar"
+curl localhost/bar
 ```
