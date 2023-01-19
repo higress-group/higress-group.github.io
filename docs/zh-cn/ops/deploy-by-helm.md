@@ -32,7 +32,6 @@ helm install istio -n istio-system --set global.higressNamespace=foo oci://higre
 
 -----
 
-
 ### 选项2. 安装标准版 Istio
 
 请参考 Istio 官网的[安装文档](https://istio.io/latest/zh/docs/setup/install/)
@@ -64,7 +63,6 @@ spec:
 istioctl install -f my-config.yaml
 ```
 
-
 ## 第二步：安装 Higress
 
 Higress 网关由控制面组件 `higress-controller` 和数据面组件 `higress-gateway` 组成。Istio 负责管理**数据平面的 API 配置**，`higress-controller` 负责管理**控制平面的 API 配置**。
@@ -84,18 +82,14 @@ helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.al
 
 可以通过 `--set enableStatus=true` 启用此功能。
 
-
 2. ingressClass
 
 在集群内部署了多个网关时，可以基于 [IngressClass](https://kubernetes.io/zh-cn/docs/concepts/services-networking/ingress/#ingress-class) 区分每个网关的职责范围。
 
 可以通过 `--set ingressClass=<name>` 指定 Higress 监听哪些 Ingress。
 
-
 3. watchNamespace
 
 当基于 K8s 命名空间进行业务系统隔离时，若需要对每个命名空间部署一套独立的网关，可以通过 watchNamespace 限制 Higress 监听此命名空间内的 Ingress。
 
 可以通过 `--set watchNamespace=<namespace>` 指定。
-
-
