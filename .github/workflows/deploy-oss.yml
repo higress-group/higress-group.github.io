@@ -1,10 +1,12 @@
-name: higress.io deploy
+name: higress.io deploy on oss
 
 on:
   push:
     branches:
       - master
-
+  #This schedule only takes effect in the default branch
+  schedule:
+    - cron: '0 */12 * * *'
 jobs:
   Build-Deploy:
     runs-on: ubuntu-18.04
