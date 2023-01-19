@@ -1,4 +1,4 @@
-name: higress.io deploy
+name: higress.io deploy on github pages
 
 on:
   push:
