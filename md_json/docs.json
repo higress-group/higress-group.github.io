@@ -148,6 +148,15 @@
         "keywords": "Higress",
         "description": "Quick Start."
       }
+    },
+    {
+      "filename": "wasm-go.md",
+      "link": "/en-us/docs/user/wasm-go.html",
+      "meta": {
+        "title": "Developing a WASM plugin with Golang",
+        "keywords": "wasm",
+        "description": "Developing a WASM plugin with Golang"
+      }
     }
   ],
   "zh-cn": [

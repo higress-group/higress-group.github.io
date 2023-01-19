@@ -310,7 +310,8 @@
       font-size: 12px;
       color: #999;
       display: flex;
-      align-items: center; }
+      align-items: center;
+      justify-content: center; }
       .footer-container .footer-body .record a {
         display: inline-block;
         margin: 0 auto;

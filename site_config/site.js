@@ -36,7 +36,13 @@ export default {
                 key: 'download',
                 text: 'DOWNLOAD',
                 link: '/en-us/blog/download.html',
-            }
+            },
+            {
+                key: 'demo',
+                text: 'Demo',
+                link: 'http://demo.higress.io',
+            },
+          
         ],
         vision: {
             title: 'Vision',
@@ -109,6 +115,11 @@ export default {
                 key: 'download',
                 text: '下载',
                 link: '/zh-cn/blog/download.html',
+            },
+            {
+                key: 'demo',
+                text: '控制台样例',
+                link: 'http://demo.higress.io',
             },
         ],
         vision: {
