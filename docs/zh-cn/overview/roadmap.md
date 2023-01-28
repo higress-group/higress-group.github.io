@@ -22,7 +22,7 @@ description: Higress Roadmap.
 | 实现简易控制台，支持路由、服务、域名管理 | v0.6.0 | done |
 | 提供基于 Nacos/Zookeeper 进行服务发现的能力 | v0.6.0 | done |
 | 支持基于 OpenKruise Rollout 的灰度发布  | v0.6.0 | done |
-| 提供 Plugin CRD，降低 wasm 插件配置复杂度  | v0.6.0 | - |
+| 提供 Plugin CRD，降低 wasm 插件配置复杂度  | v0.6.0 | done |
 | 提供基于 Prometheus + Grafana 的监控大盘  | v0.7.0 | - |
 | 提供基于 Skywalking 的监控大盘  | v0.8.0 | - |
 | 实现 CLI 工具，支持 K8s 环境下一键安装/升级，并支持如配置证书等基础运维能力 | v0.8.0 | - |
