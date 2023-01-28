@@ -8,22 +8,7 @@ description: Quick Start.
 
 ## Use in a standard K8s cluster
 
-### Step 1: Install Istio
-
-#### Option 1. Install Higress Istio (Recommended)
-
-After installation, `istiod` will be ready once Higress is fully deployed.
-
-```bash
-kubectl create ns istio-system
-helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
-```
-
-#### Option 2. Install Standard Istio
-
-Please refer to [Deployment Manual](../ops/deploy-by-helm.md) for details.
-
-### Step 2: Install Higress
+### Step 1: Install Higress
 
 #### Helm Installation Command
 
@@ -32,7 +17,7 @@ kubectl create ns higress-system
 helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
 ```
 
-### Step 3: Create and test Ingress routes
+### Step 2: Create and test Ingress routes
 
 Assuming that there is already a test service deployed in the default namespace, listening to port 80, create the following K8s Ingress now:
 
@@ -127,11 +112,9 @@ kind.exe create cluster --name higress --config=cluster.conf
 kubectl.exe config use-context kind-higress
 ```
 
-### Step 3: Install Istio & Higress
+### Step 3: Install Higress
 
 ```bash
-kubectl create ns istio-system
-helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio-local
 kubectl create ns higress-system
 helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress-local
 ```
