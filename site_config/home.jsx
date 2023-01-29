@@ -9,7 +9,7 @@ export default {
             buttons: [
                 {
                     text: '快速入门',
-                    link: '/zh-cn/docs/overview/what-is-higress.html',
+                    link: '/zh-cn/docs/user/quickstart.html',
                     type: 'primary',
                 },
                 {
@@ -40,7 +40,7 @@ export default {
                 {
                   icon: 'feature-2',
                   title: '生产等级',
-                  content: ['脱胎于阿里巴巴生产验证的内部产品，经历双十一洪峰锤炼，具备企业级SLA的开源产品'],
+                  content: ['脱胎于阿里巴巴生产验证的内部产品，经历双十一洪峰锤炼，企业级的开源产品'],
                 },
                 {
                   icon: 'feature-3',
@@ -91,7 +91,7 @@ export default {
         brand: {
             brandName: 'Higress',
             brandLogoUrl: 'https://img.alicdn.com/imgextra/i1/O1CN01bmdCFQ1Zupzs0XIKc_!!6000000003255-55-tps-288-86.svg',
-            briefIntroduction: 'Higress is ...',
+            briefIntroduction: "Higress is a next-generation cloud-native gateway based on Alibaba's internal gateway practices.",
             buttons: [
                 {
                     text: 'Get Started',
@@ -106,13 +106,13 @@ export default {
             ],
             versionNote: {
                 text: 'Release Note of 0.6.0',
-                link: 'https://github.com/alibaba/higress/releases/tag/v0.5.0',
+                link: 'https://github.com/alibaba/higress/releases/tag/v0.6.0',
             },
             releaseDate: 'Released on Jan 19, 2023',
         },
         introduction: {
             title: 'What is Higress?',
-            desc: 'Higress is ...',
+            desc: 'Powered by Istio and Envoy, Higress realizes the integration of the triple gateway architecture of traffic gateway, microservice gateway and security gateway, thereby greatly reducing the costs of deployment, operation and maintenance.',
             img: 'https://img.alicdn.com/imgextra/i4/O1CN01goCCMC1HBLZend9Gl_!!6000000000719-2-tps-3201-1561.png',
         },
         features: {
@@ -120,33 +120,33 @@ export default {
             list: [
                 {
                     icon: 'feature-1',
-                    title: 'XXX1',
-                    content: 'XXX1',
+                    title: 'Easy to use',
+                    content: 'Provide one-stop gateway solutions for traffic scheduling, service management, and security protection, support Console, K8s Ingress, and Gateway API configuration methods, and also support HTTP to Dubbo protocol conversion, and easily complete protocol mapping configuration.',
                 },
                 {
                     icon: 'feature-2',
-                    title: 'XXX2',
-                    content: 'XXX2.',
+                    title: 'Production grade',
+                    content: "An internal product that was born out of Alibaba's production and verification, experienced the peak of Double Eleven, and an enterprise-level open source product",
                 },
                 {
                     icon: 'feature-3',
-                    title: 'XXX3',
-                    content: 'XXX3.',
+                    title: 'Easy to expand',
+                    content: 'Provides Wasm, Lua, and out-of-process  plug-in extension mechanisms, so that multi-language plug-in writing is no longer an obstacle. The granularity of plug-in effectiveness supports not only the global level, domain name level, but also fine-grained routing level',
                 },
                 {
                     icon: 'feature-4',
-                    title: 'XXX4',
-                    content: 'XXX4.',
+                    title: 'Dynamic hot update',
+                    content: 'Get rid of the traffic jitter caused by reload at the bottom, the configuration change takes effect in milliseconds and the business is not affected, the Wasm plug-in is hot updated and the traffic is not damaged',
                 },
                 {
                     icon: 'feature-5',
-                    title: 'XXX5',
-                    content: 'XXX5',
+                    title: 'Smooth upgrade',
+                    content: 'Compatible with 80%+ usage scenarios of Nginx Ingress Annotation, and provides more feature-rich annotations, easy to handle Nginx Ingress migration in one step',
                 },
                 {
                     icon: 'feature-6',
-                    title: 'XXX6',
-                    content: 'XXX6.',
+                    title: 'Security',
+                    content: 'Provides JWT, OIDC, custom authentication and authentication, deeply integrates open source web application firewall.',
                 },
             ]
         },

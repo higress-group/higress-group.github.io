@@ -39,7 +39,7 @@ export default {
             },
             {
                 key: 'demo',
-                text: 'Demo',
+                text: 'DEMO',
                 link: 'http://demo.higress.io',
             },
           
