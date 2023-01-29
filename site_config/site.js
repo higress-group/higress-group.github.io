@@ -35,7 +35,7 @@ export default {
             {
                 key: 'download',
                 text: 'DOWNLOAD',
-                link: '/en-us/blog/download.html',
+                link: 'https://github.com/alibaba/higress/releases',
             },
             {
                 key: 'demo',
@@ -114,7 +114,7 @@ export default {
             {
                 key: 'download',
                 text: '下载',
-                link: '/zh-cn/blog/download.html',
+                link: 'https://github.com/alibaba/higress/releases',
             },
             {
                 key: 'demo',
