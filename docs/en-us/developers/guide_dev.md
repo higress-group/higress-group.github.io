@@ -10,12 +10,24 @@ It is warmly welcomed if you have interest to hack on Higress. First, we encoura
 
 ## Topics
 
-* [Reporting security issues](#reporting-security-issues)
-* [Reporting general issues](#reporting-general-issues)
-* [Code and doc contribution](#code-and-doc-contribution)
-* [Test case contribution](#test-case-contribution)
-* [Engage to help anything](#engage-to-help-anything)
-* [Code Style](#code-style)
+- [Contributing to Higress](#contributing-to-higress)
+  - [Topics](#topics)
+  - [Reporting security issues](#reporting-security-issues)
+  - [Reporting general issues](#reporting-general-issues)
+  - [Code and doc contribution](#code-and-doc-contribution)
+    - [Workspace Preparation](#workspace-preparation)
+    - [Branch Definition](#branch-definition)
+    - [Commit Rules](#commit-rules)
+      - [Commit Message](#commit-message)
+      - [Commit Content](#commit-content)
+    - [PR Description](#pr-description)
+  - [Test case contribution](#test-case-contribution)
+  - [Engage to help anything](#engage-to-help-anything)
+  - [Code Style](#code-style)
+    - [Guidelines](#guidelines)
+    - [IDE Plugin Install（not necessary）](#ide-plugin-installnot-necessary)
+      - [idea IDE](#idea-ide)
+      - [eclipse IDE](#eclipse-ide)
 
 ## Reporting security issues
 
@@ -31,7 +43,7 @@ To be honest, we regard every user of Higress as a very kind contributor. After 
 
 Since we collaborate project Higress in a distributed way, we appreciate **WELL-WRITTEN**, **DETAILED**, **EXPLICIT** issue reports. To make the communication more efficient, we wish everyone could search if your issue is an existing one in the searching list. If you find it existing, please add your details in comments under the existing issue instead of opening a brand new one.
 
-To make the issue details as standard as possible, we setup an [ISSUE TEMPLATE](https://github.com/alibaba/higress/blob/develop/.github/ISSUE_TEMPLATE) for issue reporters. Please **BE SURE** to follow the instructions to fill fields in template.
+To make the issue details as standard as possible, we setup an [ISSUE TEMPLATE](https://github.com/alibaba/higress/blob/main/.github/ISSUE_TEMPLATE) for issue reporters. Please **BE SURE** to follow the instructions to fill fields in template.
 
 There are a lot of cases when you could open an issue:
 
@@ -105,16 +117,16 @@ Adding this, we can easily synchronize local branches with upstream branches.
 
 ### Branch Definition
 
-Right now we assume every contribution via pull request is for [branch develop](https://github.
-com/alibaba/higress/tree/develop) in Higress. Before contributing, be aware of branch definition would help a lot.
+Right now we assume every contribution via pull request is for [branch main](https://github.
+com/alibaba/higress/tree/main) in Higress. Before contributing, be aware of branch definition would help a lot.
 
-As a contributor, keep in mind again that every contribution via pull request is for branch develop. While in project Higress, there are several other branches, we generally call them release branches(such as 0.6.0,0.6.1), feature branches, hotfix branches and master branch.
+As a contributor, keep in mind again that every contribution via pull request is for branch main. While in project Higress, there are several other branches, we generally call them release branches (such as 0.6.0,0.6.1), feature branches, hotfix branches.
 
 When officially releasing a version, there will be a release branch and named with the version number. 
 
-After the release, we will merge the commit of the release branch into the master branch.
+After the release, we will merge the commit of the release branch into the main branch.
 
-When we find that there is a bug in a certain version, we will decide to fix it in a later version or fix it in a specific hotfix version. When we decide to fix the hotfix version, we will checkout the hotfix branch based on the corresponding release branch, perform code repair and verification, and merge it into the develop branch and the master branch.
+When we find that there is a bug in a certain version, we will decide to fix it in a later version or fix it in a specific hotfix version. When we decide to fix the hotfix version, we will checkout the hotfix branch based on the corresponding release branch, perform code repair and verification, and merge it into the main branch.
 
 For larger features, we will pull out the feature branch for development and verification.
 

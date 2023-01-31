@@ -30,7 +30,7 @@ TBD
 ```sh
 git remote add upstream git@github.com:alibaba/higress.git
 git fetch upstream
-git rebase upstream/master
+git rebase upstream/main
 git checkout -b your_awesome_patch
 ... add some work
 git push origin your_awesome_patch
