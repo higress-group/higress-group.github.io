@@ -14,9 +14,9 @@ description: Higress 源码阅读指引.
 
 - pkg/ingress: Ingress 资源转换为 Istio 资源等相关代码
 
-- pkg/bootstrap: 包括启动 grpc/xds/http server 等的代码
+- pkg/bootstrap: 包括启动 gRPC/xDS/HTTP server 等的代码
 
-- pkg/registry: 实现对接多种注册中心进行服务发现的代码
+- registry: 实现对接多种注册中心进行服务发现的代码
 
 - envoy: 依赖的 envoy 官方仓库 commit，以及对应的补丁代码
 
