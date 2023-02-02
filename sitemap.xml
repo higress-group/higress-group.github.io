@@ -1,172 +1,247 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+    <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 
-<url>
-  <loc>https://higress.io/zh-cn/</loc>
-  <lastmod>2023-01-10T10:26:02+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/index.html</loc>
-  <lastmod>2023-01-10T10:26:02+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/overview/what-is-higress.html</loc>
-  <lastmod>2023-01-10T10:25:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/developers/developers_dev.html</loc>
-  <lastmod>2023-01-10T10:25:53+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/blog/index.html</loc>
-  <lastmod>2023-01-10T10:25:49+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/community/index.html</loc>
-  <lastmod>2023-01-10T10:25:50+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/quickstart.html</loc>
-  <lastmod>2023-01-10T10:26:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/overview/roadmap.html</loc>
-  <lastmod>2023-01-10T10:25:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/overview/faq.html</loc>
-  <lastmod>2023-01-10T10:25:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/overview/terminology.html</loc>
-  <lastmod>2023-01-10T10:25:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/wasm-go.html</loc>
-  <lastmod>2023-01-10T10:26:01+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/kruise-rollout.html</loc>
-  <lastmod>2023-01-10T10:25:57+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/nacos-route.html</loc>
-  <lastmod>2023-01-10T10:25:58+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/spring-cloud.html</loc>
-  <lastmod>2023-01-10T10:26:00+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/dubbo.html</loc>
-  <lastmod>2023-01-10T10:25:57+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/prometheus.html</loc>
-  <lastmod>2023-01-10T10:25:59+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/opensergo-gray.html</loc>
-  <lastmod>2023-01-10T10:25:59+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/sentinel.html</loc>
-  <lastmod>2023-01-10T10:26:00+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/waf.html</loc>
-  <lastmod>2023-01-10T10:26:01+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/annotation.html</loc>
-  <lastmod>2023-01-10T10:25:56+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/configurations.html</loc>
-  <lastmod>2023-01-10T10:25:57+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/user/mcp-bridge.html</loc>
-  <lastmod>2023-01-10T10:25:58+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/ops/deploy-by-helm.html</loc>
-  <lastmod>2023-01-10T10:25:53+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/ops/upgrade.html</loc>
-  <lastmod>2023-01-10T10:25:54+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/ops/log.html</loc>
-  <lastmod>2023-01-10T10:25:54+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/dev/code.html</loc>
-  <lastmod>2023-01-10T10:25:50+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/dev/architecture.html</loc>
-  <lastmod>2023-01-10T10:25:50+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/blog/nacos.html</loc>
-  <lastmod>2023-01-10T10:25:49+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/blog/30-line-wasm.html</loc>
-  <lastmod>2023-01-10T10:25:48+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/blog/first-meetup.html</loc>
-  <lastmod>2023-01-10T10:25:49+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/blog/higress.html</loc>
-  <lastmod>2023-01-10T10:25:49+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://higress.io/zh-cn/docs/developers/guide_dev.html</loc>
-  <lastmod>2023-01-10T10:25:53+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
+    <url>
+        <loc>https://higress.io/zh-cn/</loc>
+        <lastmod>2023-02-01T01:03:51+00:00</lastmod>
+        <priority>1.00</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/index.html</loc>
+        <lastmod>2023-02-01T01:03:51+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/overview/what-is-higress.html</loc>
+        <lastmod>2023-02-01T01:03:48+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/developers/developers_dev.html</loc>
+        <lastmod>2023-02-01T01:03:47+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/blog/index.html</loc>
+        <lastmod>2023-02-01T01:03:46+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/community/index.html</loc>
+        <lastmod>2023-02-01T01:03:46+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/quickstart.html</loc>
+        <lastmod>2023-02-01T01:03:50+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/overview/roadmap.html</loc>
+        <lastmod>2023-02-01T01:03:48+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/overview/faq.html</loc>
+        <lastmod>2023-02-01T01:03:48+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/overview/terminology.html</loc>
+        <lastmod>2023-02-01T01:03:48+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/wasm-go.html</loc>
+        <lastmod>2023-02-01T01:03:51+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/kruise-rollout.html</loc>
+        <lastmod>2023-02-01T01:03:49+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/nacos-route.html</loc>
+        <lastmod>2023-02-01T01:03:49+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/spring-cloud.html</loc>
+        <lastmod>2023-02-01T01:03:50+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/dubbo.html</loc>
+        <lastmod>2023-02-01T01:03:49+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/prometheus.html</loc>
+        <lastmod>2023-02-01T01:03:50+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/opensergo-gray.html</loc>
+        <lastmod>2023-02-01T01:03:50+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/sentinel.html</loc>
+        <lastmod>2023-02-01T01:03:50+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/waf.html</loc>
+        <lastmod>2023-02-01T01:03:50+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/annotation.html</loc>
+        <lastmod>2023-02-01T01:03:49+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/configurations.html</loc>
+        <lastmod>2023-02-01T01:03:49+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/user/mcp-bridge.html</loc>
+        <lastmod>2023-02-01T01:03:49+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/ops/deploy-by-helm.html</loc>
+        <lastmod>2023-02-01T01:03:47+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/ops/upgrade.html</loc>
+        <lastmod>2023-02-01T01:03:48+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/ops/log.html</loc>
+        <lastmod>2023-02-01T01:03:48+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/dev/code.html</loc>
+        <lastmod>2023-02-01T01:03:46+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/dev/architecture.html</loc>
+        <lastmod>2023-02-01T01:03:46+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/blog/nacos.html</loc>
+        <lastmod>2023-02-01T01:03:46+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/blog/30-line-wasm.html</loc>
+        <lastmod>2023-02-01T01:03:45+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/blog/first-meetup.html</loc>
+        <lastmod>2023-02-01T01:03:45+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/blog/higress.html</loc>
+        <lastmod>2023-02-01T01:03:45+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/zh-cn/docs/developers/guide_dev.html</loc>
+        <lastmod>2023-02-01T01:03:47+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/</loc>
+        <lastmod>2023-02-01T01:03:31+00:00</lastmod>
+        <priority>1.00</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/index.html</loc>
+        <lastmod>2023-02-01T01:03:31+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/docs/overview/what-is-higress.html</loc>
+        <lastmod>2023-02-01T01:03:30+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/docs/developers/developers_dev.html</loc>
+        <lastmod>2023-02-01T01:03:29+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/blog/index.html</loc>
+        <lastmod>2023-02-01T01:03:28+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/community/index.html</loc>
+        <lastmod>2023-02-01T01:03:28+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/docs/user/quickstart.html</loc>
+        <lastmod>2023-02-01T01:03:31+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/docs/overview/terminology.html</loc>
+        <lastmod>2023-02-01T01:03:30+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/docs/overview/faq.html</loc>
+        <lastmod>2023-02-01T01:03:30+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/docs/user/configurations.html</loc>
+        <lastmod>2023-02-01T01:03:31+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/docs/user/nginx-ingress.html</loc>
+        <lastmod>2023-02-01T01:03:31+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/docs/dev/architecture.html</loc>
+        <lastmod>2023-02-01T01:03:28+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/docs/ops/deploy-guide-beginner.html</loc>
+        <lastmod>2023-02-01T01:03:30+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/docs/ops/deploy-by-helm.html</loc>
+        <lastmod>2023-02-01T01:03:30+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://higress.io/en-us/blog/higress.html</loc>
+        <lastmod>2023-02-01T01:03:28+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
 
 
 </urlset>
