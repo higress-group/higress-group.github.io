@@ -42,7 +42,11 @@ export default {
                 text: 'DEMO',
                 link: 'http://demo.higress.io',
             },
-          
+            {
+                key: 'change',
+                text: ' ',
+                link: '/zh-cn/index.html',
+            },
         ],
         vision: {
             title: 'Vision',
@@ -120,6 +124,11 @@ export default {
                 key: 'demo',
                 text: '控制台样例',
                 link: 'http://demo.higress.io',
+            },
+            {
+                key: 'change',
+                text: ' ',
+                link: '/en-us/index.html',
             },
         ],
         vision: {
