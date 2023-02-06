@@ -152,7 +152,7 @@ export default {
         },
         users: {
             title: 'Who is using Higress?',
-            desc: <span>请在 <a rel="noopener noreferrer" target="_blank"
+            desc: <span> Please provide information on <a rel="noopener noreferrer" target="_blank"
                               href="https://github.com/alibaba/higress/issues/1246">Wanted: who&#39;s using Higress</a> to help improving Higress better.</span>,
             list: [
                 'https://img.alicdn.com/imgextra/i1/O1CN01TleQq128FAP8POtL5_!!6000000007902-2-tps-241-42.png' ,
