@@ -15,8 +15,8 @@ Higress Gateway consists of a control plane component `higress-controller` and a
 ### Helm Installation Command
 
 ```bash
-kubectl create ns higress-system
-helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
+helm repo add higress.io https://higress.io/helm-charts
+helm install higress higress.io/higress -n higress-system --create-namespace
 ```
 
 ### Installation Parameters
@@ -48,7 +48,7 @@ For the feature differences of these two modes, you can check out the [Higress A
 In this mode, you should update the deployment options like this:
 
 ```bash
-helm upgrade higress -n higress-system --set global.enableMesh=true oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress 
+helm upgrade higress -n higress-system --set global.enableMesh=true higress.io/higress
 ```
 
 ### Option 1. Install Higress Istio (Recommended)
@@ -56,8 +56,8 @@ helm upgrade higress -n higress-system --set global.enableMesh=true oci://higres
 After installation, `istiod` will be ready once Higress is fully deployed.
 
 ```bash
-kubectl create ns istio-system
-helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
+helm repo add higress.io https://higress.io/helm-charts
+helm install istio -n istio-system higress.io/istio --create-namespace
 ```
 
 **Note:**
@@ -65,7 +65,8 @@ helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyunc
 If Higress Gateway is not installed to the default namespace of `higress-system`, you need to use `--set global.higressNamespace=` to specify the actual namespace when installing Higress Istio. For example:
 
 ```bash
-helm install istio -n istio-system --set global.higressNamespace=foo oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
+helm repo add higress.io https://higress.io/helm-charts
+helm install istio -n istio-system --set global.higressNamespace=foo higress.io/istio --create-namespace
 ```
 
 -----
@@ -102,7 +103,7 @@ istioctl install -f my-config.yaml
 First update the deployment parameters of Higress and wait for Higress to be ready:
 
 ```bash
-helm upgrade higress -n higress-system --set global.enableMesh=false oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
+helm upgrade higress -n higress-system --set global.enableMesh=false higress.io/higress
 kubectl wait -n higress-system deployment/higress-controller deployment/higress-gateway --for=condition=Available
 ```
 

@@ -15,8 +15,8 @@ Higress 网关由控制面组件 `higress-controller` 和数据面组件 `higres
 ### Helm 安装命令
 
 ```bash
-kubectl create ns higress-system
-helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
+helm repo add higress.io https://higress.io/helm-charts
+helm install higress higress.io/higress -n higress-system --create-namespace
 ```
 
 ### 安装参数
@@ -47,7 +47,7 @@ Higress 网关可以通过[Istio](https://istio.io/) 统一管理数据平面的
 这种模式下，需要更新 Higress 的部署参数：
 
 ```bash
-helm upgrade higress -n higress-system --set global.enableMesh=true oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress 
+helm upgrade higress -n higress-system --set global.enableMesh=true higress.io/higress
 ```
 
 ### 选项1. 安装 Higress Istio（推荐）
@@ -55,8 +55,8 @@ helm upgrade higress -n higress-system --set global.enableMesh=true oci://higres
 安装后，`istiod` 需要等待 Higress 完成部署完成，才会处于就绪状态。
 
 ```bash
-kubectl create ns istio-system
-helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
+helm repo add higress.io https://higress.io/helm-charts
+helm install istio -n istio-system higress.io/istio --create-namespace
 ```
 
 **注意**
@@ -64,7 +64,8 @@ helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyunc
 若 Higress 网关没有安装在默认的 `higress-system` 的命名空间，需要在安装 Higress Istio 时指定通过 `--set global.higressNamespace=` 指定命名空间，如:
 
 ```bash
-helm install istio -n istio-system --set global.higressNamespace=foo oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
+helm repo add higress.io https://higress.io/helm-charts
+helm install istio -n istio-system --set global.higressNamespace=foo higress.io/istio --create-namespace
 ```
 
 -----
@@ -101,7 +102,7 @@ istioctl install -f my-config.yaml
 先更新 Higress 的部署参数，并等待 Higress 就绪：
 
 ```bash
-helm upgrade higress -n higress-system --set global.enableMesh=false oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
+helm upgrade higress -n higress-system --set global.enableMesh=false higress.io/higress 
 kubectl wait -n higress-system deployment/higress-controller deployment/higress-gateway --for=condition=Available
 ```
 
