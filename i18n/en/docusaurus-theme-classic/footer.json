@@ -1,0 +1,46 @@
+{
+  "link.item.label.Blog": {
+    "message": "Blog",
+    "description": "The label of footer link with label=Blog linking to /blog"
+  },
+  "copyright": {
+    "message": "Copyright © 2022 Higress<br />浙公网安备 33011002016922号 浙ICP备12022327号-1119",
+    "description": "The footer copyright"
+  },
+  "link.title.Vision": {
+    "message": "Vision",
+    "description": "The title of the footer links column with title=Vision in the footer"
+  },
+  "link.title.Documentation": {
+    "message": "Documentation",
+    "description": "The title of the footer links column with title=Documentation in the footer"
+  },
+  "link.title.Resources": {
+    "message": "Resources",
+    "description": "The title of the footer links column with title=Resources in the footer"
+  },
+  "link.item.label.Higress is ...": {
+    "message": "Higress is ...",
+    "description": "The label of footer link with label=Higress is ... linking to /"
+  },
+  "link.item.label.What is Higress?": {
+    "message": "What is Higress?",
+    "description": "The label of footer link with label=What is Higress? linking to /docs/overview/what-is-higress"
+  },
+  "link.item.label.Quick Start": {
+    "message": "Quick Start",
+    "description": "The label of footer link with label=Quick Start linking to /docs/user/quickstart"
+  },
+  "link.item.label.Report a doc issue": {
+    "message": "Report a doc issue",
+    "description": "The label of footer link with label=Report a doc issue linking to https://github.com/higress-group/higress-group.github.io/issues/new"
+  },
+  "link.item.label.Edit This Page on GitHub": {
+    "message": "Edit This Page on GitHub",
+    "description": "The label of footer link with label=Edit This Page on GitHub linking to https://github.com/higress-group/higress-group.github.io"
+  },
+  "link.item.label.Community": {
+    "message": "Community",
+    "description": "The label of footer link with label=Community linking to /community"
+  }
+}
