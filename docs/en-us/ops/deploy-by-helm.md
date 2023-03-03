@@ -40,7 +40,7 @@ When isolating different business systems using K8s namespace, if each namespace
 You can use `--set watchNamespace=<namespace>` to set this value.
 
 
-## Install Istio, and enable the Service Mesh mode
+## Install Istio, and enable the Service Mesh mode (Optional)
 
 Higress Gateway can use [Istio](https://istio.io/) to manage API configurations of the data plane. You can choose to deploy the custom version published by Higress, or the standard version provided by Istio authors.
 For the feature differences of these two modes, you can check out the [Higress Anntotaion Configuration Manual](../user/annotation.md).
