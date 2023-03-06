@@ -7,7 +7,7 @@ description: 使用 GO 语言开发 WASM 插件
 # 使用 GO 语言开发 WASM 插件
 
 # 一、工具准备
-需要先安装 Golang 和 TinyGo 两个程序
+需要先安装 Golang 和 TinyGo 两个程序。
 <a name="a81fa"></a>
 ## 1. Golang
 （要求 1.18 版本以上）<br />官方指引链接：[https://go.dev/doc/install](https://go.dev/doc/install)
@@ -36,7 +36,7 @@ export PATH=$PATH:/usr/local/go/bin
 3. 执行 `go version`，输出当前安装的版本，表明安装成功
 
 <a name="qugm0"></a>
-## 2. TinyGo
+## 2. TinyGo [可选的]
 （要求 0.25.0 版本以上）<br />官方指引链接：[https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
 <a name="ELNis"></a>
 ### Windows
@@ -80,8 +80,18 @@ export PATH=$PATH:/usr/local/bin
 <a name="QZbcA"></a>
 # 二、编写插件
 <a name="u83FM"></a>
-## 1. 初始化工程目录
+## 1. 新建工程目录
 
+你可以在 [higress](https://github.com/alibaba/higress) 项目的 [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
+目录下创建新的插件工程目录，以便使用该目录下提供的脚手架工具（见 1.1）；
+或者新建一个 Go 项目，从头创建一个工程目录（见 1.2）。
+如果你是第一次开发 wasm-go 插件，建议采取前者。
+
+### 1.1 在 [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) 目录下创建工程目录
+1. 使用 `git clone https://github.com/alibaba/higress.git` 将 higress 项目克隆到本地；
+2. `cd plugins/wasm-go; mkdir wasm-demo-go`, 进入项目的 plugins/wasm-go 目录，创建 wasm-demo-go 目录。
+
+### 1.2 从头创建一个工程目录
 1. 新建一个工程目录文件，例如`wasm-demo-go`
 2. 在所建目录下执行以下命令，进行 Go 工程初始化
 ```bash
@@ -191,7 +201,26 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 |  | ResumeHttpResponse | 恢复先前被暂停的应答处理流程 | - |
 
 <a name="GAa0T"></a>
-## 3. 编译生成 WASM 文件
+## 3. 编译 WASM 文件，构建 wasm-go 插件镜像
+如果你的工程目录在 [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) 目录下，
+见 3.1; 如果你是使用自行初始化的目录，见 3.2.
+
+### 3.1 使用脚手架构建 wasm-go 插件镜像
+使用以下命令可以快速构建 wasm-go 插件:
+
+```bash
+$ PLUGIN_NAME=wasm-demo-go make build
+... ...
+image:            wasm-demo-go:20230223-173305-3b1a471
+output wasm file: extensions/wasm-demo-go/plugin.wasm
+```
+
+该命令最终构建出一个 wasm 文件和一个 Docker image。
+这个本地的 wasm 文件被输出到了指定的插件的目录下，可以直接用于本地调试。
+你也可以直接使用 `make build-push` 一并构建和推送 image.
+更多构建相关信息参见 [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go).
+
+### 3.2 本地编译 wasm 文件
 执行以下命令
 ```bash
 tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
