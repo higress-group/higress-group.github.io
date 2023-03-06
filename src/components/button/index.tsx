@@ -17,7 +17,7 @@ const defaultProps: Props = {
   link: '',
   target: '_self',
 };
-export const Button = (props = defaultProps) => {
+const Button = (props = defaultProps) => {
   return (
     <a
       className={classnames({
@@ -31,3 +31,4 @@ export const Button = (props = defaultProps) => {
     </a>
   );
 };
+export default Button;

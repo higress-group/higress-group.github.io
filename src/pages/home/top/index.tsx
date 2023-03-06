@@ -3,6 +3,8 @@ import { translate } from '@docusaurus/Translate';
 import { Button, ButtonType } from '../../../components';
 import { getLink } from '../../../utils';
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
 import './index.scss';
 
 const topData = {
@@ -32,7 +34,7 @@ const topData = {
   releaseDate: 'Released on Jan 19, 2023',
 };
 
-export const Top = ({ language }: { language?: string }) => {
+const Top = ({ language }: { language?: string }) => {
   const [state, setState] = React.useState({
     starCount: '',
     forkCount: '',
@@ -52,46 +54,48 @@ export const Top = ({ language }: { language?: string }) => {
   }, []);
 
   return (
-    <section className="top-section">
-      <div className="top-body">
-        <div className="vertical-middle">
-          <div className="product-name">
-            <img src={getLink(topData.brandLogoUrl)} />
-          </div>
-          <p className="product-desc">{topData.briefIntroduction}</p>
-          <div className="button-area">
-            {topData.buttons.map((b) => (
-              <Button type={b.type as ButtonType} key={b.text} link={b.link} target={b.target} language={language}>
-                {b.text}
-              </Button>
-            ))}
-          </div>
-          <div className="github-buttons">
-            <a href="https://github.com/alibaba/higress" target="_blank" rel="noopener noreferrer">
-              <div className="star">
-                <img src="https://img.alicdn.com/tfs/TB1FlB1JwHqK1RjSZFPXXcwapXa-32-32.png" />
-                <span className="type">Star</span>
-                <span className="line" />
-                <span className="count">{starCount}</span>
+    <BrowserOnly>
+      {() => (
+        <section className="top-section">
+          <div className="top-body">
+            <div className="vertical-middle">
+              <div className="product-name">
+                <img src={getLink(topData.brandLogoUrl)} />
               </div>
-            </a>
-            <a href="https://github.com/alibaba/higress/fork" target="_blank" rel="noopener noreferrer">
-              <div className="fork">
-                <img src="https://img.alicdn.com/tfs/TB1zbxSJwDqK1RjSZSyXXaxEVXa-32-32.png" />
-                <span className="type">Fork</span>
-                <span className="line" />
-                <span className="count">{forkCount}</span>
+              <p className="product-desc">{topData.briefIntroduction}</p>
+              <div className="button-area">
+                {topData.buttons.map((b) => (
+                  <Button type={b.type as ButtonType} key={b.text} link={b.link} target={b.target} language={language}>
+                    {b.text}
+                  </Button>
+                ))}
               </div>
-            </a>
-          </div>
-          <div className="version-note">
-            <a target="_blank" rel="noopener noreferrer" href={getLink(topData.versionNote.link)}>
-              {topData.versionNote.text}
-            </a>
-          </div>
-          {/* <div className="release-date">{dataSource.brand.releaseDate}</div> */}
-        </div>
-        {/* <div className="animation">
+              <div className="github-buttons">
+                <a href="https://github.com/alibaba/higress" target="_blank" rel="noopener noreferrer">
+                  <div className="star">
+                    <img src="https://img.alicdn.com/tfs/TB1FlB1JwHqK1RjSZFPXXcwapXa-32-32.png" />
+                    <span className="type">Star</span>
+                    <span className="line" />
+                    <span className="count">{starCount}</span>
+                  </div>
+                </a>
+                <a href="https://github.com/alibaba/higress/fork" target="_blank" rel="noopener noreferrer">
+                  <div className="fork">
+                    <img src="https://img.alicdn.com/tfs/TB1zbxSJwDqK1RjSZSyXXaxEVXa-32-32.png" />
+                    <span className="type">Fork</span>
+                    <span className="line" />
+                    <span className="count">{forkCount}</span>
+                  </div>
+                </a>
+              </div>
+              <div className="version-note">
+                <a target="_blank" rel="noopener noreferrer" href={getLink(topData.versionNote.link)}>
+                  {topData.versionNote.text}
+                </a>
+              </div>
+              {/* <div className="release-date">{dataSource.brand.releaseDate}</div> */}
+            </div>
+            {/* <div className="animation">
             <img className="img1" src="//img.alicdn.com/tfs/TB1evnpJhnaK1RjSZFBXXcW7VXa-702-312.png" />
             <img className="img2" src="//img.alicdn.com/tfs/TB1iau9JcbpK1RjSZFyXXX_qFXa-914-1156.png" />
             <div className="outer-circle" />
@@ -118,7 +122,11 @@ export const Top = ({ language }: { language?: string }) => {
             <img className="img4" src="//img.alicdn.com/tfs/TB115i2JmzqK1RjSZPxXXc4tVXa-186-78.png" />
             <img className="img5" src="//img.alicdn.com/tfs/TB115i2JmzqK1RjSZPxXXc4tVXa-186-78.png" />
           </div> */}
-      </div>
-    </section>
+          </div>
+        </section>
+      )}
+    </BrowserOnly>
   );
 };
+
+export default Top;

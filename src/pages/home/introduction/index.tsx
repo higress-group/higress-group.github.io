@@ -2,6 +2,8 @@ import React from 'react';
 
 import { translate } from '@docusaurus/Translate';
 import { getLink } from '../../../utils';
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import './index.scss';
 
 const data = {
@@ -14,18 +16,24 @@ const data = {
   img: 'https://img.alicdn.com/imgextra/i4/O1CN01goCCMC1HBLZend9Gl_!!6000000000719-2-tps-3201-1561.png',
 };
 
-export const Introduction = () => {
+const Introduction = () => {
   return (
-    <section className="introduction-section">
-      <div className="introduction-body">
-        <div className="introduction">
-          <h3>{data.title}</h3>
-          <p>{data.desc}</p>
-        </div>
-        <div className="img-wrapper">
-          <img src={getLink(data.img)} />
-        </div>
-      </div>
-    </section>
+    <BrowserOnly>
+      {() => (
+        <section className="introduction-section">
+          <div className="introduction-body">
+            <div className="introduction">
+              <h3>{data.title}</h3>
+              <p>{data.desc}</p>
+            </div>
+            <div className="img-wrapper">
+              <img src={getLink(data.img)} />
+            </div>
+          </div>
+        </section>
+      )}
+    </BrowserOnly>
   );
 };
+
+export default Introduction;

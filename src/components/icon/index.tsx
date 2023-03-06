@@ -6,7 +6,7 @@ type Props = {
   type: string;
 };
 
-export const Icon = (props: Props) => {
+const Icon = (props: Props) => {
   const { type } = props;
   return (
     <i
@@ -17,3 +17,4 @@ export const Icon = (props: Props) => {
     />
   );
 };
+export default Icon;

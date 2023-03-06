@@ -1,6 +1,8 @@
 import React from 'react';
 import Translate, { translate } from '@docusaurus/Translate';
 import { Bone } from '../../../components';
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import './index.scss';
 
 const data = {
@@ -27,19 +29,25 @@ const data = {
   title: translate({ id: 'homepage.userTitle', message: '谁在使用 Higress' }),
 };
 
-export const User = () => {
+const User = () => {
   return (
-    <section className="users-section">
-      <h3>{data.title}</h3>
-      <Bone type="dark" />
-      <p>{data.desc}</p>
-      <div className="users">
-        {data.list.map((user, i) => (
-          <div className="user-item" key={i}>
-            <img src={user} />
+    <BrowserOnly>
+      {() => (
+        <section className="users-section">
+          <h3>{data.title}</h3>
+          <Bone type="dark" />
+          <p>{data.desc}</p>
+          <div className="users">
+            {data.list.map((user, i) => (
+              <div className="user-item" key={i}>
+                <img src={user} />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </section>
+        </section>
+      )}
+    </BrowserOnly>
   );
 };
+
+export default User;

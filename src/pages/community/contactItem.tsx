@@ -1,5 +1,6 @@
 import React from 'react';
 import { getLink } from '../../utils';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 type Props = {
   contact: ContactData;
@@ -16,23 +17,23 @@ type State = {
   img: string;
 };
 
-export class ContactItem extends React.Component<Props, State> {
+class ContactItem extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      img: props.contact.img,
+      img: props.contact?.img,
     };
   }
 
   onMouseOver = () => {
     this.setState({
-      img: this.props.contact.imgHover,
+      img: this.props.contact?.imgHover,
     });
   };
 
   onMouseOut = () => {
     this.setState({
-      img: this.props.contact.img,
+      img: this.props.contact?.img,
     });
   };
 
@@ -40,17 +41,23 @@ export class ContactItem extends React.Component<Props, State> {
     const { contact } = this.props;
     const { img } = this.state;
     return (
-      <a
-        className="contact-item"
-        href={getLink(contact.link)}
-        rel="noopener noreferrer"
-        target="_blank"
-        onMouseOver={this.onMouseOver}
-        onMouseOut={this.onMouseOut}
-      >
-        <img src={`${img}`} />
-        <div>{contact.title}</div>
-      </a>
+      <BrowserOnly>
+        {() => (
+          <a
+            className="contact-item"
+            href={getLink(contact.link)}
+            rel="noopener noreferrer"
+            target="_blank"
+            onMouseOver={this.onMouseOver}
+            onMouseOut={this.onMouseOut}
+          >
+            <img src={`${img}`} />
+            <div>{contact.title}</div>
+          </a>
+        )}
+      </BrowserOnly>
     );
   }
 }
+
+export default ContactItem;

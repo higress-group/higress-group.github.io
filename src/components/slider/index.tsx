@@ -14,7 +14,7 @@ type State = {
   screenIndex: number;
 };
 
-export class Slider extends React.Component<Props, State> {
+class Slider extends React.Component<Props, State> {
   container;
   throttleAdjust;
   sliderItemChild0;
@@ -33,7 +33,7 @@ export class Slider extends React.Component<Props, State> {
         visibleNum: this.getVisibleNum(),
       });
     }, 200);
-    window.addEventListener('resize', this.throttleAdjust);
+    window?.addEventListener?.('resize', this.throttleAdjust);
     // 做重新布局
     /* eslint-disable react/no-did-mount-set-state */
     this.setState({
@@ -42,7 +42,7 @@ export class Slider extends React.Component<Props, State> {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.throttleAdjust);
+    window?.removeEventListener?.('resize', this.throttleAdjust);
   }
 
   getVisibleNum = () => {
@@ -168,3 +168,5 @@ export class Slider extends React.Component<Props, State> {
     );
   }
 }
+
+export default Slider;

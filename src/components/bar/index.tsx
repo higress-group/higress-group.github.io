@@ -7,7 +7,7 @@ type Props = {
   text: string;
   img: string;
 };
-export const Bar = (props: Props) => {
+const Bar = (props: Props) => {
   const { text, img } = props;
   const cls = classnames({
     bar: true,
@@ -22,3 +22,5 @@ export const Bar = (props: Props) => {
     </div>
   );
 };
+
+export default Bar;
