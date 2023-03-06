@@ -1,0 +1,10 @@
+---
+title: Welcome to sign up for Higress' first offline meetup
+keywords: [higress,meetup]
+description: Offline Meetup registration
+author: 澄潭
+date: 2022-11-22
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/en/docusaurus-plugin-content-blog/first-meetup.md
+---
+<!--truncate-->
+![](https://img.alicdn.com/imgextra/i4/O1CN013pqDug1iTf1wdYIat_!!6000000004414-2-tps-800-8358.png)
