@@ -1,10 +1,11 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { translate } from '@docusaurus/Translate';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import { Bar, Slider } from '../../components';
-import { EventCard } from './eventCard';
-import { ContactItem, ContactData } from './contactItem';
-import { ContributorItem, ContributorData } from './contributorItem';
+import EventCard from './eventCard';
+import ContactItem, { ContactData } from './contactItem';
+import ContributorItem, { ContributorData } from './contributorItem';
 import Layout from '@theme/Layout';
 
 import './index.scss';
@@ -84,36 +85,40 @@ const data = {
 export default function Community(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout title={`Hello from ${siteConfig.title}`} description="Higress">
-      <div className="community-page">
-        <Bar img="https://img.alicdn.com/tfs/TB115XwJzTpK1RjSZKPXXa3UpXa-160-160.png" text={data.barText} />
-        <section className="events-section">
-          <h3>{data.events.title}</h3>
-          <Slider>
-            {data.events.list.map((event, i) => (
-              <EventCard event={event} key={i} />
-            ))}
-          </Slider>
-        </section>
-        <section className="contact-section">
-          <h3>{data.contacts.title}</h3>
-          <p>{data.contacts.desc}</p>
-          <div className="contact-list">
-            {data.contacts.list.map((contact, i) => (
-              <ContactItem contact={contact as ContactData} key={i} />
-            ))}
+    <BrowserOnly>
+      {() => (
+        <Layout title={`Hello from ${siteConfig.title}`} description="Higress">
+          <div className="community-page">
+            <Bar img="https://img.alicdn.com/tfs/TB115XwJzTpK1RjSZKPXXa3UpXa-160-160.png" text={data.barText} />
+            <section className="events-section">
+              <h3>{data.events.title}</h3>
+              <Slider>
+                {data.events.list.map((event, i) => (
+                  <EventCard event={event} key={i} />
+                ))}
+              </Slider>
+            </section>
+            <section className="contact-section">
+              <h3>{data.contacts.title}</h3>
+              <p>{data.contacts.desc}</p>
+              <div className="contact-list">
+                {data.contacts.list.map((contact, i) => (
+                  <ContactItem contact={contact as ContactData} key={i} />
+                ))}
+              </div>
+            </section>
+            <section className="contributor-section">
+              <h3>{data.contributorGuide.title}</h3>
+              <p>{data.contributorGuide.desc}</p>
+              <div className="contributor-list">
+                {data.contributorGuide.list.map((contributor, i) => (
+                  <ContributorItem contributor={contributor as ContributorData} key={i} />
+                ))}
+              </div>
+            </section>
           </div>
-        </section>
-        <section className="contributor-section">
-          <h3>{data.contributorGuide.title}</h3>
-          <p>{data.contributorGuide.desc}</p>
-          <div className="contributor-list">
-            {data.contributorGuide.list.map((contributor, i) => (
-              <ContributorItem contributor={contributor as ContributorData} key={i} />
-            ))}
-          </div>
-        </section>
-      </div>
-    </Layout>
+        </Layout>
+      )}
+    </BrowserOnly>
   );
 }

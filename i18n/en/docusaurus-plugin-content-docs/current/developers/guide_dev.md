@@ -2,7 +2,7 @@
 title: Contributing to Higress
 keywords: [Higress]
 description: It is warmly welcomed if you have interest to hack on Higress. First, we encourage this kind of willing very much. And here is a list of contributing guide for you.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/guide_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/en/docusaurus-plugin-content-docs/current/developers/guide_dev.md
 ---
 
 # Contributing to Higress
@@ -174,7 +174,7 @@ No matter commit message, or commit content, we do take more emphasis on code re
 
 ### PR Description
 
-PR is the only way to make change to Higress project files. To help reviewers better get your purpose, PR description could not be too detailed. We encourage contributors to follow the [PR template](./.github/PULL_REQUEST_TEMPLATE.md) to finish the pull request.
+PR is the only way to make change to Higress project files. To help reviewers better get your purpose, PR description could not be too detailed. We encourage contributors to follow the [PR template](https://github.com/alibaba/higress/blob/main/.github/PULL_REQUEST_TEMPLATE.md) to finish the pull request.
 
 ## Test case contribution
 

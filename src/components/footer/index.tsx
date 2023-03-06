@@ -58,7 +58,7 @@ type Props = {
   logo: string;
 };
 
-export const Footer = (props: Props) => {
+const Footer = (props: Props) => {
   const { logo } = props;
   return (
     <footer className="footer-container">
@@ -121,3 +121,5 @@ export const Footer = (props: Props) => {
     </footer>
   );
 };
+
+export default Footer;

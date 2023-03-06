@@ -1,6 +1,7 @@
 import React from 'react';
 import { translate } from '@docusaurus/Translate';
 import { Icon } from '../../../components';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import './index.scss';
 
 const data = {
@@ -64,30 +65,40 @@ const data = {
   title: translate({ id: 'homepage.featureTitle', message: '特色功能' }),
 };
 
-export const Feature = () => {
+const Feature = () => {
   return (
-    <section className="feature-section">
-      <div className="feature-container">
-        <h3>{data.title}</h3>
-        <ul>
-          {data.list.map((feature, i) => (
-            <Item feature={feature} key={i} />
-          ))}
-        </ul>
-      </div>
-    </section>
+    <BrowserOnly>
+      {() => (
+        <section className="feature-section">
+          <div className="feature-container">
+            <h3>{data.title}</h3>
+            <ul>
+              {data.list.map((feature, i) => (
+                <Item feature={feature} key={i} />
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+    </BrowserOnly>
   );
 };
 
 const Item = (props) => {
   const { feature } = props;
   return (
-    <li>
-      <Icon type={feature.icon} />
-      <div>
-        <h4>{feature.title}</h4>
-        <p>{feature.content}</p>
-      </div>
-    </li>
+    <BrowserOnly>
+      {() => (
+        <li>
+          <Icon type={feature.icon} />
+          <div>
+            <h4>{feature.title}</h4>
+            <p>{feature.content}</p>
+          </div>
+        </li>
+      )}
+    </BrowserOnly>
   );
 };
+
+export default Feature;

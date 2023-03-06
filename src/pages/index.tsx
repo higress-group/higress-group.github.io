@@ -1,12 +1,12 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import { Top } from './home/top';
-import { Introduction } from './home/introduction';
-import { MseMap } from './home/msemap';
-import { Feature } from './home/feature';
-import { User } from './home/users';
-import { Community } from './home/community';
+import Top from './home/top';
+import Introduction from './home/introduction';
+import MseMap from './home/msemap';
+import Feature from './home/feature';
+import User from './home/users';
+import Community from './home/community';
 // import { Footer } from '../components';
 import './index.scss';
 

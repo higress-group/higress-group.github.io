@@ -14,7 +14,7 @@ type State = {
   pageWidth: number;
 };
 
-class pageSlider extends React.Component<Props, State> {
+class PageSlider extends React.Component<Props, State> {
   container;
   throttleAdjust;
   constructor(props) {
@@ -127,3 +127,5 @@ class pageSlider extends React.Component<Props, State> {
     );
   }
 }
+
+export default PageSlider;
