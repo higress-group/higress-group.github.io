@@ -28,7 +28,27 @@ const config = {
   i18n: {
     defaultLocale: 'zh-cn',
     locales: ['en-us', 'zh-cn'],
+    localeConfigs: {
+      'en-us': {
+        label: 'En',
+        htmlLang: 'en-US',
+      },
+      'zh-cn': {
+        label: '中',
+        htmlLang: 'zh-CN',
+      },
+    },
   },
+  scripts: [
+    {
+      src: '//g.alicdn.com/mamba/assets/0.0.14/mse-arc-ui.min.js',
+    },
+  ],
+  stylesheets: [
+    {
+      href: '//g.alicdn.com/mamba/assets/0.0.14/mse-arc-ui.min.css',
+    },
+  ],
   plugins: ['docusaurus-plugin-sass'],
   presets: [
     [
@@ -48,6 +68,22 @@ const config = {
         },
       }),
     ],
+    // [
+    //   '@docusaurus/preset-classic',
+    //   {
+    //     pages: {
+    //       path: 'src/pages',
+    //       routeBasePath: '/zh-cn',
+    //       include: ['**/*.{js,jsx,ts,tsx,md,mdx}'],
+    //       exclude: ['**/_*.{js,jsx,ts,tsx,md,mdx}', '**/_*/**', '**/*.test.{js,jsx,ts,tsx}', '**/__tests__/**'],
+    //       mdxPageComponent: '@theme/MDXPage',
+    //       // remarkPlugins: [require('remark-math')],
+    //       rehypePlugins: [],
+    //       beforeDefaultRemarkPlugins: [],
+    //       beforeDefaultRehypePlugins: [],
+    //     },
+    //   },
+    // ],
   ],
 
   themeConfig:
