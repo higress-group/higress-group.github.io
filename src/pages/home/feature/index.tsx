@@ -48,7 +48,7 @@ const data = {
       icon: 'feature-5',
       title: translate({ id: 'homepage.featureListTitle5', message: '平滑升级' }),
       content: translate({
-        id: 'homepage.featureTitle',
+        id: 'homepage.featureListContent5',
         message:
           '兼容Nginx Ingress Annotation 80%+ 的使用场景，且提供功能更丰富的注解，简单一步轻松搞定Nginx Ingress迁移',
       }),
@@ -57,7 +57,7 @@ const data = {
       icon: 'feature-6',
       title: translate({ id: 'homepage.featureListTitle6', message: '安全防护' }),
       content: translate({
-        id: 'homepage.featureTitle',
+        id: 'homepage.featureListContent6',
         message: '提供JWT、OIDC、自定义认证鉴权，深度集成开源Web应用防火墙，让安全防护成为标配',
       }),
     },

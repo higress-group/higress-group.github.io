@@ -303,11 +303,17 @@
   "homepage.featureListTitle5": {
     "message": "平滑升级"
   },
+  "homepage.featureListContent5": {
+    "message": "兼容Nginx Ingress Annotation 80%+ 的使用场景，且提供功能更丰富的注解，简单一步轻松搞定Nginx Ingress迁移"
+  },
   "homepage.featureTitle": {
     "message": "特色功能"
   },
   "homepage.featureListTitle6": {
     "message": "安全防护"
+  },
+  "homepage.featureListContent6": {
+    "message": "提供JWT、OIDC、自定义认证鉴权，深度集成开源Web应用防火墙，让安全防护成为标配"
   },
   "homepage.footerVersionTitle": {
     "message": "愿景"

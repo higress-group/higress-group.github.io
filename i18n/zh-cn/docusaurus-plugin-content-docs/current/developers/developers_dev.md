@@ -20,6 +20,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | 赵炳堃 | [sjtuzbk](https://github.com/johnlanni) | Alibaba        |
 | 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | Tencent        |
 | 董艺荃 | [CH3CHO](https://github.com/CH3CHO) | Trip.com        |
+| 李强林 | [Charlie17Li](https://github.com/Charlie17Li) | ZJU-SEL        |
 
 ## Higress开发者角色
 

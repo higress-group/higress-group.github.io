@@ -378,11 +378,17 @@
   "homepage.featureListTitle5": {
     "message": "Smooth upgrade"
   },
+  "homepage.featureListContent5": {
+    "message": "Compatible with 80%+ usage scenarios of Nginx Ingress Annotation, and provides more feature-rich annotations, easy to handle Nginx Ingress migration in one step"
+  },
   "homepage.featureTitle": {
     "message": "Feature List"
   },
   "homepage.featureListTitle6": {
     "message": "Security"
+  },
+  "homepage.featureListContent6": {
+    "message": "Provides JWT, OIDC, custom authentication and authentication, deeply integrates open source web application firewall."
   },
   "homepage.introDesc": {
     "message": "Powered by Istio and Envoy, Higress realizes the integration of the triple gateway architecture of traffic gateway, microservice gateway and security gateway, thereby greatly reducing the costs of deployment, operation and maintenance."

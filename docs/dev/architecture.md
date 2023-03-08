@@ -15,14 +15,6 @@ Higress 的控制面程序，会连接 Istio ，用于生成 Istio API 对象，
 若需要编译 docker 镜像，请执行 `make docker-build`
 
 
-## Higress istio
-
-同属于 Higress 的控制面程序，直接连接 Higress Gateway，用于生成 Envoy API 对象，通过 xDS 协议发送给 Higress Gateway。
-
-
-在 higress 仓库目录下执行 `make build-istio` 会编译出 istio 的镜像。
-
-
 ## Higress Gateway
 
 Higress 的数据面程序，用于实现网关路由转发等能力。

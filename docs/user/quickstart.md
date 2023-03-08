@@ -2,6 +2,7 @@
 title: 快速开始
 keywords: [Higress]
 description: Higress 快速开始.
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/quickstart.md
 ---
 
 # 快速开始
@@ -14,7 +15,7 @@ description: Higress 快速开始.
 
 ```bash
 kubectl create ns higress-system
-helm install higress -n higress-system  oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
+helm install higress -n higress-system higress.io/higress --create-namespace
 ```
 
 ### 第二步：创建并测试 Ingress 路由
@@ -115,8 +116,8 @@ kubectl.exe config use-context kind-higress
 ### 第三步、 安装 Higress
 
 ```bash
-kubectl create ns higress-system
-helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress-local
+helm repo add higress.io https://higress.io/helm-charts
+helm install higress -n higress-system higress.io/higress-local --create-namespace
 ```
 
 ### 第四步、 创建 Ingress 资源并测试
