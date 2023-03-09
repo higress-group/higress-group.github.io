@@ -25,9 +25,10 @@ const config = {
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
+  clientModules: [require.resolve('./src/myClientModule.ts'), require.resolve('./src/custom-js.ts')],
   i18n: {
-    defaultLocale: 'zh-cn',
-    locales: ['en-us', 'zh-cn'],
+    defaultLocale: 'default',
+    locales: ['en-us', 'zh-cn', 'default'],
     localeConfigs: {
       'en-us': {
         label: 'En',
@@ -40,9 +41,20 @@ const config = {
     },
   },
   scripts: [
+    { src: '//g.alicdn.com/mamba/assets/0.0.14/mse-arc-ui.min.js' },
     {
-      src: '//g.alicdn.com/mamba/assets/0.0.14/mse-arc-ui.min.js',
+      src: '//g.alicdn.com/alilog/mlog/aplus_v2.js',
+      id: 'beacon-aplus',
+      exparams: 'clog=o&aplus&sidx=aplusSidx&ckx=aplusCkx',
     },
+    {
+      src: '//g.alicdn.com/aes/??tracker/1.0.34/index.js,tracker-plugin-pv/2.4.5/index.js,tracker-plugin-event/1.2.5/index.js,tracker-plugin-jserror/1.0.13/index.js,tracker-plugin-api/1.1.14/index.js,tracker-plugin-perf/1.1.8/index.js,tracker-plugin-eventTiming/1.0.4/index.js',
+    },
+    {
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR',
+      async: true,
+    },
+    { src: 'https://g.alicdn.com/mamba/assets/0.0.13/mse-arc-ui.min.js' },
   ],
   stylesheets: [
     {
