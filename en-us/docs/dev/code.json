@@ -1,0 +1,10 @@
+{
+  "filename": "code.md",
+  "__html": "<h1>Code Reading Instructions</h1>\n<p>If you would like to constribute source code for Higress, please check out the <a href=\"../developers/guide_dev.md\">Contribute Guide</a></p>\n<p>Code base structure descriptions:</p>\n<ul>\n<li>\n<p>cmd: Containing functions of parsing command-line arguments, etc.</p>\n</li>\n<li>\n<p>pkg/ingress: Containing functions of converting Ingress resources to Istio resources.</p>\n</li>\n<li>\n<p>pkg/bootstrap: Containing functions of starting gRPC/xDS/HTTP servers.</p>\n</li>\n<li>\n<p>registry: Implementations of various service registries.</p>\n</li>\n<li>\n<p>envoy: Containing the referred official envoy codebase and corresponding patches.</p>\n</li>\n<li>\n<p>istio: Containing the referred official istio codebase and corresponding patches.</p>\n</li>\n<li>\n<p>plugins: Higress plugin SDK and official built-in plugins.</p>\n</li>\n<li>\n<p>tools: Building related scripts.</p>\n</li>\n<li>\n<p>docker: Docker image building related scripts.</p>\n</li>\n</ul>\n<p>During compilation, <code>make prebuild</code> will be executed automatically, generating an <code>external</code> folder, which contains all the external dependeices, including envoy and istios, with all the patches applied.</p>\n<p>If you would like to modify the source code of envoy or istio, you can do it directly in the <code>external</code> folder, then execute the prebuild command and generate the patch file with diff later. For example:</p>\n<pre><code class=\"language-bash\">mv external/envoy external/envoy_new\nmake prebuild\ndiff -Naur external/envoy external/envoy_new &gt; envoy/1.20/patches/envoy/$(date +%Y%m%d)-what-changed.patch\n</code></pre>\n<p>Please be aware that patches will be applied in the order of file names. So please use timestamp as a prefix when naming a new patch file.</p>\n",
+  "link": "/en-us/docs/dev/code.html",
+  "meta": {
+    "title": "Code Reading Instructions",
+    "keywords": "higress,coding",
+    "description": "Higress Code Reading Instructions"
+  }
+}

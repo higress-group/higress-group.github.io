@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="wasm" />
+	<meta name="description" content="Developing a WASM plugin with Golang" />
+	<meta name="aes-config" content="pid=xux-opensource&user_type=101&uid=&username=&dim10=higress"/>
+	<!-- 网页标签标题 -->
+	<title>Developing a WASM plugin with Golang</title>
+  <link rel="shortcut icon" href="/img/higress_logo_small.jpg"/>
+	<link rel="stylesheet" href="/build/documentation.css" />
+  <link rel="stylesheet" href="https://g.alicdn.com/mamba/assets/0.0.13/mse-arc-ui.min.css" />
+</head>
+<body>
+	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/en-us/index.html"><img class="logo" src="//img.alicdn.com/imgextra/i1/O1CN01I7WjVs1K33EQjInid_!!6000000001107-2-tps-960-290.png"/></a><div class="search search-normal"><span class="icon-search"></span></div><span class="language-switch language-switch-normal">中</span><div class="header-menu"><img class="header-menu-toggle" src="https://img.alicdn.com/tfs/TB14eEmw7P2gK0jSZPxXXacQpXa-38-32.png"/><ul><li class="menu-item menu-item-normal"><span><a href="/en-us/index.html">HOME</a></span></li><li class="menu-item menu-item-normal menu-item-normal-active"><span><a href="/en-us/docs/overview/what-is-higress.html">DOCS</a></span></li><li class="menu-item menu-item-normal"><span><a href="/en-us/docs/developers/developers_dev.html">DEVELOPERS</a></span></li><li class="menu-item menu-item-normal"><span><a href="/en-us/blog/index.html">BLOG</a></span></li><li class="menu-item menu-item-normal"><span><a href="/en-us/community/index.html">COMMUNITY</a></span></li><li class="menu-item menu-item-normal"><span><a href="https://github.com/alibaba/higress/releases">DOWNLOAD</a></span></li><li class="menu-item menu-item-normal"><span><a href="http://demo.higress.io">DEMO</a></span></li><li class="menu-item menu-item-normal"><span><a href="/zh-cn/index.html"> </a></span></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="https://img.alicdn.com/tfs/TB1cm8nJwDqK1RjSZSyXXaxEVXa-160-160.png" class="front-img"/><span>Documentation</span><img src="https://img.alicdn.com/tfs/TB1cm8nJwDqK1RjSZSyXXaxEVXa-160-160.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>Overview</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/en-us/docs/overview/what-is-higress.html" target="_self">What is Higress?</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/en-us/docs/overview/terminology.html" target="_self">Terminology</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/en-us/docs/overview/faq.html" target="_self">FAQ</a></li></ul></li><li class="menu-item menu-item-level-1"><span>User Doc</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/en-us/docs/user/quickstart.html" target="_self">Quick Start</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/en-us/docs/user/configurations.html" target="_self">Parameters Configurations Guide</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>Ingress Guide<img style="transform:rotate(-90deg)" class="menu-toggle" src="https://img.alicdn.com/tfs/TB15.Ilw2b2gK0jSZK9XXaEgFXa-26-16.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/en-us/docs/user/nginx-ingress.html" target="_self">Nginx Ingress Compatibility Description</a></li></ul></li></ul></li><li class="menu-item menu-item-level-1"><span>Developer Guide</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/en-us/docs/dev/architecture.html" target="_self">Architecture Description</a></li></ul></li><li class="menu-item menu-item-level-1"><span>Ops Guide</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>Deploy<img style="transform:rotate(-90deg)" class="menu-toggle" src="https://img.alicdn.com/tfs/TB15.Ilw2b2gK0jSZK9XXaEgFXa-26-16.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/en-us/docs/ops/deploy-guide-beginner.html" target="_self">Deploy Guide</a></li><li class="menu-item menu-item-level-3"><a href="/en-us/docs/ops/deploy-by-helm.html" target="_self">Deploy by Helm</a></li></ul></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>Implement a WASM plugin with Golang</h1>
+<h1>1. Prepare Development Tools</h1>
+<p>First, install Golang and Tinygo.
+<a name="a81fa"></a></p>
+<h2>1. Golang</h2>
+<p>Min Version: 1.18<br />Official download link: <a href="https://go.dev/doc/install">https://go.dev/doc/install</a>
+<a name="JFoN6"></a></p>
+<h3>Windows</h3>
+<ol>
+<li>Download the installer: <a href="https://go.dev/dl/go1.19.windows-amd64.msi">https://go.dev/dl/go1.19.windows-amd64.msi</a></li>
+<li>Run the downloaded installer to start the installation. It will be installed to <code>Program Files</code> or <code>Program Files (x86)</code> folder by default.</li>
+<li>After completed the installation, open &quot;Run&quot; dialog with hotkey &quot;Win+R&quot;. Type &quot;cmd&quot; in the dialog and click &quot;OK&quot; to open Command Line Prompt. Type: <code>go version</code>. If version info is displayed, the package has been successfully installed.
+<a name="tavPX"></a></li>
+</ol>
+<h3>MacOS</h3>
+<ol>
+<li>Download the installer: <a href="https://go.dev/dl/go1.19.darwin-amd64.pkg">https://go.dev/dl/go1.19.darwin-amd64.pkg</a></li>
+<li>Run the downloaded installer to start the installation. It will be installed to <code>/usr/local/go</code> folder by default.</li>
+<li>Open Terminal and type: <code>go version</code>. If version info is displayed, the package has been successfully installed.
+<a name="olPlT"></a></li>
+</ol>
+<h3>Linux</h3>
+<ol>
+<li>Download the installer: <a href="https://go.dev/dl/go1.19.linux-amd64.tar.gz">https://go.dev/dl/go1.19.linux-amd64.tar.gz</a></li>
+<li>Execute following commands to start the installation:</li>
+</ol>
+<pre><code class="language-bash">rm -rf /usr/<span class="hljs-built_in">local</span>/go &amp;&amp; tar -C /usr/<span class="hljs-built_in">local</span> -xzf go1.19.linux-amd64.tar.gz
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/usr/<span class="hljs-built_in">local</span>/go/bin
+</code></pre>
+<ol start="3">
+<li>Execute <code>go version</code>. If version info is displayed, the package has been successfully installed.</li>
+</ol>
+<p><a name="qugm0"></a></p>
+<h2>2. TinyGo</h2>
+<p>Min Version: 0.25.0<br />Official download link: <a href="https://tinygo.org/getting-started/install/">https://tinygo.org/getting-started/install/</a>
+<a name="ELNis"></a></p>
+<h3>Windows</h3>
+<ol>
+<li>Download the package: <a href="https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip">https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip</a></li>
+<li>Unpack the package to the target folder</li>
+<li>If the package is unpacked to folder <code>C:\tinygo</code>, you need to add <code>C:\tinygo\bin</code> into the environment variable <code>PATH</code>, using set command in Command Line Prompt for example.</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> PATH=%PATH%;<span class="hljs-string">"C:\tinygo\bin"</span>;
+</code></pre>
+<ol start="4">
+<li>Execute <code>tinygo version</code> command in Command Line Prompt. If version info is displayed, the package has been successfully installed.
+<a name="iCo9z"></a></li>
+</ol>
+<h3>MacOS</h3>
+<ol>
+<li>Download and unpack the package</li>
+</ol>
+<pre><code class="language-bash">wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.darwin-amd64.tar.gz
+tar -zxf tinygo0.25.0.darwin-amd64.tar.gz
+</code></pre>
+<ol start="2">
+<li>If the package is unpacked to folder <code>/tmp</code>, you need to add <code>/tmp/tinygo/bin</code> to the environment variable <code>PATH</code>:</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-built_in">export</span> PATH=/tmp/tinygo/bin:<span class="hljs-variable">$PATH</span>
+</code></pre>
+<ol start="3">
+<li>Execute command <code>tinygo version</code> in Terminal.  If version info is displayed, the package has been successfully installed.
+<a name="hNZeF"></a></li>
+</ol>
+<h3>Linux</h3>
+<p>Following steps are based on Ubuntu AMD64. For other OSes, please refer to the official document.</p>
+<ol>
+<li>Download and install the DEB package.</li>
+</ol>
+<pre><code class="language-bash">wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo_0.25.0_amd64.deb
+sudo dpkg -i tinygo_0.25.0_amd64.deb
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/usr/<span class="hljs-built_in">local</span>/bin
+</code></pre>
+<ol start="2">
+<li>Execute command <code>tinygo version</code> in Terminal. If version info is displayed, the package has been successfully installed.</li>
+</ol>
+<p><a name="QZbcA"></a></p>
+<h1>2. Write a plugin</h1>
+<p><a name="u83FM"></a></p>
+<h2>1. Initialize the project</h2>
+<p>You can create your wasm-go plugin directory in the repo <a href="https://github.com/alibaba/higress">higress</a>'s <a href="https://github.com/alibaba/higress/tree/main/plugins/wasm-go">plugins/wasm-go</a>
+that you can use the scaffolding tools provided in this directory（see 1.1）；
+or create a new directory for your Go project yourself(see 1.2).
+If you are developing wasm-go plugins for the first time, it is recommended to take the former.</p>
+<h3>1.1 create wasm-go plugin in <a href="https://github.com/alibaba/higress/tree/main/plugins/wasm-go">plugins/wasm-go</a></h3>
+<ol>
+<li><code>git clone https://github.com/alibaba/higress.git</code>, to clone project to local；</li>
+<li><code>cd plugins/wasm-go; mkdir wasm-demo-go</code>, to go to the project's plugins/wasm-go directory and create the wasm-demo-go directory.</li>
+</ol>
+<h3>1.2 create a new project yourself</h3>
+<ol>
+<li>Create a new folder for the project. For example: <code>wasm-demo-go</code>.</li>
+<li>Execute following commands in the new folder to initialize the Go project:</li>
+</ol>
+<pre><code class="language-bash">go mod init wasm-demo-go
+</code></pre>
+<ol start="3">
+<li>If you are in the Chinese mainland, you may need to set a proxy for downloading dependencies.</li>
+</ol>
+<pre><code class="language-bash">go env -w GOPROXY=https://proxy.golang.com.cn,direct
+</code></pre>
+<ol start="4">
+<li>Download dependencies for plugin building.</li>
+</ol>
+<pre><code class="language-bash">go get github.com/tetratelabs/proxy-wasm-go-sdk
+go get github.com/alibaba/higress/plugins/wasm-go@main
+go get github.com/tidwall/gjson
+</code></pre>
+<p><a name="Z2lFM"></a></p>
+<h2>2. Write main.go</h2>
+<p>You can find a simple sample below, which provides following functions:</p>
+<ol>
+<li>If <code>mockEnable</code> is set to <code>true</code>, send <code>hello world</code> directly as the response.</li>
+<li>If <code>mockEnable</code> is not set or set to <code>false</code>, add an extra HTTP header <code>hello: world</code> to the original request.
+More samples can be found in section 4 below.</li>
+</ol>
+<blockquote>
+<p>Note: Plugin configurations use YAML format in the gateway console. But plugins receive them in JSON format. So in the sample below, actual config data are extracted from JSON by the <code>parseConfig</code> function.</p>
+</blockquote>
+<pre><code class="language-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+        <span class="hljs-string">"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"</span>
+        <span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"</span>
+        <span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"</span>
+        <span class="hljs-string">"github.com/tidwall/gjson"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+        wrapper.SetCtx(
+                <span class="hljs-comment">// Plugin name</span>
+                <span class="hljs-string">"my-plugin"</span>,
+                <span class="hljs-comment">// A custom function for parsing plugin configurations</span>
+                wrapper.ParseConfigBy(parseConfig),
+                <span class="hljs-comment">// A custom function for processing request headers</span>
+                wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+        )
+}
+
+<span class="hljs-comment">// Custom plugin configuration</span>
+<span class="hljs-keyword">type</span> MyConfig <span class="hljs-keyword">struct</span> {
+        mockEnable <span class="hljs-keyword">bool</span>
+}
+
+<span class="hljs-comment">// Plugin configurations set in the console with YAML format will be converted to JSON. So we just need to parse config data from JSON.</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseConfig</span><span class="hljs-params">(json gjson.Result, config *MyConfig, log wrapper.Log)</span> <span class="hljs-title">error</span></span> {
+        <span class="hljs-comment">// Get the configuration property and set to the config object.</span>
+    	config.mockEnable = json.Get(<span class="hljs-string">"mockEnable"</span>).Bool()
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
+        proxywasm.AddHttpRequestHeader(<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>)
+        <span class="hljs-keyword">if</span> config.mockEnable {
+                proxywasm.SendHttpResponse(<span class="hljs-number">200</span>, <span class="hljs-literal">nil</span>, []<span class="hljs-keyword">byte</span>(<span class="hljs-string">"hello world"</span>), <span class="hljs-number">-1</span>)
+        }
+        <span class="hljs-keyword">return</span> types.ActionContinue
+}
+</code></pre>
+<p><a name="SYNZJ"></a></p>
+<h3>HTTP Processing Pointcuts</h3>
+<p>In the sample above, <code>wrapper.ProcessRequestHeadersBy</code> applies custom function <code>onHttpRequestHeaders</code> when processing requests in<code>HTTP request header processing stage</code>. Besides that, you can use following methods to set custom processing functions for various stages.</p>
+<table>
+<thead>
+<tr>
+<th>HTTP Processing Stage</th>
+<th>Trigger Time</th>
+<th>Pointcut Mounting Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP request header processing stage</td>
+<td>When gateway receives request headers from client</td>
+<td>wrapper.ProcessRequestHeadersBy</td>
+</tr>
+<tr>
+<td>HTTP request body processing stage</td>
+<td>When gateway receives request body from client</td>
+<td>wrapper.ProcessRequestBodyBy</td>
+</tr>
+<tr>
+<td>HTTP response header processing stage</td>
+<td>When gateway receives response headers from upstream</td>
+<td>wrapper.ProcessResponseHeadersBy</td>
+</tr>
+<tr>
+<td>HTTP response body processing stage</td>
+<td>When gateway receives response body from upstream</td>
+<td>wrapper.ProcessResponseBodyBy</td>
+</tr>
+</tbody>
+</table>
+<p><a name="r6rK5"></a></p>
+<h3>Utility Functions</h3>
+<p>In the sample above, <code>proxywasm.AddHttpRequestHeader</code> and <code>proxywasm.SendHttpResponse</code> are two utility methods provided by the plugin SDK. You can find major utility functions in the table below:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Name</th>
+<th>Usage</th>
+<th>Available<br />HTTP Processing Stage(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Request Header Processing</td>
+<td>GetHttpRequestHeaders</td>
+<td>Get all the request headers sent by the client</td>
+<td>HTTP request header processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpRequestHeaders</td>
+<td>Replace all headers in the request.</td>
+<td>HTTP request header processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>GetHttpRequestHeader</td>
+<td>Get the specified header in the request.</td>
+<td>HTTP request header processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>RemoveHttpRequestHeader</td>
+<td>Remove the specified header from the request.</td>
+<td>HTTP request header processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpRequestHeader</td>
+<td>Replace the specified header in the response.</td>
+<td>HTTP request header processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>AddHttpRequestHeader</td>
+<td>Add a new header to the request.</td>
+<td>HTTP request header processing stage</td>
+</tr>
+<tr>
+<td>Request Body Processing</td>
+<td>GetHttpRequestBody</td>
+<td>Get the request body received from client.</td>
+<td>HTTP request body processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>AppendHttpRequestBody</td>
+<td>Append the specified binary data to the request body.</td>
+<td>HTTP request body processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>PrependHttpRequestBody</td>
+<td>Prepend the specified binary data to the request body.</td>
+<td>HTTP request body processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpRequestBody</td>
+<td>Replace the entire request body received from client.</td>
+<td>HTTP request body processing stage</td>
+</tr>
+<tr>
+<td>Response Header Processing</td>
+<td>GetHttpResponseHeaders</td>
+<td>Get all the response headers received from upstream.</td>
+<td>HTTP response header processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpResponseHeaders</td>
+<td>Replace all headers in the response.</td>
+<td>HTTP response header processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>GetHttpResponseHeader</td>
+<td>Get the specified header in the response.</td>
+<td>HTTP response header processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>RemoveHttpResponseHeader</td>
+<td>Remove the specified header from the response.</td>
+<td>HTTP response header processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpResponseHeader</td>
+<td>Replace the specified header in the response.</td>
+<td>HTTP response header processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>AddHttpResponseHeader</td>
+<td>Add a new header to the response.</td>
+<td>HTTP response header processing stage</td>
+</tr>
+<tr>
+<td>Response Body Processing</td>
+<td>GetHttpResponseBody</td>
+<td>Get the response body received from upstream.</td>
+<td>HTTP response body processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>AppendHttpResponseBody</td>
+<td>Append the specified binary data to the response body.</td>
+<td>HTTP response body processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>PrependHttpResponseBody</td>
+<td>Prepend the specified binary data to the response body.</td>
+<td>HTTP response body processing stage</td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpResponseBody</td>
+<td>Replace the entire response body with specific data.</td>
+<td>HTTP response body processing stage</td>
+</tr>
+<tr>
+<td>HTTP Call</td>
+<td>DispatchHttpCall</td>
+<td>Send an HTTP request.</td>
+<td>-</td>
+</tr>
+<tr>
+<td></td>
+<td>GetHttpCallResponseHeaders</td>
+<td>Get the response headers associated with a DispatchHttpCall call.</td>
+<td>-</td>
+</tr>
+<tr>
+<td></td>
+<td>GetHttpCallResponseBody</td>
+<td>Get the response body associated with a DispatchHttpCall call.</td>
+<td>-</td>
+</tr>
+<tr>
+<td></td>
+<td>GetHttpCallResponseTrailers</td>
+<td>Get the response trailer associated with a DispatchHttpCall call.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Respond Directly</td>
+<td>SendHttpResponse</td>
+<td>Return a specific HTTP response immediately.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Process Resuming</td>
+<td>ResumeHttpRequest</td>
+<td>Resume the request processing workflow paused before.</td>
+<td>-</td>
+</tr>
+<tr>
+<td></td>
+<td>ResumeHttpResponse</td>
+<td>Resume the response processing workflow paused before.</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a name="GAa0T"></a></p>
+<h2>3. Build WASM file</h2>
+<p>If your project directory is in the <a href="https://github.com/alibaba/higress/tree/main/plugins/wasm-go">plugins/wasm-go</a> directory
+See 3.1; if you are using a self-initialized directory, see 3.2.</p>
+<h3>3.1 Building wasm-go plugin image with scaffolding</h3>
+<p>The wasm-go plugin can be built quickly with the following command:</p>
+<pre><code class="language-bash">$ PLUGIN_NAME=wasm-demo-go make build
+... ...
+image:            wasm-demo-go:20230223-173305-3b1a471
+output wasm file: extensions/wasm-demo-go/plugin.wasm
+</code></pre>
+<p>This command eventually builds a wasm file and a Docker image.
+This local wasm file is exported to the specified plugin's directory and can be used directly for local debugging.
+You can also use <code>make build-push</code> to build and push the image together.
+See <a href="https://github.com/alibaba/higress/tree/main/plugins/wasm-go">plugins/wasm-go</a> for more.</p>
+<h3>3.2 Compile wasm files locally</h3>
+<p>Execute the following command:</p>
+<pre><code class="language-bash">tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
+</code></pre>
+<p>A new file named main.wasm will be created after a successful compilation, which will be used in the local debugging sample below as well.<br />When using custom plugin function in the cloud native gateway market, you just need to upload this file.</p>
+<p><a name="yJdN5"></a></p>
+<h1>3. Local Debugging</h1>
+<p>TBD</p>
+<h1>More Samples</h1>
+<p><a name="vdifW"></a></p>
+<h2>Plugin with No Configuration</h2>
+<p>If the plugin needs no configuration, just define an empty config struct.</p>
+<pre><code class="language-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+        <span class="hljs-string">"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"</span>
+        <span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"</span>
+        <span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+        wrapper.SetCtx(
+                <span class="hljs-string">"hello-world"</span>,
+                wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+        )
+}
+
+<span class="hljs-keyword">type</span> MyConfig <span class="hljs-keyword">struct</span> {}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
+        proxywasm.SendHttpResponse(<span class="hljs-number">200</span>, <span class="hljs-literal">nil</span>, []<span class="hljs-keyword">byte</span>(<span class="hljs-string">"hello world"</span>), <span class="hljs-number">-1</span>)
+        <span class="hljs-keyword">return</span> types.ActionContinue
+}
+</code></pre>
+<p><a name="dSdLn"></a></p>
+<h2>Send Requests to External Services in the Plugin</h2>
+<p>Only HTTP requests are supported for now. You can send requests to Nacos and K8s services with service sources configured in the gateway console, and services with a static IP or DNS source. Please be noted, HTTP client in the <code>net/http</code> package cannot be used here. You only use the wrapped HTTP client as shown in the sample below.<br />In the following sample works as below:</p>
+<ol>
+<li>Parse service type in the config parsing stage, and generate the corresponding HTTP client.</li>
+<li>In the HTTP request header processing stage, send a service request to the configured URL.</li>
+<li>Parse response headers and get token value using the specified key.</li>
+<li>Set the token value to the headers of the original request.</li>
+</ol>
+<pre><code class="language-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+	<span class="hljs-string">"errors"</span>
+	<span class="hljs-string">"net/http"</span>
+	<span class="hljs-string">"strings"</span>
+
+    <span class="hljs-string">"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"</span>
+	<span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"</span>
+	<span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"</span>
+	<span class="hljs-string">"github.com/tidwall/gjson"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+	wrapper.SetCtx(
+		<span class="hljs-string">"http-call"</span>,
+		wrapper.ParseConfigBy(parseConfig),
+		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+	)
+}
+
+<span class="hljs-keyword">type</span> MyConfig <span class="hljs-keyword">struct</span> {
+	<span class="hljs-comment">// The client used to initiate an HTTP request</span>
+	client      wrapper.HttpClient
+	<span class="hljs-comment">// Request URL</span>
+	requestPath <span class="hljs-keyword">string</span>
+	<span class="hljs-comment">// Use this key when extracting token header from the service response and setting a header to the request. The value is configurable.</span>
+	tokenHeader <span class="hljs-keyword">string</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseConfig</span><span class="hljs-params">(json gjson.Result, config *MyConfig, log wrapper.Log)</span> <span class="hljs-title">error</span></span> {
+	config.tokenHeader = json.Get(<span class="hljs-string">"tokenHeader"</span>).String()
+	<span class="hljs-keyword">if</span> config.tokenHeader == <span class="hljs-string">""</span> {
+		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">"missing tokenHeader in config"</span>)
+	}
+	config.requestPath = json.Get(<span class="hljs-string">"requestPath"</span>).String()
+	<span class="hljs-keyword">if</span> config.requestPath == <span class="hljs-string">""</span> {
+		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">"missing requestPath in config"</span>)
+	}
+	serviceSource := json.Get(<span class="hljs-string">"serviceSource"</span>).String()
+	<span class="hljs-comment">// If serviceSource is set to "ip" or "dns", serviceName shall be specified when creating the service.</span>
+	<span class="hljs-comment">// If serviceSource is set to "nacos" or "k8s", serviceName shall be set to the original name specified when registering the service.</span>
+	serviceName := json.Get(<span class="hljs-string">"serviceName"</span>).String()
+	servicePort := json.Get(<span class="hljs-string">"servicePort"</span>).Int()
+	<span class="hljs-keyword">if</span> serviceName == <span class="hljs-string">""</span> || servicePort == <span class="hljs-number">0</span> {
+		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">"invalid service config"</span>)
+	}
+	<span class="hljs-keyword">switch</span> serviceSource {
+	<span class="hljs-keyword">case</span> <span class="hljs-string">"k8s"</span>:
+		namespace := json.Get(<span class="hljs-string">"namespace"</span>).String()
+		config.client = wrapper.NewClusterClient(wrapper.K8sCluster{
+			ServiceName: serviceName,
+			Namespace:   namespace,
+			Port:        servicePort,
+		})
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+	<span class="hljs-keyword">case</span> <span class="hljs-string">"nacos"</span>:
+		namespace := json.Get(<span class="hljs-string">"namespace"</span>).String()
+		config.client = wrapper.NewClusterClient(wrapper.NacosCluster{
+			ServiceName: serviceName,
+			NamespaceID: namespace,
+			Port:        servicePort,
+		})
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+	<span class="hljs-keyword">case</span> <span class="hljs-string">"ip"</span>:
+		config.client = wrapper.NewClusterClient(wrapper.StaticIpCluster{
+			ServiceName: serviceName,
+			Port:        servicePort,
+		})
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+	<span class="hljs-keyword">case</span> <span class="hljs-string">"dns"</span>:
+		domain := json.Get(<span class="hljs-string">"domain"</span>).String()
+		config.client = wrapper.NewClusterClient(wrapper.DnsCluster{
+			ServiceName: serviceName,
+			Port:        servicePort,
+			Domain:      domain,
+		})
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+	<span class="hljs-keyword">default</span>:
+		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">"unknown service source: "</span> + serviceSource)
+	}
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
+	<span class="hljs-comment">// Use the Get function of the client to initiate an HTTP Get request.</span>
+	<span class="hljs-comment">// The timeout parameter is omitted here, whose default value is 500ms.</span>
+	config.client.Get(config.requestPath, <span class="hljs-literal">nil</span>,
+		<span class="hljs-comment">// A callback function which will be called asynchronously when receiving the response.</span>
+		<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(statusCode <span class="hljs-keyword">int</span>, responseHeaders http.Header, responseBody []<span class="hljs-keyword">byte</span>)</span></span> {
+			<span class="hljs-comment">// Process the response with a status code other than 200.</span>
+			<span class="hljs-keyword">if</span> statusCode != http.StatusOK {
+				log.Errorf(<span class="hljs-string">"http call failed, status: %d"</span>, statusCode)
+				proxywasm.SendHttpResponse(http.StatusInternalServerError, <span class="hljs-literal">nil</span>,
+					[]<span class="hljs-keyword">byte</span>(<span class="hljs-string">"http call failed"</span>), <span class="hljs-number">-1</span>)
+				<span class="hljs-keyword">return</span>
+			}
+			<span class="hljs-comment">// Print out the status code and response body</span>
+			log.Infof(<span class="hljs-string">"get status: %d, response body: %s"</span>, statusCode, responseBody)
+			<span class="hljs-comment">// Extract token value from the response header and set the header of the original request</span>
+			token := responseHeaders.Get(config.tokenHeader)
+			<span class="hljs-keyword">if</span> token != <span class="hljs-string">""</span> {
+				proxywasm.AddHttpRequestHeader(config.tokenHeader, token)
+			}
+			<span class="hljs-comment">// Resume the original request processing workflow. Continue the process, so the request can be forwarded to the upstream.</span>
+			proxywasm.ResumeHttpRequest()
+		})
+	<span class="hljs-comment">// We need to wait for the callback to finish its process.</span>
+	<span class="hljs-comment">// Return Pause action here to pause the request processing workflow, which can be resumed by a ResumeHttpRequest call.</span>
+	<span class="hljs-keyword">return</span> types.ActionPause
+}
+</code></pre>
+</div></section><footer class="footer-container"><div class="footer-body"><img src="//img.alicdn.com/imgextra/i2/O1CN01oNTGgE1lfW7oEPIzP_!!6000000004846-2-tps-960-290.png"/><p class="docsite-power">website powered by docsite</p><div class="cols-container"><div class="col col-12"><h3>Vision</h3><p>Higress is ...</p></div><div class="col col-6"><dl><dt>Documentation</dt><dd><a href="/en-us/docs/overview/what-is-higress.html" target="_self">What is Higress?</a></dd><dd><a href="/en-us/docs/user/quickstart.html" target="_self">Quick Start</a></dd><dd><a href="https://github.com/higress-group/higress-group.github.io/issues/new" target="_self">Report a doc issue</a></dd><dd><a href="https://github.com/higress-group/higress-group.github.io" target="_self">Edit This Page on GitHub</a></dd></dl></div><div class="col col-6"><dl><dt>Resources</dt><dd><a href="/en-us/blog/index.html" target="_self">Blog</a></dd><dd><a href="/en-us/community/index.html" target="_self">Community</a></dd></dl></div></div><div class="copyright"><span>Copyright © 2022 Higress</span></div><div class="record"><div><a target="_blank" href="http://idinfo.zjamr.zj.gov.cn/bscx.do?method=lzxx&amp;id=3301843301000000126540"><img src="https://img.alicdn.com/imgextra/i4/O1CN019fTXYL1tVSMxQUfXI_!!6000000005907-1-tps-65-70.gif" style="width:20px;height:20px;margin-right:8px"/></a></div><div style="margin-right:12px"><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002016922"><img src="https://img.alicdn.com/imgextra/i4/O1CN01Yy52TB1LzVPtZYepI_!!6000000001370-2-tps-20-20.png" style="width:20px;height:20px;margin:0"/><span>浙公网安备 33011002016922号</span></a></div><div><a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备12022327号-1119</a></div></div></div></footer></div></div>
+	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
+	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
+	<script src="//g.alicdn.com/alilog/mlog/aplus_v2.js" id="beacon-aplus" exparams="clog=o&aplus&sidx=aplusSidx&ckx=aplusCkx"></script>
+     <script src="//g.alicdn.com/aes/??tracker/1.0.34/index.js,tracker-plugin-pv/2.4.5/index.js,tracker-plugin-event/1.2.5/index.js,tracker-plugin-jserror/1.0.13/index.js,tracker-plugin-api/1.1.14/index.js,tracker-plugin-perf/1.1.8/index.js,tracker-plugin-eventTiming/1.0.4/index.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR"></script>
+    <script>
+		window.rootPath = '';
+    </script>
+	<script src="/build/documentation.js"></script>
+  <script src="https://g.alicdn.com/mamba/assets/0.0.13/mse-arc-ui.min.js"></script>
+	<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4debd66ec73a32e236b30b46d219e2e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+    window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YHS75WKFBR');
+    </script>
+</body>
+</html>

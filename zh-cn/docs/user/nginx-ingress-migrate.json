@@ -1,0 +1,10 @@
+{
+  "filename": "nginx-ingress-migrate.md",
+  "__html": "<h1>从 Nginx Ingress Controller 平滑迁移</h1>\n<p>TBD</p>\n",
+  "link": "/zh-cn/docs/user/nginx-ingress-migrate.html",
+  "meta": {
+    "title": "从 Nginx Ingress Controller 平滑迁移",
+    "keywords": "Ingress",
+    "description": "从 Nginx Ingress Controller 平滑迁移"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "filename": "upgrade.md",
+  "__html": "<h1>版本升级</h1>\n<h2>基于 helm 实现版本升级</h2>\n<pre><code class=\"language-bash\">helm upgrade higress -n higress-system higress.io/higress \n</code></pre>\n<h3>从 0.5.x 版本升级到最新版本</h3>\n<h4>选项一：移除 Istio 依赖</h4>\n<pre><code class=\"language-bash\">helm upgrade higress -n higress-system --<span class=\"hljs-built_in\">set</span> global.enableMesh=<span class=\"hljs-literal\">false</span> higress.io/higress \nkubectl <span class=\"hljs-built_in\">wait</span> -n higress-system deployment/higress-controller deployment/higress-gateway --<span class=\"hljs-keyword\">for</span>=condition=Available\nhelm delete istio -n istio-system\nkubectl delete ns istio-system\nkubectl get crd -oname | grep --color=never <span class=\"hljs-string\">'istio.io'</span> | xargs kubectl delete\n</code></pre>\n<h4>选项二：保留 Istio</h4>\n<pre><code class=\"language-bash\">helm upgrade higress -n higress-system --<span class=\"hljs-built_in\">set</span> global.enableMesh=<span class=\"hljs-literal\">true</span> higress.io/higress\n</code></pre>\n",
+  "link": "/zh-cn/docs/ops/upgrade.html",
+  "meta": {
+    "title": "版本升级",
+    "keywords": "Upgrade",
+    "description": "Higress 版本升级."
+  }
+}

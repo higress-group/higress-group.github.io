@@ -1,0 +1,10 @@
+{
+  "filename": "code.md",
+  "__html": "<h1>源码阅读指引</h1>\n<p>如果您想给 Higress 贡献代码，请参考<a href=\"../developers/guide_dev.md\">参与贡献</a></p>\n<p>代码目录结构说明</p>\n<ul>\n<li>\n<p>cmd: 命令行参数解析等处理代码</p>\n</li>\n<li>\n<p>pkg/ingress: Ingress 资源转换为 Istio 资源等相关代码</p>\n</li>\n<li>\n<p>pkg/bootstrap: 包括启动 gRPC/xDS/HTTP server 等的代码</p>\n</li>\n<li>\n<p>registry: 实现对接多种注册中心进行服务发现的代码</p>\n</li>\n<li>\n<p>envoy: 依赖的 envoy 官方仓库 commit，以及对应的补丁代码</p>\n</li>\n<li>\n<p>istio: 依赖的 istio 官方仓库 commit，以及对应的补丁代码</p>\n</li>\n<li>\n<p>plugins: Higress 插件 sdk，以及官方内置插件代码</p>\n</li>\n<li>\n<p>script: 编译相关脚本</p>\n</li>\n<li>\n<p>docker: docker 镜像构建相关脚本</p>\n</li>\n</ul>\n<p>在编译过程中会自动执行<code>make prebuild</code>，将产生 <code>external</code> 目录，这是将用到的 envoy 和 istio 依赖，打上对应的补丁代码后生成。</p>\n<p>如果要修改 envoy 和 istio 代码，并产生新的补丁文件，可以直接在 external 目录下修改，并进行重命名，再执行 prebuild，之后对比生成补丁文件，例如:</p>\n<pre><code class=\"language-bash\">mv external/envoy external/envoy_new\nmake prebuild\ndiff -Naur external/envoy external/envoy_new &gt; envoy/1.20/patches/envoy/$(date +%Y%m%d)-what-changed.patch\n</code></pre>\n<p>注意补丁执行顺序按照文件名字符顺序，请以时间戳开头</p>\n",
+  "link": "/zh-cn/docs/dev/code.html",
+  "meta": {
+    "title": "源码阅读指引",
+    "keywords": "higress,coding",
+    "description": "Higress 源码阅读指引."
+  }
+}

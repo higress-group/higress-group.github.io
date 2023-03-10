@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="wasm" />
+	<meta name="description" content="使用 GO 语言开发 WASM 插件" />
+	<meta name="aes-config" content="pid=xux-opensource&user_type=101&uid=&username=&dim10=higress"/>
+	<!-- 网页标签标题 -->
+	<title>使用 GO 语言开发 WASM 插件</title>
+  <link rel="shortcut icon" href="/img/higress_logo_small.jpg"/>
+	<link rel="stylesheet" href="/build/documentation.css" />
+  <link rel="stylesheet" href="https://g.alicdn.com/mamba/assets/0.0.13/mse-arc-ui.min.css" />
+</head>
+<body>
+	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="//img.alicdn.com/imgextra/i1/O1CN01I7WjVs1K33EQjInid_!!6000000001107-2-tps-960-290.png"/></a><div class="search search-normal"><span class="icon-search"></span></div><span class="language-switch language-switch-normal">En</span><div class="header-menu"><img class="header-menu-toggle" src="https://img.alicdn.com/tfs/TB14eEmw7P2gK0jSZPxXXacQpXa-38-32.png"/><ul><li class="menu-item menu-item-normal"><span><a href="/zh-cn/index.html">首页</a></span></li><li class="menu-item menu-item-normal menu-item-normal-active"><span><a href="/zh-cn/docs/overview/what-is-higress.html">文档</a></span></li><li class="menu-item menu-item-normal"><span><a href="/zh-cn/docs/developers/developers_dev.html">开发者</a></span></li><li class="menu-item menu-item-normal"><span><a href="/zh-cn/blog/index.html">博客</a></span></li><li class="menu-item menu-item-normal"><span><a href="/zh-cn/community/index.html">社区</a></span></li><li class="menu-item menu-item-normal"><span><a href="https://github.com/alibaba/higress/releases">下载</a></span></li><li class="menu-item menu-item-normal"><span><a href="http://demo.higress.io">控制台样例</a></span></li><li class="menu-item menu-item-normal"><span><a href="/en-us/index.html"> </a></span></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="https://img.alicdn.com/tfs/TB1cm8nJwDqK1RjSZSyXXaxEVXa-160-160.png" class="front-img"/><span>文档</span><img src="https://img.alicdn.com/tfs/TB1cm8nJwDqK1RjSZSyXXaxEVXa-160-160.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>概述</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/what-is-higress.html" target="_self">Higress 是什么？</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/roadmap.html" target="_self">Roadmap</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/faq.html" target="_self">FAQ</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/terminology.html" target="_self">术语表</a></li></ul></li><li class="menu-item menu-item-level-1"><span>用户指南</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/user/quickstart.html" target="_self">快速开始</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>最佳实践示例<img style="transform:rotate(-90deg)" class="menu-toggle" src="https://img.alicdn.com/tfs/TB15.Ilw2b2gK0jSZK9XXaEgFXa-26-16.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/wasm-go.html" target="_self">使用 GO 语言开发 WASM 插件</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/kruise-rollout.html" target="_self">通过 OpenKruise Rollout 实现灰度发布</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/nacos-route.html" target="_self">配置 Ingress 转发给注册在 Nacos 的服务</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/spring-cloud.html" target="_self">实现 SpringCloud 服务发现和路由</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/dubbo.html" target="_self">实现 Dubbo 服务发现和路由</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>文档陆续增加中...<img style="transform:rotate(-90deg)" class="menu-toggle" src="https://img.alicdn.com/tfs/TB15.Ilw2b2gK0jSZK9XXaEgFXa-26-16.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/prometheus.html" target="_self">基于 Prometheus 实现入口流量观测</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/opensergo-gray.html" target="_self">对接 OpenSergo 实现全链路灰度</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/sentinel.html" target="_self">基于 Sentinel 实现入口熔断限流</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/waf.html" target="_self">开启 WAF 防护的最佳实践</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>参考手册<img style="transform:rotate(-90deg)" class="menu-toggle" src="https://img.alicdn.com/tfs/TB15.Ilw2b2gK0jSZK9XXaEgFXa-26-16.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/annotation.html" target="_self">Ingress Annotaion 配置说明</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/configurations.html" target="_self">运维参数配置说明</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/mcp-bridge.html" target="_self">Mcp Brdige 配置说明</a></li></ul></li></ul></li><li class="menu-item menu-item-level-1"><span>运维指南</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/ops/deploy-by-helm.html" target="_self">安装部署</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/ops/upgrade.html" target="_self">版本升级</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/ops/log.html" target="_self">日志说明</a></li></ul></li><li class="menu-item menu-item-level-1"><span>开发者指南</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/dev/code.html" target="_self">源码阅读指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/dev/architecture.html" target="_self">组件编译说明</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>使用 GO 语言开发 WASM 插件</h1>
+<h1>一、工具准备</h1>
+<p>需要先安装 Golang 和 TinyGo 两个程序。
+<a name="a81fa"></a></p>
+<h2>1. Golang</h2>
+<p>（要求 1.18 版本以上）<br />官方指引链接：<a href="https://go.dev/doc/install">https://go.dev/doc/install</a>
+<a name="JFoN6"></a></p>
+<h3>Windows</h3>
+<ol>
+<li>下载安装文件：<a href="https://go.dev/dl/go1.19.windows-amd64.msi">https://go.dev/dl/go1.19.windows-amd64.msi</a></li>
+<li>打开下载好的安装文件直接安装，默认会安装到 <code>Program Files</code> 或 <code>Program Files (x86)</code> 目录</li>
+<li>安装完成后，使用键盘上的快捷键“Win+R”打开运行窗口，在运行窗口中输入“cmd”点击确定即可打开命令窗口，输入命令：<code>go version</code>，输出当前安装的版本，表明安装成功
+<a name="tavPX"></a></li>
+</ol>
+<h3>MacOS</h3>
+<ol>
+<li>下载安装文件：<a href="https://go.dev/dl/go1.19.darwin-amd64.pkg">https://go.dev/dl/go1.19.darwin-amd64.pkg</a></li>
+<li>打开下载好的安装文件直接安装，默认会安装到<code>/usr/local/go</code>目录</li>
+<li>打开终端命令行工具，输入命令：<code>go version</code>，输出当前安装的版本，表明安装成功
+<a name="olPlT"></a></li>
+</ol>
+<h3>Linux</h3>
+<ol>
+<li>下载安装文件：<a href="https://go.dev/dl/go1.19.linux-amd64.tar.gz">https://go.dev/dl/go1.19.linux-amd64.tar.gz</a></li>
+<li>执行下列命令进行安装：</li>
+</ol>
+<pre><code class="language-bash">rm -rf /usr/<span class="hljs-built_in">local</span>/go &amp;&amp; tar -C /usr/<span class="hljs-built_in">local</span> -xzf go1.19.linux-amd64.tar.gz
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/usr/<span class="hljs-built_in">local</span>/go/bin
+</code></pre>
+<ol start="3">
+<li>执行 <code>go version</code>，输出当前安装的版本，表明安装成功</li>
+</ol>
+<p><a name="qugm0"></a></p>
+<h2>2. TinyGo [可选的]</h2>
+<p>（要求 0.25.0 版本以上）<br />官方指引链接：<a href="https://tinygo.org/getting-started/install/">https://tinygo.org/getting-started/install/</a>
+<a name="ELNis"></a></p>
+<h3>Windows</h3>
+<ol>
+<li>下载安装文件：<a href="https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip">https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip</a></li>
+<li>解压安装文件到指定目录</li>
+<li>如果安装解压后的目录为<code>C:\tinygo</code>，则需要将<code>C:\tinygo\bin</code>添加到环境变量<code>PATH</code>中，例如通过在命令窗口中输入 set 命令设置</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> PATH=%PATH%;<span class="hljs-string">"C:\tinygo\bin"</span>;
+</code></pre>
+<ol start="4">
+<li>在命令窗口执行命令 <code>tinygo version</code>，输出当前安装的版本，表明安装成功
+<a name="iCo9z"></a></li>
+</ol>
+<h3>MacOS</h3>
+<ol>
+<li>下载压缩包并解压</li>
+</ol>
+<pre><code class="language-bash">wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.darwin-amd64.tar.gz
+tar -zxf tinygo0.25.0.darwin-amd64.tar.gz
+</code></pre>
+<ol start="2">
+<li>如果安装解压后的目录为<code>/tmp</code>，则需要将<code>/tmp/tinygo/bin</code>添加到环境变量<code>PATH</code>中：</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-built_in">export</span> PATH=/tmp/tinygo/bin:<span class="hljs-variable">$PATH</span>
+</code></pre>
+<ol start="3">
+<li>在终端执行 <code>tinygo version</code>，输出当前安装的版本，表明安装成功
+<a name="hNZeF"></a></li>
+</ol>
+<h3>Linux</h3>
+<p>以 Ubuntu 下 amd64 架构为例，其他系统请参考官方指引链接</p>
+<ol>
+<li>下载 DEB 文件，并安装</li>
+</ol>
+<pre><code class="language-bash">wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo_0.25.0_amd64.deb
+sudo dpkg -i tinygo_0.25.0_amd64.deb
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/usr/<span class="hljs-built_in">local</span>/bin
+</code></pre>
+<ol start="2">
+<li>在终端执行 <code>tinygo version</code>，输出当前安装的版本，表明安装成功</li>
+</ol>
+<p><a name="QZbcA"></a></p>
+<h1>二、编写插件</h1>
+<p><a name="u83FM"></a></p>
+<h2>1. 新建工程目录</h2>
+<p>你可以在 <a href="https://github.com/alibaba/higress">higress</a> 项目的 <a href="https://github.com/alibaba/higress/tree/main/plugins/wasm-go">plugins/wasm-go</a>
+目录下创建新的插件工程目录，以便使用该目录下提供的脚手架工具（见 1.1）；
+或者新建一个 Go 项目，从头创建一个工程目录（见 1.2）。
+如果你是第一次开发 wasm-go 插件，建议采取前者。</p>
+<h3>1.1 在 <a href="https://github.com/alibaba/higress/tree/main/plugins/wasm-go">plugins/wasm-go</a> 目录下创建工程目录</h3>
+<ol>
+<li>使用 <code>git clone https://github.com/alibaba/higress.git</code> 将 higress 项目克隆到本地；</li>
+<li><code>cd plugins/wasm-go; mkdir wasm-demo-go</code>, 进入项目的 plugins/wasm-go 目录，创建 wasm-demo-go 目录。</li>
+</ol>
+<h3>1.2 从头创建一个工程目录</h3>
+<ol>
+<li>新建一个工程目录文件，例如<code>wasm-demo-go</code></li>
+<li>在所建目录下执行以下命令，进行 Go 工程初始化</li>
+</ol>
+<pre><code class="language-bash">go mod init wasm-demo-go
+</code></pre>
+<ol start="3">
+<li>国内环境可能需要设置下载依赖包的代理</li>
+</ol>
+<pre><code class="language-bash">go env -w GOPROXY=https://proxy.golang.com.cn,direct
+</code></pre>
+<ol start="4">
+<li>下载构建插件的依赖</li>
+</ol>
+<pre><code class="language-bash">go get github.com/tetratelabs/proxy-wasm-go-sdk
+go get github.com/alibaba/higress/plugins/wasm-go@main
+go get github.com/tidwall/gjson
+</code></pre>
+<p><a name="Z2lFM"></a></p>
+<h2>2. 编写 main.go 文件</h2>
+<p>下面是一个简单示例，实现了在插件配置<code>mockEnable: true</code>时直接返回<code>hello world</code>应答；未做插件配置，或者设置<code>mockEnable: false</code>时给原始请求添加 <code>hello: world</code>请求头。更多例子请参考本文第四节。</p>
+<blockquote>
+<p>注意：在网关控制台中的插件配置为 yaml 格式，下发给插件时将自动转换为 json 格式，所以例子中的 parseConfig 可以直接从 json 中解析配置</p>
+</blockquote>
+<pre><code class="language-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+        <span class="hljs-string">"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"</span>
+        <span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"</span>
+        <span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"</span>
+        <span class="hljs-string">"github.com/tidwall/gjson"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+        wrapper.SetCtx(
+                <span class="hljs-comment">// 插件名称</span>
+                <span class="hljs-string">"my-plugin"</span>,
+                <span class="hljs-comment">// 为解析插件配置，设置自定义函数</span>
+                wrapper.ParseConfigBy(parseConfig),
+                <span class="hljs-comment">// 为处理请求头，设置自定义函数</span>
+                wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+        )
+}
+
+<span class="hljs-comment">// 自定义插件配置</span>
+<span class="hljs-keyword">type</span> MyConfig <span class="hljs-keyword">struct</span> {
+        mockEnable <span class="hljs-keyword">bool</span>
+}
+
+<span class="hljs-comment">// 在控制台插件配置中填写的yaml配置会自动转换为json，此处直接从json这个参数里解析配置即可</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseConfig</span><span class="hljs-params">(json gjson.Result, config *MyConfig, log wrapper.Log)</span> <span class="hljs-title">error</span></span> {
+        <span class="hljs-comment">// 解析出配置，更新到config中</span>
+    	config.mockEnable = json.Get(<span class="hljs-string">"mockEnable"</span>).Bool()
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
+        proxywasm.AddHttpRequestHeader(<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>)
+        <span class="hljs-keyword">if</span> config.mockEnable {
+                proxywasm.SendHttpResponse(<span class="hljs-number">200</span>, <span class="hljs-literal">nil</span>, []<span class="hljs-keyword">byte</span>(<span class="hljs-string">"hello world"</span>), <span class="hljs-number">-1</span>)
+        }
+        <span class="hljs-keyword">return</span> types.ActionContinue
+}
+</code></pre>
+<p><a name="SYNZJ"></a></p>
+<h3>HTTP 处理挂载点</h3>
+<p>上面示例代码中通过 <code>wrapper.ProcessRequestHeadersBy</code>将自定义函数 <code>onHttpRequestHeaders</code>用于<code>HTTP 请求头处理阶段</code>处理请求。除此之外，还可以通过下面方式，设置其他阶段的自定义处理函数</p>
+<table>
+<thead>
+<tr>
+<th>HTTP 处理阶段</th>
+<th>触发时机</th>
+<th>挂载方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP 请求头处理阶段</td>
+<td>网关接收到客户端发送来的请求头数据时</td>
+<td>wrapper.ProcessRequestHeadersBy</td>
+</tr>
+<tr>
+<td>HTTP 请求 Body 处理阶段</td>
+<td>网关接收到客户端发送来的请求 Body 数据时</td>
+<td>wrapper.ProcessRequestBodyBy</td>
+</tr>
+<tr>
+<td>HTTP 应答头处理阶段</td>
+<td>网关接收到后端服务响应的应答头数据时</td>
+<td>wrapper.ProcessResponseHeadersBy</td>
+</tr>
+<tr>
+<td>HTTP 应答 Body 处理阶段</td>
+<td>网关接收到后端服务响应的应答 Body 数据时</td>
+<td>wrapper.ProcessResponseBodyBy</td>
+</tr>
+</tbody>
+</table>
+<p><a name="r6rK5"></a></p>
+<h3>工具方法</h3>
+<p>上面示例代码中的 <code>proxywasm.AddHttpRequestHeader</code> 和 <code>proxywasm.SendHttpResponse</code>是插件 SDK 提供的两个工具方法，主要的工具方法见下表：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>方法名称</th>
+<th>用途</th>
+<th>可以生效的<br />HTTP 处理阶段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>请求头处理</td>
+<td>GetHttpRequestHeaders</td>
+<td>获取客户端请求的全部请求头</td>
+<td>HTTP 请求头处理阶段<br /></td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpRequestHeaders</td>
+<td>替换客户端请求的全部请求头</td>
+<td>HTTP 请求头处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>GetHttpRequestHeader</td>
+<td>获取客户端请求的指定请求头</td>
+<td>HTTP 请求头处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>RemoveHttpRequestHeader</td>
+<td>移除客户端请求的指定请求头</td>
+<td>HTTP 请求头处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpRequestHeader</td>
+<td>替换客户端请求的指定请求头</td>
+<td>HTTP 请求头处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>AddHttpRequestHeader</td>
+<td>新增一个客户端请求头</td>
+<td>HTTP 请求头处理阶段</td>
+</tr>
+<tr>
+<td>请求 Body 处理</td>
+<td>GetHttpRequestBody</td>
+<td>获取客户端请求 Body</td>
+<td>HTTP 请求 Body 处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>AppendHttpRequestBody</td>
+<td>将指定的字节串附加到客户端请求 Body 末尾</td>
+<td>HTTP 请求 Body 处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>PrependHttpRequestBody</td>
+<td>将指定的字节串附加到客户端请求 Body 的开头</td>
+<td>HTTP 请求 Body 处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpRequestBody</td>
+<td>替换客户端请求 Body</td>
+<td>HTTP 请求 Body 处理阶段</td>
+</tr>
+<tr>
+<td>应答头处理</td>
+<td>GetHttpResponseHeaders</td>
+<td>获取后端响应的全部应答头</td>
+<td>HTTP 应答头处理阶段<br /></td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpResponseHeaders</td>
+<td>替换后端响应的全部应答头</td>
+<td>HTTP 应答头处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>GetHttpResponseHeader</td>
+<td>获取后端响应的指定应答头</td>
+<td>HTTP 应答头处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>RemoveHttpResponseHeader</td>
+<td>移除后端响应的指定应答头</td>
+<td>HTTP 应答头处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpResponseHeader</td>
+<td>替换后端响应的指定应答头</td>
+<td>HTTP 应答头处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>AddHttpResponseHeader</td>
+<td>新增一个后端响应头</td>
+<td>HTTP 应答头处理阶段</td>
+</tr>
+<tr>
+<td>应答 Body 处理</td>
+<td>GetHttpResponseBody</td>
+<td>获取客户端请求 Body</td>
+<td>HTTP 应答 Body 处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>AppendHttpResponseBody</td>
+<td>将指定的字节串附加到后端响应 Body 末尾</td>
+<td>HTTP 应答 Body 处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>PrependHttpResponseBody</td>
+<td>将指定的字节串附加到后端响应 Body 的开头</td>
+<td>HTTP 应答 Body 处理阶段</td>
+</tr>
+<tr>
+<td></td>
+<td>ReplaceHttpResponseBody</td>
+<td>替换后端响应 Body</td>
+<td>HTTP 应答 Body 处理阶段</td>
+</tr>
+<tr>
+<td>HTTP 调用</td>
+<td>DispatchHttpCall</td>
+<td>发送一个 HTTP 请求</td>
+<td>-</td>
+</tr>
+<tr>
+<td></td>
+<td>GetHttpCallResponseHeaders</td>
+<td>获取 DispatchHttpCall 请求响应的应答头</td>
+<td>-</td>
+</tr>
+<tr>
+<td></td>
+<td>GetHttpCallResponseBody</td>
+<td>获取 DispatchHttpCall 请求响应的应答 Body</td>
+<td>-</td>
+</tr>
+<tr>
+<td></td>
+<td>GetHttpCallResponseTrailers</td>
+<td>获取 DispatchHttpCall 请求响应的应答 Trailer</td>
+<td>-</td>
+</tr>
+<tr>
+<td>直接响应</td>
+<td>SendHttpResponse</td>
+<td>直接返回一个特定的 HTTP 应答</td>
+<td>-</td>
+</tr>
+<tr>
+<td>流程恢复</td>
+<td>ResumeHttpRequest</td>
+<td>恢复先前被暂停的请求处理流程</td>
+<td>-</td>
+</tr>
+<tr>
+<td></td>
+<td>ResumeHttpResponse</td>
+<td>恢复先前被暂停的应答处理流程</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a name="GAa0T"></a></p>
+<h2>3. 编译 WASM 文件，构建 wasm-go 插件镜像</h2>
+<p>如果你的工程目录在 <a href="https://github.com/alibaba/higress/tree/main/plugins/wasm-go">plugins/wasm-go</a> 目录下，
+见 3.1; 如果你是使用自行初始化的目录，见 3.2.</p>
+<h3>3.1 使用脚手架构建 wasm-go 插件镜像</h3>
+<p>使用以下命令可以快速构建 wasm-go 插件:</p>
+<pre><code class="language-bash">$ PLUGIN_NAME=wasm-demo-go make build
+... ...
+image:            wasm-demo-go:20230223-173305-3b1a471
+output wasm file: extensions/wasm-demo-go/plugin.wasm
+</code></pre>
+<p>该命令最终构建出一个 wasm 文件和一个 Docker image。
+这个本地的 wasm 文件被输出到了指定的插件的目录下，可以直接用于本地调试。
+你也可以直接使用 <code>make build-push</code> 一并构建和推送 image.
+更多构建相关信息参见 <a href="https://github.com/alibaba/higress/tree/main/plugins/wasm-go">plugins/wasm-go</a>.</p>
+<h3>3.2 本地编译 wasm 文件</h3>
+<p>执行以下命令</p>
+<pre><code class="language-bash">tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
+</code></pre>
+<p>编译成功会在当前目录下创建文件 main.wasm。这个文件在下面本地调试的例子中也会被用到。<br />在使用云原生网关插件市场的自定义插件功能时，直接上传该文件即可。
+<a name="yJdN5"></a></p>
+<h1>三、本地调试</h1>
+<p>TBD</p>
+<h1>更多示例</h1>
+<p><a name="vdifW"></a></p>
+<h2>无配置插件</h2>
+<p>插件无需配置时，直接定义空结构体即可</p>
+<pre><code class="language-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+        <span class="hljs-string">"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"</span>
+        <span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"</span>
+        <span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+        wrapper.SetCtx(
+                <span class="hljs-string">"hello-world"</span>,
+                wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+        )
+}
+
+<span class="hljs-keyword">type</span> MyConfig <span class="hljs-keyword">struct</span> {}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
+        proxywasm.SendHttpResponse(<span class="hljs-number">200</span>, <span class="hljs-literal">nil</span>, []<span class="hljs-keyword">byte</span>(<span class="hljs-string">"hello world"</span>), <span class="hljs-number">-1</span>)
+        <span class="hljs-keyword">return</span> types.ActionContinue
+}
+</code></pre>
+<p><a name="dSdLn"></a></p>
+<h2>在插件中请求外部服务</h2>
+<p>目前仅支持 http 调用，支持访问在网关控制台中设置了服务来源的 Nacos、K8s 服务，以及固定地址或 DNS 来源的服务。请注意，无法直接使用<code>net/http</code>库中的 HTTP client，必须使用如下例中封装的 HTTP client。<br />下面例子中，在配置解析阶段解析服务类型，生成对应的 HTTP client ；在请求头处理阶段根据配置的请求路径访问对应服务，解析应答头，然后再设置在原始的请求头中。</p>
+<pre><code class="language-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+	<span class="hljs-string">"errors"</span>
+	<span class="hljs-string">"net/http"</span>
+	<span class="hljs-string">"strings"</span>
+
+    <span class="hljs-string">"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"</span>
+	<span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"</span>
+	<span class="hljs-string">"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"</span>
+	<span class="hljs-string">"github.com/tidwall/gjson"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+	wrapper.SetCtx(
+		<span class="hljs-string">"http-call"</span>,
+		wrapper.ParseConfigBy(parseConfig),
+		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+	)
+}
+
+<span class="hljs-keyword">type</span> MyConfig <span class="hljs-keyword">struct</span> {
+	<span class="hljs-comment">// 用于发起HTTP调用client</span>
+	client      wrapper.HttpClient
+	<span class="hljs-comment">// 请求url</span>
+	requestPath <span class="hljs-keyword">string</span>
+	<span class="hljs-comment">// 根据这个key取出调用服务的应答头对应字段，再设置到原始请求的请求头，key为此配置项</span>
+	tokenHeader <span class="hljs-keyword">string</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseConfig</span><span class="hljs-params">(json gjson.Result, config *MyConfig, log wrapper.Log)</span> <span class="hljs-title">error</span></span> {
+	config.tokenHeader = json.Get(<span class="hljs-string">"tokenHeader"</span>).String()
+	<span class="hljs-keyword">if</span> config.tokenHeader == <span class="hljs-string">""</span> {
+		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">"missing tokenHeader in config"</span>)
+	}
+	config.requestPath = json.Get(<span class="hljs-string">"requestPath"</span>).String()
+	<span class="hljs-keyword">if</span> config.requestPath == <span class="hljs-string">""</span> {
+		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">"missing requestPath in config"</span>)
+	}
+	serviceSource := json.Get(<span class="hljs-string">"serviceSource"</span>).String()
+	<span class="hljs-comment">// 固定地址和dns类型的serviceName，为控制台中创建服务时指定</span>
+	<span class="hljs-comment">// nacos和k8s来源的serviceName，即服务注册时指定的原始名称</span>
+	serviceName := json.Get(<span class="hljs-string">"serviceName"</span>).String()
+	servicePort := json.Get(<span class="hljs-string">"servicePort"</span>).Int()
+	<span class="hljs-keyword">if</span> serviceName == <span class="hljs-string">""</span> || servicePort == <span class="hljs-number">0</span> {
+		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">"invalid service config"</span>)
+	}
+	<span class="hljs-keyword">switch</span> serviceSource {
+	<span class="hljs-keyword">case</span> <span class="hljs-string">"k8s"</span>:
+		namespace := json.Get(<span class="hljs-string">"namespace"</span>).String()
+		config.client = wrapper.NewClusterClient(wrapper.K8sCluster{
+			ServiceName: serviceName,
+			Namespace:   namespace,
+			Port:        servicePort,
+		})
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+	<span class="hljs-keyword">case</span> <span class="hljs-string">"nacos"</span>:
+		namespace := json.Get(<span class="hljs-string">"namespace"</span>).String()
+		config.client = wrapper.NewClusterClient(wrapper.NacosCluster{
+			ServiceName: serviceName,
+			NamespaceID: namespace,
+			Port:        servicePort,
+		})
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+	<span class="hljs-keyword">case</span> <span class="hljs-string">"ip"</span>:
+		config.client = wrapper.NewClusterClient(wrapper.StaticIpCluster{
+			ServiceName: serviceName,
+			Port:        servicePort,
+		})
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+	<span class="hljs-keyword">case</span> <span class="hljs-string">"dns"</span>:
+		domain := json.Get(<span class="hljs-string">"domain"</span>).String()
+		config.client = wrapper.NewClusterClient(wrapper.DnsCluster{
+			ServiceName: serviceName,
+			Port:        servicePort,
+			Domain:      domain,
+		})
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+	<span class="hljs-keyword">default</span>:
+		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">"unknown service source: "</span> + serviceSource)
+	}
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">onHttpRequestHeaders</span><span class="hljs-params">(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log)</span> <span class="hljs-title">types</span>.<span class="hljs-title">Action</span></span> {
+	<span class="hljs-comment">// 使用client的Get方法发起HTTP Get调用，此处省略了timeout参数，默认超时时间500毫秒</span>
+	config.client.Get(config.requestPath, <span class="hljs-literal">nil</span>,
+		<span class="hljs-comment">// 回调函数，将在响应异步返回时被执行</span>
+		<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(statusCode <span class="hljs-keyword">int</span>, responseHeaders http.Header, responseBody []<span class="hljs-keyword">byte</span>)</span></span> {
+			<span class="hljs-comment">// 请求没有返回200状态码，进行处理</span>
+			<span class="hljs-keyword">if</span> statusCode != http.StatusOK {
+				log.Errorf(<span class="hljs-string">"http call failed, status: %d"</span>, statusCode)
+				proxywasm.SendHttpResponse(http.StatusInternalServerError, <span class="hljs-literal">nil</span>,
+					[]<span class="hljs-keyword">byte</span>(<span class="hljs-string">"http call failed"</span>), <span class="hljs-number">-1</span>)
+				<span class="hljs-keyword">return</span>
+			}
+			<span class="hljs-comment">// 打印响应的HTTP状态码和应答body</span>
+			log.Infof(<span class="hljs-string">"get status: %d, response body: %s"</span>, statusCode, responseBody)
+			<span class="hljs-comment">// 从应答头中解析token字段设置到原始请求头中</span>
+			token := responseHeaders.Get(config.tokenHeader)
+			<span class="hljs-keyword">if</span> token != <span class="hljs-string">""</span> {
+				proxywasm.AddHttpRequestHeader(config.tokenHeader, token)
+			}
+			<span class="hljs-comment">// 恢复原始请求流程，继续往下处理，才能正常转发给后端服务</span>
+			proxywasm.ResumeHttpRequest()
+		})
+	<span class="hljs-comment">// 需要等待异步回调完成，返回Pause状态，可以被ResumeHttpRequest恢复</span>
+	<span class="hljs-keyword">return</span> types.ActionPause
+}
+</code></pre>
+</div></section><footer class="footer-container"><div class="footer-body"><img src="//img.alicdn.com/imgextra/i2/O1CN01oNTGgE1lfW7oEPIzP_!!6000000004846-2-tps-960-290.png"/><p class="docsite-power">website powered by docsite</p><div class="cols-container"><div class="col col-12"><h3>愿景</h3><p>为用户提供一站式云原生网关解决方案.</p></div><div class="col col-6"><dl><dt>文档</dt><dd><a href="/zh-cn/docs/overview/what-is-higress.html" target="_self">Higress 是什么？</a></dd><dd><a href="/zh-cn/docs/user/quickstart.html" target="_self">快速开始</a></dd><dd><a href="https://github.com/higress-group/higress-group.github.io/issues/new" target="_self">报告文档问题</a></dd><dd><a href="https://github.com/higress-group/higress-group.github.io" target="_self">在Github上编辑此文档</a></dd></dl></div><div class="col col-6"><dl><dt>资源</dt><dd><a href="/zh-cn/blog/index.html" target="_self">博客</a></dd><dd><a href="/zh-cn/community/index.html" target="_self">社区</a></dd></dl></div></div><div class="copyright"><span>Copyright © 2022 Higress</span></div><div class="record"><div><a target="_blank" href="http://idinfo.zjamr.zj.gov.cn/bscx.do?method=lzxx&amp;id=3301843301000000126540"><img src="https://img.alicdn.com/imgextra/i4/O1CN019fTXYL1tVSMxQUfXI_!!6000000005907-1-tps-65-70.gif" style="width:20px;height:20px;margin-right:8px"/></a></div><div style="margin-right:12px"><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002016922"><img src="https://img.alicdn.com/imgextra/i4/O1CN01Yy52TB1LzVPtZYepI_!!6000000001370-2-tps-20-20.png" style="width:20px;height:20px;margin:0"/><span>浙公网安备 33011002016922号</span></a></div><div><a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备12022327号-1119</a></div></div></div></footer></div></div>
+	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
+	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
+	<script src="//g.alicdn.com/alilog/mlog/aplus_v2.js" id="beacon-aplus" exparams="clog=o&aplus&sidx=aplusSidx&ckx=aplusCkx"></script>
+     <script src="//g.alicdn.com/aes/??tracker/1.0.34/index.js,tracker-plugin-pv/2.4.5/index.js,tracker-plugin-event/1.2.5/index.js,tracker-plugin-jserror/1.0.13/index.js,tracker-plugin-api/1.1.14/index.js,tracker-plugin-perf/1.1.8/index.js,tracker-plugin-eventTiming/1.0.4/index.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR"></script>
+    <script>
+		window.rootPath = '';
+    </script>
+	<script src="/build/documentation.js"></script>
+  <script src="https://g.alicdn.com/mamba/assets/0.0.13/mse-arc-ui.min.js"></script>
+	<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4debd66ec73a32e236b30b46d219e2e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+    window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YHS75WKFBR');
+    </script>
+</body>
+</html>

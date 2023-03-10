@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="Dubbo,discovery" />
+	<meta name="description" content="实现 Dubbo 服务发现和路由" />
+	<meta name="aes-config" content="pid=xux-opensource&user_type=101&uid=&username=&dim10=higress"/>
+	<!-- 网页标签标题 -->
+	<title>实现 Dubbo 服务发现和路由</title>
+  <link rel="shortcut icon" href="/img/higress_logo_small.jpg"/>
+	<link rel="stylesheet" href="/build/documentation.css" />
+  <link rel="stylesheet" href="https://g.alicdn.com/mamba/assets/0.0.13/mse-arc-ui.min.css" />
+</head>
+<body>
+	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="//img.alicdn.com/imgextra/i1/O1CN01I7WjVs1K33EQjInid_!!6000000001107-2-tps-960-290.png"/></a><div class="search search-normal"><span class="icon-search"></span></div><span class="language-switch language-switch-normal">En</span><div class="header-menu"><img class="header-menu-toggle" src="https://img.alicdn.com/tfs/TB14eEmw7P2gK0jSZPxXXacQpXa-38-32.png"/><ul><li class="menu-item menu-item-normal"><span><a href="/zh-cn/index.html">首页</a></span></li><li class="menu-item menu-item-normal menu-item-normal-active"><span><a href="/zh-cn/docs/overview/what-is-higress.html">文档</a></span></li><li class="menu-item menu-item-normal"><span><a href="/zh-cn/docs/developers/developers_dev.html">开发者</a></span></li><li class="menu-item menu-item-normal"><span><a href="/zh-cn/blog/index.html">博客</a></span></li><li class="menu-item menu-item-normal"><span><a href="/zh-cn/community/index.html">社区</a></span></li><li class="menu-item menu-item-normal"><span><a href="https://github.com/alibaba/higress/releases">下载</a></span></li><li class="menu-item menu-item-normal"><span><a href="http://demo.higress.io">控制台样例</a></span></li><li class="menu-item menu-item-normal"><span><a href="/en-us/index.html"> </a></span></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="https://img.alicdn.com/tfs/TB1cm8nJwDqK1RjSZSyXXaxEVXa-160-160.png" class="front-img"/><span>文档</span><img src="https://img.alicdn.com/tfs/TB1cm8nJwDqK1RjSZSyXXaxEVXa-160-160.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>概述</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/what-is-higress.html" target="_self">Higress 是什么？</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/roadmap.html" target="_self">Roadmap</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/faq.html" target="_self">FAQ</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/terminology.html" target="_self">术语表</a></li></ul></li><li class="menu-item menu-item-level-1"><span>用户指南</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/user/quickstart.html" target="_self">快速开始</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>最佳实践示例<img style="transform:rotate(-90deg)" class="menu-toggle" src="https://img.alicdn.com/tfs/TB15.Ilw2b2gK0jSZK9XXaEgFXa-26-16.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/wasm-go.html" target="_self">使用 GO 语言开发 WASM 插件</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/kruise-rollout.html" target="_self">通过 OpenKruise Rollout 实现灰度发布</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/nacos-route.html" target="_self">配置 Ingress 转发给注册在 Nacos 的服务</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/spring-cloud.html" target="_self">实现 SpringCloud 服务发现和路由</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/dubbo.html" target="_self">实现 Dubbo 服务发现和路由</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>文档陆续增加中...<img style="transform:rotate(-90deg)" class="menu-toggle" src="https://img.alicdn.com/tfs/TB15.Ilw2b2gK0jSZK9XXaEgFXa-26-16.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/prometheus.html" target="_self">基于 Prometheus 实现入口流量观测</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/opensergo-gray.html" target="_self">对接 OpenSergo 实现全链路灰度</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/sentinel.html" target="_self">基于 Sentinel 实现入口熔断限流</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/waf.html" target="_self">开启 WAF 防护的最佳实践</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>参考手册<img style="transform:rotate(-90deg)" class="menu-toggle" src="https://img.alicdn.com/tfs/TB15.Ilw2b2gK0jSZK9XXaEgFXa-26-16.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/annotation.html" target="_self">Ingress Annotaion 配置说明</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/configurations.html" target="_self">运维参数配置说明</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/mcp-bridge.html" target="_self">Mcp Brdige 配置说明</a></li></ul></li></ul></li><li class="menu-item menu-item-level-1"><span>运维指南</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/ops/deploy-by-helm.html" target="_self">安装部署</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/ops/upgrade.html" target="_self">版本升级</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/ops/log.html" target="_self">日志说明</a></li></ul></li><li class="menu-item menu-item-level-1"><span>开发者指南</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/dev/code.html" target="_self">源码阅读指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/dev/architecture.html" target="_self">组件编译说明</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>实现 Dubbo 服务发现和路由</h1>
+<p>Higress提供了从HTTP协议到Dubbo协议进行转换的功能，用户通过配置协议转换，可以将一个Dubbo服务以HTTP接口暴露出来，从而用HTTP请求实现对Dubbo接口的调用。本文将通过示例来介绍如何用Higress配置HTTP到Dubbo的协议转换。</p>
+<h2>前提条件</h2>
+<p>Higress目前支持的Dubbo框架的版本为2.x。若您使用Dubbo3.0，要求使用dubbo协议（目前暂不支持Triple协议）。</p>
+<hr>
+<p>假设我们有如下一个Dubbo服务，并指定了该服务的version为“1.0.0”，group为“dev”，下面我们将介绍如何为该服务配置协议转换。</p>
+<pre><code class="language-java"><span class="hljs-keyword">package</span> com.alibaba.nacos.example.dubbo.service;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">DemoService</span> </span>{
+    <span class="hljs-function">String <span class="hljs-title">sayName</span><span class="hljs-params">(String name)</span></span>;
+}
+</code></pre>
+<h2>为Dubbo服务配置路由</h2>
+<h3>方法一：通过Dubbo服务的Ip和port实现Dubbo服务发现和路由</h3>
+<ol>
+<li>创建以下ServiceEntry资源，其中指定了Dubbo服务的Ip与端口号：</li>
+</ol>
+<pre><code class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.istio.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">ServiceEntry</span>
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> <span class="hljs-string">dubbo</span>
+<span class="hljs-attr">  namespace:</span> <span class="hljs-string">higress-system</span>
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  endpoints:</span>
+  <span class="hljs-comment"># 此处更换为自己dubbo服务的ip</span>
+<span class="hljs-attr">  - address:</span> <span class="hljs-string">xxx.xxx.xxx.xxx</span>
+<span class="hljs-attr">    ports:</span>
+<span class="hljs-attr">      http:</span> <span class="hljs-number">20880</span>
+<span class="hljs-attr">  hosts:</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">dubbo.static</span>
+<span class="hljs-attr">  location:</span> <span class="hljs-string">MESH_EXTERNAL</span>
+<span class="hljs-attr">  ports:</span>
+<span class="hljs-attr">  - name:</span> <span class="hljs-string">http</span>
+<span class="hljs-attr">    number:</span> <span class="hljs-number">20880</span>
+<span class="hljs-attr">    protocol:</span> <span class="hljs-string">HTTP</span>
+<span class="hljs-attr">  resolution:</span> <span class="hljs-string">STATIC</span>
+</code></pre>
+<ol start="2">
+<li>创建以下VirtualService资源，为Dubbo服务创建一条名为test的路由</li>
+</ol>
+<pre><code class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.istio.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">VirtualService</span>
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> <span class="hljs-string">global</span>
+<span class="hljs-attr">  namespace:</span> <span class="hljs-string">higress-system</span>
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  gateways:</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">higress-system/global</span>
+<span class="hljs-attr">  hosts:</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">'*'</span>
+<span class="hljs-attr">  http:</span>
+<span class="hljs-attr">  - match:</span>
+<span class="hljs-attr">    - ignoreUriCase:</span> <span class="hljs-literal">false</span>
+<span class="hljs-attr">      uri:</span>
+<span class="hljs-attr">        prefix:</span> <span class="hljs-string">/dubbo</span>
+<span class="hljs-attr">    name:</span> <span class="hljs-string">test</span>
+<span class="hljs-attr">    route:</span>
+<span class="hljs-attr">    - destination:</span>
+<span class="hljs-attr">        host:</span> <span class="hljs-string">dubbo.static</span>
+<span class="hljs-attr">        port:</span>
+<span class="hljs-attr">          number:</span> <span class="hljs-number">20880</span>
+</code></pre>
+<h3>方法二：通过对接Nacos/Zookeeper注册中心实现Dubbo服务发现和路由</h3>
+<p>TBD</p>
+<h2>通过EnvoyFilter配置HTTP到Dubbo协议转换规则</h2>
+<p>在为Dubbo服务创建了路由之后，需要配置具体的协议转换规则。Higress通过Envoy的HTTP Filter实现从HTTP协议到Dubbo协议的转换，本示例通过创建如下EnvoyFilter资源来对协议转换规则进行配置。</p>
+<pre><code class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.istio.io/v1alpha3</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">EnvoyFilter</span>
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> <span class="hljs-string">http-dubbo-transcoder-test</span>
+<span class="hljs-attr">  namespace:</span> <span class="hljs-string">higress-system</span>
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  configPatches:</span>
+<span class="hljs-attr">  - applyTo:</span> <span class="hljs-string">HTTP_FILTER</span>
+<span class="hljs-attr">    match:</span>
+<span class="hljs-attr">      context:</span> <span class="hljs-string">GATEWAY</span>
+<span class="hljs-attr">      listener:</span>
+<span class="hljs-attr">        filterChain:</span>
+<span class="hljs-attr">          filter:</span>
+<span class="hljs-attr">            name:</span> <span class="hljs-string">envoy.filters.network.http_connection_manager</span>
+<span class="hljs-attr">            subFilter:</span>
+<span class="hljs-attr">              name:</span> <span class="hljs-string">envoy.filters.http.router</span>
+<span class="hljs-attr">    patch:</span>
+<span class="hljs-attr">      operation:</span> <span class="hljs-string">INSERT_BEFORE</span>
+<span class="hljs-attr">      value:</span>
+<span class="hljs-attr">        name:</span> <span class="hljs-string">envoy.filters.http.http_dubbo_transcoder</span>
+<span class="hljs-attr">        typed_config:</span>
+          <span class="hljs-string">'@type'</span><span class="hljs-string">:</span> <span class="hljs-string">type.googleapis.com/udpa.type.v1.TypedStruct</span>
+<span class="hljs-attr">          type_url:</span> <span class="hljs-string">type.googleapis.com/envoy.extensions.filters.http.http_dubbo_transcoder.v3.HttpDubboTranscoder</span>
+<span class="hljs-attr">  - applyTo:</span> <span class="hljs-string">HTTP_ROUTE</span>
+<span class="hljs-attr">    match:</span>
+<span class="hljs-attr">      context:</span> <span class="hljs-string">GATEWAY</span>
+<span class="hljs-attr">      routeConfiguration:</span>
+<span class="hljs-attr">        vhost:</span>
+<span class="hljs-attr">          route:</span>
+<span class="hljs-attr">            name:</span> <span class="hljs-string">test</span>
+<span class="hljs-attr">    patch:</span>
+<span class="hljs-attr">      operation:</span> <span class="hljs-string">MERGE</span>
+<span class="hljs-attr">      value:</span>
+<span class="hljs-attr">        route:</span>
+<span class="hljs-attr">          upgrade_configs:</span>
+<span class="hljs-attr">          - connect_config:</span>
+<span class="hljs-attr">              allow_post:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">            upgrade_type:</span> <span class="hljs-string">CONNECT</span>
+<span class="hljs-attr">        typed_per_filter_config:</span>
+          <span class="hljs-string">envoy.filters.http.http_dubbo_transcoder:</span>
+            <span class="hljs-string">'@type'</span><span class="hljs-string">:</span> <span class="hljs-string">type.googleapis.com/udpa.type.v1.TypedStruct</span>
+<span class="hljs-attr">            type_url:</span> <span class="hljs-string">type.googleapis.com/envoy.extensions.filters.http.http_dubbo_transcoder.v3.HttpDubboTranscoder</span>
+<span class="hljs-attr">            value:</span>
+<span class="hljs-attr">              request_validation_options:</span>
+<span class="hljs-attr">                reject_unknown_method:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">                reject_unknown_query_parameters:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">              services_mapping:</span>
+<span class="hljs-attr">              - group:</span> <span class="hljs-string">dev</span>
+<span class="hljs-attr">                method_mapping:</span>
+<span class="hljs-attr">                - name:</span> <span class="hljs-string">sayName</span>
+<span class="hljs-attr">                  parameter_mapping:</span>
+<span class="hljs-attr">                  - extract_key:</span> <span class="hljs-string">p</span>
+<span class="hljs-attr">                    extract_key_spec:</span> <span class="hljs-string">ALL_QUERY_PARAMETER</span>
+<span class="hljs-attr">                    mapping_type:</span> <span class="hljs-string">java.lang.String</span>
+<span class="hljs-attr">                  passthrough_setting:</span>
+<span class="hljs-attr">                    passthrough_all_headers:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">                  path_matcher:</span>
+<span class="hljs-attr">                    match_http_method_spec:</span> <span class="hljs-string">ALL_GET</span>
+<span class="hljs-attr">                    match_pattern:</span> <span class="hljs-string">/dubbo/hello</span>
+<span class="hljs-attr">                name:</span> <span class="hljs-string">com.alibaba.nacos.example.dubbo.service.DemoService</span>
+<span class="hljs-attr">                version:</span> <span class="hljs-number">1.0</span><span class="hljs-number">.0</span>
+<span class="hljs-attr">              url_unescape_spec:</span> <span class="hljs-string">ALL_CHARACTERS_EXCEPT_RESERVED</span>
+<span class="hljs-attr">  - applyTo:</span> <span class="hljs-string">CLUSTER</span>
+<span class="hljs-attr">    match:</span>
+<span class="hljs-attr">      cluster:</span>
+<span class="hljs-attr">        service:</span> <span class="hljs-string">dubbo.static</span>
+<span class="hljs-attr">      context:</span> <span class="hljs-string">GATEWAY</span>
+<span class="hljs-attr">    patch:</span>
+<span class="hljs-attr">      operation:</span> <span class="hljs-string">MERGE</span>
+<span class="hljs-attr">      value:</span>
+<span class="hljs-attr">        upstream_config:</span>
+<span class="hljs-attr">          name:</span> <span class="hljs-string">envoy.upstreams.http.dubbo_tcp</span>
+<span class="hljs-attr">          typed_config:</span>
+            <span class="hljs-string">'@type'</span><span class="hljs-string">:</span> <span class="hljs-string">type.googleapis.com/udpa.type.v1.TypedStruct</span>
+<span class="hljs-attr">            type_url:</span> <span class="hljs-string">type.googleapis.com/envoy.extensions.upstreams.http.dubbo_tcp.v3.DubboTcpConnectionPoolProto</span>
+</code></pre>
+<h2>通过HTTP请求调用Dubbo服务</h2>
+<p>完成以上配置后，通过curl命令调用sayName方法进行验证：</p>
+<pre><code class="language-bash">curl <span class="hljs-string">"localhost/dubbo/hello?p=higress"</span> 
+{<span class="hljs-string">"result"</span>:<span class="hljs-string">"Service [name :demoService , port : 20880] sayName(\"higress\") : Hello,higress"</span>}
+</code></pre>
+<h2>Filter配置参考</h2>
+<h3>HttpDubboTranscoder</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url_unescape_spec</td>
+<td>enum</td>
+<td>URL unescaping policy</td>
+<td>可选值：<br> - ALL_CHARACTERS_EXCEPT_RESERVED<br>- ALL_CHARACTERS_EXCEPT_SLASH<br>- ALL_CHARACTERS</td>
+</tr>
+<tr>
+<td>request_validation_options</td>
+<td>RequestValidateOptions</td>
+<td>请求验证选项</td>
+<td></td>
+</tr>
+<tr>
+<td>services_mapping</td>
+<td>list of DubboServiceMapping</td>
+<td>每一项对应了一条映射规则</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>HttpDubboTranscoder.RequestValidateOptions</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reject_unknown_query_parameters</td>
+<td>bool</td>
+<td>对于无法成功映射query parameters的请求是否直接拒绝</td>
+</tr>
+<tr>
+<td>reject_unknown_method</td>
+<td>bool</td>
+<td>对于无法映射为dubbo服务的请求是否直接拒绝</td>
+</tr>
+</tbody>
+</table>
+<h3>HttpDubboTranscoder.DubboServiceMapping</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>dubbo服务名</td>
+<td>例如：&quot;com.alibaba.nacos.example.dubbo.service.DemoService&quot;</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>dubbo服务的版本</td>
+<td>例如：&quot;1.0.0&quot;</td>
+</tr>
+<tr>
+<td>group</td>
+<td>string</td>
+<td>dubbo服务的分组</td>
+<td>例如：&quot;dev&quot;</td>
+</tr>
+<tr>
+<td>method_mapping</td>
+<td>list of DubboMethodMapping</td>
+<td>每一项对应了指定dubbo服务中的某个方法的映射规则</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>HttpDubboTranscoder.DubboMethodMapping</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>方法名</td>
+<td>例：&quot;sayName&quot;</td>
+</tr>
+<tr>
+<td>path_matcher</td>
+<td>PathMatcher</td>
+<td>方法匹配规则</td>
+<td></td>
+</tr>
+<tr>
+<td>parameter_mapping</td>
+<td>lis of ParameterMapping</td>
+<td>每一项对应一个参数映射规则</td>
+<td></td>
+</tr>
+<tr>
+<td>passthrough_setting</td>
+<td>PassthroughSetting</td>
+<td>指定Header透传规则</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>HttpDubboTranscoder.DubboMethodMapping.PathMatcher</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>match_pattern</td>
+<td>string</td>
+<td>方法的匹配路径｜例如：&quot;/dubbo/hello&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>match_http_method_spec</td>
+<td>enum</td>
+<td>方法匹配的HTTP Method</td>
+<td>可选值：<br>-ALL_GET<br>- ALL_POST<br>- ALL_PUT<br>- ALL_DELETE<br>- ALL_PATCH</td>
+</tr>
+</tbody>
+</table>
+<h3>HttpDubboTranscoder.DubboMethodMapping.ParameterMapping</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>extract_key_spec</td>
+<td>enum</td>
+<td>参数提取位置</td>
+<td>可选值：<br>- ALL_QUERY_PARAMETER<br>- ALL_HEADER<br>- ALL_PATH<br>- ALL_BODY</td>
+</tr>
+<tr>
+<td>extract_key</td>
+<td>string</td>
+<td>参数提取的key</td>
+<td>例：my_param</td>
+</tr>
+<tr>
+<td>mapping_type</td>
+<td>string</td>
+<td>参数在dubbo服务中的类型</td>
+<td>例：&quot;java.lang.String&quot;</td>
+</tr>
+</tbody>
+</table>
+<h3>HttpDubboTranscoder.DubboMethodMapping.PassthroughSetting</h3>
+<p>配置HTTP Header透传规则，被透传的Header会被放在Dubbo调用的attachment中传给dubbo服务</p>
+<p>注：Header的透传规则，此项配置为one of类型，下面两个字段选其一</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>passthrough_all_headers</td>
+<td>bool</td>
+<td>透传所有Header</td>
+</tr>
+<tr>
+<td>passthrough_headers</td>
+<td>list of string</td>
+<td>透传指定Header，每一项指定了Header中的一个key</td>
+</tr>
+</tbody>
+</table>
+</div></section><footer class="footer-container"><div class="footer-body"><img src="//img.alicdn.com/imgextra/i2/O1CN01oNTGgE1lfW7oEPIzP_!!6000000004846-2-tps-960-290.png"/><p class="docsite-power">website powered by docsite</p><div class="cols-container"><div class="col col-12"><h3>愿景</h3><p>为用户提供一站式云原生网关解决方案.</p></div><div class="col col-6"><dl><dt>文档</dt><dd><a href="/zh-cn/docs/overview/what-is-higress.html" target="_self">Higress 是什么？</a></dd><dd><a href="/zh-cn/docs/user/quickstart.html" target="_self">快速开始</a></dd><dd><a href="https://github.com/higress-group/higress-group.github.io/issues/new" target="_self">报告文档问题</a></dd><dd><a href="https://github.com/higress-group/higress-group.github.io" target="_self">在Github上编辑此文档</a></dd></dl></div><div class="col col-6"><dl><dt>资源</dt><dd><a href="/zh-cn/blog/index.html" target="_self">博客</a></dd><dd><a href="/zh-cn/community/index.html" target="_self">社区</a></dd></dl></div></div><div class="copyright"><span>Copyright © 2022 Higress</span></div><div class="record"><div><a target="_blank" href="http://idinfo.zjamr.zj.gov.cn/bscx.do?method=lzxx&amp;id=3301843301000000126540"><img src="https://img.alicdn.com/imgextra/i4/O1CN019fTXYL1tVSMxQUfXI_!!6000000005907-1-tps-65-70.gif" style="width:20px;height:20px;margin-right:8px"/></a></div><div style="margin-right:12px"><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002016922"><img src="https://img.alicdn.com/imgextra/i4/O1CN01Yy52TB1LzVPtZYepI_!!6000000001370-2-tps-20-20.png" style="width:20px;height:20px;margin:0"/><span>浙公网安备 33011002016922号</span></a></div><div><a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备12022327号-1119</a></div></div></div></footer></div></div>
+	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
+	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
+	<script src="//g.alicdn.com/alilog/mlog/aplus_v2.js" id="beacon-aplus" exparams="clog=o&aplus&sidx=aplusSidx&ckx=aplusCkx"></script>
+     <script src="//g.alicdn.com/aes/??tracker/1.0.34/index.js,tracker-plugin-pv/2.4.5/index.js,tracker-plugin-event/1.2.5/index.js,tracker-plugin-jserror/1.0.13/index.js,tracker-plugin-api/1.1.14/index.js,tracker-plugin-perf/1.1.8/index.js,tracker-plugin-eventTiming/1.0.4/index.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR"></script>
+    <script>
+		window.rootPath = '';
+    </script>
+	<script src="/build/documentation.js"></script>
+  <script src="https://g.alicdn.com/mamba/assets/0.0.13/mse-arc-ui.min.js"></script>
+	<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4debd66ec73a32e236b30b46d219e2e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+    window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YHS75WKFBR');
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="higress,coding" />
+	<meta name="description" content="Higress 源码阅读指引." />
+	<meta name="aes-config" content="pid=xux-opensource&user_type=101&uid=&username=&dim10=higress"/>
+	<!-- 网页标签标题 -->
+	<title>源码阅读指引</title>
+  <link rel="shortcut icon" href="/img/higress_logo_small.jpg"/>
+	<link rel="stylesheet" href="/build/documentation.css" />
+  <link rel="stylesheet" href="https://g.alicdn.com/mamba/assets/0.0.13/mse-arc-ui.min.css" />
+</head>
+<body>
+	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="//img.alicdn.com/imgextra/i1/O1CN01I7WjVs1K33EQjInid_!!6000000001107-2-tps-960-290.png"/></a><div class="search search-normal"><span class="icon-search"></span></div><span class="language-switch language-switch-normal">En</span><div class="header-menu"><img class="header-menu-toggle" src="https://img.alicdn.com/tfs/TB14eEmw7P2gK0jSZPxXXacQpXa-38-32.png"/><ul><li class="menu-item menu-item-normal"><span><a href="/zh-cn/index.html">首页</a></span></li><li class="menu-item menu-item-normal menu-item-normal-active"><span><a href="/zh-cn/docs/overview/what-is-higress.html">文档</a></span></li><li class="menu-item menu-item-normal"><span><a href="/zh-cn/docs/developers/developers_dev.html">开发者</a></span></li><li class="menu-item menu-item-normal"><span><a href="/zh-cn/blog/index.html">博客</a></span></li><li class="menu-item menu-item-normal"><span><a href="/zh-cn/community/index.html">社区</a></span></li><li class="menu-item menu-item-normal"><span><a href="https://github.com/alibaba/higress/releases">下载</a></span></li><li class="menu-item menu-item-normal"><span><a href="http://demo.higress.io">控制台样例</a></span></li><li class="menu-item menu-item-normal"><span><a href="/en-us/index.html"> </a></span></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="https://img.alicdn.com/tfs/TB1cm8nJwDqK1RjSZSyXXaxEVXa-160-160.png" class="front-img"/><span>文档</span><img src="https://img.alicdn.com/tfs/TB1cm8nJwDqK1RjSZSyXXaxEVXa-160-160.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>概述</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/what-is-higress.html" target="_self">Higress 是什么？</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/roadmap.html" target="_self">Roadmap</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/faq.html" target="_self">FAQ</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/overview/terminology.html" target="_self">术语表</a></li></ul></li><li class="menu-item menu-item-level-1"><span>用户指南</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/user/quickstart.html" target="_self">快速开始</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>最佳实践示例<img style="transform:rotate(-90deg)" class="menu-toggle" src="https://img.alicdn.com/tfs/TB15.Ilw2b2gK0jSZK9XXaEgFXa-26-16.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/wasm-go.html" target="_self">使用 GO 语言开发 WASM 插件</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/kruise-rollout.html" target="_self">通过 OpenKruise Rollout 实现灰度发布</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/nacos-route.html" target="_self">配置 Ingress 转发给注册在 Nacos 的服务</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/spring-cloud.html" target="_self">实现 SpringCloud 服务发现和路由</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/dubbo.html" target="_self">实现 Dubbo 服务发现和路由</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>文档陆续增加中...<img style="transform:rotate(-90deg)" class="menu-toggle" src="https://img.alicdn.com/tfs/TB15.Ilw2b2gK0jSZK9XXaEgFXa-26-16.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/prometheus.html" target="_self">基于 Prometheus 实现入口流量观测</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/opensergo-gray.html" target="_self">对接 OpenSergo 实现全链路灰度</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/sentinel.html" target="_self">基于 Sentinel 实现入口熔断限流</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/waf.html" target="_self">开启 WAF 防护的最佳实践</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>参考手册<img style="transform:rotate(-90deg)" class="menu-toggle" src="https://img.alicdn.com/tfs/TB15.Ilw2b2gK0jSZK9XXaEgFXa-26-16.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/annotation.html" target="_self">Ingress Annotaion 配置说明</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/configurations.html" target="_self">运维参数配置说明</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/user/mcp-bridge.html" target="_self">Mcp Brdige 配置说明</a></li></ul></li></ul></li><li class="menu-item menu-item-level-1"><span>运维指南</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/ops/deploy-by-helm.html" target="_self">安装部署</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/ops/upgrade.html" target="_self">版本升级</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/ops/log.html" target="_self">日志说明</a></li></ul></li><li class="menu-item menu-item-level-1"><span>开发者指南</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/dev/code.html" target="_self">源码阅读指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/dev/architecture.html" target="_self">组件编译说明</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>源码阅读指引</h1>
+<p>如果您想给 Higress 贡献代码，请参考<a href="../developers/guide_dev.md">参与贡献</a></p>
+<p>代码目录结构说明</p>
+<ul>
+<li>
+<p>cmd: 命令行参数解析等处理代码</p>
+</li>
+<li>
+<p>pkg/ingress: Ingress 资源转换为 Istio 资源等相关代码</p>
+</li>
+<li>
+<p>pkg/bootstrap: 包括启动 gRPC/xDS/HTTP server 等的代码</p>
+</li>
+<li>
+<p>registry: 实现对接多种注册中心进行服务发现的代码</p>
+</li>
+<li>
+<p>envoy: 依赖的 envoy 官方仓库 commit，以及对应的补丁代码</p>
+</li>
+<li>
+<p>istio: 依赖的 istio 官方仓库 commit，以及对应的补丁代码</p>
+</li>
+<li>
+<p>plugins: Higress 插件 sdk，以及官方内置插件代码</p>
+</li>
+<li>
+<p>script: 编译相关脚本</p>
+</li>
+<li>
+<p>docker: docker 镜像构建相关脚本</p>
+</li>
+</ul>
+<p>在编译过程中会自动执行<code>make prebuild</code>，将产生 <code>external</code> 目录，这是将用到的 envoy 和 istio 依赖，打上对应的补丁代码后生成。</p>
+<p>如果要修改 envoy 和 istio 代码，并产生新的补丁文件，可以直接在 external 目录下修改，并进行重命名，再执行 prebuild，之后对比生成补丁文件，例如:</p>
+<pre><code class="language-bash">mv external/envoy external/envoy_new
+make prebuild
+diff -Naur external/envoy external/envoy_new &gt; envoy/1.20/patches/envoy/$(date +%Y%m%d)-what-changed.patch
+</code></pre>
+<p>注意补丁执行顺序按照文件名字符顺序，请以时间戳开头</p>
+</div></section><footer class="footer-container"><div class="footer-body"><img src="//img.alicdn.com/imgextra/i2/O1CN01oNTGgE1lfW7oEPIzP_!!6000000004846-2-tps-960-290.png"/><p class="docsite-power">website powered by docsite</p><div class="cols-container"><div class="col col-12"><h3>愿景</h3><p>为用户提供一站式云原生网关解决方案.</p></div><div class="col col-6"><dl><dt>文档</dt><dd><a href="/zh-cn/docs/overview/what-is-higress.html" target="_self">Higress 是什么？</a></dd><dd><a href="/zh-cn/docs/user/quickstart.html" target="_self">快速开始</a></dd><dd><a href="https://github.com/higress-group/higress-group.github.io/issues/new" target="_self">报告文档问题</a></dd><dd><a href="https://github.com/higress-group/higress-group.github.io" target="_self">在Github上编辑此文档</a></dd></dl></div><div class="col col-6"><dl><dt>资源</dt><dd><a href="/zh-cn/blog/index.html" target="_self">博客</a></dd><dd><a href="/zh-cn/community/index.html" target="_self">社区</a></dd></dl></div></div><div class="copyright"><span>Copyright © 2022 Higress</span></div><div class="record"><div><a target="_blank" href="http://idinfo.zjamr.zj.gov.cn/bscx.do?method=lzxx&amp;id=3301843301000000126540"><img src="https://img.alicdn.com/imgextra/i4/O1CN019fTXYL1tVSMxQUfXI_!!6000000005907-1-tps-65-70.gif" style="width:20px;height:20px;margin-right:8px"/></a></div><div style="margin-right:12px"><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002016922"><img src="https://img.alicdn.com/imgextra/i4/O1CN01Yy52TB1LzVPtZYepI_!!6000000001370-2-tps-20-20.png" style="width:20px;height:20px;margin:0"/><span>浙公网安备 33011002016922号</span></a></div><div><a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备12022327号-1119</a></div></div></div></footer></div></div>
+	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
+	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
+	<script src="//g.alicdn.com/alilog/mlog/aplus_v2.js" id="beacon-aplus" exparams="clog=o&aplus&sidx=aplusSidx&ckx=aplusCkx"></script>
+     <script src="//g.alicdn.com/aes/??tracker/1.0.34/index.js,tracker-plugin-pv/2.4.5/index.js,tracker-plugin-event/1.2.5/index.js,tracker-plugin-jserror/1.0.13/index.js,tracker-plugin-api/1.1.14/index.js,tracker-plugin-perf/1.1.8/index.js,tracker-plugin-eventTiming/1.0.4/index.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR"></script>
+    <script>
+		window.rootPath = '';
+    </script>
+	<script src="/build/documentation.js"></script>
+  <script src="https://g.alicdn.com/mamba/assets/0.0.13/mse-arc-ui.min.js"></script>
+	<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4debd66ec73a32e236b30b46d219e2e3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+    window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YHS75WKFBR');
+    </script>
+</body>
+</html>
