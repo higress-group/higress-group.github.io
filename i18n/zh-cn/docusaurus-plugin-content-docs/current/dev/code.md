@@ -2,7 +2,7 @@
 title: 源码阅读指引
 keywords: [higress,coding]
 description: Higress 源码阅读指引.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/dev/code.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/dev/code.md
 ---
 
 # 源码阅读指引

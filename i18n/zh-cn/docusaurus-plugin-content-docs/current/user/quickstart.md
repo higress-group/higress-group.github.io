@@ -2,7 +2,7 @@
 title: 快速开始
 keywords: [Higress]
 description: Higress 快速开始.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/quickstart.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/quickstart.md
 ---
 
 # 快速开始

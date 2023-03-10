@@ -2,7 +2,7 @@
 title: 如何汇报安全漏洞
 keywords: [Higress]
 description: Higress在消除其软件项目中的安全性问题方面采取严格的立场，对与其功能和特性有关的问题非常敏感并很快提出。
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/contributor-guide/reporting-security-issues_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/contributor-guide/reporting-security-issues_dev.md
 ---
 
 # 报告安全问题

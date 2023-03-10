@@ -2,7 +2,7 @@
 title: Code Reading Instructions
 keywords: [higress,coding]
 description: Higress Code Reading Instructions
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/dev/code.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/dev/code.md
 ---
 
 # Code Reading Instructions
