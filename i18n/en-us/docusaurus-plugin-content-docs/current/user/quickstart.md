@@ -2,7 +2,7 @@
 title: Quick Start
 keywords: [Higress]
 description: Quick Start.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/quickstart.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/quickstart.md
 ---
 
 # Quick Start

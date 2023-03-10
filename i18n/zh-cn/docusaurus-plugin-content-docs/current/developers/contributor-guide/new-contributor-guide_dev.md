@@ -2,7 +2,7 @@
 title: 新贡献者向导
 keywords: [Higress]
 description: 这篇向导旨在给正在准备向 Higress 提交贡献的新手提供指导。
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/contributor-guide/new-contributor-guide_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/contributor-guide/new-contributor-guide_dev.md
 ---
 
 # 新贡献者向导

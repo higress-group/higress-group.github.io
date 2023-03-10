@@ -42,7 +42,7 @@ Kruise Rollout 是阿里云开源的云原生应用自动化管理套件 OpenKru
 ```
 helm install kruise-rollout openkruise/kruise-rollout --version 0.3.0-rc.0
 ```
-3. 安装kubectl-kruise命令行工具，请参阅[安装kubectl-kruise](https://github.com/openkruise/kruise-tools/blob/master/README.md)
+3. 安装kubectl-kruise命令行工具，请参阅[安装kubectl-kruise](https://github.com/openkruise/kruise-tools/blob/main/README.md)
 
 
 ### 金丝雀发布
