@@ -83,6 +83,16 @@ export PATH=$PATH:/usr/local/bin
 <a name="u83FM"></a>
 ## 1. Initialize the project
 
+You can create your wasm-go plugin directory in the repo [higress](https://github.com/alibaba/higress)'s [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
+that you can use the scaffolding tools provided in this directory（see 1.1）；
+or create a new directory for your Go project yourself(see 1.2).
+If you are developing wasm-go plugins for the first time, it is recommended to take the former.
+
+### 1.1 create wasm-go plugin in [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
+1. `git clone https://github.com/alibaba/higress.git`, to clone project to local；
+2. `cd plugins/wasm-go; mkdir wasm-demo-go`, to go to the project's plugins/wasm-go directory and create the wasm-demo-go directory.
+
+### 1.2 create a new project yourself
 1. Create a new folder for the project. For example: `wasm-demo-go`.
 2. Execute following commands in the new folder to initialize the Go project:
 ```bash
@@ -197,6 +207,25 @@ In the sample above, `proxywasm.AddHttpRequestHeader` and `proxywasm.SendHttpRes
 
 <a name="GAa0T"></a>
 ## 3. Build WASM file
+If your project directory is in the [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) directory
+See 3.1; if you are using a self-initialized directory, see 3.2.
+
+### 3.1 Building wasm-go plugin image with scaffolding
+The wasm-go plugin can be built quickly with the following command:
+
+```bash
+$ PLUGIN_NAME=wasm-demo-go make build
+... ...
+image:            wasm-demo-go:20230223-173305-3b1a471
+output wasm file: extensions/wasm-demo-go/plugin.wasm
+```
+
+This command eventually builds a wasm file and a Docker image.
+This local wasm file is exported to the specified plugin's directory and can be used directly for local debugging.
+You can also use `make build-push` to build and push the image together.
+See [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) for more.
+
+### 3.2 Compile wasm files locally
 Execute the following command:
 ```bash
 tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
