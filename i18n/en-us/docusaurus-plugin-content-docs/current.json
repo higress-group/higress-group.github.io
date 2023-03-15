@@ -32,15 +32,15 @@
     "description": "The label for category Developer Guide in sidebar docs"
   },
   "sidebar.developers.category.developer": {
-    "message": "developer",
+    "message": "Developer",
     "description": "The label for category developer in sidebar developers"
   },
   "sidebar.developers.category.developer guide": {
-    "message": "developer guide",
+    "message": "Developer Guide",
     "description": "The label for category developer guide in sidebar developers"
   },
   "sidebar.developers.category.committer guide": {
-    "message": "committer guide",
+    "message": "Committer Guide",
     "description": "The label for category committer guide in sidebar developers"
   }
 }
