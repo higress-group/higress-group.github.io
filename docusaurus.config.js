@@ -214,7 +214,7 @@ const config = {
           width: 120,
           height: 36,
         },
-        copyright: `Copyright © ${new Date().getFullYear()} Copyright © 2022 Higress <br />sasa`,
+        copyright: `Copyright © ${new Date().getFullYear()} Higress<br/>浙公网安备 33011002016922号 浙ICP备12022327号-1119`,
       },
       docs: {
         sidebar: {
