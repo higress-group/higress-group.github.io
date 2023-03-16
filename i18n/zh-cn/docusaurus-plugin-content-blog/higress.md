@@ -4,7 +4,7 @@ keywords: [higress]
 description: 介绍Higress的诞生背景与发展历程
 author: gengleilei
 date: 2022-11-04
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-blog/higress.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/higress.md
 ---
 
 # 阿里巴巴重磅开源云原生网关: Higress

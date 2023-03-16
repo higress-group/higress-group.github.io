@@ -41,7 +41,7 @@ const config = {
     },
   },
   scripts: [
-    { src: '//g.alicdn.com/mamba/assets/0.0.14/mse-arc-ui.min.js' },
+    { src: '//g.alicdn.com/mamba/assets/0.0.15/mse-arc-ui.min.js' },
     {
       src: '//g.alicdn.com/alilog/mlog/aplus_v2.js',
       id: 'beacon-aplus',
@@ -58,7 +58,7 @@ const config = {
   ],
   stylesheets: [
     {
-      href: '//g.alicdn.com/mamba/assets/0.0.14/mse-arc-ui.min.css',
+      href: '//g.alicdn.com/mamba/assets/0.0.15/mse-arc-ui.min.css',
     },
   ],
   plugins: ['docusaurus-plugin-sass'],
@@ -214,7 +214,7 @@ const config = {
           width: 120,
           height: 36,
         },
-        copyright: `Copyright © ${new Date().getFullYear()} Copyright © 2022 Higress <br />sasa`,
+        copyright: `Copyright © ${new Date().getFullYear()} Higress<br/>浙公网安备 33011002016922号 浙ICP备12022327号-1119`,
       },
       docs: {
         sidebar: {

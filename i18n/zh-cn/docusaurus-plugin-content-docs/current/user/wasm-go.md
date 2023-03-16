@@ -2,7 +2,7 @@
 title: 使用 GO 语言开发 WASM 插件
 keywords: [wasm]
 description: 使用 GO 语言开发 WASM 插件
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/wasm-go.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/wasm-go.md
 ---
 
 # 使用 GO 语言开发 WASM 插件

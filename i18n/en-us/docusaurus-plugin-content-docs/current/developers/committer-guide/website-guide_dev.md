@@ -2,7 +2,7 @@
 title: Website Guide
 keywords: [Higress]
 description: Website Guide.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/committer-guide/website-guide_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/committer-guide/website-guide_dev.md
 ---
 
 # Website Guide

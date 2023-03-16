@@ -2,7 +2,7 @@
 
 [![CI Status](https://github.com/higress-group/higress-group.github.io/workflows/higress.io%20deploy/badge.svg)](https://github.com/higress-group/higress-group.github.io/actions)
 
-All website material  of https://higress.io
+All website material of https://higress.io.
 
 ### Quick Start
 
@@ -10,7 +10,7 @@ All website material  of https://higress.io
 
 2. `npm run start`
 
-3. visit
+3. Visit
 ```
 localhost:3000/
 ```
@@ -19,9 +19,9 @@ localhost:3000/
 
 1. `npm run build`
 
-2. `npm run serve` to visit
+2. `npm run serve`
 
-3. visit
+3. Visit
 ```
 localhost:3000/
 ```
@@ -30,14 +30,14 @@ localhost:3000/
 Base docusaurus v2.3.1
 Node.js version 16.14+
 
-
 ## Note for i18n
 For now, we use [docusaurus](https://www.zhihu.com/people/erda-project) `v2.3.1`, and there is a problem with `defaultLocale` in `docusaurus.config.js`. We can't deploy site like `https://my-site`, [see this](https://github.com/facebook/docusaurus/discussions/8745).
 
 It will be solved perfectly in `v2.4`, stay tuned.
 
-## How To Write Documents
+Please be noted that locale switching function doesn't work if you start the website in development mode using `npm run start` or `npm run start-en`. Please run it in production mode using the build-and-serve process to enable the locale switching function.
 
+## How To Write Documents
 
 ### Add a new doc
  
@@ -64,7 +64,7 @@ keywords: [keywords1,keywords2]
 description: some description
 author: author name
 date: 2018-12-29
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/en/docusaurus-plugin-content-blog/30-line-wasm.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en/docusaurus-plugin-content-blog/30-line-wasm.md
 ---
 ```
 **Note:**
@@ -72,12 +72,6 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 2. `keywords` must be a `Array`
 3. `custom_edit_url` is a link to the doc in this repo, required.
 
-
 ## Note for .md file
 1. Do not use un correct html tag like `<img>、<br>`, replace with `<img /> <br />`
 2. If you want show `<xx>`, replace with `&lt;xx&gt;`
-
-
-
-
-

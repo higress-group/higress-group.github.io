@@ -2,7 +2,7 @@
 title: Ingress Annotaion 配置说明
 keywords: [Ingress]
 description: Higress Ingress Annotaion 配置说明。
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/annotation.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/annotation.md
 ---
 
 # Ingress Annotaion 配置说明

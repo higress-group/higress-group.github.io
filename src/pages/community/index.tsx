@@ -21,8 +21,8 @@ const data = {
     desc: translate({ id: 'community.contactsDesc', message: '有问题需要反馈？请通过一下方式联系我们。' }),
     list: [
       {
-        img: '/img/mailinglist.png',
-        imgHover: '/img/mailinglist_hover.png',
+        img: '/img/community/mailinglist.png',
+        imgHover: '/img/community/mailinglist_hover.png',
         title: translate({ id: 'community.contactsListTitle1', message: '邮件列表' }),
         link: 'mailto:higress+subscribe@googlegroups.com',
       },
@@ -38,43 +38,47 @@ const data = {
     desc: translate({ id: 'community.contributeDesc', message: '欢迎为 Higress 做贡献！' }),
     list: [
       {
-        img: '/img/channels/email_gray.svg',
+        img: '/img/community/mailinglist.png',
         title: translate({ id: 'community.contributeListTitle1', message: '邮件列表' }),
-        content: <span>{translate({ id: 'community.contributeListContent1', message: '加入我们的邮件列表。' })}</span>,
+        content: (
+          <span>
+            <a href="mailto:higress+subscribe@googlegroups.com" target="_blank">
+              {translate({ id: 'community.contributeListContent1', message: '加入我们的邮件列表' })}
+            </a>
+          </span>
+        ),
       },
       {
-        img: '/img/channels/github_gray.svg',
+        img: '/img/community/issue.png',
         title: translate({ id: 'community.contributeListTitle2', message: '报告问题' }),
         content: (
           <span>
             {translate({ id: 'community.contributeListContent2_1', message: '提交' })}&nbsp;
-            <a href="https://github.com/alibaba/higress/issues/new">
+            <a href="https://github.com/alibaba/higress/issues/new/choose" target="_blank">
               {translate({ id: 'community.contributeListContent2_2', message: '新问题' })}
             </a>
-            。
           </span>
         ),
       },
       {
-        img: '/img/documents.png',
+        img: '/img/community/documents.png',
         title: translate({ id: 'community.contributeListTitle3', message: '改进文档' }),
         content: (
           <span>
             {translate({ id: 'community.contributeListContent3_1', message: '改进' })}&nbsp;
-            <a href="https://github.com/higress-group/higress-group.github.io">
+            <a href="https://github.com/higress-group/higress-group.github.io" target="_blank">
               {translate({ id: 'community.contributeListContent3_2', message: '文档' })}
             </a>
-            。
           </span>
         ),
       },
       {
-        img: '/img/pullrequest.png',
-        title: translate({ id: 'community.contributeListContent4', message: '提交 PR' }),
+        img: '/img/community/pullrequest.png',
+        title: translate({ id: 'community.contributeListTitle4', message: '提交 PR' }),
         content: (
           <span>
             {translate({ id: 'community.contributeListContent4', message: '创建一个' })}&nbsp;
-            <a href="https://github.com/alibaba/higress/pulls">PR</a>。
+            <a href="https://github.com/alibaba/higress/pulls" target="_blank">PR</a>
           </span>
         ),
       },

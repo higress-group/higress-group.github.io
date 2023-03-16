@@ -42,7 +42,7 @@ export default function Home(): React.Element {
     <Layout title={`Hello from ${siteConfig.title}`} description="Higress">
       <div ref={el} className="home-page">
         <Top language={curLang} />
-        <Introduction />
+        <Introduction language={curLang} />
         <MseMap />
         <Feature />
         <User />

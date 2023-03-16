@@ -2,7 +2,7 @@
 title: Contributing to Higress
 keywords: [Higress]
 description: It is warmly welcomed if you have interest to hack on Higress. First, we encourage this kind of willing very much. And here is a list of contributing guide for you.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/en/docusaurus-plugin-content-docs/current/developers/guide_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en/docusaurus-plugin-content-docs/current/developers/guide_dev.md
 ---
 
 # Contributing to Higress
@@ -213,10 +213,10 @@ Higress code style Comply with Alibaba Java Coding Guidelines.
 
 
 #### idea IDE
-[p3c-idea-plugin-install](https://github.com/alibaba/p3c/blob/master/idea-plugin/README.md) 
+[p3c-idea-plugin-install](https://github.com/alibaba/p3c/blob/main/idea-plugin/README.md) 
 
 #### eclipse IDE
-[p3c-eclipse-plugin-install](https://github.com/alibaba/p3c/blob/master/eclipse-plugin/README.md)
+[p3c-eclipse-plugin-install](https://github.com/alibaba/p3c/blob/main/eclipse-plugin/README.md)
 
 
 In a word, **ANY HELP IS CONTRIBUTION.**

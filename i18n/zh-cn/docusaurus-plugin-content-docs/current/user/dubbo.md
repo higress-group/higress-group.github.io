@@ -2,7 +2,7 @@
 title: 实现 Dubbo 服务发现和路由
 keywords: [Dubbo,discovery]
 description: 实现 Dubbo 服务发现和路由
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/master/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/dubbo.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/dubbo.md
 ---
 
 # 实现 Dubbo 服务发现和路由
