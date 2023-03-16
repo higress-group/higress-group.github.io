@@ -54,7 +54,6 @@ const config = {
       src: 'https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR',
       async: true,
     },
-    { src: 'https://g.alicdn.com/mamba/assets/0.0.13/mse-arc-ui.min.js' },
   ],
   stylesheets: [
     {
