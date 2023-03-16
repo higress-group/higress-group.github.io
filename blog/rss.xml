@@ -4,7 +4,7 @@
         <title>Higress Blog</title>
         <link>https://higress.io/blog</link>
         <description>Higress Blog</description>
-        <lastBuildDate>Thu, 16 Mar 2023 08:07:58 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 16 Mar 2023 11:06:37 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>default</language>
@@ -12,7 +12,7 @@
             <title><![CDATA[30-line-wasm]]></title>
             <link>https://higress.io/blog/30-line-wasm</link>
             <guid>https://higress.io/blog/30-line-wasm</guid>
-            <pubDate>Thu, 16 Mar 2023 08:07:58 GMT</pubDate>
+            <pubDate>Thu, 16 Mar 2023 11:06:37 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -20,7 +20,7 @@
             <title><![CDATA[first-meetup]]></title>
             <link>https://higress.io/blog/first-meetup</link>
             <guid>https://higress.io/blog/first-meetup</guid>
-            <pubDate>Thu, 16 Mar 2023 08:07:58 GMT</pubDate>
+            <pubDate>Thu, 16 Mar 2023 11:06:37 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -28,7 +28,7 @@
             <title><![CDATA[higress]]></title>
             <link>https://higress.io/blog/higress</link>
             <guid>https://higress.io/blog/higress</guid>
-            <pubDate>Thu, 16 Mar 2023 08:07:58 GMT</pubDate>
+            <pubDate>Thu, 16 Mar 2023 11:06:37 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -36,7 +36,7 @@
             <title><![CDATA[nacos]]></title>
             <link>https://higress.io/blog/nacos</link>
             <guid>https://higress.io/blog/nacos</guid>
-            <pubDate>Thu, 16 Mar 2023 08:07:58 GMT</pubDate>
+            <pubDate>Thu, 16 Mar 2023 11:06:37 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
