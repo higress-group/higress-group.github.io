@@ -7,9 +7,9 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # Quick Start
 
-## Use in a standard K8s cluster
+## Stage 1: Installation
 
-### Step 1: Install Higress
+### Scenario 1: Use in a Standard K8s Cluster
 
 #### Helm Installation Command
 
@@ -22,42 +22,12 @@ Note: A short note will be printed on the screen after installation, which conta
 
 ![image](/img/user/quickstart/zh-cn/console-credentials.png)
 
-### Step 2: Create Test Route
-
-Assuming that there is already a service named "foo" deployed in the default namespace, we'd like to create a route, forwarding http://foo.bar.com/foo requests to this service.
-
-Obtain the LoadBalancer IP of Higress Gateway:
+Obtain the LoadBalancer IP of Higress Gateway and write it down. You can use it and port 80 and 443 to access Higress Gateway.
 ```bash
 kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
-Edit hosts to point domain `console.higress.io` to the IP obtained above.
-```
-IP console.higress.io
-```
-
-Open `http://console.higress.io` in browser and log into Higress Console using the credential obtained above.
-
-![image](/img/user/quickstart/zh-cn/login.png)
-
-Click "Domain Management" on the navigation bar left. Click "Create Domain" button. Then fill the form according to the image below and click "Confirm" button.
-
-![image](/img/user/quickstart/en-us/domain_management.png)
-
-Click "Route Management" on the navigation bar left. Click "Create Route" button. Then fill the form according to the image below and click "Confirm" button.
-
-![image](/img/user/quickstart/en-us/route_management.png)
-
-### Step 6: Validate Route
-
-Send following test request to see whether the test route works properly:
-
-```bash
-# should output "foo"
-curl http://"$(kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"/foo -H 'host: foo.bar.com'
-```
-
-## Use in Local Environment
+## Scenario 2: Use in Local Environment
 
 ### Step 1: Install kubectl & kind
 
@@ -129,23 +99,47 @@ kubectl.exe config use-context kind-higress
 helm repo add higress.io https://higress.io/helm-charts
 helm install higress -n higress-system higress.io/higress-local --create-namespace
 ```
+## Stage 2: Configuration
 
-### Step 4: Create Test Services
+Assuming that there is already a service named "foo" deployed in the default namespace, we'd like to create a route, forwarding http://foo.bar.com/foo requests to this service.
 
-```bash
-kubectl apply -f https://github.com/alibaba/higress/releases/download/v0.6.1/quickstart.yaml
+You can use the following YAML to create this test service if needed.
+```yaml
+kind: Pod
+apiVersion: v1
+metadata:
+  name: foo-app
+  labels:
+    app: foo
+spec:
+  containers:
+  - name: foo-app
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/http-echo:0.2.4-alpine
+    args:
+    - "-text=foo"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: foo-service
+spec:
+  selector:
+    app: foo
+  ports:
+  # Default port used by the image
+  - port: 5678
 ```
 
-### Step 5: Create Test Route
+### Method 1: Use Higress Console
 
-Edit the hosts file, points domain `console.higress.io` to `127.0.0.1`.
+Edit hosts to point domain `console.higress.io` to the IP of Higress Gateway (In a standard K8s cluster, use the previously obtained LoadBalancer IP. And use 127.0.0.1 instead in a local cluster).
 ```
-127.0.0.1 console.higress.io
+GatewayIP console.higress.io
 ```
- 
-Open `http://console.higress.io` in browser and log into Higress Console using the credential of admin/admin.
 
-![image](/img/user/quickstart/zh-cn/login_local.png)
+Open `http://console.higress.io` in browser and log into Higress Console using the credential obtained above.
+
+![image](/img/user/quickstart/en-us/login.png)
 
 Click "Domain Management" on the navigation bar left. Click "Create Domain" button. Then fill the form according to the image below and click "Confirm" button.
 
@@ -155,11 +149,33 @@ Click "Route Management" on the navigation bar left. Click "Create Route" button
 
 ![image](/img/user/quickstart/en-us/route_management.png)
 
-### Step 6: Validate Route
+### Method 2: Use Ingress CRD
 
-Send following test request to see whether the test route works properly:
+Use the YAML below to create the test route we need.
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: foo
+spec:
+  ingressClassName: higress
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: "/foo"
+        backend:
+          service:
+            name: foo-service
+            port:
+              number: 5678
+```
+
+## Stage 3: Validate
+
+Use the following command to check whether the test route works properly:
 
 ```bash
 # should output "foo"
-curl http://localhost/foo -H "Host: foo.bar.com"
+curl http://GatewayIP/foo -H "Host: foo.bar.com"
 ```
