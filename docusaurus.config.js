@@ -41,7 +41,7 @@ const config = {
     },
   },
   scripts: [
-    { src: '//g.alicdn.com/mamba/assets/0.0.15/mse-arc-ui.min.js' },
+    { src: '//g.alicdn.com/mamba/assets/0.0.16/mse-arc-ui.min.js' },
     {
       src: '//g.alicdn.com/alilog/mlog/aplus_v2.js',
       id: 'beacon-aplus',
@@ -54,11 +54,10 @@ const config = {
       src: 'https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR',
       async: true,
     },
-    { src: 'https://g.alicdn.com/mamba/assets/0.0.13/mse-arc-ui.min.js' },
   ],
   stylesheets: [
     {
-      href: '//g.alicdn.com/mamba/assets/0.0.15/mse-arc-ui.min.css',
+      href: '//g.alicdn.com/mamba/assets/0.0.16/mse-arc-ui.min.css',
     },
   ],
   plugins: ['docusaurus-plugin-sass'],
@@ -69,11 +68,17 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: ({ docPath, locale, ...rest }) => {
+            return `https://github.com/higress-group/higress-group.github.io/blob/main/i18n/${locale}/docusaurus-plugin-content-docs/current/${docPath}`;
+          },
         },
         blog: {
           showReadingTime: true,
           blogSidebarTitle: '全部博文',
           blogSidebarCount: 'ALL',
+          editUrl: ({ blogPath, locale }) => {
+            return `https://github.com/higress-group/higress-group.github.io/blob/main/i18n/${locale}/docusaurus-plugin-content-blog/${blogPath}`;
+          },
         },
         theme: {
           customCss: require.resolve('./src/css/custom.scss'),
@@ -101,7 +106,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      metadata: [{ name: 'keywords', content: 'Higress' }],
+      metadata: [{ name: 'keywords', content: 'higress,higress官网,云原生网关' }],
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       colorMode: {
