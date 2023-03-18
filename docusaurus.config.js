@@ -68,7 +68,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: ({ docPath, locale, ...rest }) => {
+          editUrl: ({ docPath, locale }) => {
             return `https://github.com/higress-group/higress-group.github.io/blob/main/i18n/${locale}/docusaurus-plugin-content-docs/current/${docPath}`;
           },
         },
