@@ -78,7 +78,9 @@ const data = {
         content: (
           <span>
             {translate({ id: 'community.contributeListContent4', message: '创建一个' })}&nbsp;
-            <a href="https://github.com/alibaba/higress/pulls" target="_blank">PR</a>
+            <a href="https://github.com/alibaba/higress/pulls" target="_blank">
+              PR
+            </a>
           </span>
         ),
       },
@@ -91,7 +93,7 @@ export default function Community(): JSX.Element {
   return (
     <BrowserOnly>
       {() => (
-        <Layout title={`Hello from ${siteConfig.title}`} description="Higress">
+        <Layout title={'Higress'} description="Higress Community">
           <div className="community-page">
             <Bar img="https://img.alicdn.com/tfs/TB115XwJzTpK1RjSZKPXXa3UpXa-160-160.png" text={data.barText} />
             <section className="events-section">
