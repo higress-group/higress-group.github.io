@@ -11,7 +11,7 @@ import Community from './home/community';
 import './index.scss';
 
 export default function Home(): React.Element {
-  const { siteConfig, i18n, ...rest } = useDocusaurusContext();
+  const { siteConfig, i18n } = useDocusaurusContext();
   const curLang = i18n.currentLocale;
   const el = React.useRef<HTMLDivElement>(null);
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { translate } from '@docusaurus/Translate';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import { Bar, Slider } from '../../components';
@@ -89,7 +88,6 @@ const data = {
 };
 
 export default function Community(): JSX.Element {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <BrowserOnly>
       {() => (
