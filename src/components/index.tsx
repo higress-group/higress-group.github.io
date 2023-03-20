@@ -1,4 +1,5 @@
-export { default as Button, ButtonType } from './button';
+export { default as Button } from './button';
+export type { ButtonType } from './button';
 export { default as Icon } from './icon';
 export { default as Bone } from './bone';
 export { default as Bar } from './bar';

@@ -219,7 +219,7 @@
     "description": "The ARIA label for the main navigation"
   },
   "theme.blog.post.readingTime.plurals": {
-    "message": "One min read|{readingTime} min read",
+    "message": "One min read|{readingTime} mins read",
     "description": "Pluralized label for \"{readingTime} min read\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
   },
   "theme.navbar.mobileLanguageDropdown.label": {
@@ -304,16 +304,16 @@
     "message": "Events & News"
   },
   "community.contactsTitle": {
-    "message": "Talk To Us"
+    "message": "Talk to Us"
   },
   "community.contactsDesc": {
-    "message": "Feel free to contact us via the following channel."
+    "message": "Feel free to contact us via following channels."
   },
   "community.contactsListTitle1": {
     "message": "Mailing List"
   },
   "community.contactsListTitle2": {
-    "message": "dingTalk"
+    "message": "Ding Talk"
   },
   "community.contributeTitle": {
     "message": "Contributor Guide"
@@ -344,6 +344,9 @@
   },
   "community.contributeListContent3_2": {
     "message": "documentation"
+  },
+  "community.contributeListTitle4": {
+    "message": "Submit a PR"
   },
   "community.contributeListContent4": {
     "message": "Create a brilliant"
@@ -394,7 +397,7 @@
     "message": "Powered by Istio and Envoy, Higress realizes the integration of the triple gateway architecture of traffic gateway, microservice gateway and security gateway, thereby greatly reducing the costs of deployment, operation and maintenance."
   },
   "homepage.msemapTitle": {
-    "message": "microservice ecosystem landscape"
+    "message": "Microservice Ecosystem Landscape"
   },
   "homepage.briefIntroduction": {
     "message": "Higress is a next-generation cloud-native gateway based on Alibaba's internal gateway practices."

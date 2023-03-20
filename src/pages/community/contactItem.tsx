@@ -51,7 +51,7 @@ class ContactItem extends React.Component<Props, State> {
             onMouseOver={this.onMouseOver}
             onMouseOut={this.onMouseOut}
           >
-            <img src={`${img}`} />
+            <img src={getLink(img)} />
             <div>{contact.title}</div>
           </a>
         )}

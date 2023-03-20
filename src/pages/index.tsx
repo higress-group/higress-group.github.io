@@ -11,7 +11,7 @@ import Community from './home/community';
 import './index.scss';
 
 export default function Home(): React.Element {
-  const { siteConfig, i18n, ...rest } = useDocusaurusContext();
+  const { siteConfig, i18n } = useDocusaurusContext();
   const curLang = i18n.currentLocale;
   const el = React.useRef<HTMLDivElement>(null);
 
@@ -39,10 +39,10 @@ export default function Home(): React.Element {
   }, []);
 
   return (
-    <Layout title={`Hello from ${siteConfig.title}`} description="Higress">
+    <Layout title={'Higress'} description="Higress official site">
       <div ref={el} className="home-page">
         <Top language={curLang} />
-        <Introduction />
+        <Introduction language={curLang} />
         <MseMap />
         <Feature />
         <User />
