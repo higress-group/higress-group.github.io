@@ -15,7 +15,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --show --render-subchart-notes
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set higress-console.domain=console.higress.io
 ```
 
 Note: A short note will be printed on the screen after installation, which contains the commands used to obtain the console login credential. Please execute them and record the output username and password.
