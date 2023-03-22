@@ -41,63 +41,6 @@ When isolating different business systems using K8s namespace, if each namespace
 You can use `--set watchNamespace=<namespace>` to set this value.
 
 
-## Install Istio, and enable the Service Mesh mode (Optional)
-
-Higress Gateway can use [Istio](https://istio.io/) to manage API configurations of the data plane. You can choose to deploy the custom version published by Higress, or the standard version provided by Istio authors.
-For the feature differences of these two modes, you can check out the [Higress Anntotaion Configuration Manual](../user/annotation.md).
-
-In this mode, you should update the deployment options like this:
-
-```bash
-helm upgrade higress -n higress-system --set global.enableMesh=true higress.io/higress
-```
-
-### Option 1. Install Higress Istio (Recommended)
-
-After installation, `istiod` will be ready once Higress is fully deployed.
-
-```bash
-helm repo add higress.io https://higress.io/helm-charts
-helm install istio -n istio-system higress.io/istio --create-namespace
-```
-
-**Note:**
------
-If Higress Gateway is not installed to the default namespace of `higress-system`, you need to use `--set global.higressNamespace=` to specify the actual namespace when installing Higress Istio. For example:
-
-```bash
-helm repo add higress.io https://higress.io/helm-charts
-helm install istio -n istio-system --set global.higressNamespace=foo higress.io/istio --create-namespace
-```
-
------
-
-### Option 2. Install Standard Istio
-
-Please refer to the [Installation Manual](https://istio.io/latest/docs/setup/install/) on the official website of Istio.
-
-Unlike Higress Istio, the standard version of Istio won't try to retrieve configurations from Higress Controller by default. You need to configure [MeshConfig.ConfigSource](https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#ConfigSource) for this.
-
-Here we use deploying with istioctl as an example:
-
-```yaml
-# my-config.yaml
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
-spec:
-  meshConfig:
-    configSources:
-    # If there are multiple config sources, we need to add the k8s source explicitly.
-    - address: "k8s://"
-    # Assume Higress is installed in the namespace of higress-system
-    - address: "xds://higress-controller.higress-system:15051"
-    # If there are multiple Higress instances installed in different namespaces, you can add them below.
-```
-
-Execute the installation command:
-```bash
-istioctl install -f my-config.yaml
-```
 
 ## Support Istio CRD
 
