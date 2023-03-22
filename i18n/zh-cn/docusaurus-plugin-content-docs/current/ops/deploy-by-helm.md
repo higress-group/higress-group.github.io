@@ -40,77 +40,18 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 
 可以通过 `--set watchNamespace=<namespace>` 指定。
 
-## 安装 Istio，开启 Service Mesh 模式 （可选）
+## 支持 Istio CRD
 
-Higress 网关可以通过[Istio](https://istio.io/) 统一管理数据平面的 API 配置。可以选择部署 Higress 发行的 Istio 版本，也可以选择 Istio 官方提供的标准版本。
-两种模式下的能力对比可以参考[Higress Anntotaion 支持说明](../user/annotation.md)。
+集群里需要提前安装好 Istio 的 CRD，如果不希望安装 Istio，也可以只安装 Istio 的 CRD：
+
+```bash
+helm repo add istio https://istio-release.storage.googleapis.com/charts
+helm install istio-base istio/base -n istio-system
+```
 
 这种模式下，需要更新 Higress 的部署参数：
 
 ```bash
-helm upgrade higress -n higress-system --set global.enableMesh=true higress.io/higress
+helm upgrade higress -n higress-system --set global.enableIstioAPI=true higress.io/higress
 ```
 
-### 选项1. 安装 Higress Istio（推荐）
-
-安装后，`istiod` 需要等待 Higress 完成部署完成，才会处于就绪状态。
-
-```bash
-helm repo add higress.io https://higress.io/helm-charts
-helm install istio -n istio-system higress.io/istio --create-namespace
-```
-
-**注意**
------
-若 Higress 网关没有安装在默认的 `higress-system` 的命名空间，需要在安装 Higress Istio 时指定通过 `--set global.higressNamespace=` 指定命名空间，如:
-
-```bash
-helm repo add higress.io https://higress.io/helm-charts
-helm install istio -n istio-system --set global.higressNamespace=foo higress.io/istio --create-namespace
-```
-
------
-
-### 选项2. 安装标准版 Istio
-
-请参考 Istio 官网的[安装文档](https://istio.io/latest/zh/docs/setup/install/)
-
-与 Higress Istio 不同，标准版 Istio 不会从自动从 Higress Controller 获取配置，需要配置[MeshConfig.ConfigSource](https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#ConfigSource)
-
-以通过 istioctl 部署为例：
-
-```yaml
-# my-config.yaml
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
-spec:
-  meshConfig:
-    configSources:
-    # 当有多个配置来源时，需要显示指定 k8s 来源
-    - address: "k8s://"
-    # 假设 Higress 安装在 higress-system 命名空间
-    - address: "xds://higress-controller.higress-system:15051"
-    # 若在不同命名空间安装了多个 Higress ，可以继续添加
-```
-
-执行安装操作：
-```bash
-istioctl install -f my-config.yaml
-```
-
-### 关闭 Service Mesh 模式
-
-先更新 Higress 的部署参数，并等待 Higress 就绪：
-
-```bash
-helm upgrade higress -n higress-system --set global.enableMesh=false higress.io/higress 
-kubectl wait -n higress-system deployment/higress-controller deployment/higress-gateway --for=condition=Available
-```
-
-删除 istio 以及对应的 crd
-
-```bash
-helm delete istio -n istio-system
-kubectl delete ns istio-system
-kubectl get crd -oname | grep --color=never 'istio.io' | xargs kubectl delete
-```
