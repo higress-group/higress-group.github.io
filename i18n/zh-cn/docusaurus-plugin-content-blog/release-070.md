@@ -6,16 +6,16 @@ author: 澄潭
 date: 2023-03-20
 ---
 
-# 进展概要
+## 进展概要
 
 1. Higress 控制台正式 release，涵盖 Higress 的服务/路由/域名/证书管理能力，并提供开箱即用的可观测功能
 2. 安装/升级 Higress 时支持自动安装对应版本的 Higress Console，避免版本不适配的问题
 3. 支持开启 Istio API，实现更多复杂的功能，并且也可以用于平滑替换 Istio Ingress Gateway
 
 
-# 版本特性说明
+## 版本特性
 
-## Higress 控制台
+### Higress 控制台
 
 现在通过 helm 命令安装 Higress 时将自动安装对应版本的 Higress Console, 这里通过 `higress-console.domain` 参数，可以指定控制台的域名。
 
@@ -65,7 +65,7 @@ helm upgrade higress -n higress-system higress.io/higress --set higress-console.
 
 可以登陆 Higress 控制台 Demo 试用现有所有功能: http://demo.higress.io
 
-## 开启 Istio API
+### 开启 Istio API
 
 通过开启 Istio API，可以实现使用 Higress 平滑替换 Istio Ingress Gateway，具体 helm 命令如下：
 
@@ -143,7 +143,7 @@ spec:
 上述配置比较复杂，原因是为了方便 Envoy 数据面程序逻辑处理而设计的 Schema。目前 Higress 社区已经在设计更方便 Ingress 配置使用的 CRD，后续也会在 Higress 控制台上提供对应的配置功能。
 
 
-# GA 版本规划
+## GA 版本规划
 
 Higress 预计将在3月底/4月初发布首个 GA 版本：0.8.0，这个版本的主要规划如下：
 
@@ -153,7 +153,7 @@ Higress 预计将在3月底/4月初发布首个 GA 版本：0.8.0，这个版本
 4. 全面完善 Higress 官网文档，覆盖 Higress 全部功能的详细说明
 
 
-# Higress 社区
+## Higress 社区
 
 欢迎认领 Higress Issue 任务：https://github.com/alibaba/higress/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22
 
