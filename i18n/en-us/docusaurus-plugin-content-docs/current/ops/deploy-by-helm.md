@@ -2,7 +2,7 @@
 title: Deploy Higress By Helm
 keywords: [kubernetes,helm,ops]
 description: Deploy Higress By Helm.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/deploy-by-helm.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en-us/docusaurus-plugin-content-docs/current/ops/deploy-by-helm.md
 ---
 
 # Deploy Higress By Helm
@@ -99,19 +99,17 @@ Execute the installation command:
 istioctl install -f my-config.yaml
 ```
 
-### Disable Service Mesh mode
+## Support Istio CRD
 
-First update the deployment parameters of Higress and wait for Higress to be ready:
+The CRD of Istio needs to be installed in advance in the cluster. If you do not want to install Istio, you can also install only the CRD of Istio:
 
 ```bash
-helm upgrade higress -n higress-system --set global.enableMesh=false higress.io/higress
-kubectl wait -n higress-system deployment/higress-controller deployment/higress-gateway --for=condition=Available
+helm repo add istio https://istio-release.storage.googleapis.com/charts
+helm install istio-base istio/base -n istio-system
 ```
 
-Delete istio and the corresponding CRDs.
+In this mode, you need to update the deployment parameters of Higress:
 
 ```bash
-helm delete istio -n istio-system
-kubectl delete ns istio-system
-kubectl get crd -oname | grep --color=never 'istio.io' | xargs kubectl delete
+helm upgrade higress -n higress-system --set global.enableIstioAPI=true higress.io/higress
 ```
