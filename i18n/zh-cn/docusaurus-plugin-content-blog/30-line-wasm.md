@@ -111,17 +111,15 @@ docker push higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/demo:1.0.0
 除了这些配置外，还可以定义插件的执行阶段和优先级等进阶配置，可以参考 Istio API 官方文档：[https://istio.io/latest/docs/reference/config/proxy_extensions/wasm-plugin/](https://istio.io/latest/docs/reference/config/proxy_extensions/wasm-plugin/)
 ```yaml
 # wasmplugin.yaml
-apiVersion: extensions.istio.io/v1alpha1
+apiVersion: extensions.higress.io/v1alpha1
 kind: WasmPlugin
 metadata:
-  name: mock-response
+  name: request-block
   namespace: higress-system
 spec:
-  selector:
-    matchLabels:
-      higress: higress-system-higress-gateway
-  pluginConfig:
-    content: "hello higress"
+  defaultConfig:
+    block_urls:
+    - "swagger.html"
   url: oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/demo:1.0.0
 ```
 通过 kubectl 创建这个资源
@@ -144,28 +142,38 @@ kubectl apply -f wasmplugin.yaml
 将 wasmplugin.yaml 配置修改如下：
 ```yaml
 # wasmplugin.yaml
-apiVersion: extensions.istio.io/v1alpha1
+apiVersion: extensions.higress.io/v1alpha1
 kind: WasmPlugin
 metadata:
-  name: mock-response
+  name: request-block
   namespace: higress-system
 spec:
-  selector:
-    matchLabels:
-      higress: higress-system-higress-gateway
-  pluginConfig:
-    content: "hello higress"
-    _rules_:
-    - content: "hello foo"
-      _match_route_:
-      - "default/foo"
-    - content: "hello bar"
-      _match_route_:
-      - "default/bar"
-    - content: "hello world"
-      _match_domain_:
-      - "*.example.com"
-      - "www.test.com"
+  defaultConfig:
+   # 跟上面例子一样，这个配置会全局生效，但如果被下面规则匹配到，则会改为执行命中规则的配置
+   block_urls:
+   - "swagger.html"
+   matchRules:
+   # 路由级生效配置
+  - ingress:
+    - default/foo
+     # default 命名空间下名为 foo 的 ingress 会执行下面这个配置
+    config:
+      block_bodies:
+      - "foo"
+  - ingress:
+    - default/bar
+    # default 命名空间下名为 bar 的 ingress 会执行下面这个配置
+    config:
+      block_bodies:
+      - "bar"
+   # 域名级生效配置
+  - domain:
+    - "*.example.com"
+    # 若请求匹配了上面的域名, 会执行下面这个配置
+    config:
+      block_bodies:
+      - "foo"
+      - "bar"
   url: oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/demo:1.0.0
 ```
 在 pluginConfig 中增加了 `_rules_`  规则列表，规则中可以指定匹配方式，并填写对应生效的配置:
