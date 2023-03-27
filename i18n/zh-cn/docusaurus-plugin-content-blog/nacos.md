@@ -9,7 +9,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 
 # 前言
-在去年11月的云栖大会上，我们开源了云原生网关 Higress，时隔 2 月，Higress 的 Github 项目([https://github.com/alibaba/higress](https://github.com/alibaba/higress))已经收获了 700+ star，以及大量社区小伙伴的关注。
+在去年11月的云栖大会上，我们开源了云原生网关 Higress，时隔数月，Higress 的 Github 项目([https://github.com/alibaba/higress](https://github.com/alibaba/higress))已经收获了近 1k+ star，以及大量社区小伙伴的关注。
 <!--truncate-->
 在社区的交流中我们发现有不少微服务开发者在使用如 Spring Cloud Gateway/Zuul 等微服务网关对接 Nacos 注册中心实现微服务的路由，并且希望了解迁移到 Higress 网关能带来哪些好处。
 本文将介绍 Higress 组合 Nacos 作为微服务网关能力，并介绍微服务网关发展的两个趋势，为网关的选型指明道路：
