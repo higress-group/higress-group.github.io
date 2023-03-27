@@ -119,19 +119,16 @@ spec:
 作为微服务网关，需要在微服务架构中承担部分通用逻辑的处理，例如认证鉴权，安全防护等。通用的逻辑无法满足多样性的业务场景，Higress 可以支持开发者添加自定义处理逻辑。与 Spring Cloud Gateway 等传统微服务网关需要开发者自己在 Gateway 代码中加 Filter 不同，Higress 支持开发者使用多种语言编写 Wasm 插件，并动态加载生效，插件生效过程无需重启网关，变更插件逻辑对流量完全无损。
 下例是一个屏蔽特定请求的 Wasm 插件，当请求 url 中出现 “swagger.html” 时将被直接拒绝访问，插件实现代码参考：[https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/request-block](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/request-block)
 ```yaml
-apiVersion: extensions.istio.io/v1alpha1
+apiVersion: extensions.higress.io/v1alpha1
 kind: WasmPlugin
 metadata:
   name: request-block
   namespace: higress-system
 spec:
-  selector:
-    matchLabels:
-      higress: higress-system-higress-gateway
-  pluginConfig:
+  defaultConfig:
     block_urls:
     - "swagger.html"
-  url: oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/request-block:1.0.0
+  url: oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/demo:1.0.0
 ```
 Wasm 插件的开发&编译&镜像推送方式可以参考这篇文章[《Higress 实战：30 行代码写一个 Wasm Go插件》](https://mp.weixin.qq.com/s/eoPlaOgRm7u5wJAxhbVGGg)
 # 微服务网关发展趋势
@@ -157,6 +154,3 @@ Higress 开源贡献小组正在火热招募贡献者。如果您有时间，有
 ![image.png](https://img.alicdn.com/imgextra/i1/O1CN01Zc7yGt1p0zYq3OCwj_!!6000000005299-2-tps-979-1280.png)
 社区交流群：
 ![higress-comm.png](https://img.alicdn.com/imgextra/i2/O1CN01Ebh7P021yKGBaP35B_!!6000000007053-2-tps-720-405.png)
-# 实战演示直播
-1月12号（本周四）将在线直播 Higress 通过 Nacos 实现微服务网关能力的实战演示，可以扫描图中二维码，预约观看，将在直播开始前收到短信通知。
-![image.png](https://img.alicdn.com/imgextra/i4/O1CN01fZzh1e1EQVqOnw415_!!6000000000346-2-tps-1500-2044.png)
