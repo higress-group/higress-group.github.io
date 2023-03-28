@@ -28,8 +28,8 @@ const topData = {
     },
   ],
   versionNote: {
-    text: 'Release Note of 0.6.0',
-    link: 'https://github.com/alibaba/higress/releases/tag/v0.6.0',
+    text: 'Release Note of 0.7.0',
+    link: 'https://github.com/alibaba/higress/releases/tag/v0.7.0',
   },
   releaseDate: 'Released on Jan 19, 2023',
 };

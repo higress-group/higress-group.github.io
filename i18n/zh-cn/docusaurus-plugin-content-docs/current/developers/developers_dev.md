@@ -16,8 +16,8 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | Alibaba        |
 | 耿蕾蕾 | [gengleilei](https://github.com/gengleilei) | Alibaba        |
 | 范扬 | [SpecialYang](https://github.com/SpecialYang) | Alibaba        |
-| 凌轶群 | [Lynskylate](https://github.com/johnlanni) | Alibaba        |
 | 赵炳堃 | [sjtuzbk](https://github.com/johnlanni) | Alibaba        |
+| 凌轶群 | [Lynskylate](https://github.com/Lynskylate) | Pdd Holdings Inc  |
 | 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | Tencent        |
 | 董艺荃 | [CH3CHO](https://github.com/CH3CHO) | Trip.com        |
 | 李强林 | [Charlie17Li](https://github.com/Charlie17Li) | ZJU-SEL        |
