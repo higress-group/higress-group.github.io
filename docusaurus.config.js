@@ -108,7 +108,7 @@ const config = {
     ({
       metadata: [{ name: 'keywords', content: 'higress,higress官网,云原生网关' }],
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/higress_logo_small.png',
       colorMode: {
         defaultMode: 'light',
         disableSwitch: true, // 禁止切换主题模式
