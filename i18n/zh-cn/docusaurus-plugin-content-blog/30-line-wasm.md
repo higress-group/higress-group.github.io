@@ -7,7 +7,7 @@ date: 2022-11-22
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/30-line-wasm.md
 ---
 
-# 前言
+## 前言
 在11月15号的直播 《Higress 开源背后的发展历程和上手 Demo 演示》中，为大家演示了 Higress 的 Wasm 插件如何面向 Ingress 资源进行配置生效，本文对当天的 Demo 进行一个回顾，并说明背后的原理机制。
 <!--truncate-->
 本文中 Demo 运行的前提，需要在 K8s 集群中安装了 Higress，并生效了下面这份 quickstart 配置：
@@ -20,7 +20,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 - 测试插件功能：说明全局粒度，路由/域名级粒度如何生效
 - 插件生效原理：对整体流程进行回顾，说明插件生效的原理
 - 三个革命性的特性：介绍 Wasm 插件机制为网关插件开发带来的变革
-# 编写代码
+## 编写代码
 
 ```
 package main
@@ -79,18 +79,18 @@ func onHttpRequestHeaders(ctx HttpContext, config MyConfig, log Log) types.Actio
 [https://github.com/tetratelabs/proxy-wasm-go-sdk](https://github.com/tetratelabs/proxy-wasm-go-sdk)
 [https://github.com/alibaba/higress/blob/main/plugins/wasm-go/pkg/wrapper](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/pkg/wrapper/plugin_wrapper.go)
 可以看到，Higress 的 wasm-go sdk 是通过 Go 1.18 引入的泛型特性封装了插件上下文处理细节，从而降低插件开发所需代码量，开发者只用关心配置解析和请求应答处理的逻辑。
-# 生效插件
+## 生效插件
 编写完成代码后，一共有三个步骤，实现插件逻辑的生效：
 
 1. 编译：将 go 代码编译成 Wasm 格式文件
 2. 镜像推送：将 Wasm 文件打包成 docker 镜像，并推送至镜像仓库
 3. 下发配置：在 K8s 上创建 WasmPlugin 资源
-## 编译
+### 编译
 将上面的 Go 文件 main.go 编译成 plugin.wasm
 ```bash
 tinygo build -o plugin.wasm -scheduler=none -target=wasi main.go
 ```
-## 镜像推送
+### 镜像推送
 编写 Dockerfile
 ```dockerfile
 FROM scratch
@@ -101,7 +101,7 @@ COPY plugin.wasm ./
 docker build -t higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/demo:1.0.0 .
 docker push higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/demo:1.0.0
 ```
-## 下发配置
+### 下发配置
 编写 wasmplugin.yaml，配置说明：
 
 - selector： 选中了默认安装在 higress-system 命名空间下的 higress-gateway 生效这份插件
@@ -126,19 +126,19 @@ spec:
 ```bash
 kubectl apply -f wasmplugin.yaml
 ```
-# 测试插件功能
+## 测试插件功能
 基于之前生效的 quickstart.yaml，目前集群中的 Ingress 访问拓扑如下所示：
-## ![ing-topo.png](https://img.alicdn.com/imgextra/i3/O1CN0178hYAV1sBTSczmfAf_!!6000000005728-2-tps-646-605.png)
+### ![ing-topo.png](https://img.alicdn.com/imgextra/i3/O1CN0178hYAV1sBTSczmfAf_!!6000000005728-2-tps-646-605.png)
 未生效插件的情况下：
 
 - 请求`/foo` 将返回 HTTP 应答 `"foo"`
 - 请求`/bar` 将返回 HTTP 应答 `"bar"`
-## 全局生效
+### 全局生效
 基于上文生效插件阶段，下发的 wasmplugin.yaml，生效插件后效果如下：
 
 - 请求`/foo` 将返回 HTTP 应答 `"hello higress"`
 - 请求`/bar` 将返回 HTTP 应答 `"hello higress"`
-## 域名&路由级生效
+### 域名&路由级生效
 将 wasmplugin.yaml 配置修改如下：
 ```yaml
 # wasmplugin.yaml
@@ -191,7 +191,7 @@ kubectl apply -f wasmplugin.yaml
 - 请求`/bar` 将返回 HTTP 应答 `"hello bar"` (匹配到第二条 rule)
 - 请求`www.example.com` 将返回 HTTP 应答 `"hello world"` （匹配到第三条 rule）
 - 请求`www.abc.com` 将返回 HTTP 应答 `"hello higress"` （没有匹配的 rule，使用全局配置）
-# 插件生效原理
+## 插件生效原理
 ![wasm.png](https://img.alicdn.com/imgextra/i4/O1CN01PO4HYC1h7qYHonHHZ_!!6000000004231-2-tps-1100-537.png)
 
 这里对插件的生效机制简单做个说明：
@@ -208,9 +208,9 @@ kubectl apply -f wasmplugin.yaml
 10. envoy 从本地文件中加载 wasm 文件
 
 这里 envoy 获取配置并加载 wasm 文件使用到了 ECDS (Extension Config Discovery Service)的机制，实现了 wasm 文件更新，直接热加载，不会导致任何连接中断，业务流量完全无损。
-# 三个革命性的特性
+## 三个革命性的特性
 上面的 Wasm 插件机制为网关自定义插件开发带来了三个革命性的特性。
-## 特性一：插件生命周期和网关解耦
+### 特性一：插件生命周期和网关解耦
 这个特性主要得益于 Istio 的 WasmPlugin 机制设计。可以和 K8s Nginx Ingress 的插件机制做个对比：
 > reference: [https://github.com/kubernetes/ingress-nginx/blob/main/rootfs/etc/nginx/lua/plugins/README.md](https://github.com/kubernetes/ingress-nginx/blob/main/rootfs/etc/nginx/lua/plugins/README.md)
 > ### Installing a plugin
@@ -220,7 +220,7 @@ kubectl apply -f wasmplugin.yaml
 
 可以看到 Nginx Ingress 加载自定义插件，需要将 lua 文件挂载进 pod，或者在构建镜像时装入。这样就将插件的生命周期跟网关绑定在一起，插件逻辑更新，需要发布新版本，网关也需要发布新版本或者重新部署。
 使用 WasmPlugin 的机制，插件需要发布新版本，只需构建插件自身的镜像并进行下发生效，而且可以基于镜像的 tag 进行插件的版本管理。这样插件变更，不仅无需重新部署网关，结合 Envoy 的 ECDS 机制对流量也是完全无损。
-## 特性二：高性能的多语言支持
+### 特性二：高性能的多语言支持
 基于 Wasm 的能力，可以用多种语言编写插件，对开发人员更加友好。实现多语言开发插件的另一种方式是基于 RPC 和网关进程通信的外置进程/服务插件，这种模式会有额外的 IO 开销，并且附加的进程/服务也带来额外的运维复杂度。目前大家对 Wasm 插件的性能比较关心，从我们的测试数据来看，指令执行性能相比原生的 C++ 语言确实有差距，但性能和 Lua 持平，且远好于外置插件。
 对于一段逻辑：`循环执行20次请求头设置，循环执行20次请求头获取，循环执行20次请求头移除。`我们对比了分别用 Lua 和不同语言实现的 Wasm 的处理性能，下面是对单个请求延时的影响对比：
 
@@ -232,9 +232,9 @@ kubectl apply -f wasmplugin.yaml
 | Wasm (Rust) | 0.21毫秒 |
 | Wasm (AssemblyScript) | 0.21毫秒 |
 
-## 特性三：安全沙箱
+### 特性三：安全沙箱
 Envoy 目前支持多种 Wasm 的运行时，例如 V8，WAMR，wasmtime 等等，这些运行时均提供了安全沙箱能力，即 Wasm 插件中出现了访问空指针、异常未捕获等逻辑，也不会令 Envoy 宿主进程 Crash。并且可以通过配置，在插件逻辑出现异常后进行 Fail Open 处理，跳过插件的执行逻辑，将对业务的影响降至最低。
-# 开源社区
+## 开源社区
 特别感谢 Istio/Envoy 社区的前置工作，让 Higress 可以实现对 Ingress 资源启用 WasmPlugin ，增强了 Ingress Controller 的自定义扩展能力。
 特别感谢 Tetrate 社区实现的 proxy-wasm-go-sdk，Higress 在这个基础上封装了 wasm-go sdk，降低了开发插件的上手门槛。
 Higress 对 Istio/Envoy 的 Wasm 能力做了一些 Bugfix 的工作，目前已经都合并进了上游社区。后续的一些 Feature 能力，也会持续反哺上游社区。
