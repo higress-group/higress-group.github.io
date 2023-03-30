@@ -7,25 +7,25 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # 使用 GO 语言开发 WASM 插件
 
-# 一、工具准备
+## 一、工具准备
 需要先安装 Golang 和 TinyGo 两个程序
-<a name="a81fa"></a>
-## 1. Golang
+
+### 1. Golang
 （要求 1.18 版本以上）<br />官方指引链接：[https://go.dev/doc/install](https://go.dev/doc/install)
-<a name="JFoN6"></a>
-### Windows
+
+#### Windows
 
 1. 下载安装文件：[https://go.dev/dl/go1.19.windows-amd64.msi](https://go.dev/dl/go1.19.windows-amd64.msi)
 2. 打开下载好的安装文件直接安装，默认会安装到 `Program Files` 或 `Program Files (x86)` 目录
 3. 安装完成后，使用键盘上的快捷键“Win+R”打开运行窗口，在运行窗口中输入“cmd”点击确定即可打开命令窗口，输入命令：`go version`，输出当前安装的版本，表明安装成功
-<a name="tavPX"></a>
-### MacOS
+
+#### MacOS
 
 1. 下载安装文件：[https://go.dev/dl/go1.19.darwin-amd64.pkg](https://go.dev/dl/go1.19.darwin-amd64.pkg)
 2. 打开下载好的安装文件直接安装，默认会安装到`/usr/local/go`目录
 3. 打开终端命令行工具，输入命令：`go version`，输出当前安装的版本，表明安装成功
-<a name="olPlT"></a>
-### Linux
+
+#### Linux
 
 1. 下载安装文件：[https://go.dev/dl/go1.19.linux-amd64.tar.gz](https://go.dev/dl/go1.19.linux-amd64.tar.gz)
 2. 执行下列命令进行安装：
@@ -36,11 +36,12 @@ export PATH=$PATH:/usr/local/go/bin
 
 3. 执行 `go version`，输出当前安装的版本，表明安装成功
 
-<a name="qugm0"></a>
-## 2. TinyGo
+
+### 2. TinyGo
+
 （要求 0.25.0 版本以上）<br />官方指引链接：[https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
-<a name="ELNis"></a>
-### Windows
+
+#### Windows
 
 1. 下载安装文件：[https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip)
 2. 解压安装文件到指定目录
@@ -50,8 +51,8 @@ set PATH=%PATH%;"C:\tinygo\bin";
 ```
 
 4. 在命令窗口执行命令 `tinygo version`，输出当前安装的版本，表明安装成功
-<a name="iCo9z"></a>
-### MacOS
+
+#### MacOS
 
 1. 下载压缩包并解压
 ```bash
@@ -65,8 +66,8 @@ export PATH=/tmp/tinygo/bin:$PATH
 ```
 
 3. 在终端执行 `tinygo version`，输出当前安装的版本，表明安装成功
-<a name="hNZeF"></a>
-### Linux
+
+#### Linux
 以 Ubuntu 下 amd64 架构为例，其他系统请参考官方指引链接
 
 1. 下载 DEB 文件，并安装
@@ -78,10 +79,10 @@ export PATH=$PATH:/usr/local/bin
 
 2. 在终端执行 `tinygo version`，输出当前安装的版本，表明安装成功
 
-<a name="QZbcA"></a>
-# 二、编写插件
-<a name="u83FM"></a>
-## 1. 初始化工程目录
+
+## 二、编写插件
+
+### 1. 初始化工程目录
 
 1. 新建一个工程目录文件，例如`wasm-demo-go`
 2. 在所建目录下执行以下命令，进行 Go 工程初始化
@@ -100,8 +101,7 @@ go get github.com/tetratelabs/proxy-wasm-go-sdk
 go get github.com/alibaba/higress/plugins/wasm-go@main
 go get github.com/tidwall/gjson
 ```
-<a name="Z2lFM"></a>
-## 2. 编写 main.go 文件
+### 2. 编写 main.go 文件
 下面是一个简单示例，实现了在插件配置`mockEnable: true`时直接返回`hello world`应答；未做插件配置，或者设置`mockEnable: false`时给原始请求添加 `hello: world`请求头。更多例子请参考本文第四节。
 > 注意：在网关控制台中的插件配置为 yaml 格式，下发给插件时将自动转换为 json 格式，所以例子中的 parseConfig 可以直接从 json 中解析配置
 
@@ -146,8 +146,8 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 }
 ```
 
-<a name="SYNZJ"></a>
-### HTTP 处理挂载点
+
+#### HTTP 处理挂载点
 上面示例代码中通过 `wrapper.ProcessRequestHeadersBy`将自定义函数 `onHttpRequestHeaders`用于`HTTP 请求头处理阶段`处理请求。除此之外，还可以通过下面方式，设置其他阶段的自定义处理函数
 
 | HTTP 处理阶段 | 触发时机 | 挂载方法 |
@@ -157,8 +157,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 | HTTP 应答头处理阶段 | 网关接收到后端服务响应的应答头数据时 | wrapper.ProcessResponseHeadersBy |
 | HTTP 应答 Body 处理阶段 | 网关接收到后端服务响应的应答 Body 数据时 | wrapper.ProcessResponseBodyBy |
 
-<a name="r6rK5"></a>
-### 工具方法
+#### 工具方法
 上面示例代码中的 `proxywasm.AddHttpRequestHeader` 和 `proxywasm.SendHttpResponse`是插件 SDK 提供的两个工具方法，主要的工具方法见下表：
 
 | 分类 | 方法名称 | 用途 | 可以生效的<br />HTTP 处理阶段 |
@@ -191,21 +190,20 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 | 流程恢复 | ResumeHttpRequest | 恢复先前被暂停的请求处理流程 | - |
 |  | ResumeHttpResponse | 恢复先前被暂停的应答处理流程 | - |
 
-<a name="GAa0T"></a>
-## 3. 编译生成 WASM 文件
+### 3. 编译生成 WASM 文件
 执行以下命令
 ```bash
 tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
 ```
 编译成功会在当前目录下创建文件 main.wasm。这个文件在下面本地调试的例子中也会被用到。<br />在使用云原生网关插件市场的自定义插件功能时，直接上传该文件即可。
-<a name="yJdN5"></a>
-# 三、本地调试
+
+## 三、本地调试
 
 TBD
 
-# 更多示例
-<a name="vdifW"></a>
-## 无配置插件
+## 更多示例
+
+### 无配置插件
 插件无需配置时，直接定义空结构体即可
 
 ```
@@ -231,8 +229,8 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
         return types.ActionContinue
 }
 ```
-<a name="dSdLn"></a>
-## 在插件中请求外部服务
+
+### 在插件中请求外部服务
 目前仅支持 http 调用，支持访问在网关控制台中设置了服务来源的 Nacos、K8s 服务，以及固定地址或 DNS 来源的服务。请注意，无法直接使用`net/http`库中的 HTTP client，必须使用如下例中封装的 HTTP client。<br />下面例子中，在配置解析阶段解析服务类型，生成对应的 HTTP client ；在请求头处理阶段根据配置的请求路径访问对应服务，解析应答头，然后再设置在原始的请求头中。
 
 ```
