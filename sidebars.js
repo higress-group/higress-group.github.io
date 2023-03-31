@@ -39,7 +39,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Reference',
-          items: ['user/annotation', 'user/configurations', 'user/mcp-bridge'],
+          items: ['user/annotation', 'user/annotation-use-case', 'user/configurations', 'user/mcp-bridge'],
         },
       ],
     },
