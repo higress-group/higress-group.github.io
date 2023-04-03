@@ -6,15 +6,15 @@ description: 在Higress上使用Ingress并借助Annotation实现高阶流量治�
 
 本篇文档介绍如何在Higress上使用Ingress并借助Annotation实现高阶流量治理。
 
-# 前提条件
+## 前提条件
 - [安装Higress](./quickstart.md)
 - 已拥有一个Kubernetes集群，且配置了kubectl命令行工具
 
-# 灰度发布
+## 灰度发布
 Higress提供复杂的路由处理能力，支持基于Header、Cookie以及权重的灰度发布功能。灰度发布功能可以通过设置注解来实现，为了启用灰度发布功能，需要设置注解`higress.io/canary: "true"`。通过不同注解可以实现不同的灰度发布功能。
 > 说明：当多种方式同时配置时，灰度方式选择优先级为：基于Header > 基于Cookie > 基于权重（从高到低）。
 
-## 基于Header灰度发布
+### 基于Header灰度发布
 - 只配置`higress.io/canary-by-header`：基于Request Header的名称进行流量切分。当请求包含该Header并其值为always时，请求流量会被分配到灰度服务入口；其他情况时，请求流量不会分配到灰度服务。
 - 同时配置`higress.io/canary-by-header`和`higress.io/canary-by-header-value`：基于Request Header的名称和值进行流量切分。当请求中的header的名称和header的值与该配置匹配时，请求流量会被分配到灰度服务；其他情况时，请求流量不会分配到灰度服务。
 > Higress灰度发布时支持多个版本服务（无上限）。
@@ -121,7 +121,7 @@ spec:
             pathType: Exact
 ```
 
-## 基于Cookie灰度发布
+### 基于Cookie灰度发布
 - higress.io/canary-by-cookie：基于Cookie的Key进行流量切分。当请求的Cookie中含有该Key且其值为always时，请求流量将被分配到灰度服务；其他情况时，请求流量将不会分配到灰度服务。
 > 说明：基于Cookie的灰度发布不支持自定义设置Key对应的值，只能是always。
 
@@ -165,7 +165,7 @@ spec:
             pathType: Exact
 ```
 
-## 基于权重灰度发布
+### 基于权重灰度发布
 - higress.io/canary-weight：设置请求到指定服务的百分比（值为0~100的整数）
 - higress.io/canary-weight-totatl：设置权重总和，默认为100
 
@@ -229,7 +229,7 @@ spec:
             pathType: Exact
 ```
 
-# 跨域
+## 跨域
 跨域资源共享CORS（Cross-Origin Resource Sharing）是指允许Web应用服务器进行跨域访问控制，从而实现跨域数据安全传输。
 - higress.io/enable-cors："true" or "false"。开启或关闭跨域。
 - higress.io/cors-allow-origin：允许的第三方站点，支持泛域名，逗号分隔；支持通配符*。默认值为*，即允许所有第三方站点。
@@ -266,12 +266,12 @@ spec:
             pathType: Exact
 ```
 
-# Rewrite重写Path和Host
+## Rewrite重写Path和Host
 在请求转发给目标后端服务之前，重写可以修改原始请求的路径（Path）和主机域（Host)。
 - higress.io/rewrite-target：重写Path，支持捕获组（Capture Group)。
 - higress.io/upstream-vhost：重写Host。
 
-## Rewrite重写Path
+### Rewrite重写Path
 1. 将请求`example.com/test`在转发至后端服务之前，重写为`example.com/dev`
 ```
 apiVersion: networking.k8s.io/v1
@@ -341,7 +341,7 @@ spec:
             pathType: Prefix
 ```
 
-## Rewrite重写Host
+### Rewrite重写Host
 将请求`example.com/test`在转发至后端服务之前，重写为`test.com/test`
 ```
 apiVersion: networking.k8s.io/v1
@@ -365,9 +365,9 @@ spec:
             pathType: Exact
 ```
 
-# 重定向
+## 重定向
 通过重定向可以将原始客户端请求更改为目标请求。
-## 配置HTTP重定向至HTTPS
+### 配置HTTP重定向至HTTPS
 - higress.io/ssl-redirect：HTTP重定向到HTTPS
 - higress.io/force-ssl-redirect: HTTP重定向到HTTPS
 > 说明：Higress对于以上两个注解不区分对待，都是强制将HTTP重定向到HTTPS。
@@ -395,7 +395,7 @@ spec:
             pathType: Exact
 ```
 
-## 永久重定向
+### 永久重定向
 - higress.io/permanent-redirect：永久重定向的目标url，必须包含scheme（http or https)。
 - higress.io/permanent-redirect-code：永久重定向的HTTP状态码，默认为301。
 
@@ -422,7 +422,7 @@ spec:
             pathType: Exact
 ```
 
-## 临时重定向
+### 临时重定向
 - higress.io/temporal-redirect：临时重定向的目标url，必须包含scheme（http or https)。
   
 将请求`http://example.com/test`临时重定向为`http://example.com/app`。
@@ -448,9 +448,9 @@ spec:
             pathType: Exact
 ```
 
-# Header控制
+## Header控制
 通过Header控制，您可以在转发请求到后端服务之前对请求Header进行增删改，在收到响应转发给客户端时对响应Header进行增删改。
-## 请求Header控制
+### 请求Header控制
 - higress.ingress.kubernetes.io/request-header-control-add：请求在转发给后端服务时，添加指定Header。若该Header存在，则其值拼接在原有值后面。语法如下：
   - 单个Header：Key Value
   - 多个Header：使用yaml特殊符号 |，每对Key Value单独处于一行
@@ -530,7 +530,7 @@ spec:
             pathType: Exact
 ```
 
-## 响应Header控制
+### 响应Header控制
 - higress.ingress.kubernetes.io/response-header-control-add：请求在收到后端服务响应之后并且转发响应给客户端之前，添加指定Header。若该Header存在，则其值拼接在原有值后面。语法如下：
   - 单个Header：Key Value
   - 多个Header：使用yaml特殊符号 |，每对Key Value单独处于一行
@@ -564,7 +564,7 @@ spec:
             pathType: Exact
 ```
 
-# 重试
+## 重试
 Higress提供路由级别的重试设置，可以为出错的请求调用自动进行重试。您可以按需设置重试条件，例如建立连接失败，或者后端服务不可用以及对指定HTTP状态码的响应等进行请求重试。
 - higress.io/proxy-next-upstream-tries：请求的最大重试次数。默认3次。
 - higress.io/proxy-next-upstream-timeout：请求重试的超时时间，单位秒。默认未配置超时时间。
@@ -601,7 +601,7 @@ spec:
             pathType: Exact
 ```
 
-# 配置后端服务协议：HTTPS或GRPC
+## 配置后端服务协议：HTTPS或GRPC
 Higress默认使用HTTP协议转发请求到后端业务容器。当您的业务容器为HTTPS协议时，可以通过使用注解`higress.io/backend-protocol: "HTTPS"`；当您的业务容器为GRPC服务时，可以通过使用注解`higress.io/backend-protocol: "GRPC"`。
 > 说明：相比Nginx Ingress的优势，如果您的后端服务所属的K8s Service资源中关于Port Name的定义为grpc或http2，您无需配置注解higress.io/backend-protocol: "GRPC"，Higress会自动使用GRPC或者HTTP2。
 
@@ -685,9 +685,9 @@ spec:
     app: demo-service
 ```
 
-# 配置后端服务的负载均衡算法
+## 配置后端服务的负载均衡算法
 负载均衡决定着网关在转发请求至后端服务时如何选择节点。
-## 普通负载均衡算法
+### 普通负载均衡算法
 - higress.io/load-balance：后端服务的普通负载均衡算法。默认为round_robin。合法值如下：
   - round_robin：基于轮询的负载均衡。
   - least_conn：基于最小请求数的负载均衡。
@@ -716,7 +716,7 @@ spec:
             pathType: Exact
 ```
 
-## 基于一致性Hash的负载均衡算法
+### 基于一致性Hash的负载均衡算法
 基于一致性Hash的负载均衡算法具备请求亲和性，具有相同特征的请求会始终负载到相同节点上。Higress支持基于部分Nginx 变量、请求Header和请求路径参数作为Hash Key。
 - higress.io/upstream-hash-by：基于一致Hash的负载均衡算法。Higress支持以下几种形式：
   - 支持配置部分nginx变量：
@@ -795,7 +795,7 @@ spec:
             pathType: Exact
 ```
 
-# Cookie亲和性 （会话保持）
+## Cookie亲和性 （会话保持）
 具备相同的Cookie的请求会被网关始终负载到同一个节点，并且如果第一次访问携带Cookie，Higress会在第一次响应时为客户端生成一个Cookie，用来保证后续的请求被网关始终负载到相同节点。
 - higress.io/affinity：亲和性种类，目前只支持cookie，默认为cookie。
 - higress.io/affinity-mode：亲和性模式，Higress目前只支持balanced模式，默认为balanced模式。
@@ -853,7 +853,7 @@ spec:
             pathType: Exact
 ```
 
-# 网关与后端服务双向认证（MTLS)
+## 网关与后端服务双向认证（MTLS)
 默认情况下，Higress默认使用HTTP协议转发请求到后端业务容器。你可以通过使用注解`higress.io/backend-protocol: "HTTPS"`配置Higress访问后端服务使用HTTPS协议，但这是单向TLS，也就是说只有Higress会验证后端服务提供的证书，且一般后端服务使用的证书需要是权威CA签发的。另一种更安全的模式是零信任，网关会验证后端服务的证书是否合法，同样后端服务也会验证网关提供的证书是否合法，这就是MTLS，网关与后端服务进行双向认证。
 - higress.io/proxy-ssl-secret：网关使用的客户端证书，用于后端服务对网关进行身份认证，格式为 secretNamespace/secretName。
 - higress.io/proxy-ssl-name：TLS握手期间使用的SNI。
