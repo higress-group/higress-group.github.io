@@ -28,18 +28,18 @@ const sidebars = {
         'user/quickstart',
         {
           type: 'category',
-          label: 'Parameters Configurations Guide',
-          items: ['user/wasm-go', 'user/kruise-rollout', 'user/nacos-route', 'user/spring-cloud', 'user/dubbo'],
-        },
-        {
-          type: 'category',
-          label: 'More Doc',
-          items: ['user/prometheus', 'user/opensergo-gray', 'user/sentinel', 'user/waf'],
-        },
-        {
-          type: 'category',
           label: 'Reference',
           items: ['user/annotation', 'user/annotation-use-case', 'user/configurations', 'user/mcp-bridge', 'user/dubbo-envoyfilter'],
+        },
+        {
+          type: 'category',
+          label: 'Plugins',
+          items: ['plugins/intro','plugins/custom','plugins/jwt-auth','plugins/hmac-auth','plugins/key-auth','plugins/basic-auth','plugins/key-rate-limit','plugins/custom-response','plugins/bot-detect','plugins/request-block','plugins/waf'],
+        },
+        {
+          type: 'category',
+          label: 'Parameters Configurations Guide',
+          items: ['user/wasm-go', 'user/kruise-rollout', 'user/nacos-route', 'user/spring-cloud', 'user/dubbo', 'user/prometheus', 'user/waf'],
         },
       ],
     },
