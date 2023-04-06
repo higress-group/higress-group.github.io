@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://higress.io/en-us/blog</id>
     <title>Higress Blog</title>
-    <updated>2023-04-03T10:53:06.000Z</updated>
+    <updated>2023-04-06T13:45:21.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://higress.io/en-us/blog"/>
     <subtitle>Higress Blog</subtitle>
@@ -11,7 +11,7 @@
         <title type="html"><![CDATA[release-070]]></title>
         <id>https://higress.io/en-us/blog/release-070</id>
         <link href="https://higress.io/en-us/blog/release-070"/>
-        <updated>2023-04-03T10:53:06.000Z</updated>
+        <updated>2023-04-06T13:45:21.000Z</updated>
         <summary type="html"><![CDATA[Placeholder. DO NOT DELETE.]]></summary>
         <content type="html"><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content>
     </entry>
@@ -19,7 +19,7 @@
         <title type="html"><![CDATA[user-uu]]></title>
         <id>https://higress.io/en-us/blog/user-uu</id>
         <link href="https://higress.io/en-us/blog/user-uu"/>
-        <updated>2023-04-03T10:53:06.000Z</updated>
+        <updated>2023-04-06T13:45:21.000Z</updated>
         <summary type="html"><![CDATA[Placeholder. DO NOT DELETE.]]></summary>
         <content type="html"><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content>
     </entry>
