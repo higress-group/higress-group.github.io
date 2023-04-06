@@ -128,15 +128,15 @@ curl http://exmaple.com/foo -H 'exmaple-key: 123'
 
 | 插件名称 | 镜像地址 |
 | -------  | -------  | 
-| Key 认证 |  |
-| Basic 认证 |  |
-| HMAC 认证 |  |
-| JWT 认证 |  |
-| 机器人拦截 |  |
-| 自定义应答 |  |
-| 请求屏蔽 |  |
-| 基于 Key 限流 |  |
-| WAF 防护 |  |
+| Key 认证 | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/key-auth:1.0.0 |
+| Basic 认证 | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/basic-auth:1.0.0 |
+| HMAC 认证 | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/hmac-auth:1.0.0 |
+| JWT 认证 | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/jwt-auth:1.0.0 |
+| 机器人拦截 | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/bot-detect:1.0.0 |
+| 自定义应答 | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/custom-response:1.0.0 |
+| 请求屏蔽 | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/request-block:1.0.0 |
+| 基于 Key 限流 | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/key-rate-limit:1.0.0 |
+| WAF 防护 | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/waf:1.0.0  |
 
 ## Wasm 插件原理介绍
 

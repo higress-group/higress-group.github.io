@@ -1,5 +1,5 @@
 ---
-title: API Key 认证
+title: Key 认证
 keywords: [higress,key auth]
 description: API Key 认证插件配置参考
 ---
