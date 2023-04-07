@@ -92,8 +92,14 @@ Commands for Windows:
 kind.exe create cluster --name higress --config=cluster.conf
 kubectl.exe config use-context kind-higress
 ```
+### Step 3: support `LoadBalancer` svc in kind
+currently, the namespace `higress-system` has a svc which type is `LoadBalancer`, it can not get IP in cluster by default.
+we can use official support to enable this function,please refer to `https://kind.sigs.k8s.io/docs/user/loadbalancer/`
 
-### Step 3: Install Higress
+
+### Step 4: Install Higress
+when you install `higress` in local environment, you should use `--set global.kind=true`;
+in the future, we will use `--set global.local=true` for unambiguous.
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
@@ -160,7 +166,8 @@ metadata:
 spec:
   ingressClassName: higress
   rules:
-  - http:
+  - host: foo.bar.com
+    http:
       paths:
       - pathType: Prefix
         path: "/foo"
