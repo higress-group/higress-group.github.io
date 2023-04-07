@@ -29,6 +29,8 @@ kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBala
 
 ## Scenario 2: Use in Local Environment
 
+The following groups can be applied to all local K8s clusters. If there is already a test cluster running on your PC, you can go to Step 3 directly and install Higress.
+
 ### Step 1: Install kubectl & kind
 
 **MacOS:**
@@ -97,8 +99,17 @@ kubectl.exe config use-context kind-higress
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress-local --create-namespace
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=true  --set higress-controller.domain=console.higress.io --set higress-console.admin.password.value=admin
 ```
+
+After installation, you can access Higress Gateway in the local cluster via port 80 and 443.
+
+Note: If you are using a pre-existed local K8s cluster, you may need to use the command below to forward ports out of the cluster, and try the local ports later.
+
+```bash
+kubectl port-forward service/higress-gateway -n higress-system 80:80 443:443
+```
+
 ## Stage 2: Configuration
 
 Assuming that there is already a service named "foo" deployed in the default namespace, we'd like to create a route, forwarding http://foo.bar.com/foo requests to this service.
