@@ -93,7 +93,16 @@ kind.exe create cluster --name higress --config=cluster.conf
 kubectl.exe config use-context kind-higress
 ```
 
-### 第三步：安装 Higress
+### 第三步：开启`Kind`支持`LoadBalancer`类型的`svc`的能力
+目前，由于`higress-system`命名空间的名称为`higress-gateway`的`svc`，它的类型为`LoadBalancer`，而`Kind`默认情况下不支持这种类型；
+需要通过官方文档`https://kind.sigs.k8s.io/docs/user/loadbalancer/` 提供的能力予以支持。
+
+### 第四步：安装 Higress
+
+本地安装开关: `--set global.kind=true`；
+为避免歧义，后面会调整属性名称为：`--set global.local=true`
+
+
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
@@ -163,7 +172,8 @@ metadata:
 spec:
   ingressClassName: higress
   rules:
-  - http:
+  - host: foo.bar.com
+    http:
       paths:
       - pathType: Prefix
         path: "/foo"
