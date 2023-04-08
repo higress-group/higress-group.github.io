@@ -4,7 +4,7 @@
         <title>Higress Blog</title>
         <link>https://higress.io/en-us/blog</link>
         <description>Higress Blog</description>
-        <lastBuildDate>Sat, 08 Apr 2023 06:47:46 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 08 Apr 2023 13:37:24 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-us</language>
@@ -12,7 +12,7 @@
             <title><![CDATA[release-070]]></title>
             <link>https://higress.io/en-us/blog/release-070</link>
             <guid>https://higress.io/en-us/blog/release-070</guid>
-            <pubDate>Sat, 08 Apr 2023 06:47:46 GMT</pubDate>
+            <pubDate>Sat, 08 Apr 2023 13:37:24 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -20,7 +20,7 @@
             <title><![CDATA[user-uu]]></title>
             <link>https://higress.io/en-us/blog/user-uu</link>
             <guid>https://higress.io/en-us/blog/user-uu</guid>
-            <pubDate>Sat, 08 Apr 2023 06:47:46 GMT</pubDate>
+            <pubDate>Sat, 08 Apr 2023 13:37:24 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
