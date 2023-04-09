@@ -29,6 +29,8 @@ kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBala
 
 ### 场景二：在本地环境中使用
 
+以下步骤适用于所有在本地启动 K8s 集群进行验证的场景。如果您本地已经配置好了一个测试集群，可以直接跳转到第三步安装 Higress。
+
 ### 第一步：安装 kubectl & kind
 
 **MacOS：**
@@ -106,10 +108,16 @@ kubectl.exe config use-context kind-higress
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.kind=true --set higress-console.o11y.enabled=true  --set higress-controller.domain=console.higress.io --set higress-console.admin.password.value=admin
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=true  --set higress-controller.domain=console.higress.io --set higress-console.admin.password.value=admin
 ```
 
 安装完成后，通过本地的 80 和 443 端口即可访问本地集群内的 Higress Gateway。
+
+注：如果您使用的是本地现存的 K8s 集群，那么可能需要先执行下方命令将 K8s 集群内的端口映射出来，然后再尝试访问本地端口。
+
+```bash
+kubectl port-forward service/higress-gateway -n higress-system 80:80 443:443
+```
 
 ## 阶段二：配置
 
