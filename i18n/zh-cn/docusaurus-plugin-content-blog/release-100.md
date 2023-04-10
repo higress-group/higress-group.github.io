@@ -71,7 +71,7 @@ Higress 控制台的功能还在不断丰富和演进中，当前还有很多 Hi
 
 当前 Higress 1.0.0 已经发布了 RC 版本，helm [安装](https://higress.io/zh-cn/docs/user/quickstart)或[升级](https://higress.io/zh-cn/docs/ops/upgrade)时需要指定`--devel`参数，例如：`helm upgrade higress -n higress-system --devel`
 
-1.0.0 RC 版本已经在社区小伙伴的协作下完成了多轮测试和修复工作，目前已经正式可用，欢迎大家使用。
+1.0.0 RC 版本已经在社区小伙伴的协作下完成了多轮测试和修复工作，欢迎大家使用。最终的正式版本，也将在近期很快推出。
 
 ## 企业落地支持
 
