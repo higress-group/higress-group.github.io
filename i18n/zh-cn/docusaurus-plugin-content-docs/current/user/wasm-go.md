@@ -199,7 +199,175 @@ tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
 
 ## 三、本地调试
 
-TBD
+### 工具准备
+安装[Docker](https://docs.docker.com/engine/install/?spm=a2c4g.426926.0.0.29071f47tjgquo)
+
+### 使用 docker compose 启动验证
+1. 进入在编写插件时创建的目录，例如wasm-demo目录，确认该目录下已经编译生成了main.wasm文件。
+2. 在目录下创建文件docker-compose.yaml，内容如下：
+```yaml
+version: '3.7'
+services:
+  envoy:
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/envoy:1.20
+    depends_on:
+    - httpbin
+    networks:
+    - wasmtest
+    ports:
+    - "10000:10000"
+    volumes:
+    - ./envoy.yaml:/etc/envoy/envoy.yaml
+    - ./main.wasm:/etc/envoy/main.wasm
+
+  httpbin:
+    image: kennethreitz/httpbin:latest
+    networks:
+    - wasmtest
+    ports:
+    - "12345:80"
+
+networks:
+  wasmtest: {}
+```
+3. 继续在该目录下创建文件envoy.yaml，内容如下：
+```yaml
+admin:
+  address:
+    socket_address:
+      protocol: TCP
+      address: 0.0.0.0
+      port_value: 9901
+static_resources:
+  listeners:
+  - name: listener_0
+    address:
+      socket_address:
+        protocol: TCP
+        address: 0.0.0.0
+        port_value: 10000
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          scheme_header_transformation:
+            scheme_to_overwrite: https
+          stat_prefix: ingress_http
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: local_service
+              domains: ["*"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: httpbin
+          http_filters:
+          - name: wasmdemo
+            typed_config:
+              "@type": type.googleapis.com/udpa.type.v1.TypedStruct
+              type_url: type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
+              value:
+                config:
+                  name: wasmdemo
+                  vm_config:
+                    runtime: envoy.wasm.runtime.v8
+                    code:
+                      local:
+                        filename: /etc/envoy/main.wasm
+                  configuration:
+                    "@type": "type.googleapis.com/google.protobuf.StringValue"
+                    value: |
+                      {
+                        "mockEnable": false
+                      }
+          - name: envoy.filters.http.router
+  clusters:
+  - name: httpbin
+    connect_timeout: 30s
+    type: LOGICAL_DNS
+    # Comment out the following line to test on v6 networks
+    dns_lookup_family: V4_ONLY
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: httpbin
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: httpbin
+                port_value: 80
+```
+4. 执行以下命令启动docker compose。
+```bash
+docker compose up
+```
+
+### 功能验证
+1. WASM功能验证
+
+使用curl直接访问httpbin，可以看到不经过网关时的请求头内容，如下：
+```
+curl http://127.0.0.1:12345/get
+
+{
+  "args": {},
+  "headers": {
+    "Accept": "*/*",
+    "Host": "127.0.0.1:12345",
+    "User-Agent": "curl/7.79.1"
+  },
+  "origin": "172.18.0.1",
+  "url": "http://127.0.0.1:12345/get"
+}
+```
+
+使用curl通过网关访问httpbin，可以看到经过网关处理后的请求头的内容，如下：
+```
+curl http://127.0.0.1:10000/get
+
+{
+  "args": {},
+  "headers": {
+    "Accept": "*/*",
+    "Hello": "world",
+    "Host": "127.0.0.1:10000",
+    "Original-Host": "127.0.0.1:10000",
+    "Req-Start-Time": "1681269273896",
+    "User-Agent": "curl/7.79.1",
+    "X-Envoy-Expected-Rq-Timeout-Ms": "15000"
+  },
+  "origin": "172.18.0.3",
+  "url": "https://127.0.0.1:10000/get"
+}
+```
+
+此时上文编写插件的功能已经生效了，加入了`hello: world`请求头。
+
+2. 插件配置修改验证
+
+修改envoy.yaml，将`mockEnable`配置修改为true。
+```yaml
+  configuration:
+    "@type": "type.googleapis.com/google.protobuf.StringValue"
+    value: |
+      {
+        "mockEnable": true
+      }
+```
+
+使用curl通过网关访问httpbin，可以看到经过网关处理后的请求头的内容，如下：
+
+```
+curl http://127.0.0.1:10000/get
+
+hello world
+```
+说明插件配置修改生效，开启了mock应答直接返回了hello world。
+
 
 ## 更多示例
 
