@@ -46,7 +46,7 @@ date: 2023-04-10
 
 ### 企业落地支持
 
-在 RC 版本阶段使用 Higress 的企业用户，可以在此 [Github Issue](https://github.com/alibaba/higress/issues/1) 下登记企业信息，并联系我(微信:nomadao 钉钉:chengtanzty)，我会将你加到 Higress 企业落地群，群里有社区核心研发同学，可以提供更及时的响应和帮助。
+在 RC 版本阶段使用 Higress 的企业用户，社区会在落地阶段提供更多帮助，我们建立了 Higress 企业落地群，可以联系我(微信:nomadao 钉钉:chengtanzty)，会将你加进群，群里有社区核心研发同学，可以提供更及时的响应和帮助。
 
 
 ### 安装升级方式
