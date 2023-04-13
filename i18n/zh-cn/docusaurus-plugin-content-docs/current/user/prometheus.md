@@ -31,7 +31,7 @@ helm install higress -n higress-system higress.io/higress --create-namespace --r
 
 Higress 的数据面和控制面组件均通过 API 对外暴露了一系列的 Metrics 指标。只需要为 Prometheus 添加相应指标采集配置，并在 Grafana 中配置监控面板就可以监控 Higress 的内部运行情况了。
 
-在正式开始配置之前，请先在浏览器中打开 Higress Console，并在左侧导航栏切换至“监控面板”页面。在未安装内置监控套件时，页面上就会展示出外置监控面板 URL 配置页面和外部系统的配置犯法。
+在正式开始配置之前，请先在浏览器中打开 Higress Console，并在左侧导航栏切换至“监控面板”页面。在未安装内置监控套件时，页面上就会展示出外置监控面板 URL 配置页面和外部系统的配置法。
 
 ![image](/img/user/prometheus/zh-cn/external-before.png)
 
@@ -39,4 +39,4 @@ Higress 的数据面和控制面组件均通过 API 对外暴露了一系列的 
 
 ![image](/img/user/prometheus/zh-cn/external-after.png)
 
-如果需要更新监控面板的 URL，则可点击页面右上角的“重新配置”按钮。
+如果需要更新监控面板的 URL，则可点击页面左上角的“重新配置”按钮。
