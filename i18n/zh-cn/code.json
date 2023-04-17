@@ -274,7 +274,7 @@
     "message": "一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成、易使用、易扩展、热更新的下一代云原生网关。"
   },
   "homepage.introTitle": {
-    "message": "Higress 是什么？"
+    "message": "参与 Higress 社区"
   },
   "homepage.featureListTitle1": {
     "message": "易于使用"
