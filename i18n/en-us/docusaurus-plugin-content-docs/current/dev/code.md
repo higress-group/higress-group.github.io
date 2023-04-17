@@ -29,7 +29,7 @@ Code base structure descriptions:
 
 - docker: Docker image building related scripts.
 
-During compilation, `make prebuild` will be executed automatically, generating an `external` folder, which contains all the external dependeices, including envoy and istios, with all the patches applied.
+During compilation, `make prebuild` will be executed automatically, generating an `external` folder, which contains all the external dependencies, including envoy and istios, with all the patches applied.
 
 If you would like to modify the source code of envoy or istio, you can do it directly in the `external` folder, then execute the prebuild command and generate the patch file with diff later. For example:
 

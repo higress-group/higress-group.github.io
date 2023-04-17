@@ -64,7 +64,7 @@ allow:
 - consumer1
 ```
 
-对 *.exmaple.com 和 test.com 在这两个域名做如下配置:
+对 *.example.com 和 test.com 在这两个域名做如下配置:
 
 ```yaml
 allow:
