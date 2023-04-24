@@ -35,29 +35,36 @@ kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBala
 
 **MacOS：**
 ```bash
-curl -Lo ./kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
 # for Intel Macs
-[ $(uname -m) = x86_64 ]&& curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-amd64
-# for M1 / ARM Macs
-[ $(uname -m) = arm64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-arm64
-chmod +x ./kind ./kubectl
-mv ./kind ./kubectl /some-dir-in-your-PATH/
+[ $(uname -m) = x86_64 ] && curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
+[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.18.0/kind-darwin-amd64
+# for Apple Silicon Macs (M1/M2)
+[ $(uname -m) = arm64 ] && curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
+[ $(uname -m) = arm64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.18.0/kind-darwin-arm64
+chmod +x ./kubectl ./kind
+sudo mv ./kubectl ./kind /usr/local/bin
 ```
 
 **Windows 中使用 PowerShell：**
-```bash
-curl.exe -Lo kubectl.exe https://storage.googleapis.com/kubernetes-release/release/$(curl.exe -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/windows/amd64/kubectl.exe
-curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.17.0/kind-windows-amd64
-Move-Item .\kind-windows-amd64.exe c:\some-dir-in-your-PATH\kind.exe
-Move-Item .\kubectl.exe c:\some-dir-in-your-PATH\kubectl.exe
+
+下载 [kubectl v1.27.1](https://dl.k8s.io/release/v1.27.1/bin/windows/amd64/kubectl.exe) 和 [kind v0.18.0](https://kind.sigs.k8s.io/dl/v0.18.0/kind-windows-amd64)。
+
+如果你本地安装了 `curl` 工具，可直接执行以下命令：
+```powershell
+curl.exe -LO "https://dl.k8s.io/release/v1.27.1/bin/windows/amd64/kubectl.exe"
+curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.18.0/kind-windows-amd64
 ```
+> 注：若要获知 `kubectl` 的最新稳定版本（例如用于脚本编写等场景），可查看 https://dl.k8s.io/release/stable.txt 的内容.
+
+然后将下载下来的 `kind-windows-amd64` 或者 `kind-windows-amd64.exe` 重命名为 `kind.exe`，并将 `kubectl.exe` 和 `kind.exe` 移动到 `PATH` 环境变量所包含的路径下。
 
 **Linux:**
+
 ```bash
-curl -Lo ./kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
-chmod +x ./kind ./kubectl
-sudo mv ./kind ./kubectl /usr/local/bin/kind
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.18.0/kind-linux-amd64
+chmod +x ./kubectl ./kind
+sudo mv ./kubectl ./kind /usr/local/bin
 ```
 
 ### 第二步：创建并启用 kind
