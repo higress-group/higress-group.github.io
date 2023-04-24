@@ -3,6 +3,7 @@ title: Quick Start
 keywords: [Higress]
 description: Quick Start.
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en-us/docusaurus-plugin-content-docs/current/user/quickstart.md
+toc_max_heading_level: 4
 ---
 
 # Quick Start
@@ -11,7 +12,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ### Scenario 1: Use in a Standard K8s Cluster
 
-#### Helm Installation Command
+**Helm Installation Command**
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
@@ -27,11 +28,11 @@ Obtain the LoadBalancer IP of Higress Gateway and write it down. You can use it 
 kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
-## Scenario 2: Use in Local Environment
+### Scenario 2: Use in Local Environment
 
 The following groups can be applied to all local K8s clusters. If there is already a test cluster running on your PC, you can go to Step 3 directly and install Higress.
 
-### Step 1: Install kubectl & kind
+#### Step 1: Install kubectl & kind
 
 **MacOS:**
 ```bash
@@ -67,7 +68,7 @@ chmod +x ./kubectl ./kind
 sudo mv ./kubectl ./kind /usr/local/bin
 ```
 
-### Step 2: Create and Activate kind
+#### Step 2: Create and Activate kind
 
 First, create a cluster config file: `cluster.conf`
 
@@ -108,7 +109,7 @@ currently, the namespace `higress-system` has a svc which type is `LoadBalancer`
 we can use official support to enable this function,please refer to `https://kind.sigs.k8s.io/docs/user/loadbalancer/`
 
 
-### Step 3: Install Higress
+#### Step 3: Install Higress
 when you install `higress` in local environment, you should use `--set global.kind=true`;
 in the future, we will use `--set global.local=true` for unambiguous.
 

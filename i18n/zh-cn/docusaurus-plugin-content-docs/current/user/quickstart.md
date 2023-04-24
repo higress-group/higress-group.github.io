@@ -3,6 +3,7 @@ title: 快速开始
 keywords: [Higress]
 description: Higress 快速开始.
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/quickstart.md
+toc_max_heading_level: 4
 ---
 
 # 快速开始
@@ -11,7 +12,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ### 场景一：在标准 K8s 集群中使用
 
-#### Helm 安装命令
+**Helm 安装命令**
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
@@ -31,7 +32,7 @@ kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBala
 
 以下步骤适用于所有在本地启动 K8s 集群进行验证的场景。如果您本地已经配置好了一个测试集群，可以直接跳转到第三步安装 Higress。
 
-### 第一步：安装 kubectl & kind
+#### 第一步：安装 kubectl & kind
 
 **MacOS：**
 ```bash
@@ -67,7 +68,7 @@ chmod +x ./kubectl ./kind
 sudo mv ./kubectl ./kind /usr/local/bin
 ```
 
-### 第二步：创建并启用 kind
+#### 第二步：创建并启用 kind
 
 首先创建一个集群配置文件: `cluster.conf`
 
@@ -106,7 +107,7 @@ kubectl.exe config use-context kind-higress
 
 上述配置是为了将本地（127.0.0.1）的80和443端口用于Higress访问，如果希望在本地使用 LoadBalancer IP 进行访问，可以参考Kind文档`https://kind.sigs.k8s.io/docs/user/loadbalancer/` 提供的能力予以支持。
 
-### 第三步：安装 Higress
+#### 第三步：安装 Higress
 
 本地安装开关: `--set global.kind=true`；
 为避免歧义，后面会调整属性名称为：`--set global.local=true`
