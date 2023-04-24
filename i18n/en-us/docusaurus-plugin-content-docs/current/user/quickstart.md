@@ -35,29 +35,36 @@ The following groups can be applied to all local K8s clusters. If there is alrea
 
 **MacOS:**
 ```bash
-curl -Lo ./kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
 # for Intel Macs
-[ $(uname -m) = x86_64 ]&& curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-amd64
-# for M1 / ARM Macs
-[ $(uname -m) = arm64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-arm64
-chmod +x ./kind ./kubectl
-mv ./kind ./kubectl /some-dir-in-your-PATH/
+[ $(uname -m) = x86_64 ] && curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
+[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.18.0/kind-darwin-amd64
+# for Apple Silicon Macs (M1/M2)
+[ $(uname -m) = arm64 ] && curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
+[ $(uname -m) = arm64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.18.0/kind-darwin-arm64
+chmod +x ./kubectl ./kind
+sudo mv ./kubectl ./kind /usr/local/bin
 ```
 
 **Use PowerShell in Windows:**
-```bash
-curl.exe -Lo kubectl.exe https://storage.googleapis.com/kubernetes-release/release/$(curl.exe -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/windows/amd64/kubectl.exe
-curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.17.0/kind-windows-amd64
-Move-Item .\kind-windows-amd64.exe c:\some-dir-in-your-PATH\kind.exe
-Move-Item .\kubectl.exe c:\some-dir-in-your-PATH\kubectl.exe
+
+Download [kubectl v1.27.1](https://dl.k8s.io/release/v1.27.1/bin/windows/amd64/kubectl.exe) and [kind v0.18.0](https://kind.sigs.k8s.io/dl/v0.18.0/kind-windows-amd64).
+
+Or if you have `curl` installed, use the following commands:
+```powershell
+curl.exe -LO "https://dl.k8s.io/release/v1.27.1/bin/windows/amd64/kubectl.exe"
+curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.18.0/kind-windows-amd64
 ```
+> Note: To find out the latest stable version of `kubectl` (for example, for scripting), take a look at https://dl.k8s.io/release/stable.txt.
+
+Then rename downloaded `kind-windows-amd64` or `kind-windows-amd64.exe` to `kind.exe`. And move both exe files to a file location on your system PATH.
 
 **Linux:**
+
 ```bash
-curl -Lo ./kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
-chmod +x ./kind ./kubectl
-sudo mv ./kind ./kubectl /usr/local/bin/kind
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.18.0/kind-linux-amd64
+chmod +x ./kubectl ./kind
+sudo mv ./kubectl ./kind /usr/local/bin
 ```
 
 ### Step 2: Create and Activate kind
@@ -151,7 +158,8 @@ spec:
 
 ### Method 1: Use Higress Console
 
-Edit hosts to point domain `console.higress.io` to the IP of Higress Gateway (In a standard K8s cluster, use the previously obtained LoadBalancer IP. And use 127.0.0.1 instead in a local cluster).
+Edit the hosts file and point domain `console.higress.io` to the IP of Higress Gateway (In a standard K8s cluster, use the previously obtained LoadBalancer IP. And use 127.0.0.1 instead in a local cluster).
+
 ```
 GatewayIP console.higress.io
 ```
