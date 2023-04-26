@@ -108,9 +108,9 @@ go get github.com/tidwall/gjson
 ```
 package main
 
-import ("github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper",
-        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm",
-        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types",
+import ("github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
+        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
         "github.com/tidwall/gjson"
 )
 
@@ -378,8 +378,8 @@ hello world
 package main
 
 import (
-        "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper",
-        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm",
+        "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
         "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
 )
 
@@ -405,12 +405,12 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 package main
 
 import (
-	"errors",
-	"net/http",
-	"strings",
-  "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper",
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm",
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types",
+	"errors"
+	"net/http"
+	"strings"
+  "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
+	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 

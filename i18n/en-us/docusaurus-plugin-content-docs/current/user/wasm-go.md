@@ -124,10 +124,10 @@ More samples can be found in section 4 below.
 package main
 
 import (
-        "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper",
-        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm",
-        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types",
-        "github.com/tidwall/gjson",
+        "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
+        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+        "github.com/tidwall/gjson"
 )
 
 func main() {
@@ -281,9 +281,9 @@ import (
 	"errors",
 	"net/http",
 	"strings",
-  "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper",
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm",
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types",
+  "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
+	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
