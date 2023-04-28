@@ -15,9 +15,9 @@ description: 自定义插件配置参考
 
 编译环境要求如下：
 
-- Go 版本: >= 1.18 (需要支持范型特性)
+- Go 版本: >= 1.18（需要支持泛型特性）
 
-- TinyGo 版本: >= 0.25.0 (建议使用最新版本)
+- TinyGo 版本: >= 0.25.0（建议使用 0.25.0）
 
 下面是本地步骤构建 [request-block](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/request-block) 插件的例子。
 
