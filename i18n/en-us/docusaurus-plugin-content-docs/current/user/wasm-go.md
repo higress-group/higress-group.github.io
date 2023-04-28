@@ -124,10 +124,10 @@ More samples can be found in section 4 below.
 package main
 
 import (
-        "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper",
-        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm",
-        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types",
-        "github.com/tidwall/gjson",
+    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
+    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+    "github.com/tidwall/gjson"
 )
 
 func main() {
@@ -247,9 +247,9 @@ If the plugin needs no configuration, just define an empty config struct.
 package main
 
 import (
-        "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper",
-        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm",
-        "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types",
+    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
+    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
 )
 
 func main() {
@@ -278,12 +278,12 @@ Only HTTP requests are supported for now. You can send requests to Nacos and K8s
 package main
 
 import (
-	"errors",
-	"net/http",
-	"strings",
-  "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper",
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm",
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types",
+	"errors"
+	"net/http"
+	"strings"
+    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
+	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
