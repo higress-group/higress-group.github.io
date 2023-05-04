@@ -134,6 +134,12 @@ const config = {
             position: 'right',
           },
           {
+            label: 'Commercial',
+            to: 'https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0',
+            position: 'right',
+            target: '_blank',
+          },
+          {
             label: 'Developers',
             type: 'doc',
             docId: 'developers/developers_dev',

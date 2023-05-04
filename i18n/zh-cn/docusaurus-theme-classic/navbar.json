@@ -26,5 +26,9 @@
   "item.label.Demo": {
     "message": "控制台样例",
     "description": "Navbar item with label Demo"
+  },
+  "item.label.Commercial": {
+    "message": "Higress 企业版",
+    "description": "Navbar item with label Commercial"
   }
 }
