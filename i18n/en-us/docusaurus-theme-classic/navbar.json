@@ -26,5 +26,9 @@
   "item.label.Demo": {
     "message": "DEMO",
     "description": "Navbar item with label Demo"
+  },
+  "item.label.Commercial": {
+    "message": "HIGRESS IN CLOUD",
+    "description": "Navbar item with label Commercial"
   }
 }
