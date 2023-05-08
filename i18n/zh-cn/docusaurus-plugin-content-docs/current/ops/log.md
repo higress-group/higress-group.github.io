@@ -7,6 +7,13 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # 日志说明
 
+查看日志可以使用下面命令:
+
+```bash
+kubectl logs -n higress-system -l app=higress-gateway  --since=5m
+```
+
+
 Higress 默认使用的日志格式为 JSON 格式，如下所示:
 
 ```json
@@ -64,3 +71,4 @@ Value 的配置含义可以参考[ envoy 日志说明](https://www.envoyproxy.io
 | upstream_transport_failure_reason |	string |	上游链接失败的原因。|
 | user_agent |	string |	HTTP Header中的UserAgent。|
 | x_forwarded_for |	string |	HTTP Header中的x-forwarded-for，通常用来表示HTTP请求端真实IP。|
+
