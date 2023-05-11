@@ -17,7 +17,7 @@ Each image needs to be build in [OCI Image Specification](https://github.com/ope
 
 - spec.yaml: Required. Metadata file of the plugin. Please refer to section 3 below for its format.
 - README.md: Required. Readme file describing the usage of the plugin. Markdown format. Written in English or Chinese.
-- README_{lang}.md: Optional. Readme file describing the usage of the plugin. Markdown format. `lang` can be `CN` or `EN`.
+- README_{lang}.md: Optional. Readme file describing the usage of the plugin. Markdown format. `lang` can be `ZH` or `EN`.
 - icon.png: Optional. Icon file of the plugin. A URL of the plugin icon can also be specified in spec.yaml. If both the file and the URL are configured, the file will be used for display.
 - plugin.wasm: Required. The binary file of the plugin.
 
