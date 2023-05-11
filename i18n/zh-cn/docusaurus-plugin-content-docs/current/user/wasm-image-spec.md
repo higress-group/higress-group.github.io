@@ -17,7 +17,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 - spec.yaml：必要。插件的元数据文件。其内容格式请见第 3 节。
 - README.md：必要。插件的用法说明文件。使用 Markdown 格式。语言可使用英文或中文。
-- README_{lang}.md：可选。插件用法说明文件的翻译版本。使用 Markdown 格式。`lang` 的取值为 `CN` 或 `EN`。
+- README_{lang}.md：可选。插件用法说明文件的翻译版本。使用 Markdown 格式。`lang` 的取值为 `ZH` 或 `EN`。
 - icon.png：可选。插件的图标文件。也可以选择在 spec.yaml 中指定图标 URL。二者同时存在时，系统会使用包内部的图标文件用于展示。
 - plugin.wasm：必要。插件的二进制文件。
 
