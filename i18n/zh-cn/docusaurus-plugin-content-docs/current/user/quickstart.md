@@ -116,7 +116,7 @@ kubectl.exe config use-context kind-higress
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=true  --set higress-controller.domain=console.higress.io --set higress-console.admin.password.value=admin
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=true  --set higress-console.domain=console.higress.io --set higress-console.admin.password.value=admin
 ```
 
 安装完成后，通过本地的 80 和 443 端口即可访问本地集群内的 Higress Gateway。
