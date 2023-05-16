@@ -112,12 +112,12 @@ kubectl.exe config use-context kind-higress
 本地安装开关: `--set global.kind=true`；
 为避免歧义，后面会调整属性名称为：`--set global.local=true`
 
-
-
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=true  --set higress-console.domain=console.higress.io --set higress-console.admin.password.value=admin
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false  --set higress-console.domain=console.higress.io --set higress-console.admin.password.value=admin
 ```
+
+> 若要启用 Higress 内置的套件，可参阅[安装部署](../ops/deploy-by-helm.md)文档。
 
 安装完成后，通过本地的 80 和 443 端口即可访问本地集群内的 Higress Gateway。
 

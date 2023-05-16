@@ -115,8 +115,10 @@ in the future, we will use `--set global.local=true` for unambiguous.
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=true  --set higress-console.domain=console.higress.io --set higress-console.admin.password.value=admin
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false  --set higress-console.domain=console.higress.io --set higress-console.admin.password.value=admin
 ```
+
+> If you'd like to enable the built-in o11y suite, please refer to the [Deploy by Helm](../ops/deploy-by-helm) document.
 
 After installation, you can access Higress Gateway in the local cluster via port 80 and 443.
 
