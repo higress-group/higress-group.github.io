@@ -451,13 +451,13 @@ spec:
 ## Header控制
 通过Header控制，您可以在转发请求到后端服务之前对请求Header进行增删改，在收到响应转发给客户端时对响应Header进行增删改。
 ### 请求Header控制
-- higress.ingress.kubernetes.io/request-header-control-add：请求在转发给后端服务时，添加指定Header。若该Header存在，则其值拼接在原有值后面。语法如下：
+- higress.io/request-header-control-add：请求在转发给后端服务时，添加指定Header。若该Header存在，则其值拼接在原有值后面。语法如下：
   - 单个Header：Key Value
   - 多个Header：使用yaml特殊符号 |，每对Key Value单独处于一行
-- higress.ingress.kubernetes.io/request-header-control-update：请求在转发给后端服务时，修改指定Header。若该header存在，则其值覆盖原有值。语法如下：
+- higress.io/request-header-control-update：请求在转发给后端服务时，修改指定Header。若该header存在，则其值覆盖原有值。语法如下：
   - 单个Header：Key Value
   - 多个Header：使用yaml特殊符号 |，每对Key Value单独处于一行
-- higress.ingress.kubernetes.io/request-header-control-remove：请求在转发给后端服务时，删除指定Header。语法如下：
+- higress.io/request-header-control-remove：请求在转发给后端服务时，删除指定Header。语法如下：
   - 单个Header：Key
   - 多个Header：逗号分隔
 
@@ -467,7 +467,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    higress.ingress.kubernetes.io/request-header-control-add: |
+    higress.io/request-header-control-add: |
       foo bar
       test true
   name: demo
@@ -495,7 +495,7 @@ metadata:
     higress.io/canary: "true"
     higress.io/canary-by-header: "higress"
     higress.io/canary-by-header-value: "v1"
-    higress.ingress.kubernetes.io/request-header-control-add: "stage gray"
+    higress.io/request-header-control-add: "stage gray"
   name: demo-canary-v1
 spec:
   ingressClassName: higress
@@ -514,7 +514,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    higress.ingress.kubernetes.io/request-header-control-add: "stage production"
+    higress.io/request-header-control-add: "stage production"
   name: demo
 spec:
   ingressClassName: higress
@@ -531,13 +531,13 @@ spec:
 ```
 
 ### 响应Header控制
-- higress.ingress.kubernetes.io/response-header-control-add：请求在收到后端服务响应之后并且转发响应给客户端之前，添加指定Header。若该Header存在，则其值拼接在原有值后面。语法如下：
+- higress.io/response-header-control-add：请求在收到后端服务响应之后并且转发响应给客户端之前，添加指定Header。若该Header存在，则其值拼接在原有值后面。语法如下：
   - 单个Header：Key Value
   - 多个Header：使用yaml特殊符号 |，每对Key Value单独处于一行
-- higress.ingress.kubernetes.io/response-header-control-update：请求在收到后端服务响应之后并且转发响应给客户端之前，修改指定Header。若该header存在，则其值覆盖原有值。语法如下：
+- higress.io/response-header-control-update：请求在收到后端服务响应之后并且转发响应给客户端之前，修改指定Header。若该header存在，则其值覆盖原有值。语法如下：
   - 单个Header：Key Value
   - 多个Header：使用yaml特殊符号 |，每对Key Value单独处于一行
-- higress.ingress.kubernetes.io/response-header-control-remove：请求在收到后端服务响应之后并且转发响应给客户端之前，删除指定Header。语法如下：
+- higress.io/response-header-control-remove：请求在收到后端服务响应之后并且转发响应给客户端之前，删除指定Header。语法如下：
   - 单个Header：Key
   - 多个Header：逗号分隔
 
@@ -547,7 +547,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    higress.ingress.kubernetes.io/response-header-control-remove: "req-cost-time"
+    higress.io/response-header-control-remove: "req-cost-time"
   name: demo
 spec:
   ingressClassName: higress
