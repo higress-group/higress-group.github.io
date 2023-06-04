@@ -8,34 +8,49 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 # FAQ
 
 <a href="#1" target="_self">1. Higress 现在适合上生产系统么？</a>
+<br/>
 
 <a href="#2" target="_self">2. Higress 和 Envoy Gateway 有什么区别？</a>
+<br/>
 
 <a href="#3" target="_self">3. Higress 和阿里巴巴的另一款开源网关 Tengine 有哪些不同？</a>
+<br/>
 
 <a href="#4" target="_self">4. Higress 阿里云上的 MSE 云原生网关有什么关系？是基于此孵化的开源项目吗？</a>
+<br/>
 
 <a href="#5" target="_self">5. Higress 将流量网关、微服务网关、安全网关三合一，这种做法业内是否通用？是否是一种发展趋势？</a>
+<br/>
 
 <a href="#6" target="_self">6. Higress 对上游进行了定制，是否存在着无法享受社区福利、还要背负生态跟进的问题？</a>
+<br/>
 
 <a href="#7" target="_self">7. Higress 支持 Nacos 的服务发现，是否有支持 Consul 的计划？</a>
+<br/>
 
 <a href="#8" target="_self">8. Higress 是否有离线部署版本？</a>
+<br/>
 
 <a href="#9" target="_self">9. Higress 能脱离 istio 环境，只基于 Docker 运行吗？</a>
+<br/>
 
 <a href="#10" target="_self">10. Higress 除了运行在 K8s 上，是否支持在虚拟机和物理机上运行呢？ </a>
+<br/>
 
 <a href="#11" target="_self">11. Higress 的 Dashboard 会对外开源么？</a>
+<br/>
 
 <a href="#12" target="_self">12. 当前开源的版本支持 Waf 功能么，有相关的最佳实践么？</a>
+<br/>
 
 <a href="#13" target="_self">13. Higress 是否支持弹性伸缩，网关是无状态的么？</a>
+<br/>
 
 <a href="#14" target="_self">14. Higress 有 roadmap 了么？</a>
+<br/>
 
 <a href="#15" target="_self">15. 如何加入 Higress 社区进行贡献，已经迫不及待了。</a>
+<br/>
 
 ********
 <h3 id='1'>Q: Higress 现在适合上生产系统么？</h3>
@@ -120,7 +135,9 @@ Higress 和 Nacos 初步完成了整合，在整合完后，会提供给大家�
 
 **A:** 
 
-还不支持，但后续会通过 Nacos 做配置管理，来支持这个需求。
+还不支持，开源后续会通过 Nacos 做配置管理，来支持这个需求。
+
+也可以考虑使用 [Higress 企业版](https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0)，这个模式 Higress 是全托管的，无需关心 Higress 的部署和运维，可直接对接虚拟机和物理机上部署的后端服务。
 
 ********
 
