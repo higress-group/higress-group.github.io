@@ -26,9 +26,9 @@ const data = {
         link: 'mailto:higress+subscribe@googlegroups.com',
       },
       {
-        img: '//img.alicdn.com/imgextra/i1/O1CN01ACdB5r1JZHUeUgyrJ_!!6000000001042-0-tps-1022-1040.jpg',
-        imgHover: '//img.alicdn.com/imgextra/i1/O1CN01ACdB5r1JZHUeUgyrJ_!!6000000001042-0-tps-1022-1040.jpg',
-        title: translate({ id: 'community.contactsListTitle2', message: '钉钉群(推荐)' }),
+        img: '/img/community/dingtalk.jpg',
+        imgHover: '/img/community/dingtalk.jpg',
+        title: translate({ id: 'community.contactsListTitle2', message: '钉钉群（推荐）' }),
       },
     ],
   },
