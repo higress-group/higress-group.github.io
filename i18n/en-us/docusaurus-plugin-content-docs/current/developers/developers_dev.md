@@ -22,6 +22,7 @@ This page shows Higress developers and continues to expand. The list is not prio
 | Yiquan Dong | [CH3CHO](https://github.com/CH3CHO) | Trip.com        |
 | Qianglin Li | [Charlie17Li](https://github.com/Charlie17Li) | ZJU-SEL        |
 | Pengyuan Song | [songpengyuan](https://github.com/songpengyuan) | Okki.com        |
+| YaTao Tian | [Hinsteny](https://github.com/Hinsteny) | Ant       |
 
 ## Higress Developer Roles
 

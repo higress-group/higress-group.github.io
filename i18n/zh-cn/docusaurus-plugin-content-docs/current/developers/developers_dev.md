@@ -22,6 +22,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | 董艺荃 | [CH3CHO](https://github.com/CH3CHO) | Trip.com        |
 | 李强林 | [Charlie17Li](https://github.com/Charlie17Li) | ZJU-SEL        |
 | 宋鹏远 | [songpengyuan](https://github.com/songpengyuan) | Okki.com        |
+| 田亚涛 | [Hinsteny](https://github.com/Hinsteny) | Ant       |
 
 
 ## Higress开发者角色
