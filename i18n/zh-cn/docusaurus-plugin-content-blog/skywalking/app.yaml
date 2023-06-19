@@ -1,0 +1,292 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-system
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bff
+  namespace: app-system
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bff
+  namespace: app-system
+  labels:
+    app: bff
+    service: bff
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: bff
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bff
+  namespace: app-system
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bff
+      version: v1
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/scheme: "http"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "80"
+      labels:
+        app: bff
+        version: v1
+    spec:
+      serviceAccountName: bff
+      containers:
+        - image: docker.io/2456868764/httpbin:1.0.0
+          imagePullPolicy: Always
+          name: bff
+          ports:
+            - containerPort: 80
+          command:
+            - /app/httpbin
+            - --trace-provider=skywalking
+            - --skywalking-grpc-address=skywalking-oap-server.op-system.svc.cluster.local:11800
+            - --sample-rate=1.0
+          livenessProbe:
+            httpGet:
+              path: /prob/liveness
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /prob/readiness
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          env:
+            - name: SERVICE_NAME
+              value: bff
+            - name: VERSION
+              value: v1
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: SERVICE_ACCOUNT
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.serviceAccountName
+
+
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: backend
+  namespace: app-system
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: app-system
+  labels:
+    app: backend
+    service: backend
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: backend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: app-system
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+      version: v1
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/scheme: "http"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "80"
+      labels:
+        app: backend
+        version: v1
+    spec:
+      serviceAccountName: backend
+      containers:
+        - image: docker.io/2456868764/httpbin:1.0.0
+          imagePullPolicy: Always
+          name: backend
+          ports:
+            - containerPort: 80
+          command:
+            - /app/httpbin
+            - --trace-provider=skywalking
+            - --skywalking-grpc-address=skywalking-oap-server.op-system.svc.cluster.local:11800
+            - --sample-rate=1.0
+            - -v=4
+          livenessProbe:
+            httpGet:
+              path: /prob/liveness
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /prob/readiness
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          env:
+            - name: SERVICE_NAME
+              value: backend
+            - name: VERSION
+              value: v1
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: SERVICE_ACCOUNT
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.serviceAccountName
+---
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: middle
+  namespace: app-system
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: middle
+  namespace: app-system
+  labels:
+    app: middle
+    service: middle
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: middle
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: middle
+  namespace: app-system
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: middle
+      version: v1
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/scheme: "http"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "80"
+      labels:
+        app: middle
+        version: v1
+    spec:
+      serviceAccountName: middle
+      containers:
+        - image: docker.io/2456868764/httpbin:1.0.0
+          imagePullPolicy: Always
+          name: middle
+          ports:
+            - containerPort: 80
+          command:
+            - /app/httpbin
+            - --trace-provider=skywalking
+            - --skywalking-grpc-address=skywalking-oap-server.op-system.svc.cluster.local:11800
+            - --sample-rate=1.0
+          livenessProbe:
+            httpGet:
+              path: /prob/liveness
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /prob/readiness
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          env:
+            - name: SERVICE_NAME
+              value: middle
+            - name: VERSION
+              value: v1
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: SERVICE_ACCOUNT
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.serviceAccountName
