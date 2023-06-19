@@ -20,7 +20,9 @@ helm repo add higress.io https://higress.io/helm-charts
 helm install higress higress.io/higress -n higress-system --create-namespace
 ```
 
-### 安装参数
+### 常用安装参数
+
+完整参数介绍请查看[运维参数说明](../user/configurations.md)
 
 | **参数名** | **参数说明** | **默认值** |
 |---|---|---|
