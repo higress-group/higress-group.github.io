@@ -1,3 +1,12 @@
+---
+title: Higress 集成 Skywalking 可观测性探索
+keywords: [higress]
+description: Higress 集成 Skywalking 可观测性探索
+author: Jun
+date: 2023-06-20
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/skywalking.md
+---
+
 # Higress 集成 Skywalking 可观测性探索
 
 [Higress](https://higress.io/zh-cn/) 一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成、易使用、易扩展、热更新的下一代云原生网关。
@@ -7,6 +16,8 @@
 [Httpbin](https://github.com/2456868764/httpbin) 是基于 Gin 开发，用于快速测试基于云原生微服务可观测性和流量管理等功能。
 
 本文介绍 Higress 集成 Skwywalking 实现可观测性，主要内容涉及整体架构，Skywalking 调用链路跟踪原理，Higress架构，Higress本地测试环境搭建，Higress 配置，业务应用安装, 调用链路跟踪配置和 Higress gateway 指标展示等内容。
+
+这次可观测性探索相关 manifests [下载地址](../../../static/img/blog/skywalking/skywalking.zip) 
 
 ## 一、整体架构图
 
@@ -497,16 +508,14 @@ $ kubectl exec "$HIGRESS_GATEWAY_POD"  -n higress-system  -- curl -sS http://127
 
 如何查看 Higress 指标数据：
 
-- 通过 http://console.higress.io:8080/prometheus 查看 Higress Prometheus 指标数据
 - 通过 http://console.higress.io:8080/dashboard 查看 Higress gateway 监控面板
+- 通过 Skywalking Dashboard 查看 Higress gateway 性能
 
-Higress gateway 监控面板部分截图如下：
+通过 Skywalking Dashboard 查看 Higress gateway 性能部分截图如下：
 
-![img.png](../../../static/img/blog/skywalking/higress7.png)
-![img.png](../../../static/img/blog/skywalking/higress8.png)
-![img.png](../../../static/img/blog/skywalking/higress9.png)
-![img.png](../../../static/img/blog/skywalking/higress10.png)
-![img.png](../../../static/img/blog/skywalking/higress11.png)
+![img.png](../../../static/img/blog/skywalking/higress14.png)
+![img.png](../../../static/img/blog/skywalking/higress15.png)
+![img.png](../../../static/img/blog/skywalking/higress16.png)
 
 ## 参考文档
 - https://istio.io/latest/docs/tasks/observability/distributed-tracing/skywalking/
