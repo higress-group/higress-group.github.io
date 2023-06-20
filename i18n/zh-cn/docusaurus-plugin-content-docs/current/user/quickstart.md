@@ -23,6 +23,13 @@ helm install higress -n higress-system higress.io/higress --create-namespace --r
 
 ![image](/img/user/quickstart/zh-cn/console-credentials.png)
 
+例如安装在 higress-system 命名空间下时，执行下面命令获取用户名密码：
+```bash
+  export ADMIN_USERNAME=$(kubectl get secret --namespace higress-system higress-console -o jsonpath="{.data.adminUsername}" | base64 -d)
+  export ADMIN_PASSWORD=$(kubectl get secret --namespace higress-system higress-console -o jsonpath="{.data.adminPassword}" | base64 -d)
+  echo -e "Username: ${ADMIN_USERNAME}\nPassword: ${ADMIN_PASSWORD}"
+```
+
 获取 Higress Gateway 的 LoadBalancer IP，并记录下来。后续可以通过该 IP 的 80 和 443 端口访问 Higress Gateway。
 ```bash
 kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
