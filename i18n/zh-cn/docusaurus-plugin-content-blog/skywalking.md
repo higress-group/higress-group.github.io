@@ -193,33 +193,7 @@ helm 安装参考[安装文档](https://helm.sh/zh/docs/intro/install/)
 
 可以参考 higress [快速开始](https://higress.io/zh-cn/docs/user/quickstart) 和 [安装部署](https://higress.io/zh-cn/docs/ops/deploy-by-helm) 来部署，这里需要安装  Istio CRD。
 
-这里提供一键安装脚本 local-env-setup.sh 和 kind 配置文档 higress_kind_config.yaml
-
-higress_kind_config.yaml 配置文件如下，配置 kind 集群一个控制节点，二个工作节点。
-```yaml
-# cluster.conf
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-- role: control-plane
-  kubeadmConfigPatches:
-  - |
-    kind: InitConfiguration
-    nodeRegistration:
-      kubeletExtraArgs:
-        node-labels: "ingress-ready=true"
-  extraPortMappings:
-  - containerPort: 80
-    hostPort: 80
-    protocol: TCP
-  - containerPort: 443
-    hostPort: 443
-    protocol: TCP
-- role: worker
-- role: worker
-```
-
-运行 local-env-setup.sh 安装 Higress
+这里提供一键安装脚本 local-env-setup.sh, 运行 local-env-setup.sh 安装 Higress
 
 ```shell
 ./local-env-setup.sh --crd
@@ -228,6 +202,7 @@ nodes:
 3. 部署 Skywalking, 业务应用和 Ingress
 
 ```shell
+$ export KUBECONFIG=${HOME}/.kube/config_higress
 $ kubectl apply -f skywalking.yaml
 $ kubectl apply -f app.yaml
 $ kubectl apply -f ingress.yaml
@@ -373,6 +348,7 @@ Envoy Trace 配置可以参考 [Envoy Trace配置](https://www.envoyproxy.io/doc
 和 [Envoy Skywarlking 配置](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/trace/v3/skywalking.proto#extension-envoy-tracers-skywalking)
 
 ```shell
+$ export KUBECONFIG=${HOME}/.kube/config_higress
 $ kubectl apply -f envoyfilter.yaml
 ```
 
@@ -562,9 +538,9 @@ $ kubectl exec "$HIGRESS_GATEWAY_POD"  -n higress-system  -- curl -sS http://127
 如何查看 Higress 指标数据：
 
 - 通过 http://console.higress.io:8080/dashboard 查看 Higress gateway 监控面板
-- 通过 Skywalking Dashboard 查看 Higress gateway 性能
+- 通过 Skywalking Dashboard 查看 Higress gateway 监控数据
 
-通过 Skywalking Dashboard 查看 Higress gateway 性能部分截图如下：
+通过 Skywalking Dashboard 查看 Higress gateway 监控数据部分截图如下：
 
 ![img.png](../../../static/img/blog/skywalking/higress14.png)
 ![img.png](../../../static/img/blog/skywalking/higress15.png)

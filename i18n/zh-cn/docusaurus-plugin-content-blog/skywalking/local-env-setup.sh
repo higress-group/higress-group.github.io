@@ -33,7 +33,7 @@ HIGRESS_CLUSTER_NAME="higress"
 
 echo "Step1: Create local cluster: " ${HIGRESS_KUBECONFIG}
 kind delete cluster --name="${HIGRESS_CLUSTER_NAME}" 2>&1
-kind create cluster --kubeconfig "${HIGRESS_KUBECONFIG}" --name "${HIGRESS_CLUSTER_NAME}"  --config=`pwd`/higress_kind_config.yaml  --image kindest/node:v1.21.1
+kind create cluster --kubeconfig "${HIGRESS_KUBECONFIG}" --name "${HIGRESS_CLUSTER_NAME}"  --image kindest/node:v1.21.1
 export KUBECONFIG="${HIGRESS_KUBECONFIG}"
 echo "Step1: Create local cluster finished."
 
