@@ -314,6 +314,59 @@ Bff 服务： http://httpbin.example.com:8080/hostname
 
 通过应用 EnvoyFilter 增加 higress-gateway envoy 配置来激活 Skywalking 调用链路跟踪功能。
 
+EnvoyFilter 配置如下：
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: higress-trace
+  namespace: higress-system
+spec:
+  configPatches:
+    - applyTo: NETWORK_FILTER
+      match:
+        context: GATEWAY
+        listener:
+          filterChain:
+            filter:
+              name: envoy.filters.network.http_connection_manager
+      patch:
+        operation: MERGE
+        value:
+          name: envoy.filters.network.http_connection_manager
+          typed_config:
+            '@type': type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+            tracing:
+              provider:
+                name: envoy.tracers.skywalking
+                typed_config:
+                  '@type': type.googleapis.com/envoy.config.trace.v3.SkyWalkingConfig
+                  client_config:
+                    service_name: higress-gateway.higress-system
+                  grpc_service:
+                    envoy_grpc:
+                      cluster_name: outbound|11800||skywalking-oap-server.op-system.svc.cluster.local
+                    timeout: 0.250s
+              random_sampling:
+                value: 100
+    - applyTo: HTTP_FILTER
+      match:
+        context: GATEWAY
+        listener:
+          filterChain:
+            filter:
+              name: envoy.filters.network.http_connection_manager
+              subFilter:
+                name: envoy.filters.http.router
+      patch:
+        operation: MERGE
+        value:
+          name: envoy.filters.http.router
+          typed_config:
+            '@type': type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+            start_child_span: true
+```
+
 EnvoyFilter 配置可以参考 [Istio EnvoyFilter 文档](https://istio.io/latest/zh/docs/reference/config/networking/envoy-filter/)。
 
 Envoy Trace 配置可以参考 [Envoy Trace配置](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/network/http_connection_manager/v3/http_connection_manager.proto#envoy-v3-api-msg-extensions-filters-network-http-connection-manager-v3-httpconnectionmanager-tracing)
