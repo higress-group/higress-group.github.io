@@ -91,8 +91,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | nginx.ingress.kubernetes.io/affinity               | 服务  | 兼容                      | 亲和性种类，目前只支持cookie，默认为cookie。                     |
 | nginx.ingress.kubernetes.io/affinity-mode          | 服务  | 部分兼容。暂不支持`persistent`模式 | 亲和性模式，云原生网关目前只支持balanced模式，默认为balanced模式。        |
 | nginx.ingress.kubernetes.io/session-cookie-name    | 服务  | 兼容                      | 配置指定Cookie的值作为Hash Key                           |
-| nginx.ingress.kubernetes.io/session                |     |                         |                                                  |
-| -cookie-path                                       | 服务  | 兼容                      | 当指定Cookie不存在，生成的Cookie的Path值，默认为/                |
+| nginx.ingress.kubernetes.io/session-cookie-path    | 服务  | 兼容                      | 当指定Cookie不存在，生成的Cookie的Path值，默认为/                |
 | nginx.ingress.kubernetes.io/session-cookie-max-age | 服务  | 兼容                      | 当指定Cookie不存在，生成的Cookie的过期时间，单位为秒，默认为Session会话级别。 |
 | nginx.ingress.kubernetes.io/session-cookie-expires | 服务  | 兼容                      | 当指定Cookie不存在，生成的Cookie的过期时间，单位为秒，默认为Session会话级别。 |
 
