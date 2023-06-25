@@ -38,7 +38,7 @@ SkyWalking为服务(service)，服务实例(service instance)，以及端点(end
 - 端点(Endpoint)： 对于特定服务所接收的请求路径，如 HTTP 的 URI 路径和 gRPC 服务的类名 + 方法签名。
 - 进程（Process）： 操作系统进程. 在某些场景下，一个服务实例和进程不是一一对应， 在k8s部署下，一个POD对应多个进程。
 
-### Skywalking 整体架构：
+### Skywalking 整体架构
 
 ![img.png](../../../static/img/blog/skywalking/skywalking1.png)
 
