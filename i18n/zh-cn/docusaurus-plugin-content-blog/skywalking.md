@@ -15,9 +15,9 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 [Httpbin](https://github.com/2456868764/httpbin) 是基于 Gin 开发，用于快速测试基于云原生微服务可观测性和流量管理等功能。
 
-本文介绍 Higress 集成 Skwywalking 实现可观测性，主要内容涉及整体架构，Skywalking 调用链路跟踪原理，Higress架构，Higress本地测试环境搭建，Higress 配置，业务应用安装, 调用链路跟踪配置和 Higress gateway 指标展示等内容。
+本文介绍 Higress 集成 Skywalking 实现可观测性, 主要内容涉及整体架构, Skywalking 调用链路跟踪原理, Higress 架构, 业务应用集成 Skywalking, 本地测试环境搭建, Higress 配置, 应用安装, 调用链路跟踪配置以及 Higress gateway 指标和监控面板。
 
-这次可观测性探索相关 manifests [下载地址](../../../static/img/blog/skywalking/skywalking.zip) 
+这次可观测性探索相关 manifests [下载地址](https://gitcode.net/-/snippets/3612) 
 
 ## 一、整体架构图
 
@@ -38,7 +38,7 @@ SkyWalking为服务(service)，服务实例(service instance)，以及端点(end
 - 端点(Endpoint)： 对于特定服务所接收的请求路径，如 HTTP 的 URI 路径和 gRPC 服务的类名 + 方法签名。
 - 进程（Process）： 操作系统进程. 在某些场景下，一个服务实例和进程不是一一对应， 在k8s部署下，一个POD对应多个进程。
 
-### 整体架构：
+### Skywalking 整体架构：
 
 ![img.png](../../../static/img/blog/skywalking/skywalking1.png)
 
