@@ -15,7 +15,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 [Httpbin](https://github.com/2456868764/httpbin) 是基于 Gin 开发，用于快速测试基于云原生微服务可观测性和流量管理等功能。
 
-本文介绍 Higress 集成 Skywalking 实现可观测性, 主要内容涉及整体架构, Skywalking 调用链路跟踪原理, Higress 架构, 业务应用集成 Skywalking, 本地测试环境搭建, Higress 配置, 应用安装, 调用链路跟踪配置以及 Higress gateway 指标和监控面板。
+本文介绍 Higress 集成 Skywalking 实现可观测性，主要内容涉及整体架构、Skywalking 调用链路跟踪原理、Higress 架构、业务应用集成 Skywalking、本地测试环境搭建、Higress 配置、应用安装、调用链路跟踪配置以及 Higress gateway 指标和监控面板。
 
 这次可观测性探索相关 manifests [下载地址](https://gitcode.net/-/snippets/3612) 
 
@@ -45,9 +45,9 @@ SkyWalking为服务(service)，服务实例(service instance)，以及端点(end
 主要由四个核心组件组成：
 
 - 探针: 探针用于收集监测数据包括指标，链路跟踪，日志和事件
-- 数据接收和聚合: 平台后端支持数据聚合，数据分析以及驱动数据流从探针到用户界面的处理。
+- 数据接收和聚合: 平台后端支持数据聚合，数据分析以及驱动数据流从探针到用户界面的处理
 - 存储: 通过开放接口支持后端存储系统支持ElasticSearch, H2, MySQL, TiDB, BanyanDB等
-- UI:  一个定制化的Web系统，用户可以可视化查看和管理 SkyWalking 数据。
+- UI:  一个定制化的Web系统，用户可以可视化查看和管理 SkyWalking 数据
 
 ### 分布式链路追踪原理分析
 
@@ -77,7 +77,7 @@ SkyWalking为服务(service)，服务实例(service instance)，以及端点(end
 从上图可以看出：
 
 - 一个 Trace 内的所有 span 的 Trace ID 是相同的
-- 一个 Segment 中有一个 EntrySpan ,是 Segment 内其他 Span 的根 Parent
+- 一个 Segment 中有一个 EntrySpan，是 Segment 内其他 Span 的根 Parent
 - 后一个 Segment的 Entryspan 总是与前一个 Segment 中的某个 ExitSpan 关联
 
 3. Skywalking Trace 的数据协议
@@ -89,7 +89,7 @@ sw8 格式: XXXXX-XXXXX-XXXX-XXXX，以 - 分割。
 
 具体内容如下：
 
-- 采样标记(Sample):  0 或者 1。 0 表示不采样 1 表示采样
+- 采样标记(Sample):  0 或者 1， 0 表示不采样 1 表示采样
 - 跟踪ID(Trace ID): 字符(BASE64 编码)
 - 父Sengment ID (Parent trace segment ID): 字符(BASE64 编码)
 - 父 Span ID（Parent span ID): 整型
@@ -110,7 +110,7 @@ Higress是基于阿里内部的Envoy Gateway实践沉淀、以开源 Istio + Env
 
 ## 四、业务应用集成 Skywalking
 
-业务应用通过与 [go2sky](https://github.com/SkyAPM/go2sky) 项目集成 SkyWalking 监控 Golang 应用程序。主要通过 Gin middleware 和 Http 请求手动埋点
+业务应用通过与 [go2sky](https://github.com/SkyAPM/go2sky) 项目集成 SkyWalking 监控 Golang 应用程序，主要通过 Gin middleware 和 Http 请求手动埋点。
 
 1、集成 Gin middleware
 ```golang
@@ -193,13 +193,13 @@ helm 安装参考[安装文档](https://helm.sh/zh/docs/intro/install/)
 
 可以参考 higress [快速开始](https://higress.io/zh-cn/docs/user/quickstart) 和 [安装部署](https://higress.io/zh-cn/docs/ops/deploy-by-helm) 来部署，这里需要安装  Istio CRD。
 
-这里提供一键安装脚本 local-env-setup.sh, 运行 local-env-setup.sh 安装 Higress
+这里提供一键安装脚本 local-env-setup.sh，运行 local-env-setup.sh 安装 Higress
 
 ```shell
 ./local-env-setup.sh --crd
 ```
 
-3. 部署 Skywalking, 业务应用和 Ingress
+3. 部署 Skywalking，业务应用和 Ingress
 
 ```shell
 $ export KUBECONFIG=${HOME}/.kube/config_higress
@@ -272,7 +272,7 @@ $ kubectl -n higress-system port-forward service/higress-gateway 8080:80
 ```
 3）通过浏览器打开访问上面三个域名
 
-Higress 控制台 : http://console.higress.io:8080 , 登录名称和密码 admin/admin
+Higress 控制台: http://console.higress.io:8080 ， 登录名称和密码 admin/admin
 
 ![img.png](../../../static/img/blog/skywalking/higress1.png)
 
@@ -345,7 +345,7 @@ spec:
 EnvoyFilter 配置可以参考 [Istio EnvoyFilter 文档](https://istio.io/latest/zh/docs/reference/config/networking/envoy-filter/)。
 
 Envoy Trace 配置可以参考 [Envoy Trace配置](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/network/http_connection_manager/v3/http_connection_manager.proto#envoy-v3-api-msg-extensions-filters-network-http-connection-manager-v3-httpconnectionmanager-tracing)
-和 [Envoy Skywarlking 配置](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/trace/v3/skywalking.proto#extension-envoy-tracers-skywalking)
+和 [Envoy Skywarlking 配置](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/trace/v3/skywalking.proto#extension-envoy-tracers-skywalking)。
 
 ```shell
 $ export KUBECONFIG=${HOME}/.kube/config_higress
@@ -371,7 +371,7 @@ done
 curl -v -H "Host:httpbin.example.com" http://127.0.0.1:8080/service?services=middle,backend
 ```
 
-部分返回响应体情况如下
+部分返回响应体情况如下：
 
 ```json
 {
@@ -438,21 +438,21 @@ curl -v -H "Host:httpbin.example.com" http://127.0.0.1:8080/service?services=mid
 
 指标数据包含指标名称，指标标签，和指标值，下面是 envoy_cluster_upstream_cx_total upstream（总连接数）部分指标数据，
 
-其中 envoy_cluster_upstream_cx_total 是指标名称，cluster_name 是指标标签，16 是指标值
+其中 envoy_cluster_upstream_cx_total 是指标名称，cluster_name 是指标标签，16 是指标值。
 ```shell
 # TYPE envoy_cluster_upstream_cx_total counter
 envoy_cluster_upstream_cx_total{cluster_name="outbound|80||bff.app-system.svc.cluster.local"} 16
 ```
 
 Higress 指标数据大体可以分为三类:
-- Downstream 下游: 指标与外来的连接/请求有关, 主要由侦听器，HTTP连接管理器等
-- UpStream 上游: 指标与外向的连接/请求有关, 主要由连接池，路由器，过滤器，熔断等
+- Downstream 下游: 指标与外来的连接/请求有关，主要由侦听器，HTTP连接管理器等
+- UpStream 上游: 指标与外向的连接/请求有关，主要由连接池，路由器，过滤器，熔断等
 - Server 负载: 指标信息记录 Higress gateway 服务器实例的负载等
 
 Higress 指标数据类型主要有三类:
-- Counter: 无符号整数，只会增加而不会减少。例如，总请求。
-- Gauge: 增加和减少的无符号整数。例如，当前活动的请求。
-- Histogram: 作为指标流的一部分的无符号整数，然后由收集器聚合以最终产生汇总的百分位值(percentile，即平常说的 P99/P50/Pxx)。例如，Upstream 响应时间。
+- Counter: 无符号整数，只会增加而不会减少。例如，总请求
+- Gauge: 增加和减少的无符号整数。例如，当前活动的请求
+- Histogram: 作为指标流的一部分的无符号整数，然后由收集器聚合以最终产生汇总的百分位值(percentile，即平常说的 P99/P50/Pxx)。例如，Upstream 响应时间
 
 通过以下命令可以获取 Higress gateway 支持的指标和类型
 
@@ -460,7 +460,7 @@ Higress 指标数据类型主要有三类:
 $ export HIGRESS_GATEWAY_POD=$(kubectl get pods -l app=higress-gateway -o 'jsonpath={.items[0].metadata.name}' -n higress-system)
 $ kubectl exec "$HIGRESS_GATEWAY_POD"  -n higress-system  -- curl -sS http://127.0.0.1:15020/stats/prometheus | grep "# TYPE"  
 ```
-部分指标内容如下；
+部分指标内容如下：
 ```shell
 ...
 # TYPE envoy_cluster_upstream_cx_total counter
