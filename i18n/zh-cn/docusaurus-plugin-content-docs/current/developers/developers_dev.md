@@ -23,6 +23,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | 李强林 | [Charlie17Li](https://github.com/Charlie17Li) | ZJU-SEL        |
 | 宋鹏远 | [songpengyuan](https://github.com/songpengyuan) | Okki.com        |
 | 田亚涛 | [Hinsteny](https://github.com/Hinsteny) | Ant       |
+| 吴新军 | [2456868764](https://github.com/2456868764) |        |
 
 
 ## Higress开发者角色
