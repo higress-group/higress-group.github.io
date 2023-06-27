@@ -60,5 +60,5 @@ helm install istio-base istio/base -n istio-system --create-namespace
 这种模式下，需要更新 Higress 的部署参数：
 
 ```bash
-helm upgrade higress -n higress-system --set global.enableIstioAPI=true higress.io/higress
+helm upgrade higress -n higress-system --set global.enableIstioAPI=true higress.io/higress --reuse-values
 ```
