@@ -29,7 +29,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Reference',
-          items: ['user/annotation', 'user/annotation-use-case', 'user/configurations', 'user/mcp-bridge', 'user/dubbo-envoyfilter', 'user/wasm-image-spec'],
+          items: ['user/annotation', 'user/annotation-use-case', 'user/configurations', 'user/mcp-bridge', 'user/dubbo-http2rpc', 'user/wasm-image-spec'],
         },
         {
           type: 'category',
