@@ -28,6 +28,7 @@ const data = {
     'https://img.alicdn.com/imgextra/i1/O1CN01lxfk0h1k9AZkdpUD1_!!6000000004640-0-tps-225-225.jpg',
     'https://img.alicdn.com/imgextra/i2/O1CN01gf8yAj1V7aybEg6hV_!!6000000002606-2-tps-140-44.png',
     'https://img.alicdn.com/imgextra/i4/O1CN01Dn73yA1TXaDbBodqt_!!6000000002392-0-tps-262-224.jpg',
+    'https://img.alicdn.com/imgextra/i4/O1CN01UVr5D81iOAKlrECQa_!!6000000004402-2-tps-760-360.png',
   ],
   title: translate({ id: 'homepage.userTitle', message: '谁在使用 Higress' }),
 };
