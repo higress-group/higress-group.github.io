@@ -30,5 +30,9 @@
   "item.label.Commercial": {
     "message": "HIGRESS IN CLOUD",
     "description": "Navbar item with label Commercial"
+  },
+  "item.label.Case": {
+    "message": "CASE COLLECTION",
+    "description": "Navbar item with label Case"
   }
 }

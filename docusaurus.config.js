@@ -140,6 +140,12 @@ const config = {
             target: '_blank',
           },
           {
+            label: 'Case',
+            to: 'https://survey.aliyun.com/apps/zhiliao/SmDQwdihe',
+            position: 'right',
+            target: '_blank',
+          },
+          {
             label: 'Developers',
             type: 'doc',
             docId: 'developers/developers_dev',

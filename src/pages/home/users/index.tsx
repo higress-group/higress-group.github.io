@@ -9,10 +9,10 @@ const data = {
   desc: (
     <span>
       <Translate id="homepage.userDesc1">请在</Translate>{' '}
-      <a rel="noopener noreferrer" target="_blank" href="https://github.com/alibaba/higress/issues/1">
+      <a rel="noopener noreferrer" target="_blank" href="https://survey.aliyun.com/apps/zhiliao/SmDQwdihe">
         Wanted: who&#39;s using Higress
       </a>{' '}
-      <Translate id="homepage.userDesc2">上提供信息来帮助 Higress 做的更好。</Translate>
+      <Translate id="homepage.userDesc2">上提供信息来获取 Higress 开源落地支持</Translate>
     </span>
   ),
   list: [
