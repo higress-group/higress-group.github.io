@@ -49,10 +49,10 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | higress-core.gateway.service.externalTrafficPolicy             | 指定 Service 的外部流量策略。                                                                       |         ""           |
 | higress-core.gateway.rollingMaxSurge                           | 指定滚动更新期间的最大扩容数量                                                                           | 100%              |
 | higress-core.gateway.rollingMaxUnavailable                     | 指定滚动更新期间的最大不可用数量。                                                                         | 25%               |
-| higress-core.gateway.resources.limits.cpu	                     | 指定 gateway 容器的CPU请求资源限制。                                                                  | 1000m               |
-| higress-core.gateway.resources.limits.memory	                  | 指定 gateway 容器的内存请求资源限制。                                                                   | 512Mi               |
-| higress-core.gateway.resources.requests.cpu	                   | 指定 gateway 容器的CPU请求资源。                                                                    | 100m                |
-| higress-core.gateway.resources.requests.memory	                | 指定 gateway 容器的内存请求资源。                                                                     | 128Mi               |
+| higress-core.gateway.resources.limits.cpu	                     | 指定 gateway 容器的CPU请求资源限制。                                                                  | 2000m               |
+| higress-core.gateway.resources.limits.memory	                  | 指定 gateway 容器的内存请求资源限制。                                                                   | 2048Mi               |
+| higress-core.gateway.resources.requests.cpu	                   | 指定 gateway 容器的CPU请求资源。                                                                    | 2000m                |
+| higress-core.gateway.resources.requests.memory	                | 指定 gateway 容器的内存请求资源。                                                                     | 2048Mi               |
 | higress-core.gateway.autoscale.enabled	                        | 指定是否启用 gateway Pod 自动缩放。                                                                  | false               |
 | higress-core.gateway.autoscale.minReplicas	                    | 允许的最小副本数。                                                                                 | 1                   |
 | higress-core.gateway.autoscale.maxReplicas	                    | 允许的最大副本数。                                                                                 | 5                   |
