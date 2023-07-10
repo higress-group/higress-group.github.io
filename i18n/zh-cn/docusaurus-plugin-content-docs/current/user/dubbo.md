@@ -57,7 +57,8 @@ kind: Ingress
 metadata:
   annotations:
     higress.io/destination: providers:com.alibaba.nacos.example.dubbo.service.DemoService:1.0.0:dev.DEFAULT-GROUP.public.nacos
-  name: demo
+    higress.io/rpc-destination-name: httproute-http2rpc-demo
+  name: httproute-http2rpc-demo-ingress
   namespace: higress-system
 spec:
   ingressClassName: higress
@@ -74,88 +75,32 @@ spec:
 ```
 这样，path前缀为/dubbo的请求就会被路由到我们刚刚创建的Dubbo服务上。
 
-## 通过EnvoyFilter配置HTTP到Dubbo的协议转换规则
-经过上述步骤，我们已经通过Ingress将path前缀为/dubbo的请求路由到我们的Dubbo服务上。但光是这样是无法正常通信的，因为Dubbo服务使用的是定制的Dubbo协议，无法天然与HTTP协议进行兼容。因此接下来我们将通过EnvoyFilter来配置HTTP到Dubbo的协议转换规则，从而实现用HTTP请求来调用Dubbo服务。
+## 通过Higress自定义的CRD-Http2Rpc配置HTTP到Dubbo的协议转换规则
+经过上述步骤，我们已经通过Ingress将path前缀为/dubbo的请求路由到我们的Dubbo服务上。但光是这样是无法正常通信的，因为Dubbo服务使用的是定制的Dubbo协议，无法天然与HTTP协议进行兼容。因此接下来我们还要配置具体的HTTP到Dubbo的协议转换规则，从而实现用HTTP请求来调用Dubbo服务。
 
-在K8s集群中apply以下资源，要注意的是，EnvoyFilter是属于Istio的CRD，因此需要参照前提条件中的第2点来开启Higress对Istio CRD的支持。
 ```yaml
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
+apiVersion: networking.higress.io/v1
+kind: Http2Rpc
 metadata:
-  name: http-dubbo-transcoder-test
+  name: httproute-http2rpc-demo
   namespace: higress-system
 spec:
-  configPatches:
-  - applyTo: HTTP_FILTER
-    match:
-      context: GATEWAY
-      listener:
-        filterChain:
-          filter:
-            name: envoy.filters.network.http_connection_manager
-            subFilter:
-              name: envoy.filters.http.router
-    patch:
-      operation: INSERT_BEFORE
-      value:
-        name: envoy.filters.http.http_dubbo_transcoder
-        typed_config:
-          '@type': type.googleapis.com/udpa.type.v1.TypedStruct
-          type_url: type.googleapis.com/envoy.extensions.filters.http.http_dubbo_transcoder.v3.HttpDubboTranscoder
-  - applyTo: HTTP_ROUTE
-    match:
-      context: GATEWAY
-      routeConfiguration:
-        vhost:
-          route:
-            name: demo
-    patch:
-      operation: MERGE
-      value:
-        route:
-          upgrade_configs:
-          - connect_config:
-              allow_post: true
-            upgrade_type: CONNECT
-        typed_per_filter_config:
-          envoy.filters.http.http_dubbo_transcoder:
-            '@type': type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.extensions.filters.http.http_dubbo_transcoder.v3.HttpDubboTranscoder
-            value:
-              request_validation_options:
-                reject_unknown_method: true
-                reject_unknown_query_parameters: true
-              services_mapping:
-              - group: dev
-                method_mapping:
-                - name: sayName
-                  parameter_mapping:
-                  - extract_key: p
-                    extract_key_spec: ALL_QUERY_PARAMETER
-                    mapping_type: java.lang.String
-                  passthrough_setting:
-                    passthrough_all_headers: true
-                  path_matcher:
-                    match_http_method_spec: ALL_GET
-                    match_pattern: /dubbo/hello
-                name: com.alibaba.nacos.example.dubbo.service.DemoService
-                version: 1.0.0
-              url_unescape_spec: ALL_CHARACTERS_EXCEPT_RESERVED
-  - applyTo: CLUSTER
-    match:
-      cluster:
-        service: providers:com.alibaba.nacos.example.dubbo.service.DemoService:1.0.0:dev.DEFAULT-GROUP.public.nacos
-      context: GATEWAY
-    patch:
-      operation: MERGE
-      value:
-        upstream_config:
-          name: envoy.upstreams.http.dubbo_tcp
-          typed_config:
-            '@type': type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.extensions.upstreams.http.dubbo_tcp.v3.DubboTcpConnectionPoolProto
+  dubbo: 
+    service: com.alibaba.nacos.example.dubbo.service.DemoService
+    version: 1.0.0
+    group: dev
+    methods: 
+    - serviceMethod: sayName
+      headersAttach: "*"
+      httpMethods: 
+      - "GET"
+      httpPath: "/dubbo/hello"
+      params:
+      - paramKey: p
+        paramSource: QUERY
+        paramType: "java.lang.String"
 ```
-在以上EnvoyFilter中，我们配置了将path为/dubbo/hello的HTTP请求转发到Dubbo服务com.alibaba.nacos.example.dubbo.service.DemoService:1.0.0:dev中，并调用其sayName方法，而该方法的参数则通过HTTP url中的的query参数p来指定。
+在以上Http2Rpc中，我们配置了将path为/dubbo/hello的HTTP请求转发到Dubbo服务com.alibaba.nacos.example.dubbo.service.DemoService:1.0.0:dev中，并调用其sayName方法，而该方法的参数则通过HTTP url中的的query参数p来指定。
 
 ## 请求验证
 通过以上配置，我们就可以执行以下curl命令来调用这个dubbo服务了：
@@ -165,4 +110,4 @@ $curl "localhost/dubbo/hello?p=abc"
 ```
 
 ## 配置参考
-EnvoyFilter的相关配置项参考[HTTP转Dubbo配置说明](./dubbo-envoyfilter.md)
+Http2Rpc的相关配置项参考[HTTP转Dubbo配置说明](./dubbo-http2rpc.md)
