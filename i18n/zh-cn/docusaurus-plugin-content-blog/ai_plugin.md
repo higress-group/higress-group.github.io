@@ -2,7 +2,7 @@
 title: Higress助力AI大模型企业级应用落地
 keywords: [higress,wasm,AI plugin]
 description: 介绍Higress如何通过AI proxy plugin对接AI大模型并实现网关级API管理
-author: 澄潭,兆维
+author: 赵伟基(兆维)
 date: 2023-07-12
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/ai_plugin.md
 ---
