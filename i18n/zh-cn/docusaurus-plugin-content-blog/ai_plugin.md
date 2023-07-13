@@ -202,7 +202,7 @@ curl "http://{GatewayIP}/?text=pw=xxxxxx" -H "apikey:xxxxxx"
 
 对于组织来说，进行对各用户进行AI模型调用的用量观测和分析有助于了解其使用情况与产生的成本。对于个人用户了解自己的调用量和开销也是必要的。因此，在网关层进行调用的观测和分析对于AI大模型的API管理是必要的能力。[商业版Higress](https://www.alibabacloud.com/product/microservices-engine?spm=higress-website.topbar.0.0.0)与各种指标与日志系统进行了深度集成，提供了开箱即用的用量观测分析报告构建机制，可以实时查看各种API的使用情况，并根据各类参数进行过滤，从而更好的了解API使用情况。
 
-以观察各用户对OPENAI-Curie模型的调用量为例，用户可通过**MSE管理控制台**-**云原生网关**-**网关实例**-**参数配置-日志格式调整**中设置区分用户的可观测性参数请求头：x-mse-consumer，将其列入观测列表。之后进入**观测分析-日志中心**中设置使用统计图表功能即可完成对API的用量观测和分析。如下图所示，用户comsumer1与用户consumer2的对OPENAI-Curie模型的调用量以饼状图形式呈现。
+以观察各用户对OPENAI-Curie模型的调用量为例，用户可通过**MSE管理控制台**-**云原生网关**-**网关实例**-**参数配置-日志格式调整**中设置区分用户的可观测性参数请求头：x-mse-consumer，将其列入观测列表。之后进入**观测分析-日志中心**中设置使用统计图表功能即可完成对API的用量观测和分析。如下图所示，用户consumer1与用户consumer2的对OPENAI-Curie模型的调用量以饼状图形式呈现。
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/103456511/1688712645619-08deaa3b-6dfd-4031-a3bc-e9b04667eb39.png#clientId=u734a6afc-f143-4&from=paste&height=393&id=u3c0d04ae&originHeight=864&originWidth=2362&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=1411179&status=done&style=none&taskId=ud21c6766-85c4-47c4-80a6-211b485d5e1&title=&width=1073.6363403659227)
   
 # 彩蛋：Higress控制台样例的聊天机器人
