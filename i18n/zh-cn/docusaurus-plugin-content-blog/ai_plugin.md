@@ -1,13 +1,13 @@
 ---
 title: Higress助力AI大模型企业级应用落地
-keywords: [higress,wasm,AI plugin]
+keywords: [Higress,wasm,AI plugin]
 description: 介绍Higress如何通过AI proxy plugin对接AI大模型并实现网关级API管理
 author: 赵伟基(兆维)
 date: 2023-07-12
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/ai_plugin.md
 ---
 
-以ChatGPT为代表的AIGC技术为企业生产带来了巨大的变化，并一直在企业应用开发领域占据一席之地。AI大模型凭借其强大的学习能力，帮助人们完成各种复杂的任务，例如帮助开发人员编写、调试和记录代码、研究人员快速了解科研领域、营销人员撰写产品描述、设计人员设计新作品等等。许多企业探索AI大模型的应用方法和对外服务方法，通过网关进行AI大模型的API管理成为了很常规的需求。
+以ChatGPT为代表的AIGC技术为企业生产带来了巨大的变化，并一直在企业应用开发领域占据一席之地。AI大模型凭借其强大的学习能力，帮助人们完成各种复杂的任务，例如帮助开发人员编写、调试和记录代码、研究人员快速了解科研领域、营销人员撰写产品描述、设计人员设计新作品等等。许多企业探索如何降低AI大模型的使用成本，通过网关进行AI大模型的API管理成为了很常规的需求。
 
 # Higress如何降低AI大模型使用成本？
 
@@ -15,7 +15,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/103456511/1688523788955-ef30f3fa-9916-48cf-baf7-dcdc9d733a8a.png#clientId=u000cf9ed-697b-4&from=paste&height=260&id=VzJLA&originHeight=1436&originWidth=3392&originalType=binary&ratio=2&rotation=0&showTitle=false&size=3514703&status=done&style=none&taskId=uf85155a3-3c08-4964-a503-f0274c5869f&title=&width=615)
 
-对于组织来说，为每位成员申请AI大模型访问权限（API Key）显然是不现实的。分散的API密钥将不利于组织进行API的用量计算、管理与付费，从而增加AI大模型的使用成本。其次，对于组织来说，AI模型的选型和访问权限、AI模型的使用频率和成员使用权限、以及向AI大模型暴露哪些数据都是比较重要的管理功能。
+对于组织来说，为每位成员申请AI大模型访问权限（API Key）显然是不现实的。分散的API密钥将不利于组织进行API的用量计算、管理与付费，从而增加AI大模型的使用成本。其次，对于组织来说，AI模型的选型、使用频率和成员使用权限、以及向AI大模型暴露哪些数据都是比较重要的管理功能。
 
 Higress基于丰富的插件能力，提供认证鉴权、请求过滤、流量控制、用量监测和安全防护等功能，帮助组织与AI大模型的API交互变得更加安全、可靠和可观察。基于Higress提供的认证鉴权能力，组织可以实现通过统一的API密钥进行AI模型的调用量管理和付费等，并为团队成员授予不同的AI模型访问权限；基于Higress提供的流量控制能力，组织能为不同的模型与用户设置差异化的访问速率限制，有效降低AI模型的使用成本；基于Higress提供的请求拦截能力，组织能够有效过滤含敏感信息的访问请求，防护部分内部站点资源不对外暴露，从而有效保障内部数据安全；基于[商业版Higress](https://www.alibabacloud.com/product/microservices-engine?spm=higress-website.topbar.0.0.0)提供的开箱即用的指标查询和日志系统的能力，组织能够完成对不同用户的AI模型调用的用量观测与分析，从而制定更加合理的AI模型使用策略。
 
@@ -23,13 +23,13 @@ Higress基于丰富的插件能力，提供认证鉴权、请求过滤、流量�
  
 # Higress对接OpenAI大语言模型实战
 
-下面我们将以Higress对接OpenAI大语言模型为例，介绍Higress如何无缝对接AI大模型。整体方案如图3所示，我们基于WASM拓展了Higress插件，实现了对OpenAI语言模型的请求代理转发。基于Higress提供的Key-Auth认证插件的能力，我们实现统一API-Key下的多租户认证。基于Higress提供的Request-Block请求过滤的能力，我们将实现含敏感信息的请求拦截，保障用户数据安全。
+下面我们将以Higress对接OpenAI大语言模型为例，介绍Higress如何无缝对接AI大模型。整体方案如图所示，我们基于WASM拓展了Higress插件，实现了对OpenAI语言模型的请求代理转发。基于Higress提供的Key-Auth认证插件的能力，我们实现统一API-Key下的多租户认证。基于Higress提供的Request-Block请求过滤的能力，我们将实现含敏感信息的请求拦截，保障用户数据安全。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2023/jpeg/103456511/1689043915532-1c902ce8-9d12-4b5b-8577-5f9b8711b272.jpeg)
 
 ## 前提条件：
 1. 安装Higress，参考[Higress安装部署文档](https://higress.io/zh-cn/docs/ops/deploy-by-helm/#%E6%94%AF%E6%8C%81-istio-crd%E5%8F%AF%E9%80%89)。
-2. 准备Go语言开发WASM插件的开发环境，参考[使用 GO 语言开发 WASM 插件 | Higress](https://higress.io/zh-cn/docs/user/wasm-go)。
+2. 准备Go语言开发WASM插件的开发环境，参考[使用 GO 语言开发 WASM 插件](https://higress.io/zh-cn/docs/user/wasm-go)。
 
 ## 基于WASM的AI Proxy Plugin 
 下文将给出基于Higress与WASM实现的AI大模型API代理插件方案。Higress支持基于WASM实现对外扩展的能力。WASM插件提供的多语言生态和热插拔机制为插件的实现和部署提供便利。Higress同时支持在插件中请求外部服务，为AI代理插件的实现提供了高效的解决路径。
