@@ -2,7 +2,7 @@
 title: Power AIGC Applications with Higress
 keywords: [higress,AIGC,AI plugin]
 description: This paper introduces the usage of higress in AIGC application.
-author: 澄潭,兆维
+author: Weiji Zhao
 date: 2023-07-12
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en/docusaurus-plugin-content-blog/ai_plugin.md
 ---
