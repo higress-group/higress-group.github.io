@@ -1,6 +1,6 @@
 ---
 title: Power AIGC Applications with Higress
-keywords: [higress,AIGC,AI plugin]
+keywords: [Higress,AIGC,AI plugin]
 description: This paper introduces the usage of higress in AIGC application.
 author: Weiji Zhao
 date: 2023-07-12
@@ -21,19 +21,19 @@ Taking OpenAI as an example, OpenAI's APIs are priced not based on the number of
                  
 It is unrealistic for an organization to apply for an API Key for each member. Scattered API keys will not be conducive to the organization's calculation, management, and payment of API usage, thereby increasing the cost of using large AI models. For organizations, the selection and access rights of AI models, the frequency of use of AI models and the use rights of members, and the management and protection of data exposed to AI models are all important API management.   
       
-Based on rich plugin capabilities, Higress provides functions such as authentication, request filtering, traffic control, usage monitoring, and security protection, helping organizations interact with large AI model APIs more securely, reliably, and observably. Based on the **authentication** provided by Higress, organizations can implement multi-tenant authentication and grant different AI model access rights to team members; based on the **traffic control** capability, organizations can set differentiated access rate limits for different models and users, effectively reducing the cost of using AI models, based on the **request interception** capability, organizations can effectively filter access requests containing sensitive information, and protect some internal site resources from being exposed to the outside world, effectively ensuring data security. Based on the index query and log system capabilities provided by [Commercial  Higress](https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0), organizations can **observe** and **analyze** the usage of AI model calls by different users to formulate more reasonable AI model usage strategies.   
+Based on rich plugin capabilities, Higress provides functions such as authentication, request filtering, traffic control, usage monitoring, and security protection, helping organizations interact with large AI model APIs more securely, reliably, and observably. Based on the **authentication** provided by Higress, organizations can implement multi-tenant authentication and grant different AI model access rights to team members; based on the **traffic control** capability, organizations can set differentiated access rate limits for different models and users, effectively reducing the cost of using AI models, based on the **request interception** capability, organizations can effectively filter access requests containing sensitive information, and protect some internal site resources from being exposed to the outside world, effectively ensuring data security. Based on the index query and log system capabilities provided by [Commercial Higress](https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0), organizations can **observe** and **analyze** the usage of AI model calls by different users to formulate more reasonable AI model usage strategies.   
 
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/103456511/1689125555906-388e3f46-4070-414e-9f67-293bfc8c49e2.png#clientId=u7d7dc920-d9bf-4&from=paste&height=373&id=u5c1bba9d&originHeight=820&originWidth=2302&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=1205356&status=done&style=none&taskId=u6a5fcf97-095d-4300-9831-749a537703c&title=&width=1046.3636136843159)
 
 #  Manage OpenAI API with Higress
 
-We will take Higress connecting to the OpenAI API as an example to introduce how Higress seamlessly connects to the large AI model. The overall solution is shown in Fig.3. We have extended the Higress plugin based on WASM to proxy requests to the OpenAI language model. Based on authentication plugins such as Key Auth, we implement multi-tenant authentication under a unified OpenAI API-Key. Based on the Request-Block, we implement the interception of requests with sensitive information and ensure data protection.
+We will take Higress connecting to the OpenAI API as an example to introduce how Higress seamlessly connects to the large AI model. The overall solution is shown in Fig.3. We have extended the Higress plugin based on WASM to proxy requests to the OpenAI language model. Based on authentication plugins such as Key Auth, we implement multi-tenant authentication under a unified OpenAI API-Key. Based on the Request-Block plugin, we implement the interception of requests with sensitive information and ensure data protection.
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2023/jpeg/103456511/1689043915532-1c902ce8-9d12-4b5b-8577-5f9b8711b272.jpeg)
            
 ## Prerequisites
 
-1. Install Higress. Please refer to [Deploy Higress By Helm | Higress](https://higress.io/en-us/docs/ops/deploy-by-helm/).
+1. Install Higress. Please refer to [Deploy Higress By Helm](https://higress.io/en-us/docs/ops/deploy-by-helm/).
 2. Prepare the development environment for WASM plugins with Golang. Please refer to [Developing a WASM plugin with Golang | Higress](https://higress.io/en-us/docs/user/wasm-go/).
 
 ## AI Proxy WASM Plugin 
@@ -203,9 +203,9 @@ curl "http://{GatewayIP}/?text=pw=xxxxxx" -H "apikey:xxxxxx"
 ```
 ## Usage observation and analysis
 
-For organizations, observing and analyzing the usage of large AI model calls for each user helps to understand their usage and costs. It is also necessary for individual users to understand their own call volume and overhead.  [Commercial Higress](https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0) is deeply integrated with various indicators and log systems and provides an out-of-the-box usage observation and analysis report construction mechanism, which can view the usage of various APIs in real time and filter according to various parameters.
+For organizations, observing and analyzing the usage of large AI model calls for each user helps to understand their usage and costs. It is also necessary for individual users to understand their own call volume and overhead.  [Commercial Higress](https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0) is deeply integrated with various metrics and log systems and provides an out-of-the-box usage observation and analysis report construction mechanism, which can view the usage of various APIs in real time and filter according to various parameters.
 
-Taking the observation of each user's usage of the OPENAI-Curie model as an example, the administrator can set the observability parameter in the request header：x-mse-consumer, to distinguish users through **MSE console** - **cloud native gateway** - **gateway instance** - **parameter configurator**- **Custom format**. After adding the observability parameters, enter the **Observation Analysis **-** Log Center** to set the use statistics chart function to complete the observation and analysis of API usage. As shown in the figure below, the amount of calls to the OPENAI-Curie model of user consumer1 and user consumer2 is presented in the form of a pie chart.
+Taking the observation of each user's usage of the OPENAI-Curie model as an example, the administrator can set the observability parameter in the request header：x-mse-consumer, to distinguish users through **MSE console** - **Cloud native Gateway** - **Gateway instance** - **Parameter Configurator**- **Custom Format**. After adding the observability parameters, enter the **Observation Analysis **-** Log Center** to set the use statistics chart function to complete the observation and analysis of API usage. As shown in the figure below, the amount of calls to the OPENAI-Curie model of user consumer1 and user consumer2 is presented in the form of a pie chart.
 
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/103456511/1689133126041-96a120ea-34b3-488a-8d75-8a296ac41b12.png#clientId=uaea7149c-f4cc-4&from=paste&height=400&id=u56e5ce08&originHeight=879&originWidth=2334&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=1418178&status=done&style=none&taskId=u99bdb280-d7e5-4c5c-acc8-dff0c104c03&title=&width=1060.909067914506)
 
