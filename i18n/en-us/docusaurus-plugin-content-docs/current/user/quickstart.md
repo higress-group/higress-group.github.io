@@ -8,9 +8,11 @@ toc_max_heading_level: 4
 
 # Quick Start
 
-## Stage 1: Installation
+## Environment 1: Use in K8s
 
-### Scenario 1: Use in a Standard K8s Cluster
+### Stage 1: Installation
+
+#### Scenario 1: Use in a Standard K8s Cluster
 
 **Helm Installation Command**
 
@@ -28,11 +30,11 @@ Obtain the LoadBalancer IP of Higress Gateway and write it down. You can use it 
 kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
-### Scenario 2: Use in Local Environment
+#### Scenario 2: Use in Local Environment
 
 The following groups can be applied to all local K8s clusters. If there is already a test cluster running on your PC, you can go to Step 3 directly and install Higress.
 
-#### Step 1: Install kubectl & kind
+##### Step 1: Install kubectl & kind
 
 **MacOS:**
 ```bash
@@ -68,7 +70,7 @@ chmod +x ./kubectl ./kind
 sudo mv ./kubectl ./kind /usr/local/bin
 ```
 
-#### Step 2: Create and Activate kind
+##### Step 2: Create and Activate kind
 
 First, create a cluster config file: `cluster.conf`
 
@@ -109,7 +111,7 @@ currently, the namespace `higress-system` has a svc which type is `LoadBalancer`
 we can use official support to enable this function,please refer to `https://kind.sigs.k8s.io/docs/user/loadbalancer/`
 
 
-#### Step 3: Install Higress
+##### Step 3: Install Higress
 when you install `higress` in local environment, you should use `--set global.kind=true`;
 in the future, we will use `--set global.local=true` for unambiguous.
 
@@ -128,7 +130,7 @@ Note: If you are using a pre-existed local K8s cluster, you may need to use the 
 kubectl port-forward service/higress-gateway -n higress-system 80:80 443:443
 ```
 
-## Stage 2: Configuration
+### Stage 2: Configuration
 
 Assuming that there is already a service named "foo" deployed in the default namespace, we'd like to create a route, forwarding http://foo.bar.com/foo requests to this service.
 
@@ -159,7 +161,7 @@ spec:
   - port: 5678
 ```
 
-### Method 1: Use Higress Console
+#### Method 1: Use Higress Console
 
 Edit the hosts file and point domain `console.higress.io` to the IP of Higress Gateway (In a standard K8s cluster, use the previously obtained LoadBalancer IP. And use 127.0.0.1 instead in a local cluster).
 
@@ -179,7 +181,7 @@ Click "Route Management" on the navigation bar left. Click "Create Route" button
 
 ![image](/img/user/quickstart/en-us/route_management.png)
 
-### Method 2: Use Ingress CRD
+#### Method 2: Use Ingress CRD
 
 Use the YAML below to create the test route we need.
 ```yaml
@@ -202,11 +204,58 @@ spec:
               number: 5678
 ```
 
-## Stage 3: Validate
+### Stage 3: Validate
 
 Use the following command to check whether the test route works properly:
 
 ```bash
 # should output "foo"
 curl http://GatewayIP/foo -H "Host: foo.bar.com"
+```
+
+## Environment 2: Use in Docker Compose without K8s
+
+### Stage 1: Installation
+
+**Installation Command 1: Use a separated-deployed Nacos service**
+
+```bash
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos -p admin
+```
+
+Please replace `192.168.0.1` with the actual IP address of Nacos service (if Nacos is deployed locally, please use a non-loopback address such as `localhost` or `127.0.0.1`), and update the value of `--nacos-username` and `--nacos-password` based on actual configurations. If authentication isn't enabled in Nacos, you can remove these two arguments.
+
+**Installation Command 2: Use the Higress Built-In Nacos**
+
+```bash
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- --use-builtin-nacos -p admin
+```
+
+Note: On Windows, you can use Unix-like shells such as Cygwin, Git Bash to execute the command above.
+
+### Stage 2: Configuration
+
+Open `http://127.0.0.1:8080` in browser and log into Higress Console using admin as both username and password.
+
+![image](/img/user/quickstart/en-us/login.png)
+
+Click "Service Sources" on the navigation bar left. Click "Create Service Source" button. Then fill the form according to the image below and click "Confirm" button.
+
+![image](/img/user/quickstart/en-us/service_source_management_standalone.png)
+
+Click "Domain Management" on the navigation bar left. Click "Create Domain" button. Then fill the form according to the image below and click "Confirm" button.
+
+![image](/img/user/quickstart/en-us/domain_management.png)
+
+Click "Route Management" on the navigation bar left. Click "Create Route" button. Then fill the form according to the image below and click "Confirm" button.
+
+![image](/img/user/quickstart/en-us/route_management_standalone.png)
+
+### Stage 3: Validate
+
+Use the following command to check whether the test route works properly:
+
+```bash
+# should output a JSON object containing request data 
+curl http://localhost/get?foo=bar -H 'host: foo.bar.com'
 ```

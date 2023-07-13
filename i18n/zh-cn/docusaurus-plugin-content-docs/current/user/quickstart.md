@@ -8,9 +8,11 @@ toc_max_heading_level: 4
 
 # 快速开始
 
-## 阶段一：安装
+## 环境一：在 K8s 中使用
 
-### 场景一：在标准 K8s 集群中使用
+### 阶段一：安装
+
+#### 场景一：在标准 K8s 集群中使用
 
 **Helm 安装命令**
 
@@ -35,11 +37,11 @@ helm install higress -n higress-system higress.io/higress --create-namespace --r
 kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
-### 场景二：在本地环境中使用
+#### 场景二：在本地 K8s环境中使用
 
 以下步骤适用于所有在本地启动 K8s 集群进行验证的场景。如果您本地已经配置好了一个测试集群，可以直接跳转到第三步安装 Higress。
 
-#### 第一步：安装 kubectl & kind
+##### 第一步：安装 kubectl & kind
 
 **MacOS：**
 ```bash
@@ -75,7 +77,7 @@ chmod +x ./kubectl ./kind
 sudo mv ./kubectl ./kind /usr/local/bin
 ```
 
-#### 第二步：创建并启用 kind
+##### 第二步：创建并启用 kind
 
 首先创建一个集群配置文件: `cluster.conf`
 
@@ -114,7 +116,7 @@ kubectl.exe config use-context kind-higress
 
 上述配置是为了将本地（127.0.0.1）的80和443端口用于Higress访问，如果希望在本地使用 LoadBalancer IP 进行访问，可以参考Kind文档`https://kind.sigs.k8s.io/docs/user/loadbalancer/` 提供的能力予以支持。
 
-#### 第三步：安装 Higress
+##### 第三步：安装 Higress
 
 本地安装开关: `--set global.kind=true`；
 为避免歧义，后面会调整属性名称为：`--set global.local=true`
@@ -134,7 +136,7 @@ helm install higress -n higress-system higress.io/higress --create-namespace --r
 kubectl port-forward service/higress-gateway -n higress-system 80:80 443:443
 ```
 
-## 阶段二：配置
+### 阶段二：配置
 
 假设在 default 命名空间下已经部署了一个名为 foo 的服务，而我们希望创建一个对应 http://foo.bar.com/foo 的路由指向该服务。
 
@@ -165,7 +167,7 @@ spec:
   - port: 5678
 ```
 
-### 方法一：使用 Higress Console 进行配置
+#### 方法一：使用 Higress Console 进行配置
 
 编辑本机的 hosts 文件，将`console.higress.io`域名指向该 Higress Gateway 的 IP（在标准 K8s 集群中即前面获取的 LoadBalancer IP。在本地集群中可直接使用 127.0.0.1）。
 ```
@@ -184,7 +186,7 @@ GatewayIP console.higress.io
 
 ![image](/img/user/quickstart/zh-cn/route_management.png)
 
-### 方法二：使用 Ingress CRD 进行配置
+#### 方法二：使用 Ingress CRD 进行配置
 
 使用下方 YAML 来创建我们需要的路由配置。
 ```yaml
@@ -207,11 +209,58 @@ spec:
               number: 5678
 ```
 
-## 阶段三：请求验证
+### 阶段三：请求验证
 
 执行以下命令，验证测试路由可以正常工作：
 
 ```bash
 # should output "foo"
 curl http://GatewayIP/foo -H 'host: foo.bar.com'
+```
+
+## 环境二：脱离 K8s 在 Docker Compose 中使用
+
+### 阶段一：安装
+
+**安装命令一：使用独立部署的 Nacos**
+
+```bash
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos -p admin
+```
+
+请将 `192.168.0.1` 替换为 Nacos 服务器的 IP（如果 Nacos 部署在本机，请不要使用如 `localhost` 或 `127.0.0.1` 的 Loopback 地址），并按需调整 `--nacos-username` 和 `--nacos-password` 的取值。如果 Nacos 服务未开启认证功能，则可以移除这两个参数。
+
+**安装命令二：使用 Higress 内置 Nacos**
+
+```bash
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- --use-builtin-nacos -p admin
+```
+
+注：Windows 系统下可以使用 Cygwin、Git Bash 等类 Unix Shell 中执行上述命令。
+
+### 阶段二：配置
+
+在浏览器中输入`http://127.0.0.1:8080`，使用 admin 作为用户名密码登录 Higress 控制台。
+
+![image](/img/user/quickstart/zh-cn/login.png)
+
+点击左侧“服务来源”导航栏，然后点击页面右侧的“创建服务来源”按钮。按照下图所示内容填写表单并点击“确定”按钮。
+
+![image](/img/user/quickstart/zh-cn/service_source_management_standalone.png)
+
+点击左侧“域名管理”导航栏，然后点击页面右侧的“创建域名”按钮。按照下图所示内容填写表单并点击“确定”按钮。
+
+![image](/img/user/quickstart/zh-cn/domain_management.png)
+
+点击左侧“路由管理”导航栏，然后点击页面右侧的“创建路由”按钮。按照下图片所示内容填写表单并点击“确定”按钮。
+
+![image](/img/user/quickstart/zh-cn/route_management_standalone.png)
+
+### 阶段三：请求验证
+
+执行以下命令，验证测试路由可以正常工作：
+
+```bash
+# should output a JSON object containing request data 
+curl http://localhost/get?foo=bar -H 'host: foo.bar.com'
 ```
