@@ -15,7 +15,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/103456511/1688523788955-ef30f3fa-9916-48cf-baf7-dcdc9d733a8a.png#clientId=u000cf9ed-697b-4&from=paste&height=260&id=VzJLA&originHeight=1436&originWidth=3392&originalType=binary&ratio=2&rotation=0&showTitle=false&size=3514703&status=done&style=none&taskId=uf85155a3-3c08-4964-a503-f0274c5869f&title=&width=615)
 
-对于组织来说，为每位成员申请AI大模型的访问权限（API Key）显然是不现实的。分散的API密钥将不利于组织进行API的用量计算、管理与付费，从而增加AI大模型的使用成本。其次，对于组织来说，AI模型的选型、使用频率和成员使用权限、以及向AI大模型暴露哪些数据都是在管理中需要着重关注的功能。
+对于组织来说，为每位成员申请AI大模型的访问权限（API-Key）显然是不现实的。分散的API密钥将不利于组织进行API的用量计算、管理与付费，从而增加AI大模型的使用成本。其次，对于组织来说，AI模型的选型、使用频率和成员使用权限、以及向AI大模型暴露哪些数据都是在管理中需要着重关注的功能。
 
 Higress基于丰富的插件能力，提供了认证鉴权、请求过滤、流量控制、用量监测和安全防护等功能，能够帮助组织与AI大模型的API交互变得更加安全、可靠和可观察：基于Higress提供的认证鉴权能力，组织可以实现通过统一的API密钥进行AI模型的调用量管理和付费，并为团队成员授予不同的AI模型访问权限；基于Higress提供的流量控制能力，组织能为不同的模型与用户设置差异化的访问速率限制，有效降低AI模型的使用成本；基于Higress提供的请求拦截能力，组织能够有效过滤含敏感信息的访问请求，防护部分内部站点资源不对外暴露，从而有效保障内部数据安全；基于[商业版Higress](https://www.alibabacloud.com/product/microservices-engine?spm=higress-website.topbar.0.0.0)提供的开箱即用的指标查询和日志记录的能力，组织能够完成对不同用户的AI模型调用的用量观测与分析，从而制定更加合理的AI模型使用策略。
 
@@ -37,7 +37,7 @@ Higress基于丰富的插件能力，提供了认证鉴权、请求过滤、流�
 ### 实现示例：
 我们给出OpenAI-API的代理插件的实现示例，详情请参考[AI proxy plugin](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/chatgpt-proxy)。下列代码实现了插件相关配置完成之后，基于HTTP自动将请求代理转发到OPENAI-API，并接收来自OPENAI-API的响应，从而完成AI模型的调用，具体实现步骤如下：
 
-1. 通过RouteCluster方法指定具体的OPENAI-API的host，确认用户请求转发的具体路径，并新建用于请求代理转发的HTTP Client。
+1. 通过RouteCluster方法指定具体的OpenAI-API的host，确认用户请求转发的具体路径，并新建用于请求代理转发的HTTP Client。
 
 ```go
 func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
@@ -46,7 +46,7 @@ func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
 	if chatgptUri == "" {
 		config.ChatgptPath = "/v1/completions"
 		chatgptHost = "api.openai.com"
-	} //请求默认转发到OPEN AI API
+	} //请求默认转发到OpenAI-API
     ...
 	config.client = wrapper.NewClusterClient(wrapper.RouteCluster{
 		Host: chatgptHost,
@@ -55,7 +55,7 @@ func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
 }
 ```
 
-2. 对用户请求进行OPENAI-API的格式封装，通过HTTP Client进行请求转发与响应接受，并将响应转发给用户。
+2. 对用户请求进行OpenAI-API的格式封装，通过HTTP Client进行请求转发与响应接受，并将响应转发给用户。
    
 ```go
 //OPENAI API接收的请求体模版，详见：https://platform.openai.com/docs/api-reference/chat
@@ -73,7 +73,7 @@ const bodyTemplate string = `
 `
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
     ...
-    //根据用户的请求内容进行OPENAI API请求体封装 
+    //根据用户的请求内容进行OpenAI-API请求体封装 
 	body := fmt.Sprintf(bodyTemplate, config.Model, prompt[0], config.HumanId, config.AIId)
 	//通过HTTP Client进行转发
     err = config.client.Post(config.ChatgptPath, [][2]string{
@@ -85,7 +85,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 			for key, value := range responseHeaders {
 				headers = append(headers, [2]string{key, value[0]})
 			}
-            //接收来自于OPENAI API的响应并转发给用户
+            //接收来自于OpenAI-API的响应并转发给用户
 			proxywasm.SendHttpResponse(uint32(statusCode), headers, responseBody, -1)
 		}, 10000)
     ...
@@ -110,7 +110,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 | 名称 | 数据类型 | 填写要求 | 默认值 | 描述 |
 | --- | --- | --- | --- | --- |
 | model | string | 选填 | text-davinci-003 | 调用的模型名称 |
-| apiKey | string | 必填 | - | OPENAI API密钥，详情可参考 |
+| apiKey | string | 必填 | - | OpenAI-API密钥，详情可参考 |
 | promptParam | string | 选填 | prompt | prompt的来源字段名称，URL参数 |
 | chatgptUri | string | 选填 | api.openai.com/v1/completions | 调用AI模型服务的URL路径，默认值为OPENAI的API调用路径 |
 
@@ -122,13 +122,13 @@ model: "curie"
 promptParam: "text"
 ```
 
-根据该配置，网关代理到OpenAI API下的curie模型，用户通过text关键字在url中输入文本。
+根据该配置，网关代理到OpenAI-API下的curie模型，用户通过text关键字在url中输入文本。
 
 ```shell
 curl "http://{GatewayIP}/?text=Say,hello"
 ```
 
-得到OpenAI API的响应：
+得到OpenAI-API的响应：
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/103456511/1688630702128-6060fad6-4e47-4223-bc02-d9a240db9263.png#clientId=u743d3343-6ab1-4&from=paste&height=137&id=FIkxG&originHeight=520&originWidth=3170&originalType=binary&ratio=1.100000023841858&rotation=0&showTitle=false&size=1213836&status=done&style=none&taskId=u38ba4744-5835-4092-8291-ddfede62f55&title=&width=833.178955078125)
 
 ## 基于Key Auth的多租户认证
