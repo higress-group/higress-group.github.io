@@ -13,23 +13,6 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | v0.7.0  | 控制台发布正式版本，集成开箱即用的可观测   | 2023-02   |
 | v1.0.0  | 整体达到**GA状态**   | 2023-05   |
 | v1.1.0  | 增强控制台功能中微服务网关相关能力；支持非 K8s 下安装部署   | 2023-07   |
-| v1.2.0  | 完整支持 GatewayAPI，丰富可观测能力   | 2023-08   |
-
-
-# 具体功能计划 
-
-| 功能                    | 计划发布版本 | 发布状态 |
-| ----------------------  | -----------  | -------  |
-| 实现简易控制台，支持路由、服务、域名管理 | v0.6.0 | done |
-| 提供基于 Nacos/Zookeeper 进行服务发现的能力 | v0.6.0 | done |
-| 支持基于 OpenKruise Rollout 的灰度发布  | v0.6.0 | done |
-| 提供 Plugin CRD，降低 wasm 插件配置复杂度  | v0.6.0 | done |
-| 提供基于 Prometheus + Grafana 的监控大盘  | v0.7.0 | done |
-| 控制台提供 Wasm 插件能力 | v1.0.0 | done |
-| 控制台支持 WAF 能力  | v1.0.0 | done |
-| 实现基于 Nacos 存储配置的模式，解耦 Istio/K8s 依赖  | v1.1.0 | done |
-| 支持 dubbo 协议转换 CRD  | v1.1.0 | done |
-| 提供基于 Skywalking 的监控大盘  | v1.2.0 | - |
-| 插件市场支持与 SerivceMesh 共享 WASM 插件生态   | v1.2.0 | - |
-| CLI 支持对接 cert-manager 进行证书管理   | v1.2.0 | - | 
-
+| v1.2.0  | 支持作为 Knative 的网络层使用；支持 ARM 架构部署；支持对接 Consul   | 2023-08   |
+| v1.3.0  | 完整支持 GatewayAPI；支持 Operator 模式部署   | 2023-09   |
+| v1.4.0  | 推出 WASM 插件集市功能   | 2023-10   |

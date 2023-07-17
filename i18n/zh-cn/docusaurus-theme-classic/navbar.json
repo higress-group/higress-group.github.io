@@ -31,6 +31,10 @@
     "message": "Higress 企业版",
     "description": "Navbar item with label Commercial"
   },
+  "item.label.FreeTrial": {
+    "message": "企业版免费试用",
+    "description": "Navbar item with label FreeTrial"
+  },
   "item.label.Case": {
     "message": "案例征集",
     "description": "Navbar item with label Case"
