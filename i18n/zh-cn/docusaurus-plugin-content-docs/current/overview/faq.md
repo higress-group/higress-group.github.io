@@ -111,7 +111,7 @@ Higress 核心代码基本采用可插拔的 Filter 扩展，功能新增也尽�
 
 **A:** 
 
-Higress 和 Nacos 初步完成了整合，在整合完后，会提供给大家使用，Consul 的代码层面已经实现，生产还未验证，有计划开源和社区共建。
+预计将在 1.2.0 版本提供
 
 ********
 
@@ -127,7 +127,7 @@ Higress 和 Nacos 初步完成了整合，在整合完后，会提供给大家�
 
 **A:** 
 
-当前是需要依赖 K8s 的，后续支持 Nacos/Consul 等注册中心，可以与 K8s/Istio 松耦合。
+已经支持了，可以看这里：https://higress.io/zh-cn/docs/user/quickstart#%E7%8E%AF%E5%A2%83%E4%BA%8C%E8%84%B1%E7%A6%BB-k8s-%E5%9C%A8-docker-compose-%E4%B8%AD%E4%BD%BF%E7%94%A8
 
 ********
 
@@ -145,7 +145,7 @@ Higress 和 Nacos 初步完成了整合，在整合完后，会提供给大家�
 
 **A:** 
 
-预计会在 v0.6.0 推出，非常希望借助社区的力量来加速 Dashboard 的开源，好用的后端开源项目需要搭配好用的控制台。
+已经开源了：https://github.com/higress-group/higress-console
 
 ********
 
@@ -153,7 +153,7 @@ Higress 和 Nacos 初步完成了整合，在整合完后，会提供给大家�
 
 **A:** 
 
-支持的，并且会遵循 WASM 插件的社区生态，这方面的最佳实践会逐步提供出来。
+支持的，可以看这篇文档：https://higress.io/zh-cn/docs/user/waf/
 
 ********
 

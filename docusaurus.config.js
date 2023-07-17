@@ -140,6 +140,12 @@ const config = {
             target: '_blank',
           },
           {
+            label: 'FreeTrial',
+            to: 'https://free.aliyun.com/?searchKey=%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BD%91%E5%85%B3',
+            position: 'right',
+            target: '_blank',
+          },
+          {
             label: 'Case',
             to: 'https://survey.aliyun.com/apps/zhiliao/SmDQwdihe',
             position: 'right',

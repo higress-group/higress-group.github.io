@@ -31,6 +31,10 @@
     "message": "HIGRESS IN CLOUD",
     "description": "Navbar item with label Commercial"
   },
+  "item.label.FreeTrial": {
+    "message": "CLOUD FREE TRIAL",
+    "description": "Navbar item with label FreeTrial"
+  },
   "item.label.Case": {
     "message": "CASE COLLECTION",
     "description": "Navbar item with label Case"
