@@ -37,7 +37,7 @@ Higress基于丰富的插件能力，提供了认证鉴权、请求过滤、流�
 ### 实现示例：
 我们给出OpenAI-API的代理插件的实现示例，详情请参考[AI proxy plugin](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/chatgpt-proxy)。下列代码实现了插件相关配置完成之后，基于HTTP自动将请求代理转发到OPENAI-API，并接收来自OPENAI-API的响应，从而完成AI模型的调用，具体实现步骤如下：
 
-1. 通过RouteCluster方法指定具体的OPENAI-API的host,确认用户请求转发的具体路径，并新建用于请求代理转发的HTTP Client。
+1. 通过RouteCluster方法指定具体的OPENAI-API的host，确认用户请求转发的具体路径，并新建用于请求代理转发的HTTP Client。
 
 ```go
 func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
