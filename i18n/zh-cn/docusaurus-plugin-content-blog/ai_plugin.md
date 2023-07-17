@@ -11,7 +11,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # Higress如何降低AI大模型使用成本？
 
-以OpenAI为例，OpenAI的API调用并不是基于请求量或者订阅时间来计费，而是基于每个请求的使用量来计费。对于AI大模型来说，模型输入与输出的token数可以比较好的衡量当前模型进行推理任务的复杂度。因此基于token作为请求使用量进行计费是OpenAPI的标准计费策略。对于不同的模型token的计费标准也不同，越复杂的模型会生成越好的结果，但也会带来更高的计费。OpenAI通过为用户分发API密钥来完成用户的鉴权与收费等功能。
+以OpenAI为例，OpenAI的API调用并不是基于请求量或者订阅时间来计费，而是基于每个请求的使用量来计费。对于AI大模型来说，模型输入与输出的token数可以比较好的衡量当前模型进行推理任务的复杂度。因此基于token作为请求使用量进行计费是OpenAI-API的标准计费策略。对于不同的模型token的计费标准也不同，越复杂的模型会生成越好的结果，但也会带来更高的计费。OpenAI通过为用户分发API密钥来完成用户的鉴权与收费等功能。
 
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/103456511/1688523788955-ef30f3fa-9916-48cf-baf7-dcdc9d733a8a.png#clientId=u000cf9ed-697b-4&from=paste&height=260&id=VzJLA&originHeight=1436&originWidth=3392&originalType=binary&ratio=2&rotation=0&showTitle=false&size=3514703&status=done&style=none&taskId=uf85155a3-3c08-4964-a503-f0274c5869f&title=&width=615)
 
@@ -35,7 +35,7 @@ Higress基于丰富的插件能力，提供了认证鉴权、请求过滤、流�
 下文将给出基于Higress与WASM实现的AI大模型API代理插件方案。Higress支持基于WASM实现对外扩展的能力。WASM插件提供的多语言生态和热插拔机制为插件的实现和部署提供了便利。Higress同时支持在插件中请求外部服务，为AI代理插件的实现提供了高效的解决路径。
 
 ### 实现示例：
-我们给出OpenAI-API的代理插件的实现示例，详情请参考[AI proxy plugin](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/chatgpt-proxy)。下列代码实现了插件相关配置完成之后，基于HTTP自动将请求代理转发到OPENAI-API，并接收来自OPENAI-API的响应，从而完成AI模型的调用，具体实现步骤如下：
+我们给出OpenAI-API的代理插件的实现示例，详情请参考[AI proxy plugin](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/chatgpt-proxy)。下列代码实现了插件相关配置完成之后，基于HTTP自动将请求代理转发到OpenAI-API，并接收来自OpenAI-API的响应，从而完成AI模型的调用，具体实现步骤如下：
 
 1. 通过RouteCluster方法指定具体的OpenAI-API的host，确认用户请求转发的具体路径，并新建用于请求代理转发的HTTP Client。
 
@@ -58,7 +58,7 @@ func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
 2. 对用户请求进行OpenAI-API的格式封装，通过HTTP Client进行请求转发与响应接受，并将响应转发给用户。
    
 ```go
-//OPENAI API接收的请求体模版，详见：https://platform.openai.com/docs/api-reference/chat
+//OpenAI API接收的请求体模版，详见：https://platform.openai.com/docs/api-reference/chat
 const bodyTemplate string = `
 {
 "model":"%s",
@@ -112,7 +112,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 | model | string | 选填 | text-davinci-003 | 调用的模型名称 |
 | apiKey | string | 必填 | - | OpenAI-API密钥，详情可参考 |
 | promptParam | string | 选填 | prompt | prompt的来源字段名称，URL参数 |
-| chatgptUri | string | 选填 | api.openai.com/v1/completions | 调用AI模型服务的URL路径，默认值为OPENAI的API调用路径 |
+| chatgptUri | string | 选填 | api.openai.com/v1/completions | 调用AI模型服务的URL路径，默认值为OpenAI的API调用路径 |
 
 示例配置如下：
 
@@ -202,7 +202,7 @@ curl "http://{GatewayIP}/?text=pw=xxxxxx" -H "apikey:xxxxxx"
 
 对于组织来说，对各用户进行AI模型调用的用量观测和分析有助于了解其使用情况与产生的成本。对于个人用户，了解自己的调用量和开销也是必要的。因此，在网关层进行调用的观测和分析对于AI大模型的API管理是必要的能力。[商业版Higress](https://www.alibabacloud.com/product/microservices-engine?spm=higress-website.topbar.0.0.0)与各种指标与日志系统进行了深度集成，提供了开箱即用的用量观测分析报告构建机制，可以实时查看各种API的使用情况，并根据各类参数进行过滤，从而更好的了解API使用情况。
 
-以观察各用户对OPENAI-Curie模型的调用量为例，用户可通过**MSE管理控制台**-**云原生网关**-**网关实例**-**参数配置-日志格式调整**中设置区分用户的可观测性参数请求头：`x-mse-consumer`，将其列入观测列表。之后进入**观测分析-日志中心**中设置使用统计图表功能即可完成对API的用量观测和分析。如下图所示，用户`consumer1`与用户`consumer2`的对OpenAI-Curie模型的调用量以饼状图形式呈现。
+以观察各用户对OpenAI-Curie模型的调用量为例，用户可通过**MSE管理控制台**-**云原生网关**-**网关实例**-**参数配置-日志格式调整**中设置区分用户的可观测性参数请求头：`x-mse-consumer`，将其列入观测列表。之后进入**观测分析-日志中心**中设置使用统计图表功能即可完成对API的用量观测和分析。如下图所示，用户`consumer1`与用户`consumer2`的对OpenAI-Curie模型的调用量以饼状图形式呈现。
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/103456511/1688712645619-08deaa3b-6dfd-4031-a3bc-e9b04667eb39.png#clientId=u734a6afc-f143-4&from=paste&height=393&id=u3c0d04ae&originHeight=864&originWidth=2362&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=1411179&status=done&style=none&taskId=ud21c6766-85c4-47c4-80a6-211b485d5e1&title=&width=1073.6363403659227)
   
 # 彩蛋：Higress控制台样例的聊天机器人
