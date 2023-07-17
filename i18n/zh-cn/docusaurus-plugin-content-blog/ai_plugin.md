@@ -157,7 +157,7 @@ keys:
 allow: [consumer1]
 ```
 
-以上配置定义了指向AI模型服务的消费者组consumers，并且只有consumer1具备访问当前路由下AI模型服务的权限。
+以上配置定义了指向AI模型服务的消费者组`consumers`，并且只有`consumer1`具备访问当前路由下AI模型服务的权限。
 
 ```yaml
 curl "http://{GatewayIP}/?text=Say,hello"
