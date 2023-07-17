@@ -133,7 +133,7 @@ curl "http://{GatewayIP}/?text=Say,hello"
 
 ## 基于Key Auth的多租户认证
 
-不同于为每位成员颁发AI-API密钥的形式，企业可以基于Higress网关提供的认证鉴权能力，依靠内部授权（如Key Auth等）来管理成员对AI模型对访问权限，从而限制成员可以使用的服务和模型，并依靠统一的AI-API密钥进行请求代理转发实现对API用量的统一管理。接下来以key_auth为例介绍基于Higress的多租户认证能力。
+不同于为每位成员颁发OpenAI-API密钥的形式，企业可以基于Higress网关提供的认证鉴权能力，依靠内部授权（如Key Auth等）来管理成员对AI模型对访问权限，从而限制成员可以使用的服务和模型，并依靠统一的AI-API密钥进行请求代理转发实现对API用量的统一管理。接下来以Key Auth为例介绍Higress的多租户认证能力。
 
 Key Auth插件实现了基于网关内API Key进行认证和鉴权的功能，支持从HTTP请求的URL参数或者请求头解析API Key，同时验证该API是否有权限访问。通过在**Higress控制台**-**插件市场**-**Key Auth**进行**全局配置**和**路由级配置**，即可实现Higress网关的多租户认证。
 
@@ -161,19 +161,19 @@ allow: [consumer1]
 
 ```yaml
 curl "http://{GatewayIP}/?text=Say,hello"
-#请求未提供 API Key，返回401
+#请求未提供API-Key，返回401
 
 curl "http://{GatewayIP}/?text=Say,hello" -H "apikey:zzzzzz"
-#请求提供的 API Key 未在消费者组内，无权访问，返回401
+#请求提供的API-Key 未在消费者组内，无权访问，返回401
 
 curl  "http://{GatewayIP}/?text=Say,hello" -H "apikey:yyyyyy"
-#根据请求提供的 API Key匹配到的调用者无AI模型服务的访问权限，返回403
+#根据请求提供的API-Keyy匹配到的调用者无AI模型服务的访问权限，返回403
 
 curl "http://{GatewayIP}/?text=Say,hello" -H "apikey:xxxxxx"
-#请求合法且有AI模型服务访问权限，请求将被代理到AI模型，正常得到OpenAI API的响应
+#请求合法且有AI模型服务访问权限，请求将被代理到AI模型，正常得到OpenAI-API的响应
 ```
 
-Higress除了提供网关级多租户认证外，提供限流等能力。Key Rate Limit插件可以根据用户在消费组中的成员资格对用户应用速率进行限制，从而限制关键应用程序对高成本AI大模型服务的消耗。基于多租户认证插件与限流等功能插件能力，Higress可以完全控制AI大模型API的访问权限、访问数量与调用成本。
+Higress除了提供网关级多租户认证外，还能提供限流等能力。Key Rate Limit插件可以根据用户在消费组中的成员资格对用户请求速率进行限制，从而限制应用程序对高成本AI大模型服务的消耗。基于多租户认证与限流等功能，Higress可以完全控制AI大模型API的访问权限、访问数量与调用成本。
 
 ## 基于Request Block保障数据安全
 
