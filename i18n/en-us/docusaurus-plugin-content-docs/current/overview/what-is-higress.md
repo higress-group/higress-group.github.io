@@ -1,4 +1,4 @@
-![image](https://github.com/higress-group/higress-group.github.io/assets/6763318/c2d7177d-e259-4b40-afa3-1008a3587784)---
+---
 title: What Is Higress
 keywords: [Higress]
 description: Higress introduction
