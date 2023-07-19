@@ -1,35 +1,35 @@
 ---
-title: Custom Plugin
-keywords: [higress, custom, plugin]
-description: Custom plugin configuration reference
+title: 自定义插件
+keywords: [higress,custom,plugin]
+description: 自定义插件配置参考
 ---
 
-## Edit the Wasm file
+## 编辑 Wasm 文件
 
-1. [SDK](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) for developing Higress' Wasm plugin in Go language
-2. [Example of plug-in development](../user/wasm-go.md)
+1. 用于使用 Go 语言开发 Higress 的 Wasm 插件的[SDK](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
+2. [插件开发示例](../user/wasm-go.md)
 
-## Build the Wasm image
+## 构建 Wasm 镜像
 
-You can also choose to build the wasm locally first, and then copy it to the Docker image. This requires you to build the build environment locally first.
+你也可以选择先在本地将 wasm 构建出来，再拷贝到 Docker 镜像中。这要求你要先在本地搭建构建环境。
 
-The compilation environment requirements are as follows:
+编译环境要求如下：
 
-- Go version: >= 1.18 (need to support generic features)
+- Go 版本: >= 1.18（需要支持泛型特性）
 
-- TinyGo version: 0.25.0 (0.25.0 recommended)
+- TinyGo 版本: >= 0.25.0（建议使用 0.25.0）
 
-The following is an example of local steps to build the [request-block](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/request-block) plugin.
+下面是本地步骤构建 [request-block](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/request-block) 插件的例子。
 
-### step1. Compile wasm
+### step1. 编译 wasm
 
 ```bash
 tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
 ```
 
-### step2. Build and push the docker image of the plugin
+### step2. 构建并推送插件的 docker 镜像
 
-Use this simple Dockerfile
+使用这份简单的 Dockerfile
 
 ```Dockerfile
 FROM scratch
@@ -41,35 +41,35 @@ docker build -t <your_registry_hub>/request-block:1.0.0 -f <your_dockerfile> .
 docker push <your_registry_hub>/request-block:1.0.0
 ```
 
-## Enable Wasm plugin
+## 生效 Wasm 插件
 
-### Using the Higress console
+### 使用 Higress 控制台
 
-Click the `Create` button to create a custom plug-in in the plug-in market, and fill in the Wasm mirror address built above in the mirror address column;
+在插件市场中创建点击`创建`按钮，就可以创建自定义插件，在镜像地址一栏中填入上面构建出的 Wasm 镜像地址即可；
 
-After the creation is complete, click the configuration button of the plug-in card, fill in the configuration of the plug-in (if any), and turn on the switch to take effect.
+创建完成后，点击插件卡片的配置按钮，填入插件的配置（如果有），打开开启开关就生效了。
 
-If the plug-in logic changes, you can build a new image with a different image tag, click the "Edit" button in the upper right menu of the plug-in card, and change the address of the Wasm image to the address of the new version.
+如果插件逻辑发生了变更，可以构建一个新的镜像，并使用不同的镜像 tag，点插件卡片右上方菜单中的`编辑`按钮，将 Wasm 镜像地址修改为新版本的地址即可。
 
-### Using CRDs
+### 使用 CRD
 
-Write the WasmPlugin resource as follows:
+编写 WasmPlugin 资源如下：
 
 ```yaml
 apiVersion: extensions.higress.io/v1alpha1
 kind: WasmPlugin
 metadata:
-   name: request-block
-   namespace: higress-system
+  name: request-block
+  namespace: higress-system
 spec:
-   defaultConfig:
-     block_urls:
-     - "swagger.html"
-   url: oci://<your_registry_hub>/request-block:1.0.0 # The address of the image built and pushed before
+  defaultConfig:
+    block_urls:
+    - "swagger.html"
+  url: oci://<your_registry_hub>/request-block:1.0.0  # 之前构建和推送的 image 地址
 ```
 
-Use `kubectl apply -f <your-wasm-plugin-yaml>` to apply the resources.
-After the resource takes effect, if the request url carries `swagger.html`, the request will be rejected, for example:
+使用 `kubectl apply -f <your-wasm-plugin-yaml>` 使资源生效。
+资源生效后，如果请求url携带 `swagger.html`, 则这个请求就会被拒绝，例如：
 
 ```bash
 curl <your_gateway_address>/api/user/swagger.html
