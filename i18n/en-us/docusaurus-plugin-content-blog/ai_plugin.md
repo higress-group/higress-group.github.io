@@ -211,6 +211,8 @@ Taking the observation of each user's usage of the OPENAI-Curie model as an exam
 
 # Join the Higress community
 Join Higress Slack: [https://join.slack.com/t/w1689142780-euk177225/shared_invite/zt-1zbjm9d34-4nptVXPpNvnuKEKZ7V3MIg](https://join.slack.com/t/w1689142780-euk177225/shared_invite/zt-1zbjm9d34-4nptVXPpNvnuKEKZ7V3MIg)
+
 To get invited: [https://communityinviter.com/apps/w1689142780-euk177225/higress](https://communityinviter.com/apps/w1689142780-euk177225/higress)
+
 If you find Higress helpful, welcome to [Higress](https://github.com/alibaba/higress) to star us!
 
