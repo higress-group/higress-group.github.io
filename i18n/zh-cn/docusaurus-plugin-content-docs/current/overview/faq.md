@@ -7,186 +7,186 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # FAQ
 
-<a href="#1" target="_self">1. Higress 现在适合上生产系统么？</a>
+<a href="#1" target="_self">1. Is Higress suitable for production system now? </a>
 <br/>
 
-<a href="#2" target="_self">2. Higress 和 Envoy Gateway 有什么区别？</a>
+<a href="#2" target="_self">2. What is the difference between Higress and Envoy Gateway? </a>
 <br/>
 
-<a href="#3" target="_self">3. Higress 和阿里巴巴的另一款开源网关 Tengine 有哪些不同？</a>
+<a href="#3" target="_self">3. What are the differences between Higress and Tengine, another open source gateway of Alibaba? </a>
 <br/>
 
-<a href="#4" target="_self">4. Higress 阿里云上的 MSE 云原生网关有什么关系？是基于此孵化的开源项目吗？</a>
+<a href="#4" target="_self">4. What is the relationship between the MSE cloud-native gateway on Higress Alibaba Cloud? Is it an open source project incubated based on this? </a>
 <br/>
 
-<a href="#5" target="_self">5. Higress 将流量网关、微服务网关、安全网关三合一，这种做法业内是否通用？是否是一种发展趋势？</a>
+<a href="#5" target="_self">5. Higress combines traffic gateway, microservice gateway and security gateway into one. Is this practice common in the industry? Is it a trend? </a>
 <br/>
 
-<a href="#6" target="_self">6. Higress 对上游进行了定制，是否存在着无法享受社区福利、还要背负生态跟进的问题？</a>
+<a href="#6" target="_self">6. Higress has customized the upstream. Is there a problem that it cannot enjoy community benefits and has to bear ecological follow-up? </a>
 <br/>
 
-<a href="#7" target="_self">7. Higress 支持 Nacos 的服务发现，是否有支持 Consul 的计划？</a>
+<a href="#7" target="_self">7. Higress supports Nacos service discovery. Is there any plan to support Consul? </a>
 <br/>
 
-<a href="#8" target="_self">8. Higress 是否有离线部署版本？</a>
+<a href="#8" target="_self">8. Does Higress have an offline deployment version? </a>
 <br/>
 
-<a href="#9" target="_self">9. Higress 能脱离 istio 环境，只基于 Docker 运行吗？</a>
+<a href="#9" target="_self">9. Can Higress be separated from the istio environment and run only based on Docker? </a>
 <br/>
 
-<a href="#10" target="_self">10. Higress 除了运行在 K8s 上，是否支持在虚拟机和物理机上运行呢？ </a>
+<a href="#10" target="_self">10. In addition to running on K8s, does Higress support running on virtual machines and physical machines? </a>
 <br/>
 
-<a href="#11" target="_self">11. Higress 的 Dashboard 会对外开源么？</a>
+<a href="#11" target="_self">11. Will Higress Dashboard be open source? </a>
 <br/>
 
-<a href="#12" target="_self">12. 当前开源的版本支持 Waf 功能么，有相关的最佳实践么？</a>
+<a href="#12" target="_self">12. Does the current open source version support the Waf function, and is there any relevant best practice? </a>
 <br/>
 
-<a href="#13" target="_self">13. Higress 是否支持弹性伸缩，网关是无状态的么？</a>
+<a href="#13" target="_self">13. Does Higress support auto-scaling, and is the gateway stateless? </a>
 <br/>
 
-<a href="#14" target="_self">14. Higress 有 roadmap 了么？</a>
+<a href="#14" target="_self">14. Does Higress have a roadmap? </a>
 <br/>
 
-<a href="#15" target="_self">15. 如何加入 Higress 社区进行贡献，已经迫不及待了。</a>
+<a href="#15" target="_self">15. How to join the Higress community to contribute, can't wait. </a>
 <br/>
 
-********
-<h3 id='1'>Q: Higress 现在适合上生产系统么？</h3>
+***********
+<h3 id='1'>Q: Is Higress suitable for production system now? </h3>
 
-**A:** 
-建议升级到 v1.0.0 及以上版本
+**A:**
+It is recommended to upgrade to v1.0.0 and above
 
-具体可以参考我们的[Roadmap](./roadmap.md)
+For details, please refer to our [Roadmap](./roadmap.md)
 
-********
+***********
 
-<h3 id='2'>Q: Higress 和 Envoy Gateway 有什么区别？</h3>
+<h3 id='2'>Q: What is the difference between Higress and Envoy Gateway? </h3>
 
-**A:** 
-Higress 是基于 Envoy 实现和扩展的，和 Envoy Gateway 一样遵循 Gateway API 标准，不同的是，还提供了：
+**A:**
+Higress is implemented and extended based on Envoy, and follows the Gateway API standard like Envoy Gateway. The difference is that it also provides:
 
-- Waf 防护、认证鉴权等安全插件能力
+- Waf protection, authentication and authentication and other security plug-in capabilities
  
-- 多注册中心、协议转化、限流降级等服务管理插件能力，例如，对于传统使用 Dubbo 的微服务用户希望使用原生 RPC 方式暴露对外服务，但通常提供外部访问的服务以使用 HTTP 为主，为了帮助 Dubbo 用户降低服务暴露的开发成本，Higress 提供了 HTTP 转 Dubbo 协议功能，且通过 Console 为用户提供白屏化的配置方式，某客户使用后反馈“这是业界完成度最高的 HTTP 转 Dubbo 协议”功能。
+- Service management plug-in capabilities such as multiple registries, protocol conversion, and current limiting and downgrading. For example, for microservice users who traditionally use Dubbo, they want to use native RPC to expose external services, but usually the services that provide external access mainly use HTTP. To help Dubbo users reduce the development cost of service exposure, Higress provides the HTTP-to-Dubbo protocol function, and provides users with a white-screen configuration method through the Console. After using it, a customer reported that "this is the industry's most complete HTTP-to-Dubbo protocol." Function.
  
-- 支持 WASM、Lua 等自定义插件，例如 Nginx 用户，我们还会支持进程外插件，满足多语言用户诉求，尤其是 Java 用户因现阶段 Java 社区对 WebAssembly 支持尚不完善但又希望对网关进行扩展的诉求。
+- Support WASM, Lua and other custom plug-ins, such as Nginx users, we will also support out-of-process plug-ins to meet the demands of multi-language users, especially Java users who want to expand the gateway because the Java community's support for WebAssembly is not perfect at this stage demands.
  
-********
+***********
 
-<h3 id='3'>Q: Higress 和阿里巴巴的另一款开源网关 Tengine 有哪些不同？</h3>
+<h3 id='3'>Q: What are the differences between Higress and Tengine, another open source gateway of Alibaba? </h3>
 
-**A:** 
+**A:**
 
-Tengine 是基于 Nginx 实现，通过 Lua 扩展，Higress 基于 istio + Envoy，通过 WASM 扩展，在技术架构上不太一样，开发者可以根据业务场景来进行选型。Higress 已经支持 Nginx Ingress 注解平滑迁移的能力，满足部分用户期望迁移到 Higress 但又不希望重新配置网关的诉求，既可以将 Higress 作为统一接入网关使用，同时又可以享受 Ingress 的红利。
+Tengine is implemented based on Nginx, extended by Lua, and Higress is based on istio + Envoy, extended by WASM. The technical architecture is different, and developers can choose according to business scenarios. Higress already supports the ability of smooth migration of Nginx Ingress annotations, which meets the needs of some users who expect to migrate to Higress but do not want to reconfigure the gateway. Higress can be used as a unified access gateway while enjoying the bonus of Ingress.
  
-********
+***********
 
-<h3 id='4'>Q: Higress 阿里云上的 MSE 云原生网关有什么关系？是基于此孵化的开源项目吗？</h3>
+<h3 id='4'>Q: What is the relationship between the MSE cloud-native gateway on Higress Alibaba Cloud? Is it an open source project incubated based on this? </h3>
 
-**A:** 
+**A:**
 
-MSE 云原生网关是 Higress 的商业化版本，能力上是有差异的，主要体现在性能、稳定性、易用性和安全性上，因为这些都非常依赖于云上的基础设施能力，详细资源还在整理，后续会在 MSE 的产品页和文档页进行展示，方便大家选型。当然，Higress 处于演进过程中，MSE 云原生网关上的哪些能力对外进行开源，我们会和社区一起定义，开源上我们也会规划一个插件市场。
+The MSE cloud-native gateway is a commercial version of Higress, with differences in capabilities, mainly reflected in performance, stability, ease of use, and security, because these are very dependent on the infrastructure capabilities on the cloud, and detailed resources are still available. After sorting, it will be displayed on the product page and document page of MSE in the future, which is convenient for everyone to choose. Of course, Higress is in the process of evolution. We will define with the community which capabilities on the MSE cloud-native gateway are open sourced, and we will also plan a plug-in market for open source.
 
-********
+***********
 
-<h3 id='5'>Q: Higress 将流量网关、微服务网关、安全网关三合一，这种做法业内是否通用？是否是一种发展趋势？</h3>
+<h3 id='5'>Q: Higress combines traffic gateway, microservice gateway, and security gateway into one. Is this practice common in the industry? Is it a trend? </h3>
 
-**A:** 
+**A:**
 
-流量网关、微服务网关、安全网关在业界中一直都有使用，部署形态大多采用各自使用独立集群部署，在K8s 主导的容器化背景下，K8s 通过 Ingress 标准化了入口网关，传统流量网关、微服务网关、安全网关独立部署模式在 K8s 下就显得部署成本高、运维复杂，站在用户角度只需要一款功能丰富的高集成网关即可，基于此我们判断高集成网关会是未来的一种发展趋势。
+Traffic gateways, microservice gateways, and security gateways have always been used in the industry. Most of the deployment forms use independent cluster deployments. In the context of K8s-led containerization, K8s standardized ingress gateways through Ingress. Traditional traffic gateways, microservices The independent deployment mode of gateway and security gateway appears to be high in deployment cost and complicated in operation and maintenance under K8s. From the perspective of users, only a highly integrated gateway with rich functions is enough. Based on this, we judge that highly integrated gateway will be a future development trend.
 
-********
+***********
 
-<h3 id='6'>Q: Higress 对上游进行了定制，是否存在着无法享受社区福利、还要背负生态跟进的问题？</h3>
+<h3 id='6'>Q: Higress has customized the upstream. Is there a problem of not being able to enjoy community benefits and being burdened with ecological follow-up? </h3>
 
-**A:** 
+**A:**
 
-Higress 核心代码基本采用可插拔的 Filter 扩展，功能新增也尽量遵循可扩展原则，在上游跟进上为保持自身稳定性也不会马上跟进最新版本，比如 APISIX、Kong 内核都是基于 Nginx，但他们依然发展的很好，事实也说明上游跟进不会成为项目发展障碍。
+The Higress core code basically adopts pluggable Filter extensions, and new functions also follow the principle of scalability as much as possible. In order to maintain its own stability in the upstream follow-up, it will not immediately follow up with the latest version. For example, APISIX and Kong kernels are based on Nginx , but they are still developing very well, and the facts also show that upstream follow-up will not become an obstacle to project development.
 
-********
+***********
 
-<h3 id='7'>Q: Higress 支持 Nacos 的服务发现，是否有支持 Consul 的计划？</h3>
+<h3 id='7'>Q: Higress supports Nacos service discovery, is there any plan to support Consul? </h3>
 
-**A:** 
+**A:**
 
-预计将在 1.2.0 版本提供
+Expected to be available in version 1.2.0
 
-********
+***********
 
-<h3 id='8'>Q: Higress 是否有离线部署版本？</h3>
+<h3 id='8'>Q: Does Higress have an offline deployment version? </h3>
 
-**A:** 
+**A:**
 
-目前还没有现成的，需要您自行构建。目前 Docker 镜像都是提供的，可以自行拉取使用。
+There is no existing one, you need to build it yourself. Currently, all Docker images are provided and can be pulled and used by yourself.
 
-********
+***********
 
-<h3 id='9'>Q: Higress 能脱离 istio 环境，只基于 Docker 运行吗？</h3>
+<h3 id='9'>Q: Can Higress be separated from the istio environment and run only based on Docker? </h3>
 
-**A:** 
+**A:**
 
-已经支持了，可以看这里：https://higress.io/zh-cn/docs/user/quickstart#%E7%8E%AF%E5%A2%83%E4%BA%8C%E8%84%B1%E7%A6%BB-k8s-%E5%9C%A8-docker-compose-%E4%B8%AD%E4%BD%BF%E7%94%A8
+Already supported, you can see it here: https://higress.io/en-us/docs/user/quickstart#environment-2-use-in-docker-compose-without-k8s
 
-********
+***********
 
-<h3 id='10'>Q: Higress 除了运行在 K8s 上，是否支持在虚拟机和物理机上运行呢？</h3>
+<h3 id='10'>Q: In addition to running on K8s, does Higress support running on virtual machines and physical machines? </h3>
 
-**A:** 
+**A:**
 
-还不支持，开源后续会通过 Nacos 做配置管理，来支持这个需求。
+Not yet supported, open source will use Nacos for configuration management to support this requirement.
 
-也可以考虑使用 [Higress 企业版](https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0)，这个模式 Higress 是全托管的，无需关心 Higress 的部署和运维，可直接对接虚拟机和物理机上部署的后端服务。
+You can also consider using [Higress Enterprise Edition] (https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0), this mode Higress is fully managed, no need to care about Higress Deployment and operation and maintenance, can directly connect to the back-end services deployed on virtual machines and physical machines.
 
-********
+***********
 
-<h3 id='11'>Q: Higress 的 Dashboard 会对外开源么？</h3>
+<h3 id='11'>Q: Will Higress Dashboard be open source? </h3>
 
-**A:** 
+**A:**
 
-已经开源了：https://github.com/higress-group/higress-console
+Already open source: https://github.com/higress-group/higress-console
 
-********
+***********
 
-<h3 id='12'>Q: 当前开源的版本支持 Waf 功能么，有相关的最佳实践么？</h3>
+<h3 id='12'>Q: Does the current open source version support the Waf function, and is there any relevant best practice? </h3>
 
-**A:** 
+**A:**
 
-支持的，可以看这篇文档：https://higress.io/zh-cn/docs/user/waf/
+Supported, you can read this document: https://higress.io/zh-cn/docs/user/waf/
 
-********
+***********
 
-<h3 id='13'>Q: Higress 是否支持弹性伸缩，网关是无状态的么？</h3>
+<h3 id='13'>Q: Does Higress support auto-scaling, and is the gateway stateless? </h3>
 
-**A:** 
+**A:**
 
-Higress 基于 K8s HPA，是支持弹性伸缩的，网关无状态，是个 deployment 。
+Higress is based on K8s HPA and supports elastic scaling. The gateway is stateless and is a deployment.
 
-********
+***********
 
-<h3 id='14'>Q: Higress 有 roadmap 了么？</h3>
+<h3 id='14'>Q: Does Higress have a roadmap? </h3>
 
-**A:** 
+**A:**
 
-请参考[Roadmap](./roadmap.md)
+Please refer to [Roadmap](./roadmap.md)
 
-********
+***********
 
-<h3 id='15'>Q: 如何加入 Higress 社区进行贡献，已经迫不及待了 </h3>
+<h3 id='15'>Q: How to join the Higress community to contribute, I can't wait </h3>
 
-**A:** 
+**A:**
 
-我们非常欢迎大家通过各种形式参与到我们项目的建设中，包括但不限于：
+We welcome everyone to participate in the construction of our project in various forms, including but not limited to:
 
-- 架构设计
-- 模块设计
-- 代码实现
-- Bug Fix
-- Demo 样例
-- 文档、网站和翻译
+- Architecture design
+- Modular design
+- Code
+- Bug Fixes
+- Demo sample
+- Documentation, websites and translations
  
-具体的参与方法可以参见我们官网的[开发者指引](../developers/guide_dev.md)或与 higress@googlegroups.com 联系。
-实际上，我们并不拘泥于贡献的形式，开发者提出的每一个 issue，无论是 Bug Report、改进建议或者甚至是问题咨询都代表着对项目的关注和帮助。希望 Higress 项目和社区一起健康成长，成为云原生网关领域一个优秀的解决方案。
+For details on how to participate, please refer to [Developer Guide](../developers/guide_dev.md) on our official website or contact higress@googlegroups.com.
+In fact, we are not limited to the form of contribution. Every issue raised by a developer, whether it is a Bug Report, improvement suggestion or even a question consultation, represents attention and help to the project. I hope that the Higress project will grow healthily with the community and become an excellent solution in the field of cloud-native gateways.
 
-********
+***********
