@@ -141,7 +141,7 @@ const config = {
           },
           {
             label: 'FreeTrial',
-            to: 'https://free.aliyun.com/?searchKey=%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BD%91%E5%85%B3',
+            to: 'https://free.aliyun.com/?searchKey=云原生网关&spm=higress-website.topbar.0.0.0',
             position: 'right',
             target: '_blank',
           },
