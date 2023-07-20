@@ -141,7 +141,7 @@ The gateway will verify the exp field in the token. Once this field has expired,
 
 Users can generate the private and public keys used for token generation and verification on this website https://mkjwk.org. The private key is used for the authorization service to issue JWT, and the public key is configured into the JWT plugin for the gateway to verify the signature of the request. Note that the JWKs format configuration used by the gateway requires the public key in the figure below to be placed in the keys structure, such as: `{"keys":[{"kty":"RSA","e":"AQAB",...}]}`
 
-<img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/2336348951/p135823.png" style="zoom:50%" />
+![](https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/2336348951/p135823.png)
 
 **Method 2: Generate locally**
 
