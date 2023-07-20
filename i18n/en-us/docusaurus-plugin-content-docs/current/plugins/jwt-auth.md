@@ -18,8 +18,6 @@ Many open APIs need to identify the identity of the caller and determine whether
 
 #### 1.2 Process Description
 
-![](process.png)
-
 The above figure is the business process sequence diagram when the gateway uses JWT for authentication, and the following we will describe the steps marked in the figure in detail in words:
 
 1. The client initiates an authentication request to the API gateway, usually carrying the end user's username and password in the request;
