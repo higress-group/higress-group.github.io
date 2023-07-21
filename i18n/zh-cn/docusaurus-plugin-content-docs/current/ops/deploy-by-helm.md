@@ -11,7 +11,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ## 安装 Higress
 
-Higress 网关由控制面组件 `higress-controller` 和数据面组件 `higress-gateway` 组成。Istio 负责管理**数据平面的 API 配置**，`higress-controller` 负责管理**控制平面的 API 配置**。
+Higress 网关由控制面组件 `higress-controller` 和数据面组件 `higress-gateway` 组成。`higress-gateway` 负责管理**数据平面的 API 配置**，`higress-controller` 负责管理**控制平面的 API 配置**。
 
 ### Helm 安装命令
 
