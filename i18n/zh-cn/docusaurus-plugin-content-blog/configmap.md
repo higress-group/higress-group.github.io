@@ -42,28 +42,28 @@ metadata:
 
 ## 2. 核心组件
 
-1. IngressConfig
+- IngressConfig
 
 IngressConfig 是 Higress 一个核心结构体, 负责监控 Ingress， McpBridge, Http2Rpc, WasmPlugin 等 k8s 资源， 同时集成 ConfigStore Interface，通过 List 接口下发 VirtualService, DestinationRule, EnvoyFilter, ServiceEntry, WasmPlugin 等 CR 资源。
 
-2.  ConfigmapMgr
+- ConfigmapMgr
 
 ConfigmapMgr 结构体负责整个核心流程，包括通过 Informer List/Watch 机制监控 higress-config 的变更，同时遍历 ItemControllers 下发变更通知，提供构建 EnvoyFilter 列表等功能。
 
-3. TracingController
+- TracingController
 
 TracingController 结构体负责具体的 Tracing 数据校验，构建 Tracing EnvoyFilter, 以及通过 ItemEventHandler 下发变更通知等。
 
-4. HigressConfig
+- HigressConfig
  
 HigressConfig 是 higress-config Configmap 所对应数据的结构体。
 
 
 ## 3. 核心流程
 
-1. 用 Informer List/Watch 机制监控 higres-config 变更， 校验变更，同时保存变更后数据。
-2. 用变更数据构建 EnvoyFilter。
-3. 通知 XDSUpdater，EnvoyFilter 有变更，重新拉取新的 EnvoyFilter 列表。
+- 用 Informer List/Watch 机制监控 higres-config 变更， 校验变更，同时保存变更后数据。
+- 用变更数据构建 EnvoyFilter。
+- 通知 XDSUpdater，EnvoyFilter 有变更，重新拉取新的 EnvoyFilter 列表。
 
 # 二、初始化过程
 
@@ -147,7 +147,7 @@ func NewConfigmapMgr(XDSUpdater model.XDSUpdater, namespace string, higressConfi
 ```golang
 // pkg/ingress/config/ingress_config.go
 func (m *IngressConfig) Run(stop <-chan struct{}) {
-    // ...
+	// ...
 	// 启动 HigressConfigController
 	go m.configmapMgr.HigressConfigController.Run(stop)
 }
@@ -158,7 +158,6 @@ func (m *IngressConfig) HasSynced() bool {
 		return false
 	}
 }
-
 ```
 
 # 四、higress-config 变更和处理流程
@@ -328,7 +327,6 @@ func (s *Server) initXdsServer() error {
     // ...
     return s.initGrpcServer()
 }
-
 ```
 
 # 六、构建和下发 EnvoyFilters
@@ -489,7 +487,6 @@ type HigressConfig struct {
 	Tracing *Tracing `json:"tracing,omitempty"`
 	// 在这里添加对应的数据结构来扩展配置
 }
-
 ```
 
 ## 2. 增加扩展配置默认值
@@ -503,7 +500,6 @@ func NewDefaultHigressConfig() *HigressConfig {
 	}
 	return higressConfig
 }
-
 ```
 
 ## 3. 实现 ItemController interface
@@ -516,23 +512,21 @@ type ItemController interface {
 	ConstructEnvoyFilters() ([]*config.Config, error)
 	RegisterItemEventHandler(eventHandler ItemEventHandler)
 }
-
 ```
 
 ## 4. 初始化扩展配置，同时添加到 ItemControllers
 
 ```golang
 func NewConfigmapMgr(XDSUpdater model.XDSUpdater, namespace string, higressConfigController HigressConfigController, higressConfigLister listersv1.ConfigMapNamespaceLister) *ConfigmapMgr {
-	//
+	// ...
 	tracingController := NewTracingController(namespace)
 	configmapMgr.AddItemControllers(tracingController)
-	
-	// 初始化扩展配置，同时添加到 ItemControllers
+	// ...
+	// 在这里初始化扩展配置，同时添加到 ItemControllers
 	configmapMgr.initEventHandlers()
 
 	return configmapMgr
 }
-
 ```
 
 
