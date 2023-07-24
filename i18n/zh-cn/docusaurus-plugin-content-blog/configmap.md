@@ -61,7 +61,7 @@ HigressConfig 是 higress-config Configmap 所对应数据的结构体。
 
 ## 3. 核心流程
 
-- 用 Informer List/Watch 机制监控 higres-config 变更， 校验变更，同时保存变更后数据。
+- 用 Informer List/Watch 机制监控 higress-config 变更，校验变更，同时保存变更后数据。
 - 用变更数据构建 EnvoyFilter。
 - 通知 XDSUpdater，EnvoyFilter 有变更，重新拉取新的 EnvoyFilter 列表。
 
@@ -69,7 +69,7 @@ HigressConfig 是 higress-config Configmap 所对应数据的结构体。
 
 ## 1. 初始化入口
 
-初始化过程入口在 NewIngressConfig 初始化IngressConfig时同时构建 HigressConfigController 和 ConfigmapMgr。
+初始化过程入口在 NewIngressConfig， 初始化 IngressConfig 时同时构建 HigressConfigController 和 ConfigmapMgr。
 
 ```golang
 // pkg/ingress/config/ingress_config.go
