@@ -33,14 +33,14 @@ metadata:
 
 本文涉及整体架构流程、初始化过程和启动、higress-config 变更和处理流程、通知 XDSUpdater、构建 EnvoyFilter 和下发以及如何扩展全局配置等内容。
 
-# 一、整体架构流程
+## 整体架构流程
 
-## 1. 整体架构
+### 1. 整体架构
 
 ![img.png](../../../static/img/blog/configmap1.png)
 
 
-## 2. 核心组件
+### 2. 核心组件
 
 - IngressConfig
 
@@ -59,15 +59,15 @@ TracingController 结构体负责具体的 Tracing 数据校验，构建 Tracing
 HigressConfig 是 higress-config Configmap 所对应数据的结构体。
 
 
-## 3. 核心流程
+### 3. 核心流程
 
 - 用 Informer List/Watch 机制监控 higress-config 变更，校验变更，同时保存变更后数据。
 - 用变更数据构建 EnvoyFilter。
 - 通知 XDSUpdater，EnvoyFilter 有变更，重新拉取新的 EnvoyFilter 列表。
 
-# 二、初始化过程
+## 初始化过程
 
-## 1. 初始化入口
+### 1. 初始化入口
 
 初始化过程入口在 NewIngressConfig， 初始化 IngressConfig 时同时构建 HigressConfigController 和 ConfigmapMgr。
 
@@ -84,7 +84,7 @@ func NewIngressConfig(localKubeClient kube.Client, XDSUpdater model.XDSUpdater, 
 }
 ```
 
-## 2. HigressConfigController 初始化
+### 2. HigressConfigController 初始化
 
 通过 Higress 提供 NewCommonController 初始化 HigressConfigController 用于监听 higress-system 命名空间下 Configmap 的变化。
 
@@ -102,7 +102,7 @@ func GetConfigmap(lister listersv1.ConfigMapNamespaceLister, namespacedName type
 	return lister.Get(namespacedName.Name)
 }
 ```
-## 3. ConfigmapMgr 初始化
+### 3. ConfigmapMgr 初始化
 
 ConfigmapMgr 初始化具体步骤如下：
 - 构建 ConfigmapMgr
@@ -140,7 +140,7 @@ func NewConfigmapMgr(XDSUpdater model.XDSUpdater, namespace string, higressConfi
 }
 ```
 
-# 三、启动
+## 启动
 
 在 IngressConfig 添加 HigressConfigController Run() 和 HasSynced() 控制流程。
 
@@ -160,9 +160,9 @@ func (m *IngressConfig) HasSynced() bool {
 }
 ```
 
-# 四、higress-config 变更和处理流程
+## higress-config 变更和处理流程
 
-## 1. configmapMgr 变更处理
+### 1. configmapMgr 变更处理
 
 ConfigmapMgr 通过收到 HigressConfigController 通知来处理变更请求。
 
@@ -218,7 +218,7 @@ func (c *ConfigmapMgr) AddOrUpdateHigressConfig(name util.ClusterNamespacedName)
 }
 ```
 
-## 2. TracingController 变更处理
+### 2. TracingController 变更处理
 
 TracingController 变更处理就比较简单：
 - 检查 Tracing 这部分数据是否有变更。
@@ -253,7 +253,7 @@ func (t *TracingController) AddOrUpdateHigressConfig(name util.ClusterNamespaced
 }
 ```
 
-# 五、通知 XDSUpdater
+## 通知 XDSUpdater
 
 在 ConfigmapMgr 初始化时候调用 configmapMgr.initEventHandlers()， 这个 func 会创建 ItemEventHandler, 同时遍历 ItemControllers 设置 ItemEventHandler。
 
@@ -329,9 +329,9 @@ func (s *Server) initXdsServer() error {
 }
 ```
 
-# 六、构建和下发 EnvoyFilters
+## 构建和下发 EnvoyFilters
 
-## 1. IngressConfig List 下发 EnvoyFilters 列表
+### 1. IngressConfig List 下发 EnvoyFilters 列表
 
 IngressConfig List 用于 VirtualService, DestinationRule, EnvoyFilter, ServiceEntry, WasmPlugin 等 CR 资源下发， 这里主要关注 EnvoyFilter CR 资源下发。
 
@@ -380,7 +380,7 @@ func (m *IngressConfig) List(typ config.GroupVersionKind, namespace string) ([]c
 这里 m.cachedEnvoyFilters 是在构建 VirtualService 时生成，有兴趣可以进一步阅读 IngressConfig 源码。
 
 
-## 2. ConfigmapMgr 构建 EnvoyFilter 列表
+### 2. ConfigmapMgr 构建 EnvoyFilter 列表
 
 这里比较简单，遍历一下 ItemControllers，聚合每个 itemController 返回的 EnvoyFilters.
 
@@ -400,7 +400,7 @@ func (c *ConfigmapMgr) ConstructEnvoyFilters() ([]*config.Config, error) {
 }
 ```
 
-## 3. TracingController 构建 EnvoyFilters
+### 3. TracingController 构建 EnvoyFilters
 
 这里就比较简单，根据保存的 Tracing 数据构建对应的 EnvoyFilter
 
@@ -478,9 +478,9 @@ func (t *TracingController) ConstructEnvoyFilters() ([]*config.Config, error) {
 ```
 
 
-# 七、如何扩展全局配置
+## 如何扩展全局配置
 
-## 1. HigressConfig 结构体添加对应的扩展配置
+### 1. HigressConfig 结构体添加对应的扩展配置
 
 ```golang
 type HigressConfig struct {
@@ -489,7 +489,7 @@ type HigressConfig struct {
 }
 ```
 
-## 2. 增加扩展配置默认值
+### 2. 增加扩展配置默认值
 
 ```golang
 // pkg/ingress/kube/configmap/config.go
@@ -502,7 +502,7 @@ func NewDefaultHigressConfig() *HigressConfig {
 }
 ```
 
-## 3. 实现 ItemController interface
+### 3. 实现 ItemController interface
 
 ```golang
 type ItemController interface {
@@ -514,7 +514,7 @@ type ItemController interface {
 }
 ```
 
-## 4. 初始化扩展配置，同时添加到 ItemControllers
+### 4. 初始化扩展配置，同时添加到 ItemControllers
 
 ```golang
 func NewConfigmapMgr(XDSUpdater model.XDSUpdater, namespace string, higressConfigController HigressConfigController, higressConfigLister listersv1.ConfigMapNamespaceLister) *ConfigmapMgr {
@@ -529,7 +529,13 @@ func NewConfigmapMgr(XDSUpdater model.XDSUpdater, namespace string, higressConfi
 }
 ```
 
+## 参与社区贡献
 
+Higress 开源贡献小组正在火热招募贡献者。早期参与开源更容易成为项目 Committer，并有更多机会成为 Higress PMC(Project Management Committee) 的一员，参与主导 Higress 社区的前进方向。
+欢迎加入 Higress 社区群：
+
+
+![](https://img.alicdn.com/imgextra/i1/O1CN0166Gkdt1cRTVjJ2skL_!!6000000003597-2-tps-720-405.png)
 
 
 
