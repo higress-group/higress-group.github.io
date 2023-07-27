@@ -1,14 +1,14 @@
 ---
-title: window利用Nacos部署higress
+title: Windows利用Nacos部署Higress
 keywords: [Higress]
-description: window部署higress
+description: Windows部署Higress
 ---
-# window利用Nacos部署higress
+# Windows利用Nacos-docker部署Higress
 ## 前置准备
 
 ### 下载docker-desktop
 ####  配置wsl2
-详情参看步骤1-5
+详情参看步骤1-5,顺便在微软商店中下载Terminal。
 
 [WSL手动安装步骤](https://learn.microsoft.com/zh-cn/windows/wsl/install-manual)
 
@@ -28,42 +28,22 @@ description: window部署higress
 
 
 
-## 安装cygwin
+### 安装cygwin
 
 [cygwin官网](http://www.cygwin.com/)
 
-![1.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F1.png)
+
+选择setup-x86_64.exe，等待安装完成。
 
 
-![2.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F2.png)
-
-
-![3.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F3.png)
-
-
-![4.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F4.png)
-
-**这一步选择Cygwin的安装目录，以及一些参数的设置。默认的安装位置是C:\cygwin，你也可以选择自己的安装目录，然后选下一步**
-
-
-![5.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F5.png)
-
-
-![6.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F6.png)
-
-**等待安装完成**
-
-
-
-
-# 验证Cygwin安装是否成功
+#### 验证Cygwin安装是否成功
 ```shell
 cygcheck -c cygwin
 ```
 
 ![7.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F7.png)
 
-# 为cygwin配置环境变量
+#### 为cygwin配置环境变量
 
 ![8.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F8.png)
 
@@ -75,27 +55,61 @@ cygcheck -c cygwin
 
 
 
-
 ![11.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F11.png)
 
 点击确定即可添加成功
 
 
+## 安装Higrees
 
+### nacos 
+[nacos官网手册](https://nacos.io/zh-cn/docs/v2/quickstart/quick-start-docker.html)
 
-#### 安装Nacos
-我们这里选择提供安装命令二使用 Higress 内置 Nacos进行安装
+我们这里选择nacos-docker的模式安装
 
-**安装命令：使用 Higress 内置 Nacos**
+![A.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FA.png)
+
+下载解压zip文件,进入 nacos-docker-master 文件夹右键选择终端打开，执行命令，我们这里选择单机模式部署
+
+```powershell
+    docker-compose -f example/standalone-derby.yaml up
 ```
-curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- --use-builtin-nacos -p admin
+
+等待出现界面，即安装成功
+
+![B.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FB.png)
+
+### Higrees
+**安装命令：使用独立部署的 Nacos**
+
+当访问docker容器互相访问时候本地回环地址并不是真正的地址，所以需要在cywin中执行获取本地网卡地址
+
+```shell
+ipconfig
 ```
 
-![12.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F12.png)
+![C.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FC.png)
 
 
+```
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos -p admin
+```
 
-**访问http://localhost:8080/,使用 admin 作为用户名密码登录 Higress 控制台。**
+请将 `192.168.0.1` 替换为 Nacos 服务器的 IP（如果 Nacos 部署在本机，请不要使用如 `localhost` 或 `127.0.0.1` 的 Loopback 地址），并按需调整 `--nacos-username` 和 `--nacos-password` 的取值。如果 Nacos 服务未开启认证功能，则可以移除这两个参数。
+
+
+在这里未开启授权服务，直接使用WLANIP替换对应的IP
+```shell
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://10.30.0.225:8848
+
+```
+输入命令等待部署，即可看到生成的用户名名与密码
+
+![D.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FD.png)
+
+### 预备配置
+
+**访问 `http://localhost:8080/`, 使用 admin 作为用户名密码登录 Higress 控制台。**
 
 ![13.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F13.png)
 
@@ -112,10 +126,12 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- --use-built
 
 ![16.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F16.png)
 
-### 请求验证
+## 请求验证
 ```shell
 # should output a JSON object containing request data 
 curl http://localhost/get?foo=bar -H 'host: foo.bar.com'
 ```
 
-![17.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F17.png)
+![E.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FE.png)
+
+更多详情与部署方案可参考quick start
