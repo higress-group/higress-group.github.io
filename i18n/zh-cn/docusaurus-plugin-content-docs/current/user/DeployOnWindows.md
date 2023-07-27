@@ -6,8 +6,8 @@ description: Windows部署Higress
 # Windows利用Nacos-docker部署Higress
 ## 前置准备
 
-### 下载docker-desktop
-####  配置wsl2
+### 下载Docker Desktop
+####  配置WSL2
 详情参看步骤1-5,顺便在微软商店中下载Terminal。
 
 [WSL手动安装步骤](https://learn.microsoft.com/zh-cn/windows/wsl/install-manual)
