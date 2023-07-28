@@ -1,7 +1,10 @@
 ---
 title: Windows利用Nacos部署Higress
-keywords: [Higress]
+keywords: [higress]
 description: Windows部署Higress
+author: Fkbqf
+date: 2023-07-28
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/DeployOnWindows.md
 ---
 # Windows利用Nacos-docker部署Higress
 ## 前置准备
@@ -41,21 +44,21 @@ description: Windows部署Higress
 cygcheck -c cygwin
 ```
 
-![7.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F7.png)
+![7.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F7.png)
 
 #### 为cygwin配置环境变量
 
-![8.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F8.png)
+![8.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F8.png)
 
 
-![9.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F9.png)
+![9.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F9.png)
 
 
-![10.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F10.png)
+![10.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F10.png)
 
 
+![11.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F11.png)
 
-![11.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F11.png)
 
 点击确定即可添加成功
 
@@ -67,7 +70,7 @@ cygcheck -c cygwin
 
 我们这里选择nacos-docker的模式安装
 
-![A.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FA.png)
+![A.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FA.png)
 
 下载解压zip文件,进入 nacos-docker-master 文件夹右键选择终端打开，执行命令，我们这里选择单机模式部署
 
@@ -77,7 +80,7 @@ cygcheck -c cygwin
 
 等待出现界面，即安装成功
 
-![B.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FB.png)
+![B.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FB.png)
 
 ### Higrees
 **安装命令：使用独立部署的 Nacos**
@@ -88,7 +91,7 @@ cygcheck -c cygwin
 ipconfig
 ```
 
-![C.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FC.png)
+![C.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FC.png)
 
 
 ```
@@ -105,26 +108,25 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://
 ```
 输入命令等待部署，即可看到生成的用户名名与密码
 
-![D.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FD.png)
+![D.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FD.png)
 
 ### 预备配置
 
 **访问 `http://localhost:8080/`, 使用 admin 作为用户名密码登录 Higress 控制台。**
 
-![13.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F13.png)
+![13.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F13.png)
 
 **点击左侧“服务来源”导航栏，然后点击页面右侧的“创建服务来源”按钮。按照下图所示内容填写表单并点击“确定”按钮。**
 
-![14.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F14.png)
+![14.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F14.png)
 
 **点击左侧“域名管理”导航栏，然后点击页面右侧的“创建域名”按钮。按照下图所示内容填写表单并点击“确定”按钮。**
 
-![15.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F15.png)
+![15.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F15.png)
 
 **点击左侧“路由管理”导航栏，然后点击页面右侧的“创建路由”按钮。按照下图片所示内容填写表单并点击“确定”按钮。**
 
-
-![16.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F16.png)
+![16.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2F16.png)
 
 ## 请求验证
 ```shell
@@ -132,6 +134,6 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://
 curl http://localhost/get?foo=bar -H 'host: foo.bar.com'
 ```
 
-![E.png](..%2F..%2F..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FE.png)
+![E.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FE.png)
 
 更多详情与部署方案可参考quick start
