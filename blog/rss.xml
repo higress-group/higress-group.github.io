@@ -4,7 +4,7 @@
         <title>Higress Blog</title>
         <link>https://higress.io/blog</link>
         <description>Higress Blog</description>
-        <lastBuildDate>Wed, 26 Jul 2023 08:10:35 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 28 Jul 2023 01:43:25 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>default</language>
@@ -12,7 +12,7 @@
             <title><![CDATA[30-line-wasm]]></title>
             <link>https://higress.io/blog/30-line-wasm</link>
             <guid>https://higress.io/blog/30-line-wasm</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -20,7 +20,7 @@
             <title><![CDATA[ai_plugin]]></title>
             <link>https://higress.io/blog/ai_plugin</link>
             <guid>https://higress.io/blog/ai_plugin</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -28,7 +28,7 @@
             <title><![CDATA[configmap]]></title>
             <link>https://higress.io/blog/configmap</link>
             <guid>https://higress.io/blog/configmap</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -36,7 +36,7 @@
             <title><![CDATA[first-meetup]]></title>
             <link>https://higress.io/blog/first-meetup</link>
             <guid>https://higress.io/blog/first-meetup</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -44,7 +44,7 @@
             <title><![CDATA[higress]]></title>
             <link>https://higress.io/blog/higress</link>
             <guid>https://higress.io/blog/higress</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -52,7 +52,7 @@
             <title><![CDATA[nacos]]></title>
             <link>https://higress.io/blog/nacos</link>
             <guid>https://higress.io/blog/nacos</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -60,7 +60,7 @@
             <title><![CDATA[ospp-2023]]></title>
             <link>https://higress.io/blog/ospp-2023</link>
             <guid>https://higress.io/blog/ospp-2023</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -68,7 +68,7 @@
             <title><![CDATA[release-070]]></title>
             <link>https://higress.io/blog/release-070</link>
             <guid>https://higress.io/blog/release-070</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -76,7 +76,7 @@
             <title><![CDATA[release-100]]></title>
             <link>https://higress.io/blog/release-100</link>
             <guid>https://higress.io/blog/release-100</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -84,7 +84,7 @@
             <title><![CDATA[skywalking]]></title>
             <link>https://higress.io/blog/skywalking</link>
             <guid>https://higress.io/blog/skywalking</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -92,7 +92,7 @@
             <title><![CDATA[user-mq]]></title>
             <link>https://higress.io/blog/user-mq</link>
             <guid>https://higress.io/blog/user-mq</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
@@ -100,7 +100,7 @@
             <title><![CDATA[user-uu]]></title>
             <link>https://higress.io/blog/user-uu</link>
             <guid>https://higress.io/blog/user-uu</guid>
-            <pubDate>Wed, 26 Jul 2023 08:10:35 GMT</pubDate>
+            <pubDate>Fri, 28 Jul 2023 01:43:25 GMT</pubDate>
             <description><![CDATA[Placeholder. DO NOT DELETE.]]></description>
             <content:encoded><![CDATA[<p>Placeholder. DO NOT DELETE.</p>]]></content:encoded>
         </item>
