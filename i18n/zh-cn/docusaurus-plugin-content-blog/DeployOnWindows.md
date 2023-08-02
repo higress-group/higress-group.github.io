@@ -136,4 +136,4 @@ curl http://localhost/get?foo=bar -H 'host: foo.bar.com'
 
 ![E.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindos%2Fpic%2FE.png)
 
-更多详情与部署方案可参考quick start
+更多详情与部署方案可参考 [quick start](https://higress.io/zh-cn/docs/user/quickstart)
