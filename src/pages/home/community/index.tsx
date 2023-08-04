@@ -7,8 +7,7 @@ import { getLink } from '../../../utils';
 const data = {
   title: translate({ id: 'homepage.introTitle', message: '参与 Higress 社区' }),
   list: [
-    '/img/dingtalk_group.jpg',
-    'https://img.alicdn.com/imgextra/i3/O1CN01RkvQ3J1WMXUBDJ2y6_!!6000000002774-2-tps-1056-1371.png',
+    'https://img.alicdn.com/imgextra/i1/O1CN0166Gkdt1cRTVjJ2skL_!!6000000003597-2-tps-720-405.png',
   ],
 };
 
