@@ -9,6 +9,8 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 2023年8月10日 · 阅读需 20 分钟
 
+---
+
 # 功能划分
 这里我们先大概梳理一下Higress工程各目录的职责划分
 
@@ -132,19 +134,19 @@ message GrpcService {
 执行上述命令后会生成，如下代码
 ### kubernetes customresuource定义
 通过将这个定义注册给kubernetes集群，然后就能创建对应的CRD资源实例。
-![kubernetes-customresuource-definition.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2FCustomResourceDefinition%2Fpic%2Fkubernetes-customresuource-definition.png)
+![kubernetes-customresuource-definition.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2FCustomResourceDefinition%2Fkubernetes-customresuource-definition.png)
 ### CRD对应资源对象Go语言的定义及操作方法
 Hingress(IngressConfig)初始化及运行阶段会使用这里的api模型。
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/332152/1691638830293-356507c1-cc35-4fb3-963f-38d0fbdc0f1d.png#clientId=uae555697-b057-4&from=paste&height=781&id=u7345b6c2&originHeight=1562&originWidth=1992&originalType=binary&ratio=2&rotation=0&showTitle=false&size=1018095&status=done&style=none&taskId=u4e384bd3-b2ba-4518-97d8-f8192892033&title=&width=996)
+![higress-api.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2FCustomResourceDefinition%2Fhigress-api.png)
 ### kubernetes client apis
 Hingress集成kubernetes client与kube-apiserver交互时会使用这里的模型对象。
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/332152/1691640138578-ad64a0e8-1f85-436d-9699-727655588c37.png#clientId=u0aadc452-8f52-4&from=paste&height=783&id=ub473660e&originHeight=1566&originWidth=1992&originalType=binary&ratio=2&rotation=0&showTitle=false&size=1033583&status=done&style=none&taskId=u8a504699-d004-4056-be82-b4ee88deb09&title=&width=996)
+![kubernetes-client-api.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2FCustomResourceDefinition%2Fkubernetes-client-api.png)
 ### kubernetes client apis operate
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/332152/1691640273619-a1406a73-93a9-4e65-9db3-19f4b60539b1.png#clientId=u0aadc452-8f52-4&from=paste&height=782&id=uf487e4b6&originHeight=1564&originWidth=2230&originalType=binary&ratio=2&rotation=0&showTitle=false&size=1182810&status=done&style=none&taskId=u03d1c411-4cdc-431c-a675-9a2e8de88a8&title=&width=1115)
+![kubernetes-client-api-operate.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2FCustomResourceDefinition%2Fkubernetes-client-api-operate.png)
 ### kubernetes client informer
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/332152/1691640387721-69bfd584-0d00-468e-95c5-ddee2e7988e8.png#clientId=u0aadc452-8f52-4&from=paste&height=779&id=u1043ad78&originHeight=1558&originWidth=2146&originalType=binary&ratio=2&rotation=0&showTitle=false&size=1060070&status=done&style=none&taskId=uc5e3f261-c2f4-4005-a140-eba172375cb&title=&width=1073)
+![kubernetes-client-informer.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2FCustomResourceDefinition%2Fkubernetes-client-informer.png)
 ### kubernetes client informer lister
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/332152/1691640439389-bcaff4f6-6f19-49a6-b79d-aacd5448a2aa.png#clientId=u0aadc452-8f52-4&from=paste&height=789&id=ud04a71b6&originHeight=1578&originWidth=2120&originalType=binary&ratio=2&rotation=0&showTitle=false&size=977972&status=done&style=none&taskId=uff519fa7-3c98-408f-9af7-ad03c84f329&title=&width=1060)
+![kubernetes-client-informer-lister.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2FCustomResourceDefinition%2Fkubernetes-client-informer-lister.png)
 ## 3、集成 Controller
 这里主要是在ingress_config，添加自定义CRD Resource的引用对象，并且通过informer机制监听CRD实例的变化，然后实现相关业务逻辑，比如生成istio EnvoyFilter等
 > higress/pkg/ingress/config/ingress_config.go
@@ -158,12 +160,12 @@ http2rpcLister netlisterv1.Http2RpcLister
 //存储全量的http2rpcs资源对象，以便在其他事件流程中消费
 http2rpcs map[string]*higressv1.Http2Rpc
 ```
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/332152/1691646972343-b9eba16b-f6da-4375-8d11-1badaf535271.png#clientId=ufaa30722-a878-4&from=paste&height=745&id=u8f3a4fa2&originHeight=1490&originWidth=1840&originalType=binary&ratio=2&rotation=0&showTitle=false&size=802407&status=done&style=none&taskId=u890f1810-801c-4efe-a236-7ef8d9e86de&title=&width=920)
+![ingress-config.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2FCustomResourceDefinition%2Fingress-config.png)
 ### 在higress启动阶段初始化上述变量
 这里就会引用自动化生成的一些代码，进行Controller的创建及事件绑定。
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/332152/1691647251877-c9438acf-9b07-4f02-a134-8aba1740c4e6.png#clientId=ufaa30722-a878-4&from=paste&height=725&id=u2bad97cc&originHeight=1450&originWidth=2526&originalType=binary&ratio=2&rotation=0&showTitle=false&size=1139013&status=done&style=none&taskId=ueeb2eb3a-c40f-423f-afcf-e590ae7df40&title=&width=1263)
+![ingress-config-initial.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2FCustomResourceDefinition%2Fingress-config-initial.png)
 ### 实现CRD变更事件处理逻辑
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2023/png/332152/1691650054515-150a998c-05fa-4dfc-8ec0-ceb397b6a7f9.png#clientId=ufaa30722-a878-4&from=paste&height=777&id=u7f276124&originHeight=1554&originWidth=2498&originalType=binary&ratio=2&rotation=0&showTitle=false&size=1058153&status=done&style=none&taskId=ub1b8d00a-307a-44ce-bb0a-cc30a150c9b&title=&width=1249)
+![ingress-config-event.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2FCustomResourceDefinition%2Fingress-config-event.png)
 # 扩展阅读
 [Kubernetes Controller 机制详解（一）](https://www.zhaohuabing.com/post/2023-03-09-how-to-create-a-k8s-controller/)
 
