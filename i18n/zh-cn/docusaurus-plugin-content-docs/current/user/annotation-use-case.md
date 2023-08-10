@@ -176,7 +176,7 @@ kind: Ingress
 metadata:
   annotations:
     higress.io/canary: "true"
-    higress.io/canary-by-weight: "30"
+    higress.io/canary-weight: "30"
   name: demo-canary-v1
 spec:
   ingressClassName: higress
@@ -196,7 +196,7 @@ kind: Ingress
 metadata:
   annotations:
     higress.io/canary: "true"
-    higress.io/canary-by-weight: "20"
+    higress.io/canary-weight: "20"
   name: demo-canary-v2
 spec:
   ingressClassName: higress
