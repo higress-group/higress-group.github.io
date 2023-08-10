@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkhigress_website=self.webpackChunkhigress_website||[]).push([[2729],{2668:e=>{e.exports=JSON.parse('{"permalink":"/en-us/blog/page/2","page":2,"postsPerPage":10,"totalPages":2,"totalCount":14,"previousPage":"/en-us/blog","blogDescription":"Blog","blogTitle":"Blog"}')}}]);
