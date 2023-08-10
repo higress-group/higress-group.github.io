@@ -25,6 +25,7 @@ https://higress.io/zh-cn/docs/ops/upgrade.html
 https://higress.io/zh-cn/docs/ops/log.html
 https://higress.io/zh-cn/docs/dev/code.html
 https://higress.io/zh-cn/docs/dev/architecture.html
+https://higress.io/zh-cn/docs/dev/CustomResourceDefinition.html
 https://higress.io/zh-cn/blog/nacos.html
 https://higress.io/zh-cn/blog/30-line-wasm.html
 https://higress.io/zh-cn/blog/first-meetup.html

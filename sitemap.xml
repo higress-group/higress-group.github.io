@@ -143,6 +143,11 @@
         <priority>0.64</priority>
     </url>
     <url>
+        <loc>https://higress.io/zh-cn/docs/dev/CustomResourceDefinition.html</loc>
+        <lastmod>2023-02-01T01:03:46+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
         <loc>https://higress.io/zh-cn/blog/nacos.html</loc>
         <lastmod>2023-02-01T01:03:46+00:00</lastmod>
         <priority>0.64</priority>

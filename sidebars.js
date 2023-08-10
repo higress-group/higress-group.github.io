@@ -53,7 +53,7 @@ const sidebars = {
       type: 'category',
       label: 'Developer Guide',
       collapsible: false,
-      items: ['dev/code', 'dev/architecture'],
+      items: ['dev/code', 'dev/architecture', 'dev/CustomResourceDefinition'],
     },
   ],
   developers: [
