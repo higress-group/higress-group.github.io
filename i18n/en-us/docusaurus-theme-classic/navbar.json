@@ -31,6 +31,14 @@
     "message": "HIGRESS IN CLOUD",
     "description": "Navbar item with label Commercial"
   },
+  "item.label.CommercialIntro": {
+    "message": "INTRO",
+    "description": "Navbar item with label CommercialIntro"
+  },
+  "item.label.ProductReview": {
+    "message": "PRODUCT REVIEW",
+    "description": "Navbar item with label ProductReview"
+  },
   "item.label.FreeTrial": {
     "message": "CLOUD FREE TRIAL",
     "description": "Navbar item with label FreeTrial"
