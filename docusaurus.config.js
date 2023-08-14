@@ -135,15 +135,21 @@ const config = {
           },
           {
             label: 'Commercial',
-            to: 'https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0',
             position: 'right',
-            target: '_blank',
-          },
-          {
-            label: 'FreeTrial',
-            to: 'https://free.aliyun.com/?searchKey=云原生网关&spm=higress-website.topbar.0.0.0',
-            position: 'right',
-            target: '_blank',
+            items: [
+              {
+                label: 'CommercialIntro',
+                to: 'https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0',
+              },
+              {
+                label: 'ProductReview',
+                to: 'https://developer.aliyun.com/mission/higress',
+              },
+              {
+                label: 'FreeTrial',
+                to: 'https://free.aliyun.com/?searchKey=云原生网关&spm=higress-website.topbar.0.0.0',
+              }
+            ]
           },
           {
             label: 'Case',
