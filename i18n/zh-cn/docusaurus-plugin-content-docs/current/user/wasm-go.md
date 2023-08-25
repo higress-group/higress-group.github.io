@@ -39,11 +39,11 @@ export PATH=$PATH:/usr/local/go/bin
 
 ### 2. TinyGo
 
-（要求 0.25.0 版本以上）<br />官方指引链接：[https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
+（要求 0.28.1 版本以上）<br />官方指引链接：[https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
 
 #### Windows
 
-1. 下载安装文件：[https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip)
+1. 下载安装文件：[https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip)
 2. 解压安装文件到指定目录
 3. 如果安装解压后的目录为`C:\tinygo`，则需要将`C:\tinygo\bin`添加到环境变量`PATH`中，例如通过在命令窗口中输入 set 命令设置
 ```bash
@@ -56,8 +56,8 @@ set PATH=%PATH%;"C:\tinygo\bin";
 
 1. 下载压缩包并解压
 ```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.darwin-amd64.tar.gz
-tar -zxf tinygo0.25.0.darwin-amd64.tar.gz
+wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.darwin-amd64.tar.gz
+tar -zxf tinygo0.28.1.darwin-amd64.tar.gz
 ```
 
 2. 如果安装解压后的目录为`/tmp`，则需要将`/tmp/tinygo/bin`添加到环境变量`PATH`中：
@@ -72,8 +72,8 @@ export PATH=/tmp/tinygo/bin:$PATH
 
 1. 下载 DEB 文件，并安装
 ```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo_0.25.0_amd64.deb
-sudo dpkg -i tinygo_0.25.0_amd64.deb
+wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo_0.28.1_amd64.deb
+sudo dpkg -i tinygo_0.28.1_amd64.deb
 export PATH=$PATH:/usr/local/bin
 ```
 
@@ -194,7 +194,8 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 ### 3. 编译生成 WASM 文件
 执行以下命令
 ```bash
-tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
+go mod tidy
+tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
 ```
 编译成功会在当前目录下创建文件 main.wasm。这个文件在下面本地调试的例子中也会被用到。<br />在使用云原生网关插件市场的自定义插件功能时，直接上传该文件即可。
 
