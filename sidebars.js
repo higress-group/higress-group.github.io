@@ -34,7 +34,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Plugins',
-          items: ['plugins/intro','plugins/custom','plugins/jwt-auth','plugins/hmac-auth','plugins/key-auth','plugins/basic-auth','plugins/key-rate-limit','plugins/custom-response','plugins/bot-detect','plugins/request-block','plugins/waf'],
+          items: ['plugins/intro', 'plugins/custom', 'plugins/jwt-auth', 'plugins/hmac-auth', 'plugins/key-auth', 'plugins/basic-auth', 'plugins/key-rate-limit', 'plugins/custom-response', 'plugins/bot-detect', 'plugins/request-block', 'plugins/waf'],
         },
         {
           type: 'category',
@@ -47,7 +47,15 @@ const sidebars = {
       type: 'category',
       label: 'Ops',
       collapsible: false,
-      items: ['ops/deploy-by-helm', 'ops/upgrade', 'ops/log'],
+      items: [
+        {
+          type: 'category',
+          label: 'Deploy',
+          items: ['ops/deploy-by-helm', 'ops/deploy-by-docker-compose'],
+        },
+        'ops/upgrade',
+        'ops/log'
+      ],
     },
     {
       type: 'category',
