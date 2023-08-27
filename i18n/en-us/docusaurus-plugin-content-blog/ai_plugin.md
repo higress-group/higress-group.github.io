@@ -33,7 +33,7 @@ We will take Higress connecting to the OpenAI API as an example to introduce how
            
 ## Prerequisites
 
-1. Install Higress. Please refer to [Deploy Higress By Helm](https://higress.io/en-us/docs/ops/deploy-by-helm/).
+1. Install Higress. Please refer to [Deploy Higress by Helm](https://higress.io/en-us/docs/ops/deploy-by-helm/).
 2. Prepare the development environment for WASM plugins with Golang. Please refer to [Developing a WASM plugin with Golang | Higress](https://higress.io/en-us/docs/user/wasm-go/).
 
 ## AI Proxy WASM Plugin 

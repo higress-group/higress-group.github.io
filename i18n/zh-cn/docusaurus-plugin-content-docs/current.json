@@ -27,6 +27,10 @@
     "message": "运维指南",
     "description": "The label for category Ops in sidebar docs"
   },
+  "sidebar.docs.category.Deploy": {
+    "message": "安装部署",
+    "description": "The label for category Deploy in sidebar docs"
+  },
   "sidebar.docs.category.Developer Guide": {
     "message": "开发者指南",
     "description": "The label for category Developer Guide in sidebar docs"

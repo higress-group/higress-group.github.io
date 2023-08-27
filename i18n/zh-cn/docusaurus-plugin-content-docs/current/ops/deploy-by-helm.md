@@ -1,11 +1,11 @@
 ---
-title: 安装部署
-keywords: [Deploy]
+title: 使用 Helm 进行云原生部署
+keywords: [deploy,helm,kubernetes,k8s,ops]
 description: Higress Helm部署.
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/deploy-by-helm.md
 ---
 
-# 安装部署
+# 使用 Helm 进行云原生部署
 
 [Helm](https://helm.sh/) 是一个用于自动化管理和发布 Kubernetes 软件的包管理系统。通过 Helm 可以在您的 Kubernetes 集群上快速部署安装 Higress 网关。
 
