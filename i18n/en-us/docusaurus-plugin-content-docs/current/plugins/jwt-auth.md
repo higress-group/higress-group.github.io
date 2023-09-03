@@ -239,7 +239,7 @@ The configuration field descriptions for each item in consumers are as follows:
 | `from_params`           | array of string   | Optional     | access_token    | Extracts the JWT from the specified URL parameters     |
 | `from_cookies`          | array of string   | Optional     | -    | Extracts the JWT from the specified cookie(s)     |
 | `clock_skew_seconds`    | number            | Optional     | 60     | The amount of clock skew, in seconds, that is allowed when verifying the exp and iat fields of the JWT          |
-| `keep_token`            | bool              | Optional     | ture   | Whether to keep the JWT when forwarding it to the backend  |
+| `keep_token`            | bool              | Optional     | true   | Whether to keep the JWT when forwarding it to the backend  |
 
 **Note:**
 
