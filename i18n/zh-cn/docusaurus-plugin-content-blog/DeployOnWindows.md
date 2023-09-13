@@ -83,7 +83,7 @@ cygcheck -c cygwin
 ### 使用 Higrees 对接 Nacos
 **安装命令：使用独立部署的 Nacos**
 
-当访问docker容器互相访问时候本地回环地址并不是真正的地址，所以需要在cywin中执行获取本地网卡地址
+当访问docker容器互相访问时候本地回环地址并不是真正的地址，所以需要在cygwin中执行获取本地网卡地址
 
 ```shell
 ipconfig
@@ -93,7 +93,7 @@ ipconfig
 
 
 ```
-curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos -p admin
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos -p <你的密码>
 ```
 
 请将 `192.168.0.1` 替换为 Nacos 服务器的 IP（如果 Nacos 部署在本机，请不要使用如 `localhost` 或 `127.0.0.1` 的 Loopback 地址），并按需调整 `--nacos-username` 和 `--nacos-password` 的取值。如果 Nacos 服务未开启认证功能，则可以移除这两个参数。
@@ -104,13 +104,13 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://
 curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://10.30.0.225:8848
 
 ```
-输入命令等待部署，即可看到生成的用户名名与密码
+输入命令等待部署，即可看到生成的用户名与密码
 
 ![D.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindows%2Fpic%2FD.png)
 
 ### Higress 控制台配置
 
-**访问 `http://localhost:8080/`, 使用 admin 作为用户名密码登录 Higress 控制台。**
+**访问 `http://localhost:8080/`, 使用用户名 admin 和安装时设置的密码登录 Higress 控制台。**
 
 ![13.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindows%2Fpic%2F13.png)
 
