@@ -17,14 +17,14 @@ The compilation environment requirements are as follows:
 
 - Go version: >= 1.18 (need to support generic features)
 
-- TinyGo version: 0.25.0 (0.25.0 recommended)
+- TinyGo version: 0.28.1 (0.28.1 recommended)
 
 The following is an example of local steps to build the [request-block](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/request-block) plugin.
 
 ### step1. Compile wasm
 
 ```bash
-tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
+tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
 ```
 
 ### step2. Build and push the docker image of the plugin
