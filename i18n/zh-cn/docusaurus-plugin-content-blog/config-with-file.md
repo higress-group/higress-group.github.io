@@ -31,7 +31,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 启动终端，并执行以下命令：
 
 ```
-curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c file://~/higress/conf -p admin -a
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c file://~/higress/conf -p <你的密码> -a
 ```
 
 请耐心等待安装过程执行完毕。Higress 的执行文件将被安装在当前目录下的 `higress` 子目录内。配置数据则将被写入 `~/higress/conf` 目录内。
