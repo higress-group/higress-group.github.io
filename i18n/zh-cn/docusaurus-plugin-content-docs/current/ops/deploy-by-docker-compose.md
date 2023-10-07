@@ -26,17 +26,17 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- [DESTINATIO
 
 ### 安装参数
 
-|**参数名**                                                     |**参数说**明                                                                                                         |**默认值**           |
+|**参数名**                                                     |**参数说明**                                                                                                         |**默认值**           |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|--------------|
 |DESTINATION                                             |目标安装目录                                                                                                       |./higress     |
 |-a<br/>--auto-run                                          |配置完成后自动启动 Higress 网关                                                                                         |无             |
 |-c CONFIG_URL<br/>--config-url CONFIG_URL                  |配置服务的 URL。<br/>- 若使用独立部署的 Nacos 服务，URL 格式为：nacos://192.168.0.1:8848<br/>- 若在本地磁盘上保存配置，URL 格式为：file://opt/higress/conf|无             |
-|--use-builtin-nacos                                     |使用内置的 Nacos 服务。不建议用于生产环境。如果设置本参数，则无需设置?-c?参数                                                                 |无             |
+|--use-builtin-nacos                                     |使用内置的 Nacos 服务。不建议用于生产环境。如果设置本参数，则无需设置`-c`参数                                                                 |无             |
 |--nacos-ns=NACOS_NAMESPACE                              |用于保存 Higress 配置的 Nacos 命名空间 ID                                                                               |higress-system|
 |--nacos-username=NACOS_USERNAME                         |用于访问 Nacos 的用户名。仅用于 Nacos 启动了认证的情况下                                                                          |无             |
 |--nacos-password=NACOS_PASSWORD                         |用于访问 Nacos 的用户密码。仅用于 Nacos 启动了认证的情况下                                                                         |无             |
 |-k KEY<br/>--data-enc-key=KEY                              |用于加密敏感配置数据的密钥。长度必须为 32 个字符。若未设置，Higress 将自动生成一个随机的密钥。若需集群部署，此项必须设置                                           |随机字符串         |
-|-p CONSOLE_PASSWORD<br/>--console-password=CONSOLE_PASSWORD|后续用户访问 Higress Console 的密码（用户名固定为?admin）                                                                     |随机字符串         |
+|-p CONSOLE_PASSWORD<br/>--console-password=CONSOLE_PASSWORD|后续用户访问 Higress Console 的密码（用户名固定为`admin`）                                                                     |随机字符串         |
 |--nacos-port=NACOS_PORT                                 |内置 NACOS 服务在服务器本地监听的端口                                                                                       |8848          |
 |--gateway-http-port=GATEWAY_HTTP_PORT                   |Higress Gateway 在服务器本地监听的 HTTP 端口                                                                            |80            |
 |--gateway-https-port=GATEWAY_HTTPS_PORT                 |Higress Gateway 在服务器本地监听的 HTTPS 端口                                                                           |443           |
