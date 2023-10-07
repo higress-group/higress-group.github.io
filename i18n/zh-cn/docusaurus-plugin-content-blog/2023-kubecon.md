@@ -1,5 +1,5 @@
 ---
-title:  记Higress在2023 KubeCon China的分享
+title:  Higress在2023 KubeCon China的分享
 keywords: [Higress,KubeCon]
 description: 看K8s资深运维如何选型Ingress网关
 author: 澄潭
