@@ -129,8 +129,7 @@ Higress开源的前半年，专注于开源生态的打通和易用性的提升�
 
 ## 直播回看
 
-![image](https://github.com/higress-group/higress-group.github.io/assets/6763318/3535c8dd-4588-472b-99f6-1ecd111d55cc)
-
+https://www.aliyun.com/activity/middleware/CloudNative_Meetup
 
 
 
