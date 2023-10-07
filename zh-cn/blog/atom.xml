@@ -8,7 +8,7 @@
     <subtitle>Higress Blog</subtitle>
     <icon>https://higress.io/zh-cn/img/higress_logo_small.png</icon>
     <entry>
-        <title type="html"><![CDATA[记Higress在2023 KubeCon China的分享]]></title>
+        <title type="html"><![CDATA[Higress在2023 KubeCon China的分享]]></title>
         <id>https://higress.io/zh-cn/blog/2023-kubecon</id>
         <link href="https://higress.io/zh-cn/blog/2023-kubecon"/>
         <updated>2023-09-28T00:00:00.000Z</updated>
