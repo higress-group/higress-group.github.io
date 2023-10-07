@@ -133,8 +133,8 @@ spec:
         replicas: 2
       trafficRoutings:
       - service: demo
-        type: nginx
         ingress:
+          classType: higress
           name: demo
 ```
 - 其中workloadRef 旁路式的选择需要 Rollout 的 Workload，此处为Deployment，支持其他Workload（如CloneSet、DaemonSet）。
@@ -204,7 +204,7 @@ spec:
       trafficRoutings:
       - service: demo
         ingress:
-          classType: nginx
+          classType: higress
           name: demo
 ```
 其中canary.Steps 定义了整个 Rollout 过程一共分为2批，其中第一批只灰度一个新版本 Pod，并且将带有HTTP Header user-agent: android (即安卓用户）的流量routing 到新版本 Pod，并且需要人工确认是否继续发布；最后一批，无需定义，即全量发布。
