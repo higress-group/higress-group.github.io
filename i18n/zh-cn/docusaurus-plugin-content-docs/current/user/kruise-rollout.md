@@ -98,6 +98,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
 spec:
+  ingressClassName: higress
   rules:
   - http:
       paths:
