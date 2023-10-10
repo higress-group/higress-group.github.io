@@ -865,7 +865,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    higress.io/proxy-ssl-secret: "default/ateway-cert"
+    higress.io/proxy-ssl-secret: "default/gateway-cert"
   name: demo
 spec:
   ingressClassName: higress
