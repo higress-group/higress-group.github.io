@@ -247,30 +247,30 @@ var _ Transformer = (*responseTransformer)(nil)
 
 如果您觉得 Higress 对您有帮助，欢迎前往 Github: Higress[[11]](https://github.com/alibaba/higress) 为我们 star⭐️ 一下！期待与您在 Higress 社区相遇 ~
 
-**相关链接：**
-<br> [1] Spring Cloud Gateway
-<br> https://cloud.spring.io/spring-cloud-gateway/reference/html/
-<br> [2] SCG GatewayFilter Factories
-<br> https://cloud.spring.io/spring-cloud-gateway/reference/html/#gatewayfilter-factories
-<br> [3] Higress Transformer 插件
-<br> https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/transformer
-<br> [4] Higress 官方文档
-<br> https://higress.io/zh-cn/
-<br> [5] Higress Wasm SDK
-<br> https://github.com/alibaba/higress/tree/main/plugins
-<br> [6] Higress 快速开始
-<br> https://higress.io/zh-cn/docs/user/quickstart
-<br> [7] httpbin
-<br> https://httpbin.org/
-<br> [8] 开发 Higress Wasm 插件
-<br> https://higress.io/zh-cn/docs/user/wasm-go
-<br> [9] GJSON
-<br> https://github.com/tidwall/gjson
-<br> [10] SJSON
-<br> https://github.com/tidwall/sjson
-<br> [11] Higress 代码仓库
-<br> https://github.com/alibaba/higress
-<br> [12] Transformer Demo
-<br> https://github.com/higress-group/higress-demo/tree/main/wasm-demo/wasm-plugin-transformer
-<br> [13] 性能对比配置
-<br> https://gist.github.com/WeixinX/c24f4ded37832dd7e753b2d27470f0fc
+**相关链接：**  
+[1] Spring Cloud Gateway  
+https://cloud.spring.io/spring-cloud-gateway/reference/html/  
+[2] SCG GatewayFilter Factories  
+https://cloud.spring.io/spring-cloud-gateway/reference/html/#gatewayfilter-factories   
+[3] Higress Transformer 插件  
+https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/transformer  
+[4] Higress 官方文档  
+https://higress.io/zh-cn/  
+[5] Higress Wasm SDK  
+https://github.com/alibaba/higress/tree/main/plugins  
+[6] Higress 快速开始  
+https://higress.io/zh-cn/docs/user/quickstart  
+[7] httpbin  
+https://httpbin.org/  
+[8] 开发 Higress Wasm 插件  
+https://higress.io/zh-cn/docs/user/wasm-go  
+[9] GJSON  
+https://github.com/tidwall/gjson  
+[10] SJSON  
+https://github.com/tidwall/sjson  
+[11] Higress 代码仓库  
+https://github.com/alibaba/higress  
+[12] Transformer Demo  
+https://github.com/higress-group/higress-demo/tree/main/wasm-demo/wasm-plugin-transformer  
+[13] 性能对比配置  
+https://gist.github.com/WeixinX/c24f4ded37832dd7e753b2d27470f0fc
