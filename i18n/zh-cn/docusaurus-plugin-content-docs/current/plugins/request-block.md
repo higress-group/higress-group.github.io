@@ -17,9 +17,9 @@ description: 请求屏蔽插件配置参考
 
 | 名称 | 数据类型 | 填写要求 |  默认值 | 描述 |
 | -------- | -------- | -------- | -------- | -------- |
-|  block_urls     |  array of string     | 选填，`block_urls`,`block_headers`,`block_bodies` 中至少必填一项     |   -  |  配置用于匹配需要屏蔽 URL 的字符串   |
-|  block_headers     |  array of string     | 选填，`block_urls`,`block_headers`,`block_bodies` 中至少必填一项     |   -  |  配置用于匹配需要屏蔽请求 Header 的字符串   |
-|  block_bodies     |  array of string     | 选填，`block_urls`,`block_headers`,`block_bodies` 中至少必填一项     |   -  |  配置用于匹配需要屏蔽请求 Body 的字符串   |
+|  block_urls     |  array of string     | 选填，`block_urls`,`block_headers`,`block_bodys` 中至少必填一项     |   -  |  配置用于匹配需要屏蔽 URL 的字符串   |
+|  block_headers     |  array of string     | 选填，`block_urls`,`block_headers`,`block_bodys` 中至少必填一项     |   -  |  配置用于匹配需要屏蔽请求 Header 的字符串   |
+|  block_bodys     |  array of string     | 选填，`block_urls`,`block_headers`,`block_bodys` 中至少必填一项     |   -  |  配置用于匹配需要屏蔽请求 Body 的字符串   |
 |  blocked_code     |  number     | 选填     |   403  |  配置请求被屏蔽时返回的 HTTP 状态码   |
 |  blocked_message     |  string     | 选填     |   -  |  配置请求被屏蔽时返回的 HTTP 应答 Body   |
 |  case_sensitive     |  bool     | 选填     |   true  |  配置匹配时是否区分大小写，默认区分   |
@@ -57,7 +57,7 @@ curl http://exmaple.com -H 'my-header: example-value'
 
 ### 屏蔽请求 body
 ```yaml
-block_bodies:
+block_bodys:
 - "hello world"
 case_sensitive: false
 ```
@@ -71,5 +71,5 @@ curl http://exmaple.com -d 'hello world'
 
 ## 请求 Body 大小限制
 
-当配置了 `block_bodies` 时，仅支持小于 32 MB 的请求 Body 进行匹配。若请求 Body 大于此限制，并且不存在匹配到的 `block_urls` 和 `block_headers` 项时，不会对该请求执行屏蔽操作
+当配置了 `block_bodys` 时，仅支持小于 32 MB 的请求 Body 进行匹配。若请求 Body 大于此限制，并且不存在匹配到的 `block_urls` 和 `block_headers` 项时，不会对该请求执行屏蔽操作
 
