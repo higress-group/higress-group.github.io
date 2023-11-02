@@ -41,8 +41,7 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | higress-console.domain | Domain used to access Higress Console | console.higress.io |
 | higress-console.tlsSecretName | Name of Secret resource used by TLS connections. | "" |
 | higress-console.web.login.prompt | Prompt message to be displayed on the login page | "" |
-| higress-console.admin.password.value | If not empty, the admin password will be configured to the specified value. | "" |
-| higress-console.admin.password.length | The length of random admin password generated during installation. Only works when `higress-console.admin.password.value` is not set. | 8 |
+| higress-console.admin.password | If not empty, the admin password will be configured to the specified value. | "" |
 | higress-console.o11y.enabled | If `true`, o11y suite (Grafana + Promethues) will be installed. | false |
 | higress-console.pvc.rwxSupported | Set to `false` when installing to a standard K8s cluster and the target cluster doesn't support the ReadWriteMany access mode of PersistentVolumeClaim. | true |
 

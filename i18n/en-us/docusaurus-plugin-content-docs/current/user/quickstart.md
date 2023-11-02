@@ -21,10 +21,6 @@ helm repo add higress.io https://higress.io/helm-charts
 helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set higress-console.domain=console.higress.io
 ```
 
-Note: A short note will be printed on the screen after installation, which contains the commands used to obtain the console login credential. Please execute them and record the output username and password.
-
-![image](/img/user/quickstart/zh-cn/console-credentials.png)
-
 Obtain the LoadBalancer IP of Higress Gateway and write it down. You can use it and port 80 and 443 to access Higress Gateway.
 ```bash
 kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
@@ -117,7 +113,7 @@ in the future, we will use `--set global.local=true` for unambiguous.
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false  --set higress-console.domain=console.higress.io --set higress-console.admin.password.value=<YOUR-PASSWORD>
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false  --set higress-console.domain=console.higress.io
 ```
 
 > If you'd like to enable the built-in o11y suite, please refer to the [Deploy by Helm](../ops/deploy-by-helm) document.
@@ -169,7 +165,11 @@ Edit the hosts file and point domain `console.higress.io` to the IP of Higress G
 GatewayIP console.higress.io
 ```
 
-Open `http://console.higress.io` in browser and log into Higress Console using the credential obtained above.
+Open `http://console.higress.io` in browser. For the first time, you will need to configure the admin credentials.
+
+![image](/img/user/quickstart/en-us/init.png)
+
+After configuration, log into Higress Console using the credential just configured.
 
 ![image](/img/user/quickstart/en-us/login.png)
 
@@ -220,7 +220,7 @@ curl http://GatewayIP/foo -H "Host: foo.bar.com"
 **Installation Command 1: Use a separated-deployed Nacos service**
 
 ```bash
-curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos -p <YOUR-PASSWORD>
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos
 ```
 
 Please replace `192.168.0.1` with the actual IP address of Nacos service (if Nacos is deployed locally, please use a non-loopback address such as `localhost` or `127.0.0.1`), and update the value of `--nacos-username` and `--nacos-password` based on actual configurations. If authentication isn't enabled in Nacos, you can remove these two arguments.
@@ -228,14 +228,18 @@ Please replace `192.168.0.1` with the actual IP address of Nacos service (if Nac
 **Installation Command 2: Use the Higress Built-In Nacos**
 
 ```bash
-curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- --use-builtin-nacos -p <YOUR-PASSWORD>
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a --use-builtin-nacos
 ```
 
 Note: On Windows, you can use Unix-like shells such as Cygwin, Git Bash to execute the command above.
 
 ### Stage 2: Configuration
 
-Open `http://127.0.0.1:8080` in browser and log into Higress Console using username `admin` and the previously set password.
+Open `http://127.0.0.1:8080` in browser. For the first time, you will need to configure the admin credentials.
+
+![image](/img/user/quickstart/en-us/init.png)
+
+After configuration, log into Higress Console using the credential just configured.
 
 ![image](/img/user/quickstart/en-us/login.png)
 
