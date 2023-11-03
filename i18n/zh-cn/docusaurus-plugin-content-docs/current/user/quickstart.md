@@ -21,17 +21,6 @@ helm repo add higress.io https://higress.io/helm-charts
 helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set higress-console.domain=console.higress.io
 ```
 
-注意：安装完成后会输出一段文本，其中包含获取控制台登录信息的命令。请执行该命令并记录用户名和密码。
-
-![image](/img/user/quickstart/zh-cn/console-credentials.png)
-
-例如安装在 higress-system 命名空间下时，执行下面命令获取用户名密码：
-```bash
-  export ADMIN_USERNAME=$(kubectl get secret --namespace higress-system higress-console -o jsonpath="{.data.adminUsername}" | base64 -d)
-  export ADMIN_PASSWORD=$(kubectl get secret --namespace higress-system higress-console -o jsonpath="{.data.adminPassword}" | base64 -d)
-  echo -e "Username: ${ADMIN_USERNAME}\nPassword: ${ADMIN_PASSWORD}"
-```
-
 获取 Higress Gateway 的 LoadBalancer IP，并记录下来。后续可以通过该 IP 的 80 和 443 端口访问 Higress Gateway。
 ```bash
 kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
@@ -123,7 +112,7 @@ kubectl.exe config use-context kind-higress
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false  --set higress-console.domain=console.higress.io --set higress-console.admin.password.value=<你的密码>
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false  --set higress-console.domain=console.higress.io
 ```
 
 > 若要启用 Higress 内置的套件，可参阅[安装部署](../ops/deploy-by-helm.md)文档。
@@ -174,7 +163,11 @@ spec:
 GatewayIP console.higress.io
 ```
 
-在浏览器中输入`http://console.higress.io`，使用前面获取或设置的用户名密码登录 Higress 控制台（本地集群用户名固定为 admin）。
+在浏览器中输入`http://console.higress.io`。首次访问时需要先初始化管理员账号。
+
+![image](/img/user/quickstart/zh-cn/init.png)
+
+初始化完成后，界面会自动跳转至登录页面。请使用前面设置的用户名密码登录 Higress 控制台。
 
 ![image](/img/user/quickstart/zh-cn/login.png)
 
@@ -225,7 +218,7 @@ curl http://GatewayIP/foo -H 'host: foo.bar.com'
 **安装命令一：使用独立部署的 Nacos**
 
 ```bash
-curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos -p <你的密码>
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos
 ```
 
 请将 `192.168.0.1` 替换为 Nacos 服务器的 IP（如果 Nacos 部署在本机，请不要使用如 `localhost` 或 `127.0.0.1` 的 Loopback 地址），并按需调整 `--nacos-username` 和 `--nacos-password` 的取值。如果 Nacos 服务未开启认证功能，则可以移除这两个参数。
@@ -233,14 +226,18 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://
 **安装命令二：使用 Higress 内置 Nacos**
 
 ```bash
-curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- --use-builtin-nacos -p <你的密码>
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a --use-builtin-nacos
 ```
 
 注：Windows 系统下可以使用 Cygwin、Git Bash 等类 Unix Shell 中执行上述命令。
 
 ### 阶段二：配置
 
-在浏览器中输入`http://127.0.0.1:8080`，使用用户名 `admin` 和安装时设置的密码登录 Higress 控制台。
+在浏览器中输入`http://127.0.0.1:8080` 进入 Higress 控制台。首次访问时需要先初始化管理员账号。
+
+![image](/img/user/quickstart/zh-cn/init.png)
+
+初始化完成后，界面会自动跳转至登录页面。请使用前面设置的用户名密码登录 Higress 控制台。
 
 ![image](/img/user/quickstart/zh-cn/login.png)
 
