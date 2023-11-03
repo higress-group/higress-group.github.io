@@ -272,7 +272,7 @@ $ kubectl -n higress-system port-forward service/higress-gateway 8080:80
 ```
 3）通过浏览器打开访问上面三个域名
 
-Higress 控制台: [http://console.higress.io:8080](http://console.higress.io:8080)，用户名为 admin，登录密码为安装时设定的管理员密码。
+Higress 控制台: [http://console.higress.io:8080](http://console.higress.io:8080)。首次访问控制台时需要先初始化管理员用户。初始化完成后使用对应的用户名密码登录即可。
 
 ![img.png](../../../static/img/blog/skywalking/higress1.png)
 
