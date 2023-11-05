@@ -1,4 +1,4 @@
-t ---
+---
 title: 基于 Docker Compose 进行独立部署
 keywords: [deploy,docker compose,docker,ops]
 description: 如何使用 Docker Compose 实现 Higress 的独立部署
