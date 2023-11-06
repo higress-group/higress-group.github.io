@@ -6,7 +6,7 @@ author: 澄潭
 date: 2023-11-04
 ---
 
-## 新版本概要
+## 新版本速览
   
 自发布 1.2 版本过去了一个半月时间，也是 Higress 开源一周年之际，1.3 版本正式发布，带来两个全新能力：
 
@@ -25,7 +25,7 @@ date: 2023-11-04
 
 Gateway API 在 11 月 1 日正式发布了 1.0.0 版本，其中 GatewayClass, Gateway, HTTPRoute 这三个 API正式宣布 GA，发布了 v1 版本：gateway.networking.k8s.io/v1。
 
-目前 Higress 已经可以支持这些最新版本的 API 配置，需要在安装/升级 Higress 时配置开启 Gateway API：
+目前 Higress 已经可以支持这些最新版本的 API 配置，只需在安装/升级 Higress 时配置开启 Gateway API：
 
 - 使用 Helm ：通过参数 `--set global.enableGatewayAPI=true`
 - 使用 Hgctl ：通过命令行参数或者 install.yaml 中配置 `global.enableGatewayAPI=true`
@@ -178,9 +178,9 @@ Gateway API 虽然为更多网关能力做了标准化，但 CRD 的种类和复
 
 1. 大型团队划分了 SRE 角色和业务研发角色，由 SRE 通过 Gateway 资源统一管理站点域名和证书，由业务研发通过 HTTPRoute 资源管理业务路由，实现职责划分，权限收敛
 2. 创建的路由和 Service 有不在一个命名空间的需求，可以借助 ReferenceGrant 资源实现
-3. 有大量证书需要集中式管理，不希望将证书 secret 同步到 Ingress 所在命名空间，带来安全风险
+3. 有大量证书需要集中式管理，不希望将证书 Secret 同步到 Ingress 所在命名空间，带来安全风险
 
-Higress 支持 Gateway API 和 Ingress API 混合使用，Gateway API 下的域名路由将比 Ingress API 优先匹配，和 Ingress 相同资源名称的 HTTPRoute 还会继承 WASM 插件配置，这样用户可以按需采用 Gateway API，渐进/平滑地完成从 Ingress API 向 Gateway API 的演进，无需焦虑 API 标准升级过程中产生业务损失。
+Higress 支持 Gateway API 和 Ingress API 混合使用，Gateway API 下的域名路由将比 Ingress API 优先匹配，和 Ingress 相同资源名称的 HTTPRoute 还会继承 WASM 插件配置，这样用户可以按需采用 Gateway API，平滑地完成从 Ingress API 向 Gateway API 的演进，无需焦虑 API 标准升级过程中产生业务损失。
 
 ## 新工具：All in one 的 hgctl
 
@@ -201,7 +201,7 @@ Higress 借鉴了 istio 的 istioctl，提供了 hgctl 这个命令行工具解�
 
 hgctl 集成了三种 Higress 安装模式，并统一了升级/运维操作：
 
-1.  本地 K8s 环境（例如kind/k3s）模式
+1. 本地 K8s 环境（例如kind/k3s）模式
 2. 正式 K8s 环境模式
 3. 不依赖 K8s 的纯 Docker 环境模式
 
@@ -259,7 +259,7 @@ hgctl 集成了三种 Higress 安装模式，并统一了升级/运维操作：
 
 另外，若需要查看已安装的插件，则使用 `hgctl plugin ls`；若需要操作插件配置，则使用 `hgctl plugin config`
 
-通过这个工具，可以在构建 WASM 插件的同时，构建出插件的配置说明文档，以及包含插件配置约束的元信息文件，这些内容都将和 WASM 文件一起放入 OCI 镜像制品中，通过镜像方式进行版本管理和分发。这一机制是后续 Higress 推出 WASM 插件市场的基石。
+通过这个工具，可以在构建 WASM 插件的同时，根据配置代码自动生成插件的配置说明文档，以及包含插件配置约束的元信息文件，这些内容都将和 WASM 文件一起放入 OCI 镜像制品中，通过镜像方式进行版本管理和分发。这一机制是后续 Higress 建设 WASM 插件市场的基石。
 
 ### 其他功能
 
@@ -311,13 +311,13 @@ hgctl 集成了三种 Higress 安装模式，并统一了升级/运维操作：
 
 上面说了 Gateway API，接着我们聊聊 API Gateway 😄，API Gateway 有两层定义：
 
-1.  狭义上：满足统一接入，将路由转发到不同服务的运维需求，即可称为 API Gateway；这里 API 的定义是服务的路由
+1. 狭义上：满足统一接入，将路由转发到不同服务的运维需求，即可称为 API Gateway；这里 API 的定义是服务的路由
 2. 广义上：在实现服务转发的基础上，需要识别带业务语义的接口，将业务能力 API 化管理，统一对外提供服务；这里 API 的定义是业务功能接口
 
 Higress 已经实现了狭义上的 API Gateway 能力，并且是基于 Gateway/Ingress API 这些通用路由标准来实现的。而与服务路由标准不同，业务功能接口的标准是 Swagger/OAS3/RPC IDL 等，做为 API Gateway 需要提供以下关键能力：
 
-1.  支持通过上传 Swagger 等接口定义文件的方式导入 API
-2. 对 API  实现精细化策略管理，例如根据出入参定义实现参数映射/转换
+1. 支持通过上传 Swagger 等接口定义文件的方式导入 API
+2. 对 API 实现精细化策略管理，例如根据出入参定义实现参数映射/转换
 3. 实现以 API 方式开放能力时的认证/鉴权，调用量控制/审计能力
 
 Higress 新的开源征程将向具备业务 API 管理能力的 API Gateway 形态进发。在实现方式上，我们将基于 WASM 插件去扩展这一部分能力，这可以降低我们对上游 Envoy 社区的侵入性改造，同时让对 API 的精细化策略管理具备自定义扩展能力。
@@ -327,7 +327,7 @@ https://github.com/alibaba/higress/issues/535
 
 https://github.com/alibaba/higress/issues/601
 
-欢迎有更多小伙伴加入，和我们一起踏上新的征程，有兴趣的小伙伴可以联系我(微信：nomadao)，加入 API Gateway 的 SIG。
+欢迎有更多小伙伴加入，和我们一起踏上新的征程，有兴趣的小伙伴可以联系我(微信：nomadao)，加入 API Gateway 的 SIG（兴趣小组）。
 
 ## 社区致谢
 
@@ -348,11 +348,11 @@ https://github.com/alibaba/higress/issues/601
 
 ### Approver：吴新军(Jun)，刘训灼(Xunzhuo)
 
-两位都在多个 Higress 版本为社区做出了贡献，Jun 的主要贡献有：在多注册中心的服务发现支持，全局配置管理架构抽象；Xunzhuo 的主要贡献有： Higress E2E 测试流程的搭建，GitHub 上各类 CI 流程的建设，hgctl 的整体架构设计。
+两位都在多个 Higress 版本为社区做出了贡献，Jun 的主要贡献有：在多注册中心的服务发现支持，全局配置管理架构抽象；Xunzhuo 的主要贡献有：Higress E2E 测试流程的搭建，GitHub CI 流程的建设，hgctl 的整体架构设计。
 
 在 1.3 版本中二位协作完成了 hgctl 的多样化能力建设，帮助 Higress 的易用性又上到了一个新的台阶。
 
-两位同学作为 Approver 积极参与社区贡献 PR 的 Review，目前分别是 Higress Tools SIG 和 Higress GatewayAPI SIG 的社区领导者。
+两位同学作为 Approver 积极参与社区贡献 PR 的 Review，目前分别是 Higress Tools SIG 和 Higress GatewayAPI SIG 的领导者。
 
 ### Member：韦鑫(WeixinX)，封宇腾(Fkbqf)
 
@@ -360,6 +360,9 @@ https://github.com/alibaba/higress/issues/601
 
 在 1.3 版本中，WeixinX 实现了 hgctl plugin 子命令的能力，同时贡献了 Go 实现的 Basic Auth 插件，以及对标 Spring Cloud Gateway 请求响应转换能力的 Transformer 插件；Fkbqf 则实现了更为复杂的 OIDC 插件，具备比 Envoy 自带 OAuth2 Filter 更强大的功能，并且具备良好的扩展性。
 
-两位同学除了开发贡献以外，用课余时间积极参与 Higress 社区周会，一起探讨和学习技术，不亦乐乎。能够成为你们人生学业进阶路上的阶梯，Higress荣幸之至。
+两位同学除了开发贡献以外，用课余时间积极参与 Higress 社区周会，一起探讨和学习技术，不亦乐乎。能够成为你们人生学业进阶路上的阶梯，Higress 荣幸之至。
 
 欢迎更多小伙伴一起加入我们：
+
+![higress-comm](https://github.com/johnlanni/higress-group.github.io/assets/6763318/d8e09712-0b3b-4c5a-b478-c84da139cf2f)
+
