@@ -6,9 +6,18 @@ author: 澄潭
 date: 2023-11-04
 ---
 
-## 新版本速览
+## 历程回顾
+![image](https://github.com/johnlanni/higress-group.github.io/assets/6763318/b5f3ee1b-d53a-4fbb-8d4a-82427ebdfe40)
+
+Higress 开源一年时间，一共发布了 18 个 release 版本，收获了 40 多位社区贡献者和 1800+ star，上图是这一年过来达成的一些关键的里程碑。
+
+前面半年通过集成开源生态，打磨开源版本稳定性，并在发布 1.0 GA 版本后，社区又马不停蹄发布了 1.1 和 1.2 两个重要版本，实现了非 K8s 部署，Knative 适配等核心能力。
+
+Higress 1.3 版本已经正式发布，除了增加的新功能，已有能力也在大量社区用户反馈的过程中不断完善改进，这个版本同时标志着 1.x 进入可以大规模生产使用的状态。
+
+## 新版本：功能速览
   
-自发布 1.2 版本过去了一个半月时间，也是 Higress 开源一周年之际，1.3 版本正式发布，带来两个全新能力：
+自发布 1.2 版本过去了一个多月时间，1.3 版本正式发布，带来两个全新能力：
 
 - 新标准：支持最新版本 Gateway API 标准，并且具备从 Ingress 平滑渐进演进，以及对接多种服务发现机制的能力
 - 新工具：正式 release 了 hgctl (Higress Crontroller) 这个 "All in one" 的新工具，不仅可以替代 Helm 实现更简易的安装，还提供了 WASM 插件开发工具包，以及网关配置检查等丰富功能
@@ -170,15 +179,17 @@ Gateway API 在 11 月 1 日正式发布了 1.0.0 版本，其中 GatewayClass, 
 
 ### Ingress API 和 Gateway API 之间如何选择
 
-有了 Gateway API，是否应该立即抛弃 Ingress API ？Higress 的观点是只有最适合的标准，没有最好的标准。
+有了 Gateway API，是否应该立即抛弃 Ingress API？
 
-Gateway API 虽然为更多网关能力做了标准化，但 CRD 的种类和复杂度也增加了，相比之下对于大部分简单用例场景，Ingress API 更加简单易用。
+只有最合适的，没有最好的。Gateway API 虽然为更多网关能力做了标准化，但 CRD 的种类和复杂度也增加了，相比之下对于大部分简单用例场景，Ingress API 更加简单易用。
 
-而对于以下场景，建议采用 Gateway API 替代 Ingress API：
+对于以下场景，采用 Gateway API 替代 Ingress API 会带来很大帮助：
 
-1. 大型团队划分了 SRE 角色和业务研发角色，由 SRE 通过 Gateway 资源统一管理站点域名和证书，由业务研发通过 HTTPRoute 资源管理业务路由，实现职责划分，权限收敛
-2. 创建的路由和 Service 有不在一个命名空间的需求，可以借助 ReferenceGrant 资源实现
-3. 有大量证书需要集中式管理，不希望将证书 Secret 同步到 Ingress 所在命名空间，带来安全风险
+- 大型团队划分了 SRE 角色和业务研发角色，由 SRE 通过 Gateway 资源统一管理站点域名和证书，由业务研发通过 HTTPRoute 资源管理业务路由，实现职责划分，权限收敛
+- 创建的路由和 Service 有不在一个命名空间的需求，可以借助 ReferenceGrant 资源实现
+- 有大量证书需要集中式管理，不希望将证书 Secret 同步到 Ingress 所在命名空间，带来安全风险
+
+Gateway API 的另一个好处是对于更多功能的标准化定义，我们建议遇到实际需要再转换到这个新的标准，而不必盲目跟随。
 
 Higress 支持 Gateway API 和 Ingress API 混合使用，Gateway API 下的域名路由将比 Ingress API 优先匹配，和 Ingress 相同资源名称的 HTTPRoute 还会继承 WASM 插件配置，这样用户可以按需采用 Gateway API，平滑地完成从 Ingress API 向 Gateway API 的演进，无需焦虑 API 标准升级过程中产生业务损失。
 
@@ -361,6 +372,10 @@ https://github.com/alibaba/higress/issues/601
 在 1.3 版本中，WeixinX 实现了 hgctl plugin 子命令的能力，同时贡献了 Go 实现的 Basic Auth 插件，以及对标 Spring Cloud Gateway 请求响应转换能力的 Transformer 插件；Fkbqf 则实现了更为复杂的 OIDC 插件，具备比 Envoy 自带 OAuth2 Filter 更强大的功能，并且具备良好的扩展性。
 
 两位同学除了开发贡献以外，用课余时间积极参与 Higress 社区周会，一起探讨和学习技术，不亦乐乎。能够成为你们人生学业进阶路上的阶梯，Higress 荣幸之至。
+
+Higress 社区后续整体的 Roadmap 规划如下：
+
+![image](https://github.com/johnlanni/higress-group.github.io/assets/6763318/f646d9ad-d2d0-4496-b164-2884851e9e0c)
 
 欢迎更多小伙伴一起加入我们：
 
