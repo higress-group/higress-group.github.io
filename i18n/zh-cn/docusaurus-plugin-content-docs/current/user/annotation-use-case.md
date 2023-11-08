@@ -314,7 +314,7 @@ spec:
                 name: demo-service
                 port: 
                   number: 80
-            path: /v1/(app)
+            path: /v1(/|$)(.*)
             pathType: Prefix
 ```
 
@@ -337,7 +337,7 @@ spec:
                 name: demo-service
                 port: 
                   number: 80
-            path: /v1/(app)
+            path: /v1(/|$)(.*)
             pathType: Prefix
 ```
 
