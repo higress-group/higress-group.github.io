@@ -315,7 +315,7 @@ spec:
                 port: 
                   number: 80
             path: /v1(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
 ```
 
 3. 将请求`example.com/v1/app`在转发至后端服务之前，将Path前缀/v1更改为/v2
@@ -338,7 +338,7 @@ spec:
                 port: 
                   number: 80
             path: /v1(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
 ```
 
 ### Rewrite重写Host
