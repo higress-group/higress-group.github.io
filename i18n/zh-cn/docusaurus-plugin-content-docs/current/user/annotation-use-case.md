@@ -301,7 +301,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    higress.io/rewrite-target: "/$1"
+    higress.io/rewrite-target: "/$2"
   name: demo
 spec:
   ingressClassName: higress
@@ -324,7 +324,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    higress.io/rewrite-target: "/v2/$1"
+    higress.io/rewrite-target: "/v2/$2"
   name: demo
 spec:
   ingressClassName: higress
