@@ -12,11 +12,11 @@ Higress 的控制面程序，会连接 Istio ，用于生成 Istio API 对象，
 
 在 higress 仓库目录下执行 `make build` 即可进行本地环境能运行的二进制编译
 
-若需要编译 docker 镜像，请执行 `make docker-build`
+若需要编译 docker 镜像，请执行 `make docker-build`。Higress Controller使用的Istio pilot镜像使用`make build-istio-local` 编译。
 
 
 ## Higress Gateway
 
 Higress 的数据面程序，用于实现网关路由转发等能力。
 
-在 higress 仓库目录下执行 `make build-gateway` 会编译出 Higress Gateway 的镜像。
+在 higress 仓库目录下执行 `make build-gateway-local` 会编译出 Higress Gateway 的镜像。
