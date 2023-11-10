@@ -51,7 +51,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Deploy',
-          items: ['ops/deploy-by-helm', 'ops/deploy-by-docker-compose'],
+          items: ['ops/hgctl','ops/deploy-by-helm', 'ops/deploy-by-docker-compose'],
         },
         'ops/upgrade',
         'ops/log'
