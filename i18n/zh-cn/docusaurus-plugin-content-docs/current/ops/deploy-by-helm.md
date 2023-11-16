@@ -35,7 +35,6 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | global.enableIstioAPI | 若为`true`，Higress Controller 将同时监听 istio 资源 | false |
 | global.enableGlobalAPI | 若为`true`，Higress Controller 将同时监听 Gateway API 资源 | false |
 | global.onlyPushRouteCluster | 若为`true`，Higress Controller 将会只推送被路由关联的服务 | true |
-
 | **核心组件参数** |  |  |
 | higress-core.gateway.replicas | Higress Gateway 的 pod 数量 | 2 |
 | higress-core.controller.replicas | Higress Controller 的 pod 数量 | 1 |
