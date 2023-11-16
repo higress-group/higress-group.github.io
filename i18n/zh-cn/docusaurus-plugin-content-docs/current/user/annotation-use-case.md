@@ -601,6 +601,91 @@ spec:
             pathType: Exact
 ```
 
+## 超时
+Higress提供路由级别的超时设置，与nginx ingress不同，没有区分连接/读写超时，而是面向的接口处理总延时进行配置，在未进行配置时默认不限制，例如后端未返回应答，网关将无限等待。
+
+设置超时时间为5s：
+
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    mse.ingress.kubernetes.io/timeout: "5"
+  name: demo
+spec:
+  ingressClassName: higress
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: demo-service
+                port: 
+                  number: 80
+            path: /test
+            pathType: Exact
+```
+
+## 单机限流
+支持针对路由级别的单机限流策略，在设定的时间周期内，限制每个网关副本匹配在某个路由上的请求数量不大于阈值。该限流是针对单机级别，即配置的阈值在每个网关实例进行流控。
+
+**提示**
+Higress商业版具备全局限流能力，详情查看[商业版文档](https://help.aliyun.com/zh/mse/user-guide/advanced-usage-of-mse-ingress?spm=a2c4g.11186623.0.0.2e3a3db3eYcspD#862f08d03d4d3)中全局限流一节的介绍
+
+例如：
+
+限制example.com/test的请求每分钟最大请求数为100，瞬时请求数200。配置如下：
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    mse.ingress.kubernetes.io/route-limit-rpm: "100"
+    mse.ingress.kubernetes.io/route-limit-burst-multiplier: "2"
+  name: demo
+spec:
+  ingressClassName: mse
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: demo-service
+                port: 
+                  number: 80
+            path: /test
+            pathType: Exact
+```
+
+限制example.com/test的请求每秒最大请求数为10，瞬时请求数50。配置如下：
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    mse.ingress.kubernetes.io/route-limit-rps: "10"
+    # 默认为5
+    # mse.ingress.kubernetes.io/route-limit-burst-multiplier: "5"
+  name: demo
+spec:
+  ingressClassName: mse
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: demo-service
+                port: 
+                  number: 80
+            path: /test
+            pathType: Exact
+```
+
+
 ## 配置后端服务协议：HTTPS或GRPC
 Higress默认使用HTTP协议转发请求到后端业务容器。当您的业务容器为HTTPS协议时，可以通过使用注解`higress.io/backend-protocol: "HTTPS"`；当您的业务容器为GRPC服务时，可以通过使用注解`higress.io/backend-protocol: "GRPC"`。
 > 说明：相比Nginx Ingress的优势，如果您的后端服务所属的K8s Service资源中关于Port Name的定义为grpc或http2，您无需配置注解higress.io/backend-protocol: "GRPC"，Higress会自动使用GRPC或者HTTP2。
