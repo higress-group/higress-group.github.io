@@ -611,7 +611,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    mse.ingress.kubernetes.io/timeout: "5"
+    higress.io/timeout: "5"
   name: demo
 spec:
   ingressClassName: higress
@@ -647,8 +647,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    mse.ingress.kubernetes.io/route-limit-rpm: "100"
-    mse.ingress.kubernetes.io/route-limit-burst-multiplier: "2"
+    higress.io/route-limit-rpm: "100"
+    higress.io/route-limit-burst-multiplier: "2"
   name: demo
 spec:
   ingressClassName: mse
