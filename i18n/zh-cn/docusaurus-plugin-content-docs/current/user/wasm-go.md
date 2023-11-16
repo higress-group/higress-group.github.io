@@ -192,11 +192,17 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 |  | ResumeHttpResponse | 恢复先前被暂停的应答处理流程 | - |
 
 ### 3. 编译生成 WASM 文件
-执行以下命令
+#### Linux执行以下命令
 ```bash
 go mod tidy
 tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
 ```
+#### Windows执行以下命令 (参数将单引号改为双引号)
+```bash
+go mod tidy
+tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="custommalloc nottinygc_finalizer" ./main.go
+```
+如果编译出现error: could not find wasm-opt, set the WASMOPT environment variable to override 则需要下载https://github.com/WebAssembly/binaryen/ 里面包含了bin\wasm-opt.exe将这个文件拷贝到tinygo的bin目录下重新编译即可。 <br />
 编译成功会在当前目录下创建文件 main.wasm。这个文件在下面本地调试的例子中也会被用到。<br />在使用云原生网关插件市场的自定义插件功能时，直接上传该文件即可。
 
 ## 三、本地调试
