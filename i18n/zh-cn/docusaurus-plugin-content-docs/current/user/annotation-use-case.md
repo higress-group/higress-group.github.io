@@ -629,10 +629,15 @@ spec:
 ```
 
 ## 单机限流
+
+> **提示**
+> Higress商业版具备全局限流能力，详情查看[商业版文档](https://help.aliyun.com/zh/mse/user-guide/advanced-usage-of-mse-ingress?spm=a2c4g.11186623.0.0.2e3a3db3eYcspD#862f08d03d4d3)中全局限流一节的介绍
+
 支持针对路由级别的单机限流策略，在设定的时间周期内，限制每个网关副本匹配在某个路由上的请求数量不大于阈值。该限流是针对单机级别，即配置的阈值在每个网关实例进行流控。
 
-**提示**
-Higress商业版具备全局限流能力，详情查看[商业版文档](https://help.aliyun.com/zh/mse/user-guide/advanced-usage-of-mse-ingress?spm=a2c4g.11186623.0.0.2e3a3db3eYcspD#862f08d03d4d3)中全局限流一节的介绍
+- higress.io/route-limit-rpm：该Ingress定义的路由在每个网关实例上每分钟最大请求次数。瞬时最大请求次数为该值乘以limit-burst-multiplier。
+- higress.io/route-limit-rps：该Ingress定义的路由在每个网关实例上每秒最大请求次数。瞬时最大请求次数为该值乘以limit-burst-multiplier。
+- higress.io/route-limit-burst-multiplier：瞬时最大请求次数的因子，默认为5。
 
 例如：
 
