@@ -1,4 +1,4 @@
-![image](https://github.com/higress-group/higress-group.github.io/assets/6763318/ebe50a56-8abf-41d0-9511-3fb53c6ec9f8)---
+---
 title: 使用 Helm 进行云原生部署
 keywords: [deploy,helm,kubernetes,k8s,ops]
 description: Higress Helm部署.
@@ -62,4 +62,20 @@ helm install istio-base istio/base -n istio-system --create-namespace
 
 ```bash
 helm upgrade higress -n higress-system --set global.enableIstioAPI=true higress.io/higress --reuse-values
+```
+
+## 支持 Gateway API CRD（可选）
+
+集群里需要提前安装好 Gateway API 的 CRD：https://github.com/kubernetes-sigs/gateway-api/releases
+
+以1.0.0为例：
+
+```bash
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/experimental-install.yaml
+```
+
+这种模式下，需要更新 Higress 的部署参数：
+
+```bash
+helm upgrade higress -n higress-system --set global.enableGatewayAPI=true higress.io/higress --reuse-values
 ```
