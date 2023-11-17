@@ -29,7 +29,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ## Higress Reviewers
 | 姓名  | github                        | 公司             |
 |-----|-------------------------------| --------------- |
-| 凌轶群 | [Lynskylate](https://github.com/Lynskylate) | Pdd Holdings Inc  |
+| 凌轶群 | [Lynskylate](https://github.com/Lynskylate) | eBay  |
 | 刘晓瑞 | [rinfx](https://github.com/rinfx) | Alibaba        |
 | 赵炳堃 | [sjtuzbk](https://github.com/sjtuzbk) | Alibaba        |
 
@@ -47,14 +47,24 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ## 获取Higress开发者头衔
 
+**头衔本身是一种荣誉象征，每一位参与Higress的贡献者在开源社区的地位都是平等的**
+
 每种的头衔的获取方式如下：
 
 ### Member
 
 **条件：**
 - 获得 8 个完成 issue 的积分（easy +1，normal +2，challenge +4）
+
+> Higress开源社区为每个可认领（help wanted标签）的issue都标记了难度标签：简单(level/easy)，普通(level/normal)，有挑战(level/challenge)，完成issue后可以获得对应积分
+
 - 贡献代码（包含文档）DIFF 行数（包含增删）达到 500+
+
+> 不仅只有贡献代码，在Higress官网仓库(https://github.com/higress-group/higress-group.github.io)贡献文档，也可以满足此要求
+
 - 在社区周会进行 1 次主题分享
+
+> 重点不是分享的内容，是通过分享让大家认识你
 
 **申请方式：**
 
