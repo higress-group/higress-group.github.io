@@ -37,9 +37,9 @@ kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBala
 # for Intel Macs
 [ $(uname -m) = x86_64 ] && curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
 [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.18.0/kind-darwin-amd64
-# for Apple Silicon Macs (M1/M2), but higress image does not support ARM yet.
-# [ $(uname -m) = arm64 ] && curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
-# [ $(uname -m) = arm64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.18.0/kind-darwin-arm64
+# for Apple Silicon Macs (M1/M2)
+[ $(uname -m) = arm64 ] && curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
+[ $(uname -m) = arm64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.18.0/kind-darwin-arm64
 chmod +x ./kubectl ./kind
 sudo mv ./kubectl ./kind /usr/local/bin
 ```
@@ -158,12 +158,13 @@ spec:
 
 #### 方法一：使用 Higress Console 进行配置
 
-编辑本机的 hosts 文件，将`console.higress.io`域名指向该 Higress Gateway 的 IP（在标准 K8s 集群中即前面获取的 LoadBalancer IP。在本地集群中可直接使用 127.0.0.1）。
-```
-GatewayIP console.higress.io
+使用 [hgctl](https://higress.io/zh-cn/docs/ops/hgctl) 打开控制台：
+
+```bash
+hgctl dashboard console
 ```
 
-在浏览器中输入`http://console.higress.io`。首次访问时需要先初始化管理员账号。
+首次访问时需要先初始化管理员账号。
 
 ![image](/img/user/quickstart/zh-cn/init.png)
 
