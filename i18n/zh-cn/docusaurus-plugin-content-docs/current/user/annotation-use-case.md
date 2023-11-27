@@ -167,7 +167,7 @@ spec:
 
 ### 基于权重灰度发布
 - higress.io/canary-weight：设置请求到指定服务的百分比（值为0~100的整数）
-- higress.io/canary-weight-totatl：设置权重总和，默认为100
+- higress.io/canary-weight-total：设置权重总和，默认为100
 
 配置灰度服务demo-service-canary-v1的权重为30%，配置灰度服务demo-service-canary-v2的权重为20%，配置正式服务demo-service的权重为50%。
 ```
