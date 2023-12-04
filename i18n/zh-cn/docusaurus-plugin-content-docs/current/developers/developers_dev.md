@@ -32,6 +32,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | 凌轶群 | [Lynskylate](https://github.com/Lynskylate) | eBay  |
 | 刘晓瑞 | [rinfx](https://github.com/rinfx) | Alibaba        |
 | 赵炳堃 | [sjtuzbk](https://github.com/sjtuzbk) | Alibaba        |
+| 韦鑫 | [WeixinX](https://github.com/weixinx) | NUAA   |
 
 ## Higress Members
 | 姓名  | github                        | 公司             |
@@ -41,7 +42,6 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | 田亚涛 | [Hinsteny](https://github.com/Hinsteny) | Ant   |
 | 宋鹏远 | [songpengyuan](https://github.com/songpengyuan) | Okki.com        |
 | 赵伟基 | [vikizhao156](https://github.com/vikizhao156) | SJTU   |
-| 韦鑫 | [WeixinX](https://github.com/weixinx) | NUAA   |
 
 
 
