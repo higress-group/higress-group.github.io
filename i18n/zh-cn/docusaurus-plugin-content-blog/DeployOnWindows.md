@@ -93,7 +93,7 @@ ipconfig
 
 
 ```
-curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos -p <你的密码>
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos
 ```
 
 请将 `192.168.0.1` 替换为 Nacos 服务器的 IP（如果 Nacos 部署在本机，请不要使用如 `localhost` 或 `127.0.0.1` 的 Loopback 地址），并按需调整 `--nacos-username` 和 `--nacos-password` 的取值。如果 Nacos 服务未开启认证功能，则可以移除这两个参数。
@@ -110,7 +110,7 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -c nacos://
 
 ### Higress 控制台配置
 
-**访问 `http://localhost:8080/`, 使用用户名 admin 和安装时设置的密码登录 Higress 控制台。**
+**访问 `http://localhost:8080/`, 登录 Higress 控制台。首次访问时需要先设置用户名密码**
 
 ![13.png](..%2F..%2F..%2Fstatic%2Fimg%2Fblog%2Fwindows%2Fpic%2F13.png)
 

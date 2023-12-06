@@ -135,7 +135,7 @@ rules:
 
 ```yaml
 # 验证请求方向转换
-$ curl -v -H "host: foo.bar.com" "console.higress.io/get"
+$ curl -v -H "host: foo.bar.com" "127.0.0.1/get"
 ...
 >
 < HTTP/1.1 200 OK
@@ -159,7 +159,7 @@ $ curl -v -H "host: foo.bar.com" "console.higress.io/get"
 
 # 验证响应方向转换
 $ curl -v -H "host: foo.bar.com" \
-"console.higress.io/response-headers?X-Dedupe=1&X-Dedupe=2&X-Dedupe=3"
+"127.0.0.1/response-headers?X-Dedupe=1&X-Dedupe=2&X-Dedupe=3"
 ...
 >
 < HTTP/1.1 200 OK

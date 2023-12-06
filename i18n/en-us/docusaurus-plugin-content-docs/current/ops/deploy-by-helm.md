@@ -38,10 +38,7 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | **Console Paramters** |  |  |
 | higress-console.replicaCount | Number of Higress Console pods | 1 |
 | higress-console.service.type | K8s service type used by Higress Console | ClusterIP |
-| higress-console.domain | Domain used to access Higress Console | console.higress.io |
-| higress-console.tlsSecretName | Name of Secret resource used by TLS connections. | "" |
 | higress-console.web.login.prompt | Prompt message to be displayed on the login page | "" |
-| higress-console.admin.password | If not empty, the admin password will be configured to the specified value. | "" |
 | higress-console.o11y.enabled | If `true`, o11y suite (Grafana + Promethues) will be installed. | false |
 | higress-console.pvc.rwxSupported | Set to `false` when installing to a standard K8s cluster and the target cluster doesn't support the ReadWriteMany access mode of PersistentVolumeClaim. | true |
 

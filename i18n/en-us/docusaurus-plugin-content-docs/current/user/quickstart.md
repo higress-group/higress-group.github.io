@@ -18,7 +18,7 @@ toc_max_heading_level: 4
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set higress-console.domain=console.higress.io
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes
 ```
 
 Obtain the LoadBalancer IP of Higress Gateway and write it down. You can use it and port 80 and 443 to access Higress Gateway.
@@ -113,7 +113,7 @@ in the future, we will use `--set global.local=true` for unambiguous.
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false  --set higress-console.domain=console.higress.io
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false
 ```
 
 > If you'd like to enable the built-in o11y suite, please refer to the [Deploy by Helm](../ops/deploy-by-helm) document.
@@ -159,13 +159,13 @@ spec:
 
 #### Method 1: Use Higress Console
 
-Edit the hosts file and point domain `console.higress.io` to the IP of Higress Gateway (In a standard K8s cluster, use the previously obtained LoadBalancer IP. And use 127.0.0.1 instead in a local cluster).
+Use [hgctl](https://higress.io/en-us/docs/ops/hgctl) to open Higress Console.
 
-```
-GatewayIP console.higress.io
+```bash
+hgctl dashboard console
 ```
 
-Open `http://console.higress.io` in browser. For the first time, you will need to configure the admin credentials.
+For the first time, you will need to configure the admin credentials.
 
 ![image](/img/user/quickstart/en-us/init.png)
 
