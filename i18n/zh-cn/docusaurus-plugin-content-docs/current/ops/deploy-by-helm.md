@@ -41,10 +41,7 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | **控制台参数** |  |  |
 | higress-console.replicaCount | Higress Console 的 pod 数量 | 1 |
 | higress-console.service.type | Higress Console 所使用的 K8s Service 类型 | ClusterIP |
-| higress-console.domain | 对外用于访问 Higress Console 的域名 | console.higress.io |
-| higress-console.tlsSecretName | Higress Console 提供 HTTPS 访问所使用的 Secret 证书资源名称 | "" |
 | higress-console.web.login.prompt | 登录页面上显示的提示信息 | "" |
-| higress-console.admin.password | 若值不为空，则 admin 账号的密码将被配置为指定值 | "" |
 | higress-console.o11y.enabled | 若为 `true`，将同时安装可观测性套件（Grafana + Promethues） | false |
 | higress-console.pvc.rwxSupported | 标识目标 K8s 集群是否支持 PersistentVolumeClaim 的 ReadWriteMany 操作方式。 | true |
 

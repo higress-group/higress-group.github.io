@@ -26,8 +26,8 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 整体包含四大块内容：
 - Higress 组件：    higress-gateway, higress-console, higress-controller
 - Skywalking 组件： skywalking dashboard ui, skywalking aop server
-- 业务应用组件：      bff, middle service, backend service
-- Ingress 组件：    console.higress.io, skywalking.higress.io, httpbin.example.com
+- 业务应用组件：     bff, middle service, backend service
+- Ingress 组件：    skywalking.higress.io, httpbin.example.com
 
 ## 二、Skywalking 调用链路跟踪原理
 
@@ -245,13 +245,9 @@ backend   ClusterIP   10.96.179.140   <none>        80/TCP    99m
 bff       ClusterIP   10.96.121.62    <none>        80/TCP    99m
 middle    ClusterIP   10.96.55.8      <none>        80/TCP    99m
 
-
 $ kubectl get ingress -n higress-system
 
 NAME                         CLASS     HOSTS                   ADDRESS   PORTS   AGE
-higress-console              higress   console.higress.io                80      34m
-higress-console-grafana      higress   console.higress.io                80      34m
-higress-console-prometheus   higress   console.higress.io                80      34m
 httpbin                      higress   httpbin.example.com               80      8s
 skywalking-dashboard         higress   skywalking.higress.io             80      8s
 ```
@@ -261,7 +257,6 @@ skywalking-dashboard         higress   skywalking.higress.io             80     
 1）编辑 /etc/hosts 文件添加以下三个域名
 
 ```shell
-127.0.0.1 console.higress.io
 127.0.0.1 skywalking.higress.io
 127.0.0.1 httpbin.example.com
 ```
@@ -269,10 +264,11 @@ skywalking-dashboard         higress   skywalking.higress.io             80     
 ```shell
 $ export KUBECONFIG=${HOME}/.kube/config_higress
 $ kubectl -n higress-system port-forward service/higress-gateway 8080:80
+$ kubectl -n higress-system port-forward service/higress-console 18080:8080
 ```
 3）通过浏览器打开访问上面三个域名
 
-Higress 控制台: [http://console.higress.io:8080](http://console.higress.io:8080)。首次访问控制台时需要先初始化管理员用户。初始化完成后使用对应的用户名密码登录即可。
+Higress 控制台: [http://127.0.0.1:8080](http://127.0.0.1:18080)。首次访问控制台时需要先初始化管理员用户。初始化完成后使用对应的用户名密码登录即可。
 
 ![img.png](../../../static/img/blog/skywalking/higress1.png)
 
@@ -493,7 +489,7 @@ $ kubectl exec "$HIGRESS_GATEWAY_POD"  -n higress-system  -- curl -sS http://127
 
 如何查看 Higress 指标数据：
 
-- 通过 http://console.higress.io:8080/dashboard 查看 Higress gateway 监控面板
+- 通过 http://127.0.0.1:18080/dashboard 查看 Higress gateway 监控面板
 - 通过 Skywalking Dashboard 查看 Higress gateway 监控数据
 
 通过 Skywalking Dashboard 查看 Higress gateway 监控数据部分截图如下：

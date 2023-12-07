@@ -44,12 +44,12 @@ if [ "$IS_INSTALLED_CRD" = true ]; then
 
   echo "Step3: Installing Higress "
   helm repo add higress.io https://higress.io/helm-charts
-  helm install higress -n higress-system higress.io/higress --devel --create-namespace --render-subchart-notes  --set global.enableIstioAPI=true --set global.kind=true --set higress-console.o11y.enabled=true  --set higress-controller.domain=console.higress.io
+  helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes  --set global.enableIstioAPI=true --set global.kind=true --set higress-console.o11y.enabled=true
   echo "Step3: Installing Higress finished."
 else
   echo "Step2: Installing Higress "
   helm repo add higress.io https://higress.io/helm-charts
-  helm install higress -n higress-system higress.io/higress --devel --create-namespace --render-subchart-notes  --set global.enableIstioAPI=true --set global.kind=true --set higress-console.o11y.enabled=true  --set higress-controller.domain=console.higress.io
+  helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes  --set global.enableIstioAPI=true --set global.kind=true --set higress-console.o11y.enabled=true
   echo "Step2: Installing Higress finished."
 fi
 
@@ -58,11 +58,11 @@ kubectl get deploy -n higress-system
 
 echo "After all pods ready, Get the Higress Dashboard URL to visit by running these commands in the same shell:"
 echo "    export KUBECONFIG=${HOME}/.kube/config_higress"
-echo "    echo \"127.0.0.1 console.higress.io\" | sudo tee -a /etc/hosts"
 echo "    kubectl -n higress-system port-forward service/higress-gateway 8080:80"
+echo "    kubectl -n higress-system port-forward service/higress-console 18080:8080"
 
 
-echo "    higress console url: http://console.higress.io:8080 , login with admin/admin"
-echo "    higress grafana url: http://console.higress.io:8080/grafana"
-echo "    higress prometheus url: http://console.higress.io:8080/prometheus"
+echo "    higress console url: http://127.0.0.1:18080 , login with admin/admin"
+echo "    higress grafana url: http://127.0.0.1:18080/grafana"
+echo "    higress prometheus url: http://127.0.0.1:18080/prometheus"
 
