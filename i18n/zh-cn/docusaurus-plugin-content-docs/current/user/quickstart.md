@@ -214,6 +214,10 @@ curl http://GatewayIP/foo -H 'host: foo.bar.com'
 
 ## 环境二：脱离 K8s 在 Docker Compose 中使用
 
+> **注意**
+> 
+> Standalone 模式没有大规模生产使用过，目前主要用于本地部署测试的场景，如果生产部署更建议[云原生模式](https://higress.io/zh-cn/docs/ops/deploy-by-helm)部署
+
 ### 阶段一：安装
 
 **安装命令一：使用独立部署的 Nacos**
