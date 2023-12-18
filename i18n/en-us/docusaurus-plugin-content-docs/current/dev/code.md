@@ -36,7 +36,8 @@ If you would like to modify the source code of envoy or istio, you can do it dir
 ```bash
 mv external/envoy external/envoy_new
 make prebuild
-diff -Naur external/envoy external/envoy_new > envoy/1.20/patches/envoy/$(date +%Y%m%d)-what-changed.patch
+cd external
+diff -Naur envoy envoy_new > ../envoy/1.20/patches/envoy/$(date +%Y%m%d)-what-changed.patch
 ```
 
 Please be aware that patches will be applied in the order of file names. So please use timestamp as a prefix when naming a new patch file.
