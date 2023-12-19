@@ -142,10 +142,6 @@ const config = {
                 to: 'https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0',
               },
               {
-                label: 'ProductReview',
-                to: 'https://developer.aliyun.com/mission/higress',
-              },
-              {
                 label: 'FreeTrial',
                 to: 'https://free.aliyun.com/?searchKey=云原生网关&spm=higress-website.topbar.0.0.0',
               }
