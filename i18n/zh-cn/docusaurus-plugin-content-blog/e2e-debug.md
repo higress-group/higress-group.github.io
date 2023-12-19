@@ -42,7 +42,8 @@ graph LR;
 而在端到端测试中实现本地调试的功能，可通过Goland来实现，提前准备好测试环境，修改e2e测试的部分代码来减少e2e环境创建的开销，更加方便的实现debug功能。
 
 ## 具体实现
-### 端到端测试
+
+### 端到端测试优化
 
 通过makefile来完成，包含启动系列环境和执行e2e测试。
 
@@ -57,7 +58,7 @@ higress-wasmplugin-test: $(tools/kind) delete-cluster create-cluster docker-buil
 
 然而make命令不支持添加到goland里面实现debug功能，运行出错的时候也不方便定位问题，更推荐使用下面这个方法。
 
-### 本地调试
+### 在e2e中实现本地调试
 
 通过Goland来完成，提前准备好环境，修改Goland启动参数来完成本地调试。
 
