@@ -36,7 +36,8 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ```bash
 mv external/envoy external/envoy_new
 make prebuild
-diff -Naur external/envoy external/envoy_new > envoy/1.20/patches/envoy/$(date +%Y%m%d)-what-changed.patch
+cd external
+diff -Naur envoy envoy_new > ../envoy/1.20/patches/envoy/$(date +%Y%m%d)-what-changed.patch
 ```
 
 注意补丁执行顺序按照文件名字符顺序，请以时间戳开头
