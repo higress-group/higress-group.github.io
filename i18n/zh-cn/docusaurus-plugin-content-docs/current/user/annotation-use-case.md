@@ -671,9 +671,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    mse.ingress.kubernetes.io/route-limit-rps: "10"
+    higress.io/route-limit-rps: "10"
     # 默认为5
-    # mse.ingress.kubernetes.io/route-limit-burst-multiplier: "5"
+    # higress.io/route-limit-burst-multiplier: "5"
   name: demo
 spec:
   ingressClassName: mse
