@@ -1,5 +1,5 @@
 ---
-title: 教程：如何在本地进行higress调试和端到端测试
+title: 本地开发Debug指引
 keywords: [higress]
 description: 在本地快速完成e2e测试并实现debug功能
 author: SJC
