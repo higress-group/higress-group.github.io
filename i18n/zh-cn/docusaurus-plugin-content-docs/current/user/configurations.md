@@ -7,6 +7,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # Higress参数配置
 
+以下运维参数，可以通过 helm 命令的 --set 或者 --values 方式进行设置，也可以通过 hgctl 的 profile 文件中的 values 字段来实现控制
 
 ## Global参数
 | 参数                                     | 参数说明                                                                                                                                                                                                                                                                                                                                        | 默认值             |
