@@ -25,6 +25,13 @@ helm install higress -n higress-system higress.io/higress --create-namespace --r
 ```bash
 kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
+**备注**
+
+如果 LoadBalancer IP 获取不到，说明您当前的 K8s 集群不支持 LoadBalancer 类型的 Service，可以考虑以下方案：
+
+1. 使用云厂商提供的 K8s 服务，例如[阿里云 ACK](https://www.aliyun.com/product/kubernetes)
+2. 参考[运维参数配置](https://higress.io/zh-cn/docs/user/configurations)，开启`higress-core.gateway.hostNetwork`，让 Higress 监听本机端口，再通过其他软/硬负载均衡器转发给固定机器 IP
+3. （生产不建议）使用开源的负载均衡方案 [MetalLB](https://metallb.universe.tf/)
 
 #### 场景二：在本地 K8s环境中使用
 
@@ -103,7 +110,7 @@ kubectl.exe config use-context kind-higress
 
 **备注**
 
-上述配置是为了将本地（127.0.0.1）的80和443端口用于Higress访问，如果希望在本地使用 LoadBalancer IP 进行访问，可以参考Kind文档`https://kind.sigs.k8s.io/docs/user/loadbalancer/` 提供的能力予以支持。
+上述配置是为了将本地（127.0.0.1）的80和443端口用于Higress访问
 
 ##### 第三步：安装 Higress
 
