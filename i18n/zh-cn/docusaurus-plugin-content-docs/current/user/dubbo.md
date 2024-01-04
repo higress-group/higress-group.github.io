@@ -108,5 +108,37 @@ $curl "localhost/dubbo/hello?p=abc"
 {"result":"Service [name :demoService , port : 20880] sayName(\"abc\") : Hello,abc"}
 ```
 
+## 将整个请求body作为方法参数
+Http2Rpc支持将整个请求body序列化为Dubbo方法的入参，如下所示：
+
+```yaml
+apiVersion: networking.higress.io/v1
+kind: Http2Rpc
+metadata:
+  name: httproute-http2rpc-demo
+  namespace: higress-system
+spec:
+  dubbo: 
+    service: com.alibaba.nacos.example.dubbo.service.DemoService
+    version: 1.0.0
+    group: dev
+    methods: 
+    - serviceMethod: sayName
+      headersAttach: "*"
+      httpMethods: 
+      - "POST"
+      httpPath: "/dubbo/hello"
+      paramFromEntireBody:
+        paramType: "java.lang.String"
+```
+通过paramFromEntireBody字段，即可将整个请求body序列化为Dubbo方法的入参。参数的类型通过paramFromEntireBody.paramType字段来指定。该场景适用于Dubbo方法只有一个参数的情况，如果同时指定了paramFromEntireBody和params，params字段的内容将被忽略。
+
+通过以上配置，我们可以执行以下命令来调用dubbo服务，注意请求的body必须符合json格式：
+```bash
+$curl "localhost/dubbo/hello" -X POST -d '"abc"' 
+{"result":"Service [name :demoService , port : 20880] sayName(\"abc\") : Hello,abc"}
+```
+
+
 ## 配置参考
 Http2Rpc的相关配置项参考[HTTP转Dubbo配置说明](./dubbo-http2rpc.md)

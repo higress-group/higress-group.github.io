@@ -5,7 +5,7 @@ description: hgctl 工具使用说明。
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/hgctl.md
 ---
 
-# 如何下载 hgctl
+## 如何下载 hgctl
 
 通过 curl 命令下载最新版本的 hgctl 到本地
 
@@ -13,7 +13,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
   curl -Ls https://raw.githubusercontent.com/alibaba/higress/main/tools/hack/get-hgctl.sh | VERSION=latest bash
 ```
 
-# 一、安装 Profile 说明
+## 安装 Profile 说明
 
 higress 目前支持三个内置预定义 profile 包括: local-k8s , k8s, local-docker。
 
@@ -163,7 +163,7 @@ charts:
 
 配置服务的 URL 默认 file://${INSTALLPACKAGEPATH}/conf 是保存在本地文件系统下， 其中 ${INSTALLPACKAGEPATH} 是当前安装下 higress-standalone目录下创建 conf 目录
 
-# 二、安装命令： hgctl install
+## 安装命令： hgctl install
 
 hgctl install 安装命令具体参数如下：
 
@@ -320,7 +320,7 @@ hgctl install --set profile=local-docker --set gateway.httpPort=80 --set gateway
 安装成功后，会在当前用户 $HOME 目录下写入当前安装的 profile 配置: ~/.hgctl/profiles/install.yaml， 升级时根据这个 profile 来升级。（后续版本会有变化）
 
 
-# 四、升级命令： hgctl upgrade
+## 升级命令： hgctl upgrade
 
 升级命令参数如下：
 
@@ -347,7 +347,7 @@ Flags:
 
 主要差别是不能设置profile, 升级 profile 是来源于安装时保存： ~/.hgctl/profiles/install.yaml 。
 
-# 三、Dashboard 命令:  hgctl dashbaord 
+## Dashboard 命令:  hgctl dashbaord 
 
 可以通过 hgctl dashboard 命令打开 Higress Console 管理界面， Higress Controller Debug界面， Envoy 管理界面，Grafana 和 Prometheus 管理界面
 
@@ -382,7 +382,7 @@ Use "hgctl dashboard [command] --help" for more information about a command.
 
 ```
 
-# 五、卸载命令: hgctl uninstall
+## 卸载命令: hgctl uninstall
 
 hgctl uninstall 命令参数如下：
 
@@ -412,8 +412,8 @@ Flags:
 hgctl uninstall 卸载时不会自动卸载 IstioAPI, GatewayAPI组件， 如果要卸载 IstioAPI, GatewayAPI组件，卸载时加上 --purge-resources。
 
 
-# 六、插件命令： hgctl plugin 命令
+## 插件命令： hgctl plugin 命令
 
-
+TBD
 
 
