@@ -20,8 +20,24 @@ data:
       skywalking:
        service: skywalking-oap-server.op-system.svc.cluster.local
        port: 11800
+    gzip:
+      enable: false
+      minContentLength: 1024
+      contentType:
+        - text/html
+        - application/json
+        - text/css
+        - application/javascript
+        - application/xhtml+xml
+        - image/svg+xml
+      disableOnEtagHeader: true
+      memoryLevel: 5
+      windowBits: 12
+      chunkSize: 4096
+      compressionLevel: BEST_COMPRESSION
+      compressionStrategy: DEFAULT_STRATEGY
 ...
-...
+
 kind: ConfigMap
 metadata:
   name: higress-config
@@ -57,3 +73,21 @@ metadata:
 
 > 注意：
 > skywalking 和 zipkin 不能同时设置，只有一个配置能生效
+
+## Gzip 配置说明
+
+
+| 字段         | 类型             | 说明                                             | 默认                                                                                                       |
+|------------|----------------|------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| enable     | boolean        | 是否开启 gzip 功能                                   | false                                                                                                    |
+| minContentLength | int            | 启用压缩输出最少字节长度                                   | 1024                                                                                                     |
+| contentType    | array          | 启用压缩输出content-type类型                           | text/html,application/json,text/css,<br/>application/javascript,application/xhtml+xml,<br/>image/svg+xml |
+| disableOnEtagHeader | boolean        | 如果是true时, 当 response 包含 etag header时会关闭 gzip功能 | true                                                                                                     |
+| memoryLevel     | int            | 从 1 到 9 控制 zlib用到内存.                           | 5                                                                                                        |
+| windowBits     | int            | 从 9 到 15 表示压缩算法窗口大小.                           | 12                                                                                                       |
+| chunkSize      | int            | zlib buffer大小                                  | 4096                                                                                                     |
+|  compressionLevel       | string         | zlib 压缩比率                                      | BEST_COMPRESSION                                                                                         |
+|  compressionStrategy    | string         | zlib 压缩策略                                      | DEFAULT_STRATEGY                                                                                         |
+
+
+关于 gzip 参数配置详细说明可以参考 envoy gzip压缩文档： https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/compression/gzip/compressor/v3/gzip.proto#envoy-v3-api-msg-extensions-compression-gzip-compressor-v3-gzip
