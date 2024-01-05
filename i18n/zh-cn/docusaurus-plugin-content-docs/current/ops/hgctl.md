@@ -22,7 +22,7 @@ higress 目前支持三个内置预定义 profile 包括: local-k8s , k8s, local
 * local-docker profile 安装 higress 到本地 docker 环境。
 
 
-### 1. 查看默认 profile 列表和导出 profile 
+### 1. 查看内置 profile 列表和导出 profile
 
 * 查看 profile 列表
 
@@ -41,7 +41,7 @@ higress configuration profiles:
 hgctl profile dump local-k8s -o ./local-k8s.yaml
 ```
 
-### 2. 内置三个 profile 配置项说明
+### 2. 三个内置 profile 配置项说明
 
 profile 内容包含 global, console, gateway, controller, storage, values , charts 七大配置项。
 
@@ -163,9 +163,11 @@ charts:
 
 配置服务的 URL 默认 file://${INSTALLPACKAGEPATH}/conf 是保存在本地文件系统下， 其中 ${INSTALLPACKAGEPATH} 是当前安装下 higress-standalone目录下创建 conf 目录
 
+## 
+
 ## 安装命令： hgctl install
 
-hgctl install 安装命令具体参数如下：
+hgctl install 安装命令具体参数：
 
 ```shell
 hgctl install --help
@@ -204,12 +206,13 @@ Flags:
 安装参数说明：
 
 - hgctl install 核心参数就是两个 -s (--set) 和 -f (--filename) 。
-
 - --set 参数是设置 profile 配置项的值， -f 传入 helm 自定义 values 值的 yaml 文件地址。
-
 - 通过 -s profile=profile 内置 profile 名称或者 profile yaml 文件地址来指定安装 profile 来源。
 
-- 安装成功后，会在当前用户 $HOME 目录下写入当前安装的profile配置  ~/.hgctl/profiles/install.yaml ， 升级时根据这个 profile 来升级。（后续版本会有变化）
+安装成功后 profile 保存位置：
+
+- local-k8s 和 k8s 模式安装成功后，会在对应 namespace 下（默认是 higres-system）创建名为 higress-profile 的 configmap, 可以通过 "kubectl edit configmap higress-profile -n higress-system" 命令编辑 configmap 来升级。
+- local-docker 模式安装成功后，会在当前用户 $HOME 目录下写入当前安装的 profile 配置  ~/.hgctl/profiles/install-local-docker.yaml，可以通过编辑这个文件来升级。
 
 
 ### 安装样例说明
@@ -260,6 +263,7 @@ higress-core:
 helm 自定义配置项参考文件如下：
 - global 和 higress-core 配置项: https://github.com/alibaba/higress/blob/main/helm/core/values.yaml
 - global 和 higress-console 配置项: https://github.com/higress-group/higress-console/blob/main/helm/values.yaml
+- 详细运维参数配置说明： https://higress.io/zh-cn/docs/user/configurations/
 
 安装命令如下：
 
@@ -268,7 +272,7 @@ hgctl install --set profile=k8s  --set global.enableIstioAPI=true --set global.e
 
 ```
 
-3. 本地 docker 环境下安装，同时指定 gateway http 和 https 端口 
+3. 本地 docker 环境下安装，同时指定 gateway http 和 https 端口
 
 ```shell
 hgctl install --set profile=local-docker --set gateway.httpPort=80 --set gateway.httpsPort=443
@@ -317,7 +321,7 @@ hgctl install --set profile=local-docker --set gateway.httpPort=80 --set gateway
 * higress-standalone/higress/compose/.env: higress 安装后生成配置文件
 
 
-安装成功后，会在当前用户 $HOME 目录下写入当前安装的 profile 配置: ~/.hgctl/profiles/install.yaml， 升级时根据这个 profile 来升级。（后续版本会有变化）
+安装成功后，会在当前用户 $HOME 目录下写入当前安装的 profile 配置: ~/.hgctl/profiles/install-local-docker.yaml， 可以通过编辑这个文件来升级。
 
 
 ## 升级命令： hgctl upgrade
@@ -345,9 +349,26 @@ Flags:
 
 升级命令参数和安装参数时一致的，核心参数就是两个 -s (--set) 和 -f (--filename) 。
 
-主要差别是不能设置profile, 升级 profile 是来源于安装时保存： ~/.hgctl/profiles/install.yaml 。
+主要差别是不能设置profile, 升级命令会自动查找已经安装的 profile, 如果发现多于一个 profile, 会列出安装的所有的 profile, 可以选择需要升级的 profile。
 
-## Dashboard 命令:  hgctl dashbaord 
+比如下面本地同时安装 local-docker 和 local-k8s 两个 profile 时，出现提示选择需要升级的 profile。
+
+```shell
+./hgctl upgrade
+
+⌛️ Checking higress installed profiles...
+
+Please select higress installed configration profiles:
+
+1: install mode: local-docker, profile location: /Users/jun/.hgctl/profiles/install-local-docker.yaml, version: v1.3.2
+
+2: install mode: local-k8s, profile location: higress-system/higress-profile, namespace: higress-system, version: 1.3.2
+
+Please input 1 to 2 select, input your selection:
+
+```
+
+## Dashboard 命令:  hgctl dashbaord
 
 可以通过 hgctl dashboard 命令打开 Higress Console 管理界面， Higress Controller Debug界面， Envoy 管理界面，Grafana 和 Prometheus 管理界面
 
@@ -411,9 +432,12 @@ Flags:
 
 hgctl uninstall 卸载时不会自动卸载 IstioAPI, GatewayAPI组件， 如果要卸载 IstioAPI, GatewayAPI组件，卸载时加上 --purge-resources。
 
+卸载命令会自动查找已经安装的 profile, 如果发现多于一个 profile, 会列出安装的所有的 profile, 可以选择需要卸载的 profile。
+
+
 
 ## 插件命令： hgctl plugin 命令
 
-TBD
+
 
 
