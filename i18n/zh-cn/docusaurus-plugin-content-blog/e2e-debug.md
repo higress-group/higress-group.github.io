@@ -187,9 +187,133 @@ kubectl rollout restart deployment higress-controller -n higress-system
 
 通过本地higress-core日志可以看到ads成功推送出去envoyfilter配置文件给discovery，而discovery日志则显示lds/rds/cds等成功将配置文件推送给gateway。
 
+## hgctl code-debug的使用
+
+hgctl已经推出code-debug的功能，会自动修改xds地址，使其能够与本地的higress-core进行交互。这里需要使用hgctl来安装higress，目前code-debug只支持local-k8s的profile。
+
+- hgctl安装higress
+
+```shell
+hgctl install --set profile=local-k8s
+```
+
+等待安装完成后，手动查看一下是否启动成功。
+
+- 启动本地higress-core
+
+修改Goland启动参数为`serve --kubeconfig=/root/.kube/config`(改为自己的home目录)，然后启动higress-core，等待higress-core启动成功。
+
+- 开启code-debug
+
+```shell
+hgctl code-debug start
+```
+
+查看controller和gateway的pod是否重启成功，如果重启成功，说明code-debug已经生效。
+
+- 其他环境准备
+
+在后面的步骤上涉及到Ingress资源，这里需要准备一下Ingress资源，运行如下命令：
+
+```shell
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: higress-conformance-infra
+  labels:
+    higress-conformance: infra
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: infra-backend-v1
+  namespace: higress-conformance-infra
+spec:
+  selector:
+    app: infra-backend-v1
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infra-backend-v1
+  namespace: higress-conformance-infra
+  labels:
+    app: infra-backend-v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: infra-backend-v1
+  template:
+    metadata:
+      labels:
+        app: infra-backend-v1
+    spec:
+      containers:
+      - name: infra-backend-v1
+        # From https://github.com/kubernetes-sigs/ingress-controller-conformance/tree/master/images/echoserver
+        image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/echoserver:v20221109-7ee2f3e
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        resources:
+          requests:
+            cpu: 10m
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: higress-conformance-infra-configmap-global-test
+  namespace: higress-conformance-infra
+spec:
+  ingressClassName: higress
+  rules:
+    - host: "foo.com"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/foo"
+            backend:
+              service:
+                name: infra-backend-v1
+                port:
+                  number: 8080
+EOF
+```
+
+- 调试higress-core
+
+以ConfigMap的gzip(位于pkg/ingress/kube/configmap/gzip.go)为例，修改`NewDefaultGzip`方法，将`Enable`的默认值修改为true，然后重启higress-core。
+
+在重启之前，先运行如下shell命令，启动envoy查看面板：
+
+```shell
+hgctl dashboard envoy
+```
+
+访问http://localhost:15000/config_dump，使用Ctrl+F搜索`compression_level`，可以看到查找结果为空，说明gzip配置还没有生效。
+
+接下来重启higress-core，等待higress-core重启成功，再次访问http://localhost:15000/config_dump，使用Ctrl+F搜索`compression_level`，可以看到查找结果不为空，说明gzip配置已经生效。
+
+- 关闭code-debug
+
+```shell
+hgctl code-debug stop
+```
+
 ## 总结
 
 1. 本地调试和e2e测试是开发过程中必不可少的环节，通过本文的介绍，我们可以更加方便的进行本地调试和e2e测试，提高开发效率。
 2. 涉及到higress-core组件修改的时候，我们可以通过修改xds地址并本地启动higress-core，而不需要频繁地修改代码、重新构建镜像以运行e2e测试，并且还能调试higress-core组件的代码。
 3. higress后续会推出一些新功能，实现e2e测试的拆分，主要会分为准备环境，运行测试以及清除环境等，灵活性更高。
-4. hgctl会推出code-debug功能，可直接帮助查找本机非回环网卡的ip地址，并修改xds地址和重启负载，方便开发者进行本地higress-core调试。
