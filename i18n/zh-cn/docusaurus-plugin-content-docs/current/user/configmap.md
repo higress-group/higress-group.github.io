@@ -36,6 +36,17 @@ data:
       chunkSize: 4096
       compressionLevel: BEST_COMPRESSION
       compressionStrategy: DEFAULT_STRATEGY
+    addXRealIpHeader: false
+    disableXEnvoyHeaders: false
+    downstream:
+      connectionBufferLimits: 32768
+      http2:
+        initialConnectionWindowSize: 1048576
+        initialStreamWindowSize: 65535
+        maxConcurrentStreams: 100
+      idleTimeout: 180
+      maxRequestHeadersKb: 60
+
 ...
 
 kind: ConfigMap
@@ -91,3 +102,29 @@ metadata:
 
 
 关于 gzip 参数配置详细说明可以参考 envoy gzip压缩文档： https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/compression/gzip/compressor/v3/gzip.proto#envoy-v3-api-msg-extensions-compression-gzip-compressor-v3-gzip
+
+## Global Options 配置说明
+
+| 字段         | 类型                 | 说明                                                                    | 默认                  |
+|------------|--------------------|-----------------------------------------------------------------------|---------------------|
+| addXRealIpHeader     | boolean            | 是否添加 x-real-ip 请求头，如果是true，则会为请求头添加 x-real-ip 参数                      | false               |
+| disableXEnvoyHeaders | boolean            | 是否关闭 x-envoy-original-path 请求头，如果是true，则会关闭 x-envoy-original-path 请求头 | false               |
+| downstream    | 参考下面 downstream 设置 | downstream 设置                         | 参考下面 downstream 默认值 |
+
+
+### Downstream 配置说明
+
+| 字段         | 类型                 | 说明               | 默认                  |
+|------------|--------------------|------------------|---------------------|
+| connectionBufferLimits     | int            | 连接缓冲区大小，单位字节     | 32768               |
+| http2     | 参考下面 http2 设置 | http2 设置         | 参考下面 http2 默认值 |
+| idleTimeout    | int            | 连接空闲超时时间，单位秒     | 180               |
+| maxRequestHeadersKb    | int            | 最大请求头大小，单位字节，最大为8192 | 60               |
+
+#### http2 配置说明
+
+| 字段         | 类型                 | 说明                                   | 默认                  |
+|------------|--------------------|--------------------------------------|---------------------|
+| initialConnectionWindowSize     | int            | http2 连接窗口大小，单位字节，范围为65535～2147483647          | 1048576               |
+| initialStreamWindowSize     | int            | http2 流窗口大小，单位字节，范围为65535～2147483647 | 65535               |
+| maxConcurrentStreams    | int            | http2 最大并发流数量，范围为1～2147483647        | 100               |
