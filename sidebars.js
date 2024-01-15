@@ -61,7 +61,7 @@ const sidebars = {
       type: 'category',
       label: 'Developer Guide',
       collapsible: false,
-      items: ['dev/code', 'dev/architecture', 'dev/CustomResourceDefinition'],
+      items: ['dev/code', 'dev/architecture', 'dev/CustomResourceDefinition', 'dev/e2e-debug'],
     },
   ],
   developers: [
