@@ -14,5 +14,5 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | v1.0.0  | 整体达到**GA状态**   | 2023-05   |
 | v1.1.0  | 增强控制台功能中微服务网关相关能力；支持非 K8s 下安装部署   | 2023-07   |
 | v1.2.0  | 支持作为 Knative 的网络层使用；支持 ARM 架构部署；支持对接 Consul   | 2023-08   |
-| v1.3.0  | 完整支持 GatewayAPI；支持 Operator 模式部署   | 2023-09   |
-| v1.4.0  | 推出 WASM 插件集市功能   | 2023-10   |
+| v1.3.0  | 完整支持 GatewayAPI；支持 Operator 模式部署   | 2023-11   |
+| v1.4.0  | 推出 API 管理能力   | 2024-3   |
