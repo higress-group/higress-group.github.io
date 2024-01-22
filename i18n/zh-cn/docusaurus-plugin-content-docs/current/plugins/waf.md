@@ -34,7 +34,6 @@ secRules:
 useCRS: true
 secRules: 
 - "SecRuleEngine On"
-- "SecRule REQUEST_URI \"@streq /admin\" \"id:101,phase:1,t:lowercase,deny\""
 ```
 
 ### 测试自定义规则
