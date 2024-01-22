@@ -16,7 +16,7 @@ description: WAF 防护插件配置参考
 | 名称 | 数据类型 | 填写要求 |  默认值 | 描述 |
 | -------- | -------- | -------- | -------- | -------- |
 | useCRS | bool | 选填 | false | 是否开启OWASP CRS，详情可参考[coreruleset](https://github.com/coreruleset/coreruleset/tree/v3.3.2) |
-| secRules | array of string | 选填 | - | 用户自定义的waf防护规则，语法规则可参考[SecLang语法参考](https://coraza.io/docs/seclang/directives/) |
+| secRules | array of string | 选填 | - | 用户自定义的waf防护规则，语法规则可参考[SecLang语法参考](https://coraza.io/docs/seclang/directives/) 和 [ModSecurity中文手册](http://www.modsecurity.cn/chm/index.html) |
 
 ## 配置示例
 
