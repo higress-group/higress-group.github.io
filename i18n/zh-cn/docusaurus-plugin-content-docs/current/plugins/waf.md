@@ -20,47 +20,36 @@ description: WAF 防护插件配置参考
 
 ## 配置示例
 
-**观察模式（只会记录日志)**
+### 观察模式（只会记录日志)
 
 ```yaml
-defaultConfig:
-  useCRS: true
-  secRules: 
-  - "SecRuleEngine DetectionOnly"
+useCRS: true
+secRules: 
+- "SecRuleEngine DetectionOnly"
 ```
 
-**防护模式**
+### 防护模式
 
 ```yaml
-defaultConfig:
-  useCRS: true
-  secRules: 
-  - "SecRuleEngine On"
-  - "SecRule REQUEST_URI \"@streq /admin\" \"id:101,phase:1,t:lowercase,deny\""
+useCRS: true
+secRules: 
+- "SecRuleEngine On"
+- "SecRule REQUEST_URI \"@streq /admin\" \"id:101,phase:1,t:lowercase,deny\""
+```
+
+### 测试自定义规则
+
+
+```yaml
+useCRS: true
+secRules: 
+- "SecRuleEngine On"
+- "SecRule REQUEST_URI \"@streq /admin\" \"id:101,phase:1,t:lowercase,deny\""
 ```
 
 根据该配置，以下请求将被禁止访问：
+
 ```bash
 curl http://example.com/admin
 ```
 
-## 对特定路由或域名开启
-```yaml
-defaultConfig:
-  useCRS: true
-  secRules: 
-  - "SecDebugLogLevel 3"
-  - "SecRuleEngine On"
-  - "SecRule REQUEST_URI \"@streq /admin\" \"id:101,phase:1,t:lowercase,deny\""
-  - "SecRule REQUEST_BODY \"@rx maliciouspayload\" \"id:102,phase:2,t:lowercase,deny\""
-matchRules:
-- ingress:
-  - default/echo-ingress
-  config:
-    secRules:
-    - "SecRuleEngine On"
-    - "SecDebugLogLevel 3"
-    - "SecAction \"id:102,phase:1,deny\""
-```
-
-此例 `matchRules` 中指定了名为 `default/echo-ingress` 的路由的防护配置，当发现路由匹配时，将使用 `matchRules` 中 `config` 下的配置；其他请求则使用 `defaultConfig` 下的配置。
