@@ -193,11 +193,12 @@ helm 安装参考[安装文档](https://helm.sh/zh/docs/intro/install/)
 
 可以参考 higress [快速开始](https://higress.io/zh-cn/docs/user/quickstart) 和 [安装部署](https://higress.io/zh-cn/docs/ops/deploy-by-helm) 来部署，这里需要安装  Istio CRD。
 
-这里提供一键安装脚本 local-env-setup.sh，运行 local-env-setup.sh 安装 Higress
+下面是一个参考安装命令:
 
-```shell
-./local-env-setup.sh --crd
+```bash
+helm install higress -n higress-system --set global.onlyPushRouteCluster=false --set higress-core.skywalking.enabled=true  --set higress-core.skywalking.service.address=skywalking-oap-server.op-system.svc.cluster.local  --set higress-core.skywalking.service.port=11800 higress.io/higress
 ```
+
 
 3. 部署 Skywalking，业务应用和 Ingress
 
