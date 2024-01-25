@@ -51,6 +51,9 @@ description: Higress FAQ.
 <a href="#15" target="_self">15. 如何加入 Higress 社区进行贡献，已经迫不及待了。</a>
 <br/>
 
+<a href="#16" target="_self">16. 企业版和开源版有功能差异对比吗 </a>
+<br/>
+
 ********
 <h3 id='1'>Q: Higress 现在适合上生产系统么？</h3>
 
@@ -187,5 +190,18 @@ Higress 基于 K8s HPA，是支持弹性伸缩的，网关无状态，是个 dep
  
 具体的参与方法可以参见我们官网的[开发者指引](../developers/guide_dev.md)或与 higress@googlegroups.com 联系。
 实际上，我们并不拘泥于贡献的形式，开发者提出的每一个 issue，无论是 Bug Report、改进建议或者甚至是问题咨询都代表着对项目的关注和帮助。希望 Higress 项目和社区一起健康成长，成为云原生网关领域一个优秀的解决方案。
+
+********
+
+
+<h3 id='16'>Q: 企业版和开源版有功能差异对比吗 </h3>
+
+**A:** 
+
+企业版和开源版本的功能基本一致，企业版主要是以开源版本为功能内核，提供了更多现成的解决方案，包括高可用、安全、可观测等方面，详细可以参考：
+
+[MSE云原生网关和开源Higress对比](https://help.aliyun.com/zh/mse/product-overview/comparison-between-mse-cloud-native-gateways-and-open-source-higress-gateways?spm=a2c4g.11186623.0.0.5c6ec925uJLUVD)
+
+[典型的企业版解决方案：同城多活](https://help.aliyun.com/zh/mse/use-cases/active-zone-redundancy-based-on-mse-cloud-native-gateways)
 
 ********
