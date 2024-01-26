@@ -1,7 +1,7 @@
 ---
-title: 教程：如何在本地进行higress调试和端到端测试
+title: higress-core源码分析
 keywords: [higress]
-description: 在本地快速完成e2e测试并实现debug功能
+description: 通过分析higress-core源码，了解higress-core自启动以来做了哪些事情
 author: SJC
 date: 2024-1-25
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en/docusaurus-plugin-content-blog/higress-code.md
