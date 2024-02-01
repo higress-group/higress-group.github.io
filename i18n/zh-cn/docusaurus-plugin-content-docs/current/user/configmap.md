@@ -46,7 +46,9 @@ data:
         maxConcurrentStreams: 100
       idleTimeout: 180
       maxRequestHeadersKb: 60
-
+    upstream:
+      connectionBufferLimits: 1048576
+      idleTimeout: 10
 ...
 
 kind: ConfigMap
@@ -128,3 +130,11 @@ metadata:
 | initialConnectionWindowSize     | int            | http2 连接窗口大小，单位字节，范围为65535～2147483647          | 1048576               |
 | initialStreamWindowSize     | int            | http2 流窗口大小，单位字节，范围为65535～2147483647 | 65535               |
 | maxConcurrentStreams    | int            | http2 最大并发流数量，范围为1～2147483647        | 100               |
+
+
+### Upstream 配置说明
+
+| 字段         | 类型                 | 说明                    | 默认                  |
+|------------|--------------------|-----------------------|---------------------|
+| connectionBufferLimits     | int            | 连接缓冲区大小，单位字节          | 1048576               |
+| idleTimeout    | int            | 连接空闲超时时间(空闲定义是没有未处理完的请求，如果有请求在处理中，不会判定为idle)，单位秒，0表示关闭该配置 | 10               |
