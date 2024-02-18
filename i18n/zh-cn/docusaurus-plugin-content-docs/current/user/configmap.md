@@ -121,7 +121,7 @@ metadata:
 | connectionBufferLimits     | int            | 连接缓冲区大小，单位字节          | 32768               |
 | http2     | 参考下面 http2 设置 | http2 设置              | 参考下面 http2 默认值 |
 | idleTimeout    | int            | 连接空闲超时时间，单位秒，0表示关闭该配置 | 180               |
-| maxRequestHeadersKb    | int            | 最大请求头大小，单位字节，最大为8192  | 60               |
+| maxRequestHeadersKb    | int            | 最大请求头大小，单位Kb，最大为8192Kb  | 60               |
 
 #### http2 配置说明
 
