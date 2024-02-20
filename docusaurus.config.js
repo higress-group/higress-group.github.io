@@ -248,6 +248,10 @@ const config = {
       },
       prism: {
         theme: lightCodeTheme,
+        additionalLanguages: [
+          'java',
+          'gradle',
+        ],
       },
     }),
 };
