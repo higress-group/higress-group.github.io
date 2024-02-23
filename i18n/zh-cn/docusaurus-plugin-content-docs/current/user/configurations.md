@@ -54,10 +54,10 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | higress-core.gateway.resources.limits.memory	                  | 指定 gateway 容器的内存请求资源限制。                                                                   | 2048Mi               |
 | higress-core.gateway.resources.requests.cpu	                   | 指定 gateway 容器的CPU请求资源。                                                                    | 2000m                |
 | higress-core.gateway.resources.requests.memory	                | 指定 gateway 容器的内存请求资源。                                                                     | 2048Mi               |
-| higress-core.gateway.autoscale.enabled	                        | 指定是否启用 gateway Pod 自动缩放。                                                                  | false               |
-| higress-core.gateway.autoscale.minReplicas	                    | 允许的最小副本数。                                                                                 | 1                   |
-| higress-core.gateway.autoscale.maxReplicas	                    | 允许的最大副本数。                                                                                 | 5                   |
-| higress-core.gateway.autoscale.targetCPUUtilizationPercentage	 | 表示 HPA 应该尝试将 Pod 的 CPU 利用率维持在什么水平。                                                        | 80                  |
+| higress-core.gateway.autoscaling.enabled	                        | 指定是否启用 gateway Pod 自动缩放。                                                                  | false               |
+| higress-core.gateway.autoscaling.minReplicas	                    | 允许的最小副本数。                                                                                 | 1                   |
+| higress-core.gateway.autoscaling.maxReplicas	                    | 允许的最大副本数。                                                                                 | 5                   |
+| higress-core.gateway.autoscaling.targetCPUUtilizationPercentage	 | 表示 HPA 应该尝试将 Pod 的 CPU 利用率维持在什么水平。                                                        | 80                  |
 | higress-core.gateway.nodeSelector                              | 节点选择器，用于确定 gatyway 容器将部署在哪些节点上。                                                           | {}                  |
 | higress-core.gateway.tolerations                                                    | 容忍度，用于允许 gateway 容器调度到具有指定污点的节点。                                                          | []                  |
 | higress-core.gateway.affinity                                                       | 亲和性，用于控制 gateway容器如何调度，使其与其他 Pod 或节点保持亲和或反亲和。                                             | {}                  |
