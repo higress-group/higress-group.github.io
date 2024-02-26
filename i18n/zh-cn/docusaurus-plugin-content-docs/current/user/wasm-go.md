@@ -97,7 +97,7 @@ go env -w GOPROXY=https://proxy.golang.com.cn,direct
 
 4. 下载构建插件的依赖
 ```bash
-go get github.com/tetratelabs/proxy-wasm-go-sdk
+go get github.com/higress-group/proxy-wasm-go-sdk
 go get github.com/alibaba/higress/plugins/wasm-go@main
 go get github.com/tidwall/gjson
 ```
@@ -110,8 +110,8 @@ package main
 
 import (
     "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+    "github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+    "github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
     "github.com/tidwall/gjson"
 )
 
@@ -390,8 +390,8 @@ package main
 
 import (
     "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+    "github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+    "github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 )
 
 func main() {
@@ -419,9 +419,9 @@ import (
   	"errors"
   	"net/http"
   	"strings"
-    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-  	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-  	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+        "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+  	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+  	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
   	"github.com/tidwall/gjson"
 )
 
