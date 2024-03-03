@@ -33,7 +33,7 @@ kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBala
 2. 参考[运维参数配置](https://higress.io/zh-cn/docs/user/configurations)，开启`higress-core.gateway.hostNetwork`，让 Higress 监听本机端口，再通过其他软/硬负载均衡器转发给固定机器 IP
 3. （生产不建议）使用开源的负载均衡方案 [MetalLB](https://metallb.universe.tf/)
 
-#### 场景二：在本地 K8s环境中使用
+#### 场景二：在本地 K8s 环境中使用
 
 以下步骤适用于所有在本地启动 K8s 集群进行验证的场景。如果您本地已经配置好了一个测试集群，可以直接跳转到第三步安装 Higress。
 
