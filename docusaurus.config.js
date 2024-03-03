@@ -60,7 +60,10 @@ const config = {
       href: '//g.alicdn.com/mamba/assets/0.0.19/mse-arc-ui.min.css',
     },
   ],
-  plugins: ['docusaurus-plugin-sass'],
+  plugins: [
+    'docusaurus-plugin-sass',
+    require.resolve('docusaurus-plugin-image-zoom'),
+  ],
   presets: [
     [
       'classic',
@@ -252,6 +255,16 @@ const config = {
           'java',
           'gradle',
         ],
+      },
+      zoom: {
+        selector: '.markdown :not(em) > img',
+        background: {
+          light: 'rgb(255, 255, 255)',
+          dark: 'rgb(50, 50, 50)'
+        },
+        config: {
+          // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+        }
       },
     }),
 };

@@ -29,7 +29,7 @@ description: JWT 认证插件配置参考
 | `jwks`                  | string            | 必填     | -                                                 | https://www.rfc-editor.org/rfc/rfc7517 指定的json格式字符串，是由验证JWT中签名的公钥（或对称密钥）组成的Json Web Key Set  |
 | `issuer`                | string            | 必填     | -                                                 | JWT的签发者，需要和payload中的iss字段保持一致              |
 | `claims_to_headers`     | array of object   | 选填     | -                                                 | 抽取JWT的payload中指定字段，设置到指定的请求头中转发给后端 |
-| `from_headers`          | array of object   | 选填     | [{"name":"Authorization","value_prefix":"Bearer "}] | 从指定的请求头中抽取JWT |
+| `from_headers`          | array of object   | 选填     | `[{"name":"Authorization","value_prefix":"Bearer "}]` | 从指定的请求头中抽取JWT |
 | `from_params`           | array of string   | 选填     | access_token                                      | 从指定的URL参数中抽取JWT                                   |
 | `from_cookies`          | array of string   | 选填     | -                                                 | 从指定的cookie中抽取JWT                                    |
 | `clock_skew_seconds`    | number            | 选填     | 60                                                | 校验JWT的exp和iat字段时允许的时钟偏移量，单位为秒          |
