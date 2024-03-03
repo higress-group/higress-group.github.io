@@ -23,7 +23,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 #### SDK
 
-sdk 中包含了定义了 Higress 治理平面的核心数据模型和业务逻辑，如路由模型、Wasm 插件模型、配置模型转换和读写逻辑等。它也同样作为一个独立产品发布到了 Maven 中央仓库。开发者可以世界使用这个 SDK 来进行面向 Higress 的治理功能开发（[参考文档](./admin-sdk-intro)）。
+sdk 中包含了定义了 Higress 治理平面的核心数据模型和业务逻辑，如路由模型、Wasm 插件模型、配置模型转换和读写逻辑等。它也同样作为一个独立产品发布到了 Maven 中央仓库。开发者可以世界使用这个 SDK 来进行面向 Higress 的治理功能开发（[参考文档](/blog/admin-sdk-intro)）。
 
 项目中的核心包如下：
 
@@ -70,7 +70,7 @@ console 中定义了控制台所使用的 Restful API 和一些界面相关的�
 
 #### 环境准备
 
-控制台的正常运行依赖 Higress 核心组件，所以需要先准备一个安装好的 Higress 集群。大家可以参考这篇文档：[链接](../../docs/user/quickstart)。考虑到本地调试的便利度，建议大家使用本地 K8s 环境的方法进行安装。
+控制台的正常运行依赖 Higress 核心组件，所以需要先准备一个安装好的 Higress 集群。大家可以参考这篇文档：[链接](/docs/user/quickstart)。考虑到本地调试的便利度，建议大家使用本地 K8s 环境的方法进行安装。
 
 控制台的后端项目要求 Java 版本不低于 17，所以请确认本地安装的 JDK 版本满足要求。
 
