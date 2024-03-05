@@ -28,10 +28,10 @@ const topData = {
     },
   ],
   versionNote: {
-    text: 'Release Note of 1.3.0',
-    link: 'https://github.com/alibaba/higress/releases/tag/v1.3.0',
+    text: 'Release Note of 1.3.5',
+    link: 'https://github.com/alibaba/higress/releases/tag/v1.3.5',
   },
-  releaseDate: 'Released on Nov 3, 2023',
+  releaseDate: 'Released on Mar 4, 2024',
 };
 
 const Top = ({ language }: { language?: string }) => {
