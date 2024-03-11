@@ -15,9 +15,9 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ## RegistryConfig 字段说明
 | 字段                    | 类型 | 说明                                           | 示例值                                  | 是否必填 |
 |-----------------------| --- |----------------------------------------------|--------------------------------------| --- |
-| type                  | 字符串 | 注册中心类型，可选项：nacos,nacos2,zookeeper,consul,eureka | nacos2                               | 是 |
+| type                  | 字符串 | 服务发现类型，可选项：nacos,nacos2,zookeeper,consul,eureka,static,dns | nacos2                               | 是 |
 | name                  | 字符串 | 自定义的服务来源名称                                   | my-nacos                             | 是 |
-| domain                | 字符串 | 注册中心地址，可以是ip或域名                              | 192.168.1.2                          | 是 |
+| domain                | 字符串 | 服务发现地址，一般是注册中心地址; 当类型是static或dns时，这个字段用于直接配置后端地址                             | 192.168.1.2                          | 是 |
 | port                  | 整数 | 注册中心访问端口                                     | 8848                                 | 是 |
 | zkServicesPath        | 字符串数组 | 使用zk时,填写服务注册的根路径,默认监听 /dubbo 和 /services，前者为dubbo 服务默认根路径，后者为SpringCloud服务默认根路径 | ["/service-provider"]                | 否 |
 | nacosNamespaceId      | 字符串 | nacos命名空间id                                  | d8ac64f3-xxxx-xxxx-xxxx-47a814ecf358 | 否 |
@@ -61,4 +61,39 @@ metadata:
   name: higress-consul-auth
   namespace: higress-system
 type: Opaque
+```
+
+
+## 支持配置静态的服务发现方式
+
+### 通过固定IP发现服务
+
+```yaml
+apiVersion: networking.higress.io/v1
+kind: McpBridge
+metadata:
+  name: default
+  namespace: higress-system
+spec:
+  registries:
+  - domain: "1.1.1.1:80,2.2.2.2:80"
+    name: test
+    port: 80
+    type: static
+```
+
+### 通过DNS域名发现服务
+
+```yaml
+apiVersion: networking.higress.io/v1
+kind: McpBridge
+metadata:
+  name: default
+  namespace: higress-system
+spec:
+  registries:
+  - domain: www.alibaba.com
+    name: alibaba
+    port: 80
+    type: dns
 ```
