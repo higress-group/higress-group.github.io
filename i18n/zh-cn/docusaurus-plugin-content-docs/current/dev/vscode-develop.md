@@ -1,5 +1,8 @@
-1. 开发机准备：本文使用的操作系统为 Ubuntu 22.04 x86_64 
-2. k8s基础环境：
+# 如何用 vscode 搭建 higress 开发调试环境
+## 开发机环境
+本文使用的操作系统为 Ubuntu 22.04 x86_64 
+## k8s本地环境
+### 安装相关软件
 ```bash
 # kubectl install
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -17,7 +20,7 @@ chmod +x ./kind
 sudo mv ./kind /usr/local/bin
 ```
 
-3. 启动本地k8s环境
+### 启动本地k8s环境
 ```bash
 # kind 和 minikube 二选一
 ## minikube
@@ -49,21 +52,21 @@ kind create cluster --name higress --config=cluster.conf
 kubectl config use-context kind-higress
 ```
 
-4. helm安装higress
+## higress
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
 helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false
 ```
 
-5. 安装hgctl并启动debug模式
+## 安装hgctl并启动debug模式
 ```bash
 curl -Ls https://raw.githubusercontent.com/alibaba/higress/main/tools/hack/get-hgctl.sh | VERSION=latest bash
 
 hgctl code-debug start
 ```
 
-6. vscode
-vscode远程登录开发机，打开higress目录
+## vscode 设置
+在vscode中打开higress目录
 
 安装vscode go插件：
 
