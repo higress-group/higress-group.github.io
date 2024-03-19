@@ -12,7 +12,7 @@ description: Higress introduction
 
 ## Classification of traditional gateways
 
-In the industry, gateways are usually divided into two categories: traffic gateways and business gateways. Traffic gateways mainly provide global policy configurations that have nothing to do with back-end business. For example, Ali’s internal unified access gateway Tengine is a typical traffic gateway. ; As the name suggests, the business gateway mainly provides independent business domain-level, tightly coupled policy configuration with the back-end business. With the evolution of the application architecture model from a single body to the current distributed micro-service, the business gateway also has a new name - micro-service gateway ( Illustrations are shown below). In the current cloud-native era dominated by container technology and K8s, is the next-generation gateway model still the same?
+In the industry, gateways are usually divided into two categories: traffic gateways and business gateways. Traffic gateways mainly provide global policy configurations that have nothing to do with back-end business. For example, Ali’s internal unified access gateway Tengine is a typical traffic gateway. As the name suggests, the business gateway mainly provides independent business domain-level, tightly coupled policy configuration with the back-end business. With the evolution of the application architecture model from a single body to the current distributed micro-service, the business gateway also has a new name - micro-service gateway ( Illustrations are shown below). In the current cloud-native era dominated by container technology and K8s, is the next-generation gateway model still the same?
 
 ## Positioning
 
