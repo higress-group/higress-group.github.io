@@ -128,7 +128,7 @@ metadata:
 | maxRequestHeadersKb    | int            | 最大请求头大小，单位Kb，最大为8192Kb  | 60               |
 | routeTimeout    | int            | 等待上游完成响应的时间，单位秒，0表示关闭该配置。对于响应永不结束的流，如 websocket，需禁用 | 0            |
 
-关于 timeouts 参数配置详细说明可以参考 envoy 官方说明 [How do I configure timeouts](https://www.envoyproxy.io/docs/envoy/latest/faq/configuration/timeouts)
+关于 timeouts 参数配置详细说明可以参考 envoy 官方文档 [How do I configure timeouts](https://www.envoyproxy.io/docs/envoy/latest/faq/configuration/timeouts)
 
 
 #### http2 配置说明
