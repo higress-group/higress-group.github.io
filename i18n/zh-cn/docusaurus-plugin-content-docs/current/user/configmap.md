@@ -46,6 +46,7 @@ data:
         maxConcurrentStreams: 100
       idleTimeout: 180
       maxRequestHeadersKb: 60
+      routeTimeout: 0
     upstream:
       connectionBufferLimits: 1048576
       idleTimeout: 10
