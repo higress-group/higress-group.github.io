@@ -74,6 +74,29 @@ kubectl get configmap higress-config -n higress-system -o=jsonpath='{.data.meshN
 kubectl port-forward deployment/higress-controller -n higress-system 15051
 ```
 
+**代码调整**
+
+如果要调试与 TLS 证书下发的相关功能，则需要在 `pilot/pkg/xds/ads.go` 的 `initConnection` 函数中添加代码，绕过证书下发过程的认证要求。代码修改方法请参考下方示例。
+
+```go
+	if features.EnableXDSIdentityCheck && con.Identities != nil {
+		// TODO: allow locking down, rejecting unauthenticated requests.
+		id, err := checkConnectionIdentity(con)
+		if err != nil {
+			log.Warnf("Unauthorized XDS: %v with identity %v: %v", con.PeerAddr, con.Identities, err)
+			return status.Newf(codes.PermissionDenied, "authorization failed: %v", err).Err()
+		}
+		con.proxy.VerifiedIdentity = id
+	}
+    // Start - Auth bypassing for local debug
+	con.proxy.VerifiedIdentity = &spiffe.Identity{
+		TrustDomain:    "cluster.local",
+		Namespace:      "higress-system",
+		ServiceAccount: "higress-gateway",
+	}
+    // End - Auth bypassing for local debug
+```
+
 **运行配置**
 
 配置一：环境变量
@@ -103,7 +126,7 @@ discovery --monitoringAddr=:15014 --log_output_level=default:info --domain clust
 
 **启动调试**
 
-在完成以上工作之后，我们就可以直接启动 Pilot 了。它的的 main 函数定义在 `pilot/cmd/pilot-discovery/main.go` 文件中。
+在完成以上工作之后，我们就可以启动 Pilot 了。它的 main 函数定义在 `pilot/cmd/pilot-discovery/main.go` 文件中。
 
 ![img.png](../../../static/img/blog/pilot-debug/debug-run.png)
 
