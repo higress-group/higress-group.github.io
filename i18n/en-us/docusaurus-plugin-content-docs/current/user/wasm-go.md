@@ -7,26 +7,27 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # Implement a WASM plugin with Golang
 
-# 1. Prepare Development Tools
+## 1. Prepare Development Tools
 
 First, install Golang and Tinygo.
-<a name="a81fa"></a>
-## 1. Golang
+
+### 1. Golang
+
 Min Version: 1.18<br />Official download link: [https://go.dev/doc/install](https://go.dev/doc/install)
-<a name="JFoN6"></a>
-### Windows
+
+#### Windows
 
 1. Download the installer: [https://go.dev/dl/go1.19.windows-amd64.msi](https://go.dev/dl/go1.19.windows-amd64.msi)
 2. Run the downloaded installer to start the installation. It will be installed to `Program Files` or `Program Files (x86)` folder by default.
 3. After completed the installation, open "Run" dialog with hotkey "Win+R". Type "cmd" in the dialog and click "OK" to open Command Line Prompt. Type: `go version`. If version info is displayed, the package has been successfully installed.
-<a name="tavPX"></a>
-### MacOS
+
+#### MacOS
 
 1. Download the installer: [https://go.dev/dl/go1.19.darwin-amd64.pkg](https://go.dev/dl/go1.19.darwin-amd64.pkg)
 2. Run the downloaded installer to start the installation. It will be installed to `/usr/local/go` folder by default.
 3. Open Terminal and type: `go version`. If version info is displayed, the package has been successfully installed.
-<a name="olPlT"></a>
-### Linux
+
+#### Linux
 
 1. Download the installer: [https://go.dev/dl/go1.19.linux-amd64.tar.gz](https://go.dev/dl/go1.19.linux-amd64.tar.gz)
 2. Execute following commands to start the installation:
@@ -34,14 +35,13 @@ Min Version: 1.18<br />Official download link: [https://go.dev/doc/install](http
 rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 ```
-
 3. Execute `go version`. If version info is displayed, the package has been successfully installed.
 
-<a name="qugm0"></a>
-## 2. TinyGo
+### 2. TinyGo
+
 Min Version: 0.25.0<br />Official download link: [https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
-<a name="ELNis"></a>
-### Windows
+
+#### Windows
 
 1. Download the package: [https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip)
 2. Unpack the package to the target folder
@@ -49,25 +49,23 @@ Min Version: 0.25.0<br />Official download link: [https://tinygo.org/getting-sta
 ```bash
 set PATH=%PATH%;"C:\tinygo\bin";
 ```
-
 4. Execute `tinygo version` command in Command Line Prompt. If version info is displayed, the package has been successfully installed.
-<a name="iCo9z"></a>
-### MacOS
+
+#### MacOS
 
 1. Download and unpack the package
 ```bash
 wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.darwin-amd64.tar.gz
 tar -zxf tinygo0.25.0.darwin-amd64.tar.gz
 ```
-
 2. If the package is unpacked to folder `/tmp`, you need to add `/tmp/tinygo/bin` to the environment variable `PATH`:
 ```bash
 export PATH=/tmp/tinygo/bin:$PATH
 ```
-
 3. Execute command `tinygo version` in Terminal.  If version info is displayed, the package has been successfully installed.
-<a name="hNZeF"></a>
-### Linux
+
+#### Linux
+
 Following steps are based on Ubuntu AMD64. For other OSes, please refer to the official document.
 
 1. Download and install the DEB package.
@@ -76,44 +74,44 @@ wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo_0.25.
 sudo dpkg -i tinygo_0.25.0_amd64.deb
 export PATH=$PATH:/usr/local/bin
 ```
-
 2. Execute command `tinygo version` in Terminal. If version info is displayed, the package has been successfully installed.
 
-<a name="QZbcA"></a>
-# 2. Write a plugin
-<a name="u83FM"></a>
-## 1. Initialize the project
+## 2. Write a plugin
+
+### 1. Initialize the project
 
 You can create your wasm-go plugin directory in the repo [higress](https://github.com/alibaba/higress)'s [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
 that you can use the scaffolding tools provided in this directory（see 1.1）；
 or create a new directory for your Go project yourself(see 1.2).
 If you are developing wasm-go plugins for the first time, it is recommended to take the former.
 
-### 1.1 create wasm-go plugin in [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
+#### 1.1 create wasm-go plugin in [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
+
 1. `git clone https://github.com/alibaba/higress.git`, to clone project to local；
 2. `cd plugins/wasm-go; mkdir wasm-demo-go`, to go to the project's plugins/wasm-go directory and create the wasm-demo-go directory.
 
-### 1.2 create a new project yourself
+#### 1.2 create a new project yourself
+
 1. Create a new folder for the project. For example: `wasm-demo-go`.
 2. Execute following commands in the new folder to initialize the Go project:
 ```bash
 go mod init wasm-demo-go
 ```
-
 3. If you are in the Chinese mainland, you may need to set a proxy for downloading dependencies.
 ```bash
 go env -w GOPROXY=https://proxy.golang.com.cn,direct
 ```
-
 4. Download dependencies for plugin building. 
 ```bash
 go get github.com/tetratelabs/proxy-wasm-go-sdk
 go get github.com/alibaba/higress/plugins/wasm-go@main
 go get github.com/tidwall/gjson
 ```
-<a name="Z2lFM"></a>
-## 2. Write main.go
+
+### 2. Write main.go
+
 You can find a simple sample below, which provides following functions:
+
 1. If `mockEnable` is set to `true`, send `hello world` directly as the response.
 2. If `mockEnable` is not set or set to `false`, add an extra HTTP header `hello: world` to the original request.
 More samples can be found in section 4 below.
@@ -124,45 +122,46 @@ More samples can be found in section 4 below.
 package main
 
 import (
-    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
-    "github.com/tidwall/gjson"
+	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
+	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/tidwall/gjson"
 )
 
 func main() {
-        wrapper.SetCtx(
-                // Plugin name
-                "my-plugin",
-                // A custom function for parsing plugin configurations
-                wrapper.ParseConfigBy(parseConfig),
-                // A custom function for processing request headers
-                wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
-        )
+	wrapper.SetCtx(
+		// Plugin name
+		"my-plugin",
+		// A custom function for parsing plugin configurations
+		wrapper.ParseConfigBy(parseConfig),
+		// A custom function for processing request headers
+		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+	)
 }
 
 // Custom plugin configuration
 type MyConfig struct {
-        mockEnable bool
+	mockEnable bool
 }
 
 // Plugin configurations set in the console with YAML format will be converted to JSON. So we just need to parse config data from JSON.
 func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
-        // Get the configuration property and set to the config object.
-    	config.mockEnable = json.Get("mockEnable").Bool()
-        return nil
+	// Get the configuration property and set to the config object.
+	config.mockEnable = json.Get("mockEnable").Bool()
+	return nil
 }
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
-        proxywasm.AddHttpRequestHeader("hello", "world")
-        if config.mockEnable {
-                proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
-        }
-        return types.ActionContinue
+	proxywasm.AddHttpRequestHeader("hello", "world")
+	if config.mockEnable {
+		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
+	}
+	return types.ActionContinue
 }
 ```
-<a name="SYNZJ"></a>
-### HTTP Processing Pointcuts
+
+#### HTTP Processing Pointcuts
+
 In the sample above, `wrapper.ProcessRequestHeadersBy` applies custom function `onHttpRequestHeaders` when processing requests in`HTTP request header processing stage`. Besides that, you can use following methods to set custom processing functions for various stages.
 
 | HTTP Processing Stage | Trigger Time | Pointcut Mounting Method |
@@ -172,8 +171,8 @@ In the sample above, `wrapper.ProcessRequestHeadersBy` applies custom function `
 | HTTP response header processing stage | When gateway receives response headers from upstream | wrapper.ProcessResponseHeadersBy |
 | HTTP response body processing stage | When gateway receives response body from upstream | wrapper.ProcessResponseBodyBy |
 
-<a name="r6rK5"></a>
-### Utility Functions
+#### Utility Functions
+
 In the sample above, `proxywasm.AddHttpRequestHeader` and `proxywasm.SendHttpResponse` are two utility methods provided by the plugin SDK. You can find major utility functions in the table below:
 
 | Category | Name | Usage | Available<br />HTTP Processing Stage(s) |
@@ -206,12 +205,13 @@ In the sample above, `proxywasm.AddHttpRequestHeader` and `proxywasm.SendHttpRes
 | Process Resuming | ResumeHttpRequest | Resume the request processing workflow paused before. | - |
 |  | ResumeHttpResponse | Resume the response processing workflow paused before. | - |
 
-<a name="GAa0T"></a>
-## 3. Build WASM file
-If your project directory is in the [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) directory
-See 3.1; if you are using a self-initialized directory, see 3.2.
+### 3. Build WASM file
 
-### 3.1 Building wasm-go plugin image with scaffolding
+- If your project directory is in the [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) directory, see 3.1.
+- If you are using a self-initialized directory, see 3.2.
+
+#### 3.1 Building wasm-go plugin image with scaffolding
+
 The wasm-go plugin can be built quickly with the following command:
 
 ```bash
@@ -226,49 +226,52 @@ This local wasm file is exported to the specified plugin's directory and can be 
 You can also use `make build-push` to build and push the image together.
 See [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) for more.
 
-### 3.2 Compile wasm files locally
+#### 3.2 Compile wasm files locally
+
 Execute the following command:
 ```bash
 tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
 ```
 A new file named main.wasm will be created after a successful compilation, which will be used in the local debugging sample below as well.<br />When using custom plugin function in the cloud native gateway market, you just need to upload this file.
 
-<a name="yJdN5"></a>
-# 3. Local Debugging 
+## 3. Local Debugging 
 
 TBD
 
-# More Samples
-<a name="vdifW"></a>
-## Plugin with No Configuration
+## More Samples
+
+### Plugin with No Configuration
+
 If the plugin needs no configuration, just define an empty config struct.
 
 ```
 package main
 
 import (
-    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
+	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
 )
 
 func main() {
-        wrapper.SetCtx(
-                "hello-world",
-                wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
-        )
+	wrapper.SetCtx(
+		"hello-world",
+		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+	)
 }
 
 type MyConfig struct {}
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
-        proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
-        return types.ActionContinue
+	proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
+	return types.ActionContinue
 }
 ```
-<a name="dSdLn"></a>
-## Send Requests to External Services in the Plugin
+
+### Send Requests to External Services in the Plugin
+
 Only HTTP requests are supported for now. You can send requests to Nacos and K8s services with service sources configured in the gateway console, and services with a static IP or DNS source. Please be noted, HTTP client in the `net/http` package cannot be used here. You only use the wrapped HTTP client as shown in the sample below.<br />In the following sample works as below:
+
 1. Parse service type in the config parsing stage, and generate the corresponding HTTP client.
 2. In the HTTP request header processing stage, send a service request to the configured URL.
 3. Parse response headers and get token value using the specified key.
@@ -281,7 +284,7 @@ import (
 	"errors"
 	"net/http"
 	"strings"
-    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
 	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
 	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
