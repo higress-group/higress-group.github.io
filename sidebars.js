@@ -38,7 +38,7 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Parameters Configurations Guide',
+          label: 'Best Practices',
           items: ['user/wasm-go', 'user/kruise-rollout', 'user/nacos-route', 'user/spring-cloud', 'user/dubbo', 'user/prometheus', 'user/waf'],
         },
       ],

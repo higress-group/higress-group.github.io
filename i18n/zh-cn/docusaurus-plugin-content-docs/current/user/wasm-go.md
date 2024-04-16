@@ -36,7 +36,6 @@ export PATH=$PATH:/usr/local/go/bin
 
 3. 执行 `go version`，输出当前安装的版本，表明安装成功
 
-
 ### 2. TinyGo
 
 （要求 0.28.1 版本以上）<br />官方指引链接：[https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
@@ -109,44 +108,43 @@ go get github.com/tidwall/gjson
 package main
 
 import (
-    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-    "github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
-    "github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
-    "github.com/tidwall/gjson"
+	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/tidwall/gjson"
 )
 
 func main() {
-        wrapper.SetCtx(
-                // 插件名称
-                "my-plugin",
-                // 为解析插件配置，设置自定义函数
-                wrapper.ParseConfigBy(parseConfig),
-                // 为处理请求头，设置自定义函数
-                wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
-        )
+	wrapper.SetCtx(
+		// 插件名称
+		"my-plugin",
+		// 为解析插件配置，设置自定义函数
+		 wrapper.ParseConfigBy(parseConfig),
+		// 为处理请求头，设置自定义函数
+		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+	)
 }
 
 // 自定义插件配置
 type MyConfig struct {
-        mockEnable bool
+	mockEnable bool
 }
 
 // 在控制台插件配置中填写的yaml配置会自动转换为json，此处直接从json这个参数里解析配置即可
 func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
-        // 解析出配置，更新到config中
-    	config.mockEnable = json.Get("mockEnable").Bool()
-        return nil
+	// 解析出配置，更新到config中
+	config.mockEnable = json.Get("mockEnable").Bool()
+	return nil
 }
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
-        proxywasm.AddHttpRequestHeader("hello", "world")
-        if config.mockEnable {
-                proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
-        }
-        return types.ActionContinue
+	proxywasm.AddHttpRequestHeader("hello", "world")
+	if config.mockEnable {
+		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
+	}
+	return types.ActionContinue
 }
 ```
-
 
 #### HTTP 处理挂载点
 上面示例代码中通过 `wrapper.ProcessRequestHeadersBy`将自定义函数 `onHttpRequestHeaders`用于`HTTP 请求头处理阶段`处理请求。除此之外，还可以通过下面方式，设置其他阶段的自定义处理函数
@@ -389,23 +387,23 @@ hello world
 package main
 
 import (
-    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-    "github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
-    "github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 )
 
 func main() {
-        wrapper.SetCtx(
-                "hello-world",
-                wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
-        )
+	wrapper.SetCtx(
+		"hello-world",
+		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+	)
 }
 
 type MyConfig struct {}
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
-        proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
-        return types.ActionContinue
+	proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
+	return types.ActionContinue
 }
 ```
 
@@ -416,13 +414,13 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 package main
 
 import (
-  	"errors"
-  	"net/http"
-  	"strings"
-        "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-  	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
-  	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
-  	"github.com/tidwall/gjson"
+	"errors"
+	"net/http"
+	"strings"
+	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/tidwall/gjson"
 )
 
 func main() {
