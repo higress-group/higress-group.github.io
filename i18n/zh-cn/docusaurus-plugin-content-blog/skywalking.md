@@ -9,7 +9,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # Higress 集成 Skywalking 可观测性探索
 
-[Higress](https://higress.io/zh-cn/) 一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成、易使用、易扩展、热更新的下一代云原生网关。
+[Higress](https://higress.io/zh-cn/) 一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成、易使用、易扩展、热更新的云原生API网关。
 
 [Skywalking](https://skywalking.apache.org/) 是一个开源的可观测平台，用于从服务和云原生基础设施收集，分析， 聚合及可视化数据。
 
