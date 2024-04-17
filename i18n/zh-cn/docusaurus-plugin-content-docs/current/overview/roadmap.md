@@ -16,4 +16,4 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | v1.2.0  | 支持作为 Knative 的网络层使用；支持 ARM 架构部署；支持对接 Consul   | 2023-08   |
 | v1.3.0  | 完整支持 GatewayAPI；支持 Operator 模式部署   | 2023-11   |
 | v1.4.0  | 完成 Envoy/Istio 依赖升级   | 2024-04   |
-| v2.0.0  | Gateway API支持现有Ingress现有注解； 推出API网关形态  | 2024-06   |
+| v2.0.0  | Gateway API支持现有Ingress现有注解； 推出更丰富的API网关能力  | 2024-06   |
