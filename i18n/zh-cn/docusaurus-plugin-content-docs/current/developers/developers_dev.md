@@ -19,6 +19,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | 耿蕾蕾 | [gengleilei](https://github.com/gengleilei) | Alibaba        |
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | Alibaba        |
 | 范扬 | [SpecialYang](https://github.com/SpecialYang) | Alibaba        |
+| 季敏 | [slievrly](https://github.com/slievrly) | Alibaba        |
 
 ## Higress Approvers
 | 姓名  | github                        | 公司             |
