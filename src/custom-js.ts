@@ -11,25 +11,26 @@ var _hmt = _hmt || [];
 })();
 
 
-(function (w, d, s, q, i) {
+(function () {
 	if (!ExecutionEnvironment.canUseDOM) {
 		return;
 	}
-	w[q] = w[q] || [];
-	var f = d.getElementsByTagName(s)[0],
-		j = d.createElement(s);
+	window['aplus_queue'] = window['aplus_queue'] || [];
+	var f = document.getElementsByTagName('script')[0],
+		j = document.createElement('script');
 	j.async = true;
 	j.id = 'beacon-aplus';
 	j.setAttribute('exparams', 'userid=&aplus&sidx=aplusSidex&ckx=aplusCkx');
 	j.src = '//g.alicdn.com/alilog/mlog/aplus_v2.js';
 	j.crossorigin = 'anonymous';
 	f.parentNode.insertBefore(j, f);
-})(window, document, 'script', 'aplus_queue');
+})();
 
-(function (d) {
+(function () {
 	if (!ExecutionEnvironment.canUseDOM) {
 		return;
 	}
+	var d = document;
 	var t = d.createElement('script');
 	t.type = 'text/javascript';
 	t.async = true;
@@ -63,4 +64,4 @@ var _hmt = _hmt || [];
 	setTimeout(function () {
 		d.getElementsByTagName('body')[0].appendChild(t);
 	}, 800);
-})(document);
+})();
