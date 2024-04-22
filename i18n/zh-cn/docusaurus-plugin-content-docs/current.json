@@ -11,9 +11,9 @@
     "message": "用户指南",
     "description": "The label for category User Doc in sidebar docs"
   },
-  "sidebar.docs.category.Parameters Configurations Guide": {
+  "sidebar.docs.category.Best Practices": {
     "message": "最佳实践示例",
-    "description": "The label for category Parameters Configurations Guide in sidebar docs"
+    "description": "The label for category Best Practices in sidebar docs"
   },
   "sidebar.docs.category.Plugins": {
     "message": "插件使用文档",
