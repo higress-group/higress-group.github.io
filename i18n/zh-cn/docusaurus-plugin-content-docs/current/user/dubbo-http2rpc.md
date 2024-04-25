@@ -21,7 +21,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | serviceMethod        | string             | dubbo服务接口的方法名               | 例："sayName" |
 | headersAttach   | string | 需要透传的http headers | 1、空: 不设置表示不透传任何值;<br />2、*: 表示透传所有headers;<br /> 3、用英文逗号隔开需要透出的headers key: header-A,header-B,header-C,<br />|
 | httpPath | string      | 指定绑定serviceMethod的http-path       | 例："/dubbo/hello" |
-| httpMethods        | HTTP_METHOD_TYPE             | http-path的请求方式               | 例："POST" |
+| httpMethods        | list of HTTP_METHOD_TYPE             | http-path的请求方式               | 例："POST" |
 | params | list of spec.dubbo.methods.params   | 指定参数提取方式   |    |
 | paramFromEntireBody | ParamFromEntireBody   | 指定将整个请求body作为参数，如果同时配置了paramFromEntireBody和params，params字段的内容将被忽略   |    |
 
