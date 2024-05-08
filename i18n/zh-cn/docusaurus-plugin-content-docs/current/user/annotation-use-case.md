@@ -695,7 +695,7 @@ spec:
 Higress默认使用HTTP协议转发请求到后端业务容器。当您的业务容器为HTTPS协议时，可以通过使用注解`higress.io/backend-protocol: "HTTPS"`；当您的业务容器为GRPC服务时，可以通过使用注解`higress.io/backend-protocol: "GRPC"`。
 > 说明：相比Nginx Ingress的优势，如果您的后端服务所属的K8s Service资源中关于Port Name的定义为grpc或http2，您无需配置注解higress.io/backend-protocol: "GRPC"，Higress会自动使用GRPC或者HTTP2。
 
-1. 请求`example/test`转发至后端服务使用HTTPS协议。
+1. 请求`example.com/test`转发至后端服务使用HTTPS协议。
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -718,9 +718,8 @@ spec:
             pathType: Exact
 ```
 
-2. 请求`example/test`转发至后端服务使用GRPC协议。
-第一种做法：通过注解。
-```
+2. 请求`example/grpcbin.GRPCBin`转发至后端服务使用GRPC协议。
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -738,41 +737,8 @@ spec:
                 name: demo-service
                 port: 
                   number: 80
-            path: /test
-            pathType: Exact
-```
-
-第二种做法：通过Service Port Name
-```
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: demo
-spec:
-  ingressClassName: higress
-  rules:
-    - host: example.com
-      http:
-        paths:
-          - backend:
-              service:
-                name: demo-service
-                port: 
-                  number: 80
-            path: /order
-            pathType: Exact
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: demo-service
-spec:
-  ports:
-    - name: grpc
-      port: 80
-      protocol: TCP
-  selector:
-    app: demo-service
+            path: /grpcbin.GRPCBin
+            pathType: Prefix
 ```
 
 ## 配置后端服务的负载均衡算法
