@@ -720,6 +720,7 @@ spec:
 
 2. 请求`example/grpcbin.GRPCBin`转发至后端服务使用GRPC协议。
 
+```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
