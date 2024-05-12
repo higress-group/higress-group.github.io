@@ -135,7 +135,74 @@ docker compose -p higress-ai up -d
 
 从上面的搭建流程来看，Higress AI 代理插件可以很方便的让 AI 对话应用直接对接通义千问等接口契约不同的大模型服务。除了通义千问和 ChatGPT 之外，这个插件还支持 Azure OpenAI 和月之暗面（Moonshot）等大模型服务提供商，并且支持配置一个外部文件地址作为聊天上下文，可以用来快速搭建一个个人 AI 助理服务。
 
-整个插件使用 Go 语言进行开发。如果大家有任何需求，也可以很方便的对其进行二次开发，比如对接新的大模型服务，自定义 system prompt 等等。也欢迎大家把自己开发的功能贡献给社区，造福所有 Higress 的用户。
+整个插件使用 Go 语言进行开发，充分利用了 Proxy Wasm SDK 提供的各种逻辑注入点来对请求和响应标头和数据进行修改，以实现统一的 AI 服务网关功能，例如：注入 API key、注入上下文提示词、接口契约格式转换等。尤其是在对接通义千问的时候，由于它使用的接口契约不同，所以插件需要实现对应的数据模型转换逻辑。现在 AI 代理插件已经完全支持使用 OpenAI 协议来流式返回通义千问的响应数据。
+
+插件配置示例：
+
+```yaml
+apiVersion: extensions.higress.io/v1alpha1
+kind: WasmPlugin
+metadata:
+  annotations:
+    higress.io/wasm-plugin-title: AI Proxy
+  labels:
+    higress.io/resource-definer: higress
+    higress.io/wasm-plugin-built-in: "false"
+    higress.io/wasm-plugin-category: custom
+    higress.io/wasm-plugin-name: ai-proxy
+    higress.io/wasm-plugin-version: "0.0.1"
+  name: ai-proxy-0.0.1
+  namespace: higress-system
+spec:
+  defaultConfig: {}
+  defaultConfigDisable: true
+  matchRules:
+  - config:
+      provider:
+        type: qwen
+        apiToken: YOUR_DASHSCOPE_API_KEY
+        protocol: openai # 如果要继续使用通义千问本来的接口契约，可以将这里改为 "original"
+        modelMapping:
+          '*': "qwen-turbo"
+          'gpt-3': "qwen-turbo"
+          'gpt-35-turbo': "qwen-plus"
+          'gpt-4-turbo': "qwen-max"
+    configDisable: false
+    ingress:
+    - qwen
+  - config:
+      provider:
+        type: azure
+        apiToken: YOUR_AZURE_OPENAI_API_KEY
+        azureServiceUrl: https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/chat/completions?api-version=2024-02-01
+    configDisable: false
+    ingress:
+    - azure-openai
+  - config:
+      provider:
+        type: openai
+        apiToken: YOUR_OPENAI_API_KEY
+    configDisable: false
+    ingress:
+    - openai
+  - config:
+      provider:
+        type: moonshot
+        apiToken: YOUR_MOONSHOT_API_KEY
+        modelMapping:
+          '*': "moonshot-v1-8k"
+          'gpt-3': "moonshot-v1-8k"
+          'gpt-35-turbo': "moonshot-v1-32k"
+          'gpt-4-turbo': "moonshot-v1-128k"
+    configDisable: false
+    ingress:
+    - moonshot
+  phase: UNSPECIFIED_PHASE
+  priority: "100"
+  url: oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/ai-proxy:0.0.1
+```
+
+如果大家有任何需求，也可以对这个插件进行二次开发，比如对接新的大模型服务，自定义 system prompt 等等。同时也欢迎大家把自己开发的功能贡献给社区，造福所有 Higress 的用户。
 
 此外，由中国科学院软件研究所“开源软件供应链点亮计划”发起并长期支持的暑期开源活动“开源之夏”正在进行中。Higress 也有两个与 AI 相关的项目参与其中，分别是“实现基于向量相似度实现LLM结果召回的WASM插件”和“基于AI网关实现AI模型的轻量化部署”。欢迎各位在校同学积极报名参与。详情可查看开源之夏的 [Higress 社区页面](https://summer-ospp.ac.cn/org/orgdetail/1f8ea42c-86c9-46b8-b1f5-344de5741ef0)。
 
