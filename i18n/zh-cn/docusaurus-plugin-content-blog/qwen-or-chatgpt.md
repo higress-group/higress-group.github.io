@@ -65,7 +65,7 @@ Higress 是基于阿里内部的 Envoy Gateway 实践沉淀、以开源 Istio + 
 **第一步：**创建一个名为 `docker-compose.yml` 的文件，并填入以下内容：
 
 > 注意：
-> 1. 其中的 `YOUR_DASHSCOPE_API_KEY` 和 `YOUR_DASHSCOPE_API_KEY` 需要分别替换为你自己的通义千问和 OpenAI 的 API Key；
+> 1. `YOUR_DASHSCOPE_API_KEY` 需要替换为你自己的通义千问的 API Key；
 > 2. `/path-to-local-config-folder` 需要替换为一个本地可以用来保存配置文件的目录路径。
 
 ```yaml
@@ -81,9 +81,8 @@ services:
     environment:
       - MODE=gateway
       - CONFIG_TEMPLATE=ai-proxy
-      - DEFAULT_AI_SERVICE=openai
+      - DEFAULT_AI_SERVICE=qwen
       - DASHSCOPE_API_KEY=YOUR_DASHSCOPE_API_KEY
-      - OPENAI_API_KEY=YOUR_OPENAI_API_KEY
     networks:
       - higress-net
     ports:
@@ -122,7 +121,19 @@ docker compose -p higress-ai up -d
 
 ![nextchat-first-msg](../../../static/img/blog/qwen-or-chatgpt/nextchat-first-msg.png)
 
-按照上面文件进行配置，默认和你对话的将是 OpenAI ChatGPT。如果想切换到通义千问，只需要将文件中的 `DEFAULT_AI_SERVICE=openai` 修改为 `DEFAULT_AI_SERVICE=qwen`，然后重新启动 docker compose 项目即可。
+按照上面文件进行配置，默认和你对话的将是通义千问。如果想切换到OpenAI ChatGPT，只需要将文件中的 `DEFAULT_AI_SERVICE=qwen` 修改为 `DEFAULT_AI_SERVICE=openai`，并添加 OpenAI 的 API key 配置，然后重新启动 docker compose 项目即可。
+
+```yaml
+# 以上配置省略
+  higress:
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:1.3.6
+    environment:
+      - MODE=gateway
+      - CONFIG_TEMPLATE=ai-proxy
+      - DEFAULT_AI_SERVICE=openai
+      - OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+# 以下配置省略
+```
 
 ```bash
 docker compose -p higress-ai down
