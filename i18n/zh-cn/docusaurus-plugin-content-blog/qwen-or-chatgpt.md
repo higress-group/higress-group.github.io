@@ -1,5 +1,5 @@
 ---
-title: 通义千问“客串”ChatGPT，你分的清吗
+title: 通义千问2.5“客串”ChatGPT4，你分的清吗
 keywords: [Higress,Wasm,AI,Qwen,ChatGPT,NextChat]
 description: 基于通义千问大模型，使用 Higress 和 NextChat 搭建跨平台的私人 ChatGPT 应用
 author: CH3CHO
@@ -8,45 +8,81 @@ date: 2024-05-11
 
 ## 引子
 
-现在 AI 大模型的发展如火如荼，OpenAI 的 ChatGPT 和阿里云的通义千问作为全球领先的大模型服务，使用者众多。今天闲来无事，我就想对比一下这两个服务的能力。而且正好在本文写作的前几天，5 月 9 日，[阿里云正式发布了通义千问 2.5，并开源了通义千问 1100 亿参数模型。](https://mp.weixin.qq.com/s/hU5YDkjiAsAYl8h2akl14Q)。那么本次测试我们就来测试一下 ChatGPT 中最高级的模型 GPT-4-Turbo 和通义千问 2.5 对应的 Qwen-Max 模型。
+OpenAI 发布了最新的 GPT-4o 模型，通义千问也在前不久刚发布通义千问 2.5，并在中文场景已经和 GPT-4-Turbo 不分伯仲：
 
-## ChatGPT vs 通义千问
+![](https://img.alicdn.com/imgextra/i1/O1CN0148JrOd21va23GzrEb_!!6000000007047-0-tps-1080-813.jpg)
 
-在本次测试中，我们会向两个大模型分别提出相同的问题，看看它们会如何回答。同时也请各位猜猜哪些回答来自 ChatGPT，而哪些又来自通义千问。我们会在文末揭晓答案。
+既然目前还没有和 GPT-4o 文本生成能力的对比数据，就让我们来和大模型一起做个游戏测试一下：
 
-1. 创意故事讲述
-问题：
-请讲述一个涉及时间旅行的短故事，主角是一位带着宠物猫进行时空穿越的中国科学家。
+我们让通义千问 2.5 扮演 GPT4，来和真正的 GPT4 进行问答 PK，读者不妨来猜一猜谁是通义千问。
 
-2. 想象力挑战
-问题：
-如果某天科技发达到可以让我们与书中角色对话，你会选择哪位角色，为什么？请模拟一段对话。
+两名选手的头像和昵称分别是：
 
-3. 解决难题
-问题：
-描述一种新发明，它能解决全球变暖问题，但它的工作原理基于目前科学无法解释的现象。
+🌝 ：我是GPT4
 
-4. 情感智能
-问题：
-如果一个人感到孤独，你作为AI会如何安慰他/她？请给出具体的对话实例。
+🌚 ：如假包换GPT4
 
-5. 逻辑谜题
-问题：
-提出一个逻辑谜题，解答既要求逻辑推理，同时还需要一定的创造力。
+谁是通义千问，谁是ChatGPT，答案将在文末揭晓。
 
-<!-- ![qns-1](../../../static/img/blog/qwen-or-chatgpt/1.png)
+## 第一轮问答
 
-![qns-2](../../../static/img/blog/qwen-or-chatgpt/2.png)
+第一轮由“我是GPT4”选手提问，由“如假包换GPT4”选手作答
 
-![qns-3](../../../static/img/blog/qwen-or-chatgpt/3.png)
+🌝：角色设定+第一个问题
 
-![qns-4](../../../static/img/blog/qwen-or-chatgpt/4.png)
+![QA](https://img.alicdn.com/imgextra/i2/O1CN01RXt7bg1Pl5YpGvDHW_!!6000000001880-2-tps-855-480.png)
 
-![qns-5](../../../static/img/blog/qwen-or-chatgpt/5.png)
+🌚 ：角色设定+第一个回答
 
-![qns-6](../../../static/img/blog/qwen-or-chatgpt/6.png) -->
+![QA](https://img.alicdn.com/imgextra/i3/O1CN01UOHsOZ1tFt3GPBsRr_!!6000000005873-2-tps-855-422.png)
 
-大家觉得它们回答的怎么样呢？能不能看出来哪些回答实际是出自通义千问之“口”呢？
+![QA](https://img.alicdn.com/imgextra/i2/O1CN01LJQ5zW1IOv4xlYt6k_!!6000000000884-2-tps-855-525.png)
+
+🌝 ：第二个问题
+
+![QA](https://img.alicdn.com/imgextra/i3/O1CN01h0fgCS1WNupcRJqr3_!!6000000002777-2-tps-860-411.png)
+
+🌚 ：第二个回答
+
+![QA](https://img.alicdn.com/imgextra/i3/O1CN01h4Oqhu1EeFsSfNVXZ_!!6000000000376-2-tps-855-507.png)
+
+🌝 ：第三个问题
+
+![QA](https://img.alicdn.com/imgextra/i3/O1CN01iD3xp32AAFe6pUMTY_!!6000000008162-2-tps-860-374.png)
+
+🌚 ：第三个回答
+
+![QA](https://img.alicdn.com/imgextra/i2/O1CN01yDu0m41r9oZFojWHF_!!6000000005589-2-tps-855-433.png)
+
+## 第二轮问答
+
+第二轮由“如假包换GPT4”选手提问，由“我是GPT4”选手作答
+
+🌚 ：角色设定+第一个问题
+
+![QA](https://img.alicdn.com/imgextra/i2/O1CN01v1PrMd1HrwYtq3N7x_!!6000000000812-2-tps-855-517.png)
+
+🌝 ：角色设定+第一个回答
+
+![QA](https://img.alicdn.com/imgextra/i4/O1CN01Jm4Ke81CjAtwWAz9g_!!6000000000116-2-tps-855-422.png)
+
+![QA](https://img.alicdn.com/imgextra/i1/O1CN01CNkl9B1la1XSUOJIG_!!6000000004834-2-tps-855-441.png)
+
+🌚 ：第二个问题
+
+![QA](https://img.alicdn.com/imgextra/i1/O1CN01lD1DTl1FgpitHnhmI_!!6000000000517-2-tps-860-353.png)
+
+🌝 ：第二个回答
+
+![QA](https://img.alicdn.com/imgextra/i1/O1CN01v8g20421HjZh3EtET_!!6000000006960-2-tps-855-517.png)
+
+🌚 ：第三个问题
+
+![QA](https://img.alicdn.com/imgextra/i2/O1CN01Dbl4ub1UacaQ6vBlT_!!6000000002534-2-tps-860-353.png)
+
+🌝 ：第三个回答
+
+![QA](https://img.alicdn.com/imgextra/i2/O1CN01jDt0gk1SnKLN6Ay8W_!!6000000002291-2-tps-855-749.png)
 
 ## 测试应用介绍
 
