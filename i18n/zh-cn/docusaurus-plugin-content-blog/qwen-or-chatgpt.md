@@ -109,13 +109,13 @@ docker compose -p higress-ai up -d
 
 #### 第二步：在浏览器里访问 http://localhost:3000/，打开 NextChat 页面；
 
-![image](https://github.com/alibaba/higress/assets/6763318/9f94c99d-b8c3-462b-91a7-a730d80c99b1)
+![image](https://img.alicdn.com/imgextra/i1/O1CN01gJKDHH1vg6xdW0Zei_!!6000000006201-2-tps-1913-1129.png)
 
-#### 第三步：点击对话输入框工具栏最右侧的模型设置按钮，将模型切换为 `gpt-4-turbo` 并关闭窗口。
+#### 第三步：点击对话输入框工具栏最右侧的模型设置按钮，切换模型
 
 因为 Higress 的 AI Proxy 插件（可以访问 http://localhost:8001 登陆 Higress 的控制台查看插件配置）配置了 gpt-4-turbo 到 qwen-max 的模型映射，所以实际上这里提供的模型服务是 qwen-max 
 
-![image](https://github.com/alibaba/higress/assets/6763318/6b516d9f-b7ab-432f-bb64-6d6aade60467)
+![image](https://img.alicdn.com/imgextra/i3/O1CN0117qrg61hvlskpFBZK_!!6000000004340-2-tps-1913-1129.png)
 
 #### 完成！现在你就可以与 AI 进行对话了。
 
