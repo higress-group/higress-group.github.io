@@ -180,7 +180,7 @@ func onStreamingResponseBody(ctx wrapper.HttpContext, pluginConfig config.Plugin
 
 此外，由中国科学院软件研究所“开源软件供应链点亮计划”发起并长期支持的暑期开源活动“开源之夏”正在进行中。Higress 也有两个与 AI 相关的项目参与其中，分别是“基于向量相似度实现LLM结果召回的WASM插件”和“基于AI网关实现AI模型的轻量化部署”。欢迎各位在校同学积极报名参与。
 
-详情可查看开源之夏的 [Higress 社区页面](https://summer-ospp.ac.cn/org/orgdetail/1f8ea42c-86c9-46b8-b1f5-344de5741ef0)
+详情可查看开源之夏的 [Higress 社区页面](https://summer-ospp.ac.cn/org/orgdetail/1f8ea42c-86c9-46b8-b1f5-344de5741ef0)。
 
 ## 答案揭晓
 
