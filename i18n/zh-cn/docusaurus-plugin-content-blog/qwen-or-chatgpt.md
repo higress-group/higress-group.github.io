@@ -8,7 +8,7 @@ date: 2024-05-11
 
 ## 引子
 
-OpenAI 发布了最新的 GPT-4o 模型，通义千问也在前不久刚发布通义千问 2.5，并在中文场景已经和 GPT-4-Turbo 不分伯仲：
+OpenAI 发布了最新的 GPT-4o 模型，通义千问也在前不久刚发布通义千问 2.5，已经和 GPT-4-Turbo 不分伯仲：
 
 ![](https://img.alicdn.com/imgextra/i1/O1CN0148JrOd21va23GzrEb_!!6000000007047-0-tps-1080-813.jpg)
 
@@ -84,9 +84,12 @@ OpenAI 发布了最新的 GPT-4o 模型，通义千问也在前不久刚发布�
 
 ![QA](https://img.alicdn.com/imgextra/i2/O1CN01jDt0gk1SnKLN6Ay8W_!!6000000002291-2-tps-855-749.png)
 
-## 测试场景介绍
 
-聪明的你，可能已经有了答案，如果急于验证，可以直接划到文末查看；如果你对上面通义千问是如何扮演 ChatGPT，以及聊天框工具感到好奇，不妨先来看我们是如何搭建这个测试场景的。
+初看 🌚 的回答更简短，更符合设定的要求，但其实是因为 🌝 的提问更聚焦，相比下 🌚 的问题更发散，且都包含子问题，比较难用一两句话来作答。整体来说确实不分伯仲。
+
+不过，聪明的你，可能已经有了答案，如果急于验证，可以直接划到文末查看；如果你对上面通义千问是如何扮演 ChatGPT，以及聊天框工具感到好奇，不妨先来看我们是如何搭建这个测试场景的。
+
+## 测试场景介绍
 
 我们使用了两个开源软件工具来搭建：**NextChat** 和 **Higress**。
 
@@ -94,11 +97,13 @@ OpenAI 发布了最新的 GPT-4o 模型，通义千问也在前不久刚发布�
 
 [Higress](https://github.com/alibaba/higress) 是阿里云开源的高集成、易使用、易扩展、热更新的云原生API网关，遵循开源 Ingress/Gateway API 标准，提供流量调度、服务治理、安全防护三合一的网关能力。
 
+我们使用 NextChat 来搭建前端，并使用 Higress 将通义千问的应答转换为 OpenAI 协议返回给 NextChat。
+
 ### 具体搭建步骤：
 
 #### 第一步：启动容器
 
-完整的 docker compose 配置贴在 Higress 社区的这个 [issue](https://github.com/alibaba/higress/issues/938) 中
+完整的 docker compose 配置贴在 Higress 社区的这个 [issue](https://github.com/alibaba/higress/issues/938) 中，可以点击原文查看
 
 > 注意：
 > Higress 容器环境变量中的 `YOUR_DASHSCOPE_API_KEY` 需要替换为你自己的[通义千问的 API Key](https://help.aliyun.com/zh/dashscope/opening-service?spm=a2c4g.11186623.0.0.72c2369dLprd45)；
@@ -113,15 +118,15 @@ docker compose -p higress-ai up -d
 
 #### 第三步：点击对话输入框工具栏最右侧的模型设置按钮，切换模型
 
-因为 Higress 的 AI Proxy 插件（可以访问 http://localhost:8001 登陆 Higress 的控制台查看插件配置）配置了 gpt-4-turbo 到 qwen-max 的模型映射，所以实际上这里提供的模型服务是 qwen-max 
+因为 Higress 的 AI Proxy 插件（可以访问 http://localhost:8001 登陆 Higress 的控制台查看插件配置）配置了 gpt-4o 到 qwen-max （即通义千问 2.5）的模型映射，所以实际上这里提供的模型服务是 qwen-max 
 
-![image](https://img.alicdn.com/imgextra/i3/O1CN0117qrg61hvlskpFBZK_!!6000000004340-2-tps-1913-1129.png)
+![image](https://img.alicdn.com/imgextra/i1/O1CN01w8Zih920gdUdllSJS_!!6000000006879-0-tps-1150-1248.jpg)
 
 #### 完成！现在你就可以与 AI 进行对话了。
 
 可以看到 Higress 实现了流式的效果，这不仅基于 Higress 底层对 SSE 等流式协议的良好支持，也依赖 Higress 的 Wasm 插件扩展机制可以实现通义千问协议到 OpenAI 协议的流式转换
 
-![](https://img.alicdn.com/imgextra/i1/O1CN015T3D8D1xpODJHY5SO_!!6000000006492-1-tps-888-730.gif)
+![](https://img.alicdn.com/imgextra/i3/O1CN01VBt9mC1SYffZ7gbPY_!!6000000002259-1-tps-900-1188.gif)
 
 
 ## Higress AI 网关介绍
@@ -136,7 +141,7 @@ Higress 可以很好地解决这些痛点：
 
 1. 长连接：不同于 Nginx 变更配置需要 Reload，导致连接断开，Higress 基于 Envoy 实现了连接无损的真正配置热更新
 2. 高延时：Higress 基于安全网关能力可以提供 CC 防护能力，并面向 AI 场景，除了 QPS，还可以扩展针对 Token 生成的限流防护
-3. 大带宽：Higress 支持完全流式转发，在 AI Web应 用场景下，所需的内存占用极低，同时也可以开发 Wasm 插件对请求和响应进行自定义逻辑的流式处理
+3. 大带宽：Higress 支持完全流式转发，在 AI Web 应用场景下，所需的内存占用极低，同时也可以开发 Wasm 插件对请求和响应进行自定义逻辑的流式处理
 
 从上面的测试环境搭建流程来看，Higress AI 代理插件可以很方便的让 AI 对话应用直接对接通义千问等接口契约不同的大模型服务。除了通义千问和 ChatGPT 之外，这个插件还支持 Azure OpenAI 和月之暗面（Moonshot）等大模型服务提供商，并且支持配置一个外部文件地址作为聊天上下文，可以用来快速搭建一个个人 AI 助理服务。
 
@@ -145,7 +150,7 @@ Higress 可以很好地解决这些痛点：
 对于流式处理可以参考这段代码：
 
 ```go
-// 这个handle函数会重入，响应body流式分块后，每次调用次函数传入一个分块（chunk），isLastChunk标志是否是最后一个分块，handle处理完饭后修改后的分块
+// 这个handle函数会重入，响应body流式分块后，每次调用次函数传入一个分块（chunk），isLastChunk标志是否是最后一个分块，handle处理完返回修改后的分块
 func onStreamingResponseBody(ctx wrapper.HttpContext, pluginConfig config.PluginConfig, chunk []byte, isLastChunk bool, log wrapper.Log) []byte {
 	activeProvider := pluginConfig.GetProvider()
 
@@ -169,7 +174,7 @@ func onStreamingResponseBody(ctx wrapper.HttpContext, pluginConfig config.Plugin
 }
 ```
 
-如果大家有对接新的大模型服务，以及自定义 prompt 等需求，欢迎到社区提 issue，也可以进微信群交流：
+如果大家有对接新的大模型服务等需求，欢迎到社区提 issue，也可以进微信群交流：
 
 ![](https://img.alicdn.com/imgextra/i4/O1CN01m8gl531LDsNKkneiF_!!6000000001266-0-tps-824-1280.jpg)
 
