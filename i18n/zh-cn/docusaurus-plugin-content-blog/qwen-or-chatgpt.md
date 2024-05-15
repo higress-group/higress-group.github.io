@@ -85,7 +85,7 @@ OpenAI 发布了最新的 GPT-4o 模型，通义千问也在前不久刚发布�
 ![QA](https://img.alicdn.com/imgextra/i2/O1CN01jDt0gk1SnKLN6Ay8W_!!6000000002291-2-tps-855-749.png)
 
 
-初看 🌚 的回答更简短，更符合设定的要求，但其实是因为 🌝 的提问更聚焦，相比下 🌚 的问题更发散，且都包含子问题，比较难用一两句话来作答。整体来说确实不分伯仲。
+🌚 的回答更简短，更符合设定的要求，也是因为 🌝 的提问根据给定的要求更聚焦，相比下 🌚 的问题更发散，且都包含子问题，比较难用一两句话来作答。整体来说确实不分伯仲。
 
 不过，聪明的你，可能已经有了答案。如果急于验证，可以直接划到文末查看。如果你对上面通义千问是如何扮演 ChatGPT，以及聊天框工具感到好奇，不妨先来看我们是如何搭建这个测试场景的。
 
@@ -174,11 +174,15 @@ func onStreamingResponseBody(ctx wrapper.HttpContext, pluginConfig config.Plugin
 }
 ```
 
-如果大家有对接新的大模型服务等需求，欢迎到社区提 issue，也可以进微信群交流：
+有兴趣参与 Higress 社区贡献，实现更多大模型 API 的适配，可以到这个 issue 下认领任务：
 
-![](https://img.alicdn.com/imgextra/i4/O1CN01m8gl531LDsNKkneiF_!!6000000001266-0-tps-824-1280.jpg)
+https://github.com/alibaba/higress/issues/940
 
-此外，由中国科学院软件研究所“开源软件供应链点亮计划”发起并长期支持的暑期开源活动“开源之夏”正在进行中。Higress 也有两个与 AI 相关的项目参与其中，分别是“基于向量相似度实现LLM结果召回的WASM插件”和“基于AI网关实现AI模型的轻量化部署”。欢迎各位在校同学积极报名参与。
+有任何使用问题，也欢迎到社区提 issue，也可以进微信或钉钉群交流：
+
+![](https://img.alicdn.com/imgextra/i1/O1CN01LWh6QW1TxEWflxKVg_!!6000000002448-0-tps-720-405.jpg)
+
+此外，由中国科学院软件研究所“开源软件供应链点亮计划”发起并长期支持的暑期开源活动“开源之夏”正在进行中。Higress 也有两个与 AI 网关相关的项目参与其中，分别是“基于向量相似度实现LLM结果召回的WASM插件”和“基于AI网关实现AI模型的轻量化部署”。欢迎各位在校同学积极报名参与。
 
 详情可查看开源之夏的 [Higress 社区页面](https://summer-ospp.ac.cn/org/orgdetail/1f8ea42c-86c9-46b8-b1f5-344de5741ef0)。
 
