@@ -178,6 +178,10 @@ func onStreamingResponseBody(ctx wrapper.HttpContext, pluginConfig config.Plugin
 
 https://github.com/alibaba/higress/issues/940
 
+也欢迎参与 NextChat 社区贡献，参与到 3.0 版本的建设中：
+
+https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/issues/4622
+
 有任何使用问题，也欢迎到社区提 issue，也可以进微信或钉钉群交流：
 
 ![](https://img.alicdn.com/imgextra/i1/O1CN01LWh6QW1TxEWflxKVg_!!6000000002448-0-tps-720-405.jpg)
