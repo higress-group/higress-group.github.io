@@ -2,7 +2,7 @@
 title: 通义千问2.5“客串”ChatGPT4，你分的清吗
 keywords: [Higress,Wasm,AI,Qwen,ChatGPT,NextChat]
 description: 基于通义千问大模型，使用 Higress 和 NextChat 搭建跨平台的私人 ChatGPT 应用
-author: CH3CHO
+author: CH3CHO、澄潭
 date: 2024-05-11
 ---
 
@@ -14,13 +14,13 @@ OpenAI 发布了最新的 GPT-4o 模型，通义千问也在前不久刚发布�
 
 既然目前还没有和 GPT-4o 文本生成能力的对比数据，就让我们来和大模型一起做个游戏测试一下：
 
-我们让通义千问 2.5 扮演 GPT4，来和真正的 GPT4 进行问答 PK，读者不妨来猜一猜谁是通义千问。
-
-两名选手的头像和昵称分别是：
-
-🌝 ：我是GPT4
-
-🌚 ：如假包换GPT4
+> 我们让通义千问 2.5 扮演 GPT4，来和真正的 GPT4 进行问答 PK，读者不妨来猜一猜谁是通义千问。
+>
+> 两名选手的头像和昵称分别是：
+>
+> 🌝 ：我是GPT4
+> 
+> 🌚 ：如假包换GPT4
 
 谁是通义千问，谁是ChatGPT，答案将在文末揭晓。
 
@@ -87,7 +87,7 @@ OpenAI 发布了最新的 GPT-4o 模型，通义千问也在前不久刚发布�
 
 初看 🌚 的回答更简短，更符合设定的要求，但其实是因为 🌝 的提问更聚焦，相比下 🌚 的问题更发散，且都包含子问题，比较难用一两句话来作答。整体来说确实不分伯仲。
 
-不过，聪明的你，可能已经有了答案，如果急于验证，可以直接划到文末查看；如果你对上面通义千问是如何扮演 ChatGPT，以及聊天框工具感到好奇，不妨先来看我们是如何搭建这个测试场景的。
+不过，聪明的你，可能已经有了答案。如果急于验证，可以直接划到文末查看。如果你对上面通义千问是如何扮演 ChatGPT，以及聊天框工具感到好奇，不妨先来看我们是如何搭建这个测试场景的。
 
 ## 测试场景介绍
 
@@ -103,9 +103,11 @@ OpenAI 发布了最新的 GPT-4o 模型，通义千问也在前不久刚发布�
 
 #### 第一步：启动容器
 
-完整的 docker compose 配置贴在 Higress 社区的这个 [issue](https://github.com/alibaba/higress/issues/938) 中
-> 注意：
-> Higress 容器环境变量中的 `YOUR_DASHSCOPE_API_KEY` 需要替换为你自己的[通义千问的 API Key](https://help.aliyun.com/zh/dashscope/opening-service?spm=a2c4g.11186623.0.0.72c2369dLprd45)；
+完整的 docker compose 配置贴在 Higress 社区的这个 [issue](https://github.com/alibaba/higress/issues/938) 中。
+
+> **注意：**
+>
+> Higress 容器环境变量中的 `YOUR_DASHSCOPE_API_KEY` 需要替换为你自己的[通义千问的 API Key](https://help.aliyun.com/zh/dashscope/opening-service?spm=a2c4g.11186623.0.0.72c2369dLprd45)。
 
 ```bash
 docker compose -p higress-ai up -d
@@ -117,7 +119,7 @@ docker compose -p higress-ai up -d
 
 #### 第三步：点击对话输入框工具栏最右侧的模型设置按钮，切换模型
 
-因为 Higress 的 AI Proxy 插件（可以访问 http://localhost:8001 登陆 Higress 的控制台查看插件配置）配置了 gpt-4o 到 qwen-max （即通义千问 2.5）的模型映射，所以实际上这里提供的模型服务是 qwen-max 
+因为 Higress 的 AI Proxy 插件（可以访问 http://localhost:8001 登录 Higress 的控制台查看插件配置）配置了 gpt-4o 到 qwen-max （即通义千问 2.5）的模型映射，所以实际上这里提供的模型服务是 qwen-max 
 
 ![image](https://img.alicdn.com/imgextra/i1/O1CN01w8Zih920gdUdllSJS_!!6000000006879-0-tps-1150-1248.jpg)
 
@@ -126,7 +128,6 @@ docker compose -p higress-ai up -d
 可以看到 Higress 实现了流式的效果，这不仅基于 Higress 底层对 SSE 等流式协议的良好支持，也依赖 Higress 的 Wasm 插件扩展机制可以实现通义千问协议到 OpenAI 协议的流式转换
 
 ![](https://img.alicdn.com/imgextra/i3/O1CN01VBt9mC1SYffZ7gbPY_!!6000000002259-1-tps-900-1188.gif)
-
 
 ## Higress AI 网关介绍
 
@@ -146,10 +147,10 @@ Higress 可以很好地解决这些痛点：
 
 整个插件使用 Go 语言进行开发，代码可以在这里找到：https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/ai-proxy
 
-对于流式处理可以参考这段代码：
+对于流式相应的处理方法，大家可以参考这段代码：
 
 ```go
-// 这个handle函数会重入，响应body流式分块后，每次调用次函数传入一个分块（chunk），isLastChunk标志是否是最后一个分块，handle处理完返回修改后的分块
+// 这个 handler 函数会重入。在收到响应 body 的流式分块后，每次调用此函数会传入一个分块（chunk）。isLastChunk 标识是否是最后一个分块。方法处理完需要返回修改后的分块。
 func onStreamingResponseBody(ctx wrapper.HttpContext, pluginConfig config.PluginConfig, chunk []byte, isLastChunk bool, log wrapper.Log) []byte {
 	activeProvider := pluginConfig.GetProvider()
 
@@ -177,12 +178,9 @@ func onStreamingResponseBody(ctx wrapper.HttpContext, pluginConfig config.Plugin
 
 ![](https://img.alicdn.com/imgextra/i4/O1CN01m8gl531LDsNKkneiF_!!6000000001266-0-tps-824-1280.jpg)
 
-
 此外，由中国科学院软件研究所“开源软件供应链点亮计划”发起并长期支持的暑期开源活动“开源之夏”正在进行中。Higress 也有两个与 AI 相关的项目参与其中，分别是“基于向量相似度实现LLM结果召回的WASM插件”和“基于AI网关实现AI模型的轻量化部署”。欢迎各位在校同学积极报名参与。
 
 详情可查看开源之夏的 [Higress 社区页面](https://summer-ospp.ac.cn/org/orgdetail/1f8ea42c-86c9-46b8-b1f5-344de5741ef0)
-
-
 
 ## 答案揭晓
 
