@@ -21,7 +21,8 @@ helm repo add higress.io https://higress.io/helm-charts
 helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes
 ```
 
-> 中国大陆可以使用以下方法加速安装
+> 中国大陆用户可以使用以下方法加速安装：
+> 
 > ```bash
 > helm repo add higress.cn https://higress.cn/helm-charts
 > helm upgrade --install higress -n higress-system higress.cn/higress --create-namespace --render-subchart-notes
