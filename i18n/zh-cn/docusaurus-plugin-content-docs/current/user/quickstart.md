@@ -21,6 +21,13 @@ helm repo add higress.io https://higress.io/helm-charts
 helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes
 ```
 
+> 中国大陆用户可以使用以下方法加速安装：
+> 
+> ```bash
+> helm repo add higress.cn https://higress.cn/helm-charts
+> helm upgrade --install higress -n higress-system higress.cn/higress --create-namespace --render-subchart-notes
+> ```
+
 获取 Higress Gateway 的 LoadBalancer IP，并记录下来。后续可以通过该 IP 的 80 和 443 端口访问 Higress Gateway。
 ```bash
 kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
