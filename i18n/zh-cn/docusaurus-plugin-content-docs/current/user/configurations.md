@@ -45,7 +45,6 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | higress-core.gateway.podAnnotations.prometheus.io/port	        | 指定 Prometheus 监控的端口。                                                                      | 15020              |
 | higress-core.gateway.podAnnotations.prometheus.io/scrape	      | 指示 Prometheus 是否应该监控该 Pod 。如果该值为"true"，则 Prometheus 将监控该 Pod ；如果该值为 "false" ，则不会监控该 Pod 。 |  true               |
 | higress-core.gateway.podAnnotations.prometheus.io/path	        | 指定 Prometheus 监控该 Pod 时，需要访问的 URL 路径。在这里设置为"/stats/prometheus"。                           | /stats/prometheus |
-| higress-core.gateway.podAnnotations.sidecar.istio.io/inject	   | 指定是否启用 Istio Sidecar 模式。                                                                  | false              |
 | higress-core.gateway.service.type	                             | 指定 Service 的类型                                                                            | LoadBalancer      |
 | higress-core.gateway.service.loadBalancerIP                    | 指定 LoadBalancer 的 IP 地址                                                                   | ""                  |
 | higress-core.gateway.service.loadBalancerSourceRanges	         | 指定 LoadBalancer 允许的源 IP 范围。                                                               | []                  |
@@ -124,7 +123,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | higress-core.pilot.jwksResolverExtraRootCA	                       | 提供 PEM 格式的根证书，以便在解析 JWKS URI 时由 pilot 信任。                                                                      | ""    |
 | higress-core.pilot.configSource.subscribedResources	              | 指定配置源的来源，如果未指定，则使用默认的 MCP 。指定订阅的 Kubernetes 资源列表。                                                              | []     |
 | higress-core.pilot.plugins	                                       | 指定要启用的插件列表。                                                                                                    | []     |
-| higress-core.pilot.keepaliveMaxServerConnectionAge	               | 限制 sidecar 与 pilot 连接的最长时间。                                                                                    | 30m    |
+| higress-core.pilot.keepaliveMaxServerConnectionAge	               | 限制 gateway 与 controller 连接的最长时间。                                                                                    | 30m    |
 | higress-core.pilot.deploymentLabels	                              | 为部署添加额外的标签。                                                                                                    | {}     |
 | higress-core.pilot.configMap	                                     | 安装由values.yaml生成的 mesh config ，如果为 false ，则 Pilot 将使用默认值（默认情况下）或用户提供的值，如果为 false ，则 Pilot 将使用默认值（默认情况下）或用户提供的值 | true   |
 | higress-core.pilot.podLabels	                                     | 为 Pod 添加额外的标签，以用于监控和日志记录配置。                                                                                    | {}     |
