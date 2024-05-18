@@ -193,7 +193,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 
 ```bash
 go mod tidy
-tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="custommalloc nottinygc_finalizer" ./main.go
+tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="custommalloc nottinygc_finalizer" ./
 ```
 
 如果windows下编译出现error: could not find wasm-opt, set the WASMOPT environment variable to override 则需要下载https://github.com/WebAssembly/binaryen/ 里面包含了bin\wasm-opt.exe将这个文件拷贝到tinygo的bin目录下重新编译即可。 <br />
