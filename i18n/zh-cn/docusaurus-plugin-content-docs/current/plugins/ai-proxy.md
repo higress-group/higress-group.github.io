@@ -522,7 +522,7 @@ spec:
 
 访问示例：
 
-```json
+```bash
 curl "http://<YOUR-DOMAIN>/v1/chat/completions" -H "Content-Type: application/json" -d '{
   "model": "llama3-8b-8192",
   "messages": [
