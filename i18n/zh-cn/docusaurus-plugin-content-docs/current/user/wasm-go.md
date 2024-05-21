@@ -215,7 +215,7 @@ tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="customm
 version: '3.7'
 services:
   envoy:
-    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:1.3.1
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:v1.4.0-rc.1
     entrypoint: /usr/local/bin/envoy
     # 注意这里对wasm开启了debug级别日志，正式部署时则默认info级别
     command: -c /etc/envoy/envoy.yaml --component-log-level wasm:debug
