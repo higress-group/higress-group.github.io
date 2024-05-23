@@ -67,7 +67,7 @@ spec:
 
 ```bash
 curl http://example.com?foo=Bar
-curl http://exmaple.com/foo/Swagger.html
+curl http://example.com/foo/Swagger.html
 ```
 
 如果希望对 default 命名空间下名称为 foo 的 Ingress (匹配path前缀为`/foo`的请求)生效如下配置:
