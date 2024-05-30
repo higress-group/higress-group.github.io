@@ -518,6 +518,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 	// 需要等待异步回调完成，返回Pause状态，可以被ResumeHttpRequest恢复
 	return types.ActionPause
 }
+```
 
 ### 在插件中调用Redis
 
