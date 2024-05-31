@@ -11,6 +11,11 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 本规范旨在定义对 Higress Wasm Plugin 镜像的内容和构建方式。在编写时，笔者参考了 [Wasm Image Specification](https://github.com/solo-io/wasm/blob/master/spec/spec-compat.md)。
 
+> 注意：本规范使用 OCI 镜像格式，并不限定插件只能使用 OCI 镜像，对于自定义插件开发，请参考[自定义插件](../plugins/custom.md)里介绍的更简单的方式。
+>
+> OCI 镜像是用来规范所有平台推出的通用标准插件使用
+
+
 ## 2. 镜像结构
 
 每个镜像必须基于 `scratch` 使用 [OCI 格式规范](https://github.com/opencontainers/image-spec)进行构建，且可包含以下文件：
@@ -142,7 +147,7 @@ TINYGO_VERSION="0.25.0"
 ORAS_VERSION="1.0.0"
 PLUGIN_NAME="hello-world"
 BUILDER_IMAGE="higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/wasm-go-builder:go${GO_VERSION}-tinygo${TINYGO_VERSION}-oras${ORAS_VERSION}"
-docker run -v ${PWD}:/workspace -e PLUGIN_NAME=${PLUGIN_NAME} -it --rm  /bin/bash
+docker run -v ${PWD}:/workspace -e PLUGIN_NAME=${PLUGIN_NAME} -it --rm ${BUILDER_IMAGE} /bin/bash
 ```
 
 2. 在容器中构建 Wasm 文件
