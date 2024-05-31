@@ -142,7 +142,7 @@ TINYGO_VERSION="0.25.0"
 ORAS_VERSION="1.0.0"
 PLUGIN_NAME="hello-world"
 BUILDER_IMAGE="higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/wasm-go-builder:go${GO_VERSION}-tinygo${TINYGO_VERSION}-oras${ORAS_VERSION}"
-docker run -v ${PWD}:/workspace -e PLUGIN_NAME=${PLUGIN_NAME} -it --rm  /bin/bash
+docker run -v ${PWD}:/workspace -e PLUGIN_NAME=${PLUGIN_NAME} -it --rm ${BUILDER_IMAGE} /bin/bash
 ```
 
 2. 在容器中构建 Wasm 文件
