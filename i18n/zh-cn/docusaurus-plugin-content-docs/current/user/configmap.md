@@ -5,7 +5,7 @@ description: 全局配置说明。
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/configmap.md
 ---
 
-## 全局配置
+# 全局配置
 
 Higress 的全局配置 ConfigMap 对象 higress-config 增加 higress 项， 参考配置如下： 
 
@@ -141,3 +141,70 @@ metadata:
 |------------|--------------------|-----------------------|---------------------|
 | connectionBufferLimits     | int            | 连接缓冲区大小，单位字节          | 1048576               |
 | idleTimeout    | int            | 连接空闲超时时间(空闲定义是没有未处理完的请求，如果有请求在处理中，不会判定为idle)，单位秒，0表示关闭该配置 | 10               |
+
+
+# TLS 证书全局配置
+
+Higress TLS 的全局配置 ConfigMap 对象 higress-https ， 参考配置如下： 
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: higress-https
+  namespace: higress-system
+data:
+  cert: |
+    automaticHttps: true
+    renewBeforeDays: 30
+    fallbackForInvalidSecret: true
+    acmeIssuer:
+    - name: letsencrypt
+      email: test@example.com
+    credentialConfig:
+    - cacertSecret: foo-com-ca-secret
+      domains:
+      - foo.com
+      - '*.foo.com'
+      tlsSecret: foo-com-secret
+    version: test
+```
+
+## 配置说明
+| 字段                       | 类型      | 说明                                                                            | 默认                    |
+|--------------------------|---------|-------------------------------------------------------------------------------|-----------------------|
+| name                     | boolean | 是否启动通过 ACME Issuer 来签发证书                                                      | true                  |
+| renewBeforeDays          | int     | 证书过期前多少天自动Renew， 最大值为90天                                                      | 30                    |
+| fallbackForInvalidSecret | boolean | 如果开启，当 ingress TLS 里配置 secretName 找不着时候，会再在 credentialConfig 配置里根据域名匹配 secret | false                 |
+| acmeIssuer               | array   | acmeIssuer 设置                                                                 | 参考下面 acmeIssuer       |
+| credentialConfig         | array   | credentialConfig 设置                                                           | 参考下面 credentialConfig |
+| version                  | string  | 版本信息                                                                          | 空                     |
+
+
+## credentialConfig 配置
+
+| 字段           | 类型     | 说明                                                                                | 默认 |
+|--------------|--------|-----------------------------------------------------------------------------------|----|
+| tlsSecret    | string | 证书 secret 名称                                                                      | 空  |
+| cacertSecret | string | 证书 CA secret  名称                                                                  | 空  |
+| tlsIssuer    | string | 对应 ACME Issuer 名称，现在只支持 letsencrypt。 如果设置为 letsencrypt 来签发证书， domains下只能配置一个域名，而且不能是泛域名 | 空  |
+| domains      | array  | 域名配置，可以是泛域名                                                                       | 空  |
+
+
+## acmeIssuer 配置
+
+| 字段                       | 类型     | 说明                            | 默认 |
+|--------------------------|--------|-------------------------------|---|
+| name                     | string | ACME Issuer 名称，只支持 letsencrypt | 空 |
+| email                    | string | ACME Issuer 账号                | 空 |
+
+## 如何开启 ACME Issuer 自动管理证书
+
+需要在安装启动 AutomaticHttps 和配置账号
+
+| **参数名**                          | **参数说明**                            | **默认值** |
+|----------------------------------|-------------------------------------|---------|
+|higress-core.controller.automaticHttps.enabled | 是否开启ACME Issuer签发证书，只支持 letsencrypt | false   |
+|higress-core.controller.automaticHttps.email   | ACME Issuer 账号，如果为空，系统随机生成账号        | 空       |
+
+
