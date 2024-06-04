@@ -201,13 +201,13 @@ data:
 | name                     | string | ACME Issuer 名称，只支持 letsencrypt | - |
 | email                    | string | ACME Issuer 邮箱，用于通知证书变更等事件                | - |
 
-### 如何开启 ACME Issuer 自动管理证书
+### 如何开启和关闭 ACME Issuer 自动管理证书
 
-需要在安装启动 AutomaticHttps 和配置账号
+安装时默认启动 ACME Issuer 自动管理证书和系统随机生成邮箱地址，具体配置参数如下：
 
 | **参数名**                          | **参数说明**                            | **默认值** |
 |----------------------------------|-------------------------------------|---------|
-|higress-core.controller.automaticHttps.enabled | 是否开启ACME Issuer签发证书，只支持 letsencrypt | false   |
-|higress-core.controller.automaticHttps.email   | ACME Issuer 邮箱，如果为空，系统随机生成账号        | -       |
+|higress-core.controller.automaticHttps.enabled | 是否开启ACME Issuer签发证书，只支持 letsencrypt | true   |
+|higress-core.controller.automaticHttps.email   | ACME Issuer 邮箱，如果为空，系统随机生成邮箱地址        | -       |
 
 
