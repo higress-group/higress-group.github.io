@@ -165,10 +165,9 @@ data:
     - name: letsencrypt
       email: test@example.com
     credentialConfig:
-    - cacertSecret: foo-com-ca-secret
+    - tlsIssuer: letsencrypt
       domains:
       - foo.com
-      - '*.foo.com'
       tlsSecret: foo-com-secret
     version: test
 ```
@@ -189,8 +188,7 @@ data:
 | 字段           | 类型     | 说明                                                                                | 默认 |
 |--------------|--------|-----------------------------------------------------------------------------------|----|
 | tlsSecret    | string | 证书 secret 名称                                                                      | -  |
-| cacertSecret | string | 证书 CA secret  名称                                                                  | -  |
-| tlsIssuer    | string | 对应 ACME Issuer 名称，现在只支持 letsencrypt。 如果设置为 letsencrypt 来签发证书， domains下只能配置一个域名，而且不能是泛域名 | -  |
+| tlsIssuer    | string | 对应 ACME Issuer 名称，现在只支持 letsencrypt。不填 tlsIssuer 时，domains可以填列表或泛域名，用于全局管理这些域名的secret配置； 如果设置为 letsencrypt， domains 下只能配置一个域名，而且不能是泛域名，并且 tlsSecret 不能是已经存在的非 Higress 创建的自动证书 | -  |
 | domains      | array  | 域名配置，可以是泛域名                                                                       | -  |
 
 
