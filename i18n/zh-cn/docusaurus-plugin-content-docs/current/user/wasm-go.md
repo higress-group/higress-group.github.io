@@ -575,7 +575,7 @@ func parseConfig(json gjson.Result, config *RedisCallConfig, log wrapper.Log) er
 	qpm := json.Get("qpm").Int()
 	config.qpm = int(qpm)
 	config.client = wrapper.NewRedisClusterClient(wrapper.FQDNCluster{
-		ServiceName: serviceName,
+		FQDN: serviceName,
 		Port: servicePort,
 	})
 	return config.client.Init(username, password, timeout)
