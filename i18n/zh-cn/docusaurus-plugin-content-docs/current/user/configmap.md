@@ -169,7 +169,6 @@ data:
       domains:
       - foo.com
       tlsSecret: foo-com-secret
-    version: test
 ```
 
 ### 配置说明
@@ -180,7 +179,6 @@ data:
 | fallbackForInvalidSecret | boolean | 如果开启，当 ingress TLS 里配置 secretName 不存在时，会在 credentialConfig 配置里根据域名匹配 secret | false                 |
 | acmeIssuer               | array   | acmeIssuer 设置                                                                 | 参考下面 acmeIssuer       |
 | credentialConfig         | array   | credentialConfig 设置                                                           | 参考下面 credentialConfig |
-| version                  | string  | 版本信息                                                                          | -                     |
 
 
 ### credentialConfig 配置
