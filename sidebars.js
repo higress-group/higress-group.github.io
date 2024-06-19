@@ -34,11 +34,11 @@ const sidebars = {
         {
           type: 'category',
           label: 'Plugins',
-          items: ['plugins/intro', 'plugins/custom', 'plugins/jwt-auth', 'plugins/hmac-auth', 'plugins/key-auth', 'plugins/basic-auth', 'plugins/key-rate-limit', 'plugins/custom-response', 'plugins/bot-detect', 'plugins/request-block', 'plugins/waf'],
+          items: ['plugins/intro', 'plugins/custom', 'plugins/ai-proxy', 'plugins/jwt-auth', 'plugins/hmac-auth', 'plugins/key-auth', 'plugins/basic-auth', 'plugins/key-rate-limit', 'plugins/custom-response', 'plugins/bot-detect', 'plugins/request-block', 'plugins/waf'],
         },
         {
           type: 'category',
-          label: 'Parameters Configurations Guide',
+          label: 'Best Practices',
           items: ['user/wasm-go', 'user/kruise-rollout', 'user/nacos-route', 'user/spring-cloud', 'user/dubbo', 'user/prometheus', 'user/waf'],
         },
       ],
@@ -61,7 +61,7 @@ const sidebars = {
       type: 'category',
       label: 'Developer Guide',
       collapsible: false,
-      items: ['dev/code', 'dev/architecture', 'dev/CustomResourceDefinition', 'dev/e2e-debug'],
+      items: ['dev/code', 'dev/architecture', 'dev/CustomResourceDefinition', 'dev/e2e-debug', 'dev/console-dev'],
     },
   ],
   developers: [

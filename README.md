@@ -1,6 +1,6 @@
 # Higress Official Website
 
-[![CI Status](https://github.com/higress-group/higress-group.github.io/workflows/higress.io%20deploy/badge.svg)](https://github.com/higress-group/higress-group.github.io/actions)
+[![CI Status](https://github.com/higress-group/higress-group.github.io/workflows/higress.io%20deploy%20on%20oss/badge.svg)](https://github.com/higress-group/higress-group.github.io/actions)
 
 All website material of https://higress.io.
 
@@ -41,12 +41,12 @@ Please be noted that locale switching function doesn't work if you start the web
 
 ### Add a new doc
  
-1. Add new .md file under i18n/en-us/docusaurus-plugin-content-docs/current or i18n/zh-cn/docusaurus-plugin-content-docs/current. Corresponding to Chinese file and English file , and the Chinese and English file names should be consistent.
+1. Add new .md file under i18n/en-us/docusaurus-plugin-content-docs/current or i18n/zh-cn/docusaurus-plugin-content-docs/current. Corresponding to Chinese file and English file , and the Chinese and English file names should be consistent. Due to the special reasons of the current i18n implementation, you also need to add a stub file with the same name in the [docs](./docs) directory.
 2. Update sidebar.js, add a new entry to the blog in either en-us or zh-cn.
 
 ### Add a new article for developers
 
-1. Add new .md file under i18n/en-us/docusaurus-plugin-content-docs/current/developers or i18n/zh-cn/docusaurus-plugin-content-docs/current/developers, the file name should end up with _dev.md. Note that the suffix _dev is necessary.
+1. Add new .md file under i18n/en-us/docusaurus-plugin-content-docs/current/developers or i18n/zh-cn/docusaurus-plugin-content-docs/current/developers, the file name should end up with _dev.md. Note that the suffix _dev is necessary. Due to the special reasons of the current i18n implementation, you also need to add a stub file with the same name in the [docs](./docs) directory.
 2. Update sidebar.js, add a new entry in either en-us or zh-cn.
 
 ### Add a new blog

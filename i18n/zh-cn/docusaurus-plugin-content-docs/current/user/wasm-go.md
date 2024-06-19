@@ -36,7 +36,6 @@ export PATH=$PATH:/usr/local/go/bin
 
 3. 执行 `go version`，输出当前安装的版本，表明安装成功
 
-
 ### 2. TinyGo
 
 （要求 0.28.1 版本以上）<br />官方指引链接：[https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
@@ -97,7 +96,7 @@ go env -w GOPROXY=https://proxy.golang.com.cn,direct
 
 4. 下载构建插件的依赖
 ```bash
-go get github.com/tetratelabs/proxy-wasm-go-sdk
+go get github.com/higress-group/proxy-wasm-go-sdk
 go get github.com/alibaba/higress/plugins/wasm-go@main
 go get github.com/tidwall/gjson
 ```
@@ -109,44 +108,43 @@ go get github.com/tidwall/gjson
 package main
 
 import (
-    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
-    "github.com/tidwall/gjson"
+	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/tidwall/gjson"
 )
 
 func main() {
-        wrapper.SetCtx(
-                // 插件名称
-                "my-plugin",
-                // 为解析插件配置，设置自定义函数
-                wrapper.ParseConfigBy(parseConfig),
-                // 为处理请求头，设置自定义函数
-                wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
-        )
+	wrapper.SetCtx(
+		// 插件名称
+		"my-plugin",
+		// 为解析插件配置，设置自定义函数
+		 wrapper.ParseConfigBy(parseConfig),
+		// 为处理请求头，设置自定义函数
+		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+	)
 }
 
 // 自定义插件配置
 type MyConfig struct {
-        mockEnable bool
+	mockEnable bool
 }
 
 // 在控制台插件配置中填写的yaml配置会自动转换为json，此处直接从json这个参数里解析配置即可
 func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
-        // 解析出配置，更新到config中
-    	config.mockEnable = json.Get("mockEnable").Bool()
-        return nil
+	// 解析出配置，更新到config中
+	config.mockEnable = json.Get("mockEnable").Bool()
+	return nil
 }
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
-        proxywasm.AddHttpRequestHeader("hello", "world")
-        if config.mockEnable {
-                proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
-        }
-        return types.ActionContinue
+	proxywasm.AddHttpRequestHeader("hello", "world")
+	if config.mockEnable {
+		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
+	}
+	return types.ActionContinue
 }
 ```
-
 
 #### HTTP 处理挂载点
 上面示例代码中通过 `wrapper.ProcessRequestHeadersBy`将自定义函数 `onHttpRequestHeaders`用于`HTTP 请求头处理阶段`处理请求。除此之外，还可以通过下面方式，设置其他阶段的自定义处理函数
@@ -192,18 +190,18 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 |  | ResumeHttpResponse | 恢复先前被暂停的应答处理流程 | - |
 
 ### 3. 编译生成 WASM 文件
-#### Linux执行以下命令
+
 ```bash
 go mod tidy
-tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
+tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="custommalloc nottinygc_finalizer" ./
 ```
-#### Windows执行以下命令 (参数将单引号改为双引号)
-```bash
-go mod tidy
-tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="custommalloc nottinygc_finalizer" ./main.go
-```
-如果编译出现error: could not find wasm-opt, set the WASMOPT environment variable to override 则需要下载https://github.com/WebAssembly/binaryen/ 里面包含了bin\wasm-opt.exe将这个文件拷贝到tinygo的bin目录下重新编译即可。 <br />
-编译成功会在当前目录下创建文件 main.wasm。这个文件在下面本地调试的例子中也会被用到。<br />在使用云原生网关插件市场的自定义插件功能时，直接上传该文件即可。
+
+如果windows下编译出现error: could not find wasm-opt, set the WASMOPT environment variable to override 则需要下载https://github.com/WebAssembly/binaryen/ 里面包含了bin\wasm-opt.exe将这个文件拷贝到tinygo的bin目录下重新编译即可。 <br />
+编译成功会在当前目录下创建文件 main.wasm。这个文件在下面本地调试的例子中也会被用到。<br />
+
+如果linux/mac下编译出现该错误，使用apt/brew等系统自带包管理工具安装下binaryen即可，例如`brew install binaryen`
+
+要在Higress中配合Wasmplugin CRD或者Console的UI交互配置该插件，需要将该wasm文件打包成oci或者docker镜像，可以参考这篇文档：[《自定义插件》](https://higress.io/zh-cn/docs/plugins/custom)
 
 ## 三、本地调试
 
@@ -217,7 +215,7 @@ tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="customm
 version: '3.7'
 services:
   envoy:
-    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:1.3.1
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:v1.4.0-rc.1
     entrypoint: /usr/local/bin/envoy
     # 注意这里对wasm开启了debug级别日志，正式部署时则默认info级别
     command: -c /etc/envoy/envoy.yaml --component-log-level wasm:debug
@@ -389,23 +387,23 @@ hello world
 package main
 
 import (
-    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-    "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 )
 
 func main() {
-        wrapper.SetCtx(
-                "hello-world",
-                wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
-        )
+	wrapper.SetCtx(
+		"hello-world",
+		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+	)
 }
 
 type MyConfig struct {}
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
-        proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
-        return types.ActionContinue
+	proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
+	return types.ActionContinue
 }
 ```
 
@@ -416,13 +414,13 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 package main
 
 import (
-  	"errors"
-  	"net/http"
-  	"strings"
-    "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-  	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-  	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
-  	"github.com/tidwall/gjson"
+	"errors"
+	"net/http"
+	"strings"
+	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/tidwall/gjson"
 )
 
 func main() {
@@ -519,5 +517,119 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 		})
 	// 需要等待异步回调完成，返回Pause状态，可以被ResumeHttpRequest恢复
 	return types.ActionPause
+}
+```
+
+### 在插件中调用Redis
+
+使用如下示例代码实现Redis限流插件
+
+```go
+package main
+
+import (
+	"strconv"
+	"time"
+
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/tidwall/gjson"
+	"github.com/tidwall/resp"
+
+	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+)
+
+func main() {
+	wrapper.SetCtx(
+		"redis-demo",
+		wrapper.ParseConfigBy(parseConfig),
+		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+		wrapper.ProcessResponseHeadersBy(onHttpResponseHeaders),
+	)
+}
+
+type RedisCallConfig struct {
+	client wrapper.RedisClient
+	qpm    int
+}
+
+func parseConfig(json gjson.Result, config *RedisCallConfig, log wrapper.Log) error {
+	// 带服务类型的完整 FQDN 名称，例如 my-redis.dns、redis.my-ns.svc.cluster.local
+	serviceName := json.Get("serviceName").String()
+	servicePort := json.Get("servicePort").Int()
+	if servicePort == 0 {
+		if strings.HasSuffix(serviceName, ".static") {
+			// 静态IP类型服务的逻辑端口是80
+			servicePort = 80
+		} else {
+			servicePort = 6379
+		}
+	}
+	username := json.Get("username").String()
+	password := json.Get("password").String()
+	// 单位是毫秒
+	timeout := json.Get("timeout").Int()
+	if timeout == 0 {
+		timeout = 1000
+	}
+	qpm := json.Get("qpm").Int()
+	config.qpm = int(qpm)
+	config.client = wrapper.NewRedisClusterClient(wrapper.FQDNCluster{
+		FQDN: serviceName,
+		Port: servicePort,
+	})
+	return config.client.Init(username, password, timeout)
+}
+
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log wrapper.Log) types.Action {
+	now := time.Now()
+	minuteAligned := now.Truncate(time.Minute)
+	timeStamp := strconv.FormatInt(minuteAligned.Unix(), 10)
+	// 如果 redis api 返回的 err != nil，一般是由于网关找不到 redis 后端服务，请检查是否误删除了 redis 后端服务
+	err := config.client.Incr(timeStamp, func(response resp.Value) {
+		if response.Error() != nil {
+			log.Errorf("call redis error: %v", response.Error())
+			proxywasm.ResumeHttpRequest()
+		} else {
+			ctx.SetContext("timeStamp", timeStamp)
+			ctx.SetContext("callTimeLeft", strconv.Itoa(config.qpm-response.Integer()))
+			if response.Integer() == 1 {
+				err := config.client.Expire(timeStamp, 60, func(response resp.Value) {
+					if response.Error() != nil {
+						log.Errorf("call redis error: %v", response.Error())
+					}
+					proxywasm.ResumeHttpRequest()
+				})
+				if err != nil {
+					log.Errorf("Error occured while calling redis, it seems cannot find the redis cluster.")
+					proxywasm.ResumeHttpRequest()
+				}
+			} else {
+				if response.Integer() > config.qpm {
+					proxywasm.SendHttpResponse(429, [][2]string{{"timeStamp", timeStamp}, {"callTimeLeft", "0"}}, []byte("Too many requests\n"), -1)
+				} else {
+					proxywasm.ResumeHttpRequest()
+				}
+			}
+		}
+	})
+	if err != nil {
+		// 由于调用redis失败，放行请求，记录日志
+		log.Errorf("Error occured while calling redis, it seems cannot find the redis cluster.")
+		return types.ActionContinue
+	} else {
+		// 请求hold住，等待redis调用完成
+		return types.ActionPause
+	}
+}
+
+func onHttpResponseHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log wrapper.Log) types.Action {
+	if ctx.GetContext("timeStamp") != nil {
+		proxywasm.AddHttpResponseHeader("timeStamp", ctx.GetContext("timeStamp").(string))
+	}
+	if ctx.GetContext("callTimeLeft") != nil {
+		proxywasm.AddHttpResponseHeader("callTimeLeft", ctx.GetContext("callTimeLeft").(string))
+	}
+	return types.ActionContinue
 }
 ```

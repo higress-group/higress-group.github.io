@@ -33,7 +33,7 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | global.disableAlpnH2 | 是否在 ALPN 中禁用 HTTP/2 协议 | true |
 | global.enableStatus | 若为`true`， Higress Controller 将会更新 Ingress 资源的 `status` 字段。<br />为避免从 Nginx Ingress 迁移过程中，覆盖 Ingress 对象的 `status` 字段，可以将这一参数设置为`false`，这样 Higress 默认就不会将入口 IP 写入 Ingress 的 `status` 字段。 | true |
 | global.enableIstioAPI | 若为`true`，Higress Controller 将同时监听 istio 资源 | false |
-| global.enableGlobalAPI | 若为`true`，Higress Controller 将同时监听 Gateway API 资源 | false |
+| global.enableGatewayAPI | 若为`true`，Higress Controller 将同时监听 Gateway API 资源 | false |
 | global.onlyPushRouteCluster | 若为`true`，Higress Controller 将会只推送被路由关联的服务 | true |
 | **核心组件参数** |  |  |
 | higress-core.gateway.replicas | Higress Gateway 的 pod 数量 | 2 |

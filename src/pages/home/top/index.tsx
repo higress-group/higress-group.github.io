@@ -12,7 +12,7 @@ const topData = {
   briefIntroduction: translate({
     id: 'homepage.briefIntroduction',
     message:
-      '一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成、易使用、易扩展、热更新的下一代云原生网关。',
+      '一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成、易使用、易扩展、热更新的云原生API网关。',
   }),
   buttons: [
     {
@@ -28,10 +28,10 @@ const topData = {
     },
   ],
   versionNote: {
-    text: 'Release Note of 1.3.0',
-    link: 'https://github.com/alibaba/higress/releases/tag/v1.3.0',
+    text: 'Release Note of 1.4.0',
+    link: 'https://github.com/alibaba/higress/releases/tag/v1.4.0',
   },
-  releaseDate: 'Released on Nov 3, 2023',
+  releaseDate: 'Released on May 29, 2024',
 };
 
 const Top = ({ language }: { language?: string }) => {

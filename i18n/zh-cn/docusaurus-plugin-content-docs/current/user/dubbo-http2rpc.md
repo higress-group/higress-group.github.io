@@ -12,15 +12,16 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | ----------- | --------------------------- | ----------- | ----------- |
 | service     | the dubbo interface name    | dubbo服务接口名 | 例如："com.alibaba.nacos.example.dubbo.service.DemoService" |
 | version     | the dubbo service version   | dubbo服务版本号 | 例如："1.0.0" |
+| group       | the dubbo service group   | dubbo服务分组   | 例："dev" |                      | dubbo服务分组   | 例："dev" |
 | methods     | list of spec.dubbo.methods | 每一项对应了一条方法映射规则 |  |
 
 ### spec.dubbo.methods
 | 字段         | 类型        |            说明              |             |
 | ----------- | --------------------------- | ----------- | ----------- |
-| group                | string                  | 方法名                     | 例："dev" |
-| serviceMethod        | HTTP_METHOD_TYPE             | 方法匹配规则               | 例："sayName" |
+| serviceMethod        | string             | dubbo服务接口的方法名               | 例："sayName" |
 | headersAttach   | string | 需要透传的http headers | 1、空: 不设置表示不透传任何值;<br />2、*: 表示透传所有headers;<br /> 3、用英文逗号隔开需要透出的headers key: header-A,header-B,header-C,<br />|
 | httpPath | string      | 指定绑定serviceMethod的http-path       | 例："/dubbo/hello" |
+| httpMethods        | list of HTTP_METHOD_TYPE             | http-path的请求方式               | 例："POST" |
 | params | list of spec.dubbo.methods.params   | 指定参数提取方式   |    |
 | paramFromEntireBody | ParamFromEntireBody   | 指定将整个请求body作为参数，如果同时配置了paramFromEntireBody和params，params字段的内容将被忽略   |    |
 

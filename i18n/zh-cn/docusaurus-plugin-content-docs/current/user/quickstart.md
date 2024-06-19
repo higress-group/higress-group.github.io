@@ -21,6 +21,13 @@ helm repo add higress.io https://higress.io/helm-charts
 helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes
 ```
 
+> 中国大陆用户可以使用以下方法加速安装：
+> 
+> ```bash
+> helm repo add higress.cn https://higress.cn/helm-charts
+> helm upgrade --install higress -n higress-system higress.cn/higress --create-namespace --render-subchart-notes
+> ```
+
 获取 Higress Gateway 的 LoadBalancer IP，并记录下来。后续可以通过该 IP 的 80 和 443 端口访问 Higress Gateway。
 ```bash
 kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
@@ -33,7 +40,7 @@ kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBala
 2. 参考[运维参数配置](https://higress.io/zh-cn/docs/user/configurations)，开启`higress-core.gateway.hostNetwork`，让 Higress 监听本机端口，再通过其他软/硬负载均衡器转发给固定机器 IP
 3. （生产不建议）使用开源的负载均衡方案 [MetalLB](https://metallb.universe.tf/)
 
-#### 场景二：在本地 K8s环境中使用
+#### 场景二：在本地 K8s 环境中使用
 
 以下步骤适用于所有在本地启动 K8s 集群进行验证的场景。如果您本地已经配置好了一个测试集群，可以直接跳转到第三步安装 Higress。
 
@@ -81,6 +88,14 @@ sudo mv ./kubectl ./kind /usr/local/bin
 # cluster.conf
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
+# networking:
+  # WARNING: It is _strongly_ recommended that you keep this the default
+  # (127.0.0.1) for security reasons. However it is possible to change this.
+  # apiServerAddress: "0.0.0.0"
+  # By default the API server listens on a random open port.
+  # You may choose a specific port but probably don't need to in most cases.
+  # Using a random port makes it easier to spin up multiple clusters.
+  # apiServerPort: 6443
 nodes:
 - role: control-plane
   kubeadmConfigPatches:

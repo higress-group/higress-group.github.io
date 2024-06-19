@@ -11,9 +11,9 @@
     "message": "User Doc",
     "description": "The label for category User Doc in sidebar docs"
   },
-  "sidebar.docs.category.Parameters Configurations Guide": {
-    "message": "Parameters Configurations Guide",
-    "description": "The label for category Parameters Configurations Guide in sidebar docs"
+  "sidebar.docs.category.Best Practices": {
+    "message": "Best Practices",
+    "description": "The label for category Best Practices in sidebar docs"
   },
   "sidebar.docs.category.More Doc": {
     "message": "More Doc",

@@ -695,7 +695,7 @@ spec:
 Higress默认使用HTTP协议转发请求到后端业务容器。当您的业务容器为HTTPS协议时，可以通过使用注解`higress.io/backend-protocol: "HTTPS"`；当您的业务容器为GRPC服务时，可以通过使用注解`higress.io/backend-protocol: "GRPC"`。
 > 说明：相比Nginx Ingress的优势，如果您的后端服务所属的K8s Service资源中关于Port Name的定义为grpc或http2，您无需配置注解higress.io/backend-protocol: "GRPC"，Higress会自动使用GRPC或者HTTP2。
 
-1. 请求`example/test`转发至后端服务使用HTTPS协议。
+1. 请求`example.com/test`转发至后端服务使用HTTPS协议。
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -718,8 +718,8 @@ spec:
             pathType: Exact
 ```
 
-2. 请求`example/test`转发至后端服务使用GRPC协议。
-第一种做法：通过注解。
+2. 请求`example/grpcbin.GRPCBin`转发至后端服务使用GRPC协议。
+
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -738,41 +738,8 @@ spec:
                 name: demo-service
                 port: 
                   number: 80
-            path: /test
-            pathType: Exact
-```
-
-第二种做法：通过Service Port Name
-```
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: demo
-spec:
-  ingressClassName: higress
-  rules:
-    - host: example.com
-      http:
-        paths:
-          - backend:
-              service:
-                name: demo-service
-                port: 
-                  number: 80
-            path: /order
-            pathType: Exact
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: demo-service
-spec:
-  ports:
-    - name: grpc
-      port: 80
-      protocol: TCP
-  selector:
-    app: demo-service
+            path: /grpcbin.GRPCBin
+            pathType: Prefix
 ```
 
 ## 配置后端服务的负载均衡算法
@@ -941,6 +908,76 @@ spec:
                   number: 80
             path: /test
             pathType: Exact
+```
+
+## 网关与客户端双向认证(MTLS)
+
+当开启HTTPS时，网关与客户端默认是基于单向TLS认证，可以通过下面注解开启双向TLS认证，即让服务端同时校验客户端的合法性。
+
+- higress.io/auth-tls-secret: 网关使用的CA证书，用于验证MTLS握手期间，客户端提供的证书。该注解主要应用于网关需要验证客户端身份的场景。secret名字格式必须是：(该域名证书所在的secret的名字)-cacert
+
+例如:
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # 这里的要求是必须以域名上配置证书secret名称后缀加上-cacert
+    higress.io/auth-tls-secret: tls-secret-cacert
+  name: bar
+  namespace: default
+spec:
+  ingressClassName: higress
+  rules:
+  - host: bar.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: bar-service
+            port:
+              number: 5678
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - bar.com
+    secretName: tls-secret
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: foo
+  namespace: default
+spec:
+  ingressClassName: higress
+  rules:
+  - host: foo.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: foo-service
+            port:
+              number: 5678
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - foo.com
+    secretName: tls-secret
+```
+
+tls-secret-cacert 这个 secret 的内容中必须有 cacert 这个key，例如：
+```yaml
+apiVersion: v1
+data:
+  cacert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURDekNDQWZPZ0F3SUJBZ0lVQ0tMSGM5SFhBbEFYNUdFR2dHVk1zVXhzUFhBd0RRWUpLb1pJaHZjTkFRRUwKQlFBd0ZURVRNQkVHQTFVRUF3d0tSWGhoYlhCc1pTQkRRVEFlRncweU16RXlNakl3T1RNek1ESmFGdzB5TkRFeQpNakV3T1RNek1ESmFNQlV4RXpBUkJnTlZCQU1NQ2tWNFlXMXdiR1VnUTBFd2dnRWlNQTBHQ1NxR1NJYjNEUUVCCkFRVUFBNElCRHdBd2dnRUtBb0lCQVFDaW1jaWQ4VWx4VzA4a1RTcmc1UnAzTlMvSmFMQWt3bVZzeWdEanc0TUEKSjh6Q2FWWHFmU2xpbCtTRFdLcllRYUtPQ1JRWjlWdXBwODl4UnRJTkpUVmlBZUpHYzh6SDY2Sy82aUZJZ2N4ZQplczVaaDdqQXdENzZ4eEtMUjJPbkRSb0xpVlFVOGxkekVNclVHRytCOXJ1TzFsNjkxNlRjQ0dqS3VGUklQNzJCCjlJcEI0ekxZUUNLWldmZ1cxVmU0alpYTUZ0MVhUc0dWdkhCaEt0MSt5eXMrNnc3WndxMW43NysxdXcya2dmM3cKaXNCbXBzTlRPVVJSZzVvdEdYVUUxaGl3dC9KeW9PQkt1YmVyY2dwd05OYzAvNHZ6eWRHMm83UFFpTHcyallPbwppbFptYUZzVXEyclU4S0hCdWlSbVkyTXlOWEU2R0liY29sVGZRQWM2NE5EWEFnTUJBQUdqVXpCUk1CMEdBMVVkCkRnUVdCQlNOZC9vYTkyemFGWFNaRVJoRXJMSElqRE8zYWpBZkJnTlZIU01FR0RBV2dCU05kL29hOTJ6YUZYU1oKRVJoRXJMSElqRE8zYWpBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUEwR0NTcUdTSWIzRFFFQkN3VUFBNElCQVFBTwpjMDNIYWFDRHhhR0phdzlrYkJxMW1DbUVvR3pWZ0loYkhveTQ0Q0IxbGpnS0xOWHo2bnZ5bDVCdWRzWXJkT1lXCmJMMEJGdGxLbWRqeUFHemtnOThGSkpVNExTVFM1ZDNySlBkQU1lcXFOQ2R5NVh0c2l2VDlIbzh5QVBiUGFmZlkKTmozN29JVEQrdXhQbTNVMGhOTU5YSGdGdnJ4bGV6U2MyOHFWL1VxVDBWcnNJR3IyblNiaEYrR3g1WS92aTZocQp5RTJsYWJXdDQ3VlBYcTNFL2lHRWhTSmFndTdhN2xBSDhYWWlqMUtCMkU4bjlERy80R2ZDMEVpTnNXbUpzWVNjCk9tdXlmRGpXaHQ2LzlUVkh4YkNZMzZGQ08vOTcraThqUGhxVlkxRlJzUG5WRUtiRXBNemdXb3Y0UXNKeHoxS3gKdHN2eHlVRnJsaU5wUk1OQmVEODIKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+kind: Secret
+metadata:
+  name: tls-secret-cacert
+  namespace: default
+type: Opaque
 ```
 
 ## 网关与后端服务双向认证（MTLS)

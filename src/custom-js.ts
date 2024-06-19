@@ -9,3 +9,59 @@ var _hmt = _hmt || [];
     s.parentNode.insertBefore(hm, s);
   }
 })();
+
+
+(function () {
+	if (!ExecutionEnvironment.canUseDOM) {
+		return;
+	}
+	window['aplus_queue'] = window['aplus_queue'] || [];
+	var f = document.getElementsByTagName('script')[0],
+		j = document.createElement('script');
+	j.async = true;
+	j.id = 'beacon-aplus';
+	j.setAttribute('exparams', 'userid=&aplus&sidx=aplusSidex&ckx=aplusCkx');
+	j.src = '//g.alicdn.com/alilog/mlog/aplus_v2.js';
+	j.crossorigin = 'anonymous';
+	f.parentNode.insertBefore(j, f);
+})();
+
+(function () {
+	if (!ExecutionEnvironment.canUseDOM) {
+		return;
+	}
+	var d = document;
+	var t = d.createElement('script');
+	t.type = 'text/javascript';
+	t.async = true;
+	t.src =
+		'//g.alicdn.com/aes/??tracker/3.3.4/index.js,tracker-plugin-pv/3.0.5/index.js,tracker-plugin-event/3.0.0/index.js,tracker-plugin-autolog/3.0.3/index.js,tracker-plugin-survey/3.0.3/index.js,tracker-plugin-jserror/3.0.3/index.js,tracker-plugin-resourceError/3.0.3/index.js';
+	t.onload = function () {
+		if (window.location.hostname !== 'higress.io') {
+			return;
+		}
+		window.AES_CONFIG = window.AES_CONFIG || {
+			// 判断当前环境
+			env: 'prod',
+		};
+		window.aes = new AES({
+			pid: 'ZAwmfA',
+			user_type: 6,
+		});
+		window.AESPluginAutologConfig = { exposure: 'auto' };
+		window.AEMPluginInstances = [
+			aes.use(
+				AESPluginPV,
+				window.AESPluginPVConfig || { enableHistory: true },
+			),
+			aes.use(AESPluginEvent, window.AESPluginEventConfig || {}),
+			aes.use(AESPluginSurvey, window.AESPluginEventConfig || {}),
+			aes.use(AESPluginAutolog, window.AESPluginAutologConfig || {}),
+			aes.use(AESPluginJSError, window.AESPluginJSError || {}),
+			aes.use(AESPluginResourceError, window.AESPluginResourceError || {}),
+		];
+	};
+	setTimeout(function () {
+		d.getElementsByTagName('body')[0].appendChild(t);
+	}, 800);
+})();
