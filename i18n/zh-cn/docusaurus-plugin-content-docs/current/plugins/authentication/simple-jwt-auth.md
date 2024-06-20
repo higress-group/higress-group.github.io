@@ -1,6 +1,6 @@
 ---
 title: Token 认证
-keywords: [ higress,ai,proxy,rag ]
+keywords: [ higress, auth]
 description: Token 认证插件配置参考
 ---
 

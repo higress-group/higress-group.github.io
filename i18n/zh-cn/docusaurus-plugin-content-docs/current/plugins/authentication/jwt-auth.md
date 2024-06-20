@@ -1,6 +1,6 @@
 ---
 title: JWT 认证
-keywords: [higress,jwt]
+keywords: [higress, auth]
 description: JWT 认证插件配置参考
 ---
 

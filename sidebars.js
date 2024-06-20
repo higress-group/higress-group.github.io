@@ -38,7 +38,7 @@ const sidebars = {
             {
               type: 'category',
               label: 'AI Plugins',
-              items: ['plugins/ai/ai-proxy', 'plugins/ai/ai-cache', 'plugins/ai/ai-prompt-decorator', 'plugins/ai/ai-prompt-template', 'plugins/ai/ai-rag', 'plugins/ai/ai-statistics', 'plugins/ai/ai-token-ratelimit', 'plugins/ai/ai-transformer'],
+              items: ['plugins/ai/ai-proxy', 'plugins/ai/ai-cache', 'plugins/ai/ai-prompt-decorator', 'plugins/ai/ai-prompt-template', 'plugins/ai/ai-rag', 'plugins/ai/ai-statistics', 'plugins/ai/ai-token-ratelimit', 'plugins/ai/ai-transformer', 'plugins/ai/ai-security-guard'],
             },
             {
               type: 'category',

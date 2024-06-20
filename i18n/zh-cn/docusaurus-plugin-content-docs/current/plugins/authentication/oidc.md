@@ -1,6 +1,6 @@
 ---
 title: OIDC 认证
-keywords: [ higress,ai,proxy,rag ]
+keywords: [higress, auth]
 description: OIDC 认证插件配置参考
 ---
 

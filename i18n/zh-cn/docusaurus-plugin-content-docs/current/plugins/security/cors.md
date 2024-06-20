@@ -1,6 +1,6 @@
 ---
 title: CORS
-keywords: [ higress,ai,proxy,rag ]
+keywords: [higress, cors]
 description: CORS 插件配置参考
 ---
 

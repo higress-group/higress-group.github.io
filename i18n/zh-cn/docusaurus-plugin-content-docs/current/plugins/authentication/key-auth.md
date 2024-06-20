@@ -1,6 +1,6 @@
 ---
 title: Key 认证
-keywords: [ higress,ai,proxy,rag ]
+keywords: [higress, auth]
 description: API Key 认证插件配置参考
 ---
 

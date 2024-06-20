@@ -1,12 +1,12 @@
 ---
 title: AI 提示词修饰
-keywords: [ higress,ai,proxy,rag ]
+keywords: [higress, ai]
 description: AI提示词修饰插件配置参考
 ---
 
 ## 功能说明
 
-AI 提示词修饰插件，通过在与大模型发起的请求前后插入指定信息来调整大模型的输出。
+AI 提示词修饰插件用于对 Prompt 进行调整，支持在用户输入的 Prompt 前后添加额外的 Prompt，用户可以使用 Higress AI 网关来统一处理应用逻辑中需要操控 Prompt 的地方，让所有 LLM API 流量都经过 Higress 进行处理，自动完成 Prompt 的统一操控。
 
 ## 配置说明
 

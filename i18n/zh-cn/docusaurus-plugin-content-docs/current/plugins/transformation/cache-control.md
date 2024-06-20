@@ -1,6 +1,6 @@
 ---
 title: 缓存控制
-keywords: [ higress,ai,proxy,rag ]
+keywords: [higress, transformer]
 description: 缓存控制插件配置参考
 ---
 

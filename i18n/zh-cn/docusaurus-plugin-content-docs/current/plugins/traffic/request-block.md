@@ -1,6 +1,6 @@
 ---
 title: 请求屏蔽
-keywords: [higress,request block]
+keywords: [higress]
 description: 请求屏蔽插件配置参考
 ---
 

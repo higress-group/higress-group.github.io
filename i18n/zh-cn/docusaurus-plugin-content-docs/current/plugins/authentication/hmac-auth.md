@@ -1,6 +1,6 @@
 ---
 title: HMAC 认证
-keywords: [higress,hmac]
+keywords: [higress, auth]
 description: HMAC 认证插件配置参考
 ---
 

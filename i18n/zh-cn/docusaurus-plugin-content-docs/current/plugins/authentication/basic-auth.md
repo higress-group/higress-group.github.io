@@ -1,6 +1,6 @@
 ---
 title: Basic 认证
-keywords: [higress,basic auth]
+keywords: [higress, auth]
 description: Basic 认证插件配置参考
 ---
 

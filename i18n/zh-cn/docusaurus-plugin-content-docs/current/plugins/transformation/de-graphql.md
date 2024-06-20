@@ -1,6 +1,6 @@
 ---
 title: DeGraphQL
-keywords: [ higress,ai,proxy,rag ]
+keywords: [higress, transformer]
 description: Degraphql 插件配置参考
 ---
 

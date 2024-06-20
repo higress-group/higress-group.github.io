@@ -1,12 +1,12 @@
 ---
-title: AI 可观测
-keywords: [ higress,ai,proxy,rag ]
-description: AI 可观测插件配置参考
+title: AI 统计
+keywords: [ higress, ai]
+description: AI 统计插件配置参考
 ---
 
 ## 功能说明
 
-提供 AI 可观测基础能力，其后需接 ai-proxy 插件，如果不接 ai-proxy 插件的话，则只支持 openai 协议。
+相比于传统微服务，LLM 应用中主要通过 token 来衡量流量大小，针对此特点，AI 统计插件提供了路由级、服务级、模型级的 token 用量观测能力，包括日志、监控以及告警。 AI 统计插件需要对接 ai-proxy 插件，如果不接 ai-proxy 插件的话，则只支持 openai 协议。
 
 ## 配置说明
 

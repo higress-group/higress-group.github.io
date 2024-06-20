@@ -1,6 +1,6 @@
 ---
 title: WAF 防护
-keywords: [higress,waf]
+keywords: [higress, waf]
 description: WAF 防护插件配置参考
 ---
 

@@ -1,12 +1,12 @@
 ---
-title: LLM 结果缓存
-keywords: [ higress,ai,proxy,rag ]
-description: LLM 结果缓存插件配置参考
+title: AI 缓存
+keywords: [higress, ai]
+description: AI 缓存插件配置参考
 ---
 
 ## 功能说明
 
-LLM 结果缓存插件，默认配置方式可以直接用于 openai 协议的结果缓存，同时支持流式和非流式响应的缓存。
+AI 缓存插件实现了将 LLM 响应进行抽取并缓存的功能，对于向 LLM API 高频请求相同问题的场景可以显著降低响应时延并节省成本。默认配置方式可以直接用于 openai 协议的结果缓存，同时支持流式和非流式响应的缓存。
 
 > 需要数据面的proxy wasm版本大于等于0.2.100
 > 编译时，需要带上版本的tag，例如：`tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="custommalloc nottinygc_finalizer proxy_wasm_version_0_2_100" ./`

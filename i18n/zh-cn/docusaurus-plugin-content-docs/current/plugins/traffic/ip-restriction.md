@@ -1,6 +1,6 @@
 ---
 title: IP 限制
-keywords: [ higress,ai,proxy,rag ]
+keywords: [higress]
 description: IP 限制插件配置参考
 ---
 

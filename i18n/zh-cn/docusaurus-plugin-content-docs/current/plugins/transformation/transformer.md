@@ -1,7 +1,7 @@
 ---
-title: 请求响应转换
-keywords: [ higress,ai,proxy,rag ]
-description: 请求响应转换插件配置参考
+title: 请求/响应转换
+keywords: [higress, transformer]
+description: 请求/响应转换插件配置参考
 ---
 
 ## 功能说明

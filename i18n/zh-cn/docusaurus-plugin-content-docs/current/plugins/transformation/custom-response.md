@@ -1,6 +1,6 @@
 ---
 title: 自定义应答
-keywords: [ higress,ai,proxy,rag ]
+keywords: [higress, transformer]
 description: 自定义应答插件配置参考
 ---
 

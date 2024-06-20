@@ -1,6 +1,6 @@
 ---
 title: 基于 Key 限流
-keywords: [higress,rate limite]
+keywords: [higress, rate-limit]
 description: Key 限流插件配置参考
 ---
 

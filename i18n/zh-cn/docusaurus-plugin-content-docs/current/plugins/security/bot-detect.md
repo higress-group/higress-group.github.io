@@ -1,6 +1,6 @@
 ---
 title: 机器人拦截
-keywords: [higress,bot detect]
+keywords: [higress, bot detect]
 description: Bot Detect 插件配置参考
 ---
 

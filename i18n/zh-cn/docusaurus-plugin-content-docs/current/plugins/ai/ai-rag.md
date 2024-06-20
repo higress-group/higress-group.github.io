@@ -1,12 +1,12 @@
 ---
-title: AI RAG
-keywords: [ higress,ai,proxy,rag ]
-description: AI RAG 插件配置参考
+title: AI 检索增强生成
+keywords: [higress, ai, rag]
+description: AI 检索增强生成插件配置参考
 ---
 
 ## 功能说明
 
-通过对接阿里云向量检索服务实现 LLM-RAG，流程如图所示：
+基于 AI 检索增强生成（RAG）插件，可以通过对接阿里云向量检索服务实现 LLM-RAG 应用的开发，流程如图所示：
 
 ![](https://img.alicdn.com/imgextra/i1/O1CN01LuRVs41KhoeuzakeF_!!6000000001196-0-tps-1926-1316.jpg)
 

@@ -1,12 +1,13 @@
 ---
-title: 低代码开发
-keywords: [ higress,ai,proxy,rag ]
-description: 低代码开发插件配置参考
+title: AI 请求/响应转换
+keywords: [higress, ai ,transformer]
+description: AI 请求/响应转换插件配置参考
 ---
 
 ## 功能说明
 
-低代码开发插件，通过 LLM 对请求/响应的 header 以及 body 进行修改。
+通过配置 AI 请求/响应转换插件，用户可以不用写代码，直接使用自然语言的方式对网关的请求/响应进行修改。例如测试人员在测试 API 时，对待测 API 进行插件配置，将原始请求/响应作为 example，来生成进行边界条件测试的请求/响应。大模型很多时候会比人考虑的更全面，更容易测试出一些边界 case。
+
 
 ## 配置说明
 

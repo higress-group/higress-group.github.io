@@ -1,6 +1,6 @@
 ---
 title: 请求校验
-keywords: [ higress,ai,proxy,rag ]
+keywords: [higress]
 description: 请求校验插件配置参考
 ---
 

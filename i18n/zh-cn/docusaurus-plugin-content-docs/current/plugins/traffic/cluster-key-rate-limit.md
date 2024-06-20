@@ -1,6 +1,6 @@
 ---
 title: 基于 Key 集群限流
-keywords: [ higress,ai,proxy,rag ]
+keywords: [higress, rate-limit]
 description: 基于 Key 集群限流插件配置参考
 ---
 
