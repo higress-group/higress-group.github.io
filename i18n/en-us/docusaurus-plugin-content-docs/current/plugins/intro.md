@@ -18,7 +18,7 @@ That is, the global configuration will only take effect for requests that do not
 
 For general plugins, including custom plugins, the routing/domain name level configuration fields are exactly the same as the global configuration fields;
 
-For authentication plug-ins (Key authentication, HMAC authentication, Basic authentication, JWT authentication, etc.), it is different. The global configuration only configures the Consumer credential and whether to enable global authentication, and configures the allowed access through the `allow` field at the routing/domain name level. Consumer list, for details, please refer to [Configuration Instructions](./key-auth.md) of Key Authentication
+For authentication plug-ins (Key authentication, HMAC authentication, Basic authentication, JWT authentication, etc.), it is different. The global configuration only configures the Consumer credential and whether to enable global authentication, and configures the allowed access through the `allow` field at the routing/domain name level. Consumer list, for details, please refer to [Configuration Instructions](./authentication/key-auth.md) of Key Authentication
 
 ## Configuration via Higress WasmPlugin CRD
 
@@ -37,7 +37,7 @@ Description of configuration fields for each item in `matchRules`:
 | `domain` | array of string | one of `ingress` and `domain` is required | ["example.com","*.test.com"] | match domain name, support generic domain name |
 | `config` | object | optional | - | plug-in configuration that takes effect after matching |
 
-Take the [Request Blocking](./request-block.md) plugin as an example, if you want the following configuration of the plugin to take effect globally (please refer to the [Request Blocking](./request-block.md) document for configuration field descriptions):
+Take the [Request Blocking](./traffic/request-block.md) plugin as an example, if you want the following configuration of the plugin to take effect globally (please refer to the [Request Blocking](./traffic/request-block.md) document for configuration field descriptions):
 
 ```yaml
 block_urls:
