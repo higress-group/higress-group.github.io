@@ -34,7 +34,35 @@ const sidebars = {
         {
           type: 'category',
           label: 'Plugins',
-          items: ['plugins/intro', 'plugins/custom', 'plugins/ai-proxy', 'plugins/jwt-auth', 'plugins/hmac-auth', 'plugins/key-auth', 'plugins/basic-auth', 'plugins/key-rate-limit', 'plugins/custom-response', 'plugins/bot-detect', 'plugins/request-block', 'plugins/waf'],
+          items: [
+            {
+              type: 'category',
+              label: 'AI Plugins',
+              items: ['plugins/ai/ai-proxy', 'plugins/ai/ai-cache', 'plugins/ai/ai-prompt-decorator', 'plugins/ai/ai-prompt-template', 'plugins/ai/ai-rag', 'plugins/ai/ai-statistics', 'plugins/ai/ai-token-ratelimit', 'plugins/ai/ai-transformer', 'plugins/ai/ai-security-guard'],
+            },
+            {
+              type: 'category',
+              label: 'Authentication Plugins',
+              items: ['plugins/authentication/basic-auth', 'plugins/authentication/key-auth', 'plugins/authentication/oidc', 'plugins/authentication/jwt-auth', 'plugins/authentication/hmac-auth', 'plugins/authentication/simple-jwt-auth']
+            },
+            {
+              "type": "category",
+              "label": "Transformation Plugins",
+              "items": ['plugins/transformation/custom-response', 'plugins/transformation/transformer', 'plugins/transformation/cache-control', 'plugins/transformation/de-graphql']
+            },
+            {
+              "type": "category",
+              "label": "Traffic Plugins",
+              "items": ['plugins/traffic/request-block', 'plugins/traffic/key-rate-limit', 'plugins/traffic/cluster-key-rate-limit', 'plugins/traffic/ip-restriction', 'plugins/traffic/request-validation']
+            },
+            {
+              "type": "category",
+              "label": "Security Plugins",
+              "items": ['plugins/security/bot-detect', 'plugins/security/waf', 'plugins/security/cors']
+            },
+            'plugins/intro',
+            'plugins/custom'
+          ],
         },
         {
           type: 'category',

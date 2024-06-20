@@ -1,16 +1,17 @@
 ---
 title: 基于 Key 限流
-keywords: [higress,rate limite]
+keywords: [higress, rate-limit]
 description: Key 限流插件配置参考
 ---
 
 ## 功能说明
-`key-rate-limit`插件实现了基于特定键值实现限流，键值来源可以是 URL 参数、HTTP 请求头
+
+`key-rate-limit` 插件实现了基于特定键值实现限流，键值来源可以是 URL 参数、HTTP 请求头。
 
 ## 运行属性
 
-插件执行阶段：`默认阶段`
-插件执行优先级：`10`
+- 插件执行阶段：`默认阶段`
+- 插件执行优先级：`10`
 
 
 ## 配置字段
@@ -21,7 +22,7 @@ description: Key 限流插件配置参考
 |  limit_by_param     |  string     | 选填，`limit_by_header`,`limit_by_param` 中选填一项     |   -  |  配置获取限流键值的来源 URL 参数名称   |
 |  limit_keys     |  array of object     | 必填     |   -  |  配置匹配键值后的限流次数   |
 
-`limit_keys`中每一项的配置字段说明
+`limit_keys` 中每一项的配置字段说明。
 
 | 名称 | 数据类型 | 填写要求 |  默认值 | 描述 |
 | -------- | -------- | -------- | -------- | -------- |
@@ -51,5 +52,4 @@ limit_keys:
   query_per_second: 10
 - key: 308239
   query_per_hour: 10
-
 ```

@@ -1,17 +1,17 @@
 ---
 title: 机器人拦截
-keywords: [higress,bot detect]
+keywords: [higress, bot detect]
 description: Bot Detect 插件配置参考
 ---
 
 ## 功能说明
-`bot-detect`插件可以用于识别并阻止互联网爬虫对站点资源的爬取
+
+`bot-detect` 插件可以用于识别并阻止互联网爬虫对站点资源的爬取。
 
 ## 运行属性
 
-插件执行阶段：`鉴权阶段`
-插件执行优先级：`310`
-
+- 插件执行阶段：`鉴权阶段`
+- 插件执行优先级：`310`
 
 ### 配置字段
 
@@ -44,13 +44,13 @@ description: Bot Detect 插件配置参考
 ## 配置示例
 
 ### 放行原本命中爬虫规则的请求
+
 ```yaml
 allow:
 - ".*Go-http-client.*"
 ```
 
-若不作该配置，默认的 Golang 网络库请求会被视做爬虫，被禁止访问
-
+若不作该配置，默认的 Golang 网络库请求会被视做爬虫，被禁止访问。
 
 ### 增加爬虫判断
 ```yaml

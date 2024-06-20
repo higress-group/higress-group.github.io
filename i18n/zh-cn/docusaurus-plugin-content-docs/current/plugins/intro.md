@@ -18,7 +18,7 @@ Higress 控制台提供了 3 个入口进行插件配置:
 
 对于一般的插件，包括自定义插件在内，路由/域名级的配置字段和全局配置字段是完全一样的；
 
-对于认证类插件(Key 认证，HMAC 认证，Basic 认证，JWT 认证等)则不同，全局配置仅做 Consumer 凭证配置，以及是否开启全局认证，而在路由/域名级通过`allow`字段配置允许访问的 Consumer 列表，详情可以查看 Key 认证的[配置说明](./key-auth.md)
+对于认证类插件(Key 认证，HMAC 认证，Basic 认证，JWT 认证等)则不同，全局配置仅做 Consumer 凭证配置，以及是否开启全局认证，而在路由/域名级通过 `allow` 字段配置允许访问的 Consumer 列表，详情可以查看 [Key 认证的配置说明](./authentication/key-auth.md)。
 
 ## 通过 Higress WasmPlugin CRD 进行配置
 
@@ -29,15 +29,15 @@ Higress WasmPlugin CRD 在 Istio [WasmPlugin](https://istio.io/latest/docs/refer
 | `defaultConfig` | object | 选填 | 插件默认配置，全局生效于没有匹配具体域名和路由配置的请求 |
 | `matchRules` | array of object | 选填 | 匹配域名或路由生效的配置 |
 
-`matchRules`中每一项的配置字段说明：
+`matchRules` 中每一项的配置字段说明：
 
-| 字段名称 | 数据类型 | 填写要求 | 配置示例 |描述 |
-| -------  | -------  | -------- | --- |---  |
-| `ingress` | array of string | `ingress`和`domain`中必填一项 | ["default/foo","default/bar"] | 匹配 ingress 资源对象，匹配格式为: `命名空间/ingress名称` |
-| `domain` | array of string | `ingress`和`domain`中必填一项 | ["example.com","*.test.com"] | 匹配域名，支持泛域名 |
-| `config` | object | 选填 | - | 匹配后生效的插件配置 |
+| 字段名称 | 数据类型 | 填写要求                       | 配置示例 |描述 |
+| -------  | -------  |----------------------------| --- |---  |
+| `ingress` | array of string | `ingress` 和 `domain` 中必填一项 | ["default/foo","default/bar"] | 匹配 ingress 资源对象，匹配格式为: `命名空间/ingress名称` |
+| `domain` | array of string | `ingress` 和 `domain` 中必填一项 | ["example.com","*.test.com"] | 匹配域名，支持泛域名 |
+| `config` | object | 选填                         | - | 匹配后生效的插件配置 |
 
-以[请求屏蔽](./request-block.md)插件举例说明，如果希望全局生效插件的如下配置（请查看[请求屏蔽](./request-block.md)文档了解配置字段说明）：
+以[请求屏蔽](./traffic/request-block.md)插件举例说明，如果希望全局生效插件的如下配置（请查看[请求屏蔽](./traffic/request-block.md)文档了解配置字段说明）：
 
 ```yaml
 block_urls:
@@ -70,7 +70,7 @@ curl http://example.com?foo=Bar
 curl http://example.com/foo/Swagger.html
 ```
 
-如果希望对 default 命名空间下名称为 foo 的 Ingress (匹配path前缀为`/foo`的请求)生效如下配置:
+如果希望对 default 命名空间下名称为 foo 的 Ingress (匹配 path 前缀为 `/foo` 的请求)生效如下配置:
 
 ```yaml
 block_headers:
@@ -122,7 +122,7 @@ curl http://exmaple.com/foo/Swagger.html
 curl http://exmaple.com/foo -H 'exmaple-key: 123'
 ```
 
-当 `matchRules` 中存在多个规则时，按规则排列顺序优先匹配，建议将 ingress 匹配配置放在 domain 匹配之前，这也是 Higress 控制台的做法
+当 `matchRules` 中存在多个规则时，按规则排列顺序优先匹配，建议将 ingress 匹配配置放在 domain 匹配之前，这也是 Higress 控制台的做法。
 
 ### 官方插件镜像地址
 
