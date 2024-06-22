@@ -8,11 +8,6 @@ description: JWT 认证插件配置参考
 
 `jwt-auth` 插件实现了基于 JWT(JSON Web Tokens) 进行认证鉴权的功能，支持从 HTTP 请求的 URL 参数、请求头、Cookie 字段解析 JWT，同时验证该 Token 是否有权限访问。
 
-## 运行属性
-
-- 插件执行阶段：`认证阶段`
-- 插件执行优先级：`340`
-
 ## 配置字段
 
 ### 全局配置
