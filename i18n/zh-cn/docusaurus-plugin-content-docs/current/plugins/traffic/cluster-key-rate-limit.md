@@ -61,23 +61,23 @@ description: 基于 Key 集群限流插件配置参考
 ```yaml
 rule_name: default_rule
 rule_items:
-  - limit_by_param: apikey
-    limit_keys:
-    	- key: 9a342114-ba8a-11ec-b1bf-00163e1250b5
-        query_per_minute: 10
-      - key: a6a6d7f2-ba8a-11ec-bec2-00163e1250b5
-        query_per_hour: 100
-  - limit_by_per_param: apikey
-    limit_keys:
-      # 正则表达式，匹配以 a 开头的所有字符串，每个 apikey 对应的请求 10qds
-      - key: "regexp:^a.*"
-       	query_per_second: 10
-      # 正则表达式，匹配以 b 开头的所有字符串，每个 apikey 对应的请求 100qd
-      - key: "regexp:^b.*"
-        query_per_minute: 100
-      # 兜底用，匹配所有请求，每个 apikey 对应的请求 1000qdh
-      - key: "*"
-        query_per_hour: 1000
+- limit_by_param: apikey
+  limit_keys:
+  - key: 9a342114-ba8a-11ec-b1bf-00163e1250b5
+    query_per_minute: 10
+  - key: a6a6d7f2-ba8a-11ec-bec2-00163e1250b5
+    query_per_hour: 100
+- limit_by_per_param: apikey
+  limit_keys:
+  # 正则表达式，匹配以 a 开头的所有字符串，每个 apikey 对应的请求 10qds
+  - key: "regexp:^a.*"
+    query_per_second: 10
+  # 正则表达式，匹配以 b 开头的所有字符串，每个 apikey 对应的请求 100qd
+  - key: "regexp:^b.*"
+    query_per_minute: 100
+  # 兜底用，匹配所有请求，每个 apikey 对应的请求 1000qdh
+  - key: "*"
+    query_per_hour: 1000
 redis:
   service_name: redis.static
 show_limit_quota_header: true
@@ -88,23 +88,23 @@ show_limit_quota_header: true
 ```yaml
 rule_name: default_rule
 rule_items:
-  - limit_by_header: x-ca-key
-    limit_keys:
-    	- key: 102234
-        query_per_minute: 10
-      - key: 308239
-        query_per_hour: 10
-  - limit_by_per_header: x-ca-key
-    limit_keys:
-      # 正则表达式，匹配以 a 开头的所有字符串，每个 apikey 对应的请求 10qds
-      - key: "regexp:^a.*"
-        query_per_second: 10
-      # 正则表达式，匹配以b开头的所有字符串，每个 apikey 对应的请求 100qd
-      - key: "regexp:^b.*"
-        query_per_minute: 100
-      # 兜底用，匹配所有请求，每个 apikey 对应的请求 1000qdh
-      - key: "*"
-        query_per_hour: 1000            
+- limit_by_header: x-ca-key
+  limit_keys:
+  - key: 102234
+    query_per_minute: 10
+  - key: 308239
+    query_per_hour: 10
+- limit_by_per_header: x-ca-key
+  limit_keys:
+  # 正则表达式，匹配以 a 开头的所有字符串，每个 apikey 对应的请求 10qds
+  - key: "regexp:^a.*"
+    query_per_second: 10
+  # 正则表达式，匹配以b开头的所有字符串，每个 apikey 对应的请求 100qd
+  - key: "regexp:^b.*"
+    query_per_minute: 100
+  # 兜底用，匹配所有请求，每个 apikey 对应的请求 1000qdh
+  - key: "*"
+    query_per_hour: 1000            
 redis:
   service_name: redis.static
 show_limit_quota_header: true
@@ -115,17 +115,17 @@ show_limit_quota_header: true
 ```yaml
 rule_name: default_rule
 rule_items:
-  - limit_by_per_ip: from-header-x-forwarded-for
-    limit_keys:
-      # 精确 ip
-      - key: 1.1.1.1
-        query_per_day: 10
-      # ip 段，符合这个 ip 段的 ip，每个 ip 100qpd
-      - key: 1.1.1.0/24
-        query_per_day: 100
-      # 兜底用，即默认每个 ip 1000 qpd
-      - key: 0.0.0.0/0
-        query_per_day: 1000
+- limit_by_per_ip: from-header-x-forwarded-for
+  limit_keys:
+  # 精确 IP
+  - key: 1.1.1.1
+    query_per_day: 10
+  # IP 段，符合这个 IP 段的 IP，每个 IP 100qpd
+  - key: 1.1.1.0/24
+    query_per_day: 100
+  # 兜底用，即默认每个 IP 1000 qpd
+  - key: 0.0.0.0/0
+    query_per_day: 1000
 redis:
   service_name: redis.static
 show_limit_quota_header: true
@@ -136,23 +136,23 @@ show_limit_quota_header: true
 ```yaml
 rule_name: default_rule
 rule_items:
-  - limit_by_consumer: ''
-    limit_keys:
-      - key: consumer1
-        query_per_second: 10
-      - key: consumer2
-        query_per_hour: 100
-  - limit_by_per_consumer: ''
-    limit_keys:
-      # 正则表达式，匹配以 a 开头的所有字符串，每个 consumer 对应的请求 10qds
-      - key: "regexp:^a.*"
-        query_per_second: 10
-      # 正则表达式，匹配以 b 开头的所有字符串，每个 consumer 对应的请求 100qd
-      - key: "regexp:^b.*"
-        query_per_minute: 100
-      # 兜底用，匹配所有请求，每个 consumer 对应的请求 1000qdh
-      - key: "*"
-        query_per_hour: 1000     
+- limit_by_consumer: ''
+  limit_keys:
+  - key: consumer1
+    query_per_second: 10
+  - key: consumer2
+    query_per_hour: 100
+- limit_by_per_consumer: ''
+  limit_keys:
+  # 正则表达式，匹配以 a 开头的所有字符串，每个 consumer 对应的请求 10qds
+  - key: "regexp:^a.*"
+    query_per_second: 10
+  # 正则表达式，匹配以 b 开头的所有字符串，每个 consumer 对应的请求 100qd
+  - key: "regexp:^b.*"
+    query_per_minute: 100
+  # 兜底用，匹配所有请求，每个 consumer 对应的请求 1000qdh
+  - key: "*"
+    query_per_hour: 1000     
 redis:
   service_name: redis.static
 show_limit_quota_header: true 
@@ -163,23 +163,23 @@ show_limit_quota_header: true
 ```yaml
 rule_name: default_rule
 rule_items:
-  - limit_by_cookie: key1
-    limit_keys:
-      - key: value1
-        query_per_minute: 10
-      - key: value2
-        query_per_hour: 100
-  - limit_by_per_cookie: key1
-    limit_keys:
-      # 正则表达式，匹配以 a 开头的所有字符串，每个 cookie 中的 value 对应的请求 10qds
-      - key: "regexp:^a.*"
-        query_per_second: 10
-      # 正则表达式，匹配以 b 开头的所有字符串，每个 cookie 中的 value 对应的请求 100qd
-      - key: "regexp:^b.*"
-        query_per_minute: 100
-      # 兜底用，匹配所有请求，每个 cookie 中的 value 对应的请求 1000qdh
-      - key: "*"
-        query_per_hour: 1000 
+- limit_by_cookie: key1
+  limit_keys:
+  - key: value1
+    query_per_minute: 10
+  - key: value2
+    query_per_hour: 100
+- limit_by_per_cookie: key1
+  limit_keys:
+  # 正则表达式，匹配以 a 开头的所有字符串，每个 cookie 中的 value 对应的请求 10qds
+  - key: "regexp:^a.*"
+    query_per_second: 10
+  # 正则表达式，匹配以 b 开头的所有字符串，每个 cookie 中的 value 对应的请求 100qd
+  - key: "regexp:^b.*"
+    query_per_minute: 100
+  # 兜底用，匹配所有请求，每个 cookie 中的 value 对应的请求 1000qdh
+  - key: "*"
+    query_per_hour: 1000 
 rejected_code: 200
 rejected_msg: '{"code":-1,"msg":"Too many requests"}'
 redis:

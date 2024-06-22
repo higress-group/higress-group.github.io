@@ -10,10 +10,10 @@ description: 请求/响应转换插件配置参考
 
 ## 配置字段
 
-| 名称 | 数据类型 | 填写要求 |  默认值 | 描述 |
-| :----: | :----: | :----: | :----: | -------- |
-|  reqRules |  string  | 选填，reqRules和respRules至少填一个 |   -  |  请求转换器配置，指定转换操作类型以及请求头、请求查询参数、请求体的转换规则  |
-|  respRules |  string  | 选填，reqRules和respRules至少填一个 |   -  |  响应转换器配置，指定转换操作类型以及响应头、响应体的转换规则  |
+| 名称 | 数据类型 |             填写要求              |  默认值 | 描述 |
+| :----: | :----: |:-----------------------------:| :----: | -------- |
+|  reqRules |  string  | 选填，reqRules 和 respRules 至少填一个 |   -  |  请求转换器配置，指定转换操作类型以及请求头、请求查询参数、请求体的转换规则  |
+|  respRules |  string  | 选填，reqRules 和 respRules 至少填一个 |   -  |  响应转换器配置，指定转换操作类型以及响应头、响应体的转换规则  |
 
 `reqRules` 和 `respRules` 中每一项的配置字段说明如下：
 
@@ -536,7 +536,7 @@ reqRules:
 curl localhost -d '{"userId":12, "userName":"johnlanni"}' -H 'content-type:application/json'
 ```
 
-将从 json 中提取出 `userId` 字段的值，设置到 `x-user-id` 中，后端服务收到的请求头将增加：`x-usr-id: 12`。
+将从 JSON 中提取出 `userId` 字段的值，设置到 `x-user-id` 中，后端服务收到的请求头将增加：`x-usr-id: 12`。
 
 因为在插件新增这个 Header 后，网关将重新计算路由，所以可以实现网关路由配置根据这个请求头来匹配路由到特定的目标服务。
 
@@ -553,9 +553,9 @@ curl localhost -d 'userId=12&userName=johnlanni'
 
 ### JSON Path 支持
 
-可以根据 [GJSON Path 语法](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)，从复杂的 json 中提取出字段。
+可以根据 [GJSON Path 语法](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)，从复杂的 JSON 中提取出字段。
 
-比较常用的操作举例，对于以下 json:
+比较常用的操作举例，对于以下 JSON:
 
 ```json
 {
@@ -584,7 +584,7 @@ friends.1              {"first": "Roger", "last": "Craig", "age": 68}
 friends.1.first        "Roger"
 ```
 
-现在如果想从上面这个 json 格式的 body 中提取出 friends 中第二项的 first 字段，来设置到 Header `x-first-name` 中，同时抽取 last 字段，来设置到 Header `x-last-name` 中，则可以使用这份插件配置：
+现在如果想从上面这个 JSON 格式的 body 中提取出 friends 中第二项的 first 字段，来设置到 Header `x-first-name` 中，同时抽取 last 字段，来设置到 Header `x-last-name` 中，则可以使用这份插件配置：
 
 ```yaml
 reqRules:

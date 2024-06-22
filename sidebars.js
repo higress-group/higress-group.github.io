@@ -43,7 +43,7 @@ const sidebars = {
             {
               type: 'category',
               label: 'Authentication Plugins',
-              items: ['plugins/authentication/basic-auth', 'plugins/authentication/key-auth', 'plugins/authentication/oidc', 'plugins/authentication/jwt-auth', 'plugins/authentication/hmac-auth', 'plugins/authentication/simple-jwt-auth']
+              items: ['plugins/authentication/basic-auth', 'plugins/authentication/key-auth', 'plugins/authentication/oidc', 'plugins/authentication/jwt-auth', 'plugins/authentication/hmac-auth']
             },
             {
               "type": "category",

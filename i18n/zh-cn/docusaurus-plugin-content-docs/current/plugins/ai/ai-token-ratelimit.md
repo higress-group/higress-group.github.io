@@ -1,7 +1,7 @@
 ---
-title: AI 限流
+title: AI Token 限流
 keywords: [higress, ai, rate-limit]
-description: AI 限流插件配置参考
+description: AI Token 限流插件配置参考
 ---
 
 ## 功能说明
