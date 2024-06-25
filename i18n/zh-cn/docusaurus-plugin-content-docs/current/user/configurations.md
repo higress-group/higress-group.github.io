@@ -18,22 +18,23 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | global.enableStatus	                   | 若为true， Higress Controller 将会更新 Ingress 资源的 status 字段。为避免从 Nginx Ingress 迁移过程中，覆盖 Ingress 对象的 status 字段，可以将这一参数设置为false，这样 Higress 默认就不会将入口 IP 写入 Ingress 的 status 字段。                                                                                                                                                                       | true            |
 | global.local	                          | 	如果要安装至本地 K8s 集群（如 Kind、Rancher Desktop 等），请设置为 true                                                                                                                                                                                                                                                                                        | false           |
 | global.enableIstioAPI	                 | 	若为 true，Higress Controller 将同时监听 istio 资源     | false           |
-| global.enableGatewayAPI	                 | 	若为 true，Higress Controller 将同时监听 Gateway API 资源     | false           |                          
+| global.enableGatewayAPI	                 | 	若为 true，Higress Controller 将同时监听 Gateway API 资源     | false           |
 | global.imagePullPolicy                 | 如果不希望使用默认行为，则可以指定镜像拉取策略。默认行为：最新的镜像将始终以 Always 方式拉取，否则将以 IfNotPresent 方式拉取。                                                                                                                                                                                                                                                                  | ""              |
 | global.imagePullSecrets                | 为所有 ServiceAccount 配置 ImagePullSecrets，即在同一命名空间中列出的一组密钥，用于拉取任何引用此 ServiceAccount 的 pod 中的镜像。对于不使用 ServiceAccount 的组件（例如 grafana、servicegraph、tracing），ImagePullSecrets 将被添加到相应的 Deployment（StatefulSet）对象中。对于配置了私有 Docker Registry 的任何集群，都必须设置此项。                                                                                           | []              |
 | global.defaultUpstreamConcurrencyThreshold                | 单个数据面实例和后端服务之间的最大并发（不同服务独立计算），注意过多并发可能导致网关内存过高，请相应调高数据面内存限制  | 10000        |
 
 ## meshConfig参数
-| 参数                                | 参数说明                                                                     | 默认值                       |       
+| 参数                                | 参数说明                                                                     | 默认值                       |
 |-----------------------------------|--------------------------------------------------------------------------|---------------------------|
 | higress-core.meshConfig.enablePrometheusMerge	 | 用于启用或禁用将 Prometheus 指标进行合并的选项。通过启用它，Istio 将能够将来自多个代理的指标进行聚合和展示。          | true |
 | higress-core.meshConfig.rootNamespace          | 表示根命名空间。如果未指定，则默认为 "istio-system"。                                 | null                      |
 | higress-core.meshConfig.trustDomain            | 表示信任域。默认为 "cluster.local"。信任域用于确定服务之间的安全通信，它将用于生成服务的证书和 JWT Token。 | cluster.local           |
 
 ## Gateway参数
-| 参数                                                             | 参数说明                                                                                      | 默认值                 |       
+| 参数                                                             | 参数说明                                                                                      | 默认值                 |
 |----------------------------------------------------------------|:------------------------------------------------------------------------------------------|---------------------|
-| higress-core.gateway.replicas	                                 | Higress Gateway 的 pod 数量。                                                                 | 2                   |
+|higress-core.gateway.kind| Higress gateway 的部署方式，可选项为 `DaemonSet` 和 `Controller` | Controller |
+| higress-core.gateway.replicas	                                 | Higress Gateway 的 pod 数量，仅在`higress-core.gateway.kind` 为 `Controller` 时生效。                                                                 | 2                   |
 | higress-core.gateway.rbac.enabled	                             | 如果启用，则将创建 roles 以便从 Gateways 访问证书。但在使用 http://gateway-api.org/ 时，这不是必需的                   | true                |
 | higress-core.gateway.serviceAccount.create	                    | 指定是否创建 ServiceAccount, 否则，使用默认值。                                                          | true                |
 | higress-core.gateway.serviceAccount.annotations                | 指定需要添加到 ServiceAccount 上的注释。                                                              | {}                  |
@@ -67,7 +68,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 
 ## Controller参数
-| 参数                                                     | 参数说明                                                                 | 默认值       |       
+| 参数                                                     | 参数说明                                                                 | 默认值       |
 |--------------------------------------------------------|----------------------------------------------------------------------|-----------|
 | higress-core.controller.replicas	                      | Higress Controller 的 pod 数量。                                         | 1         |
 | higress-core.controller.env	                           | 指定容器所需的任何环境变量。                                                       | {}        |
@@ -99,7 +100,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | higress-core.autoscaling.targetCPUUtilizationPercentage	 | 指定自动缩放调整 Pod 数量的目标 CPU 利用率百分比。                                       | 80        |
 
 ## Pilot参数
-| 参数                                                                | 参数说明                                                                                                           | 默认值    |       
+| 参数                                                                | 参数说明                                                                                                           | 默认值    |
 |-------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|--------|
 | higress-core.pilot.autoscaleEnabled	                              | 是否启用 Pilot 的自动伸缩。                                                                                              | false  |
 | higress-core.pilot.autoscaleMin	                                  | 自动伸缩时最小的副本数。                                                                                                   | 1      |
@@ -131,8 +132,8 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 
 ## skywalking 参数
-| 参数                                      | 参数说明                         | 默认值       |   
-|-----------------------------------------|------------------------------|-----------|                                       
+| 参数                                      | 参数说明                         | 默认值       |
+|-----------------------------------------|------------------------------|-----------|
 | higress-core.skywalking.enabled	        | 是否启用 SkyWalking              | false     |
 | higress-core.skywalking.service.address | 	SkyWalking 服务地址，如果不指定则使用默认值 | ~         |
 | higress-core.skywalking.service.port	   | SkyWalking 服务端口，默认为 11800    | 11800 |
@@ -140,7 +141,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ## 控制台参数
 | 参数                                       | 参数说明                                                                                                                                       | 默认值              |
-|------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------|------------------|    
+|------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------|------------------|
 | higress-console.replicaCount	                            | Higress Console 的 pod 数量                                                                                                                   | 1                |
 | higress-console.dnsPolicy	                               | 指定 DNS 策略，这里为 ClusterFirst 。                                                                                                               | ClusterFirst     |
 | higress-console.restartPolicy                            | 指定重启策略，这里指定为 Always 。                                                                                                                      | 	Always          |
