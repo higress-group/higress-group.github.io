@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkhigress_website=self.webpackChunkhigress_website||[]).push([[2572],{2572:(e,s,h)=>{h.r(s)}}]);
