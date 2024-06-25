@@ -72,16 +72,16 @@ curl http://exmaple.com -d 'hello world'
 ### 对特定路由或域名开启
 
 ```yaml
-# 使用 _rules_ 字段进行细粒度规则配置
-_rules_:
-# 规则一：按路由名称匹配生效
-- _match_route_:
-  - route-a
-  - route-b
+# 使用 matchRules 字段进行细粒度规则配置
+matchRules:
+# 规则一：按 Ingress 名称匹配生效
+- ingress:
+  - default/foo
+  - default/bar
   block_bodies: 
   - "hello world"
 # 规则二：按域名匹配生效
-- _match_domain_:
+- domain:
   - "*.example.com"
   - test.com
   block_urls: 
@@ -89,9 +89,10 @@ _rules_:
   block_bodies:
   - "hello world"
 ```
-此例 `_match_route_` 中指定的 `route-a` 和 `route-b` 即在创建网关路由时填写的路由名称，当匹配到这两个路由时，将使用此段配置；
-此例 `_match_domain_` 中指定的 `*.example.com` 和 `test.com` 用于匹配请求的域名，当发现域名匹配时，将使用此段配置；
-配置的匹配生效顺序，将按照 `_rules_` 下规则的排列顺序，匹配第一个规则后生效对应配置，后续规则将被忽略。
+
+此例 `ingress` 中指定的 `default/foo` 和 `default/bar` 对应 default 命名空间下名为 foo 和 bar 的 Ingress，当匹配到这两个 Ingress 时，将使用此段配置；
+此例 `domain` 中指定的 `*.example.com` 和 `test.com` 用于匹配请求的域名，当发现域名匹配时，将使用此段配置；
+配置的匹配生效顺序，将按照 `matchRules` 下规则的排列顺序，匹配第一个规则后生效对应配置，后续规则将被忽略。
 
 ## 请求 Body 大小限制
 
