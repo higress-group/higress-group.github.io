@@ -55,6 +55,11 @@ const config = {
   plugins: [
     'docusaurus-plugin-sass',
     'docusaurus-plugin-image-zoom',
+    [
+      require.resolve('docusaurus-lunr-search'), {
+        languages: ['en', 'zh']
+      }
+    ]
   ],
   presets: [
     [
