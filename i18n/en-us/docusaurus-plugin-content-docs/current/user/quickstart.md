@@ -108,12 +108,11 @@ we can use official support to enable this function,please refer to `https://kin
 
 
 ##### Step 3: Install Higress
-when you install `higress` in local environment, you should use `--set global.kind=true`;
-in the future, we will use `--set global.local=true` for unambiguous.
+when you install `higress` in local environment, you should use `--set global.local=true`.
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set global.o11y.enabled=false
 ```
 
 > If you'd like to enable the built-in o11y suite, please refer to the [Deploy by Helm](../ops/deploy-by-helm) document.

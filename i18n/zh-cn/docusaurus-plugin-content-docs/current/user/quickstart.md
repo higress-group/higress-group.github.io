@@ -129,12 +129,11 @@ kubectl.exe config use-context kind-higress
 
 ##### 第三步：安装 Higress
 
-本地安装开关: `--set global.kind=true`；
-为避免歧义，后面会调整属性名称为：`--set global.local=true`
+本地安装开关: `--set global.local=true`
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set global.o11y.enabled=false
 ```
 
 > 若要启用 Higress 内置的套件，可参阅[安装部署](../ops/deploy-by-helm.md)文档。

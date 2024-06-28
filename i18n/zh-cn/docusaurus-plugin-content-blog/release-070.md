@@ -54,7 +54,7 @@ helm upgrade higress -n higress-system higress.io/higress --set higress-console.
 如果希望启用 Higress 自带的 Prometheus&Grafana，可以通过下面 helm 命令进行安装：
 
 ```bash
-helm upgrade higress -n higress-system higress.io/higress --set higress-console.o11y.enabled=true
+helm upgrade higress -n higress-system higress.io/higress --set global.o11y.enabled=true
 ```
 
 这样 Higress 控制台就可以看到自带的可观测大盘了：

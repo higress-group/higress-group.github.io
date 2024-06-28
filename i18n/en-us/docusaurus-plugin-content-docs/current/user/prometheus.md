@@ -9,18 +9,18 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ## Use the Higress Console Built-In Monitor Suite
 
-Higress Console has a built-in monitor suite based on Prometheus + Grafana, which isn't installed by default. When installing Higress with Helm, you can enable it by adding the following argument to the command line: `--set higress-console.o11y.enabled=true`.
+Higress Console has a built-in monitor suite based on Prometheus + Grafana, which isn't installed by default. When installing Higress with Helm, you can enable it by adding the following argument to the command line: `--set global.o11y.enabled=true`.
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set higress-console.o11y.enabled=true
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.o11y.enabled=true
 ```
 
-Note: When installing to a standard K8s cluster (meaning without specifying `global.local=true` or `global.kind=true`), the PersistentVolumeClaim configured in the suite uses the access mode of `ReadWriteMany` by default. If the target K8s cluster doesn't support this mode, you can add the following argument to the command line to change the access mode to `ReadWriteOnce`: `--set higress-console.pvc.rwxSupported=false`.
+Note: When installing to a standard K8s cluster (meaning without specifying `global.local=true`), the PersistentVolumeClaim configured in the suite uses the access mode of `ReadWriteMany` by default. If the target K8s cluster doesn't support this mode, you can add the following argument to the command line to change the access mode to `ReadWriteOnce`: `--set global.pvc.rwxSupported=false`.
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set higress-console.o11y.enabled=true --set higress-console.pvc.rwxSupported=false
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.o11y.enabled=true --set global.pvc.rwxSupported=false
 ```
 
 After installation, open Higress Console in your browser, and click "Dashboard" on the left navigation area. The built-in dashboard will be displayed on the right.
