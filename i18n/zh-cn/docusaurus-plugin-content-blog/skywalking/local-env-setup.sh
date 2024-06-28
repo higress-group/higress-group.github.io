@@ -44,12 +44,12 @@ if [ "$IS_INSTALLED_CRD" = true ]; then
 
   echo "Step3: Installing Higress "
   helm repo add higress.io https://higress.io/helm-charts
-  helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes  --set global.enableIstioAPI=true --set global.kind=true --set higress-console.o11y.enabled=true
+  helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes  --set global.enableIstioAPI=true --set global.local=true --set global.o11y.enabled=true
   echo "Step3: Installing Higress finished."
 else
   echo "Step2: Installing Higress "
   helm repo add higress.io https://higress.io/helm-charts
-  helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes  --set global.enableIstioAPI=true --set global.kind=true --set higress-console.o11y.enabled=true
+  helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes  --set global.enableIstioAPI=true --set global.local=true --set global.o11y.enabled=true
   echo "Step2: Installing Higress finished."
 fi
 

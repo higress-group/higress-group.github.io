@@ -9,18 +9,18 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ## 使用 Higress Console 的内置监控套件
 
-Higress Console 内置了一套基于 Prometheus + Grafana 的监控套件，但默认不会安装。在使用 Helm 安装 Higress 时，可以通过在命令行中添加 `--set higress-console.o11y.enabled=true` 参数启用这一监控套件。
+Higress Console 内置了一套基于 Prometheus + Grafana 的监控套件，但默认不会安装。在使用 Helm 安装 Higress 时，可以通过在命令行中添加 `--set global.o11y.enabled=true` 参数启用这一监控套件。
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set higress-console.o11y.enabled=true
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.o11y.enabled=true
 ```
 
-注意：在安装到标准 K8s 集群（即未指定 `global.local=true` 或 `global.kind=true` 参数）时，监控系统所配置的 PersistentVolumeClaim 默认使用 `ReadWriteMany` 访问模式。如果目标 K8s 集群不支持这一访问模式，则可以在命令行中额外添加 `--set higress-console.pvc.rwxSupported=false` 参数来将访问模式切换为 `ReadyWriteOnce`。
+注意：在安装到标准 K8s 集群（即未指定 `global.local=true` 参数）时，监控系统所配置的 PersistentVolumeClaim 默认使用 `ReadWriteMany` 访问模式。如果目标 K8s 集群不支持这一访问模式，则可以在命令行中额外添加 `--set global.pvc.rwxSupported=false` 参数来将访问模式切换为 `ReadyWriteOnce`。
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set higress-console.o11y.enabled=true --set higress-console.pvc.rwxSupported=false
+helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.o11y.enabled=true --set global.pvc.rwxSupported=false
 ```
 
 完成安装后，在浏览器中访问 Higress Console，点击左侧导航栏“监控面板”，页面右侧就会展示出系统内置的监控面板。

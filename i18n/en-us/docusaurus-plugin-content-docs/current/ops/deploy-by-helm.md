@@ -32,6 +32,8 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | global.enableStatus | If `true`, Higress Controller will update the `status` field of Ingress resources.<br />When migrating from Nginx Ingress, in order to avoid `status` field of Ingress objects being overwritten, this parameter needs to be set to false, so Higress won't write the entry IP to the `status` field of the corresponding Ingress object. | true |
 | global.enableIstioAPI | If `true`, Higress Controller will monitor istio resources as well | false |
 | global.istioNamespace | The namespace istio is installed to | istio-system |
+| global.o11y.enabled | If `true`, o11y suite (Grafana + Promethues) will be installed. | false |
+| global.pvc.rwxSupported | Set to `false` when installing to a standard K8s cluster and the target cluster doesn't support the ReadWriteMany access mode of PersistentVolumeClaim. | true |
 | **Core Paramters** |  |  |
 | higress-core.gateway.replicas | Number of Higress Gateway pods | 2 |
 | higress-core.controller.replicas | Number of Higress Controller pods | 1 |
@@ -39,8 +41,6 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | higress-console.replicaCount | Number of Higress Console pods | 1 |
 | higress-console.service.type | K8s service type used by Higress Console | ClusterIP |
 | higress-console.web.login.prompt | Prompt message to be displayed on the login page | "" |
-| higress-console.o11y.enabled | If `true`, o11y suite (Grafana + Promethues) will be installed. | false |
-| higress-console.pvc.rwxSupported | Set to `false` when installing to a standard K8s cluster and the target cluster doesn't support the ReadWriteMany access mode of PersistentVolumeClaim. | true |
 
 ## Support Istio CRD
 
