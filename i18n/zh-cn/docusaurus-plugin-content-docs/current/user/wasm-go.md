@@ -383,7 +383,7 @@ hello world
 ### 无配置插件
 插件无需配置时，直接定义空结构体即可
 
-```
+```go
 package main
 
 import (
@@ -410,7 +410,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 ### 在插件中请求外部服务
 目前仅支持 http 调用，支持访问在网关控制台中设置了服务来源的 Nacos、K8s 服务，以及固定地址或 DNS 来源的服务。请注意，无法直接使用`net/http`库中的 HTTP client，必须使用如下例中封装的 HTTP client。<br />下面例子中，在配置解析阶段解析服务类型，生成对应的 HTTP client ；在请求头处理阶段根据配置的请求路径访问对应服务，解析应答头，然后再设置在原始的请求头中。
 
-```
+```go
 package main
 
 import (
