@@ -22,6 +22,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | global.imagePullPolicy                 | 如果不希望使用默认行为，则可以指定镜像拉取策略。默认行为：最新的镜像将始终以 Always 方式拉取，否则将以 IfNotPresent 方式拉取。                                                                                                                                                                                                                                                                  | ""              |
 | global.imagePullSecrets                | 为所有 ServiceAccount 配置 ImagePullSecrets，即在同一命名空间中列出的一组密钥，用于拉取任何引用此 ServiceAccount 的 pod 中的镜像。对于不使用 ServiceAccount 的组件（例如 grafana、servicegraph、tracing），ImagePullSecrets 将被添加到相应的 Deployment（StatefulSet）对象中。对于配置了私有 Docker Registry 的任何集群，都必须设置此项。                                                                                           | []              |
 | global.defaultUpstreamConcurrencyThreshold                | 单个数据面实例和后端服务之间的最大并发（不同服务独立计算），注意过多并发可能导致网关内存过高，请相应调高数据面内存限制  | 10000        |
+| global.onlyPushRouteCluster | 若为`true`，Higress Controller 将会只推送被路由关联的服务 | true |
 
 ## meshConfig参数
 | 参数                                | 参数说明                                                                     | 默认值                       |       
