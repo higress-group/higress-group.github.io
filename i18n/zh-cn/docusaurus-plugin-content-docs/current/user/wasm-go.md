@@ -383,7 +383,7 @@ hello world
 ### 无配置插件
 插件无需配置时，直接定义空结构体即可
 
-```
+```go
 package main
 
 import (
@@ -410,7 +410,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 ### 在插件中请求外部服务
 目前仅支持 http 调用，支持访问在网关控制台中设置了服务来源的 Nacos、K8s 服务，以及固定地址或 DNS 来源的服务。请注意，无法直接使用`net/http`库中的 HTTP client，必须使用如下例中封装的 HTTP client。<br />下面例子中，在配置解析阶段解析服务类型，生成对应的 HTTP client ；在请求头处理阶段根据配置的请求路径访问对应服务，解析应答头，然后再设置在原始的请求头中。
 
-```
+```go
 package main
 
 import (
@@ -449,48 +449,19 @@ func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
 	if config.requestPath == "" {
 		return errors.New("missing requestPath in config")
 	}
-	serviceSource := json.Get("serviceSource").String()
-	// 固定地址和dns类型的serviceName，为控制台中创建服务时指定
-	// nacos和k8s来源的serviceName，即服务注册时指定的原始名称
+	// 带服务类型的完整 FQDN 名称，例如 my-svc.dns, my-svc.static, service-provider.DEFAULT-GROUP.public.nacos, httpbin.my-ns.svc.cluster.local
 	serviceName := json.Get("serviceName").String()
 	servicePort := json.Get("servicePort").Int()
-	if serviceName == "" || servicePort == 0 {
-		return errors.New("invalid service config")
+	if servicePort == 0 {
+		if strings.HasSuffix(serviceName, ".static") {
+			// 静态IP类型服务的逻辑端口是80
+			servicePort = 80
+		}
 	}
-	switch serviceSource {
-	case "k8s":
-		namespace := json.Get("namespace").String()
-		config.client = wrapper.NewClusterClient(wrapper.K8sCluster{
-			ServiceName: serviceName,
-			Namespace:   namespace,
-			Port:        servicePort,
-		})
-		return nil
-	case "nacos":
-		namespace := json.Get("namespace").String()
-		config.client = wrapper.NewClusterClient(wrapper.NacosCluster{
-			ServiceName: serviceName,
-			NamespaceID: namespace,
-			Port:        servicePort,
-		})
-		return nil
-	case "ip":
-		config.client = wrapper.NewClusterClient(wrapper.StaticIpCluster{
-			ServiceName: serviceName,
-			Port:        servicePort,
-		})
-		return nil
-	case "dns":
-		domain := json.Get("domain").String()
-		config.client = wrapper.NewClusterClient(wrapper.DnsCluster{
-			ServiceName: serviceName,
-			Port:        servicePort,
-			Domain:      domain,
-		})
-		return nil
-	default:
-		return errors.New("unknown service source: " + serviceSource)
-	}
+        config.client = wrapper.NewClusterClient(wrapper.FQDNCluster{
+		FQDN: serviceName,
+		Port: servicePort,
+        })
 }
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {

@@ -24,6 +24,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | global.defaultUpstreamConcurrencyThreshold                | 单个数据面实例和后端服务之间的最大并发（不同服务独立计算），注意过多并发可能导致网关内存过高，请相应调高数据面内存限制  | 10000        |
 | global.o11y.enabled	                            | 若为 true，将同时安装可观测性套件（Grafana、Promethues、Loki、PromTail 等）。                                                                                                 | false            |
 | global.pvc.rwxSupported	                        | RwxSupported 参数用于指示是否支持读写多个 Pod，即是否支持共享卷。如果该参数设置为 true，则表明支持共享卷，多个 Pod 可以同时挂载该 PVC，进行读写操作。如果设置为 false，则表明不支持共享卷，只有一个 Pod 可以挂载该 PVC 进行读写操作。 | true             |
+| global.onlyPushRouteCluster | 若为`true`，Higress Controller 将会只推送被路由关联的服务 | true |
 
 ## meshConfig参数
 | 参数                                | 参数说明                                                                     | 默认值                       |       
@@ -66,7 +67,6 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | higress-core.gateway.tolerations                                                    | 容忍度，用于允许 gateway 容器调度到具有指定污点的节点。                                                          | []                  |
 | higress-core.gateway.affinity                                                       | 亲和性，用于控制 gateway容器如何调度，使其与其他 Pod 或节点保持亲和或反亲和。                                             | {}                  |
 | higress-core.gateway.networkGateway                                                 | 用于指定网络网关的名称或 IP 地址。                                                                       | ""                  |
-
 
 ## Controller参数
 | 参数                                                     | 参数说明                                                                 | 默认值       |       
@@ -130,15 +130,12 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | higress-core.pilot.configMap	                                     | 安装由values.yaml生成的 mesh config ，如果为 false ，则 Pilot 将使用默认值（默认情况下）或用户提供的值，如果为 false ，则 Pilot 将使用默认值（默认情况下）或用户提供的值 | true   |
 | higress-core.pilot.podLabels	                                     | 为 Pod 添加额外的标签，以用于监控和日志记录配置。                                                                                    | {}     |
 
-
-
-## skywalking 参数
+## SkyWalking参数
 | 参数                                      | 参数说明                         | 默认值       |   
 |-----------------------------------------|------------------------------|-----------|                                       
 | higress-core.skywalking.enabled	        | 是否启用 SkyWalking              | false     |
 | higress-core.skywalking.service.address | 	SkyWalking 服务地址，如果不指定则使用默认值 | ~         |
 | higress-core.skywalking.service.port	   | SkyWalking 服务端口，默认为 11800    | 11800 |
-
 
 ## 控制台参数
 | 参数                                       | 参数说明                                                                                                                                       | 默认值              |
