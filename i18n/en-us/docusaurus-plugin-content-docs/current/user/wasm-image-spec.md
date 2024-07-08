@@ -149,7 +149,7 @@ docker run -v ${PWD}:/workspace -e PLUGIN_NAME=${PLUGIN_NAME} -it --rm  /bin/bas
 ```bash
 cd /workspace/plugins/wasm-go/extensions/${PLUGIN_NAME}
 go mod tidy
-tinygo build -o ./plugin.wasm -scheduler=none -target=wasi ./main.go
+tinygo build -o ./plugin.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
 ```
 
 3. Build and push an OCI image

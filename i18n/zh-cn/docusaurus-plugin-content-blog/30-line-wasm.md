@@ -88,7 +88,7 @@ func onHttpRequestHeaders(ctx HttpContext, config MyConfig, log Log) types.Actio
 ### 编译
 将上面的 Go 文件 main.go 编译成 plugin.wasm
 ```bash
-tinygo build -o plugin.wasm -scheduler=none -target=wasi main.go
+tinygo build -o plugin.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' main.go
 ```
 ### 镜像推送
 编写 Dockerfile
