@@ -230,7 +230,7 @@ See [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-
 
 Execute the following command:
 ```bash
-tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
+tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
 ```
 A new file named main.wasm will be created after a successful compilation, which will be used in the local debugging sample below as well.<br />When using custom plugin function in the cloud native gateway market, you just need to upload this file.
 

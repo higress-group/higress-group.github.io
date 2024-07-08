@@ -51,6 +51,10 @@
     "message": "安装部署",
     "description": "The label for category Deploy in sidebar docs"
   },
+  "sidebar.docs.category.How-tos": {
+    "message": "操作指南",
+    "description": "The label for category How-tos in sidebar docs"
+  },
   "sidebar.docs.category.Developer Guide": {
     "message": "开发者指南",
     "description": "The label for category Developer Guide in sidebar docs"

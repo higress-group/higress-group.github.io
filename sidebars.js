@@ -81,6 +81,11 @@ const sidebars = {
           label: 'Deploy',
           items: ['ops/hgctl','ops/deploy-by-helm', 'ops/deploy-by-docker-compose'],
         },
+        {
+          type: 'category',
+          label: 'How-tos',
+          items: ['ops/how-tos/grpc-upstream','ops/how-tos/https-upstream', 'ops/how-tos/tcp-route', 'ops/how-tos/gateway-ports'],
+        },
         'ops/upgrade',
         'ops/log'
       ],
