@@ -143,7 +143,7 @@ spec:
 
 ```bash
 GO_VERSION="1.19"
-TINYGO_VERSION="0.25.0"
+TINYGO_VERSION="0.28.1"
 ORAS_VERSION="1.0.0"
 PLUGIN_NAME="hello-world"
 BUILDER_IMAGE="higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/wasm-go-builder:go${GO_VERSION}-tinygo${TINYGO_VERSION}-oras${ORAS_VERSION}"
