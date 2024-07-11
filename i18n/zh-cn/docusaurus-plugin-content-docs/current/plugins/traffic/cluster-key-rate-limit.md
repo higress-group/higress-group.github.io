@@ -6,7 +6,8 @@ description: 基于 Key 集群限流插件配置参考
 
 ## 功能说明
 
-`key-cluster-rate-limit` 插件实现了基于特定 Key 实现集群限流，键值来源可以是 URL 参数、HTTP 请求头、客户端 IP 地址、consumer 名称、Cookie 中 Key 名称。
+`cluster-key-rate-limit` 插件基于 Redis 实现集群限流，适用于需要跨多个 Higress Gateway 实例实现全局一致速率限制的场景。
+限流所使用的 Key 可以来源于 URL 参数、HTTP 请求头、客户端 IP 地址、消费者名称或 Cookie 中的 Key。
 
 ## 配置说明
 
