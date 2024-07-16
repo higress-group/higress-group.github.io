@@ -4,7 +4,7 @@ keywords: [higress,hiring]
 description: Higress 招聘信息
 author: 澄潭
 date: "2023-11-17"
-category: "article"
+category: "ecosystem"
 ---
 
 

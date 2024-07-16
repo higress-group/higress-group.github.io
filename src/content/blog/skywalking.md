@@ -5,7 +5,7 @@ description: Higress 集成 Skywalking 可观测性探索
 author: Jun
 date: "2023-06-20"
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/skywalking.md
-category: "article"
+category: "ecosystem"
 ---
 
 # Higress 集成 Skywalking 可观测性探索

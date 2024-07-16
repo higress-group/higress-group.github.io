@@ -5,7 +5,7 @@ description: Higress：Nacos的最佳拍档
 author: 澄潭
 date: "2023-01-10"
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/nacos.md
-category: "article"
+category: "case"
 ---
 
 

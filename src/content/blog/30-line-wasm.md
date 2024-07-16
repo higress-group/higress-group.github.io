@@ -5,7 +5,7 @@ description: 对《Higress 开源背后的发展历程和上手 Demo 演示》�
 author: 澄潭
 date: "2022-11-22"
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/30-line-wasm.md
-category: "article"
+category: "case"
 ---
 
 ## 前言

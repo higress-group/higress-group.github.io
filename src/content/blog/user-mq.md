@@ -4,7 +4,7 @@ keywords: [higress,美洽]
 description: 美洽在阿里云上采用Higress企业版，在其他云采用Higress开源版，统一了网关架构
 author: 古建国 (Larry Koo)
 date: "2023-07-10"
-category: "article"
+category: "case"
 ---
 
 ## 关于美洽

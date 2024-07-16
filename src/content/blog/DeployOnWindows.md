@@ -5,7 +5,7 @@ description: Windows部署Higress
 author: Fkbqf
 date: "2023-07-28"
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/DeployOnWindows.md
-category: "article"
+category: "ecosystem"
 ---
 ## 前置准备
 
