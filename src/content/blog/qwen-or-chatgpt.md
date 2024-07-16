@@ -4,7 +4,7 @@ keywords: [Higress,Wasm,AI,Qwen,ChatGPT,NextChat]
 description: 基于通义千问大模型，使用 Higress 和 NextChat 搭建跨平台的私人 ChatGPT 应用
 author: CH3CHO、澄潭
 date: "2024-05-11"
-category: "article"
+category: "ecosystem"
 ---
 
 ## 引子

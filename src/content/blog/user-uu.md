@@ -4,7 +4,7 @@ keywords: [higress,UU跑腿]
 description: 介绍UU跑腿的云原生网关探索之路
 author: 王德冲
 date: "2023-03-30"
-category: "article"
+category: "case"
 ---
 
 ## UU跑腿介绍
