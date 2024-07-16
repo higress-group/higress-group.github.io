@@ -141,7 +141,7 @@ export default {
 	'home.overviewcard.title': 'Overview Image',
 	'home.standards.title': 'Standards',
 	'home.standards.subtitle': 'Strictly following the Ingress, Gateway API, and Istio API standards ensures seamless one-click migration of similar gateways. ',
-	'home.security.capability.title':'Security Capability Empowerment',
+	'home.security.capability.title':'Security',
 	'home.security.capability.subtitle':'Higress offer WAF security, authorization, and traffic protection at both global and route-specific levels, ensuring your business automatically benefits from enterprise-grade security capabilities.',
 
 	'home.introduction.detailTitle.1':'About Spring Boot',
