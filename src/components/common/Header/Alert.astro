@@ -1,0 +1,100 @@
+---
+import { TOPBAR } from "@/constant";
+import { useTranslations } from "@i18n/util";
+
+const t = useTranslations(Astro);
+const { text, mobileText, link, target, display } = TOPBAR;
+---
+
+{
+  display && (
+    <div
+      class={`alert-bar w-full  h-12 flex align-center justify-between top-0 bg-cover bg-[url('https://img.alicdn.com/imgextra/i3/O1CN010OMCW91rMde4sifaA_!!6000000005617-0-tps-828-52.jpg')] md:bg-[url('https://img.alicdn.com/imgextra/i4/O1CN01wkq3Nl1O9FCjTbQNk_!!6000000001662-0-tps-2880-96.jpg')]`}
+      client:load
+    >
+      <div class="md:text-base text-sm m-auto leading-6 ">
+        <span class=" text-muted mr-4 md:mr-6 opacity-30 hidden md:inline-block">{`</>`}</span>
+        <span
+          class="alert-text hidden md:inline-block bg-gradient-to-r from-link to-success font-medium"
+          set:html={text}
+        />
+        <span
+          class="alert-text bg-gradient-to-r from-link to-success text-muted  md:hidden font-medium"
+          set:html={mobileText}
+        />
+        <a
+          href={link}
+          target={target}
+          class="mx-auto flex justify-center md:inline text-primary font-medium md:ml-4 no-underline"
+        >
+          {t("commmon.header.alert.link")}
+        </a>
+      </div>
+      <button class="close-button text-muted bg-transparent border-none cursor-pointer text-lg leading-6 mr-1 md:mr-4">
+        &times;
+      </button>
+    </div>
+  )
+}
+
+<script>
+  // handleAlertClose函数用于处理提示条的关闭逻辑。
+  function handleAlertClose(button) {
+    button.parentNode.style.display = "none";
+    window.alertBarClosed = true;
+  }
+
+  // 检查localStorage中的状态，看是否需要显示提示条。
+  function initAlertBar() {
+    const displayAlert = [
+      "/",
+      "/en/",
+      "/cloud/",
+      "/en/cloud/",
+      "/news/",
+      "/en/news/",
+      "/activity",
+      "/en/activity",
+      "/blog/",
+      "/en/blog/",
+      "/wuyi/",
+      "/en/wuyi/",
+      "/plugin/",
+      "/en/plugin/",
+    ];
+    if (!displayAlert.includes(location.pathname)) {
+      // 如果为文档/博客详情等不期望展示提示条，则隐藏提示条。
+      document.querySelector(".alert-bar") &&
+        (document.querySelector(".alert-bar").style.display = "none");
+    } else {
+      try {
+        const alertBar = document.querySelector(".alert-bar");
+        const closeButton = document.querySelector(".close-button");
+        const isClosed = window.alertBarClosed || false;
+
+        if (isClosed === true) {
+          alertBar.style.display = "none";
+        } else {
+          closeButton.addEventListener("click", function () {
+            handleAlertClose(closeButton);
+          });
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
+  // // 当页面加载时，调用initAlertBar函数。
+  window.addEventListener("DOMContentLoaded", initAlertBar);
+
+  // 监听astro页面切换事件：在新页面替换旧页面后立即触发的事件
+  document.addEventListener("astro:after-swap", initAlertBar);
+</script>
+
+<style is:global>
+  .alert-text {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>

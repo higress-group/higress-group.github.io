@@ -1,7 +1,16 @@
 {
-  // This file is not used in compilation. It is here just for a nice editor experience.
-  "extends": "@tsconfig/docusaurus/tsconfig.json",
+  "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+	"paths": {
+		"@/*":["src/*"],
+		"@components/*": ["src/components/*"],
+		"@layouts/*": ["src/layouts/*"],
+		"@i18n/*": ["src/i18n/*"],
+		"@helpers/*": ["src/helpers/*"],
+		"@starlight/*": ["node_modules/@astrojs/starlight/*"],
+		"@style/*": ["src/style/*"],
+		"@utils/*": ["src/utils/*"],
+	}
   }
 }

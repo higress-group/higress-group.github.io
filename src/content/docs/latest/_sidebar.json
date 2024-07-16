@@ -1,0 +1,278 @@
+[
+    {
+        "label": "概述",
+        "translations": {
+          "en": "Overview"
+        },
+        "collapsed": false,
+        "autogenerate":{
+          "directory": "overview"
+        }
+    },
+    {
+      "label": "用户指南",
+      "translations": {
+        "en": "User Doc"
+      },
+      "collapsed": false,
+      "items":[
+        {
+          "label": "快速开始",
+          "translations": {
+            "en": "Quick Start"
+          },
+          "link": "docs/user/quickstart"
+        },
+        {
+          "label": "参考手册",
+          "translations": {
+            "en": "Reference"
+          },
+          "collapsed": true,
+          "items":[
+            {
+              "label": "全局配置说明",
+              "translations": {
+                "en": "Config Map"
+              },
+              "link": "docs/user/configmap"
+            },
+            {
+              "label": "Ingress Annotaion 配置说明",
+              "translations": {
+                "en": "Higress Annotaion"
+              },
+              "link": "docs/user/annotation"
+            },
+            {
+              "label": "通过Ingress Annotation实现高阶流量治理",
+              "translations": {
+                "en": "Annotation Use Case"
+              },
+              "link": "docs/user/annotation-use-case"
+            },
+            {
+              "label": "Higress参数配置",
+              "translations": {
+                "en": "Higress Parameters Guide"
+              },
+              "link": "docs/user/configurations"
+            },
+            {
+              "label": "Mcp Bridge 配置说明",
+              "translations": {
+                "en": "Mcp Bridge Configuration"
+              },
+              "link": "docs/user/mcp-bridge"
+            },
+            {
+              "label": "HTTP转Dubbo 配置说明",
+              "translations": {
+                "en": "HTTP to Dubbo"
+              },
+              "link": "docs/user/dubbo-http2rpc"
+            },
+            {
+              "label": "Wasm 插件镜像规范",
+              "translations": {
+                "en": "Wasm Plugin Image Specification"
+              },
+              "link": "docs/user/wasm-image-spec"
+            }
+          ]
+        },
+        {
+          "label": "插件使用文档",
+          "translations": {
+            "en": "Plugin Doc"
+          },
+          "items":[
+            {
+              "label": "AI Plugins",
+              "collapsed": true,
+              "autogenerate":{
+                "directory": "plugins/ai"
+              }
+            },
+            {
+              "label": "认证",
+              "translations": {
+                "en": "Authentication Plugins"
+              },
+              "collapsed": true,
+              "autogenerate":{
+                "directory": "plugins/authentication"
+              }
+            },
+            {
+              "label": "转换",
+              "translations": {
+                "en": "Transformation Plugins"
+              },
+              "collapsed": true,
+              "autogenerate":{
+                "directory": "plugins/transformation"
+              }
+            },
+            {
+              "label": "流量",
+              "translations": {
+                "en": "Traffic Plugins"
+              },
+              "collapsed": true,
+              "autogenerate":{
+                "directory": "plugins/traffic"
+              }
+            },
+            {
+              "label": "安全",
+              "translations": {
+                "en": "Security Plugins"
+              },
+              "collapsed": true,
+              "autogenerate":{
+                "directory": "plugins/security"
+              }
+            },
+            {
+              "label": "Wasm 插件使用简介",
+              "translations": {
+                "en": "Wasm Plugin Doc"
+              },
+              "collapsed": true,
+              "link": "docs/plugins/intro"
+            },
+            {
+              "label": "自定义插件",
+              "translations": {
+                "en": "Custom Plugin"
+              },
+              "collapsed": true,
+              "link": "docs/plugins/custom"
+            }
+          ]
+        },
+        {
+          "label": "最佳实践示例",
+          "translations": {
+            "en": "Best Practices"
+          },
+          "collapsed": true,
+          "items":[
+            {
+              "label": "使用 GO 语言开发 WASM 插件",
+              "translations": {
+                "en": "Developing a WASM Plugin with Golang"
+              },
+              "link": "docs/user/wasm-go"
+            },
+            {
+              "label": "通过 OpenKruise Rollout 实现灰度发布",
+              "translations": {
+                "en": "OpenKruise Rollout"
+              },
+              "link": "docs/user/kruise-rollout"
+            },
+            {
+              "label": "配置 Ingress 转发给注册在 Nacos 的服务",
+              "translations": {
+                "en": "Nacos Route"
+              },
+              "link": "docs/user/nacos-route"
+            },
+            {
+              "label": "实现 SpringCloud 服务发现和路由",
+              "translations": {
+                "en": "SpringCloud"
+              },
+              "link": "docs/user/spring-cloud"
+            },
+            {
+              "label": "Higress 对接 Dubbo 服务",
+              "translations": {
+                "en": "Higress Dubbo"
+              },
+              "link": "docs/user/dubbo"
+            },
+            {
+              "label": "基于 Prometheus 实现入口流量观测",
+              "translations": {
+                "en": "Request Monitoring Based on Prometheus"
+              },
+              "link": "docs/user/prometheus"
+            },
+            {
+              "label": "开启 WAF 防护的最佳实践",
+              "translations": {
+                "en": "WAF"
+              },
+              "link": "docs/user/waf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "运维指南",
+      "translations": {
+        "en": "Ops"
+      },
+      "collapsed": false,
+      "items":[
+        {
+          "label": "安装部署",
+          "translations": {
+            "en": "Deploy"
+          },
+          "items":[
+            {
+              "label": "hgctl 工具使用说明",
+              "translations": {
+                "en": "hgctl"
+              },
+              "link": "docs/ops/hgctl"
+            },
+            {
+              "label": "使用 Helm 进行云原生部署",
+              "translations": {
+                "en": "Deploy Higress by Helm"
+              },
+              "link": "docs/ops/deploy-by-helm"
+            },
+            {
+              "label": "基于 Docker Compose 进行独立部署",
+              "translations": {
+                "en": "Deploy Higress by Docker Compose"
+              },
+              "link": "docs/ops/deploy-by-docker-compose"
+            }
+          ]
+        },
+        {
+          "label": "版本升级",
+          "translations": {
+            "en": "Upgrade"
+          },
+          "link": "docs/ops/upgrade"
+        },
+        {
+          "label": "日志说明",
+          "translations": {
+            "en": "Log"
+          },
+          "link": "docs/ops/log"
+        }
+      ]
+    },
+    {
+      "label": "开发者指南",
+      "translations": {
+        "en": "Developer Guide"
+      },
+      "collapsed": false,
+      "autogenerate":{
+        "directory": "dev"
+      }
+    }
+    
+]

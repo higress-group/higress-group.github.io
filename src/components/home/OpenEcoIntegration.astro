@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import { useTranslations } from "@i18n/util";
+import { Headline } from "@serverless-cd/goat-ui";
+
+const t = useTranslations(Astro);
+---
+
+<span class="open-ecosystem-wrapper">
+  <open-ecosystem
+    class="open-ecosystem block bg-neutral py-10 flex justify-center items-center"
+  >
+    <div class="ecosystem-container flex flex-col justify-center items-center">
+      <Headline
+        classes={{ subtitle: "text-sm" }}
+        title={t("home.open.ecosystem.title")}
+        titleTheme="error"
+        taglineTheme="info"
+        subtitle={t("home.open.ecosystem.subtitle")}
+        subtitleTheme="success"
+      />
+
+      <Image
+        class="w-[80%]"
+        alt={t("home.open.ecosystem.title")}
+        src="https://img.alicdn.com/imgextra/i3/O1CN01fP1req1hWa70Cp4EG_!!6000000004285-2-tps-2728-1405.png"
+        width="1089.59"
+        height="561.17"
+      />
+    </div>
+  </open-ecosystem>
+</span>
+
+<style is:global>
+  .open-ecosystem-wrapper {
+    .ecosystem-container  {
+      width: 85.125rem;
+    }
+
+    /* 小于50rem  小于 800px */
+    @media (max-width: 50rem) {
+      .ecosystem-container  {
+        padding: 1.5rem;
+        width: 100%;
+      }
+    }
+
+    /* 大于50rem 小于 72rem  800px < width < 1152 */
+    @media (min-width: 50rem) and (max-width: 86rem) {
+      .ecosystem-container  {
+        padding: 2.5rem;
+        width: 100%;
+      }
+    }
+  }
+</style>

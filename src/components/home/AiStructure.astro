@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import { useTranslations } from "@i18n/util";
+import { Headline } from "@serverless-cd/goat-ui";
+
+const t = useTranslations(Astro);
+---
+
+<span class="ai-structure-wrapper ">
+  <ai-structure
+    class="ai-structure block bg-neutral py-10 flex justify-center items-center"
+  >
+    <div class="structure-container flex flex-col justify-center items-center">
+      <Headline
+        classes={{ subtitle: "text-sm" }}
+        title={t("home.ai.structure.title")}
+        subtitle={t("home.ai.structure.subtitle")}
+        titleTheme="error"
+        taglineTheme="info"
+        subtitleTheme="success"
+      />
+
+      <Image
+        class="w-[80%]"
+        alt={t("home.website.edge.title")}
+        src="https://img.alicdn.com/imgextra/i2/O1CN01a3TQwu1hUI8C4HYDb_!!6000000004280-2-tps-2669-1462.png"
+        width="1089.59"
+        height="596.84"
+        />
+    </div>
+  </ai-structure>
+</span>
+
+<style is:global>
+  .ai-structure-wrapper {
+    width: 100%;
+    .structure-container {
+      width: 85.125rem;
+    }
+
+    /* 小于50rem  小于 800px */
+    @media (max-width: 50rem) {
+      .structure-container {
+        padding: 1.5rem;
+        width: 100%;
+      }
+    }
+
+    /* 大于50rem 小于 72rem  800px < width < 1152 */
+    @media (min-width: 50rem) and (max-width: 86rem) {
+      .structure-container {
+        padding: 2.5rem;
+        width: 100%;
+      }
+    }
+  }
+</style>

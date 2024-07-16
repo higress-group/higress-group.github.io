@@ -1,0 +1,55 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PluginIntroduce from "@components/plugin/PluginIntroduce.astro";
+import PluginHub from "@components/plugin/PluginHub/index";
+import CloudFooter from "@components/common/Footer.astro";
+import { isChinese } from "@i18n/util";
+import { useTranslations } from "@i18n/util";
+const t = useTranslations(Astro);
+const ifzh = isChinese(Astro);
+import { getCollection } from "astro:content";
+import { toCodes } from "astro:i18n";
+
+const Functionality = {
+  ai: "AI",
+  authentication: "认证",
+  transformation: "转换",
+  traffic: "流量",
+  security: "安全",
+};
+
+const lang = ifzh ? "zh-cn" : "en"
+
+// 拿到插件的文档
+const posts = await getCollection("docs", (item) => {
+  return item.slug.includes(`latest/${lang}/plugin`);
+});
+
+const generateLink = (slug) => {
+  const arr = slug.split("/" + lang);
+  return (lang ==='en' ? "/en" : "") + "/docs/" + arr.join("") + "/?source=plugin";
+}
+
+const dataSource = posts
+  .map((item) => ({
+    Img: "",
+    Title: item.data.title,
+    Tiers: "企业版",
+    Des: item.data.description,
+    Link: generateLink(item.slug),
+    Functionality:
+      Functionality[
+        item.id.match(/plugins\/(.*?)\/[^\/]+\.md$/)
+          ? item.id.match(/plugins\/(.*?)\/[^\/]+\.md$/)[1]
+          : ""
+      ],
+    SupportBy: "Higress",
+  }))
+  .filter((item) => item.Functionality);
+---
+
+<BaseLayout title={t('plugin.title')} description={t('plugin.description')}>
+  <PluginIntroduce />
+  <PluginHub client:load dataSource={dataSource} />
+  <CloudFooter />
+</BaseLayout>
