@@ -1,0 +1,5 @@
+import{c as e,r as u,m as g}from"./render-template.BxWVGK5g.js";import{u as a}from"./index.DVQprq0Y.js";import"./hooks.module.6Mr8QjZg.js";import"./preact.module.LHOPIhyX.js";import"./jsxRuntime.module.B-HT3-kV.js";import"./preload-helper.BiBI96sQ.js";const r="<p>TBD</p>",s={title:"Nginx Ingress \u517C\u5BB9\u8BF4\u660E",keywords:["ingress","nginx"],description:"Nginx Ingress \u517C\u5BB9\u8BF4\u660E\u3002",custom_edit_url:"https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/nginx-ingress.md"},t="/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/zh-cn/user/nginx-ingress.md",i=void 0;function c(){return`
+# Nginx Ingress \u517C\u5BB9\u8BF4\u660E
+
+TBD
+`}function m(){return r}function p(){return[]}const o=e((d,h,l)=>{const{layout:f,...n}=s;return n.file=t,n.url=i,u`${g()}${a(r)}`});export{o as Content,m as compiledContent,o as default,t as file,s as frontmatter,p as getHeadings,c as rawContent,i as url};

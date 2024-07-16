@@ -1,0 +1,4 @@
+import{c as i,r as u,m as g}from"./render-template.BxWVGK5g.js";import{u as a}from"./index.DVQprq0Y.js";import"./hooks.module.6Mr8QjZg.js";import"./preact.module.LHOPIhyX.js";import"./jsxRuntime.module.B-HT3-kV.js";import"./preload-helper.BiBI96sQ.js";const t="<p>TBD</p>",n={title:"Nginx Ingress Controller",keywords:["Ingress"],description:"Nginx Ingress Controller",custom_edit_url:"https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/nginx-ingress-migrate.md"},s="/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/en/user/nginx-ingress-migrate.md",o=void 0;function c(){return`
+
+TBD
+`}function m(){return t}function p(){return[]}const e=i((l,d,h)=>{const{layout:f,...r}=n;return r.file=s,r.url=o,u`${g()}${a(t)}`});export{e as Content,m as compiledContent,e as default,s as file,n as frontmatter,p as getHeadings,c as rawContent,o as url};
