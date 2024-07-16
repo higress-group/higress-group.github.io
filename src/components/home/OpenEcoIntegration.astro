@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import { useTranslations } from "@i18n/util";
 import { Headline } from "@serverless-cd/goat-ui";
 
@@ -20,12 +19,12 @@ const t = useTranslations(Astro);
         subtitleTheme="success"
       />
 
-      <Image
+      <img
         class="w-[80%]"
         alt={t("home.open.ecosystem.title")}
         src="https://img.alicdn.com/imgextra/i3/O1CN01fP1req1hWa70Cp4EG_!!6000000004285-2-tps-2728-1405.png"
-        width="1089.59"
-        height="561.17"
+        decoding="async"
+        loading="lazy"
       />
     </div>
   </open-ecosystem>

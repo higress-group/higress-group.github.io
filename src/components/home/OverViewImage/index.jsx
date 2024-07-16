@@ -15,13 +15,13 @@ import { DataPanel } from "./components/DataPanel";
 import { AppContext } from "./context";
 
 const defaultColorConfig = {
-  panelColor: "linear-gradient(0deg, #FBFDFF 0%, #F4F8FF 100%)",
+  panelColor: "linear-gradient(179deg, rgba(43, 85, 255, 0) 4%, rgba(112, 131, 254, 0.47) 95%)",
   arrowColor: "#2491FF",
   background:
     "url('https://gw.alicdn.com/imgextra/i3/O1CN01kMsmPQ1rqrmbBpNo1_!!6000000005683-0-tps-3600-1440.jpg')",
   normalFontColor: "#5C6170",
   highlightFontColor: "#567BE1",
-  panelTitleColor: "#1F36AD",
+  panelTitleColor: "#F4F4F6",
   tagBgColor: '#e6f4ff',
   tagBorderColor: '#91caff',
   tagFontColor: '#1677ff',
@@ -70,7 +70,7 @@ function App({ colors = defaultColorConfig, linkStyle = "text-sm", className = '
             <TelemetryPanel />
           </div>
         </div>
-        <img class='md:hidden' alt='overview image' onClick={handleImageClick} src='https://img.alicdn.com/imgextra/i2/O1CN01OhhnzT1CtFbbiKTWq_!!6000000000138-0-tps-2792-1502.jpg' />
+        <img class='md:hidden' alt='overview image' onClick={handleImageClick} src='https://img.alicdn.com/imgextra/i2/O1CN01Sb00TA1LFFa1ZQliw_!!6000000001269-0-tps-2400-1156.jpg' />
         {isModalOpen && (
           <div
             style={{
@@ -96,7 +96,7 @@ function App({ colors = defaultColorConfig, linkStyle = "text-sm", className = '
               onClick={(e) => e.stopPropagation()} // 防止点击图片时也关闭遮罩层
             >
               <img
-                src="https://img.alicdn.com/imgextra/i2/O1CN01OhhnzT1CtFbbiKTWq_!!6000000000138-0-tps-2792-1502.jpg"
+                src="https://img.alicdn.com/imgextra/i2/O1CN01Sb00TA1LFFa1ZQliw_!!6000000001269-0-tps-2400-1156.jpg"
                 alt="overview image"
                 style={{ maxWidth: '100%' }}
               />
