@@ -1,0 +1,69 @@
+site:
+  name: Higress
+  site: 'https://higress.io/'
+  base: '/'
+  trailingSlash: 'always'
+  websiteGithubUrl: 'https://github.com/higress-group/higress-group.github.io/blob/main'
+  githubUrl: 'https://github.com/alibaba/higress'
+  logoUrl: "https://img.alicdn.com/imgextra/i1/O1CN01aIB6n51zcgTM5vhku_!!6000000006735-2-tps-156-48.png"
+
+analytics:
+  vendors:
+    googleAnalytics:
+      id: null # or "G-XXXXXXXXXX"
+    baiduAnalytics:
+      id: 
+      verification: code-wzq5sw7io3
+    aesAnalytics:
+      pid: e7WQkK
+    clarityAlalytics:
+      id: l4jzj6wbhh
+
+
+# Default SEO metadata
+metadata:
+  title:
+    default: AstroWind
+    template: '%s — AstroWind'
+  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: AstroWind
+    images:
+      - url: '~/assets/images/default.png'
+        width: 1200
+        height: 628
+    type: website
+  twitter:
+    handle: '@onwidget'
+    site: '@onwidget'
+    cardType: summary_large_image
+
+
+ui:
+  colors:
+    # 主按钮颜色，一般为主色中间的颜色
+    primary: "#3E5CF4" # sky-08
+    # 次按钮的颜色，一般为灰色调最浅颜色
+    secondary: "#F4F4F6" #gray-01
+    # 强调色。"Header"中的联系我们
+    accent: "#2D4CE6" #moss-10
+    # 中性色。作为大标题的字体颜色
+    neutral: "#121316" #gray-14
+    # 基础色，用做首页的背景色1
+    base-100: "#EDF1FC" # sky-01
+    # 信息颜色。Headline的上方小字, Fotter商标字体颜色
+    info: "#E0E9FB" #sky-02
+    # 成功。 Header的分割符、主要特性中的分割符、companiesfeedback中的isGray的背景颜色
+    success: "#818598" #gray-08
+    # 警告。header中的toggle-trigger-atc颜色
+    warning: "#4C505D" #gray-11
+    # 错误。搜索等组件的bgcolor
+    error: "#EBECEF" #gray-02
+    # 静音 companiesfeedback中的isLight的背景颜色
+    muted: "#C5D7F7" #blue-03
+    # 搜索/语言切换组件的文字颜色
+    link: "#DDDEE4" #gray-03
+    language: "#222327"

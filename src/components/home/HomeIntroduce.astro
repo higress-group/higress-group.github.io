@@ -1,0 +1,201 @@
+---
+import { useTranslations, isChinese } from "@i18n/util";
+import StarAndForkV2 from "./StarAndForkV2/index.jsx";
+import { SITE } from "@utils/config";
+import sendFetch from "@/utils/sendFetch";
+import type { StarAndForkT } from 'src/types';
+
+const t = useTranslations(Astro);
+const ifzh = isChinese(Astro);
+
+// 服务端构建预先获取star数和fork数作为兜底
+const { stargazers_count=0, forks_count=0 }:StarAndForkT = await sendFetch("https://api.github.com/repos/alibaba/higress");
+---
+
+<div class="home-introduce-wrapper h-[65vh] relative">
+  <video autoplay muted loop class="video-background" poster="https://img.alicdn.com/imgextra/i1/O1CN01U3PG171Wiz4B85TGK_!!6000000002823-0-tps-2388-1168.jpg">
+    <source src="https://cloud.video.taobao.com/vod/play/V3VEOGxHS3IxSU5wWkFYeTFuZU4wdHJ2eXloK1g1aXlXV0pvNU0zVjhmYTZQZWw1SnpKVVVCTlh4OVFON0V5UUVMUDduY1RJak82VE1sdXdHTjNOaHc9PQ" type="video/mp4">
+  </video>
+  <home-introduce
+    class="introduce flex flex-col justify-center items-center bg-transparent h-full relative z-1"
+  >
+  
+    <div class=" flex flex-col justify-center items-center h-[75%]">
+      <div
+        class=`top-introduce-title leading-[96px] text-base-100 font-medium  ${ifzh ? 'text-[72px]' : 'text-[76px]'}`
+      >
+         <span class="ai-description">{t('home.title.native.ai')}</span>{t('home.title.native.api.gateway')}
+      </div>
+    </div>
+
+    <div class="flex h-[15%]">
+      <StarAndForkV2 client:load SITE={SITE} stargazers_count={stargazers_count} forks_count={forks_count} />
+    </div>
+    <div class="versionInfo flex justify-end items-center h-[10%]">
+        <a class="text-xs text-link block" href="https://github.com/alibaba/higress/releases/tag/v1.4.1" target="_blank"> Release Note of V1.4.1</a>
+    </div>
+  </home-introduce>
+
+</div>
+
+<style is:global>
+  .home-introduce-wrapper {
+    .video-background{
+      position: absolute;
+      top:0;
+      left:0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      object-fit: cover;
+    }
+    /* a {
+      text-decoration: inherit;
+      color: theme("colors.link");
+    } */
+    .versionInfo{
+      width: 85.125rem;
+    }
+
+    .top-section {
+      width: 85.125rem;
+      overflow: hidden;
+    }
+    .top-section .notes .pc-version-intro {
+      display: inline;
+    }
+    .top-section .notes .mobile-version-intro {
+      display: none;
+    }
+    .shortcut button {
+      height: 3rem;
+      min-height: 3rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .ai-description {
+      background: linear-gradient(90deg, #6181ff 48%, #cac8fd 61%);
+      background-clip: text;
+      text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .bottom-section {
+      width: 85.125rem;
+    }
+    .bottom-section .desc {
+      width: 9.75rem;
+      height: 22.5rem;
+      background-color: theme("colors.warning");
+      transition: width 0.8s;
+    }
+
+    .bottom-section .desc .text {
+      opacity: 0;
+      transition: opacity 0.8s;
+    }
+    .bottom-section .log {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+      transition: width 0.8s;
+    }
+    .bottom-section .desc:hover {
+      width: 31.25rem;
+    }
+    .bottom-section .desc:hover .log {
+      flex: 1;
+    }
+    .bottom-section .desc:hover .text {
+      opacity: 1;
+    }
+    .bottom-section .desc:hover .arrow {
+      display: none;
+    }
+    .divider-horizontal {
+      width: 1px;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+    a {
+      text-decoration: none;
+    }
+    .fork {
+      background: rgba(244, 244, 246, 0.2);
+      backdrop-filter: blur(36px);
+    }
+    .fork:hover {
+      background: rgba(244, 244, 246, 0.2) !important;
+      backdrop-filter: blur(36px);
+    }
+
+    /* 小于50rem  小于 800px */
+    @media (max-width: 50rem) {
+      .introduce {
+        min-height: 0;
+        padding: 1.5rem;
+      }
+      .top-section,.introduce {
+        width: 100%;
+      }
+      .top-introduce-title {
+        font-size: 1.875rem !important;
+        line-height: 2.25rem !important;
+      }
+      .versionInfo{
+      width: 100%;
+    }
+      .top-section .notes .pc-version-intro {
+        display: none;
+      }
+      .top-section .notes .mobile-version-intro {
+        display: inline;
+      }
+      .shortcut button {
+        height: 2rem;
+        min-height: 2rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+      .top-section .notes {
+        margin-top: 1.25rem;
+      }
+      .bottom-section {
+        width: 100%;
+        display: none !important;
+      }
+      .mobile-bottom-section {
+        display: block !important;
+      }
+      .mobile-bottom-section .btn:hover {
+        background-color: theme(colors.neutral) !important;
+      }
+    }
+
+    /* 大于50rem 小于 72rem  800px < width < 1440 */
+    @media (min-width: 50rem) and (max-width: 86rem) {
+      .introduce {
+        padding: 2.5rem;
+        width: 100%;
+      }
+      .top-section,
+      .bottom-section, {
+        width: 100%;
+      }
+      .top-section .notes .pc-version-intro {
+        display: none;
+      }
+      .top-section .notes .mobile-version-intro {
+        display: inline;
+      }
+      .bottom-section .desc div {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+      }
+    }
+  }
+</style>

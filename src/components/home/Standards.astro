@@ -1,0 +1,98 @@
+---
+import { Image } from "astro:assets";
+import { useTranslations } from "@i18n/util";
+import Button from "@components/common/Button.astro";
+const t = useTranslations(Astro);
+---
+
+<higress-standards
+  class="higress-standards flex flex-col items-center justify-center bg-neutral py-0 md:py-32"
+>
+  <div class="higress-standards-wrapper flex items-center justify-around">
+    <div class="left-container h-full flex flex-col justify-center">
+      <div class="flex flex-col">
+        <div
+          class="standards_title text-base-100 text-center font-medium tracking-normal md:text-left"
+        >
+          {t("home.standards.title")}
+        </div>
+        <div
+          class="title text-success font-normal text-center text-sm my-4 md:my-12 md:text-left"
+        >
+          {t("home.standards.subtitle")}
+        </div>
+      </div>
+      <Button
+        size="large"
+        type="normal"
+        class="standards-btn rounded-3xl text-neutral"
+        href="https://higress.io/zh-cn/docs/user/annotation"
+        iconClass="text-neutral"
+      >
+        {t("home.contributors.learn.more")}
+      </Button>
+    </div>
+    <div class="right-container-warp">
+      <Image
+        src="https://img.alicdn.com/imgextra/i3/O1CN012foBRN1lVtzLyjemW_!!6000000004825-0-tps-1002-664.jpg"
+        alt={t("home.standards.title")}
+        height="501"
+        width="332"
+      />
+    </div>
+  </div>
+</higress-standards>
+<style is:global>
+  .higress-standards {
+    .higress-standards-wrapper {
+      width: 85.125rem;
+    }
+    .standards_title {
+      font-size: 2.75rem;
+      line-height: 3.5rem;
+    }
+    .standards-btn {
+      width: 10.375rem;
+      height: 3.25rem;
+    }
+    .right-container-warp {
+      img {
+        width: 501px;
+        height: 332px;
+      }
+    }
+    @media (max-width: 50rem) {
+      .higress-standards-wrapper {
+        width: 100%;
+        flex-direction: column;
+        padding: 1.5rem;
+      }
+      .left-container {
+        width: 100%;
+        align-items: center;
+      }
+      .standards-btn {
+        width: 7.5rem;
+        height: 1.875rem;
+      }
+      .standards_title {
+        font-size: 1.125rem;
+        line-height: 1.25rem;
+      }
+      .right-container-warp {
+        width: 100%;
+        overflow: hidden;
+
+        img {
+          width: 350px;
+          object-fit: contain;
+        }
+      }
+    }
+    @media (min-width: 50rem) and (max-width: 86rem) {
+      .higress-standards-wrapper {
+        width: 100%;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,104 @@
+---
+import { Image } from "astro:assets";
+import { useTranslations } from "@i18n/util";
+import Button from "@components/common/Button.astro";
+const t = useTranslations(Astro);
+---
+
+<higress-security
+  class="higress-security flex flex-col items-center justify-center bg-neutral py-0 md:py-8"
+>
+  <div class="higress-security-wrapper flex items-center justify-around">
+    <div class="left-security-warp">
+      <Image
+        src="https://img.alicdn.com/imgextra/i4/O1CN01bZuGIN1TS5bevTift_!!6000000002380-2-tps-1046-860.png"
+        alt={t("home.security.capability.title")}
+        height="523"
+        width="430"
+      />
+    </div>
+    <div class="right-security-container h-full flex flex-col justify-center">
+      <div class="flex flex-col">
+        <div
+          class="security_capability_title text-base-100 text-center font-medium tracking-normal md:text-left"
+        >
+          {t("home.security.capability.title")}
+        </div>
+        <div
+          class="title max-w-[450px] text-success font-normal text-center text-sm my-8 md:my-12 md:text-left"
+        >
+          {t("home.security.capability.subtitle")}
+        </div>
+      </div>
+      <Button
+        size="large"
+        type="normal"
+        class="security-btn rounded-3xl text-neutral"
+        href="https://higress.io/zh-cn/docs/plugins/security/waf"
+        iconClass="text-neutral"
+      >
+        {t("home.contributors.learn.more")}
+      </Button>
+    </div>
+  </div>
+</higress-security>
+
+<style is:global>
+  .higress-security {
+    .higress-security-wrapper {
+      width: 85.125rem;
+    }
+    .security_capability_title {
+      font-size: 2.75rem;
+      line-height: 3.5rem;
+    }
+    .security-btn{
+      width: 10.375rem;
+      height: 3.25rem;
+    }
+    .left-security-warp {
+      overflow: hidden;
+      img {
+        width: 523px;
+        height: 430px;
+        object-fit: contain;
+        position: relative;
+        left: -60px;
+      }
+    }
+    @media (max-width: 50rem) {
+      .higress-security-wrapper {
+        width: 100%;
+        flex-direction: column-reverse;
+        padding: 1.5rem;
+      }
+      .right-security-container {
+        width: 100%;
+        align-items: center;
+      }
+      .security-btn{
+        width: 7.5rem;
+        height: 1.875rem;
+    }
+      .security_capability_title {
+        font-size: 1.125rem;
+        line-height: 1.25rem;
+      }
+      .left-security-warp {
+        width: 100%;
+        overflow: hidden;
+        img {
+          width: 350px;
+          object-fit: contain;
+          position: relative;
+          left: -40px;
+        }
+      }
+    }
+    @media (min-width: 50rem) and (max-width: 86rem) {
+      .higress-security-wrapper {
+        width: 100%;
+      }
+    }
+  }
+</style>

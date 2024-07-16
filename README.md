@@ -1,77 +1,54 @@
-# Higress Official Website
+# Starlight Starter Kit: Basics
 
-[![CI Status](https://github.com/higress-group/higress-group.github.io/workflows/higress.io%20deploy%20on%20oss/badge.svg)](https://github.com/higress-group/higress-group.github.io/actions)
+[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
-All website material of https://higress.io.
-
-### Quick Start
-
-1. `npm install`
-
-2. `npm run start`
-
-3. Visit
 ```
-localhost:3000/
+npm create astro@latest -- --template starlight
 ```
 
-### Build
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/examples/basics)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwithastro%2Fstarlight%2Ftree%2Fmain%2Fexamples%2Fbasics&project-name=my-starlight-docs&repository-name=my-starlight-docs)
 
-1. `npm run build`
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-2. `npm run serve`
+## 🚀 Project Structure
 
-3. Visit
+Inside of your Astro + Starlight project, you'll see the following folders and files:
+
 ```
-localhost:3000/
+.
+├── public/
+├── src/
+│   ├── assets/
+│   ├── content/
+│   │   ├── docs/
+│   │   └── config.ts
+│   └── env.d.ts
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
 ```
 
-## Requirements
-Base docusaurus v2.3.1
-Node.js version 16.14+
+Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
 
-## Note for i18n
-For now, we use [docusaurus](https://www.zhihu.com/people/erda-project) `v2.3.1`, and there is a problem with `defaultLocale` in `docusaurus.config.js`. We can't deploy site like `https://my-site`, [see this](https://github.com/facebook/docusaurus/discussions/8745).
+Images can be added to `src/assets/` and embedded in Markdown with a relative link.
 
-It will be solved perfectly in `v2.4`, stay tuned.
+Static assets, like favicons, can be placed in the `public/` directory.
 
-Please be noted that locale switching function doesn't work if you start the website in development mode using `npm run start` or `npm run start-en`. Please run it in production mode using the build-and-serve process to enable the locale switching function.
+## 🧞 Commands
 
-## How To Write Documents
+All commands are run from the root of the project, from a terminal:
 
-### Add a new doc
- 
-1. Add new .md file under i18n/en-us/docusaurus-plugin-content-docs/current or i18n/zh-cn/docusaurus-plugin-content-docs/current. Corresponding to Chinese file and English file , and the Chinese and English file names should be consistent. Due to the special reasons of the current i18n implementation, you also need to add a stub file with the same name in the [docs](./docs) directory.
-2. Update sidebar.js, add a new entry to the blog in either en-us or zh-cn.
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-### Add a new article for developers
+## 👀 Want to learn more?
 
-1. Add new .md file under i18n/en-us/docusaurus-plugin-content-docs/current/developers or i18n/zh-cn/docusaurus-plugin-content-docs/current/developers, the file name should end up with _dev.md. Note that the suffix _dev is necessary. Due to the special reasons of the current i18n implementation, you also need to add a stub file with the same name in the [docs](./docs) directory.
-2. Update sidebar.js, add a new entry in either en-us or zh-cn.
-
-### Add a new blog
-
-1. Add new .md file under i18n/en-us/docusaurus-plugin-content-blog/current or i18n/zh-cn/docusaurus-plugin-content-blog/current. Corresponding to Chinese file and English file , and the Chinese and English file names should be consistent.
-2. `SEO` config is required.
-
-## SEO
-
-the type is :
-```
----
-title: title
-keywords: [keywords1,keywords2]
-description: some description
-author: author name
-date: 2018-12-29
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en/docusaurus-plugin-content-blog/30-line-wasm.md
----
-```
-**Note:**
-1. `title` can not include `:` 
-2. `keywords` must be a `Array`
-3. `custom_edit_url` is a link to the doc in this repo, required.
-
-## Note for .md file
-1. Do not use un correct html tag like `<img>、<br>`, replace with `<img /> <br />`
-2. If you want show `<xx>`, replace with `&lt;xx&gt;`
+Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).

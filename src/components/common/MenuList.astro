@@ -1,0 +1,62 @@
+---
+import { LinkText } from "@serverless-cd/goat-ui";
+import { isChinese } from "@i18n/util";
+const { menuData = {} } = Astro.props;
+const { comt, events } = menuData;
+const ifzh = isChinese(Astro);
+---
+
+<div class="flex">
+  <!-- 社区label -->
+  <div class="border-l border-warning flex flex-col px-7 min-w-[12rem]">
+    <span class="text-xs text-warning mb-2"
+      >{ifzh ? comt.label : comt.translations?.en}</span
+    >
+    {
+      comt.children.map((menu) => {
+        const { label, translations, link, target = "_self" } = menu;
+        return (
+          <LinkText
+            href={link}
+            theme="neutral"
+            class="text-sm mt-3"
+            target={target}
+          >
+            {ifzh ? label : translations?.en}
+          </LinkText>
+        );
+      })
+    }
+  </div>
+
+  <!-- 事件、资源label -->
+  <div
+    class:list={[
+      "border-l",
+      "border-warning",
+      "flex",
+      "flex-col",
+      "px-7",
+      "mr-10",
+    ]}
+  >
+    <span class="text-xs text-warning mb-2"
+      >{ifzh ? events.label : events.translations?.en}</span
+    >
+    {
+      events.children.map((menu) => {
+        const { label, translations, link, target = "_self" } = menu;
+        return (
+          <LinkText
+            href={link}
+            theme="neutral"
+            class="text-sm mt-3"
+            target={target}
+          >
+            {ifzh ? label : translations?.en}
+          </LinkText>
+        );
+      })
+    }
+  </div>
+</div>

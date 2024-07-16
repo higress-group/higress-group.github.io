@@ -1,0 +1,55 @@
+---
+import { Image } from "astro:assets";
+import { useTranslations } from "@i18n/util";
+import { Button } from "@serverless-cd/goat-ui";
+import { SITE } from "@utils/config";
+const { blogData = {} } = Astro.props;
+
+const t = useTranslations(Astro);
+
+const { blogDescrip, blogImgs, posts, categoryMap, blankUrl } = blogData;
+---
+
+<div class="flex" id="blog-card-container">
+  {
+    posts.map((item, index) => {
+      return (
+        <div class="relative blog-card w-[16.875] h-[22.5rem] rounded-2xl p-2 flex flex-col ml-4 ">
+          <Image
+            src={blogImgs[index]}
+            alt={`${SITE.name} case`}
+            class="rounded-lg"
+            width="254"
+            height="185"
+          />
+          <p class="w-[15.875rem] text-lg line-clamp-2 mt-3 text-base-100">
+            {blogDescrip[index] || item.data.title}
+          </p>
+          <Button
+            id="article-button"
+            class="rounded-3xl w-[8.5rem] h-[2.5rem] absolute bottom-2 article-button border-none text-secondary"
+            variant="teritiary"
+            href={
+              blankUrl && blankUrl[index]? 
+              blankUrl[index] :
+              `/${item.collection}/${item.slug}/?source=${categoryMap[item.data.category]}`
+            }
+            target={blankUrl && blankUrl[index]? "_blank" : "_self"}
+            text={t("commmon.header.comm.shortcut")}
+          />
+        </div>
+      );
+    })
+  }
+</div>
+<style is:global>
+  #blog-card-container{
+    .blog-card{
+      background-color: rgba(76, 80, 93, 0.3);
+    }
+    .article-button{
+      color: theme("colors.secondary");
+      background-color: rgba(76, 80, 93, 0.5);
+    }
+  }
+</style>
