@@ -4,7 +4,7 @@ keywords: [Higress,KubeCon]
 description: 看K8s资深运维如何选型Ingress网关
 author: 澄潭
 date: "2023-09-28"
-category: "article"
+category: "event"
 ---
 
 ## 分享简介

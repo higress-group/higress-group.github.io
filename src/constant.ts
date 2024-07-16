@@ -215,6 +215,7 @@ export const i18nMap = {
     article: 'blog.article.technical',
     case: 'blog.article.case.best.practices',
     ecosystem: 'blog.article.ecosystem.articles',
+    event: 'blog.article.event.articles',
     all: 'blog.all.articles'
   },
   "news": {
@@ -254,6 +255,11 @@ export const BLOG_CATEGORY = [
     type: 'case',
     title: '最佳实践',
     href: '/blog/case/'
+  },
+  {
+    type: 'event',
+    title: '社区活动',
+    href: '/blog/event/'
   },
 ];
 
