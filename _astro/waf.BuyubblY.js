@@ -1,0 +1,2 @@
+const e="latest/en/user/waf.md",t="docs",s="latest/en/user/waf",a=`
+TBD`,o={title:"WAF",description:"WAF",editUrl:!0,head:[],template:"doc",sidebar:{hidden:!1,attrs:{}},pagefind:!0,keywords:["waf"]},r={type:"content",filePath:"/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/en/user/waf.md",rawData:void 0};export{r as _internal,a as body,t as collection,o as data,e as id,s as slug};

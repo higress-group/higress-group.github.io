@@ -1,0 +1,2 @@
+const e="developers/en/committer-guide/release-guide_dev.md",d="docs",i="developers/en/committer-guide/release-guide_dev",s=`
+TBD`,t={title:"Release Guide",description:"Release Guide",editUrl:!0,head:[],template:"doc",sidebar:{hidden:!1,attrs:{}},pagefind:!0,keywords:["Higress"]},o={type:"content",filePath:"/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/developers/en/committer-guide/release-guide_dev.md",rawData:void 0};export{o as _internal,s as body,d as collection,t as data,e as id,i as slug};

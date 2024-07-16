@@ -1,0 +1,2 @@
+const e="latest/en/ops/log.md",s="docs",o="latest/en/ops/log",t=`
+TBD`,a={title:"Log",description:"Higress Log.",editUrl:!0,head:[],template:"doc",sidebar:{hidden:!1,attrs:{}},pagefind:!0,keywords:["higress","log"]},i={type:"content",filePath:"/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/en/ops/log.md",rawData:void 0};export{i as _internal,t as body,s as collection,a as data,e as id,o as slug};

@@ -1,0 +1,5 @@
+import{c as e,r as u,m as g}from"./render-template.DKq3LV42.js";import{u as c}from"./index.ZXqh_YvC.js";import"./hooks.module.6Mr8QjZg.js";import"./preact.module.LHOPIhyX.js";import"./jsxRuntime.module.B-HT3-kV.js";import"./preload-helper.BiBI96sQ.js";const t="<p>TBD</p>",n={title:"Nginx Ingress compatibility description",keywords:["ingress","nginx"],description:"Nginx Ingress compatibility description.",custom_edit_url:"https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/nginx-ingress.md"},r="/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/en/user/nginx-ingress.md",s=void 0;function a(){return`
+# Nginx Ingress compatibility description
+
+TBD
+`}function p(){return t}function m(){return[]}const o=e((d,l,h)=>{const{layout:b,...i}=n;return i.file=r,i.url=s,u`${g()}${c(t)}`});export{o as Content,p as compiledContent,o as default,r as file,n as frontmatter,m as getHeadings,a as rawContent,s as url};

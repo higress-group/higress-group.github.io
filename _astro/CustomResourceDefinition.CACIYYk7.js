@@ -1,0 +1,3 @@
+const e="latest/en/dev/CustomResourceDefinition.md",s="docs",t="latest/en/dev/customresourcedefinition",i=`
+# Alibaba Open Source Cloud Native Gateway: Higress
+`,o={title:"Higress Custom CRD Development Guidelines",description:"This section describes the development process of a custom CRD in Higress.",editUrl:!0,head:[],template:"doc",sidebar:{hidden:!1,attrs:{}},pagefind:!0,keywords:["higress","CRD"]},n={type:"content",filePath:"/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/en/dev/CustomResourceDefinition.md",rawData:void 0};export{n as _internal,i as body,s as collection,o as data,e as id,t as slug};

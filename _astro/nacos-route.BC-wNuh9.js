@@ -1,0 +1,2 @@
+const e="latest/en/user/nacos-route.md",s="docs",t="latest/en/user/nacos-route",o=`
+TBD`,a={title:"Nacos Route",description:"Nacos Route",editUrl:!0,head:[],template:"doc",sidebar:{hidden:!1,attrs:{}},pagefind:!0,keywords:["ingress","higress nacos"]},r={type:"content",filePath:"/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/en/user/nacos-route.md",rawData:void 0};export{r as _internal,o as body,s as collection,a as data,e as id,t as slug};

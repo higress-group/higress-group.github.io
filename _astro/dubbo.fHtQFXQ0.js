@@ -1,0 +1,2 @@
+const e="latest/en/user/dubbo.md",s="docs",t="latest/en/user/dubbo",o=`
+TBD`,r={title:"Higress Dubbo",description:"Dubbo",editUrl:!0,head:[],template:"doc",sidebar:{hidden:!1,attrs:{}},pagefind:!0,keywords:["Dubbo","discovery"]},a={type:"content",filePath:"/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/en/user/dubbo.md",rawData:void 0};export{a as _internal,o as body,s as collection,r as data,e as id,t as slug};

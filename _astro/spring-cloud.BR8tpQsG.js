@@ -1,0 +1,2 @@
+const e="latest/en/user/spring-cloud.md",s="docs",t="latest/en/user/spring-cloud",o=`
+TBD`,r={title:"SpringCloud",description:"SpringCloud",editUrl:!0,head:[],template:"doc",sidebar:{hidden:!1,attrs:{}},pagefind:!0,keywords:["SpringCloud","discovery"]},i={type:"content",filePath:"/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/en/user/spring-cloud.md",rawData:void 0};export{i as _internal,o as body,s as collection,r as data,e as id,t as slug};

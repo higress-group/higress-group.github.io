@@ -1,0 +1,2 @@
+const e="latest/en/user/opensergo-gray.md",o="docs",r="latest/en/user/opensergo-gray",s=`
+TBD`,t={title:"OpenSergo",description:"OpenSergo",editUrl:!0,head:[],template:"doc",sidebar:{hidden:!1,attrs:{}},pagefind:!0,keywords:["opensergo","gray"]},a={type:"content",filePath:"/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/en/user/opensergo-gray.md",rawData:void 0};export{a as _internal,s as body,o as collection,t as data,e as id,r as slug};
