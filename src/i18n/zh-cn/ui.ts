@@ -140,7 +140,7 @@ export default {
 	'home.overviewcard.title': '微服务全景图',
 	'home.standards.title': '标准化',
 	'home.standards.subtitle': '严格遵循Ingress、Gateway API 和 Istio API标准，可实现同类网关一键平滑迁移',
-	'home.security.capability.title':'安全能力授权',
+	'home.security.capability.title':'安全',
 	'home.security.capability.subtitle':'提供全局和路由粒度的WAF安全，认证鉴权和流量防护能力，使您的业务默认具备企业级安全能力。',
 
 	'home.introduction.card.des':'加速单体、微服务应用开发、打包与部署',
