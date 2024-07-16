@@ -4,12 +4,12 @@ import { useTranslations } from "@i18n/util";
 const t = useTranslations(Astro);
 ---
 
-<div class="overview-image-wrapper bg-base-100">
+<div class="overview-image-wrapper bg-neutral">
     <div class="top-title w-full flex flex-col items-center mb-[10px] pt-16">
-        <span class="text-gray-10 text-xs mb-6"
+        <span class="text-secondary text-xs mb-6"
             >{t("home.overviewcard.about")}</span
         >
-        <span class="title text-gray-14 text-4xl font-medium"
+        <span class="title text-secondary text-4xl font-medium"
             >{t("home.overviewcard.title")}</span
         >
     </div>
@@ -17,8 +17,8 @@ const t = useTranslations(Astro);
         client:load
         colors={{
             arrowColor: "#8BABE9",
-            highlightFontColor: "#2C46C9",
-            normalFontColor: "#9295A5",
+            highlightFontColor: "#F4F4F6",
+            normalFontColor: "#F4F4F6",
             tagBgColor: "#C6D6F7", //弹框右上方标签背景颜色
             tagBorderColor: "#8BABE9", //弹框右上方标签边框颜色
             tagFontColor: "#0B1337", //弹框右上方标签字体颜色
@@ -32,6 +32,7 @@ const t = useTranslations(Astro);
 
 <style is:global>
     .overview-image-wrapper {
+        /* background:  linear-gradient(111deg, #131466 11%, #0B0A34 100%); */
         /* 小于50rem  小于 800px */
         @media (max-width: 50rem) {
             .top-title {
