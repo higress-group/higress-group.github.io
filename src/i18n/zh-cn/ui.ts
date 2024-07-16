@@ -52,7 +52,8 @@ export default {
 	'common.base.quick.start': '快速开始',
 	
 	'commmon.footer.title': '愿景',
-	'commmon.footer.description':'Higress 通过卓越的云原生应用网络解决方案，结合AI by default的能力，帮助企业快速构建AI Native应用。我们致力于打造世界一流的智能化网关产品，加速企业在AI浪潮中的快速转型。',
+	'commmon.footer.description':'Higress 通过卓越的云原生应用网络解决方案，结合 AI by default 的能力，帮助企业快速构建 AI' +
+		' Native 应用。我们致力于打造世界一流的智能化网关产品，加速企业在 AI 浪潮中的快速转型。',
 	'commmon.footer.subscribe': '提供易于使用的服务基础设施，如动态服务发现、服务配置、服务共享和管理等等。',
 	'commmon.footer.email.placeholder': '请输入电子邮件地址...',
 	'commmon.footer.actions.subscribe': '订阅',
