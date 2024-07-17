@@ -3,7 +3,7 @@ import { useTranslations } from "@i18n/util";
 import { Headline } from "@serverless-cd/goat-ui";
 import { CHOOSE_REASON_LIST } from "@/constant";
 import { Adaptive, Easy, TimeTested, Variety, Standard } from "../icon";
-
+import Button from "@components/common/Button.astro";
 const t = useTranslations(Astro);
 ---
 
@@ -11,13 +11,29 @@ const t = useTranslations(Astro);
   <choose-reason
     class="choose-reason block bg-neutral py-10 flex flex-col justify-center items-center"
   >
-    <Headline
-      classes={{subtitle: "text-sm"}}
-      title={t("home.website.edge.title")}
+    <!-- <Headline
+      classes={{ subtitle: "text-sm" }}
+      title={}
       titleTheme="error"
       taglineTheme="info"
       subtitleTheme="success"
-    />
+    /> -->
+    <div class="mb-8 md:mx-auto md:mb-12 text-center max-w-3xl">
+      <p
+        class=`text-[18px] md:text-[44px] leading-[76px] text-error font-medium mt-6 tracking-normal text-center`
+      >
+        {t("home.website.edge.title")}
+      </p>
+      <Button
+        size="large"
+        type="normal"
+        class="advantage-btn rounded-3xl text-neutral"
+        href="/advantage/"
+        iconClass="text-neutral"
+      >
+        查看higress优势对比
+      </Button>
+    </div>
 
     <div class="bottom-card flex flex-wrap">
       {
@@ -71,6 +87,10 @@ const t = useTranslations(Astro);
       flex-direction: column;
       flex: 0 0 25%;
     }
+    .advantage-btn {
+      width: 14rem;
+      height: 2.5rem;
+    }
 
     /* 小于50rem  小于 800px */
     @media (max-width: 50rem) {
@@ -100,6 +120,11 @@ const t = useTranslations(Astro);
       }
       .transfrom-header div:last-child {
         margin-left: 1rem;
+      }
+      .advantage-btn {
+        width: 11.5rem;
+        height: 1.875rem;
+        font-size: 12px;
       }
     }
 

@@ -962,3 +962,481 @@ export const versionDataSource = [
     ]
   },
 ]
+
+export const advantageSource = [
+  {
+    title: "基础架构", data: [
+      {
+        name: {
+          title: '内核',
+        },
+        higress: {
+          checked: '',
+          des: ['基于 Envoy 和 Istio 实现的云原生 API 网关']
+        },
+        nginx: {
+          checked: '',
+          des: ['独立的高性能服务器软件']
+        },
+        scg: {
+          checked: '',
+          des: ['基于 Spring Framework 的微服务网关']
+        },
+      },
+      {
+        name: {
+          title: '架构',
+        },
+        higress: {
+          checked: '',
+          des: ['流量网关、微服务网关、安全网关三合一','(缩短网关转化链路、降低故障排查难度)']
+        },
+        nginx: {
+          checked: '',
+          des: ['流量网关']
+        },
+        scg: {
+          checked: '',
+          des: ['微服务网关']
+        },
+      },
+      {
+        name: {
+          title: '遵循 Ingress 标准，提供标准化的扩展机制',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: true,
+          des: ['基于 Ingress Nginx']
+        },
+        scg: {
+          checked: false,
+          des: ['暂未见公开的支持计划'],
+        },
+      },
+      {
+        name: {
+          title: '遵循 Gateway API 标准',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: true,
+          des: ['基于 Ingress Nginx，有支持计划']
+        },
+        scg: {
+          checked: false,
+          des: ['暂未见公开的支持计划']
+        },
+      },
+    ]
+  },
+  {
+    title: "AI 特性", data: [
+      {
+        name: {
+          title: 'AI 代理插件',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['暂未见相关能力'],
+        },
+        scg: {
+          checked: false,
+          des: ['暂未见相关能力']
+        },
+      },
+      {
+        name: {
+          title: 'AI 内容审核插件',
+          des: ''
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['暂未见相关能力'],
+        },
+        scg: {
+          checked: false,
+          des: ['暂未见相关能力']
+        },
+      },
+      {
+        name: {
+          title: 'AI 统计插件',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['暂未见相关能力'],
+        },
+        scg: {
+          checked: false,
+          des: ['暂未见相关能力']
+        },
+      },
+      {
+        name: {
+          title: 'AI 限流插件',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['暂未见相关能力'],
+        },
+        scg: {
+          checked: false,
+          des: ['暂未见相关能力']
+        },
+      },
+      {
+        name: {
+          title: 'AI 开发插件集',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['暂未见相关能力'],
+        },
+        scg: {
+          checked: false,
+          des: ['暂未见相关能力']
+        },
+      },
+    ]
+  },
+  {
+    title: "云原生特性", data: [
+      {
+        name: {
+          title: '无损变更',
+        },
+        higress: {
+          checked: '',
+          des: []
+        },
+        nginx: {
+          checked: '',
+          des: []
+        },
+        scg: {
+          checked: '',
+          des: []
+        },
+      },
+      {
+        name: {
+          title: '支持 Nacos、K8s Service 等多种注册中心',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['通常不直接集成服务发现，可能需要配合其他组件']
+        },
+        scg: {
+          checked: '',
+          des: []
+        },
+      },
+      {
+        name: {
+          title: '限流防护',
+        },
+        higress: {
+          checked: true,
+          des: ['支持 Header/URL 参数/IP 粒度的全局统一限流']
+        },
+        nginx: {
+          checked: false,
+          des: ['有较高的集成开发成本']
+        },
+        scg: {
+          checked: '',
+          des: []
+        },
+      },
+      {
+        name: {
+          title: 'HTTP 转 Dubbo 协议',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['暂未见相关能力']
+        },
+        scg: {
+          checked: '',
+          des: []
+        },
+      },
+      {
+        name: {
+          title: '可观测（metrics/logging/tracing）',
+        },
+        higress: {
+          checked: true,
+          des: ['开箱即用']
+        },
+        nginx: {
+          checked: false,
+          des: ['需自行搭建']
+        },
+        scg: {
+          checked: '',
+          des: []
+        },
+      },
+      {
+        name: {
+          title: '极简部署',
+        },
+        higress: {
+          checked: true,
+          des: ['不依赖 K8s，Docker 容器即可启动']
+        },
+        nginx: {
+          checked: true,
+          des: []
+        },
+        scg: {
+          checked: '',
+          des: []
+        },
+      },
+    ]
+  },
+  {
+    title: "性能", data: [
+      {
+        name: {
+          title: 'QPS 性能',
+        },
+        higress: {
+          checked: '',
+          des: [],
+        },
+        nginx: {
+          checked: '',
+          des: []
+        },
+        scg: {
+          checked: '',
+          des: []
+        },
+      },
+      {
+        name: {
+          title: '超大规模路由配置性能优化',
+        },
+        higress: {
+          checked: true,
+          des: ['10000 个路由，生效时间3秒'],
+        },
+        nginx: {
+          checked: false,
+          des: ['Ingress Nginx 为例，10000个路由，生效时间1分钟'],
+        },
+        scg: {
+          checked: false,
+          des: ['暂未见公开的优化能力'],
+        },
+      },
+      {
+        name: {
+          title: 'CPU/内存成本优化',
+        },
+        higress: {
+          checked: true,
+          des: ['对比 Ingress Nginx，CPU 成本节省50%，内存成本节省90%'],
+        },
+        nginx: {
+          checked: false,
+          des: ['暂未见公开的优化能力'],
+        },
+        scg: {
+          checked: false,
+          des: ['暂未见公开的优化能力'],
+        },
+      },
+    ]
+  },
+  {
+    title: "扩展性", data: [
+      {
+        name: {
+          title: 'Lua',
+          des:''
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: true,
+          des: []
+        },
+        scg: {
+          checked: false,
+          des: ['通过 Java 编程模型进行扩展']
+        },
+      },
+      {
+        name: {
+          title: 'WASM',
+          des:'',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['暂未见公开的支持计划']
+        },
+        scg: {
+          checked: false,
+          des: ['通过 Java 编程模型进行扩展']
+        },
+      },
+      {
+        name: {
+          title: '热更新',
+          des:'',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['需要 reload']
+        },
+        scg: {
+          checked: false,
+          des: ['需要重启网关']
+        },
+      },
+    ]
+  },
+  {
+    title: "安全性", data: [
+      {
+        name: {
+          title: 'IP 黑白名单',
+          des:''
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: true,
+          des: []
+        },
+        scg: {
+          checked: true,
+          des: []
+        },
+      },
+      {
+        name: {
+          title: '消费者认证鉴权',
+          des:'（key-auth/hmac-auth/jwt-auth等）',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['需要额外配置安全模块']
+        },
+        scg: {
+          checked: false,
+          des: ['支持安全特性，但需要额外配置']
+        },
+      },
+      {
+        name: {
+          title: '自建服务鉴权',
+          des:'',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['需要额外配置安全模块']
+        },
+        scg: {
+          checked: false,
+          des: ['支持安全特性，但需要额外配置']
+        },
+      },
+      {
+        name: {
+          title: 'OIDC 认证',
+          des:'',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['需要额外配置安全模块']
+        },
+        scg: {
+          checked: false,
+          des: ['支持安全特性，但需要额外配置']
+        },
+      },
+      {
+        name: {
+          title: 'WAF 防护',
+          des:'',
+        },
+        higress: {
+          checked: true,
+          des: []
+        },
+        nginx: {
+          checked: false,
+          des: ['需要额外配置安全模块']
+        },
+        scg: {
+          checked: false,
+          des: ['支持安全特性，但需要额外配置']
+        },
+      },
+    ]
+  },
+]
