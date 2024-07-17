@@ -93,10 +93,11 @@ const ifactive = (toggle) => {
           } = toggle;
           // const component = slot && await import(slot);
           const active = ifactive(toggle);
+          const targetRoute = target == "_self" && route? `${ifzh? "" : "/en"}${route}`: route;
           return (
             <Toggle
               title={ifzh ? label : translations?.en}
-              route={route}
+              route={targetRoute}
               trigger={trigger}
               active={active}
               slot={slot}
