@@ -1,0 +1,4 @@
+import{c as n,r as u,m as g}from"./render-template.CJlwwtnB.js";import{u as d}from"./constant.CxavaNFL.js";import"./preload-helper.BiBI96sQ.js";const o="<p>TBD</p>",r={title:"Higress deploy guide",keywords:["Higress"],description:"Higress deploy guide.",custom_edit_url:"https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/deploy-guide-beginner.md"},s="/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/en/ops/deploy-guide-beginner.md",t=void 0;function p(){return`
+# Higress deploy guide
+
+TBD`}function a(){return o}function c(){return[]}const i=n((l,m,h)=>{const{layout:f,...e}=r;return e.file=s,e.url=t,u`${g()}${d(o)}`});export{i as Content,a as compiledContent,i as default,s as file,r as frontmatter,c as getHeadings,p as rawContent,t as url};

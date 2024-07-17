@@ -1,0 +1,5 @@
+import{c as u,r as i,m as g}from"./render-template.CJlwwtnB.js";import{u as a}from"./constant.CxavaNFL.js";import"./preload-helper.BiBI96sQ.js";const o="<p>\u6587\u6863\u8BA1\u5212\u63A8\u51FA\u65F6\u95F4\uFF1A2022.02.28</p>",t={title:"\u5BF9\u63A5 OpenSergo \u5B9E\u73B0\u5168\u94FE\u8DEF\u7070\u5EA6",keywords:["opensergo","gray"],description:"\u5BF9\u63A5 OpenSergo \u5B9E\u73B0\u5168\u94FE\u8DEF\u7070\u5EA6",custom_edit_url:"https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/opensergo-gray.md"},e="/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/zh-cn/user/opensergo-gray.md",n=void 0;function c(){return`
+# \u5BF9\u63A5 OpenSergo \u5B9E\u73B0\u5168\u94FE\u8DEF\u7070\u5EA6
+
+\u6587\u6863\u8BA1\u5212\u63A8\u51FA\u65F6\u95F4\uFF1A2022.02.28
+`}function p(){return o}function m(){return[]}const s=u((d,h,l)=>{const{layout:f,...r}=t;return r.file=e,r.url=n,i`${g()}${a(o)}`});export{s as Content,p as compiledContent,s as default,e as file,t as frontmatter,m as getHeadings,c as rawContent,n as url};
