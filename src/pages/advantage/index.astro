@@ -1,0 +1,16 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import AdvantageIntroduce from "./AdvantageIntroduce.astro";
+import AdvantageCompare from "./AdvantageCompare/index";
+import CloudFooter from "@components/common/Footer.astro";
+import { useTranslations } from "@i18n/util";
+const t = useTranslations(Astro);
+---
+
+<BaseLayout title={t("cloud.title")} description={t("cloud.description")}>
+  <AdvantageIntroduce />
+
+  <AdvantageCompare client:load/> 
+
+  <CloudFooter />
+</BaseLayout>

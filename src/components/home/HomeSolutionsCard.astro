@@ -35,13 +35,13 @@ const t = useTranslations(Astro);
                       {t("home.solutions.about")}
                     </div>
                     <div class="user_introduce flex justify-between h-full mt-12 opacity-0">
-                      <div class="">
-                        <div class="w-[489px] h-[177px] mb-24 text-secondary text-[20px] leading-9">
+                      <div class="left-container">
+                        <div class="left-container-introduce mb-24 text-secondary text-[20px] leading-9">
                           {item.introduce}
                         </div>
                         <div class="flex text-secondary">
                           <img src={item.logo} class="w-auto h-12 object-contain mr-4">
-                          <div class='text-lg'>
+                          <div class='text-lg user_container'>
                             <p class="font-medium">{item.user}</p>
                             <p class="font-light">{item.userInfo}</p>
                           </div>
@@ -49,11 +49,11 @@ const t = useTranslations(Astro);
                       </div>
                       <div>
                         <div class="right-container w-auto h-[236px] flex flex-col justify-around py-11 px-9">
-                          <p class="text-6xl text-secondary ">
-                            <span class='text-[100px]'>{item.speed}</span>
-                            <span>{item.unit}</span></p>
+                          <p class=" text-secondary ">
+                            <span class='right-container-speed'>{item.speed}</span>
+                            <span class="right-container-unit">{item.unit}</span></p>
                           {item.speedDes&& item.speedDes.map((des)=>(
-                            <p class='text-lg font-light text-secondary'>{des}</p>
+                            <p class='right-container-speedDes font-light text-secondary'>{des}</p>
                           ))}
                         </div>
                         <div class="button ml-16 mb-[3.75rem] mt-11">
@@ -144,6 +144,9 @@ const t = useTranslations(Astro);
 </script>
 
 <style is:global>
+  body{
+    overflow-x: hidden;
+  }
   .card-solution-wrapper {
     .bottom-solutions-card {
       width: 85.125rem;
@@ -157,12 +160,25 @@ const t = useTranslations(Astro);
       background-size: cover;
       background-position: center;
     }
+    .left-container-introduce{
+      width: 489px;
+      height:177px ;
+    }
     .right-container{
       background-color: rgba(255, 255, 255, 0.1);
-      span{
+      .right-container-speed{
+        font-size:100px ;
         font-family: 'Roboto';
       }
+      .right-container-unit{
+        font-size: 60px;
+      }
+      .right-container-speedDes{
+        font-size: 1.125rem; /* 18px */
+        line-height: 1.75rem; /* 28px */
+      }
     }
+
     .solution-container > .solutions-card:first-of-type {
       margin-left: 0;
     }
@@ -280,6 +296,27 @@ const t = useTranslations(Astro);
       }
       input:checked + label {
         flex: 1;
+      }
+      .left-container-introduce{
+        width: 300px;
+        font-size: 12px;
+      }
+      .user_container{
+        font-size: 12px;
+      }
+      .right-container{
+        padding:30px 20px;
+        height: 200px;
+        .right-container-speed{
+          font-size:50px ;
+        }
+        .right-container-unit{
+          font-size: 30px;
+        }
+        .right-container-speedDes{
+          font-size:14px; /* 18px */
+          line-height: 16px; /* 28px */
+        }
       }
     }
   }

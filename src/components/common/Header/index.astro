@@ -6,12 +6,14 @@ import MobileNavbar from "@components/common/MobileNavbar.astro";
 import SearchComp from "./searchComp/index.astro";
 import { SITE } from "@utils/config";
 import Alert from "./Alert.astro";
+import { isChinese } from "@i18n/util";
 
 interface Props {
   align?: "home" | "docs";
   position?: "static" | "sticky";
   lang: "zh-cn" | "en" | string;
 }
+const ifzh = isChinese(Astro);
 
 const t = useTranslations(Astro);
 const { align = "home", position = "sticky", lang } = Astro.props;
@@ -44,7 +46,7 @@ let height,
     <!-- 方便控制header宽度 -->
     <div class="header-content flex items-center justify-between">
       <div class="left-content h-full flex flex-1 items-center after:content-[''] after:grow after:invisible">
-        <a class="no-underline flex" href="/">
+        <a class="no-underline flex" href={ifzh?"/":"/en"}>
           <img class="logo" src={SITE.logoUrl} alt=`${SITE.name}-logo` />
         </a>
         <MobileNavbar top={height} class="mobile-navbar h-full ml-4" />
