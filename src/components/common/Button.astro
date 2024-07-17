@@ -32,7 +32,7 @@ const {
       <slot />
       {
         visibility && (
-          <span class="icon">
+          <span class="jump-icon icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -117,7 +117,6 @@ const {
     .button-normal,
     .button-primary {
       .icon {
-        opacity: 0;
         width: 0;
         margin-left: 0;
         transition:
@@ -125,6 +124,9 @@ const {
           width 0.3s ease,
           opacity 0.3s ease,
           margin-left 0.3s ease;
+      }
+      .jump-icon {
+        opacity: 0;
       }
       &:hover {
         .icon {
