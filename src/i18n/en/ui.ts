@@ -49,7 +49,7 @@ export default {
 	'commmon.base.layout.keywords':'Dynamic service discovery, configuration management, service management',
 	'commmon.base.page.previousLink':'Prev',
 	'commmon.base.page.nextLink': 'Next',
-	'common.base.quick.start': 'Quick Start',
+	'common.base.quick.start': 'Start',
 
 
 	'commmon.footer.title': 'Vision',
@@ -120,7 +120,7 @@ export default {
 	'home.contributors.members': 'MEMBERS',
 	'home.contributors.our': 'Our',
 	'home.contributors.community.stars': 'Community Stars',
-	'home.contributors.learn.more': 'LEARN MORE',
+	'home.contributors.learn.more': 'MORE',
 	'home.overviewcard.about': 'Panoramic overview',
 	'home.overviewcard.title': 'Overview Image',
 	'home.standards.title': 'Standards',
