@@ -3,6 +3,7 @@ import Easy from "./Easy.astro";
 import Fork from "./Fork.astro";
 import Github from "./Github.astro";
 import Star from "./Star.astro";
+import Start from "./Start.astro"
 import TimeTested from "./TimeTested.astro";
 import UpDown from "./UpDown.astro";
 import UpRight from "./UpRight.astro";
@@ -27,5 +28,6 @@ export {
 	Variety,
 	Lock,
 	Arrow,
-	Standard
+	Standard,
+	Start
 }

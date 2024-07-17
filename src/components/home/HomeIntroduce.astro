@@ -1,49 +1,90 @@
 ---
 import { useTranslations, isChinese } from "@i18n/util";
-import StarAndForkV2 from "./StarAndForkV2/index.jsx";
 import { SITE } from "@utils/config";
-import sendFetch from "@/utils/sendFetch";
-import type { StarAndForkT } from 'src/types';
+import Button from "@/components/common/Button.astro";
+import { Github, Start } from "../icon";
 
 const t = useTranslations(Astro);
 const ifzh = isChinese(Astro);
-
-// 服务端构建预先获取star数和fork数作为兜底
-const { stargazers_count=0, forks_count=0 }:StarAndForkT = await sendFetch("https://api.github.com/repos/alibaba/higress");
 ---
 
 <div class="home-introduce-wrapper h-[65vh] relative">
-  <video autoplay muted loop class="video-background" poster="https://img.alicdn.com/imgextra/i1/O1CN01U3PG171Wiz4B85TGK_!!6000000002823-0-tps-2388-1168.jpg">
-    <source src="https://cloud.video.taobao.com/vod/play/V3VEOGxHS3IxSU5wWkFYeTFuZU4wdHJ2eXloK1g1aXlXV0pvNU0zVjhmYTZQZWw1SnpKVVVCTlh4OVFON0V5UUVMUDduY1RJak82VE1sdXdHTjNOaHc9PQ" type="video/mp4">
+  <video
+    autoplay
+    muted
+    loop
+    class="video-background"
+    poster="https://img.alicdn.com/imgextra/i1/O1CN01U3PG171Wiz4B85TGK_!!6000000002823-0-tps-2388-1168.jpg"
+  >
+    <source
+      src="https://cloud.video.taobao.com/vod/play/V3VEOGxHS3IxSU5wWkFYeTFuZU4wdHJ2eXloK1g1aXlXV0pvNU0zVjhmYTZQZWw1SnpKVVVCTlh4OVFON0V5UUVMUDduY1RJak82VE1sdXdHTjNOaHc9PQ"
+      type="video/mp4"
+    />
   </video>
   <home-introduce
     class="introduce flex flex-col justify-center items-center bg-transparent h-full relative z-1"
   >
-  
-    <div class=" flex flex-col justify-center items-center h-[75%]">
+    <div class="flex flex-col justify-center items-center h-[75%]">
       <div
-        class=`top-introduce-title leading-[96px] text-base-100 font-medium text-5xl  ${ifzh ? 'md:text-[72px]' : 'md:text-[76px]'}`
+        class=`top-introduce-title leading-[96px] text-base-100 font-medium text-[2rem]  ${ifzh ? 'sm:text-[72px]' : 'sm:text-[76px]'}`
       >
-         <span class="ai-description">{t('home.title.native.ai')}</span>{t('home.title.native.api.gateway')}
+        <span class="ai-description">{t("home.title.native.ai")}</span>{
+          t("home.title.native.api.gateway")
+        }
       </div>
     </div>
 
     <div class="flex h-[15%]">
-      <StarAndForkV2 client:load SITE={SITE} stargazers_count={stargazers_count} forks_count={forks_count} />
+      <star-and-fork class="shortcut flex justify-center">
+        <Button
+          size="large"
+          class="rounded-3xl text-neutral"
+          href={SITE.githubUrl}
+          target="_blank"
+          type="normal"
+          iconClass="text-neutral"
+        >
+          <Github themeClass="neutral-fill" />
+          <span class="text-[0.875rem] leading-4 ml-2 text-neutral">GitHub</span
+          >
+        </Button>
+
+        <Button
+          size="large"
+          type="primary"
+          class="rounded-3xl"
+          href="/docs/latest/user/quickstart/"
+          target="_self"
+        >
+          <Start themeClass="secondary-fill" />
+          <span class="ml-2">{t("common.base.quick.start")}</span>
+        </Button>
+      </star-and-fork>
     </div>
     <div class="versionInfo flex justify-end items-center h-[10%]">
-        <a class="text-xs text-link block" href="https://github.com/alibaba/higress/releases/tag/v1.4.1" target="_blank"> Release Note of V1.4.1</a>
+      <a
+        class="text-xs text-link block"
+        href="https://github.com/alibaba/higress/releases/tag/v1.4.1"
+        target="_blank"
+      >
+        Release Note of V1.4.1</a
+      >
     </div>
   </home-introduce>
-
 </div>
 
 <style is:global>
   .home-introduce-wrapper {
-    .video-background{
+    .neutral-fill {
+      color: theme("colors.neutral");
+    }
+    .secondary-fill {
+      color: theme("colors.secondary");
+    }
+    .video-background {
       position: absolute;
-      top:0;
-      left:0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       z-index: 0;
@@ -53,7 +94,7 @@ const { stargazers_count=0, forks_count=0 }:StarAndForkT = await sendFetch("http
       text-decoration: inherit;
       color: theme("colors.link");
     } */
-    .versionInfo{
+    .versionInfo {
       width: 85.125rem;
     }
 
@@ -131,22 +172,23 @@ const { stargazers_count=0, forks_count=0 }:StarAndForkT = await sendFetch("http
       backdrop-filter: blur(36px);
     }
 
-    /* 小于50rem  小于 800px */
-    @media (max-width: 50rem) {
+    /* 小于85.125rem  */
+    @media (max-width: 85.125rem) {
       .introduce {
         min-height: 0;
         padding: 1.5rem;
       }
-      .top-section,.introduce {
+      .top-section,
+      .introduce {
         width: 100%;
       }
       /* .top-introduce-title {
         font-size: 1.875rem !important;
         line-height: 2.25rem !important;
       } */
-      .versionInfo{
-      width: 100%;
-    }
+      .versionInfo {
+        width: 100%;
+      }
       .top-section .notes .pc-version-intro {
         display: none;
       }
@@ -181,7 +223,7 @@ const { stargazers_count=0, forks_count=0 }:StarAndForkT = await sendFetch("http
         width: 100%;
       }
       .top-section,
-      .bottom-section, {
+      .bottom-section {
         width: 100%;
       }
       .top-section .notes .pc-version-intro {
