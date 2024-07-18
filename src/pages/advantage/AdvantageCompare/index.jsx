@@ -5,23 +5,30 @@ import UpDown from "./UpDown.jsx";
 import {
   advantageSource
 } from "../../../constant.ts";
+import { isSafari } from "@/utils/util.ts";
 import "./style.css";
 
 
 const FunctionalCompare = (props) => {
-  const dataVersion = ['Higress', 'Nginx', 'Spring Cloud Gateway']
+  const dataVersion = ['Higress', 'Nginx', 'Spring Cloud Gateway'];
 
   const versionContain = {
     'Higress': 'higress',
     'Nginx': 'nginx',
     'Spring Cloud Gateway': 'scg',
   }
+  const [isSafariBrowser, setIsSafariBrowser] = useState(true);
   const [version, setVersion] = useState('Higress');
   const [isSticky, setIsSticky] = useState(false);
   const [isShow, setIsShow] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const functionalCompareWrapperRef = useRef(null);
+
+  useEffect(() => {
+    // 判断是否为safari浏览器
+    setIsSafariBrowser(isSafari());
+  }, []);
 
   const handleScroll = () => {
     const wrapper = functionalCompareWrapperRef.current;
@@ -43,9 +50,11 @@ const FunctionalCompare = (props) => {
       class="functional-compare-wrapper top-[100px] flex flex-col justify-center items-center mt-10 mb-10"
     >
       <div id='collapse-fold' class="collapse bg-error collapse-arrow">
-        <input type="checkbox" checked={isCollapsed} onChange={() => setIsCollapsed(!isCollapsed)} />
+        {
+          !isSafariBrowser && (<input type="checkbox" checked={isCollapsed} onChange={() => setIsCollapsed(!isCollapsed)} />)
+       } 
         <div class="collapse-title text-2xl font-normal">产品对比</div>
-        <div class="collapse-content">
+        <div class={`${!isSafariBrowser && 'collapse-content'}`}>
           {advantageSource.map((item, index) => {
             return (
               <Tableplugin dataSource={item.data} title={item.title} isHead={index == 0} />
@@ -54,7 +63,7 @@ const FunctionalCompare = (props) => {
         </div>
       </div>
       {/* <!-- 吸底 --> */}
-      {isSticky && isCollapsed && <div id='sticky-table-bottom' class='table table-fixed bg-error mt-6 px-4'>
+      {isSticky && isCollapsed  && <div id='sticky-table-bottom' class='table table-fixed bg-error mt-6 px-4'>
         <table class='w-full'>
           <tbody>
             <tr>

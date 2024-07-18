@@ -1,5 +1,12 @@
 functional-compare {
-
+  
+    .table :where(thead tr, tbody tr:not(:last-child), tbody tr:first-child:last-child) {
+        border-bottom: 1px dotted #818598;
+      }
+    
+      .collapse-content {
+        height: fit-content
+      }
   #collapse-fold,
   #sticky-table-bottom {
     width: 85.125rem;

@@ -6,11 +6,11 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-  "text": "8月2日（周五）开源沙龙首个AI原生应用架构专场 | 上海站 ，欢迎报名！",
-  "mobileText": "欢迎报名8月2日上海首个AI原生应用架构开源沙龙！",
-  "link": "https://summit.aliyun.com/cloudnative2024_developer_shanghai?spm=5176.20960838.0.0.7802305eyqMQf8",
-  "target": "_blank",
-  "display": true
+    "text": "8月2日（周五）开源沙龙首个AI原生应用架构专场 | 上海站 ，欢迎报名！",
+    "mobileText": "欢迎报名8月2日上海首个AI原生应用架构开源沙龙！",
+    "link": "https://summit.aliyun.com/cloudnative2024_developer_shanghai?spm=5176.20960838.0.0.7802305eyqMQf8",
+    "target": "_blank",
+    "display": true
 }
 // TODO: 配置algolia
 export const ALGOLIA = {
@@ -316,18 +316,18 @@ export const ACTIVITY_CATEGORY = [
 
 // TODO: 设置运营位
 export const HEADER_ACTIVITY_CARD = [
-  {
-    "collection": "blog",
-    "slug": "qwen-or-chatgpt",
-    "description": "通义千问2.5“客串”ChatGPT4，你分的清吗",
-    "imageUrl": "https://img.alicdn.com/imgextra/i4/O1CN01bGnAVW1pFeLFnlaQL_!!6000000005331-2-tps-508-370.png"
-  },
-  {
-    "collection": "blog",
-    "slug": "ai_plugin",
-    "description": "Higress助力AI大模型企业级应用落地",
-    "imageUrl": "https://img.alicdn.com/imgextra/i4/O1CN01zfayJW1Lhe4kliPv9_!!6000000001331-2-tps-508-370.png"
-  }
+    {
+        "collection": "blog",
+        "slug": "qwen-or-chatgpt",
+        "description": "通义千问2.5“客串”ChatGPT4，你分的清吗",
+        "imageUrl": "https://img.alicdn.com/imgextra/i4/O1CN01bGnAVW1pFeLFnlaQL_!!6000000005331-2-tps-508-370.png"
+    },
+    {
+        "collection": "blog",
+        "slug": "ai_plugin",
+        "description": "Higress助力AI大模型企业级应用落地",
+        "imageUrl": "https://img.alicdn.com/imgextra/i4/O1CN01zfayJW1Lhe4kliPv9_!!6000000001331-2-tps-508-370.png"
+    }
 ];
 
 export const BLOG_IMAGE_SOURCE = [
