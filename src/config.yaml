@@ -3,7 +3,7 @@ site:
   site: 'https://higress.io/'
   base: '/'
   trailingSlash: 'always'
-  websiteGithubUrl: 'https://github.com/higress-group/higress-group.github.io/blob/main'
+  websiteGithubUrl: 'https://github.com/higress-group/higress-group.github.io/blob/develop-astro-higress'
   githubUrl: 'https://github.com/alibaba/higress'
   logoUrl: "https://img.alicdn.com/imgextra/i1/O1CN01aIB6n51zcgTM5vhku_!!6000000006735-2-tps-156-48.png"
 
