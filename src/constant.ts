@@ -318,14 +318,14 @@ export const ACTIVITY_CATEGORY = [
 export const HEADER_ACTIVITY_CARD = [
     {
         "collection": "blog",
-        "slug": "activity-preview-opss2024",
-        "description": "Nacos开源之夏2024，贡献社区赢取12000奖金",
+        "slug": "qwen-or-chatgpt",
+        "description": "通义千问2.5“客串”ChatGPT4，你分的清吗",
         "imageUrl": "https://img.alicdn.com/imgextra/i4/O1CN01bGnAVW1pFeLFnlaQL_!!6000000005331-2-tps-508-370.png"
     },
     {
         "collection": "blog",
-        "slug": "case-authorization",
-        "description": "Nacos 安全使用最佳实践 - 访问控制实践",
+        "slug": "ai_plugin",
+        "description": "Higress助力AI大模型企业级应用落地",
         "imageUrl": "https://img.alicdn.com/imgextra/i4/O1CN01zfayJW1Lhe4kliPv9_!!6000000001331-2-tps-508-370.png"
     }
 ];
