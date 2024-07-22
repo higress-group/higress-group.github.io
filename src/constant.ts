@@ -324,8 +324,8 @@ export const HEADER_ACTIVITY_CARD = [
     },
     {
         "collection": "blog",
-        "slug": "ai_plugin",
-        "description": "Higress助力AI大模型企业级应用落地",
+        "slug": "higress-gvr7dx_awbbpb_picigqfume3k5lf3",
+        "description": "Higress 发布 v1.4，开放 AI 网关能力，增强云原生能力",
         "imageUrl": "https://img.alicdn.com/imgextra/i4/O1CN01zfayJW1Lhe4kliPv9_!!6000000001331-2-tps-508-370.png"
     }
 ];
