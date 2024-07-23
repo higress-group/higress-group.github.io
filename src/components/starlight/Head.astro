@@ -160,7 +160,7 @@ const head = createHead(headDefaults, config.head, data.head);
             "//g.alicdn.com/aes/??tracker/3.3.4/index.js,tracker-plugin-pv/3.0.5/index.js,tracker-plugin-event/3.0.0/index.js,tracker-plugin-autolog/3.0.3/index.js,tracker-plugin-survey/3.0.3/index.js,tracker-plugin-jserror/3.0.3/index.js,tracker-plugin-resourceError/3.0.3/index.js";
         t.onload = function () {
             // TODO: 设置aem sdk环境
-            if (window.location.hostname !== "nacos.io") {
+            if (window.location.hostname !== "higress.io") {
                 return;
             }
             window.AES_CONFIG = window.AES_CONFIG || {
