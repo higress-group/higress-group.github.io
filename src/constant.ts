@@ -578,7 +578,7 @@ export const versionDataSource = [
           des: []
         },
         serverless: {
-          checked: '',
+          checked: true,
           des: ['免运维']
         },
       },
@@ -745,16 +745,16 @@ export const versionDataSource = [
           title: '限流降级',
         },
         free: {
-          checked: false,
-          des: ''
+          checked: true,
+          des: '全局限流，需要自建 Redis'
         },
         speciality: {
           checked: true,
-          des: ['路由颗粒度限流降级']
+          des: ['']
         },
         serverless: {
           checked: true,
-          des: ['路由颗粒度限流降级']
+          des: ['']
         },
       },
       {
@@ -800,8 +800,8 @@ export const versionDataSource = [
           title: 'IP黑白名单',
         },
         free: {
-          checked: '',
-          des: '自行通过插件实现'
+          checked: true,
+          des: ''
         },
         speciality: {
           checked: true,
@@ -817,8 +817,8 @@ export const versionDataSource = [
           title: '消费者鉴权',
         },
         free: {
-          checked: '',
-          des: '自行通过插件实现'
+          checked: true,
+          des: ''
         },
         speciality: {
           checked: true,
@@ -834,8 +834,8 @@ export const versionDataSource = [
           title: '全局认证及鉴权',
         },
         free: {
-          checked: '',
-          des: '自行通过插件实现'
+          checked: true,
+          des: ''
         },
         speciality: {
           checked: true,
@@ -851,16 +851,16 @@ export const versionDataSource = [
           title: 'Waf防护',
         },
         free: {
-          checked: '',
-          des: '自行通过插件实现'
+          checked: true,
+          des: '开源方案，静态规则'
         },
         speciality: {
           checked: true,
-          des: ['实例级别防护和路由级别防护']
+          des: ['商业方案，动态运营规则']
         },
         serverless: {
           checked: true,
-          des: ['实例级别防护和路由级别防护']
+          des: ['商业方案，动态运营规则']
         },
       },
     ]
