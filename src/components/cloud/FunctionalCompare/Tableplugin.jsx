@@ -63,7 +63,7 @@ const Tableplugin = (props) => {
                   {item.name.des && <p class="text-xs">{item.name.des}</p>}
                 </td>
                 <td class="col3 text-center">
-                  {item.free.checked ? <Correct /> : <False />}
+                  {typeof item.free.checked =='boolean' && (item.free.checked ? <Correct /> : <False />)}
                   {item.free.des && (
                     <p class="text-xs font-normal color-gray-08">
                       {item.free.des}
@@ -71,7 +71,7 @@ const Tableplugin = (props) => {
                   )}
                 </td>
                 <td class="col4 text-center">
-                  {item.speciality.checked ? <Correct /> : <False />}
+                  {typeof item.speciality.checked =='boolean' && (item.speciality.checked ? <Correct /> : <False />)}
                   {item.speciality.des && item.speciality.des.map((item)=>(
                     <p class="text-xs font-normal color-gray-08 mb-1">
                       {item}
@@ -79,7 +79,7 @@ const Tableplugin = (props) => {
                   ))}
                 </td>
                 <td class="col5 text-center">
-                  {item.serverless.checked ? <Correct /> : <False />}
+                  {typeof item.serverless.checked =='boolean' && (item.serverless.checked ? <Correct /> : <False />)}
                   {item.serverless.des && item.serverless.des.map((item)=>(
                     <p class="text-xs font-normal color-gray-08 mb-1">
                       {item}
