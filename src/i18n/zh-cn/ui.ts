@@ -153,7 +153,7 @@ export default {
 
 	'plugin.title': 'Higress 插件',
 	'plugin.description': 'Higress 的核心，提供了丰富的插件功能，让您可以轻松实现微服务应用的定制化需求。',
-	'plugin.introduction.des': '解锁无限可能：增强、定制和更易集成！',
+	'plugin.introduction.des': '拥有强大性能的 Wasm 插件扩展机制，通过沙箱隔离确保内存安全，支持多种编程语言，允许插件版本独立升级，可以流量无损热更新，助力构建更加灵活和安全的应用网络！',
 	'plugin.select.filter.description': '过滤插件名称',
 	
 
