@@ -145,7 +145,7 @@ export default {
 
 	'plugin.title': 'Higress Plugins',
 	'plugin.description': 'At its core, Higress provides a rich set of plugins that allow you to easily customize your microservices application.',
-	'plugin.introduction.des':'Unlock Possibilities with Our Gateway Plugin: Easy Enhance, Customize, and Integrate!',
+	'plugin.introduction.des':'Powerful Wasm plugin system, supporting multiple languages, with independent version upgrades, zero-downtime updates, and sandbox isolation for memory safety. Build more flexible and secure application networks!',
 	'plugin.select.filter.description': 'Filter by plugin type',
 
 	'home.introduction.card.des':'Accelerate the development, packaging, and deployment of individual and microservice applications',
