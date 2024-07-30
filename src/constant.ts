@@ -1048,11 +1048,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力'],
+          des: ['暂未见公开的相关能力'],
         },
         scg: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
       },
       {
@@ -1066,11 +1066,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力'],
+          des: ['暂未见公开的相关能力'],
         },
         scg: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
       },
       {
@@ -1083,11 +1083,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力'],
+          des: ['暂未见公开的相关能力'],
         },
         scg: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
       },
       {
@@ -1100,11 +1100,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力'],
+          des: ['暂未见公开的相关能力'],
         },
         scg: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
       },
       {
@@ -1117,11 +1117,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力'],
+          des: ['暂未见公开的相关能力'],
         },
         scg: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
       },
     ]
@@ -1133,16 +1133,16 @@ export const advantageSource = [
           title: '无损变更',
         },
         higress: {
-          checked: '',
+          checked: true,
           des: []
         },
         nginx: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['通常不直接集成服务发现，需要配合其他组件']
         },
         scg: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['暂未见相关能力']
         },
       },
       {
@@ -1155,11 +1155,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['通常不直接集成服务发现，可能需要配合其他组件']
+          des: ['通常不直接集成服务发现，需要配合其他组件']
         },
         scg: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['暂未见相关能力']
         },
       },
       {
@@ -1175,8 +1175,8 @@ export const advantageSource = [
           des: ['有较高的集成开发成本']
         },
         scg: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['通常不直接集成服务发现，需要配合其他组件']
         },
       },
       {
@@ -1189,11 +1189,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
         scg: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['暂未见公开的相关能力']
         },
       },
       {
@@ -1209,8 +1209,8 @@ export const advantageSource = [
           des: ['需自行搭建']
         },
         scg: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['需自行搭建']
         },
       },
       {
@@ -1226,7 +1226,7 @@ export const advantageSource = [
           des: []
         },
         scg: {
-          checked: '',
+          checked: true,
           des: []
         },
       },
@@ -1234,23 +1234,23 @@ export const advantageSource = [
   },
   {
     title: "性能", data: [
-      {
-        name: {
-          title: 'QPS 性能',
-        },
-        higress: {
-          checked: '',
-          des: [],
-        },
-        nginx: {
-          checked: '',
-          des: []
-        },
-        scg: {
-          checked: '',
-          des: []
-        },
-      },
+      // {
+      //   name: {
+      //     title: 'QPS 性能',
+      //   },
+      //   higress: {
+      //     checked: '',
+      //     des: [],
+      //   },
+      //   nginx: {
+      //     checked: '',
+      //     des: []
+      //   },
+      //   scg: {
+      //     checked: '',
+      //     des: []
+      //   },
+      // },
       {
         name: {
           title: '超大规模路由配置性能优化',
