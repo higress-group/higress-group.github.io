@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("docs");
+    return posts.map((post) => {
+        let newSlug = post.slug;
+        if (post.slug.includes("latest/zh-cn")) {
+            // @ts-ignore
+            newSlug = newSlug.replace("latest/zh-cn", "");
+            return {
+                params: { slug: newSlug },
+                props: post,
+            };
+        } else
+            return {
+                params: { slug: newSlug },
+                props: post,
+            };
+    });
+}
+
+return Astro.redirect(
+    `/docs/latest${Astro.params.slug[0] !== "/" ? "/" : ""}${
+        Astro.params.slug
+    }/`,
+    301,
+);
+---
