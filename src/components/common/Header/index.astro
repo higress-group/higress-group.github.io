@@ -78,31 +78,49 @@ let height,
   document.head.appendChild(script);
 </script>
 
-<!-- <script>
-  //cnpilot
-  const copilotJSScript = document.createElement("script");
-  copilotJSScript.type = "text/javascript";
-  copilotJSScript.src =
-    "//g.alicdn.com/cm-design/copilot-booter/0.0.21/copilot-booter.js";
-  copilotJSScript.addEventListener("load", function () {
-    // TODO: 设置CNPilot
-    if (window.CNPilot) {
-      window.CNPilot.mounted({
-        CNPilot_NODE_ENV: "development",
-        CNPilot_OPEN_SOURCE: ["nacos.io"],
-        CNPilot_OPEN_SOURCE_API: "https://ai.nacos.io",
-        showFloatICON: true,
-        globalStyle: {
-          top: "64px",
-        },
-        headerProps: {
-          closeIcon: { show: true }, // 关闭按钮
-        },
-      });
-    }
+<script>
+  function addCopilot() {
+    const copilotJSScript = document.createElement("script");
+    copilotJSScript.type = "text/javascript";
+    copilotJSScript.src = "https://g.alicdn.com/cm-design/copilot-booter/0.0.26/copilot-booter.js";
+    copilotJSScript.addEventListener("load", function () {
+      if (window.CNPilot) {
+        window.CNPilot.mounted({
+          CNPilot_OPEN_SOURCE: ["higress.cn"],
+          CNPilot_OPEN_SOURCE_API: "https://ai.nacos.io",
+          CNPilot_OPEN_SOURCE_PRODUCT_NAME: "higress",
+          showFloatICON: true,
+          globalStyle: {
+            top: "0",
+            height: "100vh",
+          },
+          entryIconProps: {
+            "position-type": "updown",
+            "icon-hover-text": "专家答疑",
+            "icon-style": {
+              color: "red",
+              background: "white",
+              border: "2px solid red",
+              borderRadius: "20px",
+            },
+          },
+          headerProps: {
+            closeIcon: { show: true },
+            titleText: "AI答疑专家",
+          },
+        });
+      }
+    });
+    document.body.append(copilotJSScript);
+  };
+
+  addCopilot();
+
+  document.addEventListener("astro:page-load", function () {
+    if (window.CNPilot) window.CNPilot.unmounted();
+    addCopilot();
   });
-  document.body.append(copilotJSScript);
-</script> -->
+</script>
 
 <script>
   class HeaderLayout2 extends HTMLElement {
