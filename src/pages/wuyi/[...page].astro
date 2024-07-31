@@ -22,7 +22,6 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
     const posts = await getCollection("blog", (item) =>
         blogCategories.has(item.data.category),
     );
-    console.log('posts')
 
     const sortedPosts = posts.sort(
         (a, b) =>
@@ -32,7 +31,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 }
 ---
 
-<BaseLayout title="NACOS FAQ">
+<BaseLayout title="Higress FAQ">
     <BlogTop 
         title={t("wuyi.blog.title")} 
         type="wuyi-sub" 
