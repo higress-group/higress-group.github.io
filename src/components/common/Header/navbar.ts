@@ -72,4 +72,14 @@ export default [
     target: "_blank",
     route: "http://demo.higress.io/",
   },
+
+  {
+    label: "答疑样例",
+    translations: {
+      en: "FAQ",
+    },
+    trigger: "click",
+    target: "_self",
+    route: "/blog/wuyi-intro/",
+  },
 ];

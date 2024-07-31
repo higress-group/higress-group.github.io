@@ -234,6 +234,14 @@ export const i18nMap = {
   }
 };
 
+export const WUYI_CATEGORY = [
+  {
+      type: 'expertConsultation',
+      title: '全部文章',
+      href: '/wuyi/'
+  },
+];
+
 export const BLOG_CATEGORY = [
   {
     type: 'all',
