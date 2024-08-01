@@ -278,6 +278,9 @@ export default {
 	'page.blog.news.community.cooperation':'Community Cooperation',
 	'page.limiting.prompt': 'The current download channel is too crowded, please try again later...',
 	"themeSelect.accessibleLabel": "Select theme",
+	'wuyi.meet-professor.title': "Meet Professor",
+	'wuyi.meet-professor.article': "Article",
+	'wuyi.blog.title': 'Examples of experts answering questions',
 
 
 	"page.team.introduction": 'Team Introduction',

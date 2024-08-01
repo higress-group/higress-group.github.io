@@ -231,8 +231,19 @@ export const i18nMap = {
     'activity-detail': 'blog.activity.detail.event',
     'all': 'blog.activity.all.event'
 
-  }
+  },
+  "wuyi": {
+      'expertConsultation': 'wuyi.meet-professor.title',
+  },
 };
+
+export const WUYI_CATEGORY = [
+  {
+      type: 'expertConsultation',
+      title: '全部文章',
+      href: '/wuyi/'
+  },
+];
 
 export const BLOG_CATEGORY = [
   {
