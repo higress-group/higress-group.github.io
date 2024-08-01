@@ -498,7 +498,7 @@ export const getCloudPostpaidData = (t: Function) => [
     price: t("cloud.introduce.free.price"),
     priceDesc: [t("cloud.introduce.free.feature")],
     linkName: t("cloud.introduce.free.link"),
-    link: "https://free.aliyun.com/?searchKey=higress&spm=higress.cloud.topbar.0.0.0",
+    link: "https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0",
     feature: [
       t("cloud.introduce.free.discount.1"),
     ],
@@ -536,7 +536,7 @@ export const getCloudResourcePackData = (t: Function) => [
     unit: "",
     priceDesc: [t("cloud.introduce.free.feature")],
     linkName: t("cloud.introduce.free.link"),
-    link: "https://free.aliyun.com/?searchKey=higress&spm=higress.cloud.topbar.0.0.0",
+    link: "hhttps://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0",
     feature: [
       t("cloud.introduce.free.discount.1"),
     ],
