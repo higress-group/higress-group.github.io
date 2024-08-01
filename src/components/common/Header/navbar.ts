@@ -80,6 +80,6 @@ export default [
     },
     trigger: "click",
     target: "_self",
-    route: "/blog/wuyi-intro/",
+    route: "/faq/wuyi-intro/",
   },
 ];

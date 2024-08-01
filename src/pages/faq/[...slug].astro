@@ -7,13 +7,18 @@ import { Button } from "@serverless-cd/goat-ui";
 import { Icon } from "@astrojs/starlight/components";
 import Sidebar from "@components/starlight/Sidebar.astro";
 import { useTranslations } from "@i18n/util";
-import {SITE} from "@utils/config";
+import { SITE } from "@utils/config";
 import Pagination from "@astrojs/starlight/components/Pagination.astro";
 
 const t = useTranslations(Astro);
 
 export async function getStaticPaths() {
-	const posts = await getCollection("blog");
+	const posts = await getCollection("faq");
+	const introPost = await getCollection(
+		"blog",
+		(item) => item.slug === "wuyi-intro",
+	);
+	posts.unshift(...introPost);
 	return posts.map((post) => ({
 		params: { slug: post.slug },
 		props: post,
@@ -21,28 +26,26 @@ export async function getStaticPaths() {
 }
 
 const blogArticle = {
-	article: "blog.article.technical",
-	case: "blog.article.case.best.practices",
-	ecosystem: "blog.article.ecosystem.articles",
-	announcement: "blog.activity.community.announcement",
-	release: "blog.activity.release.statement",
-	committer: "page.blog.news.personnel.promotion",
-	cooperate: "page.blog.news.community.cooperation",
-	"activity-preview": "blog.activity.preview.event",
-	"activity-detail": "blog.activity.detail.event",
+	expertConsultation: "wuyi.meet-professor.title",
 };
 
-type Props = CollectionEntry<"blog">;
+type Props = CollectionEntry<"faq">;
 
 const post = Astro.props;
 
 const { Content, headings } = await post.render();
 
-const posts = await getCollection("blog");
+const posts = await getCollection("faq");
+
+const introPost = await getCollection(
+	"blog",
+	(item) => item.slug === "wuyi-intro",
+);
 
 const sortedPosts = posts.sort(
 	(a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
 );
+sortedPosts.unshift(...introPost);
 
 const articlePosts = [
 	{
@@ -62,12 +65,14 @@ sortedPosts.forEach((item) => {
 		articlePosts[0].entries.push({
 			type: "link",
 			label: item.data.title,
-			href: `/blog/${item.slug}/`,
+			href: `/faq/${item.slug}/`,
 			isCurrent: post.id === item.id,
 			attrs: {},
 		});
 	}
 });
+
+sortedPosts.push(introPost);
 
 const prev = articlePosts[0].entries[currentIndex - 1];
 const next = articlePosts[0].entries[currentIndex + 1];
@@ -104,8 +109,12 @@ const description = post?.data?.description || "";
 						(prev || next) && (
 							<Pagination
 								labels={{
-									"page.previousLink": t("commmon.base.page.previousLink"),
-									"page.nextLink": t("commmon.base.page.nextLink"),
+									"page.previousLink": t(
+										"commmon.base.page.previousLink",
+									),
+									"page.nextLink": t(
+										"commmon.base.page.nextLink",
+									),
 								}}
 								pagination={{
 									prev: prev,
@@ -125,36 +134,35 @@ const description = post?.data?.description || "";
 	</BaseLayout>
 </span>
 <script>
-		function addBackBtnClick (){
+	function addBackBtnClick() {
 		const url = new URL(window.location.href);
 		let source = url.searchParams.get("source");
-		if(source) {
+		if (source) {
 			source = source.replace(/_/g, "/");
-		};
-		const backBtn: HTMLAnchorElement = document.querySelector("#back-btn a");
-		if(backBtn){
+		}
+		const backBtn: HTMLAnchorElement =
+			document.querySelector("#back-btn a");
+		if (backBtn) {
 			backBtn.onclick = (e) => {
 				e.preventDefault();
 				const params = new URLSearchParams(window.location.search);
-				params.delete("source")
+				params.delete("source");
 
-				let newPathname = ""
-				if (source && source !== 'undefined') {
-						newPathname = `/${source}/`;
+				let newPathname = "";
+				if (source && source !== "undefined") {
+					newPathname = `/${source}/`;
 				} else {
-						newPathname = '/blog/';
+					newPathname = "/faq/";
 				}
-				const newUrl = `${newPathname}${params.toString() ? `?${params.toString()}` : ''}`;
+				const newUrl = `${newPathname}?${params.toString()}`;
 
-				window.location.href = newUrl; 
+				window.location.href = newUrl;
 			};
 		}
-		
 	}
-	document.addEventListener("astro:page-load",addBackBtnClick);
-	document.addEventListener("DOMContentLoaded", addBackBtnClick)
+	document.addEventListener("astro:page-load", addBackBtnClick);
+	document.addEventListener("DOMContentLoaded", addBackBtnClick);
 </script>
-
 
 <style is:global>
 	.blog-slug-wrapper {
