@@ -10,7 +10,7 @@ export const TOPBAR = {
     "mobileText": "欢迎报名8月2日上海首个AI原生应用架构开源沙龙！",
     "link": "https://summit.aliyun.com/cloudnative2024_developer_shanghai?spm=5176.20960838.0.0.7802305eyqMQf8",
     "target": "_blank",
-    "display": true
+    "display": false
 }
 // TODO: 配置algolia
 export const ALGOLIA = {
@@ -231,8 +231,19 @@ export const i18nMap = {
     'activity-detail': 'blog.activity.detail.event',
     'all': 'blog.activity.all.event'
 
-  }
+  },
+  "wuyi": {
+      'expertConsultation': 'wuyi.meet-professor.title',
+  },
 };
+
+export const WUYI_CATEGORY = [
+  {
+      type: 'expertConsultation',
+      title: '全部文章',
+      href: '/wuyi/'
+  },
+];
 
 export const BLOG_CATEGORY = [
   {
@@ -487,7 +498,7 @@ export const getCloudPostpaidData = (t: Function) => [
     price: t("cloud.introduce.free.price"),
     priceDesc: [t("cloud.introduce.free.feature")],
     linkName: t("cloud.introduce.free.link"),
-    link: "https://free.aliyun.com/?searchKey=higress&spm=higress.cloud.topbar.0.0.0",
+    link: "https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0",
     feature: [
       t("cloud.introduce.free.discount.1"),
     ],
@@ -525,7 +536,7 @@ export const getCloudResourcePackData = (t: Function) => [
     unit: "",
     priceDesc: [t("cloud.introduce.free.feature")],
     linkName: t("cloud.introduce.free.link"),
-    link: "https://free.aliyun.com/?searchKey=higress&spm=higress.cloud.topbar.0.0.0",
+    link: "hhttps://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0",
     feature: [
       t("cloud.introduce.free.discount.1"),
     ],
@@ -1048,11 +1059,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力'],
+          des: ['暂未见公开的相关能力'],
         },
         scg: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
       },
       {
@@ -1066,11 +1077,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力'],
+          des: ['暂未见公开的相关能力'],
         },
         scg: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
       },
       {
@@ -1083,11 +1094,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力'],
+          des: ['暂未见公开的相关能力'],
         },
         scg: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
       },
       {
@@ -1100,11 +1111,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力'],
+          des: ['暂未见公开的相关能力'],
         },
         scg: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
       },
       {
@@ -1117,11 +1128,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力'],
+          des: ['暂未见公开的相关能力'],
         },
         scg: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
       },
     ]
@@ -1133,16 +1144,16 @@ export const advantageSource = [
           title: '无损变更',
         },
         higress: {
-          checked: '',
+          checked: true,
           des: []
         },
         nginx: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['通常不直接集成服务发现，需要配合其他组件']
         },
         scg: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['暂未见相关能力']
         },
       },
       {
@@ -1155,11 +1166,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['通常不直接集成服务发现，可能需要配合其他组件']
+          des: ['通常不直接集成服务发现，需要配合其他组件']
         },
         scg: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['暂未见相关能力']
         },
       },
       {
@@ -1175,8 +1186,8 @@ export const advantageSource = [
           des: ['有较高的集成开发成本']
         },
         scg: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['通常不直接集成服务发现，需要配合其他组件']
         },
       },
       {
@@ -1189,11 +1200,11 @@ export const advantageSource = [
         },
         nginx: {
           checked: false,
-          des: ['暂未见相关能力']
+          des: ['暂未见公开的相关能力']
         },
         scg: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['暂未见公开的相关能力']
         },
       },
       {
@@ -1209,8 +1220,8 @@ export const advantageSource = [
           des: ['需自行搭建']
         },
         scg: {
-          checked: '',
-          des: []
+          checked: false,
+          des: ['需自行搭建']
         },
       },
       {
@@ -1226,7 +1237,7 @@ export const advantageSource = [
           des: []
         },
         scg: {
-          checked: '',
+          checked: true,
           des: []
         },
       },
@@ -1234,23 +1245,23 @@ export const advantageSource = [
   },
   {
     title: "性能", data: [
-      {
-        name: {
-          title: 'QPS 性能',
-        },
-        higress: {
-          checked: '',
-          des: [],
-        },
-        nginx: {
-          checked: '',
-          des: []
-        },
-        scg: {
-          checked: '',
-          des: []
-        },
-      },
+      // {
+      //   name: {
+      //     title: 'QPS 性能',
+      //   },
+      //   higress: {
+      //     checked: '',
+      //     des: [],
+      //   },
+      //   nginx: {
+      //     checked: '',
+      //     des: []
+      //   },
+      //   scg: {
+      //     checked: '',
+      //     des: []
+      //   },
+      // },
       {
         name: {
           title: '超大规模路由配置性能优化',

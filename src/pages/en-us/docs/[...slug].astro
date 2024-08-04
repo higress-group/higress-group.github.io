@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("docs");
+    return posts.map((post) => {
+        let newSlug = post.slug;
+        if (post.slug.includes("latest/en")) {
+            // @ts-ignore
+            newSlug = newSlug.replace("latest/en", "");
+        }
+        return {
+            params: { slug: newSlug },
+            props: post,
+        };
+    });
+}
+
+return Astro.redirect(
+    `/en/docs/latest${Astro.params.slug[0] !== "/" ? "/" : ""}${
+        Astro.params.slug
+    }/`,
+    301,
+);
+---

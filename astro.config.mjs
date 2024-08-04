@@ -112,10 +112,10 @@ export default defineConfig({
 	},
 	// TODO: 梳理redirects
 	redirects: {
+		'/zh-cn/': '/',
 		'/en-us/': '/en/',
-		'/[...slug].html': '/[...slug]',
 		'/docs/': '/docs/latest/overview/what-is-higress/',
 		'/docs/latest/dev/CustomResourceDefinition/': '/docs/latest/dev/customresourcedefinition/',
-		'/en-us/docs/latest/dev/CustomResourceDefinition/': '/en/docs/latest/dev/customresourcedefinition/'
+		'/en-us/docs/latest/dev/CustomResourceDefinition/': '/en/docs/latest/dev/customresourcedefinition/',
 	}
 });
