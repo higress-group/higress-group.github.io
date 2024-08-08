@@ -39,11 +39,11 @@ export PATH=$PATH:/usr/local/go/bin
 
 ### 2. TinyGo
 
-Min Version: 0.25.0<br />Official download link: [https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
+Min Version: 0.28.1<br />Official download link: [https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
 
 #### Windows
 
-1. Download the package: [https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.windows-amd64.zip)
+1. Download the package: [https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip)
 2. Unpack the package to the target folder
 3. If the package is unpacked to folder `C:\tinygo`, you need to add `C:\tinygo\bin` into the environment variable `PATH`, using set command in Command Line Prompt for example.
 ```bash
@@ -55,8 +55,8 @@ set PATH=%PATH%;"C:\tinygo\bin";
 
 1. Download and unpack the package
 ```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.darwin-amd64.tar.gz
-tar -zxf tinygo0.25.0.darwin-amd64.tar.gz
+wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.darwin-amd64.tar.gz
+tar -zxf tinygo0.28.1.darwin-amd64.tar.gz
 ```
 2. If the package is unpacked to folder `/tmp`, you need to add `/tmp/tinygo/bin` to the environment variable `PATH`:
 ```bash
@@ -70,8 +70,8 @@ Following steps are based on Ubuntu AMD64. For other OSes, please refer to the o
 
 1. Download and install the DEB package.
 ```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo_0.25.0_amd64.deb
-sudo dpkg -i tinygo_0.25.0_amd64.deb
+wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo_0.28.1_amd64.deb
+sudo dpkg -i tinygo_0.28.1_amd64.deb
 export PATH=$PATH:/usr/local/bin
 ```
 2. Execute command `tinygo version` in Terminal. If version info is displayed, the package has been successfully installed.
@@ -230,7 +230,7 @@ See [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-
 
 Execute the following command:
 ```bash
-tinygo build -o main.wasm -scheduler=none -target=wasi ./main.go
+tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
 ```
 A new file named main.wasm will be created after a successful compilation, which will be used in the local debugging sample below as well.<br />When using custom plugin function in the cloud native gateway market, you just need to upload this file.
 
