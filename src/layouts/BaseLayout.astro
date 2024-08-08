@@ -16,7 +16,7 @@ export type Props = {
   title: string;
   description?: string;
   lang?: string;
-  keywords?: string[] | string;
+  keywords?:(string | number)[] | string;
   align?: "home" | "docs";
 };
 const { title, description, keywords, align = "home" } = Astro.props;
