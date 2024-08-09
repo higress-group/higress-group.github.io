@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from "@i18n/util";
 import { Headline } from "@serverless-cd/goat-ui";
+import Button from "@components/common/Button.astro";
 
 const t = useTranslations(Astro);
 ---
@@ -9,7 +10,11 @@ const t = useTranslations(Astro);
   <open-ecosystem
     class="open-ecosystem block bg-neutral py-10 flex justify-center items-center"
   >
-    <div class="ecosystem-container flex flex-col justify-center items-center">
+    <div
+      class="ecosystem-container flex flex-col justify-center items-center"
+      data-aos="fade-up"
+      data-aos-duration="1500"
+    >
       <Headline
         classes={{ subtitle: "text-sm" }}
         title={t("home.open.ecosystem.title")}
@@ -17,6 +22,9 @@ const t = useTranslations(Astro);
         taglineTheme="info"
         subtitle={t("home.open.ecosystem.subtitle")}
         subtitleTheme="success"
+        data-aos="fade-right"
+        data-aos-duration="1500"
+        data-aos-delay="200"
       />
 
       <img
@@ -25,7 +33,23 @@ const t = useTranslations(Astro);
         src="https://img.alicdn.com/imgextra/i3/O1CN01fP1req1hWa70Cp4EG_!!6000000004285-2-tps-2728-1405.png"
         decoding="async"
         loading="lazy"
+        data-aos="fade-left"
+        data-aos-duration="1500"
+        data-aos-delay="400"
       />
+
+      <Button
+        size="large"
+        type="normal"
+        class="open-ecosystem-btn rounded-3xl text-neutral"
+        href="#"
+        iconClass="text-neutral"
+        data-aos="zoom-in"
+        data-aos-duration="1500"
+        data-aos-delay="500"
+      >
+        {t("home.contributors.learn.more")}
+      </Button>
     </div>
   </open-ecosystem>
 </span>
@@ -51,5 +75,17 @@ const t = useTranslations(Astro);
         width: 100%;
       }
     }
+
+    .open-ecosystem-btn {
+      width: 10.375rem;
+      height: 3.25rem;
+    }
   }
 </style>
+
+<script client:only="browser">
+  import AOS from "aos";
+  import "aos/dist/aos.css";
+
+  AOS.init();
+</script>

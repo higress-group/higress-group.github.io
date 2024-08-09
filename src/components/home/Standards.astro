@@ -7,16 +7,30 @@ const t = useTranslations(Astro);
 <higress-standards
   class="higress-standards flex flex-col items-center justify-center bg-neutral py-0 md:py-32"
 >
-  <div class="higress-standards-wrapper flex items-center justify-around">
-    <div class="left-container h-full flex flex-col justify-center">
+  <div
+    class="higress-standards-wrapper flex items-center justify-around"
+    data-aos="fade-up"
+    data-aos-duration="1500"
+  >
+    <div
+      class="left-container h-full flex flex-col justify-center"
+      data-aos="fade-right"
+      data-aos-duration="1500"
+      data-aos-delay="200"
+    >
       <div class="flex flex-col">
         <div
           class="standards_title text-base-100 text-center font-medium tracking-normal md:text-left"
+          data-aos="fade-up"
+          data-aos-duration="1200"
         >
           {t("home.standards.title")}
         </div>
         <div
           class="title text-success font-normal text-center text-sm my-4 md:my-12 md:text-left"
+          data-aos="fade-up"
+          data-aos-duration="1200"
+          data-aos-delay="300"
         >
           {t("home.standards.subtitle")}
         </div>
@@ -27,20 +41,32 @@ const t = useTranslations(Astro);
         class="standards-btn rounded-3xl text-neutral"
         href="https://higress.io/zh-cn/docs/user/annotation"
         iconClass="text-neutral"
+        data-aos="zoom-in"
+        data-aos-duration="1500"
+        data-aos-delay="500"
       >
         {t("home.contributors.learn.more")}
       </Button>
     </div>
-    <div class="right-container-warp">
+    <div
+      class="right-container-warp"
+      data-aos="fade-left"
+      data-aos-duration="1500"
+      data-aos-delay="200"
+    >
       <img
         src="https://img.alicdn.com/imgextra/i3/O1CN012foBRN1lVtzLyjemW_!!6000000004825-0-tps-1002-664.jpg"
         alt={t("home.standards.title")}
         decoding="async"
         loading="lazy"
+        data-aos="fade-in"
+        data-aos-duration="1500"
+        data-aos-delay="300"
       />
     </div>
   </div>
 </higress-standards>
+
 <style is:global>
   .higress-standards {
     .higress-standards-wrapper {
@@ -95,3 +121,10 @@ const t = useTranslations(Astro);
     }
   }
 </style>
+
+<script client:only="browser">
+  import AOS from "aos";
+  import "aos/dist/aos.css";
+
+  AOS.init();
+</script>

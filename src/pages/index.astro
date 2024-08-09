@@ -4,7 +4,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import HomeIntroduce from '@components/home/HomeIntroduce.astro';
 import ChooseReason from '@components/home/ChooseReason.astro';
 import OpenEcoIntegration from "@/components/home/OpenEcoIntegration.astro";
-import AiStructure from "@/components/home/AiStructure.astro"
+import AiStructure from "@/components/home/AiStructure.astro";
 import Contributors from '@components/home/Contributors.astro';
 import UseCompanies from '@components/home/UseCompanies.astro';
 import OverviewImage from '@components/home/OverViewImage/index.astro';
@@ -14,24 +14,23 @@ import HomeSolutionsCard from '@components/home/HomeSolutionsCard.astro';
 import HomeFooter from '@components/common/Footer.astro';
 
 const t = useTranslations(Astro);
-
 ---
 
 <BaseLayout
   title={t('home.title')}
   description={t('home.description')}
 >
-    <HomeIntroduce/>
-    <UseCompanies />
-    <ChooseReason />
-    <AiStructure />
-    <OpenEcoIntegration />
-    <Standards />
-    <SecurityCapability />
-    <OverviewImage />
-    <Contributors />
+  <HomeIntroduce />
+  <UseCompanies  />
+  <ChooseReason />
+  <AiStructure  />
+  <OpenEcoIntegration  />
+  <Standards  />
+  <SecurityCapability  />
+  <OverviewImage  />
+  <Contributors  />
 
-    <HomeFooter>
-        <HomeSolutionsCard slot="after-footer" />
-    </HomeFooter>
+  <HomeFooter>
+    <HomeSolutionsCard slot="after-footer"  />
+  </HomeFooter>
 </BaseLayout>

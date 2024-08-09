@@ -10,6 +10,8 @@ import locales from "@i18n/languages";
 import { useTranslations } from "@i18n/util";
 import Head from "@components/starlight/Head.astro";
 import HomeHeader from "@components/common/Header/index.astro";
+import "aos/dist/aos.css"; // 导入 AOS 样式
+
 const t = useTranslations(Astro);
 
 export type Props = {
@@ -19,6 +21,7 @@ export type Props = {
   keywords?: string[] | string;
   align?: "home" | "docs";
 };
+
 const { title, description, keywords, align = "home" } = Astro.props;
 const headEntry = {
   data: {
@@ -58,5 +61,13 @@ Astro.props.lang = lang;
     <!-- <HomeHeader align="home" position={position} lang={Astro.props.lang} {...Astro.props} /> -->
     <HomeHeader align={align} lang={Astro.props.lang} {...Astro.props} />
     <slot />
+    <script >
+      import('aos').then(AOS => {
+        AOS.init({
+          duration: 1200, // 动画持续时间
+          easing: 'ease-in-out', // 动画曲线
+        });
+      });
+    </script>
   </body>
 </html>
