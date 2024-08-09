@@ -69,6 +69,7 @@ export default {
 	'commmon.footer.actions.edas': '云服务 EDAS',
 	'commmon.actions.download': '下载',
 
+
 	'home.title': `${SITE.name} 官网 | ${SITE.name} 官方社区 | ${SITE.name} 官方插件 | AI 网关 | API 网关 ｜ AI 原生`,
 	'home.title.native.ai':'AI',
 	'home.title.native.api.gateway':'原生的API网关',
