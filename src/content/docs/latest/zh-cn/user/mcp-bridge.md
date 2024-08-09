@@ -8,9 +8,10 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 # Mcp Bridge 配置说明
 
 ## McpBridge 字段说明
-| 字段 | 类型 | 说明 | 示例值 | 是否必填 |
-| --- | --- | --- | --- | --- |
-| registries | RegistryConfig 数组 | 支持配置多个不同注册中心的服务来源 | [] | 否 |
+| 字段         | 类型 | 说明                | 示例值     | 是否必填              |
+|------------| --- |-------------------|---------|-------------------|
+| registries | RegistryConfig 数组 | 支持配置多个不同注册中心的服务来源 | []      | 否                 |
+| name       | 字符串 | McpBridge 名称      | default | 是，当前该值只能是 default |
 
 ## RegistryConfig 字段说明
 | 字段                    | 类型 | 说明                                           | 示例值                                  | 是否必填 |

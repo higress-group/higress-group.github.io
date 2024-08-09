@@ -69,7 +69,7 @@ export default {
 	'commmon.footer.actions.edas': 'Cloud Service EDAS',
 	'commmon.actions.download': 'Download',
 
-	'home.title': `${SITE.name} Website | ${SITE.name} Official Community | ${SITE.name} Plugin| AI Gateway | API Native ｜ API Gateway`,
+	'home.title': `${SITE.name} Website | AI Gateway | API Native ｜ API Gateway | AI Proxy`,
 	'home.title.native.ai':'AI-Native',
 	'home.title.native.api.gateway':' API Gateway',
 	'home.description': 'Powered by Istio and Envoy, Higress realizes the integration of the triple gateway architecture of traffic gateway, microservice gateway and security gateway, thereby greatly reducing the costs of deployment, operation and maintenance.',
