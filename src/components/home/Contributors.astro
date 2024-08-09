@@ -13,8 +13,10 @@ const getBackgroundRandomColor = () =>  colorList[Math.floor(Math.random() * col
   <div class="contributors-container-wrapper  md:flex block  bg-[#1E1F24] p-9 mt-10 rounded-2xl">
     <div class="left-container flex-1 h-full flex flex-col justify-around md:pl-[8.5rem]">
       <div class="flex flex-col">
-        <div class="text-muted text-xs text-center tracking-[0.15em] md:text-left">{t('home.contributors.members')}</div>
-        <div class="title text-base-100 font-medium text-center text-lg leading-[3.5rem] md:mt-6 md:text-left md:text-[2.4rem] lg:text-[2.75rem] ">
+        <div class="text-muted text-xs text-center tracking-[0.15em] md:text-left" data-aos="fade-in" data-aos-duration="1000">
+          {t('home.contributors.members')}
+        </div>
+        <div class="title text-base-100 font-medium text-center text-lg leading-[3.5rem] md:mt-6 md:text-left md:text-[2.4rem] lg:text-[2.75rem]" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
           {t('home.contributors.our')}<br class="hidden md:block" />{t('home.contributors.community.stars')}
         </div>
       </div>
@@ -22,6 +24,9 @@ const getBackgroundRandomColor = () =>  colorList[Math.floor(Math.random() * col
         size="large"
         class="more hidden md:inline-block leading-[3.5] md:mt-[2.5rem] lg:mt-[4rem] rounded-3xl"
         href="https://github.com/alibaba/higress/graphs/contributors"
+        data-aos="zoom-in"
+        data-aos-duration="1500"
+        data-aos-delay="400"
       >
         {t('home.contributors.learn.more')}
       </Button>
@@ -81,3 +86,10 @@ const getBackgroundRandomColor = () =>  colorList[Math.floor(Math.random() * col
     }
     }
 </style>
+
+<script client:only="browser">
+  import AOS from "aos";
+  import "aos/dist/aos.css";
+
+  AOS.init();
+</script>
