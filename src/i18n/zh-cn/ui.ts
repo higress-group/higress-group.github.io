@@ -69,7 +69,7 @@ export default {
 	'commmon.footer.actions.edas': '云服务 EDAS',
 	'commmon.actions.download': '下载',
 
-	'home.title': `${SITE.name} 官网 | ${SITE.name} 官方社区 | ${SITE.name} 官方插件 | AI 网关 | API 网关 ｜ AI 原生`,
+	'home.title': `${SITE.name} 官网 | AI 网关 | API 网关 ｜ AI 原生 | AI 代理`,
 	'home.title.native.ai':'AI原生',
 	'home.title.native.api.gateway':'的API网关',
 	'home.description': 'Higress 是基于阿里内部两年多的 Envoy Gateway 实践沉淀，以开源 Istio + Envoy 为核心构建的云原生API网关，实现了流量调度 + 服务治理 +' +
