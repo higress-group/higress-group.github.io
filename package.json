@@ -23,6 +23,7 @@
     "@iconify-json/basil": "^1.1.5",
     "@iconify-json/tabler": "^1.1.108",
     "@serverless-cd/goat-ui": "^0.0.28",
+    "aos": "^2.3.4",
     "astro": "4.9.1",
     "astro-compress": "^2.2.11",
     "date-fns": "^3.4.0",
@@ -43,14 +44,14 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.24.3",
+    "@swc/core": "1.6.0",
     "@tailwindcss/typography": "^0.5.10",
     "@types/lodash": "^4.14.202",
     "autoprefixer": "^10.4.2",
     "daisyui": "^4.4.18",
     "tailwindcss": "^3.3.5",
     "vite-plugin-babel": "^1.2.0",
-    "vite-plugin-top-level-await": "1.4.1",
-    "@swc/core": "1.6.0"
+    "vite-plugin-top-level-await": "1.4.1"
   },
   "repository": "git@gitlab.alibaba-inc.com:goat/goat-scaffold.git"
 }

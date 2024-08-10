@@ -21,12 +21,13 @@ const ifzh = isChinese(Astro);
       type="video/mp4"
     />
   </video>
-  <home-introduce
+  <div
     class="introduce flex flex-col justify-center items-center bg-transparent h-full relative z-1"
+    data-aos="fade-up"
   >
     <div class="flex flex-col justify-center items-center h-[75%]">
       <div
-        class=`top-introduce-title leading-[96px] text-base-100 font-medium text-[2rem]  ${ifzh ? 'sm:text-[72px]' : 'sm:text-[76px]'}`
+        class={`top-introduce-title leading-[96px] text-base-100 font-medium text-[2rem] ${ifzh ? 'sm:text-[72px]' : 'sm:text-[76px]'}`}
       >
         <span class="ai-description">{t("home.title.native.ai")}</span>{
           t("home.title.native.api.gateway")
@@ -35,7 +36,7 @@ const ifzh = isChinese(Astro);
     </div>
 
     <div class="flex h-[15%]">
-      <star-and-fork class="shortcut flex justify-center">
+      <div class="shortcut flex justify-center">
         <Button
           size="large"
           class="rounded-3xl text-neutral"
@@ -45,8 +46,7 @@ const ifzh = isChinese(Astro);
           iconClass="text-neutral"
         >
           <Github themeClass="neutral-fill" />
-          <span class="text-[0.875rem] leading-4 ml-2 text-neutral">GitHub</span
-          >
+          <span class="text-[0.875rem] leading-4 ml-2 text-neutral">GitHub</span>
         </Button>
 
         <Button
@@ -59,7 +59,7 @@ const ifzh = isChinese(Astro);
           <Start themeClass="secondary-fill" />
           <span class="ml-2">{t("common.base.quick.start")}</span>
         </Button>
-      </star-and-fork>
+      </div>
     </div>
     <div class="versionInfo flex justify-end items-center h-[10%]">
       <a
@@ -67,10 +67,10 @@ const ifzh = isChinese(Astro);
         href="https://github.com/alibaba/higress/releases/tag/v1.4.1"
         target="_blank"
       >
-        Release Note of V1.4.1</a
-      >
+        Release Note of V1.4.1
+      </a>
     </div>
-  </home-introduce>
+  </div>
 </div>
 
 <style is:global>
@@ -90,14 +90,9 @@ const ifzh = isChinese(Astro);
       z-index: 0;
       object-fit: cover;
     }
-    /* a {
-      text-decoration: inherit;
-      color: theme("colors.link");
-    } */
     .versionInfo {
       width: 85.125rem;
     }
-
     .top-section {
       width: 85.125rem;
       overflow: hidden;
@@ -172,7 +167,6 @@ const ifzh = isChinese(Astro);
       backdrop-filter: blur(36px);
     }
 
-    /* 小于85.125rem  */
     @media (max-width: 85.125rem) {
       .introduce {
         min-height: 0;
@@ -182,10 +176,6 @@ const ifzh = isChinese(Astro);
       .introduce {
         width: 100%;
       }
-      /* .top-introduce-title {
-        font-size: 1.875rem !important;
-        line-height: 2.25rem !important;
-      } */
       .versionInfo {
         width: 100%;
       }
@@ -215,7 +205,6 @@ const ifzh = isChinese(Astro);
       }
     }
 
-    /* 大于50rem 小于 72rem  800px < width < 1440 */
     @media (min-width: 50rem) and (max-width: 86rem) {
       .introduce {
         padding: 2.5rem;

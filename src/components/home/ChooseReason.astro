@@ -20,7 +20,10 @@ const t = useTranslations(Astro);
     /> -->
     <div class="mb-8 md:mx-auto md:mb-12 text-center max-w-3xl">
       <p
-        class=`text-[18px] md:text-[44px] leading-[76px] text-error font-medium mt-6 tracking-normal text-center`
+        class="text-[18px] md:text-[44px] leading-[76px] text-error font-medium mt-6 tracking-normal text-center"
+        data-aos="fade-up"
+        data-aos-duration="1200"
+        data-aos-delay="100"
       >
         {t("home.website.edge.title")}
       </p>
@@ -30,6 +33,9 @@ const t = useTranslations(Astro);
         class="advantage-btn rounded-3xl text-neutral"
         href="/advantage/"
         iconClass="text-neutral"
+        data-aos="zoom-in"
+        data-aos-duration="1500"
+        data-aos-delay="300"
       >
         查看Higress和其他主流网关的比对
       </Button>
@@ -37,12 +43,17 @@ const t = useTranslations(Astro);
 
     <div class="bottom-card flex flex-wrap">
       {
-        CHOOSE_REASON_LIST.map((reason) => {
+        CHOOSE_REASON_LIST.map((reason, index) => {
           const { title, svgKey, description } = reason;
           return (
-            <div class="item px-5 border-success/50 border-l ">
+            <div
+              class="item px-5 border-success/50 border-l"
+              data-aos="fade-up"
+              data-aos-duration="1500"
+              data-aos-delay={100 + index * 200}
+            >
               <div class="transfrom-header block">
-                <div class="w-12 h-12 bg-warning border border-link  rounded-md flex justify-center items-center mb-5">
+                <div class="w-12 h-12 bg-warning border border-link rounded-md flex justify-center items-center mb-5">
                   {(() => {
                     switch (svgKey) {
                       case "adaptive":
@@ -58,12 +69,17 @@ const t = useTranslations(Astro);
                     }
                   })()}
                 </div>
-                <div class="py-4 text-info text-[.875rem] leading-4 tracking-[0.15em]">
+                <div
+                  class="py-4 text-info text-[.875rem] leading-4 tracking-[0.15em]"
+                >
                   {t(title)}
                 </div>
               </div>
 
-              <div class="text-success text-sm" set:html={t(description)} />
+              <div
+                class="text-success text-sm"
+                set:html={t(description)}
+              />
             </div>
           );
         })
@@ -77,7 +93,6 @@ const t = useTranslations(Astro);
     .primary-fill {
       fill: theme("colors.primary");
     }
-    ,
     .top-title,
     .bottom-card {
       width: 85.125rem;
@@ -159,3 +174,10 @@ const t = useTranslations(Astro);
     }
   }
 </style>
+
+<script client:only="browser">
+  import AOS from "aos";
+  import "aos/dist/aos.css";
+
+  AOS.init();
+</script>

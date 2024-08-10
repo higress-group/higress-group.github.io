@@ -7,24 +7,45 @@ const t = useTranslations(Astro);
 <higress-security
   class="higress-security flex flex-col items-center justify-center bg-neutral py-0 md:py-8"
 >
-  <div class="higress-security-wrapper flex items-center justify-around">
-    <div class="left-security-warp">
+  <div
+    class="higress-security-wrapper flex items-center justify-around"
+    data-aos="fade-up"
+    data-aos-duration="1500"
+  >
+    <div
+      class="left-security-warp"
+      data-aos="fade-right"
+      data-aos-duration="1500"
+      data-aos-delay="200"
+    >
       <img
         src="https://img.alicdn.com/imgextra/i4/O1CN01bZuGIN1TS5bevTift_!!6000000002380-2-tps-1046-860.png"
         alt={t("home.security.capability.title")}
         decoding="async"
         loading="lazy"
+        data-aos="fade-in"
+        data-aos-duration="1500"
       />
     </div>
-    <div class="right-security-container h-full flex flex-col justify-center">
+    <div
+      class="right-security-container h-full flex flex-col justify-center"
+      data-aos="fade-left"
+      data-aos-duration="1500"
+      data-aos-delay="400"
+    >
       <div class="flex flex-col">
         <div
           class="security_capability_title text-base-100 text-center font-medium tracking-normal md:text-left"
+          data-aos="fade-up"
+          data-aos-duration="1200"
         >
           {t("home.security.capability.title")}
         </div>
         <div
           class="title max-w-[450px] text-success font-normal text-center text-sm my-8 md:my-12 md:text-left"
+          data-aos="fade-up"
+          data-aos-duration="1200"
+          data-aos-delay="300"
         >
           {t("home.security.capability.subtitle")}
         </div>
@@ -35,6 +56,9 @@ const t = useTranslations(Astro);
         class="security-btn rounded-3xl text-neutral"
         href="https://higress.io/zh-cn/docs/plugins/security/waf"
         iconClass="text-neutral"
+        data-aos="zoom-in"
+        data-aos-duration="1500"
+        data-aos-delay="500"
       >
         {t("home.contributors.learn.more")}
       </Button>
@@ -51,7 +75,7 @@ const t = useTranslations(Astro);
       font-size: 2.75rem;
       line-height: 3.5rem;
     }
-    .security-btn{
+    .security-btn {
       width: 10.375rem;
       height: 3.25rem;
     }
@@ -75,10 +99,10 @@ const t = useTranslations(Astro);
         width: 100%;
         align-items: center;
       }
-      .security-btn{
+      .security-btn {
         width: 7.5rem;
         height: 1.875rem;
-    }
+      }
       .security_capability_title {
         font-size: 1.125rem;
         line-height: 1.25rem;
@@ -101,3 +125,10 @@ const t = useTranslations(Astro);
     }
   }
 </style>
+
+<script client:only="browser">
+  import AOS from "aos";
+  import "aos/dist/aos.css";
+
+  AOS.init();
+</script>
