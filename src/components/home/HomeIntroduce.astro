@@ -31,9 +31,9 @@ const ifzh = isChinese(Astro);
       <div
         class={`top-introduce-title leading-[96px] text-base-100 font-medium text-[2rem] ${ifzh ? 'sm:text-[72px]' : 'sm:text-[76px]'}`}
       >
-        <!-- 使用两个 span 来分别显示“AI Gateway”和“AI Native API Gateway” -->
-        <span class="ai-description step-1">AI Gateway</span>
-        <span class="ai-description step-2"> <span class="typing-text">AI Native API Gateway</span></span>
+        <span class="ai-description">{t("home.title.native.ai")}</span>{
+          t("home.title.native.api.gateway")
+        }
       </div>
     </div>
 
@@ -75,19 +75,6 @@ const ifzh = isChinese(Astro);
   </div>
 </div>
 
-<script is:inline>
-  // JavaScript 控制动画顺序
-  document.addEventListener("DOMContentLoaded", () => {
-    const step1 = document.querySelector('.step-1');
-    const step2 = document.querySelector('.step-2');
-
-    // 当第一个动画结束后，显示第二个动画
-    step1.addEventListener('animationend', () => {
-      step2.style.display = 'inline';
-      step1.style.display = 'none'; // 隐藏第一个文本
-    });
-  });
-</script>
 
 <style is:global>
   .home-introduce-wrapper {
@@ -126,61 +113,13 @@ const ifzh = isChinese(Astro);
       padding-right: 1rem;
     }
 
-  .ai-description {
-    background: linear-gradient(90deg, #6181ff 48%, #cac8fd 61%);
-    background-clip: text;
-    text-fill-color: transparent;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block; /* 确保与 .typing-text 在同一行 */
-    vertical-align: middle; /* 保持与 .typing-text 的对齐 */
-  }
-
-  .typing-text {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
-    border-right: 3px solid black;
-    vertical-align: middle; /* 保持与 .ai-description 的对齐 */
-  }
-  
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-
-  @keyframes blink {
-    from, to { border-color: transparent; }
-    50% { border-color: black; }
-  }
-
-    .step-1, .step-2 {
-      overflow: hidden;
-      white-space: nowrap;
-      display: inline-block;
+    .ai-description {
+      background: linear-gradient(90deg, #6181ff 48%, #cac8fd 61%);
+      background-clip: text;
+      text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-
-    .step-1 {
-      animation: expandText 2s steps(15) forwards;
-    }
-
-    .step-2 {
-      display: none; /* Initially hidden */
-      animation: expandText 2s steps(25) forwards;
-    }
-
-    @keyframes expandText {
-      0% {
-        opacity: 0;
-        width: 0;
-      }
-      100% {
-        opacity: 1;
-        width: auto;
-      }
-    }
-
     .bottom-section {
       width: 85.125rem;
     }
