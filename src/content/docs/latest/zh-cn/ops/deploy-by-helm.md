@@ -75,3 +75,7 @@ kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/downloa
 ```bash
 helm upgrade higress -n higress-system --set global.enableGatewayAPI=true higress.io/higress --reuse-values
 ```
+
+可以使用这份配置验证 Gateway API 功能：
+
+https://github.com/alibaba/higress/blob/main/samples/gateway-api/demo.yaml
