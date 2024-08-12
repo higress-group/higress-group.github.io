@@ -46,7 +46,7 @@ export default {
 	'commmon.ebook.complete.get':'Get the complete e-book',
 	'commmon.ebook.enjoy.read':'Enjoy the reading experience to the fullest',
 	'commmon.markdown.subheading.page':'This Page',
-	'commmon.base.layout.keywords':'Dynamic service discovery, configuration management, service management',
+	'commmon.base.layout.keywords':'AI Gateway,AI Proxy,API Gateway,AI Native',
 	'commmon.base.page.previousLink':'Prev',
 	'commmon.base.page.nextLink': 'Next',
 	'common.base.quick.start': 'Start',
@@ -69,7 +69,7 @@ export default {
 	'commmon.footer.actions.edas': 'Cloud Service EDAS',
 	'commmon.actions.download': 'Download',
 
-	'home.title': `${SITE.name} Website | AI Gateway | API Native ｜ API Gateway | AI Proxy`,
+	'home.title': `${SITE.name} | AI Gateway | AI Native API Gateway`,
 	'home.title.native.ai':'AI-Native',
 	'home.title.native.api.gateway':' API Gateway',
 	'home.description': 'Powered by Istio and Envoy, Higress realizes the integration of the triple gateway architecture of traffic gateway, microservice gateway and security gateway, thereby greatly reducing the costs of deployment, operation and maintenance.',
