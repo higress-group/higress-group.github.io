@@ -11,22 +11,23 @@ const ifzh = isChinese(Astro);
 ---
 
 <div class="home-introduce-wrapper h-[65vh] relative">
-  <video
-    autoplay
-    muted
-    loop
-    class="video-background"
-    poster="https://img.alicdn.com/imgextra/i1/O1CN01U3PG171Wiz4B85TGK_!!6000000002823-0-tps-2388-1168.jpg"
-  >
-    <source
-      src="https://cloud.video.taobao.com/vod/play/V3VEOGxHS3IxSU5wWkFYeTFuZU4wdHJ2eXloK1g1aXlXV0pvNU0zVjhmYTZQZWw1SnpKVVVCTlh4OVFON0V5UUVMUDduY1RJak82VE1sdXdHTjNOaHc9PQ"
-      type="video/mp4"
-    />
-  </video>
-  <div
-    class="introduce flex flex-col justify-center items-center bg-transparent h-full relative z-1"
-    data-aos="fade-up"
-  >
+  <!-- 这里将原本的 <video> 替换为 <div>，并通过CSS来显示不同的内容 -->
+  <div class="media-container">
+    <video
+      autoplay
+      muted
+      loop
+      class="video-background"
+      poster="https://img.alicdn.com/imgextra/i1/O1CN01U3PG171Wiz4B85TGK_!!6000000002823-0-tps-2388-1168.jpg"
+    >
+      <source
+        src="https://cloud.video.taobao.com/vod/play/V3VEOGxHS3IxSU5wWkFYeTFuZU4wdHJ2eXloK1g1aXlXV0pvNU0zVjhmYTZQZWw1SnpKVVVCTlh4OVFON0V5UUVMUDduY1RJak82VE1sdXdHTjNOaHc9PQ"
+        type="video/mp4"
+      />
+    </video>
+    <div class="image-background"></div>
+  </div>
+  <div class="introduce flex flex-col justify-center items-center bg-transparent h-full relative z-1"  >
      <div class="flex flex-col justify-center items-center h-[75%]">
       <div
         class={`top-introduce-title leading-[96px] text-base-100 font-medium text-[2rem] ${ifzh ? 'sm:text-[72px]' : 'sm:text-[76px]'}`}
@@ -78,158 +79,186 @@ const ifzh = isChinese(Astro);
 
 <style is:global>
   .home-introduce-wrapper {
-    .neutral-fill {
-      color: theme("colors.neutral");
-    }
-    .secondary-fill {
-      color: theme("colors.secondary");
-    }
+    position: relative;
+  }
+
+  .media-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .video-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .image-background {
+    width: 100%;
+    height: 100%;
+    background-image: url('https://img.alicdn.com/imgextra/i1/O1CN01U3PG171Wiz4B85TGK_!!6000000002823-0-tps-2388-1168.jpg');
+    background-size: cover;
+    display: none;
+  }
+
+  .ai-description {
+    background: linear-gradient(90deg, #6181ff 48%, #cac8fd 61%);
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media only screen and (max-width: 768px) {
     .video-background {
-      position: absolute;
-      top: 0;
-      left: 0;
+      display: none;
+    }
+
+    .image-background {
+      display: block;
+    }
+  }
+
+  /* 其他CSS样式保持不变 */
+  .neutral-fill {
+    color: theme("colors.neutral");
+  }
+  .secondary-fill {
+    color: theme("colors.secondary");
+  }
+  .versionInfo {
+    width: 85.125rem;
+  }
+  .top-section {
+    width: 85.125rem;
+    overflow: hidden;
+  }
+  .top-section .notes .pc-version-intro {
+    display: inline;
+  }
+  .top-section .notes .mobile-version-intro {
+    display: none;
+  }
+  .shortcut button {
+    height: 3rem;
+    min-height: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .bottom-section {
+    width: 85.125rem;
+  }
+  .bottom-section .desc {
+    width: 9.75rem;
+    height: 22.5rem;
+    background-color: theme("colors.warning");
+    transition: width 0.8s;
+  }
+
+  .bottom-section .desc .text {
+    opacity: 0;
+    transition: opacity 0.8s;
+  }
+  .bottom-section .log {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    transition: width 0.8s;
+  }
+  .bottom-section .desc:hover {
+    width: 31.25rem;
+  }
+  .bottom-section .desc:hover .log {
+    flex: 1;
+  }
+  .bottom-section .desc:hover .text {
+    opacity: 1;
+  }
+  .bottom-section .desc:hover .arrow {
+    display: none;
+  }
+  .divider-horizontal {
+    width: 1px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  a {
+    text-decoration: none;
+  }
+  .fork {
+    background: rgba(244, 244, 246, 0.2);
+    backdrop-filter: blur(36px);
+  }
+  .fork:hover {
+    background: rgba(244, 244, 246, 0.2) !important;
+    backdrop-filter: blur(36px);
+  }
+
+  @media (max-width: 85.125rem) {
+    .introduce {
+      min-height: 0;
+      padding: 1.5rem;
+    }
+    .top-section,
+    .introduce {
       width: 100%;
-      height: 100%;
-      z-index: 0;
-      object-fit: cover;
     }
     .versionInfo {
-      width: 85.125rem;
-    }
-    .top-section {
-      width: 85.125rem;
-      overflow: hidden;
+      width: 100%;
     }
     .top-section .notes .pc-version-intro {
-      display: inline;
+      display: none;
     }
     .top-section .notes .mobile-version-intro {
-      display: none;
+      display: inline;
     }
     .shortcut button {
-      height: 3rem;
-      min-height: 3rem;
-      padding-left: 1rem;
-      padding-right: 1rem;
+      min-height: 2rem;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
     }
-
-    .ai-description {
-      background: linear-gradient(90deg, #6181ff 48%, #cac8fd 61%);
-      background-clip: text;
-      text-fill-color: transparent;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .top-section .notes {
+      margin-top: 1.25rem;
     }
     .bottom-section {
-      width: 85.125rem;
+      width: 100%;
+      display: none !important;
     }
-    .bottom-section .desc {
-      width: 9.75rem;
-      height: 22.5rem;
-      background-color: theme("colors.warning");
-      transition: width 0.8s;
+    .mobile-bottom-section {
+      display: block !important;
     }
+    .mobile-bottom-section .btn:hover {
+      background-color: theme(colors.neutral) !important;
+    }
+  }
 
-    .bottom-section .desc .text {
-      opacity: 0;
-      transition: opacity 0.8s;
+  @media (min-width: 50rem) and (max-width: 86rem) {
+    .introduce {
+      padding: 2.5rem;
+      width: 100%;
     }
-    .bottom-section .log {
-      flex: 1;
-      display: flex;
-      position: relative;
-      overflow: hidden;
-      transition: width 0.8s;
+    .top-section,
+    .bottom-section,
+    .versionInfo {
+      width: 100%;
     }
-    .bottom-section .desc:hover {
-      width: 31.25rem;
-    }
-    .bottom-section .desc:hover .log {
-      flex: 1;
-    }
-    .bottom-section .desc:hover .text {
-      opacity: 1;
-    }
-    .bottom-section .desc:hover .arrow {
+    .top-section .notes .pc-version-intro {
       display: none;
     }
-    .divider-horizontal {
-      width: 1px;
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
+    .top-section .notes .mobile-version-intro {
+      display: inline;
     }
-    a {
-      text-decoration: none;
-    }
-    .fork {
-      background: rgba(244, 244, 246, 0.2);
-      backdrop-filter: blur(36px);
-    }
-    .fork:hover {
-      background: rgba(244, 244, 246, 0.2) !important;
-      backdrop-filter: blur(36px);
-    }
-
-    @media (max-width: 85.125rem) {
-      .introduce {
-        min-height: 0;
-        padding: 1.5rem;
-      }
-      .top-section,
-      .introduce {
-        width: 100%;
-      }
-      .versionInfo {
-        width: 100%;
-      }
-      .top-section .notes .pc-version-intro {
-        display: none;
-      }
-      .top-section .notes .mobile-version-intro {
-        display: inline;
-      }
-      .shortcut button {
-        min-height: 2rem;
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-      }
-      .top-section .notes {
-        margin-top: 1.25rem;
-      }
-      .bottom-section {
-        width: 100%;
-        display: none !important;
-      }
-      .mobile-bottom-section {
-        display: block !important;
-      }
-      .mobile-bottom-section .btn:hover {
-        background-color: theme(colors.neutral) !important;
-      }
-    }
-
-    @media (min-width: 50rem) and (max-width: 86rem) {
-      .introduce {
-        padding: 2.5rem;
-        width: 100%;
-      }
-      .top-section,
-      .bottom-section,
-      .versionInfo {
-        width: 100%;
-      }
-      .top-section .notes .pc-version-intro {
-        display: none;
-      }
-      .top-section .notes .mobile-version-intro {
-        display: inline;
-      }
-      .bottom-section .desc div {
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 4;
-      }
+    .bottom-section .desc div {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
     }
   }
 </style>
