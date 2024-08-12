@@ -1,0 +1,71 @@
+---
+title: "时速云使用 Higress 替换 Ngnix Ingress + Spring Cloud Gateway 的生产实践"
+description: "时速云使用 Higress 替换 Ngnix Ingress + Spring Cloud Gateway 的生产实践"
+date: "2024-08-12"
+category: "ecosystem"
+keywords: ["Higress"]
+authors: "CH3CHO"
+---
+
+作者介绍：王金山，北京云思畅想科技有限公司技术部微服务架构师，负责公司 API 网关和服务网格等研发工作
+<a name="SY0FA"></a>
+## 一、时速云介绍
+时速云成立于2014年10月，致力于通过云原生技术帮助企业实现数字化转型，拥有云原生应用平台 TCAP 和云原生数据平台 KubeData 两大核心产品体系，产品包含云原生 DevOps、容器云 PaaS、中间件服务、边缘计算、微服务治理、服务网格、API 网关等。
+<a name="PRgD1"></a>
+## 二、需求背景
+![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434539449-0dd1c25e-1e45-4864-a024-7a26f1cdc490.webp#clientId=ub1bb9b57-3d57-4&from=paste&id=u2309f400&originHeight=405&originWidth=720&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u4fbe122c-8e1e-452e-8e97-0dad73e1867&title=)<br />时速云的 PaaS 平台中存在着多款网关软件：
+
+- 以 HAProxy、Nginx Ingress 为基础的流量网关
+- Spring Cloud 微服务体系的 Spring Cloud Gateway
+- 作为 API 网关的 Kong
+- 服务网格体系下的 Istio Ingress Gateway
+
+以上产品虽说各自有自己的应用场景，但是带来的问题是技术栈各不相同，为了满足不同的需求引入多种工具后，带来的就是维护成本的急剧增加。因此，寻找一种既可以满足所有需求，又可以使用统一技术栈的工具，成为我们追求的目标。Higress 正符合我们的需求。
+<a name="Y2qmn"></a>
+## 三、Higress 解决方案
+**替代 Nginx Ingress**<br />Higress 可以作为 K8s 集群的 Ingress 入口网关, 并且兼容了大量 K8s Nginx Ingress 的注解，可以从 K8s Nginx Ingress 快速平滑迁移到 Higress。如下是一个基于 Higress 自带注解来实现 REST 路由，并兼容 Nginx Ingress 注解重写路径的示例：
+```
+apiVersion: networking.k8s.io/v1kind: Ingressmetadata:  annotations:    # 兼容 Nginx Ingress 注解    nginx.ingress.kubernetes.io/rewrite-target: /    # Higress 注解，支持 method/header/query 匹配路由    higress.io/match-method: POST    higress.io/exact-match-query-higressQuery: hi    higress.io/prefix-match-header-x-higress-header: hi  name: foospec:  ingressClassName: higress  rules:  - host: foo.example.com    http:      paths:      - pathType: Prefix        path: /foo        backend:          service:            name: foo-service            port:              number: 5678
+```
+并且 Nginx Ingress 的 Lua 代码性能比较差，Higress 对比 Nginx Ingress 的性能提升很大，如下图所示：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434541489-278a40f3-3d5b-4768-a132-a69d1b11d957.webp#clientId=ub1bb9b57-3d57-4&from=paste&id=uff462749&originHeight=639&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ud0a57763-f024-4fb7-9cbc-fdcc8b8fa9a&title=)<br />**替代 Spring Cloud Gateway**<br />Spring Cloud 微服务体系下，作为微服务网关必须跟微服务注册中心进行对接，实现服务发现。Higress 提供了 McpBridge 这个 CRD，可以很方便地跟多种注册中心对接，我们使用的 Spring Cloud 注册中心是 Nacos，McpBridge 配置如下：
+```
+apiVersion: networking.higress.io/v1kind: McpBridgemetadata:  name: default  namespace: higress-systemspec:  registries:    # 定义一个名为 my-nacos  的服务来源  - name: my-nacos    # 注册中心类型是 Nacos 2.x，支持 gRPC 协议    type: nacos2    # 注册中心的访问地址，可以是域名或者IP    domain: 127.0.0.1    # 注册中心的访问端口，Nacos 默认都是 8848    port: 8848    # Nacos 命名空间 ID    nacosNamespaceId: d8ac64f3-xxxx-xxxx-xxxx-47a814ecf358    # Nacos 服务分组    nacosGroups:    - DEFAULT_GROUP
+```
+接着，配置 Ingress 转发到注册在 Nacos 上的服务 user-center：
+```
+apiVersion: networking.k8s.io/v1kind: Ingressmetadata:  annotations:    higress.io/destination: user-center.DEFAULT-GROUP.d8ac64f3-xxxx-xxxx-xxxx-47a814ecf358.nacos  name: user  namespace: defaultspec:  rules:  - http:      paths:      - backend:          resource:            apiGroup: networking.higress.io            kind: McpBridge            name: default        path: /        pathType: Prefix
+```
+这样 Spring Cloud 微服务无需做任何改造，即可接入 Higress 网关。对比 Spring Cloud Gateway/Zuul 等传统 Java 微服务网关， Higress 的性能高出 2 倍以上，可以显著降低资源成本。<br />**替代 Kong**<br />时速云的 API 网关产品用于帮助企业和开发者完成 API 的创建、维护、发布、监控告警等整个生命周期的管理。通过 API 网关，以 API 的形式将后端服务开放出来，提供给各方使用。认证鉴权能力是 API 网关中的关键能力，我们的 API 网关最初是基于 Kong 来构建的，主要使用了 Kong 的 Key Auth/Basic Auth/JWT Auth/HMAC Auth 插件，而 Higress 也都提供了这些插件能力：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434539373-c731cc24-6779-4bfa-b457-9813a8377d9b.webp#clientId=ub1bb9b57-3d57-4&from=paste&id=u7fcff463&originHeight=399&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ue413007c-3541-41f8-a2a0-a29fbaa02bc&title=)<br />以 Key Auth 为例，通过 Higress 提供的 WasmPlugin CRD 做如下配置即可：
+```
+apiVersion: extensions.higress.io/v1alpha1kind: WasmPluginmetadata:  name: key-auth  namespace: higress-systemspec:  # 全局配置，配置认证规则  defaultConfig:    consumers:    - credential: 2bda943c-xxxx-xxxx-xxxx-00163e1250b5      name: consumer1    - credential: c8c8e9ca-xxxx-xxxx-xxxx-e700dcc40e35      name: consumer2    keys:    - x-api-key    # 从请求header识别key    in_header: true    # 开启全局认证，consumer未识别将拒绝访问    global_auth: true  # 匹配规则，配置授权规则  matchRules:  # 路由级生效配置，匹配default命名空间下名为foo的ingress  - ingress:    - default/foo    config:      # 仅允许 consumer1 访问      allow:      - consumer1  # 域名级生效配置  - domain:    - www.test.com    - *.example.com    config:      # 仅允许 consumer1 访问      allow:      - consumer2  url: oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/key-auth:1.0.0
+```
+发起一个认证请求，因为 xxx.exmaple.com 仅授权了 consumer2 访问，所以下面这个 curl 命令将返回 403：
+```
+curl  http://xxx.example.com/test -H 'x-api-key: 2bda943c-xxxx-xxxx-xxxx-00163e1250b5'
+```
+此外，Higress 提供了更灵活的自定义插件机制，相比 Kong 新增插件需要重新部署网关，Higress 可以动态扩展并热更新插件逻辑，对流量完全无损，而且也可以支持多种语言开发，不局限于 Lua 语言。<br />**替代 Istio Ingress Gateway**<br />时速云的服务网格产品是基于 Istio 搭建的，在 Istio 服务网格架构中一般由 Istio Ingress Gateway 来负责南北向的流量治理。因为 Higress 也能够支持 Istio API，所以我们也使用 Higress 统一了服务网格中的南北向流量管理。<br />Higress 本身并未对 Istio 有强依赖，因此默认关闭了 Istio 的 API 支持，需要通过 helm 参数配置开启该支持：
+```
+helm upgrade higress -n higress-system higress.io/higress --reuse-values --set global.enableIstioAPI=true
+```
+开启后，可以直接使用 Istio API 来管理 Higress 上的路由：<br />apiVersion: networking.istio.io/v1alpha3kind: Gatewaymetadata:  name: devops  namespace: higress-systemspec:  selector:    higress: higress-system-higress-gateway  servers:  - port:      number: 80      name: http      protocol: HTTP    hosts:    - devops.com---apiVersion: networking.istio.io/v1beta1kind: VirtualServicemetadata:  name: devops  namespace: higress-systemspec:  gateways:  - higress-system/devops  hosts:  - devops.com  http:  - name: default    route:    - destination:        host: devops.default.svc.cluster.local <br />基于 Istio API，Higress 也支持 TCP 路由，这可以替代我们之前使用 HAProxy 来代理 MySql 等中间件的功能，例如：
+```
+apiVersion: networking.istio.io/v1beta1kind: Gatewaymetadata:  name: mysql   namespace: higress-systemspec:  selector:    higress: higress-system-higress-gatewayservers:  - hosts:    - '*'   port:     name: tcp     number: 3306     protocol: TCP---apiVersion: networking.istio.io/v1beta1kind: VirtualServicemetadata:  name: mysql  namespace: higress-systemspec:  gateways:  - mysql  hosts:  - '*'  tcp:  - match:    - port: 3306    route:    - destination:         host: mysql         port:           number: 3306         subset: v1
+```
+<a name="OvrOE"></a>
+## 四、收益与展望
+![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434539377-9ab7a7e0-deeb-426e-959d-7d38866d575e.webp#clientId=ub1bb9b57-3d57-4&from=paste&id=ud4968553&originHeight=610&originWidth=750&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u44a8a8c0-0b8d-4e67-8575-27948d2acca&title=)<br />迁移后的架构基于 Higress 在产品层面做了各个技术栈的统一融合，增强了用户体验，具体收益如下：
+
+1. Higress 同时支持 K8s Ingress API 以及 Istio Gateway/VirtualService API，多个集群可以快速平滑升级
+2. 使用 Higress 进行了多种网关的统一，统一了流量入口/路由负载/安全认证的技术栈，实现了降本增效
+3. Higress 基于 Envoy，与东西向流量治理的 Sidecar 采用相同的技术栈，降低了开发人员扩展和维护的成本
+
+最后，我们也对 Higress 未来发展提出几点期待：
+
+1. 希望能尽快支持 Gateway API，并支持 TCPRoute/UDPRoute，增强四层能力
+2. 期待社区的 Wasm 插件生态越来越丰富，提供更多开箱即用的能力
+3. 目前时速云会在一个 K8s 集群中部署多套 Higress 网关，希望能提供 Operator 机制来简化运维
+
+---
+
+欢迎加入 Higress 社区，了解更多 Higress 动向：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434555656-3fa9391a-f842-4697-87e7-744986ac5a63.webp#clientId=ub1bb9b57-3d57-4&from=paste&id=u05431898&originHeight=405&originWidth=720&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u25438cc8-ed73-43f4-b5c8-ea392fa6121&title=)
+
