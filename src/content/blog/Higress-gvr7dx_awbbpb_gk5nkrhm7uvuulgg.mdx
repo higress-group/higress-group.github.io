@@ -1,0 +1,24 @@
+---
+title: "Higress GitHub star 突破 1k ，来自社区开发者和用户的寄语"
+description: "Higress GitHub star 突破 1k ，来自社区开发者和用户的寄语 "
+date: "2024-08-12"
+category: "article"
+keywords: ["Higress"]
+authors: "CH3CHO"
+---
+
+不知不觉间，Higress 从去年[11 月云栖大会](http://mp.weixin.qq.com/s?__biz=MzU4NzU0MDIzOQ==&mid=2247515576&idx=1&sn=35bccdb10f5249f524e8ee42a67ee972&chksm=fde88fd8ca9f06ce7f1ac0ff2a8645c1306837d9dc44296ca8343b54f9ff0a1e3fe46f15c05e&scene=21#wechat_redirect)宣布开源，已经过去了 5 个月的时间。这期间，Higress 一共完成了 136 个 PR 的合并，发布了 9 个 Release，收获了 25 位社区 Contributor。在这里向 Higress 一路同行的小伙伴们表达最诚挚的敬意。<br />Higress 已经基本完成了 1.0 版本的开发工作（功能预览见文章结尾），正式的 GA 版本预计在 4 月初发布。开源是云原生生态的基石，Higress 作为云原生网关，同时也是阿里的战略级开源项目，会持续不断地加大开源投入，带给大家更多惊喜。<br />这里我们收集了来自 Higress 社区开发者和用户的寄语，欢迎更多的伙伴一起参与到社区的建设和产品的使用中来～
+<a name="isLrB"></a>
+## 社区开发者寄语
+@董艺荃 | 携程研发工程师，Higress Committer  <br />Higress 的开源为社区贡献了一个功能丰富的云原生网关解决方案。很高兴参与到这个项目当中，也让我对云原生网关产品有了一个更深入的了解。但项目的发展需要的是大家的一同付出。希望能够有更多的朋友参与到这个项目当中。不管你擅长什么方面的技术，相信都能够在其中找到自己的用武之地。让我们加深交流、共同努力，让 Higress 社区更好地发展下去。<br />@李强林｜浙江大学SEL实验室，Higress Committer<br />很幸运能够参与到 Higress 社区中来，可以概括为几点心得体会，一是参与体验非常好，社区的 Issue 分类管理非常贴心，不仅分类多而且还有难度提示，尤其是对于新加入的同学来说上手体验很好。二是自参与以来收获颇丰，不仅了解和学习了云原生网关，还加强了社区协作能力。在解决 Issue 的过程中，细致地理解云原生网关的设计思路和细节，在代码不断被 review 时，更加了解代码规范和重视代码质量。此外对于未来做云原生网关技术选型也是一个宝贵的经验。最后还收到了社区证书、奖杯和礼物 :)<br />@刘训灼｜腾讯研发工程师，Higress Committer<br />很开心能参与到 Higress 社区中，参与的过程中学习和收获很多，社区提供了不同难度的 issue，参与者可以根据个人兴趣来阶段性的参与进来，当前项目也在持续发展，还是有很大的参与空间，同时也有很多展现自己的机会，鼓励大家参与进来，一起交流学习。<br />@田亚涛｜蚂蚁金服研发工程师，Higress Contributor<br />当下 Higress 处于飞速发展的阶段，持续不断地更新迭代新 feature，而且社区活跃、社区成员间学习氛围浓厚；而且 Higress 本身设计优雅，新手开发门槛低，对于想要接触和学习云原生的同学非常友好，期待有更多对云原生和网关感兴趣的同学加入社区，一起共建共享，创造美好！
+<a name="ne63v"></a>
+## 用户寄语
+@张嘉豪 ｜百威英博 SRE工程师<br />Higress 提供的 Wasm 插件机制很好用，可以很方便地对网关功能进行扩展，插件逻辑频繁改动也能实时热更新，不会影响网关流量，扩展性和稳定性鱼和熊掌兼得，替运维开发节省不少时间与精力。祝愿 Higress 开源越做越好，把云原生技术的红利用更普惠的方式带给大家。<br />@王德冲｜UU跑腿 业务中台架构师<br />Higress 项目受到了许多人的关注和认可，在未来的开发中，继续保持创新和努力，不断提高产品的质量和用户体验，为更多的人带来便利和价值。让 Higress 项目更加优秀，为开源社区做出更大的贡献！祝所有 Higress 开源开发者在未来的道路上越走越远。
+<a name="dvwMr"></a>
+## Higress 1.0版本新功能预览
+1. 服务来源新增固定IP地址和DNS域名<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723434701894-578f21f0-a8eb-4b9c-8638-b522ea89003f.png#clientId=ubde5bda5-015d-4&from=paste&id=u8f168db6&originHeight=386&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u1aaa92dd-c0a0-488d-8a6b-dd4562de943&title=)<br />创建路由转发给目标服务时，不再局限于选择 K8s Service，或是 Nacos 和 ZooKeeper 上的服务，可以直接配置基于 IP 或者域名的目标服务。
+
+2. 提供多种路由策略<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723434701860-4001e695-72d7-4e02-bfe4-9fceaab4e998.png#clientId=ubde5bda5-015d-4&from=paste&id=ud4dc308c&originHeight=616&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ubab0897e-d299-4e10-be99-bd28521bbb0&title=)<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723434701870-4a3f9778-d01b-4218-8814-8506d0a456d8.png#clientId=ubde5bda5-015d-4&from=paste&id=udf3b73f0&originHeight=622&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u5695394b-0180-4ec1-95b5-fa4e05566b1&title=)<br />我们将 Ingress 能力封装为开箱即用的策略配置，同时基于 Wasm 插件实现的策略也可以在这里灵活开启，用户也可以配置自定义的 Wasm 插件生效，这些都将在正式 GA 版本里推出。
+
+欢迎加入 Higress 社区群，及时了解更多 Higress 动向：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434784956-894aa73b-28bb-43cb-b1e8-96673d31571b.webp#clientId=ubde5bda5-015d-4&from=paste&id=ue183e5f1&originHeight=405&originWidth=720&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ub1502292-16a3-4ee9-9a96-dba08085edf&title=)
+
