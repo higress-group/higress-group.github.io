@@ -1,0 +1,409 @@
+---
+title: "下一代云原生网关Higress：基于Wasm开发JWT认证插件"
+description: "下一代云原生网关Higress：基于Wasm开发JWT认证插件"
+date: "2024-08-12"
+category: "article"
+keywords: ["Higress"]
+authors: "CH3CHO"
+---
+
+**编者荐语：**<br />Higress 原生提供了 C++ 版本的 JWT 插件，二次开发适配自己业务需求成本比较高，基于该博主的 Go 版本插件二次开发会容易很多。
+<a name="70a3a26b"></a>
+## 一、什么是Higress
+Higress是基于阿里内部的Envoy Gateway实践沉淀、以开源Istio + Envoy为核心构建的下一代云原生网关，实现了流量网关 + 微服务网关 + 安全网关三合一的高集成能力，深度集成Dubbo、Nacos、Sentinel等微服务技术栈，能够帮助用户极大的降低网关的部署及运维成本且能力不打折；在标准上全面支持Ingress与Gateway API，积极拥抱云原生下的标准API规范；同时，Higress Controller也支持Nginx Ingress平滑迁移，帮助用户零成本快速迁移到Higress。![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434140072-be7774d7-73b4-486d-9203-7a206ae8686a.webp#clientId=u92f2bbb7-e796-4&from=paste&id=u16b78d9a&originHeight=881&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u18dee760-02ae-4d4a-81ed-22d51ba4ecf&title=)
+<a name="6b1ce141"></a>
+## 二、什么是WASM
+WASM代表"WebAssembly"，它是一种可移植、低级别的二进制指令格式，旨在作为Web浏览器中的一种新型执行环境而推出。它的设计目标是为Web上的高性能应用提供一种通用的编译目标，使开发人员能够在不同平台和架构上运行高效的代码。 WASM的主要特点包括：
+
+1. 性能： WASM是一种二进制格式，可以高效地编码和解码，从而在浏览器中实现比传统JavaScript更快的执行速度。这使得WASM特别适用于需要高性能的Web应用，如游戏、图像处理和模拟器。
+2. 安全性： 由于WASM是低级别的虚拟机，它提供了一种隔离和受控的执行环境。这意味着它可以在浏览器中安全地运行，防止恶意代码对用户计算机的损害。
+3. 跨平台： WASM可以在不同的体系结构和操作系统上运行，使开发人员能够编写一次代码，然后在多个平台上运行，而无需进行大量的修改和调整。
+4. 语言无关性： 尽管WASM可以从多种编程语言中生成，但它与特定的编程语言无关。这使得开发人员能够选择他们熟悉的语言，并将其编译成WASM以在Web上运行。
+5. 适用范围： 虽然WASM主要针对Web浏览器中的Web应用程序，但它不仅限于此。它还可以在其他领域，如服务器端、嵌入式系统等中发挥作用。
+<a name="34062b25"></a>
+## 三、最佳实践
+言归正传，现在我们基于Wasm为Higress开发一个JWT认证插件，实现在Higress中进行token解析认证，如果Token无效或不存在直接拒绝返回401，Token有效继续访问后端微服务。利用最佳实践的方式带大家熟悉一下基于Wsam开发Higress插件的整个过程，流程图如下：![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434142141-e3b3d7ce-f431-42cc-9441-58a32231b87c.webp#clientId=u92f2bbb7-e796-4&from=paste&id=ub77be6b6&originHeight=590&originWidth=800&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u3f994d1c-e577-4676-b450-8f57cc1dceb&title=)这样做的好处：
+
+- 下游微服务无需重复进行认证，减少了重复的工作，也提高了系统的安全性
+- 避免了下游服务重复解析token来获取用户信息的需求。减少了不必要的开销
+<a name="074bfd55"></a>
+## 四、Higress 部署
+```
+# 环境为Kubernetes v1.27.3
+$ kubectl get nodes
+NAME                 STATUS   ROLES           AGE   VERSION
+kind-control-plane   Ready    control-plane   9h    v1.27.3
+
+# 通过Helm安装
+$ helm repo add higress.io https://higress.io/helm-charts
+
+"higress.io" already exists with the same configuration, skipping
+$ helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.local=true --set higress-console.o11y.enabled=false  --set higress-console.domain=console.higress.io --set higress-console.admin.password.value=admin
+
+NAME: higress
+LAST DEPLOYED: Thu Aug 10 20:37:40 2023
+NAMESPACE: higress-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Higress successfully installed!
+
+To learn more about the release, try:
+  $ helm status higress -n higress-system
+  $ helm get all higress -n higress-system
+
+1. Use the following URL to access the console:
+  http://console.higress.io/
+  Since Higress Console is running in local mode, you may need to add the following line into your hosts file before accessing the console:
+  127.0.0.1 console.higress.io
+2. Use following commands to get the credential and login:
+  export ADMIN_USERNAME=$(kubectl get secret --namespace higress-system higress-console -o jsonpath="{.data.adminUsername}" | base64 -d)
+  export ADMIN_PASSWORD=$(kubectl get secret --namespace higress-system higress-console -o jsonpath="{.data.adminPassword}" | base64 -d)
+  echo -e "Username: ${ADMIN_USERNAME}\nPassword: ${ADMIN_PASSWORD}"
+  NOTE: If this is an upgrade release, your current password won't be changed.
+3. If you'd like to change the credential, you can edit this secret with new values: higress-system/higress-console
+
+# 查看密码
+$ export ADMIN_USERNAME=$(kubectl get secret --namespace higress-system higress-console -o jsonpath="{.data.adminUsername}" | base64 -d)
+$ export ADMIN_PASSWORD=$(kubectl get secret --namespace higress-system higress-console -o jsonpath="{.data.adminPassword}" | base64 -d)
+$ echo -e "Username: ${ADMIN_USERNAME}\nPassword: ${ADMIN_PASSWORD}"
+Username: admin
+Password: admin
+
+# 配置Hosts
+ $ cat /etc/hosts
+ 127.0.0.1 demo.kubesre.com console.higress.io
+
+# 转发一下端口本地可以访问
+$ kubectl  port-forward service/higress-gateway -n higress-system 80:80
+```
+访问地址：http://console.higress.io/pluginUsername: admin Password: admin<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434140160-de343a84-19c6-4f54-9ded-1b6b9520f3bc.webp#clientId=u92f2bbb7-e796-4&from=paste&id=ubcccc3a8&originHeight=459&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ue517d491-92eb-4135-bc12-768e08b79d3&title=)出现如上界面说明安装成功！
+<a name="75ec19c7"></a>
+## 五、开发环境搭建
+以MacOS为例,Windows可以去查阅官方文档进行安装环境： Golang：https://go.dev/doc/installTinyGo：https://tinygo.org/getting-started/install/Wasm-opt:https://github.com/WebAssembly/binaryen.git
+```
+# 安装golang
+$ brew install go
+$ go version
+go version go1.19.9 darwin/arm64
+
+# TinyGo
+$ wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.darwin-amd64.tar.gz
+$ tar -zxf tinygo0.25.0.darwin-amd64.tar.gz
+$ export PATH=/tmp/tinygo/bin:$PATH
+$ tinygo version
+tinygo version 0.28.0-dev-5c2753e darwin/amd64 (using go version go1.19.9 and LLVM version 15.0.0)
+
+# Wasm-opt
+$ wget https://github.com/WebAssembly/binaryen/releases/download/version_114/binaryen-version_114-arm64-macos.tar.gz
+$ tar binaryen-version_114-arm64-macos.tar.gz
+$ export PATH=/tmp/binaryen/bin:$PATH
+$ wasm-opt --version
+wasm-opt version 114 (version_114)
+```
+到此为止，开发环境搭建完毕：
+<a name="995d076a"></a>
+## 六、JWT认证插件开发
+初始化工程：
+```
+# 初始化工程
+$  mkdir jwt-plugin
+$  cd jwt-plugin 
+$  go mod init jwt-plugin 
+go: creating new go.mod: module jwt-plugin
+# 设置代理
+$ go env -w GOPROXY=https://proxy.golang.com.cn,direct
+# 下载依赖性
+$ go get github.com/tetratelabs/proxy-wasm-go-sdk
+$ go get github.com/alibaba/higress/plugins/wasm-go@main
+$ go get github.com/tidwall/gjson
+```
+插件代码：
+```
+package main
+
+import (
+ "encoding/json"
+ "github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+ jwt "github.com/dgrijalva/jwt-go"
+ "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
+ "github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+ "github.com/tidwall/gjson"
+)
+
+// 自定义插件配置
+
+func main() {
+ wrapper.SetCtx(
+  "jwt-plugin",  // 配置插件名称
+  wrapper.ParseConfigBy(parseConfig),
+  wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+ )
+}
+
+type Config struct {
+ TokenSecretKey string // 解析Token SecretKey
+ TokenHeaders   string // 定义获取Token请求头名称
+}
+
+type Res struct {
+ Code int    `json:"code"`  // 返回状态码
+ Msg  string `json:"msg"`  // 返回信息
+}
+
+func parseConfig(json gjson.Result, config *Config, log wrapper.Log) error {
+ // 解析出配置，更新到config中
+ config.TokenSecretKey = json.Get("token_secret_key").String()
+ config.TokenHeaders = json.Get("token_headers").String()
+ return nil
+}
+
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config Config, log wrapper.Log) types.Action {
+ var res Res
+ if config.TokenHeaders == "" || config.TokenSecretKey == "" {
+  res.Code = 401
+  res.Msg = "参数不足"
+  data, _ := json.Marshal(res)
+  _ = proxywasm.SendHttpResponse(401, nil, data, -1)
+  return types.ActionContinue
+ }
+
+ token, err := proxywasm.GetHttpRequestHeader(config.TokenHeaders)  // 获取Token
+ if err != nil {
+  res.Code = 401
+  res.Msg = "认证失败"
+  data, _ := json.Marshal(res)
+  _ = proxywasm.SendHttpResponse(401, nil, data, -1)
+  return types.ActionContinue
+ }
+ valid := ParseTokenValid(token, config.TokenSecretKey)
+ if valid {
+  _ = proxywasm.ResumeHttpRequest()
+  return types.ActionPause
+ } else {
+  res.Code = 401
+  res.Msg = "认证失败"
+  data, _ := json.Marshal(res)
+  _ = proxywasm.SendHttpResponse(401, nil, data, -1)
+  return types.ActionContinue
+ }
+}
+// 认证解析Token
+func ParseTokenValid(tokenString, TokenSecretKey string) bool {
+ token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+  // 在这里提供用于验证签名的密钥
+  return []byte(TokenSecretKey), nil
+ })
+ return token.Valid
+}
+```
+HTTP 处理挂载点：<br />代码中通过 wrapper.ProcessRequestHeadersBy将自定义函数 onHttpRequestHeaders用于HTTP 请求头处理阶段处理请求。除此之外，还可以通过下面方式，设置其他阶段的自定义处理函数
+
+| HTTP 处理阶段 | 触发时机 | 挂载方法 |
+| --- | --- | --- |
+| HTTP 请求头处理阶段 | 网关接收到客户端发送来的请求头数据时 | wrapper.ProcessRequestHeadersBy |
+| HTTP 请求 Body 处理阶段 | 网关接收到客户端发送来的请求 Body 数据时 | wrapper.ProcessRequestBodyBy |
+| HTTP 应答头处理阶段 | 网关接收到后端服务响应的应答头数据时 | wrapper.ProcessResponseHeadersBy |
+| HTTP 应答 Body 处理阶段 | 网关接收到后端服务响应的应答 Body 数据时 | wrapper.ProcessResponseBodyBy |
+
+工具方法：<br />代码中的 proxywasm.SendHttpResponse是插件 SDK 提供的两个工具方法
+
+| 分类 | 方法名称 | 用途 | 可以生效的HTTP 处理阶段 |
+| --- | --- | --- | --- |
+| 请求头处理 | GetHttpRequestHeaders | 获取客户端请求的全部请求头 | HTTP 请求头处理阶段 |
+| 
+
+ | ReplaceHttpRequestHeaders | 替换客户端请求的全部请求头 | HTTP 请求头处理阶段 |
+| 
+
+ | GetHttpRequestHeader | 获取客户端请求的指定请求头 | HTTP 请求头处理阶段 |
+| 
+
+ | RemoveHttpRequestHeader | 移除客户端请求的指定请求头 | HTTP 请求头处理阶段 |
+| 
+
+ | ReplaceHttpRequestHeader | 替换客户端请求的指定请求头 | HTTP 请求头处理阶段 |
+| 
+
+ | AddHttpRequestHeader | 新增一个客户端请求头 | HTTP 请求头处理阶段 |
+| 请求 Body 处理 | GetHttpRequestBody | 获取客户端请求 Body | HTTP 请求 Body 处理阶段 |
+| 
+
+ | AppendHttpRequestBody | 将指定的字节串附加到客户端请求 Body 末尾 | HTTP 请求 Body 处理阶段 |
+| 
+
+ | PrependHttpRequestBody | 将指定的字节串附加到客户端请求 Body 的开头 | HTTP 请求 Body 处理阶段 |
+| 
+
+ | ReplaceHttpRequestBody | 替换客户端请求 Body | HTTP 请求 Body 处理阶段 |
+| 应答头处理 | GetHttpResponseHeaders | 获取后端响应的全部应答头 | HTTP 应答头处理阶段 |
+| 
+
+ | ReplaceHttpResponseHeaders | 替换后端响应的全部应答头 | HTTP 应答头处理阶段 |
+| 
+
+ | GetHttpResponseHeader | 获取后端响应的指定应答头 | HTTP 应答头处理阶段 |
+| 
+
+ | RemoveHttpResponseHeader | 移除后端响应的指定应答头 | HTTP 应答头处理阶段 |
+| 
+
+ | ReplaceHttpResponseHeader | 替换后端响应的指定应答头 | HTTP 应答头处理阶段 |
+| 
+
+ | AddHttpResponseHeader | 新增一个后端响应头 | HTTP 应答头处理阶段 |
+| 应答 Body 处理 | GetHttpResponseBody | 获取客户端请求 Body | HTTP 应答 Body 处理阶段 |
+| 
+
+ | AppendHttpResponseBody | 将指定的字节串附加到后端响应 Body 末尾 | HTTP 应答 Body 处理阶段 |
+| 
+
+ | PrependHttpResponseBody | 将指定的字节串附加到后端响应 Body 的开头 | HTTP 应答 Body 处理阶段 |
+| 
+
+ | ReplaceHttpResponseBody | 替换后端响应 Body | HTTP 应答 Body 处理阶段 |
+| HTTP 调用 | DispatchHttpCall | 发送一个 HTTP 请求 | - |
+| 
+
+ | GetHttpCallResponseHeaders | 获取 DispatchHttpCall 请求响应的应答头 | - |
+| 
+
+ | GetHttpCallResponseBody | 获取 DispatchHttpCall 请求响应的应答 Body | - |
+| 
+
+ | GetHttpCallResponseTrailers | 获取 DispatchHttpCall 请求响应的应答 Trailer | - |
+| 直接响应 | SendHttpResponse | 直接返回一个特定的 HTTP 应答 | - |
+| 流程恢复 | ResumeHttpRequest | 恢复先前被暂停的请求处理流程 | - |
+| 
+
+ | ResumeHttpResponse | 恢复先前被暂停的应答处理流程 | - |
+
+<a name="e1933bd1"></a>
+## 七、编译打包插件
+```
+# 编译WASM
+$  tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' main.go
+
+# 查看Dockerfile
+cat Dockerfile 
+FROM scratch
+COPY main.wasm plugin.wasm
+
+# 编译Docker Image
+$ docker build -t  registry.cn-shanghai.aliyuncs.com/kubesre01/jwt-plugin:v1 .
+
+[+] Building 0.1s (5/5) FINISHED                                                                                                                                                                               docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                                                                                                                           0.0s
+ => => transferring dockerfile: 113B                                                                                                                                                                                           0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                              0.0s
+ => => transferring context: 2B                                                                                                                                                                                                0.0s
+ => [internal] load build context                                                                                                                                                                                              0.0s
+ => => transferring context: 1.99MB                                                                                                                                                                                            0.0s
+ => [1/1] COPY main.wasm plugin.wasm                                                                                                                                                                                           0.0s
+ => exporting to image                                                                                                                                                                                                         0.0s
+ => => exporting layers                                                                                                                                                                                                        0.0s
+ => => writing image sha256:6097b8347fc71e52eadd05753b2bd6877f4f9283a9cd4d844e62259ef714e373                                                                                                                                   0.0s
+ => => naming to registry.cn-shanghai.aliyuncs.com/kubesre01/jwt-plugin:v1 
+
+ # 上传镜像到仓库
+ $ docker push  registry.cn-shanghai.aliyuncs.com/kubesre01/jwt-plugin:v1                            
+The push refers to repository [registry.cn-shanghai.aliyuncs.com/kubesre01/jwt-plugin]
+31f0fa5f1adf: Pushed 
+v1: digest: sha256:c3c629576c71d3dbd4d2bd8118c5523346c63cff7853ce995eb5879affd2c752 size: 526
+```
+<a name="f3bc7945"></a>
+## 八、部署示例服务
+
+- Auth服务：负责用户登陆授权返回Token
+- Demo服务：负责认证通过后访问的微服务
+```
+# 部署Auth服务
+$ cat auth.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+  labels:
+    app: auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+      - name: auth
+        imagePullPolicy: Always
+        image: registry.cn-shanghai.aliyuncs.com/kubesre01/auth:v1
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: auth
+  ports:
+    - port: 8080
+      targetPort: 8080
+$ kubectl apply -f auth.yml
+deployment.apps/auth unchanged
+service/auth-svc unchanged
+
+
+# 部署demo服务
+$  cat demo.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+  labels:
+    app: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo
+  template:
+    metadata:
+      labels:
+        app: demo
+    spec:
+      containers:
+      - name: demo
+        imagePullPolicy: Always
+        image: registry.cn-shanghai.aliyuncs.com/kubesre01/demo:v1
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: demo
+  ports:
+    - port: 8080
+      targetPort: 8080
+
+$ kubectl apply -f demo.yml
+deployment.apps/demo unchanged
+service/demo-svc unchanged
+```
+<a name="f2899460"></a>
+## 九、验证JWT认证插件
+安装插件：![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434140204-fb76c9ac-4b79-49e8-a268-c16ef13061e1.webp#clientId=u92f2bbb7-e796-4&from=paste&id=u6f31e071&originHeight=523&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=uad91f942-f141-45be-92f5-2be84f89ea8&title=)<br />配置域名：![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434140165-ddf926bc-8177-4b6c-b5f9-efe2793736a0.webp#clientId=u92f2bbb7-e796-4&from=paste&id=ub2904940&originHeight=367&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u1f86f8d3-38a2-44a8-8516-5c9524257c2&title=)配置路由：![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434140615-c3e97eb7-f841-4303-aaba-7fdf34499ebd.webp#clientId=u92f2bbb7-e796-4&from=paste&id=u83db79bd&originHeight=506&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ue9f4f02e-8a30-4730-8b6b-d62a3e72d0f&title=)![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434140981-12586ec6-703c-4769-94d1-61dd51700a85.webp#clientId=u92f2bbb7-e796-4&from=paste&id=u95f7ef6d&originHeight=469&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u98ad77fb-a1c8-4dcf-8b9e-2cd286503a2&title=)为demo服务配置策略：![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434140593-55551c23-c0bd-42ea-939e-582a23908a1b.webp#clientId=u92f2bbb7-e796-4&from=paste&id=uecb23a2a&originHeight=377&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u2492a983-a163-47b1-9c00-17cbee85e9f&title=)验证： 先通过auth服务接口获取到Token![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434140758-bd4a9d10-16d3-4bb8-a65e-67778013a6ab.webp#clientId=u92f2bbb7-e796-4&from=paste&id=u882ce8db&originHeight=445&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=uddb3b7bf-f9d8-406e-aacf-c2c33979c43&title=)携带Token进行请求demo服务，正常返回![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434141073-5de27523-a545-472f-a2f7-1f9054ec0ca3.webp#clientId=u92f2bbb7-e796-4&from=paste&id=uad4c8749&originHeight=585&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u4021494e-1490-4e3a-8897-1ecfa65189b&title=)不携带Token进行请求demo服务，返回401，详情如下![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434140928-1097b698-ea04-43e9-b6e0-3da97637237c.webp#clientId=u92f2bbb7-e796-4&from=paste&id=u2abea244&originHeight=580&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u1b273d35-b539-4039-bad9-99c4af317b8&title=)
+<a name="25f9c7fa"></a>
+## 十、总结
+本文带大家了解Higress云原生网关与Wasm，并通过最佳实践开发了基于Wasm的Higress JWT认证插件的整个过程，相信大家一定有所收获，接下来文章内容中会分享更多企业级实战案例，请敬请期待！<br />**添加下面微信，拉你进群与大佬一起探讨云原生！**<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434141316-40eb178b-7ab3-4925-8888-b227f83a2cfe.webp#clientId=u92f2bbb7-e796-4&from=paste&id=u0ea17e44&originHeight=400&originWidth=400&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u916bb99e-4ea7-4f20-81ec-b8de46edbd2&title=)
+
