@@ -28,12 +28,12 @@ description: AI 代理插件配置参考
 
 | 名称           | 数据类型        | 填写要求 | 默认值 | 描述                                                                                                                                                                                                                                                           |
 | -------------- | --------------- | -------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------                                                                                                  |
-| `type`         | string          | 必填     | -      | AI 服务提供商名称  |
-| `apiTokens`    | array of string | 非必填   | -      | 用于在访问 AI 服务时进行认证的令牌。如果配置了多个 token，插件会在请求时随机进行选择。部分服务提供商只支持配置一个 token。|
-| `timeout`      | number          | 非必填   | -      | 访问 AI 服务的超时时间。单位为毫秒。默认值为 120000，即 2 分钟     |
+| `type`         | string          | 必填     | -      | AI 服务提供商名称                                                                                                                                                                                                                                              |
+| `apiTokens`    | array of string | 非必填   | -      | 用于在访问 AI 服务时进行认证的令牌。如果配置了多个 token，插件会在请求时随机进行选择。部分服务提供商只支持配置一个 token。                                                                                                                                     |
+| `timeout`      | number          | 非必填   | -      | 访问 AI 服务的超时时间。单位为毫秒。默认值为 120000，即 2 分钟                                                                                                                                                                                                 |
 | `modelMapping` | map of string   | 非必填   | -      | AI 模型映射表，用于将请求中的模型名称映射为服务提供商支持模型名称。<br/>1. 支持前缀匹配。例如用 "gpt-3-*" 匹配所有名称以“gpt-3-”开头的模型；<br/>2. 支持使用 "*" 为键来配置通用兜底映射关系；<br/>3. 如果映射的目标名称为空字符串 ""，则表示保留原模型名称。 |
-| `protocol`     | string          | 非必填   | -      | 插件对外提供的 API 接口契约。目前支持以下取值：openai（默认值，使用 OpenAI 的接口契约）、original（使用目标服务提供商的原始接口契约） |
-| `context`      | object          | 非必填   | -      | 配置 AI 对话上下文信息      |
+| `protocol`     | string          | 非必填   | -      | 插件对外提供的 API 接口契约。目前支持以下取值：openai（默认值，使用 OpenAI 的接口契约）、original（使用目标服务提供商的原始接口契约）                                                                                                                          |
+| `context`      | object          | 非必填   | -      | 配置 AI 对话上下文信息                                                                                                                                                                                                                                         |
 
 `context`的配置字段说明如下：
 
@@ -164,6 +164,14 @@ Gemini 所对应的 `type` 为 `gemini`。它特有的配置字段如下：
 | 名称                  | 数据类型 | 填写要求 | 默认值 | 描述                                                                                              |
 | --------------------- | -------- | -------- |-----|-------------------------------------------------------------------------------------------------|
 | `geminiSafetySetting` | map of string   | 非必填     | -   | Gemini AI内容过滤和安全级别设定。参考[Safety settings](https://ai.google.dev/gemini-api/docs/safety-settings) |
+
+#### DeepL
+
+DeepL 所对应的 `type` 为 `deepl`。它特有的配置字段如下：
+
+| 名称         | 数据类型 | 填写要求 | 默认值 | 描述                         |
+| ------------ | -------- | -------- | ------ | ---------------------------- |
+| `targetLang` | string   | 必填     | -      | DeepL 翻译服务需要的目标语种 |
 
 ## 用法示例
 
@@ -1005,6 +1013,59 @@ provider:
         "completion_tokens": 29,
         "total_tokens": 34
     }
+}
+```
+
+### 使用 OpenAI 协议代理 DeepL 文本翻译服务
+
+**配置信息**
+
+```yaml
+provider:
+  type: deepl
+  apiTokens:
+    - "YOUR_DEEPL_API_TOKEN"
+  targetLang: "ZH"
+```
+
+**请求示例**
+此处 `model` 表示 DeepL 的服务类型，只能填 `Free` 或 `Pro`。`content` 中设置需要翻译的文本；在 `role: system` 的 `content` 中可以包含可能影响翻译但本身不会被翻译的上下文，例如翻译产品名称时，可以将产品描述作为上下文传递，这种额外的上下文可能会提高翻译的质量。
+
+```json
+{
+  "model": "Free",
+  "messages": [
+    {
+      "role": "system",
+      "content": "money"
+    },
+    {
+      "content": "sit by the bank"
+    },
+    {
+      "content": "a bank in China"
+    }
+  ]
+}
+```
+
+**响应示例**
+```json
+{
+  "choices": [
+    {
+      "index": 0,
+      "message": { "name": "EN", "role": "assistant", "content": "坐庄" }
+    },
+    {
+      "index": 1,
+      "message": { "name": "EN", "role": "assistant", "content": "中国银行" }
+    }
+  ],
+  "created": 1722747752,
+  "model": "Free",
+  "object": "chat.completion",
+  "usage": {}
 }
 ```
 
