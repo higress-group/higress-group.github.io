@@ -4,6 +4,11 @@ import { Icon } from "@astrojs/starlight/components";
 ---
 
 <div class="lg:sl-flex two-column-content-wrapper">
+  <div id="toggle-sidebar" class="pt-12 pl-6 fixed right-2 top-2 z-10">
+    <Button variant="secondary" id="toggle-btn" class="px-2">
+      <Icon name="right-caret" class="right_caret text-lg align-middle" />
+    </Button>
+  </div>
   {
     Astro.props.toc && (
       <aside class="right-sidebar-container">
@@ -33,7 +38,9 @@ import { Icon } from "@astrojs/starlight/components";
     .main-pane {
       isolation: isolate;
     }
-
+    #toggle-sidebar {
+      display: none; /* 默认隐藏 */
+    }
     @media (min-width: 72rem) {
       .right-sidebar-container {
         order: 2;
@@ -43,7 +50,9 @@ import { Icon } from "@astrojs/starlight/components";
             (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
         );
       }
-
+      #toggle-sidebar {
+        display: block;
+      }
       .right-sidebar {
         position: fixed;
         top: 0;
@@ -53,6 +62,18 @@ import { Icon } from "@astrojs/starlight/components";
         height: 100vh;
         overflow-y: auto;
         scrollbar-width: none;
+      }
+      .collapsed {
+        display: none; /* 隐藏 */
+      }
+      .max-fold {
+        max-width: none !important;
+      }
+      .max-unfold {
+        max-width: var(--sl-content-width);
+      }
+      .rotate {
+        transform: rotate(180deg);
       }
 
       .main-pane {
@@ -76,30 +97,59 @@ import { Icon } from "@astrojs/starlight/components";
   function addBackBtnClick (){
   const url = new URL(window.location.href);
   let source = url.searchParams.get("source");
-  if(source) {
-    source = source.replace(/_/g, "/");
-  };
-  const backBtn: HTMLAnchorElement = document.querySelector("#back-btn a");
-  if(backBtn){
-    backBtn.onclick = (e) => {
-      e.preventDefault();
-      const params = new URLSearchParams(window.location.search);
-      params.delete("source")
-
-      let newPathname = ""
-      if (source && source !== 'undefined') {
-          newPathname = `/${source}/`;
-      } else {
-          newPathname = '/';
+    if (source) {
+      source = source.replace(/_/g, "/");
       }
-      console.log("======backbtn")
-      const newUrl = `${newPathname}${params.toString() ? `?${params.toString()}` : ''}`;
+    const backBtn: HTMLAnchorElement = document.querySelector("#back-btn a");
+    if (backBtn) {
+      backBtn.onclick = (e) => {
+        e.preventDefault();
+        const params = new URLSearchParams(window.location.search);
+        params.delete("source");
 
-      window.location.href = newUrl; 
-    };
+        let newPathname = "";
+        if (source && source !== "undefined") {
+          newPathname = `/${source}/`;
+        } else {
+          newPathname = "/";
+        }
+        const newUrl = `${newPathname}${params.toString() ? `?${params.toString()}` : ""}`;
+
+        window.location.href = newUrl;
+      };
+    }
   }
-  
-}
-document.addEventListener("astro:page-load",addBackBtnClick);
-document.addEventListener("DOMContentLoaded", addBackBtnClick)
+
+  // 折叠侧边栏
+  function toggleSidebar() {
+    const sidebar = document.querySelector(".right-sidebar-container");
+    const slContainer = document.querySelectorAll(
+      ".content-panel-wrapper .sl-container",
+    );
+    const toggleIcon = document.querySelector("#toggle-btn .right_caret");
+
+    if (sidebar.classList.contains("collapsed")) {
+      sidebar.classList.remove("collapsed");
+      toggleIcon.classList.remove("rotate");
+      slContainer.forEach((element) => {
+        element.classList.add("max-unfold");
+        element.classList.remove("max-fold");
+      });
+    } else {
+      sidebar.classList.add("collapsed");
+      toggleIcon.classList.add("rotate");
+      slContainer.forEach((element) => {
+        element.classList.add("max-fold");
+        element.classList.remove("max-unfold");
+      });
+    }
+  }
+
+  // 按钮点击事件
+  document
+    .getElementById("toggle-btn")
+    .addEventListener("click", toggleSidebar);
+
+  document.addEventListener("astro:page-load", addBackBtnClick);
+  document.addEventListener("DOMContentLoaded", addBackBtnClick);
 </script>
