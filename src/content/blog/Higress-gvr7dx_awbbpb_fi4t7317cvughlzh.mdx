@@ -157,10 +157,10 @@ kubectl apply -f wasmplugin.yaml
 <a name="installing-a-plugin"></a>
 ### Installing a plugin
 There are two options:
-
+```
 - mount your plugin into /etc/nginx/lua/plugins/<your plugin name> in the ingress-nginx pod
 - build your own ingress-nginx image like it is done in the example and install your plugin during image build
-
+```
 https://github.com/kubernetes/ingress-nginx/blob/main/rootfs/etc/nginx/lua/plugins/README.md<br />可以看到 Nginx Ingress 加载自定义插件，需要将 lua 文件挂载进 pod，或者在构建镜像时装入。这样就将插件的生命周期跟网关绑定在一起，插件逻辑更新，需要发布新版本，网关也需要发布新版本或者重新部署。
 
 使用 WasmPlugin 的机制，插件需要发布新版本，只需构建插件自身的镜像并进行下发生效，而且可以基于镜像的 tag 进行插件的版本管理。这样插件变更，不仅无需重新部署网关，结合 Envoy 的 ECDS 机制对流量也是完全无损。
