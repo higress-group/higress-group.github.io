@@ -4,14 +4,14 @@ import { Icon } from "@astrojs/starlight/components";
 ---
 
 <div class="lg:sl-flex two-column-content-wrapper">
-  <div id="toggle-sidebar" class="pt-12 pl-6 fixed right-2 top-2 z-10">
-    <Button variant="secondary" id="toggle-btn" class="px-2">
-      <Icon name="right-caret" class="right_caret text-lg align-middle" />
-    </Button>
-  </div>
   {
     Astro.props.toc && (
       <aside class="right-sidebar-container">
+        <div id="toggle-sidebar"> 
+          <Button variant="secondary" id="toggle-btn" class="px-2">
+            <Icon name="right-caret" class="right_caret text-lg align-middle" />
+          </Button>
+        </div>
         <div class="right-sidebar">
           <slot name="right-sidebar" />
         </div>
@@ -20,11 +20,7 @@ import { Icon } from "@astrojs/starlight/components";
   }
   <div class="main-pane">
     <div id="back-btn" class="pt-12 pl-6">
-      <Button
-        variant="secondary"
-        target="_self"
-        class="rounded-3xl"
-      >
+      <Button variant="secondary" target="_self" class="rounded-3xl">
         <Icon name="left-arrow" class="text-lg align-middle" />
         <span>BACK</span>
       </Button>
@@ -39,7 +35,7 @@ import { Icon } from "@astrojs/starlight/components";
       isolation: isolate;
     }
     #toggle-sidebar {
-      display: none; /* 默认隐藏 */
+      display: none;
     }
     @media (min-width: 72rem) {
       .right-sidebar-container {
@@ -52,6 +48,10 @@ import { Icon } from "@astrojs/starlight/components";
       }
       #toggle-sidebar {
         display: block;
+        position: fixed;
+        top: 45%;
+        z-index: 2; 
+        transform:translateX(-35px) ;
       }
       .right-sidebar {
         position: fixed;
@@ -64,7 +64,7 @@ import { Icon } from "@astrojs/starlight/components";
         scrollbar-width: none;
       }
       .collapsed {
-        display: none; /* 隐藏 */
+        width: 0px !important;
       }
       .max-fold {
         max-width: none !important;
@@ -94,12 +94,12 @@ import { Icon } from "@astrojs/starlight/components";
 </style>
 
 <script>
-  function addBackBtnClick (){
-  const url = new URL(window.location.href);
-  let source = url.searchParams.get("source");
+  function addBackBtnClick() {
+    const url = new URL(window.location.href);
+    let source = url.searchParams.get("source");
     if (source) {
       source = source.replace(/_/g, "/");
-      }
+    }
     const backBtn: HTMLAnchorElement = document.querySelector("#back-btn a");
     if (backBtn) {
       backBtn.onclick = (e) => {
