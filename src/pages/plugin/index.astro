@@ -8,7 +8,6 @@ import { useTranslations } from "@i18n/util";
 const t = useTranslations(Astro);
 const ifzh = isChinese(Astro);
 import { getCollection } from "astro:content";
-import { toCodes } from "astro:i18n";
 
 const Functionality = {
   ai: "AI",
@@ -44,6 +43,7 @@ const dataSource = posts
           : ""
       ],
     SupportBy: "Higress",
+    GithubHigressUrl: item.data.githubHigressUrl || `https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/${item.slug.split('/').pop()}`
   }))
   .filter((item) => item.Functionality);
 ---

@@ -1,6 +1,6 @@
-import Button from './Button.jsx';
-import Star from "./Star.jsx";
-import Start from './Start.jsx';
+import Button from '../../common/ReactComponents/Button.jsx';
+import Star from "../../common/ReactComponents/Star.jsx";
+import Start from '../../common/ReactComponents/Start.jsx';
 import { useEffect, useState } from "preact/hooks";
 import useCustomSWR from "@/utils/useCustomSWR";
 import type { StarAndForkT } from 'src/types';

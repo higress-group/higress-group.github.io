@@ -43,6 +43,7 @@ export const collections = {
 			extend: z.object({
 				keywords: z.string().or(z.array(z.string().or(z.number())).optional()),
 				position: z.number().optional(),
+				githubHigressUrl: z.string().optional()
 			}),
 		})
 	}),

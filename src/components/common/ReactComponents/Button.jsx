@@ -22,7 +22,7 @@ const Button = (props) =>{
                 {children}
                 {
                     visibility && (
-                    <span class="icon">
+                    <span class="icon jump-icon">
                         <Jump class={iconClass}/>
                     </span>
                     )
