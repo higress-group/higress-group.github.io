@@ -7,9 +7,9 @@ import { Icon } from "@astrojs/starlight/components";
   {
     Astro.props.toc && (
       <aside class="right-sidebar-container">
-        <div id="toggle-sidebar"> 
+        <div id="toggle-sidebar">
           <Button variant="secondary" id="toggle-btn" class="px-2">
-            <Icon name="right-caret" class="right_caret text-lg align-middle" />
+            <Icon name="right-caret" class="right_caret text-lg align-middle rotate-180" />
           </Button>
         </div>
         <div class="right-sidebar">
@@ -41,17 +41,14 @@ import { Icon } from "@astrojs/starlight/components";
       .right-sidebar-container {
         order: 2;
         position: relative;
-        width: calc(
-          var(--sl-sidebar-width) +
-            (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
-        );
+        width: 0px;
       }
       #toggle-sidebar {
         display: block;
         position: fixed;
-        top: 45%;
-        z-index: 2; 
-        transform:translateX(-35px) ;
+        top: 40%;
+        z-index: 2;
+        transform: translateX(-35px);
       }
       .right-sidebar {
         position: fixed;
@@ -64,7 +61,10 @@ import { Icon } from "@astrojs/starlight/components";
         scrollbar-width: none;
       }
       .collapsed {
-        width: 0px !important;
+        width: calc(
+          var(--sl-sidebar-width) +
+            (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
+        );
       }
       .max-fold {
         max-width: none !important;
@@ -73,7 +73,7 @@ import { Icon } from "@astrojs/starlight/components";
         max-width: var(--sl-content-width);
       }
       .rotate {
-        transform: rotate(180deg);
+        transform: rotate(0deg);
       }
 
       .main-pane {
@@ -122,34 +122,37 @@ import { Icon } from "@astrojs/starlight/components";
 
   // 折叠侧边栏
   function toggleSidebar() {
-    const sidebar = document.querySelector(".right-sidebar-container");
-    const slContainer = document.querySelectorAll(
-      ".content-panel-wrapper .sl-container",
-    );
-    const toggleIcon = document.querySelector("#toggle-btn .right_caret");
+    const toggleBtn = document.getElementById("toggle-btn");
+    if (toggleBtn) {
+      toggleBtn.onclick = (e) => {
+        e.preventDefault();
+        const sidebar = document.querySelector(".right-sidebar-container");
+        const slContainer = document.querySelectorAll(
+          ".content-panel-wrapper .sl-container",
+        );
+        const toggleIcon = document.querySelector("#toggle-btn .right_caret");
 
-    if (sidebar.classList.contains("collapsed")) {
-      sidebar.classList.remove("collapsed");
-      toggleIcon.classList.remove("rotate");
-      slContainer.forEach((element) => {
-        element.classList.add("max-unfold");
-        element.classList.remove("max-fold");
-      });
-    } else {
-      sidebar.classList.add("collapsed");
-      toggleIcon.classList.add("rotate");
-      slContainer.forEach((element) => {
-        element.classList.add("max-fold");
-        element.classList.remove("max-unfold");
-      });
+        if (sidebar.classList.contains("collapsed")) {
+          sidebar.classList.remove("collapsed");
+          toggleIcon.classList.remove("rotate");
+          slContainer.forEach((element) => {
+            element.classList.remove("max-unfold");
+            element.classList.add("max-fold");
+          });
+        } else {
+          sidebar.classList.add("collapsed");
+          toggleIcon.classList.add("rotate");
+          slContainer.forEach((element) => {
+            element.classList.remove("max-fold");
+            element.classList.add("max-unfold");
+          });
+        }
+      };
     }
   }
 
-  // 按钮点击事件
-  document
-    .getElementById("toggle-btn")
-    .addEventListener("click", toggleSidebar);
-
+  document.addEventListener("astro:page-load", toggleSidebar);
+  document.addEventListener("DOMContentLoaded", toggleSidebar);
   document.addEventListener("astro:page-load", addBackBtnClick);
   document.addEventListener("DOMContentLoaded", addBackBtnClick);
 </script>
