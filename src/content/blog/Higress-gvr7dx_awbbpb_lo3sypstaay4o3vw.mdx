@@ -1,0 +1,45 @@
+---
+title: "调研7个开源项目后，这家数据合规平台如何构建高性能网关"
+description: "调研7个开源项目后，这家数据合规平台如何构建高性能网关"
+date: "2024-01-15"
+category: "ecosystem"
+keywords: ["Higress"]
+authors: "阿里云高级工程师"
+---
+
+<a name="64179773"></a>
+# **用九智汇介绍**
+用九智汇是一家面向企业提供数据合规、隐私保护相关产品和解决方案的数据合规公司，致力于帮助客户在合法合规、充分保护用户隐私的基础上发挥数据的最大价值，已服务众多世界500强企业。当前我们的产品交付主要基于云原生相关的基础设施和开源技术栈，如kubernetes、Istio、Apache Dubbo、Alibaba Nacos等，既支持以SaaS的方式提供开箱即用、标准、可配置化的产品服务，亦支持以混合云、私有云的方式进行私有化部署。
+<a name="a11d9117"></a>
+# **需求背景**
+在服务客户的的过程中，来自于客户跟网关相关的需求主要体现在以下三个方面：<br />· 提供开放API供企业内部系统进行集成调用，实现全流程自动化。<br />· 能够自定义SaaS产品的访问域名，二级域名甚至一级域名，增强企业员工的品牌感知。<br />· 私有化部署时，能不依赖于客户的基础设施能力，对公网提供服务并保障稳定和安全。<br />为了满足以上的客户诉求，以及支撑公司整个产品体系和能力的建设，我们的技术团队希望通过找到一款合适的网关产品来满足客户的需求，同时也能满足以下技术要求：<br />· 基于云原生，跟我们当前基于云原生的技术架构相匹配。<br />· 开源并且开源协议满足商业化使用要求，有长期的发展规划RoadMap。<br />· 性能至少不差于Nginx Ingress，能够解决配置频繁变更导致Nginx进程频繁重启连接瞬时断开后并发重连的问题。<br />· 支持插件，可以开发自定义插件。<br />· 可以根据域名、路由配置不同的插件，以实现在不同业务场景下使用不同的认证鉴权方式。<br />· 具备将HTTP请求转换为微服务RPC请求的能力，微服务API能通过网关的可配置能力，快速地对外提供开放API服务，内部、外部使用同一套API，提升研发效率。<br />· 网关核心组件和控制台分开部署，并且网关控制台的技术架构方便进行定制化开发，可通过控制台提供的API实现域名、证书、路由等自动化配置。<br />· 至少能够将安全网关和流量网关二合一，降低私有化部署的复杂度和维护成本。<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723111352554-196392e5-ed78-493e-b2df-11491871f24f.png#clientId=u755c0a2b-3f7a-4&from=paste&id=u82db3acf&originHeight=879&originWidth=1000&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u8c281069-2df4-4a7e-bd5c-08992489c5b&title=)    <br />除了已经在使用的Nginx Ingress，我们调研了Ambassador、Kong、APISIX、Gloo、Spring Cloud Gateway等产品，最终决定选择Higress。
+<a name="813aaef8"></a>
+# **为什么选择Higress**
+1、Higress进入我们视野，首先是因为它基于云原生的，在广泛被使用的envoy、istio的基础上进行开发，跟我们当前基于kubenetes的技术架构完全匹配，技术团队完全可以通过云原生社区学习和掌握相关的能力并独立运维。<br />2、Higress是开源的，基于Apache-2.0协议，对商用比较友好，即使完全没有社区的帮助，我们也可以根据自己的需求进行自定义和修改，来满足特定的客户需求和公司产品能力建设需要。另外我们在调研和测试Higress开源版本过程中，Higress开源团队的支持非常及时和给力，这给了我们非常大的信心。<br />3、Wasm插件机制，跨语言支持，开发可以选择自己熟悉的语言进行插件开发，大幅降低了插件的开发难度，插件可以动态加载和卸载而无需重启网关，提供了强大的灵活性和扩展性，并且在安全性和性能上完全能够满足我们的需要。<br />4、HTTP转Dubbo能力，结合认证鉴权Wasm插件，我们可以将内部使用的RPC API和提供给外部使用的Open API统一，只用开发一套标准的RPC API，即可同时服务内部系统和外部系统的需要。开发只用将内部的API配置即可上线到Open API目录中，能够极大地提高了研发效率。<br />5、我们当前在使用Nginx Ingress作为网关，最终我们希望只有一个网关产品，所以需要把Nginx Ingress的配置平滑迁移到Higress，由于Higress兼容Nginx Ingress绝大部份Annotation，所以迁移成本较低。
+<a name="d139e7d7"></a>
+# **已经使用了哪些Higress能力**
+<a name="7ee1b4f7"></a>
+## **1、开发自定义Wasm插件对Open API调用进行认证鉴权**
+Higress开源版本已经提供了如hmac-auth、jwt-auth、basic-auth等认证鉴权插件，但这些插件并不能完全满足我们的需要，如：<br />· 访问凭证只能写在插件的yaml中，不能动态调用其他服务或存储进行校验。<br />· 访问凭证校验通过后，需要根据调用的密钥所归属的企业租户，在header中设置访问租户信息，只允许访问属于该租户的数据。<br />所以我们参考[官方文档](https://higress.io/zh-cn/docs/user/wasm-go)使用GO语言开发自己的认证鉴权、设置Header插件，流程如下图：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723111352546-e70cebaf-ccff-4ee2-af07-4876a4b79c0f.png#clientId=u755c0a2b-3f7a-4&from=paste&id=uaf3f5029&originHeight=509&originWidth=1000&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u7059500b-5cc3-44d8-baa0-a8eed27c78a&title=)    <br />a. 使用Go语言开发、编译、测试<br />#1、在plugins/wasm-go/yong9ai-***-auth目录下执行<br />go mod init yong9ai-***-auth
+
+#2、编写main.go文件，按需实现onHttpRequestHeaders、onHttpRequestBody等方法
+
+#3、编译生成WASM文件（Windows下将单引号改为双引号）<br />go mod tidy<br />tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
+
+#4、使用docker-compose启动envoy和httpbin进行测试
+
+b. 使用Higress wasm-go builder构建插件镜像<br />#1、在plugins/wasm-go目录下执行<br />PLUGIN_NAME=yong9ai-***-auth make build
+
+#2、push到镜像仓库
+
+c. 配置插件，基于域名开启指定插件对所有请求进行认证鉴权<br />apiVersion: extensions.higress.io/v1alpha1<br />kind: WasmPlugin<br />metadata:<br />  annotations:<br />    higress.io/wasm-plugin-description: 用九智汇***认证鉴权<br />    higress.io/wasm-plugin-title: yong9ai-***-auth<br />  labels:<br />    higress.io/resource-definer: higress<br />    higress.io/wasm-plugin-built-in: "false"<br />    higress.io/wasm-plugin-category: custom<br />    higress.io/wasm-plugin-name: yong9ai-***-auth<br />    higress.io/wasm-plugin-version: 1.0.0<br />  name: yong9ai-***-auth-1.0.0<br />  namespace: higress-system<br />spec:<br />  defaultConfig: {}<br />  defaultConfigDisable: true<br />  matchRules:<br />  - config:<br />      namespace: ***<br />      serviceName: ***<br />      servicePort: ***<br />      serviceSource: ***<br />    configDisable: false<br />    domain:<br />    - ***.yong9ai.com<br />  phase: AUTHN<br />  priority: 1000<br />  url: oci://****.cn-shanghai.cr.aliyuncs.com/**/**:yong9ai-***-auth-1.0.0
+
+<a name="7ea9223e"></a>
+## **2、使用Http转Dubbo能力对外暴露Open API**
+我们内部使用了同样是阿里开源的Dubbo作为微服务框架，并使用Nacos作为注册中心。通过使用Higress的Http转Dubbo能力，可以将内部使用的标准Dubbo Service以Open API提供给客户使用。<br />a. 创建服务来源（配置McpBridge）<br />apiVersion: networking.higress.io/v1<br />kind: McpBridge<br />metadata:<br />  name: default<br />  namespace: higress-system<br />spec:<br />  registries:<br />    - domain: nacos-***.***<br />      nacosGroups:<br />        - DEFAULT_GROUP<br />      nacosNamespaceId: public<br />      name: Nacos<br />      port: 8848<br />      type: nacos2
+
+b. 配置Http2RPC<br />apiVersion: networking.higress.io/v1<br />kind: Http2Rpc<br />metadata:<br />  name: ***-***-***-service<br />  namespace: higress-system<br />spec:<br />  dubbo:<br />    group: DUBBO<br />    methods:<br />      - headersAttach: '*'<br />        httpMethods:<br />          - POST<br />        httpPath: /api/open/**/**/**/post.json<br />        params:<br />          - paramKey: request<br />            paramSource: BODY<br />            paramType: >-<br />              com.yong9ai.***.***.***.***.***.***.param.****Request<br />        serviceMethod: ***<br />    service: com.yong9ai.***.***.***.***.***.***.api.****Service<br />    version: 1.0.0
+
+c. 配置路由<br />apiVersion: networking.k8s.io/v1<br />kind: Ingress<br />metadata:<br />  annotations:<br />    higress.io/destination: '***.***.svc.cluster.local:8080'<br />    higress.io/ignore-path-case: 'true'<br />    higress.io/match-method: POST<br />    higress.io/ssl-redirect: 'true'<br />  labels:<br />    higress.io/domain_datacls.openapi.yong9ai.work: 'true'<br />    higress.io/resource-definer: higress<br />  name: ***-***-service-***<br />  namespace: higress-system<br />spec:<br />  ingressClassName: higress<br />  rules:<br />    - host: ***.yong9ai.com<br />      http:<br />        paths:<br />          - backend:<br />              resource:<br />                apiGroup: networking.higress.io<br />                kind: McpBridge<br />                name: default<br />            path: /api/open/**/**/**/post.json<br />            pathType: Exact<br />  tls:<br />    - hosts:<br />        - ***.yong9ai.com<br />      secretName: yong9ai-***
+
+

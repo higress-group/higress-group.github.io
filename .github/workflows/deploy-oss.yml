@@ -29,7 +29,7 @@ jobs:
       - name: Update Cache-Control
         uses: doggycool/ossutil-github-action@master
         with:
-          ossArgs: 'set-meta oss://higress-website-cn-hongkong/ Cache-Control:no-cache -rf'
+          ossArgs: 'set-meta oss://higress-website-cn-hongkong/ Cache-Control:public,max-age=3600 -rf'
           accessKey: ${{ secrets.ACCESS_KEYID }}
           accessSecret: ${{ secrets.ACCESS_KEYSECRET }}
           endpoint: oss-cn-hongkong.aliyuncs.com

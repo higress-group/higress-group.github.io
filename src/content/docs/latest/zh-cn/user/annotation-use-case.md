@@ -982,11 +982,12 @@ type: Opaque
 
 ## 网关与后端服务双向认证（MTLS)
 默认情况下，Higress默认使用HTTP协议转发请求到后端业务容器。你可以通过使用注解`higress.io/backend-protocol: "HTTPS"`配置Higress访问后端服务使用HTTPS协议，但这是单向TLS，也就是说只有Higress会验证后端服务提供的证书，且一般后端服务使用的证书需要是权威CA签发的。另一种更安全的模式是零信任，网关会验证后端服务的证书是否合法，同样后端服务也会验证网关提供的证书是否合法，这就是MTLS，网关与后端服务进行双向认证。
+
 - higress.io/proxy-ssl-secret：网关使用的客户端证书，用于后端服务对网关进行身份认证，格式为 secretNamespace/secretName。
 - higress.io/proxy-ssl-name：TLS握手期间使用的SNI。
 - higress.io/proxy-ssl-server-name：on or off。开启或关闭TLS握手期间使用SNI。
 
-网关与后端服务进行双向认证，网关使用的secret name为gateway-cert，命名空为default。
+网关与后端服务进行双向认证，网关使用的secret name为gateway-cert，命名空间为default。
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress

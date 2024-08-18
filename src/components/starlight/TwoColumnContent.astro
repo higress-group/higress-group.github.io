@@ -7,6 +7,11 @@ import { Icon } from "@astrojs/starlight/components";
   {
     Astro.props.toc && (
       <aside class="right-sidebar-container">
+        <div id="toggle-sidebar">
+          <Button variant="secondary" id="toggle-btn" class="px-2">
+            <Icon name="right-caret" class="right_caret text-lg align-middle rotate-180" />
+          </Button>
+        </div>
         <div class="right-sidebar">
           <slot name="right-sidebar" />
         </div>
@@ -15,11 +20,7 @@ import { Icon } from "@astrojs/starlight/components";
   }
   <div class="main-pane">
     <div id="back-btn" class="pt-12 pl-6">
-      <Button
-        variant="secondary"
-        target="_self"
-        class="rounded-3xl"
-      >
+      <Button variant="secondary" target="_self" class="rounded-3xl">
         <Icon name="left-arrow" class="text-lg align-middle" />
         <span>BACK</span>
       </Button>
@@ -33,17 +34,22 @@ import { Icon } from "@astrojs/starlight/components";
     .main-pane {
       isolation: isolate;
     }
-
+    #toggle-sidebar {
+      display: none;
+    }
     @media (min-width: 72rem) {
       .right-sidebar-container {
         order: 2;
         position: relative;
-        width: calc(
-          var(--sl-sidebar-width) +
-            (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
-        );
+        width: 0px;
       }
-
+      #toggle-sidebar {
+        display: block;
+        position: fixed;
+        top: 40%;
+        z-index: 2;
+        transform: translateX(-35px);
+      }
       .right-sidebar {
         position: fixed;
         top: 0;
@@ -53,6 +59,21 @@ import { Icon } from "@astrojs/starlight/components";
         height: 100vh;
         overflow-y: auto;
         scrollbar-width: none;
+      }
+      .collapsed {
+        width: calc(
+          var(--sl-sidebar-width) +
+            (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
+        );
+      }
+      .max-fold {
+        max-width: none !important;
+      }
+      .max-unfold {
+        max-width: var(--sl-content-width);
+      }
+      .rotate {
+        transform: rotate(0deg);
       }
 
       .main-pane {
@@ -73,33 +94,65 @@ import { Icon } from "@astrojs/starlight/components";
 </style>
 
 <script>
-  function addBackBtnClick (){
-  const url = new URL(window.location.href);
-  let source = url.searchParams.get("source");
-  if(source) {
-    source = source.replace(/_/g, "/");
-  };
-  const backBtn: HTMLAnchorElement = document.querySelector("#back-btn a");
-  if(backBtn){
-    backBtn.onclick = (e) => {
-      e.preventDefault();
-      const params = new URLSearchParams(window.location.search);
-      params.delete("source")
+  function addBackBtnClick() {
+    const url = new URL(window.location.href);
+    let source = url.searchParams.get("source");
+    if (source) {
+      source = source.replace(/_/g, "/");
+    }
+    const backBtn: HTMLAnchorElement = document.querySelector("#back-btn a");
+    if (backBtn) {
+      backBtn.onclick = (e) => {
+        e.preventDefault();
+        const params = new URLSearchParams(window.location.search);
+        params.delete("source");
 
-      let newPathname = ""
-      if (source && source !== 'undefined') {
+        let newPathname = "";
+        if (source && source !== "undefined") {
           newPathname = `/${source}/`;
-      } else {
-          newPathname = '/';
-      }
-      console.log("======backbtn")
-      const newUrl = `${newPathname}${params.toString() ? `?${params.toString()}` : ''}`;
+        } else {
+          newPathname = "/";
+        }
+        const newUrl = `${newPathname}${params.toString() ? `?${params.toString()}` : ""}`;
 
-      window.location.href = newUrl; 
-    };
+        window.location.href = newUrl;
+      };
+    }
   }
-  
-}
-document.addEventListener("astro:page-load",addBackBtnClick);
-document.addEventListener("DOMContentLoaded", addBackBtnClick)
+
+  // 折叠侧边栏
+  function toggleSidebar() {
+    const toggleBtn = document.getElementById("toggle-btn");
+    if (toggleBtn) {
+      toggleBtn.onclick = (e) => {
+        e.preventDefault();
+        const sidebar = document.querySelector(".right-sidebar-container");
+        const slContainer = document.querySelectorAll(
+          ".content-panel-wrapper .sl-container",
+        );
+        const toggleIcon = document.querySelector("#toggle-btn .right_caret");
+
+        if (sidebar.classList.contains("collapsed")) {
+          sidebar.classList.remove("collapsed");
+          toggleIcon.classList.remove("rotate");
+          slContainer.forEach((element) => {
+            element.classList.remove("max-unfold");
+            element.classList.add("max-fold");
+          });
+        } else {
+          sidebar.classList.add("collapsed");
+          toggleIcon.classList.add("rotate");
+          slContainer.forEach((element) => {
+            element.classList.remove("max-fold");
+            element.classList.add("max-unfold");
+          });
+        }
+      };
+    }
+  }
+
+  document.addEventListener("astro:page-load", toggleSidebar);
+  document.addEventListener("DOMContentLoaded", toggleSidebar);
+  document.addEventListener("astro:page-load", addBackBtnClick);
+  document.addEventListener("DOMContentLoaded", addBackBtnClick);
 </script>

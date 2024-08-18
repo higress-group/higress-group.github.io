@@ -66,7 +66,7 @@ spec:
 </dependency>
 ```
 
-```gradle
+```
 implementation 'io.higress.api:higress-admin-sdk:0.0.2'
 ```
 

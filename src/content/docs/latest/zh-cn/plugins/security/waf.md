@@ -8,6 +8,13 @@ description: 开源版 WAF 插件，支持基于 OWASP ModSecurity Core Rule Set
 
 开源版 WAF 插件，支持基于 OWASP ModSecurity Core Rule Set (CRS) 的 WAF 规则配置。
 
+
+> ⚠️**重要**
+>
+> 当前 WAF 插件会缓存请求 Body 和响应 Body，如果 Body 比全局配置中的 downstream.connectionBufferLimits 配置要大，会导致请求或响应异常
+>
+> downstream.connectionBufferLimits 也不建议配置过大，可能导致网络传输慢时，网关内存占用过高
+
 ## 配置字段
 
 | 名称 | 数据类型 | 填写要求 |  默认值 | 描述                                                                                                                                              |

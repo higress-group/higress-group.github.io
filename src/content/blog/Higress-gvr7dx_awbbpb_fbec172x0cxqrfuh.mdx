@@ -1,0 +1,80 @@
+---
+title: "回归本质｜我们梳理了 LLM 场景下，网关的业务需求和使用场景"
+description: "回归本质｜我们梳理了 LLM 场景下，网关的业务需求和使用场景"
+date: "2024-08-15"
+category: "case"
+keywords: ["Higress"]
+authors: "王晨, 张添翼"
+---
+
+作者澄潭、望宸<br />**一、前言**<br />网关在网络通信中扮演着诸多角色，包括数据转发、协议转化、负载均衡、访问控制和身份验证、安全防护、内容审核，以及服务和 API 颗粒度的管控等，因此常见的网关种类有流量网关、安全网关、微服务网关、API 网关等。在不同语义下，网关的命名也会有所不同，例如 K8s 体系下，有 ingress 网关，在 Sping 体系下，有 Spring Cloud Gateway。但不论如何命名，网关的管控内容几乎都离不开流量、服务、安全和 API 这 4 个维度，只是功能侧重不同、所遵循的协议有差异。<br />另外，随着互联网从 Web 2.0 迈进到 AI 时代，用户和互联网的交互方式，AI 时代下互联网的内容生产流程都发生了显著的转变，这对基础设施（Infra）提出了新的诉求，也带来了新的机遇。Infra 包含的内容非常丰富，本文仅从网关层面分享笔者的所见所感所悟。<br />我们先来看一些 AI 时代出现的新场景和新需求：
+
+- 相比传统 Web 应用，LLM 应用的内容生成时间更长，对话连续性对用户体验至关重要，如果避免后端插件更新导致的服务中断？
+- 相比传统 Web 应用，LLM 应用在服务端处理单个请求的资源消耗会大幅超过客户端，来自客户端的攻击成本更低，后端的资源开销更大，如何加固后端架构稳定性？
+- 很多 AGI 企业都会通过免费调用策略吸引用户，如何防止黑灰产爬取免费调用量封装成收费 API 所造成的资损？
+- 不同于传统 Web 应用基于信息的匹配关系，LLM 应用生成的内容则是基于人工智能推理，如果保障生产内容的合规和安全？
+- 当接入多个大模型 API 时，如何屏蔽不同模型厂商 API 的调用差异，降低适配成本？
+
+在支持大量 LLM 客户的过程中，我们也看到了一些行业发展趋势，借本文分享给大家：
+
+- 互联网内容的生产机制将从 UGC（User Generate Content） 转变为 AIGC（Artificial Intelligence Generate Content），互联网流量增长，除了要考虑传统的 SEO，还需要考虑 AI 抓取下的 SEO。
+- 目前处于 AI 时代的 Web 1.0 阶段，基于静态内容生成，可以预见，AI 时代的 Web 2.0 不久会到来，基于理解互联网内容来识别页面中提供的“可操作能力”，来完成复杂任务，真正的 Web 3.0 也将由 AI 来实现。
+- API 是 LLM 应用的一等公民，并引入了更多流量，催生企业新的生命力和想象空间。
+- LLM 应用对网关的需求超越了传统的流量管控功能，承载了更大的 AI 工程化使命。
+
+
+
+**二、AI 场景下的新场景和新需求**<br />相比传统 Web 应用，LLM 应用在网关层的流量有以下三大特征：
+
+- 长连接。由 AI 场景常见的 Websocket 和 SSE 协议决定，长连接的比例很高，要求网关更新配置操作对长连接无影响，不影响业务。
+- 高延时。LLM 推理的响应延时比普通应用要高出很多，使得 AI 应用面向恶意攻击很脆弱，容易被构造慢请求进行异步并发攻击，攻击者的成本低，但服务端的开销很高。
+- 大带宽。结合 LLM 上下文来回传输，以及高延时的特性，AI 场景对带宽的消耗远超普通应用，网关如果没有实现较好的流式处理能力和内存回收机制，容易导致内存快速上涨。
+
+传统 Web 应用中普遍使用的 Nginx 网关难以应对以上新需求，例如变更配置需要 Reload，导致连接断开，不具备安全防护能力等。因此国内外均出现了大量基于 Envoy 为内核的新一代开源网关，本文将以笔者维护的 Higress (_https://github.com/alibaba/higress_) 为例展开描述。<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723704553324-ee1d2d7c-614e-4223-9927-58b1e02aa345.webp#clientId=u6ccc5dcf-faa0-4&from=paste&id=u98cb75aa&originHeight=563&originWidth=1000&originalType=url&ratio=2&rotation=0&showTitle=false&status=done&style=none&taskId=u97ecb52e-e7c8-4cc8-b3a9-ad31bda260b&title=)<br />Higress 已经为通义千问 APP、灵积平台 (通义千问 API 服务)、人工智能平台 PAI 提供 AI 业务下的网关流量接入，以及多个头部 AGI 独角兽提供 API 网关。这篇文章详细介绍了 Higress AI 网关的能力：[《Higress 发布 v1.4，开放 AI 网关能力，增强云原生能力》](http://mp.weixin.qq.com/s?__biz=MzU4NzU0MDIzOQ==&mid=2247518691&idx=1&sn=57009a978a81765df2c561b5ef5ec2ec&chksm=fde8bb83ca9f3295d0036ed725dac42a8e092c0fa99a15a690dceeca0e0788496d4d3f2fa1c4&scene=21#wechat_redirect)<br />**如何实现网关配置的热更新**<br />互联网从 Web 1.0 演进到 Web 2.0 的时代，互联网从静态内容为主，变为动态更新的 UGC 内容为主，大量用户开始高频使用互联网。用户使用形态，以及网站内容形态的改变，催生了大量技术的变革。例如 HTTP 1.0 到 HTTP 1.1 协议的升级，解决了连接复用的问题。又例如以 Nginx 为代表的基于异步非阻塞的事件驱动架构的网关诞生，解决了 C10K 问题。<br />到了 AI 时代的互联网，LLM 驱动的对话式场景，大量采用 SSE/WebSocket/gRPC 等长连接协议来维持会话。网关除了要解决并发连接问题，还需要解决配置变更导致连接断开的问题。配置变更时的连接断开，不但导致用户会话断开，影响体验，在高并发场景下，断开后的并发重连风暴很有可能将网关和后端业务同时打挂。<br />而类似 Nginx 这样 Web 2.0 时代诞生的网关，并不能解决此问题，Nginx 的整体配置文件发生任意变更，都需要重启 Worker 进程，会同时导致客户端连接（Downstream）和服务端连接（Upstream）断开：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723704553337-727f3d98-0fcd-41d4-8605-9984fd8c9cb2.webp#clientId=u6ccc5dcf-faa0-4&from=paste&id=u627ec2f0&originHeight=345&originWidth=920&originalType=url&ratio=2&rotation=0&showTitle=false&status=done&style=none&taskId=u08c9d13b-6c21-4953-b216-d05bb5140cd&title=)<br />笔者参与维护的 Higress 开源网关，使用 Envoy 作为数据面，来解决这一问题。Envoy 站在 Nginx 等网关的肩膀上，对网关配置做了更合理的抽象。例如将处理客户端连接（Downstream）的监听器（Listener）配置发现定义为 LDS（Listener Discovery Service），将处理后端服务连接（Upstream）的服务集群（Cluster）配置发现定义为 CDS（Cluster Discovery Service）。LDS 和 CDS 可以独立更新，从而 Listener 连接池参数更新不会断开 Upstream 连接，Cluster 连接池参数更新变了不会断开 Downstream 连接。<br />对于跟连接无关的配置，又做了进一步抽象，例如路由配置发现定义为 RDS（Route Discovery Service），TLS 证书 / 密钥配置发现定义为 SDS（Secret Discovery Service），都可以独立更新，那么无论是路由变更，还是 HTTPS 证书变更，都不会导致任何连接断开：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723704553295-76f3054e-44b2-4a0b-b605-6c50cb216372.webp#clientId=u6ccc5dcf-faa0-4&from=paste&id=u53dc37f6&originHeight=190&originWidth=920&originalType=url&ratio=2&rotation=0&showTitle=false&status=done&style=none&taskId=ua220a674-567a-455d-8ce2-fa64de43b0c&title=)<br />**如何在网关层做好安全和流量防护**<br />当前的 AI 技术，尤其是 LLM 正处于快速发展阶段。虽然模型压缩、知识蒸馏等技术正被广泛应用以提高效率，但 LLM 应用的资源消耗仍然显著高于传统 Web 应用。<br />针对传统的 Web 应用，服务端处理单个请求的资源消耗通常不会大幅超过客户端，因此对客户端来说，发起分布式拒绝服务（DDoS）攻击的成本相对较高。然而在 LLM 应用的场景中，客户端通过发送长文本或提出复杂的推理问题，可以轻易增加服务端的负载，而自身资源消耗甚微。这种情况突显了在 LLM 应用中部署强大的网关安全防护策略的重要性。传统网关，通常具备两类限流能力：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723704553302-24234ed8-ee7c-4c8e-99c2-1e10e6642b2c.webp#clientId=u6ccc5dcf-faa0-4&from=paste&id=u598bff50&originHeight=457&originWidth=895&originalType=url&ratio=2&rotation=0&showTitle=false&status=done&style=none&taskId=u39d80df6-840a-4024-9f0e-9133b2caa46&title=)<br />Higress 不仅支持这些传统限流能力，例如每秒、每分、每小时和每天的请求次数限制（QPS/QPM/QPH/QPD），还引入了对令牌数量的细粒度管理，采用每分钟、每小时和每日令牌数（TPM/TPH/TPD）作为衡量指标，除了 QPS，还支持面向 Token 吞吐的限流防护。<br />“令牌”（Token）在这里作为一个衡量单位，更准确地量化了 LLM 处理的数据量。对 LLM 应用而言，以令牌而非传统请求次数来计量使用情况，更能贴切地反映资源消耗和成本开支。同时也支持多种限流统计维度，包括：API、IP、Cookie、请求 Header、URL 参数和基于 Bearer Token 认证的调用方。<br />AI 场景下，后端保护式限流尤其重要，很多 AGI 厂商都有免费的 Web 应用吸引用户流量，而一些黑灰产可能会爬取页面调用封装成收费 API 来提供给用户实现牟利。这种情况下就可以使用 Higress 的 IP、Cookie 等维度的保护式限流进行防护。<br />此外，当大模型未经过适当的过滤和监控就生成回应时，它们可能产生包含有害语言、误导信息、歧视性言论甚至是违反法律法规的内容。正是因为这种潜在的风险，大模型中的内容安全就显得异常重要。在 Higress 中，通过简单的配置即可对接阿里云内容安全服务，为大模型问答的合规性保驾护航。<br />**如何应对大宽带和高延时的流量特征**<br />除了能针对 Token 进行限流，基于 Token 的完整可观测能力，也是 AI Infra 中不可或缺的，例如提供日志、指标、告警等可观测能力。下方展示的限流、观测能力，都依赖对 HTTP 请求 / 响应 Body 的解析处理。<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723704553293-44e184b9-daa0-4435-abe9-e360f376ad6f.webp#clientId=u6ccc5dcf-faa0-4&from=paste&id=u30d4bc9b&originHeight=321&originWidth=920&originalType=url&ratio=2&rotation=0&showTitle=false&status=done&style=none&taskId=u0cb9655d-29bc-472a-bab5-95147436bfe&title=)<br />传统网关，如 Nginx/Openresty，以及基于此实现的 Kong/APISIX 等在 Lua 脚本中处理 Body 时，要求必须对请求 / 响应开启缓存。而基于 Envoy 的开源网关，例如 Higress，其插件扩展机制是基于 Wasm 实现的，能够支持对 Body 的流式处理，以处理请求 Body 为例：
+```
+func onHttpRequestBody(ctx wrapper.HttpContext, config Config, chunk []byte, isLastChunk bool, log wrapper.Log) []byte {    log.Infof("receive request body chunk:%s, isLastChunk:%v", chunk, isLastChunk)    return chunk}
+```
+在 AI 场景下，因为大带宽 / 高延时的流量特征，网关是否对请求 / 响应进行真正的流式处理，影响是巨大的。
+
+首先，LLM 场景下如果网关没有实现流式响应，将严重影响用户受到首个响应的时间，其速度影响能从秒级变到分钟级，严重影响用户体验。其次，是对资源开销的影响。以 Higress 的一个开源用户 Sealos 举例（旗下有 FastGPT 等 AI 相关平台产品），在使用 Nginx 时因为开启了请求 / 响应缓存，在 AI 业务应用被高并发访问时，网关资源水位占用处于崩溃边缘。迁移到 Higress 之后，网关只需很少资源。因为 Higress 提供了完整的流式转发能力，而且提供的插件扩展机制也可以流失处理请求 / 响应，在大带宽场景下，所需的内存占用极低。内存虽然相比 GPU 很廉价，但内存控制不当导致 OOM，导致业务宕机，损失不可估量。下图是常态流量下，Sealos 切换前后网关使用资源的对比：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723704554051-fc71627e-ab8d-4c7c-8e0f-43fb7927b645.webp#clientId=u6ccc5dcf-faa0-4&from=paste&id=ub8603117&originHeight=672&originWidth=920&originalType=url&ratio=2&rotation=0&showTitle=false&status=done&style=none&taskId=uc291bbf1-702c-458d-8ec5-d205b0a8085&title=)<br />**如何提升海量域名、海量理由规则下的多租功能**<br />在 AI 场景下，Envoy 的热更新能力备受青睐，Higress 的一些 AI 平台场景的用户，在一开始也选用了基于 Envoy 的网关，例如 Contour、Gloo、Istio gateway 等。但大都会遇到两个问题：
+
+- 给每个用户 or 每个模型分配一个域名，数量级达到一万规模时，新建路由的生效速度至少要 1 分钟；
+- 对多个租户域名使用同一本泛域名证书，开启 HTTP2 时，浏览器访问会遇到 404 问题。
+
+对于第一个问题，其根本原因在于路由规则下发方式不够精细，社区开发者对此进行过分析。与此相比，Higress 可以在域名级别进行分片加载，即使达到一万个域名，新增路由的生效时间也只需三秒。此外，Higress 支持按需加载机制，即只有在接收到特定域名的请求时才加载该域名下的路由配置。在配置了大量域名的环境下，这种策略只加载活跃的路由配置，显著减少了网关的内存使用。<br />关于第二个问题，浏览器在 HTTP2 环境中会尽量复用连接。两个请求的域名不同，但解析到的 IP 地址和使用的证书是相同时，连接复用会导致 Host 请求头与建立连接时的 SNI 不匹配，进而在 Envoy 场景下产生 404 错误。多数基于 Envoy 的解决方案是返回 421 状态码，提示浏览器断开连接并重新发起请求，但这个解决方案在浏览器兼容性上存在问题。于是，Higress 借鉴了 Nginx 的办法，使 SNI 的查找（TLS 层）与 Host 头部的查找（HTTP 层）分离，允许它们不匹配，从而能正确地路由配置（在要求客户端证书验证的场景例外）。<br />Higress 支撑海量域名的能力，也是众多 MaaS/SaaS 服务用于实现多租的关键。比如智算服务 PAI- 灵骏平台在近期将网关从同样基于 Envoy 实现的 Contour 迁移到了 Higress 之后，新增路由生效的时间从分钟级变为秒级，同时整体消耗的云资源也大幅下降。
+
+**三、AI 场景下，网关比我们想象中更能打**<br />传统 Web 应用，网关扮演的基础角色是流量管理。但在 AI 场景下，网关正承载着更大的 AI 工程化使命，分别体现着 MaaS/AGI 接入层、应用接入层、和企业内部各类系统对接等。<br />**MaaS/AGI 接入层**<br />整体架构如下，网关对接入层进行流量管理，除此之外还具备满足负载均衡和流量灰度和观测的能力。<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723704554024-922b51cb-0578-4e54-9d72-333e3867bbff.webp#clientId=u6ccc5dcf-faa0-4&from=paste&id=ua7d3e114&originHeight=226&originWidth=742&originalType=url&ratio=2&rotation=0&showTitle=false&status=done&style=none&taskId=udf85864c-e0a4-4c19-8ab9-759b61171e4&title=)<br />负载均衡：<br />由于 AI 场景下，网关的后端通常是模型服务本身，对网关的负载均衡能力提出了特殊要求。由于 LLM 场景具有高延时，且不同请求差异大的特点，传统的 Round Robin 负载均衡策略无法正确平衡负载。Higress 目前采用基于最小请求数的均衡策略，将请求优先转发给当前处理中请求最少的后端节点。针对模型服务负载均衡的挑战，Higress 计划在未来通过调用一个低延时的小参数模型进行旁路预测，以估计每个后端节点的实时负载，从而尽量将请求发送给负载最低的后端节点。<br />流量灰度和观测：<br />AGI 厂商高度依赖 A/B 测试和服务灰度能力来进行模型迭代。作为流量入口，AI 网关需要在流量灰度和观测方面发挥关键作用，包括灰度打标以及入口流量延时和成功率等指标的监测。Higress 凭借其在云原生微服务网关领域的经验，已经积累了强大的能力来满足这些需求。<br />**AI 应用层**<br />整体架构如下：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723704554131-9cf5ec5d-4b0a-48c0-b811-8d8804e00e9b.webp#clientId=u6ccc5dcf-faa0-4&from=paste&id=u527289e4&originHeight=318&originWidth=726&originalType=url&ratio=2&rotation=0&showTitle=false&status=done&style=none&taskId=u890f52e3-0aab-4211-b74e-e5fccd72654&title=)<br />跟随 GPT4 等模型的爆火，涌现了大量的优秀的 AI SaaS 应用，例如：
+
+- makelogo.ai：AI 生成产品 Logo
+- MyMap.ai：AI 辅助规划 Idea
+- Gamma：AI 生成 PPT
+- Podwise：AI 辅助查看播客
+
+许多 AI 应用开发者，尤其是独立开发者，通常不会自己部署模型服务，而是直接利用模型厂商提供的强大 API 来实现创意应用。值得注意的是，许多开发者来自国内。然而，由于底层技术依赖于 OpenAI 等海外 LLM 厂商，这些技术可能不符合国内法规。为了避免潜在的麻烦，这些开发者往往选择将产品推向国际市场，而不是面向国内用户。<br />随着国内大模型技术逐渐赶上 OpenAI 等厂商，并且国内 API 在价格上具有竞争优势，越来越多的 AI 应用预计会选择使用国内厂商的 API 来实现相关功能。这将对网关提出特定需求：
+
+- 通过网关的统一协议，屏蔽不同模型厂商 API 的调用差异，降低适配成本。
+- 对涉黄涉政等敏感内容进行屏蔽和过滤，更好地符合国内法规要求。
+- 切换模型后的 A/B 测试以及效果观察和对比，包括延迟、成本、用户使用频率等因素。
+
+Higress 目前支持的 LLM Provider 有：通义千问、OpenAI/Azure OpenAI、月之暗面、百川智能、零一万物、智谱 AI、阶跃星辰、文心一言、腾讯混元、DeepSeek、Anthropic Claude、Groq、MiniMax、Ollama 等，借助 Higress 活跃的开源开发者社区，支持的类型还在持续增加中。<br />**企业内部 AI 网关**<br />整体架构如下：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723704554019-44583591-a985-4a1d-87b6-e506eba5c5df.webp#clientId=u6ccc5dcf-faa0-4&from=paste&id=ue8508d4c&originHeight=222&originWidth=736&originalType=url&ratio=2&rotation=0&showTitle=false&status=done&style=none&taskId=uf33f67e5-d3ff-4612-b12f-e1775d3bf82&title=)<br />大量 AGI 厂商在闭源和开源模型能力方面展开竞争，而受益者主要是企业用户。企业在选择模型时需要在性能和成本之间做 trade-off。面对众多模型，尤其是在厂商提供的 API 不一致时，企业需要一个统一的网关来屏蔽模型协议的差异，从而提供一个统一接口，便于企业内部系统的对接和使用。在这种场景下，网关的架构类似于 ESB（企业服务总线）的架构，即所有内部 AI 流量都通过网关进行统一治理。这样的架构带来了以下好处：
+
+- 成本分摊计算：借助网关的观测能力，可以审计企业内部不同业务部门的 Token 消耗量，用于成本分摊并发现不合理的成本。
+- 提高稳定性：基于网关提供的多模型对接能力，当主用模型调用失败时，可以自动切换至备用模型，保障依赖 AI 能力的业务稳定性。
+- 降低调用成本：在一些固定业务流程中，LLM 接口的输入输出相似性较高时，可以基于向量相似性进行缓存召回，从而降低企业的 AI 调用成本。
+- 认证和限流：通过对企业内员工的 API 调用进行限量控制，管理整体成本。
+- 内容安全：实现统一的内容安全管理，禁止发送敏感数据，防止企业敏感数据泄漏。
+
+这种架构下，网关不再只是接入层的流量网关，而是要处理来自所有依赖 AI 能力的业务模块的访问流量。网关更能打了。<br />**四、畅享 AI 时代的互联网发展**<br />笔者发现在 AI 火了之后，大家已经很少提 Web 3.0 的概念了。而且很有趣的一个事是，CDN 和网络防护提供商 CloudFlare，已经将控制台内的一级入口 Web 3.0 换成了 AI，并集成了 Workers AI 和 AI Gateway 这两款产品。而笔者觉得，真正的 Web 3.0 也许将由 AI 带来。<br />就像 Web 1.0 到 Web 2.0 的演进，用户的交互方式和互联网的内容形式发生了彻头彻尾的改变，我们其实已经身处在类似的改变之中。例如，笔者的常用搜索工具从 Google 换到了 Perplexity。做互联网流量增长，除了要考虑传统的 SEO，还需要考虑 AI 抓取下的 SEO，下面来自 Perplexity 对这一问题的回答：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723704554090-759e38ec-b3b8-4355-91ca-01da8233e82a.webp#clientId=u6ccc5dcf-faa0-4&from=paste&id=u1188f684&originHeight=844&originWidth=920&originalType=url&ratio=2&rotation=0&showTitle=false&status=done&style=none&taskId=u4e48b18a-ac76-4b69-b805-e2ba05a85db&title=)<br />倒并不是说 Perplexity 未来一定会替代 Google，但这种改变其实反应了一种趋势：
+
+- 从用户角度看，用户从主动参与互联网转变为通过 AI 帮助参与。
+- 从内容角度看，不仅需要服务于真实用户，还要同时服务于 AI。
+
+Perplexity 这样的工具还只是基于静态内容，可以类比为 AI 时代的 Web 1.0。可以预见，AI 时代的 Web 2.0 会是：
+
+- 电商场景下，在用户浏览商品时，AI 将充当导购，根据商品信息与用户对话，并在用户确认后自动下单；
+- 出行场景下：AI 将根据用户的出行目标地点自动安排旅行计划，了解用户喜好，预订沿途餐厅和酒店；
+- OA 场景下：用户需要操作资源时，AI 将自动提交审批申请，查询审批状态，并在获批后完成资源操作。
+
+在这种模式下，AI 需要理解互联网内容，并识别页面中提供的“可操作能力”，从而代替人类执行操作。苹果宣布将在 iOS 18 中 大幅提升 Siri 的能力，未来 Siri 将能够访问应用程序的各种功能，这也需要应用程序为 AI 提供“可操作能力”的声明。HTML 也有相关社区提案，让 AI 可以更方便地识别页面中的可执行任务，明确其输入和输出定义。<br />未来的互联网内容，无论是 APP 还是 HTML 场景，都将面向 AI 进行改变。核心在于让 AI 知道如何操作页面内容，从而帮助用户完成复杂任务。为 AI 提供的“可操作能力”声明，实际上就是 API 声明。当前，大量互联网应用，尤其是 ToC 应用，API 仅在内部开发过程中使用，最高频使用 API 的可能是前端或 BFF 层的开发人员。在国内，由于研发成本普遍低于国外，不会为了降低前后端对接成本，而去优化 API 设计，开发过程中往往忽略了 API 的重要性。因此，虽然在海外 API 管理产品的市场竞争已经是一片红海，但在国内 API 管理以及 API First 的理念并不普及。<br />随着 AI 操作互联网场景的不断增加，API 将成为 LLM 应用的一等公民，API 管理的重要性将愈发明显。类似于 Perplexity 在抓取页面内容时使用清晰的标题、小标题和列表以便 AI 更容易理解和提取内容；定义清晰的 API、明确的输入输出参数，以及 API 的版本管理，将变得至关重要。<br />对网关来说，应回归本质，在 AI 的加持下，帮助用户做好 API 的设计、管理将成为核心能力。而通过合理设计的 API，网关也可以更深入地了解所处理流量的业务含义，从而实现更智能化的流量治理。
+
+
