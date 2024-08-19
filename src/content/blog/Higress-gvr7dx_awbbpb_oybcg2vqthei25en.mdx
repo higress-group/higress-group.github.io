@@ -277,7 +277,7 @@ Question: {input}
 
 该模板指导了大模型的推理过程。
 
-在AI Agent的onHttpRequestBody阶段，接收到用户的query后，例如：我要在北京五道口附近喝咖啡，帮我推荐一下，会将query填入{input}部分，同时将插件参数配置中的api名称，功能以及OpenAPI文档放在{tools}部分，将api名称放在{tools_name}部分。
+在AI Agent的onHttpRequestBody阶段，接收到用户的query后，例如：我要在北京五道口附近喝咖啡，帮我推荐一下，会将query填入`{input}`部分，同时将插件参数配置中的api名称，功能以及OpenAPI文档放在`{tools}`部分，将api名称放在`{tools_name}`部分。
 
 将该prompt模板存入到messageStore中，格式为:
 
@@ -313,7 +313,7 @@ Action Input: {"keywords": "五道口", "region": "北京市"}
 
 通过正则表达式取出Action与Action Input的值，就得到了需要调用的工具名称以及参数的值。
 
-由于通常外部API都会提供一个认证apiKey，只有配置了apiKey，才能使用api接口。以本例子为例，需要在url中包含key={apiKey}的参数，所以我在apiProvider中对apiKey做了设计。包含name和value两个字段，name表示实际服务商要求的apiKey的名称，例如本例中的key，value是具体的apiKey值。
+由于通常外部API都会提供一个认证apiKey，只有配置了apiKey，才能使用api接口。以本例子为例，需要在url中包含`key={apiKey}`的参数，所以我在apiProvider中对apiKey做了设计。包含name和value两个字段，name表示实际服务商要求的apiKey的名称，例如本例中的key，value是具体的apiKey值。
 
 程序还会根据OpenAPI文档拼接处url以及查看method是什么，从而发送对应的http请求，例如本例子是要发送：
 
