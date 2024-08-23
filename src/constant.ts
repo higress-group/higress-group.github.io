@@ -329,8 +329,8 @@ export const ACTIVITY_CATEGORY = [
 export const HEADER_ACTIVITY_CARD = [
     {
         "collection": "blog",
-        "slug": "qwen-or-chatgpt",
-        "description": "通义千问2.5“客串”ChatGPT4，你分的清吗",
+        "slug": "higress-gvr7dx_awbbpb_im44tpldqyt8c97d",
+        "description": "API赋能AI，AI网关零代码解决AI幻觉问题",
         "imageUrl": "https://img.alicdn.com/imgextra/i4/O1CN01bGnAVW1pFeLFnlaQL_!!6000000005331-2-tps-508-370.png"
     },
     {
