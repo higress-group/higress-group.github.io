@@ -129,7 +129,7 @@ Higress 核心代码基本采用可插拔的 Filter 扩展，功能新增也尽�
 
 **A:** 
 
-已经支持了，可以看这里：https://higress.io/zh-cn/docs/user/quickstart#%E7%8E%AF%E5%A2%83%E4%BA%8C%E8%84%B1%E7%A6%BB-k8s-%E5%9C%A8-docker-compose-%E4%B8%AD%E4%BD%BF%E7%94%A8
+已经支持了，可以看这里：https://higress.cn/docs/latest/user/quickstart/#%E7%8E%AF%E5%A2%83%E4%BA%8C%E8%84%B1%E7%A6%BB-k8s-%E5%9C%A8-docker-compose-%E4%B8%AD%E4%BD%BF%E7%94%A8
 
 ********
 
@@ -155,7 +155,7 @@ Higress 核心代码基本采用可插拔的 Filter 扩展，功能新增也尽�
 
 **A:** 
 
-支持的，可以看这篇文档：https://higress.io/zh-cn/docs/user/waf/
+支持的，可以看这篇文档：https://higress.cn/docs/latest/user/waf/
 
 ********
 

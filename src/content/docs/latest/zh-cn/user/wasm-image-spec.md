@@ -54,7 +54,7 @@ info:
   version: 1.0.0 # 版本号
   contact: # 联系信息
     name: Higress Team
-    url: http://higress.io/
+    url: http://higress.cn/
     email: admin@higress.io
 spec:
   phase: AUTHN # 运行阶段。取值请参考 https://istio.io/latest/docs/reference/config/proxy_extensions/wasm-plugin/#PluginPhase

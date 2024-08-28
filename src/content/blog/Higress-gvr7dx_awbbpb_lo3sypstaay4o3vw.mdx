@@ -20,7 +20,7 @@ authors: "阿里云高级工程师"
 # **已经使用了哪些Higress能力**
 <a name="7ee1b4f7"></a>
 ## **1、开发自定义Wasm插件对Open API调用进行认证鉴权**
-Higress开源版本已经提供了如hmac-auth、jwt-auth、basic-auth等认证鉴权插件，但这些插件并不能完全满足我们的需要，如：<br />· 访问凭证只能写在插件的yaml中，不能动态调用其他服务或存储进行校验。<br />· 访问凭证校验通过后，需要根据调用的密钥所归属的企业租户，在header中设置访问租户信息，只允许访问属于该租户的数据。<br />所以我们参考[官方文档](https://higress.io/zh-cn/docs/user/wasm-go)使用GO语言开发自己的认证鉴权、设置Header插件，流程如下图：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723111352546-e70cebaf-ccff-4ee2-af07-4876a4b79c0f.png#clientId=u755c0a2b-3f7a-4&from=paste&id=uaf3f5029&originHeight=509&originWidth=1000&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u7059500b-5cc3-44d8-baa0-a8eed27c78a&title=)    <br />a. 使用Go语言开发、编译、测试<br />#1、在plugins/wasm-go/yong9ai-***-auth目录下执行<br />go mod init yong9ai-***-auth
+Higress开源版本已经提供了如hmac-auth、jwt-auth、basic-auth等认证鉴权插件，但这些插件并不能完全满足我们的需要，如：<br />· 访问凭证只能写在插件的yaml中，不能动态调用其他服务或存储进行校验。<br />· 访问凭证校验通过后，需要根据调用的密钥所归属的企业租户，在header中设置访问租户信息，只允许访问属于该租户的数据。<br />所以我们参考[官方文档](https://higress.cn/docs/latest/user/wasm-go/)使用GO语言开发自己的认证鉴权、设置Header插件，流程如下图：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723111352546-e70cebaf-ccff-4ee2-af07-4876a4b79c0f.png#clientId=u755c0a2b-3f7a-4&from=paste&id=uaf3f5029&originHeight=509&originWidth=1000&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u7059500b-5cc3-44d8-baa0-a8eed27c78a&title=)    <br />a. 使用Go语言开发、编译、测试<br />#1、在plugins/wasm-go/yong9ai-***-auth目录下执行<br />go mod init yong9ai-***-auth
 
 #2、编写main.go文件，按需实现onHttpRequestHeaders、onHttpRequestBody等方法
 

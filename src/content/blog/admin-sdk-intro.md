@@ -21,7 +21,7 @@ Higress Admin SDK 现在只提供 Java 版本，且要求 JDK 版本不低于 17
 
 ## 3.1 环境准备
 
-这里我们以本地基于 Kind 搭建的 K8s 集群作为实验环境。所以首先，请大家参考这篇[文档](https://higress.io/zh-cn/docs/user/quickstart#%E5%9C%BA%E6%99%AF%E4%BA%8C%E5%9C%A8%E6%9C%AC%E5%9C%B0-k8s%E7%8E%AF%E5%A2%83%E4%B8%AD%E4%BD%BF%E7%94%A8)在本地完成 K8s 集群的搭建和 Higress 的安装。
+这里我们以本地基于 Kind 搭建的 K8s 集群作为实验环境。所以首先，请大家参考这篇[文档](https://higress.cn/docs/latest/user/quickstart/#%E5%9C%BA%E6%99%AF%E4%BA%8C%E5%9C%A8%E6%9C%AC%E5%9C%B0-k8s%E7%8E%AF%E5%A2%83%E4%B8%AD%E4%BD%BF%E7%94%A8)在本地完成 K8s 集群的搭建和 Higress 的安装。
 
 然后，我们需要创建一个测试用的 K8s 服务。大家可以将下方的 YAML 保存为 `test.yaml`，然后执行 `kubectl apply -f test.yaml` 命令在 K8s 中创建对应的资源。
 

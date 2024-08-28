@@ -29,7 +29,7 @@ metadata:
   namespace: higress-system
 ```
 
-具体配置说明请参考 [Higress 全局配置说明文档](https://higress.io/zh-cn/docs/user/configmap)，
+具体配置说明请参考 [Higress 全局配置说明文档](https://higress.cn/docs/latest/user/configmap/)，
 本文介绍以 Tracing 为例，详细说明 Tracing 全局配置是如何转成 EnvoyFilter 和如何同时实现实时下发到 Higress Gateway过程。
 
 本文涉及整体架构流程、初始化过程和启动、higress-config 变更和处理流程、通知 XDSUpdater、构建 EnvoyFilter 和下发以及如何扩展全局配置等内容。

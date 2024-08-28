@@ -10,7 +10,7 @@ category: "ecosystem"
 
 # Higress 集成 Skywalking 可观测性探索
 
-[Higress](https://higress.io/zh-cn/) 一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成、易使用、易扩展、热更新的云原生API网关。
+[Higress](https://higress.cn/) 一个遵循开源Ingress/Gateway API标准，提供流量调度、服务治理、安全防护三合一的高集成、易使用、易扩展、热更新的云原生API网关。
 
 [Skywalking](https://skywalking.apache.org/) 是一个开源的可观测平台，用于从服务和云原生基础设施收集，分析， 聚合及可视化数据。
 
@@ -187,12 +187,12 @@ func traceHttpCall(c *gin.Context, req *http.Request, url string, fn func(req *h
 
 1. 本地安装 kubectl, kind, helm
 
-可以参考 Higress [快速开始](https://higress.io/zh-cn/docs/user/quickstart)安装 kubectl, kind。
+可以参考 Higress [快速开始](https://higress.cn/docs/latest/user/quickstart/)安装 kubectl, kind。
 helm 安装参考[安装文档](https://helm.sh/zh/docs/intro/install/)
 
 2. 安装 higress 和 istio CRD
 
-可以参考 higress [快速开始](https://higress.io/zh-cn/docs/user/quickstart) 和 [安装部署](https://higress.io/zh-cn/docs/ops/deploy-by-helm) 来部署，这里需要安装  Istio CRD。
+可以参考 higress [快速开始](https://higress.cn/docs/latest/user/quickstart/) 和 [安装部署](https://higress.cn/docs/latest/ops/deploy-by-helm/) 来部署，这里需要安装  Istio CRD。
 
 下面是一个参考安装命令:
 

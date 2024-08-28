@@ -12,7 +12,7 @@ category: "case"
 在11月15号的直播 《Higress 开源背后的发展历程和上手 Demo 演示》中，为大家演示了 Higress 的 Wasm 插件如何面向 Ingress 资源进行配置生效，本文对当天的 Demo 进行一个回顾，并说明背后的原理机制。
 <!--truncate-->
 本文中 Demo 运行的前提，需要在 K8s 集群中安装了 Higress，并生效了下面这份 quickstart 配置：
-[https://higress.io/samples/quickstart.yaml](https://higress.io/samples/quickstart.yaml)
+[https://higress.io/samples/quickstart.yaml](https://higress.cn/samples/quickstart.yaml)
 这个 Demo 要实现的功能是一个 Mock 应答的功能，需要实现根据配置的内容，返回 HTTP 应答。
 本文会按以下方式进行介绍：
 
@@ -75,7 +75,7 @@ func onHttpRequestHeaders(ctx HttpContext, config MyConfig, log Log) types.Actio
 
 这个 30 行代码实现的插件功能比较简单，这里有一些功能相对复杂的例子：[https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions)
 这里有插件 sdk 的详细使用文档：
-[https://higress.io/zh-cn/docs/user/wasm-go.html](https://higress.io/zh-cn/docs/user/wasm-go.html)
+[https://higress.cn/docs/latest/user/wasm-go/](https://higress.cn/docs/latest/user/wasm-go/)
 这个插件 sdk 是基于 Tetrate 社区的 proxy-wasm-go-sdk 实现的，如果关注更底层的细节，可以查看：
 [https://github.com/tetratelabs/proxy-wasm-go-sdk](https://github.com/tetratelabs/proxy-wasm-go-sdk)
 [https://github.com/alibaba/higress/blob/main/plugins/wasm-go/pkg/wrapper](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/pkg/wrapper/plugin_wrapper.go)
@@ -240,5 +240,5 @@ Envoy 目前支持多种 Wasm 的运行时，例如 V8，WAMR，wasmtime 等等�
 特别感谢 Tetrate 社区实现的 proxy-wasm-go-sdk，Higress 在这个基础上封装了 wasm-go sdk，降低了开发插件的上手门槛。
 Higress 对 Istio/Envoy 的 Wasm 能力做了一些 Bugfix 的工作，目前已经都合并进了上游社区。后续的一些 Feature 能力，也会持续反哺上游社区。
 同时欢迎大家一起为 Higress 的插件以及其他社区生态添砖加瓦，为 Higress 贡献请参考文档：
-[https://higress.io/zh-cn/docs/developers/guide_dev.html](https://higress.io/zh-cn/docs/developers/guide_dev.html)
+[https://higress.cn/docs/latest/developers/guide_dev/](https://higress.cn/docs/latest/developers/guide_dev/)
 
