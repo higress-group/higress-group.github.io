@@ -47,7 +47,7 @@ WAF 插件基于 Higress Wasm Go SDK 以及 [Coraza](https://coraza.io/docs/tuto
 插件内置了OWASP CRS以提供基础的防护功能，支持用户自定义防护规则，并且支持路由级/域名级细粒度防护。
 
 ## 使用示例
-首先准备一个k8s集群，并安装Higress，参考[Higress部署教程](https://higress.io/zh-cn/docs/ops/deploy-by-helm/)。
+首先准备一个k8s集群，并安装Higress，参考[Higress部署教程](https://higress.cn/docs/latest/ops/deploy-by-helm/)。
 
 ### 部署服务并创建ingress
 在K8s集群中apply如下资源，以部署后端服务以及ingress：

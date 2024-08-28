@@ -135,4 +135,4 @@ curl http://localhost/get?foo=bar -H 'host: foo.bar.com'
 
 ![E.png](/img/blog/windows/pic/E.png)
 
-更多详情与部署方案可参考 [quick start](https://higress.io/zh-cn/docs/user/quickstart)
+更多详情与部署方案可参考 [quick start](https://higress.cn/docs/latest/user/quickstart/)

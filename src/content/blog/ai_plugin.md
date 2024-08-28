@@ -31,8 +31,8 @@ Higress 基于丰富的插件能力，提供了认证鉴权、请求过滤、流
 ![]( https://img.alicdn.com/imgextra/i2/O1CN01WjbLBi23A451Ip2xp_!!6000000007214-2-tps-1544-368.png)
 
 ### 前提条件：
-1. 安装 Higress ，参考[Higress 安装部署文档]( https://higress.io/zh-cn/docs/ops/deploy-by-helm/#%E6%94%AF%E6%8C%81-istio-crd%E5%8F%AF%E9%80%89)。
-2. 准备 Go 语言开发 WASM 插件的开发环境，参考[使用 GO 语言开发 WASM 插件]( https://higress.io/zh-cn/docs/user/wasm-go)。
+1. 安装 Higress ，参考[Higress 安装部署文档]( https://higress.cn/docs/latest/ops/deploy-by-helm/#%E6%94%AF%E6%8C%81-istio-crd%E5%8F%AF%E9%80%89)。
+2. 准备 Go 语言开发 WASM 插件的开发环境，参考[使用 GO 语言开发 WASM 插件]( https://higress.cn/docs/latest/user/wasm-go/)。
 
 ### 基于 WASM 的 AI Proxy Plugin 
 下文将给出基于 Higress 与 WASM 实现的 AI 大模型 API 代理插件方案。Higress 支持基于 WASM 实现对外扩展的能力。WASM 插件提供的多语言生态和热插拔机制为插件的实现和部署提供了便利。Higress 同时支持在插件中请求外部服务，为 AI 代理插件的实现提供了高效的解决路径。

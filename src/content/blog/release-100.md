@@ -17,7 +17,7 @@ category: "article"
 
   “云原生”已经不再是一个新鲜词，但企业对云原生技术的学习使用成本仍有许多顾虑，对云原生新标准的追赶又有很多焦虑；
 
-  Higress 同时提供了本地安装/生产部署的 [quickstart](https://higress.io/zh-cn/docs/user/quickstart)，可以一键部署，并通过控制台操作快速上手；基于简单易用的控制台，Higress 可以封装 Ingress/Gateway API 的标准细节，根治技术追赶焦虑。
+  Higress 同时提供了本地安装/生产部署的 [quickstart](https://higress.cn/docs/latest/user/quickstart/)，可以一键部署，并通过控制台操作快速上手；基于简单易用的控制台，Higress 可以封装 Ingress/Gateway API 的标准细节，根治技术追赶焦虑。
 
 - **标准化**
 
@@ -29,7 +29,7 @@ category: "article"
 
   企业内有大量传统架构部署的服务，会成为向云原生架构演进的技术负担，要求云原生网关具备对接异构服务架构的能力；
 
-  基于 Higress 提供的多种服务发现机制，网关路由不仅可以转发到 K8s 服务，也可以直接配置 IP 转发到到物理机上的服务；基于 Nacos/ZooKeeper 等注册中心对接，还可以轻松实现 [Spring Cloud](https://higress.io/zh-cn/docs/user/spring-cloud) 和 [Dubbo](https://higress.io/zh-cn/docs/user/dubbo) 微服务的路由，无论其是否部署在 K8s 内。
+  基于 Higress 提供的多种服务发现机制，网关路由不仅可以转发到 K8s 服务，也可以直接配置 IP 转发到到物理机上的服务；基于 Nacos/ZooKeeper 等注册中心对接，还可以轻松实现 [Spring Cloud](https://higress.cn/docs/latest/user/spring-cloud/) 和 [Dubbo](https://higress.cn/docs/latest/user/dubbo/) 微服务的路由，无论其是否部署在 K8s 内。
   
 - **易扩展**
 
@@ -52,7 +52,7 @@ category: "article"
 
 ### 安装升级方式
 
-安装 RC 版本，需要 helm [安装](https://higress.io/zh-cn/docs/user/quickstart)或[升级](https://higress.io/zh-cn/docs/ops/upgrade)时需要指定`--devel`参数，例如：`helm upgrade higress -n higress-system --devel`
+安装 RC 版本，需要 helm [安装](https://higress.cn/docs/latest/user/quickstart/)或[升级](https://higress.cn/docs/latest/ops/upgrade/)时需要指定`--devel`参数，例如：`helm upgrade higress -n higress-system --devel`
 
 1.0.0 RC 版本已经在社区小伙伴的协作下完成了多轮测试和修复工作，欢迎大家使用。最终的正式版本，也将在近期很快推出。
 
@@ -61,14 +61,14 @@ category: "article"
 
 - **丰富的可观测**
 
-  提供开箱即用的可观测，Grafana&Prometheus 可以使用内置的也可对接自建的，具体可以参考[文档](https://higress.io/zh-cn/docs/user/prometheus)
+  提供开箱即用的可观测，Grafana&Prometheus 可以使用内置的也可对接自建的，具体可以参考[文档](https://higress.cn/docs/latest/user/prometheus/)
 
   ![](https://img.alicdn.com/imgextra/i1/O1CN016n7gBU1UCnrfOBOZC_!!6000000002482-1-tps-1778-1012.gif)
     
 
 - **插件扩展机制**
 
-  官方提供了多种插件，用户也可以[开发](https://higress.io/zh-cn/docs/user/wasm-go)自己的插件，构建成 docker/oci [镜像](https://higress.io/zh-cn/docs/plugins/custom)后在控制台配置，可以实时变更插件逻辑，对流量完全无损。
+  官方提供了多种插件，用户也可以[开发](https://higress.cn/docs/latest/user/wasm-go/)自己的插件，构建成 docker/oci [镜像](https://higress.cn/docs/latest/plugins/custom/)后在控制台配置，可以实时变更插件逻辑，对流量完全无损。
 
   ![](https://img.alicdn.com/imgextra/i2/O1CN01t7XqQB1s6R8cM5ZRS_!!6000000005717-1-tps-1778-1012.gif)
 
@@ -96,9 +96,9 @@ category: "article"
 
 ### 进阶使用
 
-Higress 控制台的功能还在不断丰富和演进中，当前还有很多 Higress Ingress 注解的能力没有支持，如果有这部分深度使用的需求，可以参考[这篇文档](https://higress.io/zh-cn/docs/user/annotation-use-case)进行进阶配置
+Higress 控制台的功能还在不断丰富和演进中，当前还有很多 Higress Ingress 注解的能力没有支持，如果有这部分深度使用的需求，可以参考[这篇文档](https://higress.cn/docs/latest/user/annotation-use-case/)进行进阶配置
 
-如果希望使用 Istio 的能力进行流量治理，可以参考[这篇文档](https://higress.io/zh-cn/docs/ops/deploy-by-helm)的支持 Istio CRD 一节。基于 Istio 的 [EnvoyFilter API](https://istio.io/latest/docs/reference/config/networking/envoy-filter/) 可以实现更多细粒度的管控能力。
+如果希望使用 Istio 的能力进行流量治理，可以参考[这篇文档](https://higress.cn/docs/latest/ops/deploy-by-helm/)的支持 Istio CRD 一节。基于 Istio 的 [EnvoyFilter API](https://istio.io/latest/docs/reference/config/networking/envoy-filter/) 可以实现更多细粒度的管控能力。
 
 
 

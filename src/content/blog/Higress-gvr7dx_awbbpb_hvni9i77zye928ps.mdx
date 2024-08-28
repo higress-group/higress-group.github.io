@@ -14,7 +14,7 @@ authors: "CH3CHO"
 ## Higress 无缝接入 OKG
 > 前置步骤：
 > 1. 安装[OpenKruiseGame](https://openkruise.io/zh/kruisegame/installation/)。
-> 2. 安装[Higress](https://higress.io/zh-cn/docs/user/quickstart)。
+> 2. 安装[Higress](https://higress.cn/docs/latest/user/quickstart/)。
 
     OKG提供诸多游戏服热更新和游戏服伸缩的优秀特性，便于游戏运维人员管理游戏服的全生命周期。游戏不同于无状态类型的服务，玩家战斗的网络流量是不允许被负载均衡的，因此每一个游戏服需要独立的访问地址。使用原生工作负载（如Deployment或StatefulSet）时，运维工程师需要为众多游戏服一一配置接入层网络，这无疑阻碍了开服效率，同时手动配置也无形中增加了故障的概率。OKG提供的GameServerSet工作负载可以自动化地管理游戏服的接入网络，大幅度降低运维工程师的负担。对于TCP/UDP网络游戏，OKG提供了诸如HostPort、SLB、NATGW等网络模型；而对于H5/WebSocket类型的网络游戏，OKG也相应提供了Ingress网络模型，如Higress、Nginx、ALB等。![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/22499/1706061269330-94d61fb0-cf64-4ee4-a68a-0647be4416ee.png#clientId=uf3687708-f69f-4&from=paste&height=1220&id=uc17cbd3e&originHeight=1220&originWidth=2648&originalType=binary&ratio=1&rotation=0&showTitle=false&size=182535&status=done&style=none&taskId=ubb8efab9-052d-459e-8f79-96831bd8c0d&title=&width=2648)<br />    本文采用了一款开源游戏[Posio](https://github.com/abrenaut/posio/issues)来构建demo游戏服。下述配置中，`IngressClassName="higress"`指定了Higress作为游戏服的网络层，Higress通过下面配置可以无缝接入Posio游戏服，并且可以基于Annotation实现Higress定义的高阶流量治理等功能。示例Yaml如下所示，GameServerSet生成的游戏服对应的访问域名与游戏服ID相关。在此例中，游戏服0的访问域名为game0.postio.example.com，游戏服1的访问域名为game1.postio.example.com.客户端以此来访问不同的游戏服。
 ```yaml

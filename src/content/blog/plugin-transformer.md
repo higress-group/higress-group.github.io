@@ -63,7 +63,7 @@ spring:
 
 # 3. Higress 简介
 
-[Higress](https://higress.io/zh-cn/) 是基于阿里内部的 Envoy Gateway 实践沉淀、以开源 Istio + Envoy 为核心构建的下一代云原生网关，实现了流量网关+微服务网关+安全网关三合一的高集成能力，深度集成 Dubbo、Nacos、Sentinel 等微服务技术栈，能够帮助用户极大地降低网关的部署及运维成本且能力不打折；在标准上全面支持 Ingress 与 Gateway API，积极拥抱云原生下的标准 API 规范；同时，Higress Controller 也支持 Nginx Ingress 平滑迁移，帮助用户零成本快速迁移到 Higress。
+[Higress](https://higress.cn/) 是基于阿里内部的 Envoy Gateway 实践沉淀、以开源 Istio + Envoy 为核心构建的下一代云原生网关，实现了流量网关+微服务网关+安全网关三合一的高集成能力，深度集成 Dubbo、Nacos、Sentinel 等微服务技术栈，能够帮助用户极大地降低网关的部署及运维成本且能力不打折；在标准上全面支持 Ingress 与 Gateway API，积极拥抱云原生下的标准 API 规范；同时，Higress Controller 也支持 Nginx Ingress 平滑迁移，帮助用户零成本快速迁移到 Higress。
 Higress 提供了一套 [Wasm (WebAssembly) SDK](https://github.com/alibaba/higress/tree/main/plugins)，使得开发者能够轻松使用 C++，Golang，Rust 开发 Wasm 插件增强网关能力。下面将为大家介绍 Higress Transformer 插件的基本功能，最后简单说明 Transformer 插件的核心代码逻辑。
 
 ![Higress Architecture](https://github.com/higress-group/higress-group.github.io/assets/49450531/c93bc55d-8cca-47ac-8b63-64168626f9a9)
@@ -75,7 +75,7 @@ Higress Transformer 插件可以对请求/响应头部、请求查询参数、�
 
 接下来我们复现最开始提到的 SCG GatewayFilter 简单用例，来演示如何使用该插件（以下使用 Higress 控制台可以很方便地部署插件，当然也可以使用 [K8s YAML Manifests 的方式](https://github.com/higress-group/higress-demo/tree/main/wasm-demo/wasm-plugin-transformer)）：
 
-1. 首先根据[官方文档](https://higress.io/zh-cn/docs/user/quickstart) 快速安装 Higress，结果如下：
+1. 首先根据[官方文档](https://higress.cn/docs/latest/user/quickstart/) 快速安装 Higress，结果如下：
 
 ```bash
 $ kubectl -n higress-system get deploy
@@ -191,7 +191,7 @@ $ curl -v -H "host: foo.bar.com" \
 
 本节将简单说明 Higress Transformer 插件的核心代码逻辑，希望可以为有兴趣优化该插件或进行二次开发的同学提供一些帮助。
 
-首先该插件代码位于Higress 仓库的 plugins/wasm-go/extensions/transformer 目录下，使用 Higress 提供的 [Wasm SDK](https://github.com/alibaba/higress/tree/main/plugins) 进行开发（关于如何开发 Wasm 插件详见[官方文档](https://higress.io/zh-cn/docs/user/wasm-go)）。
+首先该插件代码位于Higress 仓库的 plugins/wasm-go/extensions/transformer 目录下，使用 Higress 提供的 [Wasm SDK](https://github.com/alibaba/higress/tree/main/plugins) 进行开发（关于如何开发 Wasm 插件详见[官方文档](https://higress.cn/docs/latest/user/wasm-go/)）。
 
 插件的配置模型 TransformerConfig：
 
