@@ -124,6 +124,8 @@ export default {
 	'home.overviewcard.about': 'Panoramic overview',
 	'home.overviewcard.title': 'Overview Image',
 	'home.standards.title': 'Standards',
+	'home.card.player.voice':'COMMUNITY VOICE',
+	'home.card.player.tutorials':'Tutorials from Community',
 	'home.standards.subtitle': 'Strictly following the Ingress, Gateway API, and Istio API standards ensures seamless one-click migration of similar gateways. ',
 	'home.security.capability.title':'Security',
 	'home.security.capability.subtitle':'Higress offer WAF security, authorization, and traffic protection at both global and route-specific levels, ensuring your business automatically benefits from enterprise-grade security capabilities.',

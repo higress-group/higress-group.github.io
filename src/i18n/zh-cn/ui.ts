@@ -122,6 +122,8 @@ export default {
 	'home.contributors.learn.more': '更多',
 	'home.overviewcard.about': '全景概览',
 	'home.overviewcard.title': '微服务全景图',
+	'home.card.player.voice':'社区声音',
+	'home.card.player.tutorials':'社区教程',
 	'home.standards.title': '标准化',
 	'home.standards.subtitle': '严格遵循 Ingress、Gateway API 和 Istio API 标准，可实现同类网关一键平滑迁移',
 	'home.security.capability.title':'安全',

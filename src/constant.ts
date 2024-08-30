@@ -12,6 +12,9 @@ export const TOPBAR = {
     "target": "_blank",
     "display": false
 }
+
+export const MEDIARESOURCE = null;
+
 // TODO: 配置algolia
 export const ALGOLIA = {
   appId: 'XLRZN94V02',
