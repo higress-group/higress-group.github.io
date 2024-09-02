@@ -19,9 +19,9 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 - registry: 实现对接多种注册中心进行服务发现的代码
 
-- envoy: 依赖的 envoy 官方仓库 commit，以及对应的补丁代码
+- envoy: 依赖的 envoy 仓库 commit
 
-- istio: 依赖的 istio 官方仓库 commit，以及对应的补丁代码
+- istio: 依赖的 istio 仓库 commit
 
 - plugins: Higress 插件 sdk，以及官方内置插件代码
 
@@ -29,15 +29,27 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 - docker: docker 镜像构建相关脚本
 
-在编译过程中会自动执行`make prebuild`，将产生 `external` 目录，这是将用到的 envoy 和 istio 依赖，打上对应的补丁代码后生成。
+在编译过程中会自动执行`make prebuild`，将产生 `external` 目录，这是将用到的 envoy 和 istio 依赖
 
-如果要修改 envoy 和 istio 代码，并产生新的补丁文件，可以直接在 external 目录下修改，并进行重命名，再执行 prebuild，之后对比生成补丁文件，例如:
+如果要修改 envoy 和 istio 代码，可以直接在 external 目录下修改，并进行重命名，再执行 prebuild，之后对比生成补丁文件，例如:
 
 ```bash
 mv external/envoy external/envoy_new
 make prebuild
 cd external
-diff -Naur envoy envoy_new > ../envoy/1.20/patches/envoy/$(date +%Y%m%d)-what-changed.patch
+diff -Naur envoy envoy_new > envoy.patch
 ```
 
-注意补丁执行顺序按照文件名字符顺序，请以时间戳开头
+测试完成后，可以将对应的补丁文件，patch 到 envoy 或 istio 的仓库里进行提交.
+
+首先 fork higress 的 [envoy](https://github.com/higress-group/envoy) 或 [istio](https://github.com/higress-group/istio) 仓库，接着推送你的改动，并提交 PR，例如：
+
+```bash
+git clone https://github.com/<your-fork>/envoy.git
+cd envoy
+git checkout -b <Your branch name>
+patch -p1 < envoy.patch
+git add -u
+git commit -m <Your change info>
+git push origin <Your branch name>
+```
