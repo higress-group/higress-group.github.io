@@ -10,7 +10,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 通过 curl 命令下载最新版本的 hgctl 到本地
 
 ```shell
-  curl -Ls https://raw.githubusercontent.com/alibaba/higress/main/tools/hack/get-hgctl.sh | VERSION=latest bash
+  curl -Ls https://raw.githubusercontent.com/alibaba/higress/main/tools/hack/get-hgctl.sh | bash
 ```
 
 ## 安装 Profile 说明
