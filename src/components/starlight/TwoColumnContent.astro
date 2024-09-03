@@ -90,6 +90,11 @@ import { Icon } from "@astrojs/starlight/components";
         );
       }
     }
+    @media (min-width: 100rem) {
+      .collapsed {
+        max-width: 20rem!important;
+      }
+    }
   }
 </style>
 
@@ -151,7 +156,21 @@ import { Icon } from "@astrojs/starlight/components";
     }
   }
 
-  document.addEventListener("astro:page-load", toggleSidebar);
+  // 大屏幕下文档三栏宽度自适应 100rem
+  function largeScreen() {
+    const toggleBtn = document.getElementById("toggle-btn");
+    const remwidth = parseFloat(getComputedStyle(document.documentElement).fontSize) * 100;
+    const windowWidth = window.innerWidth;
+    if (toggleBtn && windowWidth > remwidth) {
+      toggleBtn.click();
+    }
+  };
+
+  document.addEventListener("astro:page-load", ()=> {
+    toggleSidebar()
+    largeScreen()
+  });
+  
   document.addEventListener("DOMContentLoaded", toggleSidebar);
   document.addEventListener("astro:page-load", addBackBtnClick);
   document.addEventListener("DOMContentLoaded", addBackBtnClick);
