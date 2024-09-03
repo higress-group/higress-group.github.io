@@ -1,7 +1,7 @@
 ---
-title: Wasm 插件使用简介
+title: 插件使用引导
 keywords: [higress,wasm]
-description: Higress Wasm 插件简介
+description: Higress Wasm 插件使用引导
 ---
 
 ## 通过 Higress 控制台进行配置
