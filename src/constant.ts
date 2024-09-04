@@ -489,6 +489,14 @@ export const COMMUNITY_MENU_LIST = [
           en: "Blog",
         },
       },
+      {
+        label: "电子书",
+        target: "_self",
+        link: "/docs/ebook/wasm14/",
+        translations: {
+          en: "E-book",
+        },
+      },
     ],
   },
 ];

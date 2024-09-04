@@ -2,7 +2,7 @@
 import type { Props } from "../props";
 ---
 
-<div class="content-panel content-panel-wrapper">
+<div class="content-panel content-panel-wrapper large-screen-width">
   <div class="sl-container"><slot /></div>
 </div>
 
@@ -28,4 +28,9 @@ import type { Props } from "../props";
       }
     }
   }
+  @media (min-width: 100rem) {
+      .large-screen-width .max-unfold{
+        max-width: 100%!important;
+      }
+    }
 </style>
