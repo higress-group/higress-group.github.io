@@ -94,6 +94,9 @@ import { Icon } from "@astrojs/starlight/components";
       .collapsed {
         max-width: 20rem!important;
       }
+      .max-unfold .sl-markdown-content .expressive-code{
+        max-width: calc(100vw - var(--sl-sidebar-width) - 20rem);
+      }
     }
   }
 </style>
