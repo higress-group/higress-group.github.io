@@ -42,6 +42,7 @@ export default {
 	'commmon.header.microservices.governance.describe': '原生支持 Spring Cloud/Dubbo/Sentinel，提供丰富的流量治理和流量防护功能。',
 	'commmon.header.microservices.application.service': ' 微服务治理教程',
 	'commmon.header.microservices.application.service.describe': ' 作为云原生可观测平台，ARMS 提供全栈性能监控告警与端到端追踪诊断能力。',
+	'commmon.header.title.official.website': '官网',
 	'commmon.ebook.click.download':'点击下载',
 	'commmon.ebook.complete.get':'获取完整版电子书',
 	'commmon.ebook.enjoy.read':'尽享阅读体验',

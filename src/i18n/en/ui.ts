@@ -42,6 +42,7 @@ export default {
 	'commmon.header.microservices.governance.describe': 'Rich features like canary release, zero traffic loss deployment and authentication.',
 	'commmon.header.microservices.application.service': 'Application Real-Time Monitoring Service (ARMS)',
 	'commmon.header.microservices.application.service.describe': 'A full-stack performance monitoring and end-to-end tracing platform',
+	'commmon.header.title.official.website': 'Official Website',
 	'commmon.ebook.click.download':'Click to download',
 	'commmon.ebook.complete.get':'Get the complete e-book',
 	'commmon.ebook.enjoy.read':'Enjoy the reading experience to the fullest',

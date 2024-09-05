@@ -34,7 +34,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 }
 ---
 
-<BaseLayout title="Higress Blog">
+<BaseLayout title={t("blog.article.ecosystem.articles")} channel={t("commmon.header.comm.blog")}>
     <BlogTop 
         title={t("blog.article.ecosystem.articles")} 
         type="blog-sub" 
