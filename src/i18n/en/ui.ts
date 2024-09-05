@@ -84,6 +84,7 @@ export default {
 	'home.website.edge.3.description': 'Adheres to Ingress, Gateway API, and Istio API standards, enabling seamless migration of other gateways based on the above technologies with a single click.',
 	'home.website.edge.4.title': 'API Management',
 	'home.website.edge.4.description': 'Provide developers with the "API introspection" function to help them quickly build API openness capabilities, while also offering various authentication and authentication methods such as JWT and OIDC to meet one-stop authentication security requirements.',
+	'home.website.button.comparison': 'Compare Higress with other mainstream gateways',
 	'home.open.ecosystem.title': 'Ecosystem Integration',
 	'home.open.ecosystem.subtitle': 'Powered by Istio and Envoy, Higress realizes the integration of the triple gateway architecture of traffic gateway, microservice gateway and security gateway, thereby greatly reducing the costs of deployment, operation and maintenance.',
 	'home.ai.structure.title': 'AI Gateway',

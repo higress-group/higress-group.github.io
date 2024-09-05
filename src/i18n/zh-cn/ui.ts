@@ -87,6 +87,7 @@ export default {
 	'home.website.edge.3.description': '遵循 Ingress、Gateway API 和 Istio API 标准，可一键支持基于以上技术选型的其他网关平滑迁移。',
 	'home.website.edge.4.title': 'API 管理',
 	'home.website.edge.4.description': '为开发者提供"API 自省"功能，帮助开发者快速构建 API 开放能力，同时也提供 JWT、 OIDC 等多种认证鉴权，满足一站式认证安全要求。',
+	'home.website.button.comparison': '查看Higress和其他主流网关的比对',
 	'home.open.ecosystem.title': '生态集成',
 	'home.open.ecosystem.subtitle': '在 Istio 和 Envoy 的助力下，Higress 实现了流量网关、微服务网关和安全网关三重网关架构的集成，从而大大降低了部署和运维成本。',
 	'home.ai.structure.title': 'AI 网关',
