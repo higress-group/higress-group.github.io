@@ -14,40 +14,41 @@ description: Higress 维护者名单
 
 | 姓名  | github                        | 公司             |
 |-----|-------------------------------| --------------- |
-| 董艺荃 | [CH3CHO](https://github.com/CH3CHO) | Trip.com        |
-| 耿蕾蕾 | [gengleilei](https://github.com/gengleilei) | Alibaba        |
-| 张添翼 | [johnlanni](https://github.com/johnlanni) | Alibaba        |
-| 范扬 | [SpecialYang](https://github.com/SpecialYang) | Alibaba        |
-| 季敏 | [slievrly](https://github.com/slievrly) | Alibaba        |
+| 吴新军 | [2456868764](https://github.com/2456868764) | 独立开发者      |
+| 董艺荃 | [CH3CHO](https://github.com/CH3CHO) | 携程        |
+| 耿蕾蕾 | [gengleilei](https://github.com/gengleilei) | 阿里云        |
+| 张添翼 | [johnlanni](https://github.com/johnlanni) | 阿里云        |
+| 范扬 | [SpecialYang](https://github.com/SpecialYang) | 阿里云        |
+| 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
 
 ## Higress Approvers
 | 姓名  | github                        | 公司             |
 |-----|-------------------------------| --------------- |
-| 吴新军 | [2456868764](https://github.com/2456868764) |        |
-| 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | Tencent        |
+| 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
 
 ## Higress Reviewers
 | 姓名  | github                        | 公司             |
 |-----|-------------------------------| --------------- |
+| 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
 | 凌轶群 | [Lynskylate](https://github.com/Lynskylate) | eBay  |
-| 刘晓瑞 | [rinfx](https://github.com/rinfx) | Alibaba        |
-| 赵炳堃 | [sjtuzbk](https://github.com/sjtuzbk) | Alibaba        |
-| 韦鑫 | [WeixinX](https://github.com/weixinx) | NUAA   |
+| 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
+| 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
+| 赵炳堃 | [sjtuzbk](https://github.com/sjtuzbk) | 阿里云        |
+| 韦鑫 | [WeixinX](https://github.com/weixinx) | 爱橙科技   |
 
 ## Higress Members
 | 姓名   | github                                          | 组织     |
 |--------|-------------------------------------------------|----------|
-| 张正好 | [alexzzh](https://github.com/alexzzh)   | koal safety  |
-| 李强林 | [Charlie17Li](https://github.com/Charlie17Li)   | ZJU  |
-| 封宇腾 | [Ffyyt](https://github.com/Fkbqf)               | XUPT     |
-| 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | Finv      |
-| 田亚涛 | [Hinsteny](https://github.com/Hinsteny)         | Ant      |
-| 屈晗煜 | [Ink-33](https://github.com/Ink-33)         | DGUT     |
-| 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
-| 邵佳成 | [sjcsjc123](https://github.com/sjcsjc123) | HDU |
-| 宋鹏远 | [songpengyuan](https://github.com/songpengyuan) | Okki.com |
-| 彭万山 | [Uncle-Justice](https://github.com/Uncle-Justice) | HUST |
-| 赵伟基 | [vikizhao156](https://github.com/vikizhao156)   | SJTU     |
+| 刘毅杰 | [007gzs](https://github.com/007gzs) | 棱镜七彩 |
+| 张正好 | [alexzzh](https://github.com/alexzzh)   | 格尔软件  |
+| 李强林 | [Charlie17Li](https://github.com/Charlie17Li)   | 浙大  |
+| 封宇腾 | [Ffyyt](https://github.com/Fkbqf)               | 西安邮电     |
+| 田亚涛 | [Hinsteny](https://github.com/Hinsteny)         | 蚂蚁      |
+| 屈晗煜 | [Ink-33](https://github.com/Ink-33)         | 东莞理工     |
+| 邵佳成 | [sjcsjc123](https://github.com/sjcsjc123) | 杭电 |
+| 宋鹏远 | [songpengyuan](https://github.com/songpengyuan) | 小满科技 |
+| 彭万山 | [Uncle-Justice](https://github.com/Uncle-Justice) | 华中科技 |
+| 赵伟基 | [vikizhao156](https://github.com/vikizhao156)   | 上交     |
 
 
 
