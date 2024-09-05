@@ -12,7 +12,7 @@ description: Higress 维护者名单
 
 ## Higress Maintainers
 
-| 姓名  | github                        | 公司             |
+| 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
 | 吴新军 | [2456868764](https://github.com/2456868764) | 独立开发者      |
 | 董艺荃 | [CH3CHO](https://github.com/CH3CHO) | 携程        |
@@ -22,12 +22,12 @@ description: Higress 维护者名单
 | 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
 
 ## Higress Approvers
-| 姓名  | github                        | 公司             |
+| 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
 | 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
 
 ## Higress Reviewers
-| 姓名  | github                        | 公司             |
+| 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
 | 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
 | 凌轶群 | [Lynskylate](https://github.com/Lynskylate) | eBay  |
@@ -37,7 +37,7 @@ description: Higress 维护者名单
 | 韦鑫 | [WeixinX](https://github.com/weixinx) | 爱橙科技   |
 
 ## Higress Members
-| 姓名   | github                                          | 组织     |
+| 姓名   | github                                          | 公司组织     |
 |--------|-------------------------------------------------|----------|
 | 刘毅杰 | [007gzs](https://github.com/007gzs) | 棱镜七彩 |
 | 张正好 | [alexzzh](https://github.com/alexzzh)   | 格尔软件  |
