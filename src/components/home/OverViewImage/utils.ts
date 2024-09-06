@@ -62,7 +62,7 @@ export const hoverAppActiveData = {
       link: "https://github.com/alibaba/Appactive/releases/tag/v0.2.1",
     },
     快速入门: {
-      link: "https://doc.appactive.io/docs/cn/README_CN.html/",
+      link: "https://doc.appactive.io/docs/cn/README_CN.html",
     },
   },
 };
