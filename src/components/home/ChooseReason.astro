@@ -19,34 +19,37 @@ const t = useTranslations(Astro);
       subtitleTheme="success"
     /> -->
     <div class="mb-8 md:mx-auto md:mb-12 text-center max-w-3xl">
-      <p
+      <h2
         class="text-[18px] md:text-[44px] leading-[76px] text-error font-medium mt-6 tracking-normal text-center"
         data-aos="fade-up"
         data-aos-duration="1200"
         data-aos-delay="100"
       >
         {t("home.website.edge.title")}
-      </p>
-      <Button
-        size="large"
-        type="normal"
-        class="advantage-btn rounded-3xl text-neutral"
-        href="/advantage/"
-        iconClass="text-neutral"
+      </h2>
+      <div
         data-aos="zoom-in"
         data-aos-duration="1500"
         data-aos-delay="300"
       >
-        查看Higress和其他主流网关的比对
-      </Button>
+        <Button
+          size="large"
+          type="normal"
+          class="advantage-btn rounded-3xl text-neutral"
+          href="/advantage/"
+          iconClass="text-neutral"
+        >
+          {t('home.website.button.comparison')}
+        </Button>
+      </div>
     </div>
 
-    <div class="bottom-card flex flex-wrap">
+    <ul class="ps-0 bottom-card flex flex-wrap">
       {
         CHOOSE_REASON_LIST.map((reason, index) => {
           const { title, svgKey, description } = reason;
           return (
-            <div
+            <li
               class="item px-5 border-success/50 border-l"
               data-aos="fade-up"
               data-aos-duration="1500"
@@ -80,11 +83,11 @@ const t = useTranslations(Astro);
                 class="text-success text-sm"
                 set:html={t(description)}
               />
-            </div>
+            </li>
           );
         })
       }
-    </div>
+    </ul>
   </choose-reason>
 </span>
 

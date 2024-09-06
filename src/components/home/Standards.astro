@@ -35,18 +35,21 @@ const t = useTranslations(Astro);
           {t("home.standards.subtitle")}
         </div>
       </div>
-      <Button
-        size="large"
-        type="normal"
-        class="standards-btn rounded-3xl text-neutral"
-        href="https://higress.cn/docs/latest/user/annotation"
-        iconClass="text-neutral"
+      <div
         data-aos="zoom-in"
         data-aos-duration="1500"
         data-aos-delay="500"
       >
-        {t("home.contributors.learn.more")}
-      </Button>
+        <Button
+          size="large"
+          type="normal"
+          class="standards-btn rounded-3xl text-neutral"
+          href="https://higress.cn/docs/latest/user/annotation"
+          iconClass="text-neutral"
+        >
+          {t("home.contributors.learn.more")}
+        </Button>
+      </div>
     </div>
     <div
       class="right-container-warp"

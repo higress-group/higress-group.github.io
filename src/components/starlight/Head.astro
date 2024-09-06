@@ -8,6 +8,8 @@ import { localizedUrl } from "@starlight/utils/localizedUrl";
 import type { Props } from "@starlight/props";
 import get from 'lodash.get';
 import { ViewTransitions } from "astro:transitions";
+import { useTranslations } from "@i18n/util";
+const t = useTranslations(Astro);
 
 const { entry, lang } = Astro.props;
 const { data } = entry;
@@ -33,7 +35,7 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
     },
     {
         tag: "title",
-        content: `${data.title} ${config.titleDelimiter} ${config.title}`,
+        content: `${data.title}-${config.title}${t("commmon.header.title.official.website")}`,
     },
     { tag: "link", attrs: { rel: "canonical", href: canonical?.href } },
     {

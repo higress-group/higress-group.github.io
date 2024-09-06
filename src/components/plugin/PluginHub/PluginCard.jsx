@@ -14,7 +14,7 @@ const PluginCardList = (props) => {
                     >
                         <div class="p-6 rounded-2xl ">
                             <div class='flex flex-row justify-between items-center'>
-                                <img class="logo w-12 h-12 rounded-lg" src="https://img.alicdn.com/imgextra/i3/O1CN01dMHdeW24VsfWvPRA9_!!6000000007397-2-tps-192-192.png" />
+                                <img class="logo w-12 h-12 rounded-lg" src="https://img.alicdn.com/imgextra/i3/O1CN01dMHdeW24VsfWvPRA9_!!6000000007397-2-tps-192-192.png" alt="start" />
                                 <div class="flex flex-row items-center">
                                     <Button
                                         size="medium"

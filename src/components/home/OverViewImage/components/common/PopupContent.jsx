@@ -70,6 +70,7 @@ export const PopupContent = ({ image, title, labels, links, direction = 'top', i
                 href={link} 
                 className={twMerge("line-clamp-1 no-underline",appContext.linkStyle )}
                 style={`color:${appContext.colors.linkColor};`}
+                target="_blank"
                 >
                   {link}
                 </a>

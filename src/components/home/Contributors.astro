@@ -20,16 +20,19 @@ const getBackgroundRandomColor = () =>  colorList[Math.floor(Math.random() * col
           {t('home.contributors.our')}<br class="hidden md:block" />{t('home.contributors.community.stars')}
         </div>
       </div>
-      <Button 
-        size="large"
-        class="more hidden md:inline-block leading-[3.5] md:mt-[2.5rem] lg:mt-[4rem] rounded-3xl"
-        href="https://github.com/alibaba/higress/graphs/contributors"
+      <div
         data-aos="zoom-in"
         data-aos-duration="1500"
         data-aos-delay="400"
       >
-        {t('home.contributors.learn.more')}
-      </Button>
+        <Button 
+          size="large"
+          class="more hidden md:inline-block leading-[3.5] md:mt-[2.5rem] lg:mt-[4rem] rounded-3xl"
+          href="https://github.com/alibaba/higress/graphs/contributors"
+        >
+          {t('home.contributors.learn.more')}
+        </Button>
+      </div>
     </div>
     <div class="right-container flex-1">
       <div
