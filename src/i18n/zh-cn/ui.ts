@@ -284,6 +284,7 @@ export default {
 	'blog.article.case.best.practices':'最佳实践',
 	'blog.article.ecosystem.articles':'生态文章',
 	'blog.article.event.articles':'社区活动',
+	'blog.article.release.time':'发布时间',
 	'page.blog.card.website':'Spring Cloud Alibaba 博客',
 	'page.blog.news.all':'全部新闻',
 	'page.blog.news.personnel.promotion':'人员晋升',

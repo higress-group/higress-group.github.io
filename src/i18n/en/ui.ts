@@ -275,6 +275,7 @@ export default {
 	'blog.all.articles':'All Articles',
 	'blog.article.technical':'Technical Articles',
 	'blog.article.case.best.practices':'Best Practices',
+	'blog.article.release.time':'Release Time',
 	'blog.article.ecosystem.articles':'Ecological Articles',
 	'page.blog.card.website':'Spring Cloud Alibaba Blog',
 	'page.blog.news.all':'All News',
