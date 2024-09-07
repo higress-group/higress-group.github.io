@@ -32,13 +32,13 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 }
 ---
 
-<BaseLayout title="Higress Blog">
+<BaseLayout title={t("blog.article.case.best.practices")} channel={t("commmon.header.comm.blog")}>
     <BlogTop
         title={t("blog.article.case.best.practices")}
         type="blog-sub"
         source="blog"
         category={BLOG_CATEGORY}
-        activeCategory="case"
+        activeCategory="event"
     />
     <div
         class="flex flex-col items-center gap-20 py-8 lg:p-12 xl:p-20 bg-base-100"

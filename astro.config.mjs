@@ -36,7 +36,7 @@ export default defineConfig({
 
 	integrations: [
 		starlight({
-			title: SITE.name + '官网',
+			title: SITE.name,
 			favicon:"/higress_logo.png",
 			social: {
 				github: 'https://github.com/withastro/starlight'

@@ -12,6 +12,9 @@ export const TOPBAR = {
     "target": "_blank",
     "display": false
 }
+
+export const MEDIARESOURCE = null;
+
 // TODO: 配置algolia
 export const ALGOLIA = {
   appId: 'XLRZN94V02',
@@ -329,8 +332,8 @@ export const ACTIVITY_CATEGORY = [
 export const HEADER_ACTIVITY_CARD = [
     {
         "collection": "blog",
-        "slug": "qwen-or-chatgpt",
-        "description": "通义千问2.5“客串”ChatGPT4，你分的清吗",
+        "slug": "higress-gvr7dx_awbbpb_im44tpldqyt8c97d",
+        "description": "API赋能AI，AI网关零代码解决AI幻觉问题",
         "imageUrl": "https://img.alicdn.com/imgextra/i4/O1CN01bGnAVW1pFeLFnlaQL_!!6000000005331-2-tps-508-370.png"
     },
     {
@@ -486,6 +489,14 @@ export const COMMUNITY_MENU_LIST = [
           en: "Blog",
         },
       },
+      {
+        label: "电子书",
+        target: "_self",
+        link: "/docs/ebook/wasm14/",
+        translations: {
+          en: "E-book",
+        },
+      },
     ],
   },
 ];
@@ -536,7 +547,7 @@ export const getCloudResourcePackData = (t: Function) => [
     unit: "",
     priceDesc: [t("cloud.introduce.free.feature")],
     linkName: t("cloud.introduce.free.link"),
-    link: "hhttps://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0",
+    link: "https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0",
     feature: [
       t("cloud.introduce.free.discount.1"),
     ],

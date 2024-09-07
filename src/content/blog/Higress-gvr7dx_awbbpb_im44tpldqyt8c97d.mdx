@@ -1,0 +1,278 @@
+---
+title: "API赋能AI，AI网关零代码解决AI幻觉问题"
+description: "API赋能AI，AI网关零代码解决AI幻觉问题"
+date: "2024-08-19"
+category: "article"
+keywords: ["Higress"]
+authors: "CH3CHO"
+---
+
+> 作者：邢云阳，Higress Contributor
+
+<a name="VpueU"></a>
+## 一、前言
+<a name="kALmF"></a>
+### 什么是 AI Agent
+随着大模型技术的快速发展，越来越多的公司在实际业务中落地了大模型应用。但是人们逐渐发现了大模型能力的不足。例如：由于大模型的训练数据是有限的，因此一些垂直领域的知识，如金融，医疗等等，大模型无法回答，或者容易出现幻觉。并且随着业务的复杂度提高，如何能让大模型像人一样思考，深度的分析解决问题，也对大模型的理解力提出了挑战。<br />在这样的背景下，业界提出了AI Agent的概念。AI Agent中文翻译成智能体，旨在让大模型像人脑一样思考问题，通过在思考过程中的不断反馈以及工具的调用，最终实现逐步完成给定目标的过程。例如，用户使用外卖助手Agent，只需告诉Agent，我想点一份肯德基的上校鸡块，Agent便可以实现搜索肯德基商家，选择食物，下单，支付等一系列的思考过程以及工具调用，无需人工参与。
+<a name="smMNa"></a>
+### 什么是 AI Gateway
+AI Gateway的定义是AI Native的API Gateway，是基于API Gateway的能力来满足AI Native的需求。例如：
+
+- 将传统的QPS限流扩展到Token限流
+- 将传统的负载均衡/重试/fallback能力延伸，支持对接多个大模型厂商API，提高整体稳定性
+- 扩展可观测能力，支持不同模型之间效果对比的A/B Test，以及对话上下文链路Tracing等
+
+Higress ([https://github.com/alibaba/higress](https://github.com/alibaba/higress)) 是阿里云开源的一款AI Gateway，基于API Gateway的能力，再加上基于Wasm插件扩展的大量AI插件，就可以满足上述所有AI Native的需求。<br />我也是基于Higress的Wasm插件扩展能力，开发了一个AI Agent插件，通过发挥API Gateway对于API管理的优势，用API赋能AI Agent，基于Agent ReAct能力，可以实现零代码快速构建一个AI Agent应用。<br />本文将以高德地图和心知天气两个服务为例，介绍一下如何零代码使用AI Agent插件构建一个同时支持地图服务和天气服务的Agent，同时会探讨AI Agent插件的实现原理。
+<a name="d5SvF"></a>
+## 二、AI Agent插件使用
+<a name="u0aop"></a>
+### apiKey申请
+高德地图提供了地图相关业务的API服务，例如地点搜索，导航等等；心知天气提供了天气情况查询的相关API服务。两个服务都提供了每日免费的API调用次数，方便用户测试。<br />使用这两个服务需要去其官方网址，注册账号，申请apiKey，有了apiKey，便可以根据官方API文档去调用API。官方文档的链接我放在下方，这里就不再赘述申请apiKey的过程。<br />高德地图：[入门指南-Web服务 API|高德地图API (amap.com)](https://lbs.amap.com/api/webservice/gettingstarted)<br />心知天气：[查看/修改你的API密钥 (yuque.com)](https://seniverse.yuque.com/hyper_data/api_v3/gc03wk)
+<a name="enn2o"></a>
+### Higress服务配置
+为了让插件能够访问通义千问大模型以及高德地图和心知天气服务，需要在Higress的路由管理-服务中，配置服务。服务类型为DNS域名：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1724058532640-7aef3483-4790-43b2-8762-3b451adf9245.png#clientId=u76be9aab-f03b-4&id=yKidO&originHeight=369&originWidth=3188&originalType=binary&ratio=1&rotation=0&showTitle=false&size=312249&status=done&style=none&taskId=ub938b099-af89-424d-a201-3e99890e3b0)
+
+<a name="pjFBL"></a>
+### 插件参数配置
+在插件配置中，选择实例级插件规则，配置如下：
+```yaml
+dashscope: #通义千问大模型客户端配置
+  apiKey: sk-xxxxxxxxxxxxxxxxxxxxxxx
+  domain: dashscope.aliyuncs.com
+  serviceName: dashscope
+  servicePort: 443
+promptTemplate:
+  language: CH
+apis:
+- apiProvider:
+    domain: restapi.amap.com
+    serviceName: geo
+    servicePort: 80
+    apiKey:
+      in: query
+      name: key
+      value: fcxxxxxxxxxxxxxxxxxx
+  api: |
+    openapi: 3.1.0
+    info:
+      title: 高德地图
+      description: 获取 POI 的相关信息
+      version: v1.0.0
+    servers:
+      - url: https://restapi.amap.com
+    paths:
+      /v5/place/text:
+        get:
+          description: 根据POI名称，获得POI的经纬度坐标
+          operationId: get_location_coordinate
+          parameters:
+            - name: keywords
+              in: query
+              description: POI名称，必须是中文
+              required: true
+              schema:
+                type: string
+            - name: region
+              in: query
+              description: POI所在的区域名，必须是中文
+              required: true
+              schema:
+                type: string
+          deprecated: false
+      /v5/place/around:
+        get:
+          description: 搜索给定坐标附近的POI
+          operationId: search_nearby_pois
+          parameters:
+            - name: keywords
+              in: query
+              description: 目标POI的关键字
+              required: true
+              schema:
+                type: string
+            - name: location
+              in: query
+              description: 中心点的经度和纬度，用逗号隔开
+              required: true
+              schema:
+                type: string
+          deprecated: false
+    components:
+      schemas: {}
+- apiProvider:
+    domain: api.seniverse.com
+    serviceName: seniverse
+    servicePort: 80
+    apiKey:
+      in: query
+      name: key
+      value: SMxxxxxxxxxxxxxx
+  api: |
+    openapi: 3.1.0
+    info:
+      title: 心知天气
+      description: 获取 天气预办相关信息
+      version: v1.0.0
+    servers:
+      - url: https://api.seniverse.com
+    paths:
+      /v3/weather/now.json:
+        get:
+          description: 获取指定城市的天气实况
+          operationId: get_weather_now
+          parameters:
+            - name: location
+              in: query
+              description: 所查询的城市
+              required: true
+              schema:
+                type: string
+            - name: language
+              in: query
+              description: 返回天气查询结果所使用的语言
+              required: true
+              schema:
+                type: string
+                default: zh-Hans
+                enum:
+                  - zh-Hans
+                  - en
+                  - ja
+            - name: unit
+              in: query
+              description: 表示温度的的单位，有摄氏度和华氏度两种
+              required: true
+              schema:
+                type: string
+                default: c
+                enum:
+                  - c
+                  - f
+          deprecated: false
+    components:
+      schemas: {}
+```
+插件配置分三部分，第一部分dashscope，是通义千问大模型服务的相关信息，第二部分promptTemplate，是自定义agent react模板的配置项，示例中的language是指使用中文模板，第三部分apis是外部API服务的相关配置，包含服务相关信息apiProvider以及api(tools)的OpenAPI文档，这一部分是实现agent调用外部工具的关键，agent会通过理解OpenAPI文档来理解参数应该赋什么值。
+<a name="K6YpJ"></a>
+### 插件效果
+示例请求一：
+```shell
+curl 'http://<这里换成网关公网IP>/api/openai/v1/chat/completions' \
+-H 'Accept: application/json, text/event-stream' \
+-H 'Content-Type: application/json' \
+--data-raw '{"messages":[{"role":"user","content":"我想在济南市鑫盛大厦附近喝咖啡，给我推荐几个"}],"model":"qwen","stream":false}'
+```
+示例响应一：
+```json
+{...,"content":" 在济南市鑫盛大厦附近，您可以选择以下咖啡店：\n1. luckin coffee 瑞幸咖啡(鑫盛大厦店)，位于新泺大街1299号鑫盛大厦2号楼大堂；\n2. 三庆齐盛广场挪瓦咖啡(三庆·齐盛广场店)，位于新泺大街与颖秀路交叉口西南60米；\n3. luckin coffee 瑞幸咖啡(三庆·齐盛广场店)，位于颖秀路1267号；\n4. 库迪咖啡(齐鲁软件园店)，位于新泺大街三庆齐盛广场4号楼底商；\n5. 库迪咖啡(美莲广场店)，位于高新区新泺大街1166号美莲广场L117号；以及其他一些选项。希望这些建议对您有所帮助！"...}
+```
+
+示例请求二：
+```yaml
+curl 'http://<这里换成网关公网IP>/api/openai/v1/chat/completions' \
+-H 'Accept: application/json, text/event-stream' \
+-H 'Content-Type: application/json' \
+--data-raw '{"messages":[{"role":"user","content":"济南市现在的天气情况如何？"}],"model":"qwen","stream":false}'
+```
+示例响应二：
+```json
+{..."content":" 济南市现在的天气状况为阴天，温度为31℃。此信息最后更新于2024年8月9日15时12分（北京时间）。"...}
+```
+
+示例请求三：
+```shell
+curl 'http://<这里换成网关公网IP>/api/openai/v1/chat/completions' \
+-H 'Accept: application/json, text/event-stream' \
+-H 'Content-Type: application/json' \
+--data-raw '{"messages":[{"role":"user","content":"济南市现在的天气情况如何？用华氏度表示，用日语回答"}],"model":"qwen","stream":false}'
+```
+示例响应三：
+```json
+{..."content":" 济南市の現在の天気は雨曇りで、気温は88°Fです。この情報は2024年8月9日15時12分（東京時間）に更新されました。"...}
+```
+<a name="cnBjx"></a>
+## 三、AI Agent实现原理
+<a name="C9b06"></a>
+### ReAct原理
+AI Agent插件的实现是使用了ReAct(Reasoning and Action)，ReAct一词来自于论文《ReAct: Synergizing Reasoning and Acting in Language Models》，其核心思想是通过思维链的方式，引导模型将复杂问题进行拆分，一步一步地推理(Reasoning)和行动(Action)，同事还引入了观察(Observation)环节，在每次执行(Action)之后，都会先观察(Observation)当前现状，然后再进行下一步的推理(Reasoning)。<br />ReAct，就是要让开发者引导大模型进行推理，然后根据推理结果，判断需要采取哪个行动（调用工具），与外界环境互动。<br />ReAct的工作流程如下：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1724058532646-d5a2eaeb-a7d6-4b90-89d2-1332eb50df19.png#clientId=u76be9aab-f03b-4&id=EKZMT&originHeight=663&originWidth=1293&originalType=binary&ratio=1&rotation=0&showTitle=false&size=108680&status=done&style=none&taskId=u3be08657-7659-46bb-b7fc-a8fa811c540)
+
+<a name="BJkQ0"></a>
+### 插件实现逻辑
+插件的工作流程如下：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1724058532774-2c73fdf8-77a8-42c2-a85c-1605f53e397f.png#clientId=u76be9aab-f03b-4&id=tRObU&originHeight=1473&originWidth=2733&originalType=binary&ratio=1&rotation=0&showTitle=false&size=473723&status=done&style=none&taskId=u1fea02d4-4610-47b6-bf88-a67e26f90ea)<br />AI Proxy插件配置在默认阶段，而AI Agent可以配置在确保比AI Agent优先级高的阶段，比如认证阶段。这样可以保证用户的http request可以先被AI Agent拦截到。<br />AI Agent的处理过程分为三个部分。
+<a name="F98xh"></a>
+#### 1. 参数配置
+使用AI Agent需要先按上一章节的插件参数配置的格式配置好服务以及api相关参数，也就是图中第0步要做的工作。
+<a name="FW3QB"></a>
+#### 2. prompt模板
+首先，因为Agent是一个一步一步思考，多次调用工具的过程，因此是一个多轮对话场景，因此AI Agent维护了一个messageStore，用来存储历史对话。<br />整个Agent ReAct的控制核心就在于prompt模板，中文版本的模板如下：
+```latex
+尽你所能回答以下问题。你可以使用以下工具：
+
+{tools}
+
+请使用以下格式，其中Action字段后必须跟着Action Input字段，并且不要将Action Input替换成Input或者tool等字段，不能出现格式以外的字段名，每个字段在每个轮次只出现一次：
+Question: 你需要回答的输入问题
+Thought: 你应该总是思考该做什么
+Action: 要采取的动作，动作只能是{tools_name}中的一个 ，一定不要加入其它内容
+Action Input: 行动的输入，必须出现在Action后。
+Observation: 行动的结果
+...（这个Thought/Action/Action Input/Observation可以重复N次）
+Thought: 我现在知道最终答案
+Final Answer: 对原始输入问题的最终答案
+再次重申，不要修改以上模板的字段名称，开始吧！
+
+Question: {input}
+```
+该模板指导了大模型的推理过程。<br />在AI Agent的onHttpRequestBody阶段，接收到用户的query后，例如：我要在北京五道口附近喝咖啡，帮我推荐一下，会将query填入`{input}`部分，同时将插件参数配置中的api名称，功能以及OpenAPI文档放在`{tools}`部分，将api名称放在`{tools_name}`部分。<br />将该prompt模板存入到messageStore中，格式为:
+```
+role: user
+msg: {prompt模板}
+```
+之后通过proxywasm.ReplaceHttpRequestBody函数用prompt模板替换掉用户的原始query，通过ai-proxy发送给大模型。<br />此部分对应图中的1，2，3，4步骤。
+<a name="VV7Em"></a>
+#### 3. 推理过程（工具调用）
+大模型的返回会在AI Agent的onHttpResponseBody阶段拦截到。此时首先将回复内容存储到messageStore中，格式为：
+```
+role: assistant
+msg: {大模型的回复}
+```
+之后需要通过正则表达式来判断大模型的返回内容。<br />例如上文的例子，大模型会返回如下内容：
+```
+Thought: 为了提供咖啡店的推荐，我首先需要获取五道口这一地点的经纬度坐标。
+
+Action: get_location_coordinate
+
+Action Input: {"keywords": "五道口", "region": "北京市"}
+```
+通过正则表达式取出Action与Action Input的值，就得到了需要调用的工具名称以及参数的值。<br />由于通常外部API都会提供一个认证apiKey，只有配置了apiKey，才能使用api接口。以本例子为例，需要在url中包含`key={apiKey}`的参数，所以我在apiProvider中对apiKey做了设计。包含name和value两个字段，name表示实际服务商要求的apiKey的名称，例如本例中的key，value是具体的apiKey值。<br />程序还会根据OpenAPI文档拼接处url以及查看method是什么，从而发送对应的http请求，例如本例子是要发送：
+```
+GET https://restapi.amap.com/v5/place/text?key=xxxxxx&keywords=五道口&region=北京市
+```
+该API的回复为：
+```
+{"status":0,"message":"成功","result":{"location":{"lng":116.352978,"lat":39.982849},"precise":1,"confidence":100,"comprehension":100}}
+```
+将该回复拼接到Observation后面，作为新的query，在存储到messageStore后，将整个历史对话发送给大模型。此时由于处在插件的onHttpResponseBody阶段，无法再通过ai-proxy访问大模型，因此需要自己去调用dashscope client访问大模型。<br />大模型会返回如下内容：
+```
+Thought: 现在我得到了五道口的经纬度坐标，接下来我可以使用这些坐标来搜索附近的咖啡店。
+
+Action: search_nearby_pois
+
+Action Input: {"keywords": "咖啡", "longitude": "116.352978", "latitude": "39.982849"}
+```
+程序通过正则得到Action与Action Input后，会重复刚才的过程，组装新的url，向高德地图发请求，然后把结果存messageStore后给到大模型。整个过程是一个不断递归调用的过程。<br />大模型会再次返回：
+```
+Thought: 我现在知道最终答案
+
+Final Answer: 在北京市五道口附近有几家咖啡店可以选择，包括：
+- 星巴克五道口店
+- Costa Coffee五道口店
+- 漫咖啡五道口店
+
+您可以根据个人喜好选择前往。
+```
+这一次，程序通过可以检测到回复中包含了Final Answer，这说明大模型已经得到了最终答案，无需再次调用工具了。因此检测到Final Answer就是结束递归调用的条件，此时就可以将Final Answer的答案通过proxywasm.ReplaceHttpResponseBody函数替换掉response body返回给用户了。<br />该部分对应图中的5，6，7，8步骤。
+<a name="TldId"></a>
+## 四、总结
+本文主要介绍了AI Agent的背景，概念，探讨了AI Agent网关插件的使用方法，效果以及实现原理。希望对你有帮助！<br />插件的实现已经提交PR给Higress开源社区，可以到这里查看完整的代码实现：[https://github.com/alibaba/higress/pull/1192](https://github.com/alibaba/higress/pull/1192)<br />也欢迎大家提出宝贵建议，可以直接在上面PR中评论，或者在Higress社区交流群（钉钉群号：30735012403）里一起沟通。
+

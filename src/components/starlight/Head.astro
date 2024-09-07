@@ -8,6 +8,8 @@ import { localizedUrl } from "@starlight/utils/localizedUrl";
 import type { Props } from "@starlight/props";
 import get from 'lodash.get';
 import { ViewTransitions } from "astro:transitions";
+import { useTranslations } from "@i18n/util";
+const t = useTranslations(Astro);
 
 const { entry, lang } = Astro.props;
 const { data } = entry;
@@ -33,7 +35,7 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
     },
     {
         tag: "title",
-        content: `${data.title} ${config.titleDelimiter} ${config.title}`,
+        content: `${data.title}-${config.title}${t("commmon.header.title.official.website")}`,
     },
     { tag: "link", attrs: { rel: "canonical", href: canonical?.href } },
     {
@@ -61,7 +63,11 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
     { tag: "meta", attrs: { name: "twitter:title", content: data.title } },
     {
         tag: 'meta',
-        attrs: { name: 'baidu-site-verification', content: 'codeva-T2MeTQHYnM' },
+        attrs: { name: 'baidu-site-verification', content: 'codeva-x6yW4DqCn3' },
+    },
+    {
+        tag: 'meta',
+        attrs: { name: 'msvalidate.01', content: '418883CE9AE2CAD01E7FC1A7B9F20801'}
     },
     {
         tag: "meta",
@@ -160,7 +166,7 @@ const head = createHead(headDefaults, config.head, data.head);
             "//g.alicdn.com/aes/??tracker/3.3.4/index.js,tracker-plugin-pv/3.0.5/index.js,tracker-plugin-event/3.0.0/index.js,tracker-plugin-autolog/3.0.3/index.js,tracker-plugin-survey/3.0.3/index.js,tracker-plugin-jserror/3.0.3/index.js,tracker-plugin-resourceError/3.0.3/index.js";
         t.onload = function () {
             // TODO: 设置aem sdk环境
-            if (window.location.hostname !== "higress.io") {
+            if (window.location.hostname !== "higress.io" && window.location.hostname !== "higress.cn") {
                 return;
             }
             window.AES_CONFIG = window.AES_CONFIG || {
@@ -197,6 +203,9 @@ const head = createHead(headDefaults, config.head, data.head);
 <script>
     var _hmt = _hmt || [];
     (function () {
+        if (window.location.hostname !== "higress.io" && window.location.hostname !== "higress.cn") {
+                return;
+        }
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?4debd66ec73a32e236b30b46d219e2e3";
         var s = document.getElementsByTagName("script")[0];

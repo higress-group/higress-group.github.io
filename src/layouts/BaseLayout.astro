@@ -16,18 +16,19 @@ const t = useTranslations(Astro);
 
 export type Props = {
   title: string;
+  channel?: string;
   description?: string;
   lang?: string;
   keywords?:(string | number)[] | string;
   align?: "home" | "docs";
 };
 
-const { title, description, keywords, align = "home" } = Astro.props;
+const { title, description, keywords, align = "home", channel = "" } = Astro.props;
 const headEntry = {
   data: {
     description: description,
     keywords: keywords || t("commmon.base.layout.keywords"),
-    title: title,
+    title: `${title}${channel? "_":""}${channel}`,
     head: [],
   },
 };
@@ -50,7 +51,7 @@ Astro.props.lang = lang;
     <Head entry={headEntry} />
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="index, follow" />
-    <title>{title}</title>
+    <meta name="applicable-device" content="pc,mobile" />
     <link
       data-rh="true"
       rel="icon"

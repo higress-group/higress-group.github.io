@@ -126,7 +126,7 @@ There is no existing one, you need to build it yourself. Currently, all Docker i
 
 **A:**
 
-Already supported, you can see it here: https://higress.io/en-us/docs/user/quickstart#environment-2-use-in-docker-compose-without-k8s
+Already supported, you can see it here: https://higress.cn/en/docs/latest/user/quickstart/#environment-2-use-in-docker-compose-without-k8s
 
 ***********
 
@@ -152,7 +152,7 @@ Already open source: https://github.com/higress-group/higress-console
 
 **A:**
 
-Supported, you can read this document: https://higress.io/zh-cn/docs/user/waf/
+Supported, you can read this document: https://higress.cn/en/docs/latest/user/waf/
 
 ***********
 

@@ -158,7 +158,7 @@ spec:
 
 #### Method 1: Use Higress Console
 
-Use [hgctl](https://higress.io/en-us/docs/ops/hgctl) to open Higress Console.
+Use [hgctl](https://higress.cn/en/docs/latest/ops/hgctl/) to open Higress Console.
 
 ```bash
 hgctl dashboard console

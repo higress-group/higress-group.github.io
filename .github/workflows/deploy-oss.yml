@@ -5,8 +5,6 @@ on:
     branches:
       - develop-astro-higress
   #This schedule only takes effect in the default branch
-  schedule:
-    - cron: '0 */12 * * *'
 jobs:
   Build-Deploy:
     runs-on: ubuntu-latest

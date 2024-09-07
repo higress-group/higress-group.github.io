@@ -201,7 +201,7 @@ tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="customm
 
 如果linux/mac下编译出现该错误，使用apt/brew等系统自带包管理工具安装下binaryen即可，例如`brew install binaryen`
 
-要在Higress中配合Wasmplugin CRD或者Console的UI交互配置该插件，需要将该wasm文件打包成oci或者docker镜像，可以参考这篇文档：[《自定义插件》](https://higress.io/zh-cn/docs/plugins/custom)
+要在Higress中配合Wasmplugin CRD或者Console的UI交互配置该插件，需要将该wasm文件打包成oci或者docker镜像，可以参考这篇文档：[《自定义插件》](https://higress.cn/docs/latest/plugins/custom)
 
 ## 三、本地调试
 

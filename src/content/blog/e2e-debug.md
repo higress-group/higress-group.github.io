@@ -77,7 +77,7 @@ higress-wasmplugin-test: $(tools/kind) delete-cluster create-cluster docker-buil
 
 - e2e测试之前的准备
 
-根据各自的需求来定制环境，如果测试环境中需要用到higress的controller、gateway等组件，需要提前本地安装好环境，安装教程可参考[这里](https://higress.io/zh-cn/docs/user/quickstart/)，或者参考端到端测试优化步骤来准备好测试环境。
+根据各自的需求来定制环境，如果测试环境中需要用到higress的controller、gateway等组件，需要提前本地安装好环境，安装教程可参考[这里](https://higress.cn/docs/latest/user/quickstart/)，或者参考端到端测试优化步骤来准备好测试环境。
 
 安装好higress后，可以使用如下命令来查看higress的pod是否正常运行：
 

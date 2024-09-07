@@ -31,16 +31,16 @@ const t = useTranslations(Astro);
                 >
                   <div class="px-16 relative">
                     <div class="right_arrow absolute top-1/2 left-1.5 opacity-1"><Right/></div>
-                    <div class="main-title text-sm text-base-100 mt-[1.25rem] tracking-[0.15em] text-center opacity-0 tracking-wider">
+                    <h2 class="font-light main-title text-sm text-base-100 mt-[1.25rem] tracking-[0.15em] text-center opacity-0 tracking-wider">
                       {t("home.solutions.about")}
-                    </div>
+                    </h2>
                     <div class="user_introduce flex justify-between h-full mt-12 opacity-0">
                       <div class="left-container">
                         <div class="left-container-introduce mb-24 text-secondary text-[20px] leading-9">
                           {item.introduce}
                         </div>
                         <div class="flex text-secondary">
-                          <img src={item.logo} class="w-auto h-12 object-contain mr-4">
+                          <img src={item.logo} class="w-auto h-12 object-contain mr-4" alt="logo">
                           <div class='text-lg user_container'>
                             <p class="font-medium">{item.user}</p>
                             <p class="font-light">{item.userInfo}</p>
@@ -72,28 +72,28 @@ const t = useTranslations(Astro);
       </div>
     </div>
 
-    <div class="mobile-bottom-solutions-card w-full flex flex-col hidden p-[1.5rem]">
+    <ul class="ps-0 mobile-bottom-solutions-card w-full flex flex-col hidden p-[1.5rem]">
       {
         SOLUTION_LIST.map((item, index) => {
           const { src, introduce } = item;
           return (
-            <div class="solutions-mobile-card mx-auto h-[14rem] overflow-hidden flex flex-col justify-between cursor-pointer p-4 rounded-3xl">
+            <li class="solutions-mobile-card mx-auto h-[14rem] overflow-hidden flex flex-col justify-between cursor-pointer p-4 rounded-3xl">
               <div class="flex align-center flex-nowrap w-full">
-                <div class="mx-auto text-xs font-normal text-secondary tracking-wider">
+                <h2 class="font-light mx-auto text-xs font-normal text-secondary tracking-wider">
                   {t("home.solutions.about")}
-                </div>
+                </h2>
               </div>
-              <div class="w-full text-secondary text-base line-clamp-2">{introduce}</div>
+              <p class="w-full text-secondary text-base line-clamp-2">{introduce}</p>
               <div class="button mx-auto">
                 <Button class="rounded-3xl" href={src} target="_blank">
                   {t("home.solutions.action")}
                 </Button>
               </div>
-            </div>
+            </li>
           );
         })
       }
-    </div>
+    </ul>
   </card-solution>
 </span>
 

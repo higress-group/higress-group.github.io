@@ -1,6 +1,6 @@
 site:
   name: Higress
-  site: 'https://higress.io/'
+  site: 'https://higress.cn/'
   base: '/'
   trailingSlash: 'always'
   websiteGithubUrl: 'https://github.com/higress-group/higress-group.github.io/blob/develop-astro-higress'
