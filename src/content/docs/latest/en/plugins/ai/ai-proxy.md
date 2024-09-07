@@ -25,22 +25,45 @@ The `AI Proxy` plugin implements AI proxy functionality based on the OpenAI API 
 
 **Details for the `provider` configuration fields:**
 
-| Name           | Data Type        | Requirement | Default Value | Description                                                                                                                                                                                                                                                           |
-| -------------- | --------------- | ----------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------                                                                                                  |
-| `type`         | string          | Required    | -             | Name of the AI service provider.                                                                                                                                                                                                                                              |
-| `apiTokens`    | array of string | Optional    | -             | Tokens used for authentication when accessing AI services. If multiple tokens are configured, the plugin will randomly select one for each request. Some service providers only support configuring a single token. |
-| `timeout`      | number          | Optional    | -             | Timeout for accessing AI services. Measured in milliseconds. The default value is 120000, which is 2 minutes.                                                                                                                                                                                                 |
-| `modelMapping` | map of string   | Optional    | -             | Mapping table for AI models, used to map model names in requests to the model names supported by the service provider.<br/>1. Supports prefix matching. For example, "gpt-3-*" matches all model names starting with "gpt-3-";<br/>2. Supports using "*" as a key for a general fallback mapping;<br/>3. If the mapped target name is an empty string "", it means to retain the original model name. |
-| `protocol`     | string          | Optional    | -             | API contract provided by the plugin. Currently supports the following values: openai (default, uses OpenAI's API contract), original (uses the raw API contract of the target service provider).                                                                                                                          |
-| `context`      | object          | Optional    | -             | Configuration for AI conversation context information.                                                                                                                                                                                                                                         |
+| Name           | Data Type        | Requirement | Default | Description                                                                                                                                                                                                                                                           |
+| -------------- | --------------- | -------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------                                                                                                  |
+| `type`         | string          | Required     | -      | Name of the AI service provider                                                                                                                                                                                                                                              |
+| `apiTokens`    | array of string | Optional   | -      | Tokens used for authentication when accessing AI services. If multiple tokens are configured, the plugin randomly selects one for each request. Some service providers only support configuring a single token.                                                                                                                                     |
+| `timeout`      | number          | Optional   | -      | Timeout for accessing AI services, in milliseconds. The default value is 120000, which equals 2 minutes.                                                                                                                                                                                                 |
+| `modelMapping` | map of string   | Optional   | -      | Mapping table for AI models, used to map model names in requests to names supported by the service provider.<br/>1. Supports prefix matching. For example, "gpt-3-*" matches all model names starting with “gpt-3-”;<br/>2. Supports using "*" as a key for a general fallback mapping;<br/>3. If the mapped target name is an empty string "", the original model name is preserved. |
+| `protocol`     | string          | Optional   | -      | API contract provided by the plugin. Currently supports the following values: openai (default, uses OpenAI's interface contract), original (uses the raw interface contract of the target service provider)                                                                                                                          |
+| `context`      | object          | Optional   | -      | Configuration for AI conversation context information                                                                                                                                                                                                                                         |
+| `customSettings` | array of customSetting | Optional   | -      | Specifies overrides or fills parameters for AI requests                                                                                                                                                                                                                                 |
 
 **Details for the `context` configuration fields:**
 
-| Name           | Data Type   | Requirement | Default | Description                               |
+| Name            | Data Type   | Requirement | Default | Description                               |
 |---------------|--------|------|-----|----------------------------------|
-| `fileUrl`     | string | Required   | -   | URL for storing AI conversation context. Only supports file content of plain text type |
-| `serviceName` | string | Required   | -   | Full name of the Higress backend service corresponding to the URL |
-| `servicePort` | number | Required   | -   | Port for accessing the Higress backend service corresponding to the URL |
+| `fileUrl`     | string | Required   | -   | File URL to save AI conversation context. Only supports file content of plain text type |
+| `serviceName` | string | Required   | -   | Full name of the Higress backend service corresponding to the URL        |
+| `servicePort` | number | Required   | -   | Port for accessing the Higress backend service corresponding to the URL        |
+
+**Details for the `customSettings` configuration fields:**
+
+| Name        | Data Type              | Requirement | Default | Description                                                                                                                         |
+| ----------- | --------------------- | -------- | ------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| `name`      | string                | Required     | -      | Name of the parameter to set, e.g., `max_tokens`                                                                                       |
+| `value`     | string/int/float/bool | Required     | -      | Value of the parameter to set, e.g., 0                                                                                                    |
+| `mode`      | string                | Optional   | "auto" | Mode for setting the parameter, can be set to "auto" or "raw"; if "auto", the parameter name will be automatically rewritten based on the protocol; if "raw", no rewriting or restriction checks will be applied |
+| `overwrite` | bool                  | Optional   | true   | If false, the parameter is only filled if the user has not set it; otherwise, it directly overrides the user's existing parameter settings                                            |
+
+The `custom-setting` adheres to the following table, replacing the corresponding field based on `name` and protocol. Users need to fill in values from the `settingName` column that exists in the table. For instance, if a user sets `name` to `max_tokens`, in the openai protocol, it replaces `max_tokens`; for gemini, it replaces `maxOutputTokens`. `"none"` indicates that the protocol does not support this parameter. If `name` is not in this table or the corresponding protocol does not support the parameter, and "raw" mode is not set, the configuration will not take effect.
+
+| settingName | openai      | baidu             | spark       | qwen        | gemini          | hunyuan     | claude      | minimax            |
+| ----------- | ----------- | ----------------- | ----------- | ----------- | --------------- | ----------- | ----------- | ------------------ |
+| max_tokens  | max_tokens  | max_output_tokens | max_tokens  | max_tokens  | maxOutputTokens | none        | max_tokens  | tokens_to_generate |
+| temperature | temperature | temperature       | temperature | temperature | temperature     | Temperature | temperature | temperature        |
+| top_p       | top_p       | top_p             | none        | top_p       | topP            | TopP        | top_p       | top_p              |
+| top_k       | none        | none              | top_k       | none        | topK            | none        | top_k       | none               |
+| seed        | seed        | none              | none        | seed        | none            | none        | none        | none               |
+
+If raw mode is enabled, `custom-setting` will directly alter the JSON content using the input `name` and `value`, without any restrictions or modifications to the parameter names.
+For most protocols, `custom-setting` modifies or fills parameters at the root path of the JSON content. For the `qwen` protocol, ai-proxy configures under the `parameters` subpath. For the `gemini` protocol, it configures under the `generation_config` subpath.
 
 ### Provider-Specific Configurations
 
@@ -48,9 +71,10 @@ The `AI Proxy` plugin implements AI proxy functionality based on the OpenAI API 
 
 For OpenAI, the corresponding `type` is `openai`. Its unique configuration fields include:
 
-| Name                   | Data Type | Filling Requirements | Default Value | Description                                                                                                 |
-|-----------------------|-----------|----------------------|---------------|------------------------------------------------------------------------------------------------------------|
-| `openaiCustomUrl`     | string    | Optional              | -             | A custom backend URL based on the OpenAI protocol, e.g., www.example.com/myai/v1/chat/completions          |
+| Name              | Data Type | Requirement | Default | Description                                                                          |
+|-------------------|----------|----------|--------|-------------------------------------------------------------------------------|
+| `openaiCustomUrl` | string   | Optional   | -      | Custom backend URL based on the OpenAI protocol, e.g., www.example.com/myai/v1/chat/completions |
+| `responseJsonSchema` | object | Optional | - | Predefined Json Schema that OpenAI responses must adhere to; note that currently only a few specific models support this usage|
 
 #### Azure OpenAI
 
@@ -102,6 +126,14 @@ For Groq, the corresponding `type` is `groq`. It has no unique configuration fie
 #### ERNIE Bot
 
 For ERNIE Bot, the corresponding `type` is `baidu`. It has no unique configuration fields.
+
+### 360 Brain
+
+For 360 Brain, the corresponding `type` is `ai360`. It has no unique configuration fields.
+
+### Mistral
+
+For Mistral, the corresponding `type` is `mistral`. It has no unique configuration fields.
 
 #### Minimax
 
@@ -908,6 +940,120 @@ provider:
         "status_code": 0,
         "status_msg": ""
     }
+}
+```
+
+### Using OpenAI Protocol Proxy for 360 Brain Services
+
+**Configuration Information**
+
+```yaml
+provider:
+  type: ai360
+  apiTokens:
+    - "YOUR_MINIMAX_API_TOKEN"
+  modelMapping:
+    "gpt-4o": "360gpt-turbo-responsibility-8k"
+    "gpt-4": "360gpt2-pro"
+    "gpt-3.5": "360gpt-turbo"
+    "text-embedding-3-small": "embedding_s1_v1.2"
+    "*": "360gpt-pro"
+```
+
+**Request Example**
+
+```json
+{
+  "model": "gpt-4o",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a professional developer!"
+    },
+    {
+      "role": "user",
+      "content": "Hello, who are you?"
+    }
+  ]
+}
+```
+
+**Response Example**
+
+```json
+{
+  "choices": [
+    {
+      "message": {
+        "role": "assistant",
+        "content": "Hello, I am 360 Brain, a large language model. I can assist with answering various questions, providing information, engaging in conversations, and more. How can I assist you?"
+      },
+      "finish_reason": "",
+      "index": 0
+    }
+  ],
+  "created": 1724257207,
+  "id": "5e5c94a2-d989-40b5-9965-5b971db941fe",
+  "model": "360gpt-turbo",
+  "object": "",
+  "usage": {
+    "completion_tokens": 33,
+    "prompt_tokens": 24,
+    "total_tokens": 57
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a professional developer!"
+    },
+    {
+      "role": "user",
+      "content": "Hello, who are you?"
+    }
+  ],
+  "context": null
+}
+```
+
+**Text Embedding Request Example**
+
+**URL**: http://your-domain/v1/embeddings
+
+**Request Example**
+
+```json
+{
+  "input":["Hello"],
+  "model":"text-embedding-3-small"
+}
+```
+
+**Response Example**
+
+```json
+{
+  "data": [
+    {
+      "embedding": [
+        -0.011237,
+        -0.015433,
+        ...,
+        -0.028946,
+        -0.052778,
+        0.003768,
+        -0.007917,
+        -0.042201
+      ],
+      "index": 0,
+      "object": ""
+    }
+  ],
+  "model": "embedding_s1_v1.2",
+  "object": "",
+  "usage": {
+    "prompt_tokens": 2,
+    "total_tokens": 2
+  }
 }
 ```
 
