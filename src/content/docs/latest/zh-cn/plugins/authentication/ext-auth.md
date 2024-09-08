@@ -19,7 +19,7 @@ description: Ext 认证插件实现了调用外部授权服务进行认证鉴权
 | `failure_mode_allow_header_add` | bool     | 否   | false  | 当 `failure_mode_allow` 和 `failure_mode_allow_header_add` 都设置为 `true` 时，若与授权服务的通信失败，或授权服务返回了 HTTP 5xx 错误，那么请求头中将会添加 `x-envoy-auth-failure-mode-allowed: true` |
 | `status_on_error`               | int      | 否   | 403    | 当授权服务无法访问或状态码为 5xx 时，设置返回给客户端的 HTTP 状态码。默认状态码是 `403`                                        |
 
-### `http_service` 中每一项的配置字段说明
+`http_service` 中每一项的配置字段说明如下：
 
 | 名称                     | 数据类型 | 必填 | 默认值 | 描述                                  |
 | ------------------------ | -------- | ---- | ------ | ------------------------------------- |
@@ -29,7 +29,7 @@ description: Ext 认证插件实现了调用外部授权服务进行认证鉴权
 | `authorization_request`  | object   | 否   | -      | 发送鉴权请求配置                      |
 | `authorization_response` | object   | 否   | -      | 处理鉴权响应配置                      |
 
-### `endpoint` 中每一项的配置字段说明
+`endpoint` 中每一项的配置字段说明如下：
 
 | 名称             | 数据类型 | 必填 | 默认值 | 描述                                                                                      |
 | -------------- | -------- | ---- | ------ | ----------------------------------------------------------------------------------------- |
@@ -39,7 +39,7 @@ description: Ext 认证插件实现了调用外部授权服务进行认证鉴权
 | `request_method` | string   | 否   | GET    | `endpoint_mode` 为 `forward_auth` 时，客户端向授权服务发送请求的 HTTP Method |
 | `path`          | string   | `endpoint_mode` 为 `forward_auth` 时必填 | - | `endpoint_mode` 为 `forward_auth` 时，客户端向授权服务发送请求的请求路径 |
 
-### `authorization_request` 中每一项的配置字段说明
+`authorization_request` 中每一项的配置字段说明如下：
 
 | 名称                     | 数据类型               | 必填 | 默认值 | 描述                                                                                                                                                              |
 | ------------------------ | ---------------------- | ---- | ------ |----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -48,25 +48,14 @@ description: Ext 认证插件实现了调用外部授权服务进行认证鉴权
 | `with_request_body`      | bool                   | 否   | false  | 缓冲客户端请求体，并将其发送至鉴权请求中（HTTP Method 为 GET、OPTIONS、HEAD 请求时不生效）                                                                                                        |
 | `max_request_body_bytes` | int                    | 否   | 10MB   | 设置在内存中保存客户端请求体的最大尺寸。当客户端请求体达到在此字段中设置的数值时，将会返回 HTTP 413 状态码，并且不会启动授权过程。注意，这个设置会优先于 `failure_mode_allow` 的配置                                                        |
 
-### `x-forwarded-*` header
-
-在 `endpoint_mode` 为 `forward_auth` 时，Higress 会自动生成并发送以下 header 至鉴权服务：
-
-| Header             | 说明                                  |
-|--------------------|-------------------------------------|
-| `x-forwarded-proto` | 原始请求的 scheme，比如 http/https            |
-| `x-forwarded-method` | 原始请求的方法，比如 get/post/delete/patch     |
-| `x-forwarded-host`   | 原始请求的 host                           |
-| `x-forwarded-uri`    | 原始请求的 path，包含路径参数，比如 `/v1/app?test=true` |
-
-### `authorization_response` 中每一项的配置字段说明
+`authorization_response` 中每一项的配置字段说明如下：
 
 | 名称                       | 数据类型               | 必填 | 默认值 | 描述                                                                              |
 | -------------------------- | ---------------------- | ---- | ------ |---------------------------------------------------------------------------------|
 | `allowed_upstream_headers` | array of StringMatcher | 否   | -      | 当设置后，具有相应匹配项的鉴权请求的响应头将添加到原始的客户端请求头中。请注意，同名的请求头将被覆盖                              |
 | `allowed_client_headers`   | array of StringMatcher | 否   | -      | 如果不设置，在请求被拒绝时，所有的鉴权请求的响应头将添加到客户端的响应头中。当设置后，在请求被拒绝时，具有相应匹配项的鉴权请求的响应头将添加到客户端的响应头中 |
 
-### `StringMatcher` 类型每一项的配置字段说明
+`StringMatcher` 类型每一项的配置字段说明如下：
 
 在使用 `array of StringMatcher` 时会按照数组中定义的 `StringMatcher` 顺序依次进行配置。
 
@@ -77,6 +66,21 @@ description: Ext 认证插件实现了调用外部授权服务进行认证鉴权
 | `suffix`   | string   | 否，`exact`、`prefix`、`suffix`、`contains`、`regex` 中选填一项 | -      | 后缀匹配 |
 | `contains` | string   | 否，`exact`、`prefix`、`suffix`、`contains`、`regex` 中选填一项 | -      | 是否包含 |
 | `regex`    | string   | 否，`exact`、`prefix`、`suffix`、`contains`、`regex` 中选填一项 | -      | 正则匹配 |
+
+
+
+## `x-forwarded-*` header
+
+在 `endpoint_mode` 为 `forward_auth` 时，Higress 会自动生成并发送以下 header 至鉴权服务：
+
+| Header               | 说明                                                    |
+| -------------------- | ------------------------------------------------------- |
+| `x-forwarded-proto`  | 原始请求的 scheme，比如 http/https                      |
+| `x-forwarded-method` | 原始请求的方法，比如 get/post/delete/patch              |
+| `x-forwarded-host`   | 原始请求的 host                                         |
+| `x-forwarded-uri`    | 原始请求的 path，包含路径参数，比如 `/v1/app?test=true` |
+
+
 
 ## 配置示例
 
@@ -286,3 +290,4 @@ Content-Length: 0
 ```
 
 `ext-auth` 服务返回响应头中如果包含 `x-user-id` 和 `x-auth-version`，网关调用 upstream 时的请求中会带上这两个请求头。
+
