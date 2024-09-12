@@ -572,6 +572,8 @@ func (ctx *CommonHttpCtx[PluginConfig]) SetResponseBodyBufferLimit(size uint32) 
 
 ### 2.4 Types.Action
 
+proxy wasm 社区目前提供的 ABI 比较简单，只封装了两种状态。
+
 在自定义插件中 onHttpRequestHeaders、onHttpRequestBody、onHttpResponseHeaders、onHttpResponseBody 返回值类型为 types.Action。通过 types.Action 枚举值来控制插件的运行流程，常见的返回值如下： 
 
 1. types.ActionContinue：继续后续处理，比如继续读取请求 body，或者继续读取响应 body。
@@ -579,13 +581,13 @@ func (ctx *CommonHttpCtx[PluginConfig]) SetResponseBodyBufferLimit(size uint32) 
 2. types.ActionPause： 暂停后续处理，比如在 onHttpRequestHeaders 通过 Http 或者 Redis 调用外部服务获取认证信息，在调用外部服务回调钩子函数中调用 proxywasm.ResumeHttpRequest() 来恢复后续处理 或者调用 proxywasm.SendHttpResponseWithDetail() 来返回响应。
 
 
-#### 2.4.1 编译插件注意事项
+#### 2.4.1 使用 Higress 实现的能力更丰富的 WASM ABI
 
-1. Higress 需要编译时启用 `EXTRA_TAGS=proxy_wasm_version_0_2_100` 标签来修改 Proxy Wasm ABI。 TinyGo 本地构建命令如下：
+1. Higress 需要基于特定的 Proxy Wasm ABI 来实现下面更丰富的 Header 状态管理， TinyGo 本地构建命令如下：
 ```shell
 tinygo build -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer proxy_wasm_version_0_2_100' -o ./build/plugin.wasm main.go
 ```
-2. Makefile 文件默认启用 `proxy_wasm_version_0_2_100` 标签，所以不需要修改 Makefile 文件。
+2. 使用 Makefile 编译时需要设置 `EXTRA_TAGS=proxy_wasm_version_0_2_100`
 
 #### 2.4.2 Header 状态码
 
