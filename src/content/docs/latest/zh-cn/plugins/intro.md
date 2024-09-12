@@ -140,14 +140,4 @@ curl http://exmaple.com/foo -H 'exmaple-key: 123'
 
 ## Wasm 插件原理介绍
 
-### 什么是 Wasm 
-// TODO...
-
-### 插件生效流程
-// TODO...
-
-### 插件执行顺序编排
-// TODO...
-
-### Wasm 插件如何做到变更时流量无损
-// TODO...
+请查看电子书：[《Wasm插件开发篇》](https://higress.io/docs/ebook/wasm19/)
