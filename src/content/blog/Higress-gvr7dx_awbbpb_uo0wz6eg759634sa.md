@@ -19,11 +19,11 @@ authors: "CH3CHO"
 
 <font style="color:rgb(0, 0, 0);"></font>
 
-**<font style="color:rgb(46, 75, 227);">议题一：</font>****<font style="color:#2F4BDA;">AI 时代，从 Spring Cloud Alibaba 到 Spring AI Alibaba</font>**
+**<font style="color:rgb(46, 75, 227);">议题一：</font><font style="color:#2F4BDA;">AI 时代，从 Spring Cloud Alibaba 到 Spring AI Alibaba</font>**
 
 **<font style="color:rgb(46, 75, 227);">分享嘉宾：</font>**
 
-**<font style="color:rgb(0, 0, 0);">李艳林，阿</font>****<font style="color:rgb(0, 0, 0);">里云智能集团云原生微服务技术负责人，Spring AI Alibaba 发起人</font>**
+**<font style="color:rgb(0, 0, 0);">李艳林，阿</font><font style="color:rgb(0, 0, 0);">里云智能集团云原生微服务技术负责人，Spring AI Alibaba 发起人</font>**
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726216341052-d1c1ad6c-30a5-4ed8-9b87-164dbcfa355f.webp)
 
@@ -68,11 +68,11 @@ authors: "CH3CHO"
 + <font style="color:rgb(0, 0, 0);">了解 AI 原生应用架构的落地实践。</font><font style="color:rgb(62, 58, 57);">  
 </font>
 
-**<font style="color:rgb(46, 75, 227);">议题二：</font>****<font style="color:#2F4BDA;">从云原生到 AI 原生，网关的发展趋势和最佳实践</font>**
+**<font style="color:rgb(46, 75, 227);">议题二：</font><font style="color:#2F4BDA;">从云原生到 AI 原生，网关的发展趋势和最佳实践</font>**
 
 **<font style="color:rgb(46, 75, 227);">分享嘉宾：</font>**
 
-**<font style="color:rgb(0, 0, 0);">谢吉宝，</font>****<font style="color:rgb(0, 0, 0);">阿里云智能集团资深技术专家，云原生产品线中间件负责人</font>**
+**<font style="color:rgb(0, 0, 0);">谢吉宝，</font><font style="color:rgb(0, 0, 0);">阿里云智能集团资深技术专家，云原生产品线中间件负责人</font>**
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726216341081-9a8551b8-9b3a-4d95-8d5a-db5e32fc2a75.webp)
 
@@ -84,14 +84,14 @@ authors: "CH3CHO"
 + <font style="color:rgb(0, 0, 0);">AI 原生应用所带来的流量新特点，网关所遇到的痛点。</font>
 + <font style="color:rgb(0, 0, 0);">云原生 API 网关：高集成化解云原生和 AI 原生的复杂场景。</font>
 
-**<font style="color:rgb(0, 0, 0);">2. </font>****<font style="color:rgb(0, 0, 0);">云原生 API 网关的价值和优势</font>**
+**<font style="color:rgb(0, 0, 0);">2. </font><font style="color:rgb(0, 0, 0);">云原生 API 网关的价值和优势</font>**
 
 + <font style="color:rgb(0, 0, 0);">高集成：</font><font style="color:rgb(0, 0, 0);">零代码构建 AI 应用。</font>
 + <font style="color:rgb(0, 0, 0);">零信任：AI 防护 & 内容合规。</font>
 + <font style="color:rgb(0, 0, 0);">高性能：软硬一体加速响应体验。</font>
 + <font style="color:rgb(0, 0, 0);">高可用：服务治理无损变更。</font>
 
-**<font style="color:rgb(0, 0, 0);">3. </font>****<font style="color:rgb(0, 0, 0);">云原生 API 网关的实践、典型客户和 Demo</font>**
+**<font style="color:rgb(0, 0, 0);">3. </font><font style="color:rgb(0, 0, 0);">云原生 API 网关的实践、典型客户和 Demo</font>**
 
 + <font style="color:rgb(0, 0, 0);">云产品案例：通义APP、灵积、人工智能平台 PAI。</font>
 + <font style="color:rgb(0, 0, 0);">云上客户案例：零一万物、震坤行。</font>
@@ -132,25 +132,25 @@ authors: "CH3CHO"
 
 **<font style="color:rgb(46, 75, 227);">演讲提纲</font>**
 
-**<font style="color:rgb(0, 0, 0);">1. </font>****<font style="color:rgb(0, 0, 0);">微服务技术的新趋势和新挑战</font>**
+**<font style="color:rgb(0, 0, 0);">1. </font><font style="color:rgb(0, 0, 0);">微服务技术的新趋势和新挑战</font>**
 
 + <font style="color:rgb(0, 0, 0);">新趋势：开源标准化、跨语言架构、高可用成为企业标准诉求。</font>
 + <font style="color:rgb(0, 0, 0);">新挑战：开源维护成本高、跨语言复杂度高、高可用改造代价高。</font>
 
-**<font style="color:rgb(0, 0, 0);">2. </font>****<font style="color:rgb(0, 0, 0);">微服务引擎 MSE：打造通用企业级微服务架构</font>**
+**<font style="color:rgb(0, 0, 0);">2. </font><font style="color:rgb(0, 0, 0);">微服务引擎 MSE：打造通用企业级微服务架构</font>**
 
 + <font style="color:rgb(0, 0, 0);">流量入口：跨语言、跨框架服务治理，默认高可用、高安全，高性能。</font>
 + <font style="color:rgb(0, 0, 0);">内部流量：内部 RPC 流量，通过注册中心进行寻址，集群可以通过配置中心整体管理 。</font>
 + <font style="color:rgb(0, 0, 0);">微服务治理：管理业务应用的治理，增强业务高可用能力 。</font>
 + <font style="color:rgb(0, 0, 0);">默认高可用、默认安全零信任、默认性能翻倍。</font>
 
-**<font style="color:rgb(0, 0, 0);">3.</font>****<font style="color:rgb(0, 0, 0);"> </font>****<font style="color:rgb(0, 0, 0);">微服务引擎 MSE：</font>****<font style="color:rgb(0, 0, 0);">拥抱开源，坚持开放</font>**
+**<font style="color:rgb(0, 0, 0);">3.</font>****<font style="color:rgb(0, 0, 0);"> </font><font style="color:rgb(0, 0, 0);">微服务引擎 MSE：</font>****<font style="color:rgb(0, 0, 0);">拥抱开源，坚持开放</font>**
 
 + <font style="color:rgb(0, 0, 0);">引领国内微服务架构，相关开源项目有 60%市场份额。</font>
 + <font style="color:rgb(0, 0, 0);">快速构建 Spring AI 标准应用，提供 AI 场景下的最佳 Java 实践。</font>
 + <font style="color:rgb(0, 0, 0);">通过云原生让应用场景</font><font style="color:rgb(0, 0, 0);">更加融入</font><font style="color:rgb(0, 0, 0);"> </font><font style="color:rgb(0, 0, 0);">AI，通过 AI 原生让更多云原生应用赋予智能。</font>
 
-**<font style="color:rgb(0, 0, 0);">4.</font>****<font style="color:rgb(0, 0, 0);"> </font>****<font style="color:rgb(0, 0, 0);">微服务引擎 MSE：</font>****<font style="color:rgb(0, 0, 0);">最佳实践以及演示视频</font>**
+**<font style="color:rgb(0, 0, 0);">4.</font>****<font style="color:rgb(0, 0, 0);"> </font><font style="color:rgb(0, 0, 0);">微服务引擎 MSE：</font>****<font style="color:rgb(0, 0, 0);">最佳实践以及演示视频</font>**
 
 + <font style="color:rgb(0, 0, 0);">应用上云迁移实践</font><font style="color:rgb(0, 0, 0);">。</font><font style="color:rgba(0, 0, 0, 0.9);">  
 </font>
