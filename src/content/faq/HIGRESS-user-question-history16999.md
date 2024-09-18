@@ -4,6 +4,8 @@ title: "higress jwt插件 鉴权配置详解"
 date: "2024-09-11"
 category: "expertConsultation"
 description: "Higress JWT插件的鉴权配置详细解析如下，这将帮助您理解如何在Higress中配置JWT认证以保护您的服务和API。### 1. 功能概述JWT（JSON Web Tokens）是一种常用的轻量级安全认证方式，它允许各方之间以JSON对象的形式安全地传输信息。Higress JWT插件(`j"
+tags: ["higress","jwt","插件","鉴权","配置","详解"]
+keywords: ["higress","jwt","插件","鉴权","配置","详解"]
 ---
 
 ## 用户问题 ： 
@@ -65,7 +67,12 @@ JWT（JSON Web Tokens）是一种常用的轻量级安全认证方式，它允�
 
 ## <font color="#FF0000">答疑服务说明：</font> 
 
-本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>，在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。您也可以访问 : [全局专家答疑](https://answer.opensource.alibaba.com/docs/intro) 。 咨询其他产品的的问题
+本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>,使用方法：
+用法1： 在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。
+用法2： 点击[专家答疑页](https://answer.opensource.alibaba.com/docs/intro)（针对部分网站不支持插件嵌入的情况）
+### 另：
 
+
+有其他开源产品的使用问题？[点击访问阿里AI专家答疑服务](https://answer.opensource.alibaba.com/docs/intro)。
 ### 反馈
 如问答有错漏，欢迎点：[差评](https://ai.nacos.io/user/feedbackByEnhancerGradePOJOID?enhancerGradePOJOId=17008)给我们反馈。

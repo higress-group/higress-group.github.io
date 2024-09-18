@@ -4,6 +4,8 @@ title: "higress jar包部署详解"
 date: "2024-09-11"
 category: "expertConsultation"
 description: "为了详细解答关于Higress及其jar包部署的问题，我们首先需要理解Higress的基本概念和它在微服务架构中的作用。遗憾的是，当前的我了解的知识库中并未直接提供关于Higress的具体信息。Higress这个名字并不像常见的技术术语如Spring Boot、Kubernetes等那样广为人知，因"
+tags: ["higress","部署","详解","jar","包","使用","方法"]
+keywords: ["higress","部署","详解","jar","包","使用","方法"]
 ---
 
 ## 用户问题 ： 
@@ -61,7 +63,12 @@ description: "为了详细解答关于Higress及其jar包部署的问题，我�
 
 ## <font color="#FF0000">答疑服务说明：</font> 
 
-本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>，在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。您也可以访问 : [全局专家答疑](https://answer.opensource.alibaba.com/docs/intro) 。 咨询其他产品的的问题
+本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>,使用方法：
+用法1： 在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。
+用法2： 点击[专家答疑页](https://answer.opensource.alibaba.com/docs/intro)（针对部分网站不支持插件嵌入的情况）
+### 另：
 
+
+有其他开源产品的使用问题？[点击访问阿里AI专家答疑服务](https://answer.opensource.alibaba.com/docs/intro)。
 ### 反馈
 如问答有错漏，欢迎点：[差评](https://ai.nacos.io/user/feedbackByEnhancerGradePOJOID?enhancerGradePOJOId=17006)给我们反馈。

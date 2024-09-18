@@ -4,6 +4,8 @@ title: "higress envoy filter用法详解"
 date: "2024-09-11"
 category: "expertConsultation"
 description: "为了解答关于Higress与Envoy Filter的用法详解，我们首先需要理解这两个概念的基本背景和它们之间的关系。知识: Higress 是一个基于Istio和Envoy的扩展项目，旨在提供更灵活的服务网格功能和更优化的性能。它通过集成特定的Envoy扩展和策略，增强了服务网格的能力，特别是在流"
+tags: ["higress","envoy","filter","用法","详解"]
+keywords: ["higress","envoy","filter","用法","详解"]
 ---
 
 ## 用户问题 ： 
@@ -61,7 +63,12 @@ description: "为了解答关于Higress与Envoy Filter的用法详解，我们�
 
 ## <font color="#FF0000">答疑服务说明：</font> 
 
-本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>，在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。您也可以访问 : [全局专家答疑](https://answer.opensource.alibaba.com/docs/intro) 。 咨询其他产品的的问题
+本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>,使用方法：
+用法1： 在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。
+用法2： 点击[专家答疑页](https://answer.opensource.alibaba.com/docs/intro)（针对部分网站不支持插件嵌入的情况）
+### 另：
 
+
+有其他开源产品的使用问题？[点击访问阿里AI专家答疑服务](https://answer.opensource.alibaba.com/docs/intro)。
 ### 反馈
 如问答有错漏，欢迎点：[差评](https://ai.nacos.io/user/feedbackByEnhancerGradePOJOID?enhancerGradePOJOId=16985)给我们反馈。

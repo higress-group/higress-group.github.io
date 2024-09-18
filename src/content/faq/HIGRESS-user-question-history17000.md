@@ -4,6 +4,8 @@ title: "higress 注册服务详解"
 date: "2024-09-11"
 category: "expertConsultation"
 description: "用户的问题：**higress higress 注册服务详解**根据提供的知识内容，Higress对接注册服务主要涉及两个场景：一是关于配置文件服务的问题，二是对接Dubbo服务的详细过程。这里我们聚焦于Higress如何与注册服务交互，特别是针对Dubbo服务的注册发现机制，因为直接关于Higre"
+tags: ["higress","注册","服务","详解"]
+keywords: ["higress","注册","服务","详解"]
 ---
 
 ## 用户问题 ： 
@@ -118,7 +120,12 @@ Higress通过集成McpBridge和Http2Rpc CRDs实现了与注册中心（如Nacos�
 
 ## <font color="#FF0000">答疑服务说明：</font> 
 
-本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>，在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。您也可以访问 : [全局专家答疑](https://answer.opensource.alibaba.com/docs/intro) 。 咨询其他产品的的问题
+本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>,使用方法：
+用法1： 在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。
+用法2： 点击[专家答疑页](https://answer.opensource.alibaba.com/docs/intro)（针对部分网站不支持插件嵌入的情况）
+### 另：
 
+
+有其他开源产品的使用问题？[点击访问阿里AI专家答疑服务](https://answer.opensource.alibaba.com/docs/intro)。
 ### 反馈
 如问答有错漏，欢迎点：[差评](https://ai.nacos.io/user/feedbackByEnhancerGradePOJOID?enhancerGradePOJOId=17009)给我们反馈。

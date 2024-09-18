@@ -4,6 +4,8 @@ title: "go wasm 开发"
 date: "2024-09-11"
 category: "expertConsultation"
 description: "### : Higress 使用 Go 语言开发 WASM 插件#### 分析问题原因在Higress项目中，利用Go语言开发WebAssembly（WASM）插件是一项高级功能，它允许开发者扩展代理服务器的功能，如实现自定义的请求处理逻辑、限流、认证等。根据提供的知识，我们了解到整个开发流程涉及几"
+tags: ["higress","go","wasm","开发","网络","应用","编程"]
+keywords: ["higress","go","wasm","开发","网络","应用","编程"]
 ---
 
 ## 用户问题 ： 
@@ -53,7 +55,12 @@ description: "### : Higress 使用 Go 语言开发 WASM 插件#### 分析问题�
 
 ## <font color="#FF0000">答疑服务说明：</font> 
 
-本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>，在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。您也可以访问 : [全局专家答疑](https://answer.opensource.alibaba.com/docs/intro) 。 咨询其他产品的的问题
+本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>,使用方法：
+用法1： 在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。
+用法2： 点击[专家答疑页](https://answer.opensource.alibaba.com/docs/intro)（针对部分网站不支持插件嵌入的情况）
+### 另：
 
+
+有其他开源产品的使用问题？[点击访问阿里AI专家答疑服务](https://answer.opensource.alibaba.com/docs/intro)。
 ### 反馈
 如问答有错漏，欢迎点：[差评](https://ai.nacos.io/user/feedbackByEnhancerGradePOJOID?enhancerGradePOJOId=17020)给我们反馈。

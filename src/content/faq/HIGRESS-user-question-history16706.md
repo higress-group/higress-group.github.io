@@ -4,6 +4,8 @@ title: "higress的启动命令"
 date: "2024-09-03"
 category: "expertConsultation"
 description: "在 Higress 的启动过程中，主要涉及到了在其 Kubernetes (K8s) 集群上的部署。根据提供的 我了解的知识, 启动 Higress 的命令依赖于你的环境，具体分为两个主要场景：标准 K8s 集群和本地 K8s 环境（如使用 kind）。下面是启动 Higress 的详细步骤：###"
+tags: ["higress","启动","命令"]
+keywords: ["higress","启动","命令"]
 ---
 
 ## 用户问题 ： 
@@ -77,7 +79,12 @@ description: "在 Higress 的启动过程中，主要涉及到了在其 Kubernet
 
 ## <font color="#FF0000">答疑服务说明：</font> 
 
-本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>，在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。您也可以访问 : [全局专家答疑](https://answer.opensource.alibaba.com/docs/intro) 。 咨询其他产品的的问题
+本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>,使用方法：
+用法1： 在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。
+用法2： 点击[专家答疑页](https://answer.opensource.alibaba.com/docs/intro)（针对部分网站不支持插件嵌入的情况）
+### 另：
 
+
+有其他开源产品的使用问题？[点击访问阿里AI专家答疑服务](https://answer.opensource.alibaba.com/docs/intro)。
 ### 反馈
 如问答有错漏，欢迎点：[差评](https://ai.nacos.io/user/feedbackByEnhancerGradePOJOID?enhancerGradePOJOId=16720)给我们反馈。

@@ -4,6 +4,8 @@ title: "higress vs. kong 对比"
 date: "2024-09-11"
 category: "expertConsultation"
 description: "为了全面且准确地对比Higress与Kong，我们首先需要从几个关键方面来分析这两个API网关平台的特点、功能以及适用场景。由于我无法直接访问或引用知识:中的具体信息，我将基于广泛认可的信息和我的内置知识来展开讨论。### 1. **性能与可扩展性**- **Higress**: Higress是由"
+tags: ["higress","kong","对比","分析","微服务","网关","特性"]
+keywords: ["higress","kong","对比","分析","微服务","网关","特性"]
 ---
 
 ## 用户问题 ： 
@@ -59,7 +61,12 @@ description: "为了全面且准确地对比Higress与Kong，我们首先需要�
 
 ## <font color="#FF0000">答疑服务说明：</font> 
 
-本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>，在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。您也可以访问 : [全局专家答疑](https://answer.opensource.alibaba.com/docs/intro) 。 咨询其他产品的的问题
+本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>,使用方法：
+用法1： 在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。
+用法2： 点击[专家答疑页](https://answer.opensource.alibaba.com/docs/intro)（针对部分网站不支持插件嵌入的情况）
+### 另：
 
+
+有其他开源产品的使用问题？[点击访问阿里AI专家答疑服务](https://answer.opensource.alibaba.com/docs/intro)。
 ### 反馈
 如问答有错漏，欢迎点：[差评](https://ai.nacos.io/user/feedbackByEnhancerGradePOJOID?enhancerGradePOJOId=17017)给我们反馈。

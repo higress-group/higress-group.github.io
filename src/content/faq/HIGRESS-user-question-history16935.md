@@ -4,6 +4,8 @@ title: "K8s体系下，以ingress 和 higress代表的云原生网关和传统�
 date: "2024-09-11"
 category: "expertConsultation"
 description: "在higress在Kubernetes（K8s）体系下作为云原生网关与传统Nginx的不同之处前，让我们首先回顾一下知识: Kubernetes Ingress与Nginx ingress controller对比(链接假设存在但未具体给出)中的关键点，以便更清晰地理解两者的差异。### 分析原因1"
+tags: ["K8s","云原生网关","ingress","higress","Nginx","不同"]
+keywords: ["K8s","云原生网关","ingress","higress","Nginx","不同"]
 ---
 
 ## 用户问题 ： 
@@ -65,7 +67,12 @@ Higress（或任何K8s Ingress控制器）与传统Nginx的主要区别在于其
 
 ## <font color="#FF0000">答疑服务说明：</font> 
 
-本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>，在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。您也可以访问 : [全局专家答疑](https://answer.opensource.alibaba.com/docs/intro) 。 咨询其他产品的的问题
+本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>,使用方法：
+用法1： 在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。
+用法2： 点击[专家答疑页](https://answer.opensource.alibaba.com/docs/intro)（针对部分网站不支持插件嵌入的情况）
+### 另：
 
+
+有其他开源产品的使用问题？[点击访问阿里AI专家答疑服务](https://answer.opensource.alibaba.com/docs/intro)。
 ### 反馈
 如问答有错漏，欢迎点：[差评](https://ai.nacos.io/user/feedbackByEnhancerGradePOJOID?enhancerGradePOJOId=16941)给我们反馈。

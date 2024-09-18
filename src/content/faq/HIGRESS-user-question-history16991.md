@@ -4,6 +4,8 @@ title: "higress kind集群部署详解"
 date: "2024-09-11"
 category: "expertConsultation"
 description: "根据您的问题，您想了解关于在Kubernetes（K8s）中使用Higress以及如何在Kind集群上部署Higress的详细步骤。以下是对这一过程的详细解析和指导，依托于提供的知识内容。### 部署准备与环境配置#### 第一步：配置本地环境与Kubernetes集群确保你的本地环境已准备好Kub"
+tags: ["kind","集群","部署","详解","higress"]
+keywords: ["kind","集群","部署","详解","higress"]
 ---
 
 ## 用户问题 ： 
@@ -123,7 +125,12 @@ kubectl port-forward service/higress-gateway -n higress-system 80:80 443:443
 
 ## <font color="#FF0000">答疑服务说明：</font> 
 
-本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>，在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。您也可以访问 : [全局专家答疑](https://answer.opensource.alibaba.com/docs/intro) 。 咨询其他产品的的问题
+本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>,使用方法：
+用法1： 在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。
+用法2： 点击[专家答疑页](https://answer.opensource.alibaba.com/docs/intro)（针对部分网站不支持插件嵌入的情况）
+### 另：
 
+
+有其他开源产品的使用问题？[点击访问阿里AI专家答疑服务](https://answer.opensource.alibaba.com/docs/intro)。
 ### 反馈
 如问答有错漏，欢迎点：[差评](https://ai.nacos.io/user/feedbackByEnhancerGradePOJOID?enhancerGradePOJOId=16994)给我们反馈。

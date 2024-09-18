@@ -4,6 +4,8 @@ title: "cors 怎么配置允许所有跨域请求？"
 date: "2024-07-31"
 category: "expertConsultation"
 description: "要配置 Higress 允许所有跨域请求，你可以遵循以下步骤进行设置：### 分析问题原因根据 CORS（跨域资源共享）规范，浏览器出于安全考虑会对不同源的请求进行限制。为了允许不同源的请求能够成功访问 API 或资源，需要在服务器端配置 CORS 相关的 HTTP 头部信息。### 配置步骤###"
+tags: ["higress","cors","配置","允许","所有","跨域","请求"]
+keywords: ["higress","cors","配置","允许","所有","跨域","请求"]
 ---
 
 ## 用户问题 ： 
@@ -110,7 +112,12 @@ max_age: 7200
 
 ## <font color="#FF0000">答疑服务说明：</font> 
 
-本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>，在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。您也可以访问 : [全局专家答疑](https://answer.opensource.alibaba.com/docs/intro) 。 咨询其他产品的的问题
+本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>,使用方法：
+用法1： 在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。
+用法2： 点击[专家答疑页](https://answer.opensource.alibaba.com/docs/intro)（针对部分网站不支持插件嵌入的情况）
+### 另：
 
+
+有其他开源产品的使用问题？[点击访问阿里AI专家答疑服务](https://answer.opensource.alibaba.com/docs/intro)。
 ### 反馈
 如问答有错漏，欢迎点：[差评](https://ai.nacos.io/user/feedbackByEnhancerGradePOJOID?enhancerGradePOJOId=16392)给我们反馈。

@@ -4,6 +4,8 @@ title: "200字讲明白什么是云原生网关 higress"
 date: "2024-09-11"
 category: "expertConsultation"
 description: "Higress是一款专为云原生设计的API网关，它集成了流量网关、微服务网关与安全网关的功能于一身，简化了部署与运维的复杂性。在云原生架构下，它基于开源Istio与Envoy，不仅支持南北向流量管理，也擅长东西向微服务间通信，还内建了WAF模块强化安全防护。Higress通过深度融合Dubbo、Na"
+tags: ["云原生","网关","higress","讲明","白","200字","什么"]
+keywords: ["云原生","网关","higress","讲明","白","200字","什么"]
 ---
 
 ## 用户问题 ： 
@@ -24,7 +26,7 @@ Higress是一款专为云原生设计的API网关，它集成了流量网关、�
  
  * 专家经验：Higress 支持配置热更新吗?？ 
  
- * 专家经验：higress 控制台相关介绍 
+ * 专家经验：higress 控制台本地运行的相关介绍 
 
 
  <font color="#949494">---------------</font> 
@@ -33,7 +35,12 @@ Higress是一款专为云原生设计的API网关，它集成了流量网关、�
 
 ## <font color="#FF0000">答疑服务说明：</font> 
 
-本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>，在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。您也可以访问 : [全局专家答疑](https://answer.opensource.alibaba.com/docs/intro) 。 咨询其他产品的的问题
+本内容经由技术专家审阅的用户问答的镜像生成，我们提供了<font color="#FF0000">专家智能答疑服务</font>,使用方法：
+用法1： 在<font color="#FF0000">页面的右下的浮窗”专家答疑“</font>。
+用法2： 点击[专家答疑页](https://answer.opensource.alibaba.com/docs/intro)（针对部分网站不支持插件嵌入的情况）
+### 另：
 
+
+有其他开源产品的使用问题？[点击访问阿里AI专家答疑服务](https://answer.opensource.alibaba.com/docs/intro)。
 ### 反馈
 如问答有错漏，欢迎点：[差评](https://ai.nacos.io/user/feedbackByEnhancerGradePOJOID?enhancerGradePOJOId=16943)给我们反馈。
