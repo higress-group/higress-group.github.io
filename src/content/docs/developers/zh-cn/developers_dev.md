@@ -49,7 +49,7 @@ description: Higress 维护者名单
 | 宋鹏远 | [songpengyuan](https://github.com/songpengyuan) | 小满科技 |
 | 彭万山 | [Uncle-Justice](https://github.com/Uncle-Justice) | 华中科技 |
 | 赵伟基 | [vikizhao156](https://github.com/vikizhao156)   | 上交     |
-
+| 邢云阳 | [xingyunyang01](https://github.com/xingyunyang01)   | 联通数科     |
 
 
 ## 获取Higress开发者头衔
