@@ -68,7 +68,7 @@ description: Higress 维护者名单
 
 - 贡献代码（包含文档）DIFF 行数（包含增删）达到 500+
 
-> 不仅只有贡献代码，在Higress官网仓库(https://github.com/higress-group/higress-group.github.io) 贡献文档，也可以满足此要求
+> 不仅只有贡献代码，在Higress官网仓库（[https://github.com/higress-group/higress-group.github.io](https://github.com/higress-group/higress-group.github.io)）贡献文档，也可以满足此要求
 
 - 在社区周会进行 1 次主题分享
 
