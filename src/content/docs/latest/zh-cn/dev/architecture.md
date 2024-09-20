@@ -13,9 +13,12 @@ Higress 的控制面程序，会连接 Istio ，用于生成 Istio API 对象，
 在 higress 仓库目录下执行 `make build` 即可进行本地环境能运行的二进制编译
 
 若需要编译 docker 镜像，请执行 `make docker-build`。Higress Controller使用的Istio pilot镜像使用`make build-istio-local` 编译。
+
 ### 给新手的一些tips：
-如果在linux服务器编译打包时发现使用https方式clone子项目失败，如连接超时等导致下载依赖出错，可以尝试修改submodule配置为ssh，并配置GOPROXY：
-```
+
+如果在Linux服务器编译打包时发现使用https方式clone子项目失败，如连接超时等导致下载依赖出错，可以尝试修改submodule配置为ssh，并配置GOPROXY：
+
+```bash
 #前提是已经在github中配置了本地公钥
 #修改https方式为ssh方式
 sed -i 's|https://github.com/|git@github.com:|g' .gitmodules
@@ -25,8 +28,10 @@ git submodule sync
 #export GOPROXY ?= https://proxy.golang.org,direct
 export GOPROXY ?= https://goproxy.cn,direct
 ```
+
 另外，在windows中开发时，为了方便进行代码开发，可以执行以下步骤完成依赖配置：
-```
+
+```bash
 #如果https方式无法clone submodule，则同上修改.gitmodules配置，并执行git submodule sync同步
 #初始化submodule（如果执行这条命令发现部分submodule没有clone，可以添加 --force）：
 git submodule update --init
