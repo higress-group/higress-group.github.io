@@ -1,13 +1,18 @@
 ---
 title: 基于 Key 集群限流
 keywords: [higress, rate-limit]
-description: 基于 Key 集群限流插件实现了基于特定 Key 实现集群限流，键值来源可以是 URL 参数、HTTP 请求头、客户端 IP 地址、consumer 名称、Cookie 中 Key 名称。
+description: 基于 Key 集群限流插件配置参考
 ---
 
 ## 功能说明
 
 `cluster-key-rate-limit` 插件基于 Redis 实现集群限流，适用于需要跨多个 Higress Gateway 实例实现全局一致速率限制的场景。
 限流所使用的 Key 可以来源于 URL 参数、HTTP 请求头、客户端 IP 地址、消费者名称或 Cookie 中的 Key。
+
+## 运行属性
+
+插件执行阶段：`默认阶段`
+插件执行优先级：`20`
 
 ## 配置说明
 
@@ -164,23 +169,23 @@ show_limit_quota_header: true
 ```yaml
 rule_name: default_rule
 rule_items:
-- limit_by_cookie: key1
-  limit_keys:
-  - key: value1
-    query_per_minute: 10
-  - key: value2
-    query_per_hour: 100
-- limit_by_per_cookie: key1
-  limit_keys:
-  # 正则表达式，匹配以 a 开头的所有字符串，每个 cookie 中的 value 对应的请求 10qds
-  - key: "regexp:^a.*"
-    query_per_second: 10
-  # 正则表达式，匹配以 b 开头的所有字符串，每个 cookie 中的 value 对应的请求 100qd
-  - key: "regexp:^b.*"
-    query_per_minute: 100
-  # 兜底用，匹配所有请求，每个 cookie 中的 value 对应的请求 1000qdh
-  - key: "*"
-    query_per_hour: 1000 
+  - limit_by_cookie: key1
+    limit_keys:
+      - key: value1
+        query_per_minute: 10
+      - key: value2
+        query_per_hour: 100
+  - limit_by_per_cookie: key1
+    limit_keys:
+      # 正则表达式，匹配以 a 开头的所有字符串，每个 cookie 中的 value 对应的请求 10qds
+      - key: "regexp:^a.*"
+        query_per_second: 10
+      # 正则表达式，匹配以 b 开头的所有字符串，每个 cookie 中的 value 对应的请求 100qd
+      - key: "regexp:^b.*"
+        query_per_minute: 100
+      # 兜底用，匹配所有请求，每个 cookie 中的 value 对应的请求 1000qdh
+      - key: "*"
+        query_per_hour: 1000
 rejected_code: 200
 rejected_msg: '{"code":-1,"msg":"Too many requests"}'
 redis:

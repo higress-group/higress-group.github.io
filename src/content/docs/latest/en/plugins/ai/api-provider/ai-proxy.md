@@ -14,6 +14,10 @@ The `AI Proxy` plugin implements AI proxy functionality based on the OpenAI API 
 
 > When the request path suffix matches `/v1/embeddings`, it corresponds to text vector scenarios. The request body will be parsed using OpenAI's text vector protocol and then converted to the corresponding LLM vendor's text vector protocol.
 
+## Execution Properties
+Plugin execution phase: `Default Phase`
+Plugin execution priority: `100`
+
 
 ## Configuration Fields
 
