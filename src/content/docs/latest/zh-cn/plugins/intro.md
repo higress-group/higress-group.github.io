@@ -124,6 +124,11 @@ curl http://exmaple.com/foo -H 'exmaple-key: 123'
 
 当 `matchRules` 中存在多个规则时，按规则排列顺序优先匹配，建议将 ingress 匹配配置放在 domain 匹配之前，这也是 Higress 控制台的做法。
 
+使用 Higress 控制台通过 UI 交互方式启用插件，无需关心这里的 oci 镜像地址，如果是通过黑屏 yaml 方式配置，所有官方插件的 oci 镜像地址可以在这里找到：
+
+https://github.com/higress-group/higress-console/blob/main/backend/sdk/src/main/resources/plugins/plugins.properties
+
+目前所有插件的稳定版本为 1.0.0，最新开发版本为 latest，如果希望始终使用稳定版本，可以固定镜像 tag 为指定版本，如果希望使用最新的插件能力，可以将镜像 tag 指定为 latest （插件有任意配置更新时就会自动拉取最新版本的插件）
 
 ## Wasm 插件原理介绍
 

@@ -10,14 +10,24 @@ const ifzh = isChinese(Astro);
 import { getCollection } from "astro:content";
 
 const Functionality = {
-  ai: "AI",
-  authentication: "认证",
-  transformation: "转换",
-  traffic: "流量",
-  security: "安全",
+  ai: {
+    description: "AI",
+    children: 
+    [
+      { key: 'api-consumer', label: 'API Consumer' },
+      { key: 'api-dev', label: 'API Development' },
+      { key: 'api-o11y', label: 'API Observation' },
+      { key: 'api-provider', label: 'API Provider' },
+      { key: 'others', label: 'Others' },
+    ]
+  },
+  authentication: {description:"Authentication"},
+  transformation:{description:"Transformation"}, 
+  traffic: {description:"Traffic"},
+  security: {description:"Security"},
 };
 
-const lang = ifzh ? "zh-cn" : "en";
+const lang = ifzh ? "zh-cn" : "en"
 
 // 拿到插件的文档
 const posts = await getCollection("docs", (item) => {
@@ -26,26 +36,36 @@ const posts = await getCollection("docs", (item) => {
 
 const generateLink = (slug) => {
   const arr = slug.split("/" + lang);
-  return (
-    (lang === "en" ? "/en" : "") + "/docs/" + arr.join("") + "/?source=plugin"
-  );
-};
+  return (lang ==='en' ? "/en" : "") + "/docs/" + arr.join("") + "/?source=plugin";
+}
 
 const dataSource = posts
-  .map((item) => ({
-    Img: "",
-    Title: item.data.title,
-    Tiers: "企业版",
-    Des: item.data.description,
-    Link: generateLink(item.slug),
-    Functionality:
-      Functionality[
-        item.id.match(/plugins\/(.*?)\/[^\/]+\.md$/)
-          ? item.id.match(/plugins\/(.*?)\/[^\/]+\.md$/)[1]
-          : ""
-      ],
-    SupportBy: "Higress",
-  }))
+  .map((item) => {
+    // 从 item.id 中提取可能的 key
+    const match = item.id.match(/plugins\/(.*?)\/[^\/]+\.md$/);
+    
+    const key = match && match[1]
+      ? match[1].indexOf('/') !== -1
+        ? match[1].split('/')[0] // 匹配并提取 key
+        : match[1]
+      : "";
+    const childKey = key==='ai'? match[1].split('/')[1] : "";
+    const functionality = Functionality[key];
+    // 查找ai 副标题
+    const secondaryTitle = (functionality?.children && functionality.children.find(child => child.key === childKey)?.label) || '';
+      
+    return {
+      Img: "",
+      Title: item.data.title,
+      Tiers: "企业版",
+      Des: item.data.description,
+      Link: generateLink(item.slug),
+      SecondaryTitle: secondaryTitle,
+      Functionality: functionality?.description || '',
+      SupportBy: "Higress",
+      GithubHigressUrl: item.data.githubHigressUrl || `https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/${item.slug.split('/').pop()}`,
+    };
+  })
   .filter((item) => item.Functionality);
 ---
 

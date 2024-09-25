@@ -124,30 +124,8 @@ curl http://exmaple.com/foo -H 'exmaple-key: 123'
 
 When there are multiple rules in `matchRules`, they will be matched according to the order of the rules. It is recommended to place the ingress matching configuration before the domain matching, which is also the practice of the Higress console
 
-### Official plugin mirror address
+Enable plugins via UI interaction using the Higress console, without needing to concern yourself with the OCI image address here. If configuring via YAML in a non-interactive environment, the OCI image addresses for all official plugins can be found at:
 
-| Plugin name | Mirror address |
-| ------- | ------- |
-| Key authentication | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/key-auth:1.0.0 |
-| Basic authentication | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/basic-auth:1.0.0 |
-| HMAC authentication | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/hmac-auth:1.0.0 |
-| JWT authentication | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/jwt-auth:1.0.0 |
-| Bot detection | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/bot-detect:1.0.0 |
-| Custom Response | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/custom-response:1.0.0 |
-| request block | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/request-block:1.0.0 |
-| Key-based rate limit | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/key-rate-limit:1.0.0 |
-| WAF Protection | higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/waf:1.0.0 |
+https://github.com/higress-group/higress-console/blob/main/backend/sdk/src/main/resources/plugins/plugins.properties
 
-## Wasm plugin principle introduction
-
-### What is Wasm
-// TODO...
-
-### Plug-in effective process
-// TODO...
-
-### Plug-in execution sequence arrangement
-// TODO...
-
-### How does the Wasm plugin achieve lossless traffic when changing
-// TODO...
+Currently, the stable version for all plugins is 1.0.0, while the latest development version is tagged as `latest`. To consistently use the stable version, you may pin the image tag to a specific version. To leverage the newest capabilities of the plugins, set the image tag to `latest`, which will automatically pull the newest version of the plugin whenever there are configuration updates available.

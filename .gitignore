@@ -1,7 +1,9 @@
 # build output
 dist/
+build/
 # generated types
 .astro/
+.docusaurus/
 
 # dependencies
 node_modules/

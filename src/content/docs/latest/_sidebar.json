@@ -28,7 +28,7 @@
           "translations": {
             "en": "Reference"
           },
-          "collapsed": true,
+          "collapsed": false,
           "items":[
             {
               "label": "全局配置说明",
@@ -88,11 +88,60 @@
           },
           "items":[
             {
-              "label": "AI Plugins",
+              "label": "AI",
               "collapsed": true,
-              "autogenerate":{
-                "directory": "plugins/ai"
-              }
+              "items":[
+                {
+                  "label": "大模型 API 供应",
+                  "collapsed": true,
+                  "translations": {
+                    "en": "LLM API Provide"
+                  },
+                  "autogenerate":{
+                    "directory": "plugins/ai/api-provider"
+                  }
+                },
+                {
+                  "label": "大模型 API 消费",
+                  "collapsed": true,
+                  "translations": {
+                    "en": "LLM API Consume"
+                  },
+                  "autogenerate":{
+                    "directory": "plugins/ai/api-consumer"
+                  }
+                },
+                {
+                  "label": "大模型 API 开发",
+                  "collapsed": true,
+                  "translations": {
+                    "en": "LLM API Develop"
+                  },
+                  "autogenerate":{
+                    "directory": "plugins/ai/api-dev"
+                  }
+                },
+                {
+                  "label": "大模型 API 观测",
+                  "collapsed": true,
+                  "translations": {
+                    "en": "LLM API Observe"
+                  },
+                  "autogenerate":{
+                    "directory": "plugins/ai/api-o11y"
+                  }
+                },
+                {
+                  "label": "其他工具",
+                  "collapsed": true,
+                  "translations": {
+                    "en": "others"
+                  },
+                  "autogenerate":{
+                    "directory": "plugins/ai/others"
+                  }
+                }
+              ]
             },
             {
               "label": "认证",
