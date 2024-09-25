@@ -10,11 +10,21 @@ const ifzh = isChinese(Astro);
 import { getCollection } from "astro:content";
 
 const Functionality = {
-  ai: "AI",
-  authentication: "认证",
-  transformation: "转换",
-  traffic: "流量",
-  security: "安全",
+  ai: {
+    description: "AI",
+    children: 
+    [
+      { key: 'api-consumer', label: '大模型API消费' },
+      { key: 'api-dev', label: '大模型API开发' },
+      { key: 'api-o11y', label: '大模型API观测' },
+      { key: 'api-provider', label: '大模型API供应' },
+      { key: 'others', label: '其他工具' },
+    ]
+  },
+  authentication: {description:"认证"},
+  transformation:{description:"转换"}, 
+  traffic: {description:"流量"},
+  security: {description:"安全"},
 };
 
 const lang = ifzh ? "zh-cn" : "en"
@@ -30,21 +40,32 @@ const generateLink = (slug) => {
 }
 
 const dataSource = posts
-  .map((item) => ({
-    Img: "",
-    Title: item.data.title,
-    Tiers: "企业版",
-    Des: item.data.description,
-    Link: generateLink(item.slug),
-    Functionality:
-      Functionality[
-        item.id.match(/plugins\/(.*?)\/[^\/]+\.md$/)
-          ? item.id.match(/plugins\/(.*?)\/[^\/]+\.md$/)[1]
-          : ""
-      ],
-    SupportBy: "Higress",
-    GithubHigressUrl: item.data.githubHigressUrl || `https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/${item.slug.split('/').pop()}`
-  }))
+  .map((item) => {
+    // 从 item.id 中提取可能的 key
+    const match = item.id.match(/plugins\/(.*?)\/[^\/]+\.md$/);
+
+    const key = match && match[1]
+      ? match[1].indexOf('/') !== -1
+        ? match[1].split('/')[0] // 匹配并提取 key
+        : match[1]
+      : "";
+    const childKey = key==='ai'? match[1].split('/')[1] : "";
+    const functionality = Functionality[key];
+    // 查找ai 副标题
+    const secondaryTitle = (functionality?.children && functionality.children.find(child => child.key === childKey)?.label) || '';
+      
+    return {
+      Img: "",
+      Title: item.data.title,
+      Tiers: "企业版",
+      Des: item.data.description,
+      Link: generateLink(item.slug),
+      SecondaryTitle: secondaryTitle,
+      Functionality: functionality?.description || '',
+      SupportBy: "Higress",
+      GithubHigressUrl: item.data.githubHigressUrl || `https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/${item.slug.split('/').pop()}`,
+    };
+  })
   .filter((item) => item.Functionality);
 ---
 
