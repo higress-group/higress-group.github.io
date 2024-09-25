@@ -249,6 +249,42 @@
           ]
         },
         {
+          "label": "操作指南",
+          "translations": {
+            "en": "How-tos"
+          },
+          "items":[
+            {
+              "label": "配置路由指向 gRPC 服务",
+              "translations": {
+                "en": "Configure a route with gRPC upstream"
+              },
+              "link": "docs/ops/how-tos/grpc-upstream"
+            },
+            {
+              "label": "配置路由指向 HTTPS 服务",
+              "translations": {
+                "en": "Configure a route with HTTP upstream"
+              },
+              "link": "docs/ops/how-tos/https-upstream"
+            },
+            {
+              "label": "配置 TCP 四层路由",
+              "translations": {
+                "en": "Configure a TCP route"
+              },
+              "link": "docs/ops/how-tos/tcp-route"
+            },
+            {
+              "label": "修改 Gateway 监听端口",
+              "translations": {
+                "en": "Modify gateway ports"
+              },
+              "link": "docs/ops/how-tos/gateway-ports"
+            }
+          ]
+        },
+        {
           "label": "版本升级",
           "translations": {
             "en": "Upgrade"
