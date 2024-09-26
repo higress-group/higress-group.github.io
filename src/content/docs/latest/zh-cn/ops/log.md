@@ -7,6 +7,12 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # 日志说明
 
+自定义日志字段可以通过下面命令，编辑 mesh 字段下的 accessLogFormat 字段
+
+```bash
+kubectl edit cm -n higress-system higress-config
+```
+
 查看日志可以使用下面命令:
 
 ```bash
