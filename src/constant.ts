@@ -6,44 +6,14 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "8月2日（周五）开源沙龙首个AI原生应用架构专场 | 上海站 ，欢迎报名！",
-    "mobileText": "8月2日（周五）开源沙龙首个AI原生应用架构专场 | 上海站 ，欢迎报名！",
-    "link": "https://summit.aliyun.com/cloudnative2024_developer_shanghai?spm=5176.20960838.0.0.7802305eyqMQf8",
+    "text": "云栖回顾 | 2024 云栖大会微服务和网关相关演讲材料",
+    "mobileText": "云栖回顾 | 2024 云栖大会微服务和网关相关演讲材料",
+    "link": "https://developer.aliyun.com/ebook/8379",
     "target": "_blank",
-    "display": false
+    "display": true
 }
 
 export const MEDIARESOURCE = null;
-
-// TODO: 配置algolia
-export const ALGOLIA = {
-  appId: 'XLRZN94V02',
-  apiKey: 'dc990c3b1509885bfe31b58063b60c51',
-  indexName: 'higress'
-}
-
-// 文档根据版本区分的提示banner
-export const DOCS_BANNER = {
-  latest: '',
-  next: '',
-  v1: '',
-  v2: '',
-}
-
-// TODO: 文档Header数据
-export const DOCS_ITEM = [
-  {
-    key: "latest",
-    label: "最新版（Latest）",
-    target: "_self",
-    link: "/docs/latest/overview/what-is-higress/",
-    translations: {
-      en: "Latest",
-      link: "/en/docs/latest/overview/what-is-higress/",
-    }
-  },
-
-];
 
 // 主要特性
 export const CHOOSE_REASON_LIST: ChooseReason[] = [
