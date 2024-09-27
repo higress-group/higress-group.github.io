@@ -6,40 +6,77 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ---
 
 
-# Higress是什么?
+## Higress 是什么?
 
-Higress是基于阿里内部的Envoy Gateway实践沉淀、以开源Istio + Envoy为核心构建的云原生API网关，实现了流量网关 + 微服务网关 + 安全网关三合一的高集成能力，深度集成Dubbo、Nacos、Sentinel等微服务技术栈，能够帮助用户极大的降低网关的部署及运维成本且能力不打折；在标准上全面支持Ingress与Gateway API，积极拥抱云原生下的标准API规范；同时，Higress Controller也支持Nginx Ingress平滑迁移，帮助用户零成本快速迁移到Higress。
+Higress 是基于阿里内部多年的 Envoy Gateway 实践沉淀，以开源 [Istio](https://github.com/istio/istio) 与 [Envoy](https://github.com/envoyproxy/envoy) 为核心构建的云原生 API 网关。
 
-![image](https://img.alicdn.com/imgextra/i1/O1CN01iO9ph825juHbOIg75_!!6000000007563-2-tps-2483-2024.png)
+Higress 在阿里内部作为 AI 网关，承载了通义千问 APP、百炼大模型 API、机器学习 PAI 平台等 AI 业务的流量。
 
-## 传统网关分类
+Higress 能够用统一的协议对接国内外所有 LLM 模型厂商，同时具备丰富的 AI 可观测、多模型负载均衡/fallback、AI token 流控、AI 缓存等能力：
 
-行业中通常把网关分为两个大类：流量网关与业务网关，流量网关主要提供全局性的、与后端业务无关的策略配置，例如阿里内部的的统一接入网关Tengine就是典型的流量网关；业务网关顾名思义主要提供独立业务域级别的、与后端业务紧耦合策略配置，随着应用架构模式从单体演进到现在的分布式微服务，业务网关也有了新的叫法 - 微服务网关（图示说明如下）。在目前容器技术与K8s主导的云原生时代，下一代网关模式依然是这样吗？
+![](https://img.alicdn.com/imgextra/i1/O1CN01fNnhCp1cV8mYPRFeS_!!6000000003605-0-tps-1080-608.jpg)
 
-![image](https://img.alicdn.com/imgextra/i2/O1CN01b5lrN41VXF7SzQtWU_!!6000000002662-0-tps-2116-974.jpg)
+### 什么是 AI 网关
 
-## Higress定位
+AI Gateway = AI Native API Gateway
 
-在虚拟化时期的微服务架构下，业务通常采用流量网关 + 微服务网关的两层架构，流量网关负责南北向流量调度和安全防护，微服务网关负责东西向流量调度和服务治理，而在容器和 K8s 主导的云原生时代，Ingress 成为 K8s 生态的网关标准，赋予了网关新的使命，使得流量网关 + 微服务网关合二为一成为可能。
+AI 网关的本质依然是 API 网关，AI 原生的意义在于，在这样的 API 网关里，AI 是一等公民。API 研发，API 供应，API 消费，以及 API 观测都基于 AI 场景下的需求，演进出全新的能力。
 
-作为面向南北向的公网网关，使用Waf防护异常流量是很常规的需求，而且随着互联网环境变得越来越复杂，用户对防护的诉求是持续增强的，常规做法是将流量先接入Waf安全网关，过滤后再将流量转发给流量网关，最后到达微服务网关；Higress希望通过内置Waf模块，使得用户的请求链接只经过Higress就可以同时完成Waf防护、流量分发、微服务治理，既可以降低链路RT，也可以降低网关的运维复杂度。因此Higress实现了流量网关 + 微服务网关 + 安全网关三合一的高集成能力。
+这是传统 API 网关的功能范畴，AI 场景下仍然有其通用价值：
 
-![image](https://img.alicdn.com/imgextra/i1/O1CN01B8h0j41nGRfxtGWfB_!!6000000005062-0-tps-2114-1004.jpg)
+![](https://img.alicdn.com/imgextra/i3/O1CN010HLOBV28WZkzCkHnE_!!6000000007940-2-tps-1904-908.png)
 
+在 AI 场景下，API 网关的功能范畴进一步扩展：
 
-
-## Higress为什么选择以Envoy + Istio为内核构建?
-
-在容器化的云原生大背景下，Kubernetes已经成为了基础设施与上层应用的标准接口，Kubernetes集群天然的内外网络隔离环境，使得外部流量进入Kubernetes集群内部需要通过入口网关，因此Kubernetes通过Ingress来规范化入口网关的定义与标准，虽然Ingress标准存在一些如路由表达能力弱等不足之处，社区已经在积极推进Gateway API标准定义来解决，但不可否认的是目前Ingress标准仍然占据主流，CNCF年度报告中也单独统计了Ingress Provider（Ingress标准的实现方统称为Ingress Provider）的使用情况。
-
-![image](https://img.alicdn.com/imgextra/i2/O1CN01S99fCF1VBG6dqsXoM_!!6000000002614-0-tps-2194-794.jpg)
-
-从上述统计报告中可以看到虽然目前Nginx Ingress仍然占据K8s Ingress Provider榜首，但Envoy的增长是最快的，已经从2019年的不足20%增长为2020年的37%，且仅在Nginx Ingress之后，增长势头非常迅猛，这说明选择以Envoy为内核是符合云原生发展趋势的；而且随着Service Mesh逐步被大众认可，Istio + Envoy的体系可以同时覆盖Mesh与Ingress领域，实现以一套技术架构调度东西向、南北向全域流量的目标，这对用户来说也是非常有意义的。
+![](https://img.alicdn.com/imgextra/i1/O1CN011Tlzje1gJvZrIfcCT_!!6000000004122-2-tps-1904-966.png)
 
 
 
-## Higress在阿里巴巴内部介绍
 
-Higress孵化自阿里巴巴内部2020年5月的"本地生活战役"，最初是为满足阿里巴巴集团与蚂蚁集团直接使用RPC请求互访的诉求而构建，而且借该项目也成功孵化了Dubbo 3.0的Triple协议，因此Higress也是内部第一个支持Triple协议的应用，同年Higress也成功支持了双11、双12等大促活动，后续随着业务范围的扩展，目前Higress在内部已经支持优酷、钉钉、达摩院、蚂蚁等业务，业务场景也扩展到了东西向、南北向的全域流量调度。
+## 核心优势
 
-![image](https://img.alicdn.com/imgextra/i4/O1CN01x3Ap5B1SEW4rltAQ7_!!6000000002215-0-tps-2398-1220.jpg)
+- **生产等级**
+
+  脱胎于阿里巴巴2年多生产验证的内部产品，支持每秒请求量达数十万级的大规模场景。
+
+  彻底摆脱 Nginx reload 引起的流量抖动，配置变更毫秒级生效且业务无感。对 AI 业务等长连接场景特别友好。
+
+- **流式处理**
+
+  支持真正的完全流式处理请求/响应 Body，Wasm 插件很方便地自定义处理 SSE （Server-Sent Events）等流式协议的报文。
+
+  在 AI 业务等大带宽场景下，可以显著降低内存开销。  
+    
+- **便于扩展**
+  
+  提供丰富的官方插件库，涵盖 AI、流量管理、安全防护等常用功能，满足90%以上的业务场景需求。
+
+  主打 Wasm 插件扩展，通过沙箱隔离确保内存安全，支持多种编程语言，允许插件版本独立升级，实现流量无损热更新网关逻辑。
+
+- **安全易用**
+  
+  基于 Ingress API 和 Gateway API 标准，提供开箱即用的 UI 控制台（demo 点[这里](http://demo.higress.io/)），WAF 防护插件、IP/Cookie CC 防护插件开箱即用。
+
+  支持对接 Let's Encrypt 自动签发和续签免费证书，并且可以脱离 K8s 部署，一行 Docker 命令即可启动，方便个人开发者使用。
+
+## 使用场景
+
+- **AI 网关**:
+
+  Higress 提供了一站式的 AI 插件集，可以增强依赖 AI 能力业务的稳定性、灵活性、可观测性，使得业务与 AI 的集成更加便捷和高效。
+
+- **Kubernetes Ingress 网关**:
+
+  Higress 可以作为 K8s 集群的 Ingress 入口网关, 并且兼容了大量 K8s Nginx Ingress 的注解，可以从 K8s Nginx Ingress 快速平滑迁移到 Higress。
+  
+  支持 [Gateway API](https://gateway-api.sigs.k8s.io/) 标准，支持用户从 Ingress API 平滑迁移到 Gateway API。
+  
+- **微服务网关**:
+
+  Higress 可以作为微服务网关, 能够对接多种类型的注册中心发现服务配置路由，例如 Nacos, ZooKeeper, Consul, Eureka 等。
+  
+  并且深度集成了 [Dubbo](https://github.com/apache/dubbo), [Nacos](https://github.com/alibaba/nacos), [Sentinel](https://github.com/alibaba/Sentinel) 等微服务技术栈，基于 Envoy C++ 网关内核的出色性能，相比传统 Java 类微服务网关，可以显著降低资源使用率，减少成本。
+  
+- **安全防护网关**:
+
+  Higress 可以作为安全防护网关， 提供 WAF 的能力，并且支持多种认证鉴权策略，例如 key-auth, hmac-auth, jwt-auth, basic-auth, oidc 等。  
