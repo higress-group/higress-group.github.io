@@ -15,6 +15,33 @@ export const TOPBAR = {
 
 export const MEDIARESOURCE = null;
 
+// TODO: 配置algolia
+export const ALGOLIA = {
+  appId: 'XLRZN94V02',
+  apiKey: 'dc990c3b1509885bfe31b58063b60c51',
+  indexName: 'higress'
+}
+// 文档根据版本区分的提示banner
+export const DOCS_BANNER = {
+  latest: '',
+  next: '',
+  v1: '',
+  v2: '',
+}
+// TODO: 文档Header数据
+export const DOCS_ITEM = [
+  {
+    key: "latest",
+    label: "最新版（Latest）",
+    target: "_self",
+    link: "/docs/latest/overview/what-is-higress/",
+    translations: {
+      en: "Latest",
+      link: "/en/docs/latest/overview/what-is-higress/",
+    }
+  },
+];
+
 // 主要特性
 export const CHOOSE_REASON_LIST: ChooseReason[] = [
   {
