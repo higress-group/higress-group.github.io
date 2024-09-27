@@ -24,8 +24,8 @@ description: Higress 维护者名单
 ## Higress Approvers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
-| 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
 | 范扬 | [SpecialYang](https://github.com/SpecialYang) | 字节跳动        |
+| 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
 
 ## Higress Reviewers
 | 姓名  | github                        | 公司组织             |
