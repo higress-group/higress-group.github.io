@@ -19,13 +19,13 @@ description: Higress 维护者名单
 | 耿蕾蕾 | [gengleilei](https://github.com/gengleilei) | 阿里云        |
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | 阿里云        |
 | 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
-| 范扬 | [SpecialYang](https://github.com/SpecialYang) | 字节跳动        |
 | 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
 
 ## Higress Approvers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
 | 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
+| 范扬 | [SpecialYang](https://github.com/SpecialYang) | 字节跳动        |
 
 ## Higress Reviewers
 | 姓名  | github                        | 公司组织             |
