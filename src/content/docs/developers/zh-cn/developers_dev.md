@@ -18,7 +18,8 @@ description: Higress 维护者名单
 | 董艺荃 | [CH3CHO](https://github.com/CH3CHO) | 携程        |
 | 耿蕾蕾 | [gengleilei](https://github.com/gengleilei) | 阿里云        |
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | 阿里云        |
-| 范扬 | [SpecialYang](https://github.com/SpecialYang) | 阿里云        |
+| 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
+| 范扬 | [SpecialYang](https://github.com/SpecialYang) | 字节跳动        |
 | 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
 
 ## Higress Approvers
@@ -31,7 +32,6 @@ description: Higress 维护者名单
 |-----|-------------------------------| --------------- |
 | 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
 | 凌轶群 | [Lynskylate](https://github.com/Lynskylate) | eBay  |
-| 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
 | 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
 | 赵炳堃 | [sjtuzbk](https://github.com/sjtuzbk) | 阿里云        |
 | 韦鑫 | [WeixinX](https://github.com/weixinx) | 爱橙科技   |
