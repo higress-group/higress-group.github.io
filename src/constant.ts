@@ -13,7 +13,6 @@ export const TOPBAR = {
     "display": true
 }
 
-export const MEDIARESOURCE = null;
 
 // TODO: 配置algolia
 export const ALGOLIA = {
@@ -41,6 +40,8 @@ export const DOCS_ITEM = [
     }
   },
 ];
+
+export const MEDIARESOURCE = null;
 
 // 主要特性
 export const CHOOSE_REASON_LIST: ChooseReason[] = [
