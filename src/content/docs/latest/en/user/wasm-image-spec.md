@@ -60,7 +60,7 @@ spec:
       properties:
         consumers:
           type: array
-          scope: GLOBAL # Field effective scope. Options: GLOBAL (global configuration), INSTANCE (instance-level configuration, which can be set associated to routes or domains.), ALL (Available as both global and instance-level configurations). Optional. Default value is INSTANCE.
+          x-scope: GLOBAL # Field effective scope. Options: GLOBAL (global configuration), INSTANCE (instance-level configuration, which can be set associated to routes or domains.), ALL (Available as both global and instance-level configurations). Optional. Default value is INSTANCE.
           title: 调用方列表
           x-title-i18n:
             en-US: Consumer List
