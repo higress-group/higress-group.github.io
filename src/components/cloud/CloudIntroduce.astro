@@ -45,7 +45,7 @@ import { getCloudPostpaidData, getCloudResourcePackData } from "@/constant";
                       {item?.title}
                     </div>
                   </div>
-                  <div class="price-content pt-4 border-b border-t border-info h-32">
+                  <div class="price-content pt-4 border-b border-t border-info min-h-32">
                     <span class="price text-[2.75rem] leading-[3rem] font-bold text-link3">
                       {item?.price}
                     </span>
@@ -105,7 +105,7 @@ import { getCloudPostpaidData, getCloudResourcePackData } from "@/constant";
                       {item?.title}
                     </div>
                   </div>
-                  <div class="price-content pt-4 border-b border-t border-info h-32">
+                  <div class="price-content pt-4 border-b border-t border-info min-h-32">
                     <span class="price text-[2.75rem] leading-[3rem] font-bold text-link3">
                       {item?.price}
                     </span>
@@ -128,7 +128,7 @@ import { getCloudPostpaidData, getCloudResourcePackData } from "@/constant";
                   <div class="pl-2 h-20">
                     {item?.feature?.map((el, i) => {
                       return (
-                        <div class="feature text-left text-xs text-neutral/[0.8] mt-2 line-clamp-2">
+                        <div class={`feature text-left text-xs text-neutral/[0.8] ${i > 0? 'mt-1': 'mt-4'} line-clamp-2`}>
                           {el}
                         </div>
                       );
