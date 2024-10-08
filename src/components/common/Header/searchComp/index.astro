@@ -114,6 +114,19 @@ const docsearchTranslations: DocSearchTranslationProps = {
 
 <script>
 	import { ALGOLIA } from "@/constant";
+
+	const getRootUrl = (url: string) => {
+		if (!url) {
+			return url;
+		}
+		const schemeIndex = url.indexOf("://");
+		const firstSlashIndex = url.indexOf(
+			"/",
+			schemeIndex === -1 ? 0 : schemeIndex + "://".length,
+		);
+		return firstSlashIndex === -1 ? url : url.substring(0, firstSlashIndex);
+	};
+
 	let url = "";
 	class StarlightDocSearch extends HTMLElement {
 		constructor() {
@@ -132,6 +145,37 @@ const docsearchTranslations: DocSearchTranslationProps = {
 			const options: Parameters<typeof docsearch>[0] = {
 				...ALGOLIA,
 				container: "sl-doc-search",
+				transformItems(items) {
+					if (!items || !items.length) {
+						return items;
+					}
+					const filteredItems = [];
+					const pageRootUrl = getRootUrl(url);
+					const isPageEnglish = url
+						.substring(pageRootUrl.length)
+						.startsWith("/en");
+					for (const item of items) {
+						const itemUrl = item.url;
+						if (!itemUrl) {
+							continue;
+						}
+						const itemRootUrl = getRootUrl(itemUrl);
+						const itemPath = itemUrl.substring(itemRootUrl.length);
+						if (itemPath.startsWith("/en") !== isPageEnglish) {
+							continue;
+						}
+						if (itemRootUrl === pageRootUrl) {
+							filteredItems.push(item);
+						} else {
+							filteredItems.push(
+								Object.assign({}, item, {
+									url: pageRootUrl + itemPath,
+								}),
+							);
+						}
+					}
+					return filteredItems;
+				},
 			};
 			try {
 				const translations = JSON.parse(
