@@ -248,7 +248,8 @@ data:
       tlsSecret: foo-com-secret
   # 对匹配的域名使用特定的 secret
     - domains:  
-       - statica.example.org- staticb.example.org
+       - statica.example.org
+       - staticb.example.org
       tlsSecret: static-example-org-certificate
   # 兜底证书，对于不匹配上面规则的域名开启
     - domains:  
