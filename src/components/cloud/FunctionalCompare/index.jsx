@@ -74,13 +74,13 @@ const FunctionalCompare = (props) => {
               <div class='text-warning text-xs h-2 leading-8'></div>
             </th>
             <th class="col4">
-              <p class="mb-6 text-2xl font-normal"> 专业版</p>
+              <p class="mb-6 text-2xl font-normal"> 开发版</p>
               <div class='h-2 text-warning text-xs text-left pl-4'>
               </div>
 
             </th>
             <th class="col5">
-              <p class="mb-6 text-2xl font-normal"> Serverless 版</p>
+              <p class="mb-6 text-2xl font-normal"> 生产版</p>
               <div class='h-2 text-warning text-xs text-left pl-4'>
               </div>
             </th>
