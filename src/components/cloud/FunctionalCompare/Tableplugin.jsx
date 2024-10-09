@@ -23,22 +23,36 @@ const Tableplugin = (props) => {
               <div class='text-warning text-xs h-28 leading-8'>免费</div>
             </th>
             <th class="col4">
-              <p class="mb-6 text-2xl font-normal"> 专业版</p>
-              <div class='h-28 text-warning text-xs text-left pl-4'>
-                <p class='mb-1'>后付费：0.84元/节点/小时起</p>
-                <p class='mb-1'>资源包：422元/月起（相当于1个节点连续运行7200小时）</p>
-                <p class='mb-1'>1. 首次购买资源包享受4折优惠，比后付费节省436元/月</p>
-                <p class='mb-1'>2. 资源包续费，比后付费节省183元/月</p>
+              <p class="mb-6 text-2xl font-normal"> 开发版</p>
+              <div class='min-h-28 text-warning text-xs text-left pl-4'>
+                <p class='mb-1'>后付费：0.826元/小时起</p>
+                <p class='mb-1'>apigw.dev.x1</p>
+                <p class='mb-1'>最大客户端连接数：24000</p>
+                <p class='mb-1'>最大 HTTPS 每秒新建连接数：800</p>
+                <p class='mb-1'>最大短连接 QPS：1700</p>
+                <p class='mb-1'>最大长连接 QPS：2200</p>
+                <p class='mb-1'>无 SLA 保障</p>
+                
+                <p class='mb-1'>资源包：249.6元/月起</p>
+                <p class='mb-1'>1. 首次购买资源包享受6折优惠，比后付费节省178元/月</p>
+                <p class='mb-1'>2. 资源包续费，比后付费节省345元/月</p>
               </div>
 
             </th>
             <th class="col5">
-              <p class="mb-6 text-2xl font-normal"> Serverless 版</p>
-              <div class='h-28 text-warning text-xs text-left pl-4'>
-                <p class='mb-1'>后付费：0.135元/万次请求（采用阶梯计费，用得越多，单位请求计费越便宜）</p>
-                <p class='mb-1'>资源包：92元起</p>
-                <p class='mb-1'>1. 承诺购买时长3个月，享95折</p>
-                <p class='mb-1'>2. 承诺购买时长1年，享9折</p>
+              <p class="mb-6 text-2xl font-normal"> 生产版</p>
+              <div class='min-h-28 text-warning text-xs text-left pl-4'>
+                <p class='mb-1'>后付费：1.935元/小时起</p>
+                <p class='mb-1'>apigw.small.x1</p>
+                <p class='mb-1'>最大客户端连接数：48000</p>
+                <p class='mb-1'>最大 HTTPS 每秒新建连接数：1600</p>
+                <p class='mb-1'>最大短连接 QPS：3400</p>
+                <p class='mb-1'>最大长连接 QPS：4400</p>
+                <p class='mb-1'>SLA：99.99%</p>
+
+                <p class='mb-1'>资源包：585元/月起</p>
+                <p class='mb-1'>1. 首次购买资源包享受6折优惠，比后付费节省808元/月</p>
+                <p class='mb-1'>2. 资源包续费，比后付费节省418元/月</p>
               </div>
             </th>
           </tr>
