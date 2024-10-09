@@ -559,7 +559,7 @@ export const getCloudResourcePackData = (t: Function) => [
     unit: "",
     priceDesc: [t("cloud.introduce.free.feature")],
     linkName: t("cloud.introduce.free.link"),
-    link: "https://free.aliyun.com?spm=higress-website.topbar.0.0.0",
+    link: "https://free.aliyun.com/?spm=higress-website.topbar.0.0.0&searchKey=api%E7%BD%91%E5%85%B3",
     feature: [
       t("cloud.introduce.free.discount.3"),
     ],
