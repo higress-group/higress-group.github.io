@@ -293,6 +293,8 @@ static_resources:
                         "mockEnable": false
                       }
           - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
   clusters:
   - name: httpbin
     connect_timeout: 30s

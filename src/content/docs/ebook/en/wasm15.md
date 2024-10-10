@@ -249,6 +249,8 @@ static_resources:
                             local:
                               filename: "all-in-one.wasm"
                   - name: envoy.filters.http.router
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
 
     - name: http-body-operation
       address:
@@ -278,6 +280,8 @@ static_resources:
                             local:
                               filename: "all-in-one.wasm"
                   - name: envoy.filters.http.router
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
 
     - name: tcp-total-data-size-counter
       address:
