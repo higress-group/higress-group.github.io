@@ -1,6 +1,6 @@
 ---
-title: "Nacos Python SDK 强势来袭，动态管理大模型 Prompt！ 副本"
-description: "Nacos Python SDK 强势来袭，动态管理大模型 Prompt！ 副本"
+title: "Nacos Python SDK 强势来袭，动态管理大模型 Prompt！"
+description: "Nacos Python SDK 强势来袭，动态管理大模型 Prompt！"
 date: "2024-09-27"
 category: "ecosystem"
 keywords: ["Higress"]
