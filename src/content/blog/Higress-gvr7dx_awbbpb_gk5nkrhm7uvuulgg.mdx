@@ -16,9 +16,9 @@ authors: "CH3CHO"
 @张嘉豪 ｜百威英博 SRE工程师<br />Higress 提供的 Wasm 插件机制很好用，可以很方便地对网关功能进行扩展，插件逻辑频繁改动也能实时热更新，不会影响网关流量，扩展性和稳定性鱼和熊掌兼得，替运维开发节省不少时间与精力。祝愿 Higress 开源越做越好，把云原生技术的红利用更普惠的方式带给大家。<br />@王德冲｜UU跑腿 业务中台架构师<br />Higress 项目受到了许多人的关注和认可，在未来的开发中，继续保持创新和努力，不断提高产品的质量和用户体验，为更多的人带来便利和价值。让 Higress 项目更加优秀，为开源社区做出更大的贡献！祝所有 Higress 开源开发者在未来的道路上越走越远。
 <a name="dvwMr"></a>
 ## Higress 1.0版本新功能预览
-1. 服务来源新增固定IP地址和DNS域名<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723434701894-578f21f0-a8eb-4b9c-8638-b522ea89003f.png#clientId=ubde5bda5-015d-4&from=paste&id=u8f168db6&originHeight=386&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u1aaa92dd-c0a0-488d-8a6b-dd4562de943&title=)<br />创建路由转发给目标服务时，不再局限于选择 K8s Service，或是 Nacos 和 ZooKeeper 上的服务，可以直接配置基于 IP 或者域名的目标服务。
+1. 服务来源新增固定IP地址和DNS域名<br />![](/img/1728551141189.png)<br />创建路由转发给目标服务时，不再局限于选择 K8s Service，或是 Nacos 和 ZooKeeper 上的服务，可以直接配置基于 IP 或者域名的目标服务。
 
-2. 提供多种路由策略<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723434701860-4001e695-72d7-4e02-bfe4-9fceaab4e998.png#clientId=ubde5bda5-015d-4&from=paste&id=ud4dc308c&originHeight=616&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ubab0897e-d299-4e10-be99-bd28521bbb0&title=)<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723434701870-4a3f9778-d01b-4218-8814-8506d0a456d8.png#clientId=ubde5bda5-015d-4&from=paste&id=udf3b73f0&originHeight=622&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u5695394b-0180-4ec1-95b5-fa4e05566b1&title=)<br />我们将 Ingress 能力封装为开箱即用的策略配置，同时基于 Wasm 插件实现的策略也可以在这里灵活开启，用户也可以配置自定义的 Wasm 插件生效，这些都将在正式 GA 版本里推出。
+2. 提供多种路由策略<br />![](/img/1728551141374.png)<br />![](/img/1728551141536.png)<br />我们将 Ingress 能力封装为开箱即用的策略配置，同时基于 Wasm 插件实现的策略也可以在这里灵活开启，用户也可以配置自定义的 Wasm 插件生效，这些都将在正式 GA 版本里推出。
 
-欢迎加入 Higress 社区群，及时了解更多 Higress 动向：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434784956-894aa73b-28bb-43cb-b1e8-96673d31571b.webp#clientId=ubde5bda5-015d-4&from=paste&id=ue183e5f1&originHeight=405&originWidth=720&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ub1502292-16a3-4ee9-9a96-dba08085edf&title=)
+欢迎加入 Higress 社区群，及时了解更多 Higress 动向：<br />![](/img/1728551141697.png)
 

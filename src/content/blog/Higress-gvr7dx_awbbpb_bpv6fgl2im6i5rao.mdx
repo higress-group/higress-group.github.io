@@ -7,7 +7,7 @@ keywords: ["Higress"]
 authors: "CH3CHO"
 ---
 
-作者介绍：钰诚<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723431007943-7a4d92b5-e15f-4a45-9dff-84e853b7337d.png#clientId=uc3452dac-c66b-4&from=paste&id=u14fc59c2&originHeight=880&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u5e63db8a-e801-4fdf-90e3-b8198b78ec8&title=)<br />Higress 是基于阿里内部的 Envoy Gateway 实践沉淀、以开源 Istio + Envoy 为核心构建的下一代云原生网关，实现了流量网关 + 微服务网关 + 安全网关三合一的高集成能力，深度集成 Dubbo、Nacos、Sentinel 等微服务技术栈，能够帮助用户极大地降低网关的部署及运维成本且能力不打折；在标准上全面支持 Ingress 与 Gateway API，积极拥抱云原生下的标准 API 规范；同时，Higress Controller也支持 Nginx Ingress平滑迁移，帮助用户零成本快速迁移到 Higress。<br />Higress 具有丰富的可观测能力，包含日志、监控、链路追踪等，本文主要介绍 Higress 的链路追踪功能以及如何与主流的链路追踪系统进行集成。 
+作者介绍：钰诚<br />![](/img/1728551136979.png)<br />Higress 是基于阿里内部的 Envoy Gateway 实践沉淀、以开源 Istio + Envoy 为核心构建的下一代云原生网关，实现了流量网关 + 微服务网关 + 安全网关三合一的高集成能力，深度集成 Dubbo、Nacos、Sentinel 等微服务技术栈，能够帮助用户极大地降低网关的部署及运维成本且能力不打折；在标准上全面支持 Ingress 与 Gateway API，积极拥抱云原生下的标准 API 规范；同时，Higress Controller也支持 Nginx Ingress平滑迁移，帮助用户零成本快速迁移到 Higress。<br />Higress 具有丰富的可观测能力，包含日志、监控、链路追踪等，本文主要介绍 Higress 的链路追踪功能以及如何与主流的链路追踪系统进行集成。 
 <a name="YKZO0"></a>
 ## 一、分布式链路追踪介绍
 分布式链路追踪（Distributed Tracing）是一种用于跟踪和监控分布式系统中请求的路径和性能的技术。它可以帮助开发人员和运维团队在复杂的分布式系统中快速定位和解决问题。
@@ -22,7 +22,7 @@ authors: "CH3CHO"
 
 分布式链路追踪通过在分布式系统中的每个请求上添加唯一的标识符（通常是一个trace ID），以及另外一些关键的上下文信息（例如 span ID、父 span ID 等），来跟踪请求的流转和路径，如下图所示。当请求通过不同的服务和组件时，每个组件都会创建一个 span 并记录相关的信息，包括该组件的处理时间、调用的其他组件等。这些 span 将形成一个分布式的链路，描述了请求的完整路径和各个组件的性能。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723431007906-fbb8adb6-ae73-4774-83d1-b691313dd951.png#clientId=uc3452dac-c66b-4&from=paste&id=ue9ef427e&originHeight=240&originWidth=910&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u1a089b49-27ce-4bfc-abab-995488176f4&title=)
+![](/img/1728551137124.png)
 
 <a name="gAQRl"></a>
 ## 二、Apache SkyWalking 介绍
@@ -35,9 +35,9 @@ SkyWalking 逻辑上分为四部分：探针，平台后端，存储和用户界
 - **存储**：通过开放的插件化的接口存放 SkyWalking 数据，支持 ElasticSearch、MySQL等
 - **UI**：一个基于接口高度定制化的 Web 系统，用户可以可视化查看和管理 SkyWalking 数据
 
-架构图如下所示：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723431008512-6091ef88-4ec5-4200-bbbd-0159d90aebd7.png#clientId=uc3452dac-c66b-4&from=paste&id=u58e0463d&originHeight=361&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ueda26d19-f2f0-4aa3-bc3d-a891c662d94&title=)
+架构图如下所示：<br />![](/img/1728551137493.png)
 
-应用程序接入 skywalking 时主要有两种方法，分别是通过 agent 方式接入以及通过 SDK 方式接入。skywalking 官方提供了适用于多种语言的agent 供开发者使用。不管使用什么方式接入，目的都是收集并且重新格式化数据为 skywalking 使用的方式，然后发送到 skywalking 的后端进行处理，如下图所示：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723431008547-f6df833d-e054-4d5c-af50-0eb3147db11f.png#clientId=uc3452dac-c66b-4&from=paste&id=uadc34e77&originHeight=630&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u8d40cd18-5499-484a-bd2c-ad7b7eea5ef&title=)
+应用程序接入 skywalking 时主要有两种方法，分别是通过 agent 方式接入以及通过 SDK 方式接入。skywalking 官方提供了适用于多种语言的agent 供开发者使用。不管使用什么方式接入，目的都是收集并且重新格式化数据为 skywalking 使用的方式，然后发送到 skywalking 的后端进行处理，如下图所示：<br />![](/img/1728551137693.png)
 <a name="o9iv3"></a>
 ## 三、Higress链路踪能力
 Higress 支持多种链路追踪服务，详情参见 envoy 官方文档**[1]**。在 Higress 1.1 版本以上，仅需要在 configmap 中增加以下配置即可集成 skywalking，其中 sampling 字段设置采样率。
@@ -56,7 +56,7 @@ data:
 
 <a name="JgBhK"></a>
 ## 四、测试环境架构
-本文中使用 6 个 spring boot 应用在本地 k8s 集群中构建如下调用链路：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723431009467-9e2972f1-3e8e-492c-ae95-8eb87900b45a.png#clientId=uc3452dac-c66b-4&from=paste&id=u0c82af20&originHeight=395&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ub05bdc7d-94a3-4cfe-91b8-85b16983d79&title=)<br />本次测试中涉及的代码可以在 higress-demo**[2]** 中获取，可以通过修改环境变量中`remote_addrs`和`sleep_time`来指定 springboot 程序要调用的下游服务以及当前服务休眠的时间，从而创造不同的测试场景。
+本文中使用 6 个 spring boot 应用在本地 k8s 集群中构建如下调用链路：<br />![](/img/1728551137846.png)<br />本次测试中涉及的代码可以在 higress-demo**[2]** 中获取，可以通过修改环境变量中`remote_addrs`和`sleep_time`来指定 springboot 程序要调用的下游服务以及当前服务休眠的时间，从而创造不同的测试场景。
 <a name="vJTnU"></a>
 ## 五、链路追踪示例
 测试时，设置 springboot 服务的 rt 分别为：
@@ -76,15 +76,15 @@ while :; do curl springboot.higress.io/spring-svc-1 ; done
 ```
 <a name="aQirr"></a>
 ### 获取微服务调用链路
-skywalking 基于请求调用链路生成微服务之间的拓扑图，通过拓扑图可以清晰的看到系统架构，如下图所示：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723431009878-10769a0e-038b-4fe9-be5b-4f4857b3e1c0.png#clientId=uc3452dac-c66b-4&from=paste&id=u6982abe3&originHeight=947&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u81d29712-478f-408a-8a98-9766f124509&title=)
+skywalking 基于请求调用链路生成微服务之间的拓扑图，通过拓扑图可以清晰的看到系统架构，如下图所示：<br />![](/img/1728551138036.png)
 <a name="IK7rk"></a>
 ### 排查系统性能瓶颈
-当系统整体 rt 较高时，如何排查系统的性能瓶颈往往是开发者关心的问题。通过链路追踪能够帮助开发者排查系统的性能瓶颈。<br />根据 trace id 能够查看请求的链路，并且能够看到链路中各节点记录的相关信息，下图较为直观的反映了请求调用链路中各环节响应时间的对比：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723431009955-d2786456-9ca2-44d0-a34f-7f7086396b1e.png#clientId=uc3452dac-c66b-4&from=paste&id=u99d958f4&originHeight=707&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u0d6c6cb2-fa39-4230-9f29-02d3b007c94&title=)<br />以下表格反映了每个请求自身占用的时间，通过该表格可以看到 springboot-svc-4-2 耗时最久，为 504 ms，开发者可以根据此结果对服务进行性能优化。<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723431010021-1a5c1001-dd1f-4657-99fd-a31ceed82320.png#clientId=uc3452dac-c66b-4&from=paste&id=uf7296916&originHeight=519&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u8b771ddd-fc82-49f5-8f54-f7375948e19&title=)
+当系统整体 rt 较高时，如何排查系统的性能瓶颈往往是开发者关心的问题。通过链路追踪能够帮助开发者排查系统的性能瓶颈。<br />根据 trace id 能够查看请求的链路，并且能够看到链路中各节点记录的相关信息，下图较为直观的反映了请求调用链路中各环节响应时间的对比：<br />![](/img/1728551138238.png)<br />以下表格反映了每个请求自身占用的时间，通过该表格可以看到 springboot-svc-4-2 耗时最久，为 504 ms，开发者可以根据此结果对服务进行性能优化。<br />![](/img/1728551138430.png)
 <a name="qUVsU"></a>
 ### 排查系统错误节点
-当系统中调用链路较为复杂时，如果某个环节出现错误，排查问题对于开发者来说是一件困难的事情，现在删除 springboot svc 4-2 来模拟系统某一环节出现错误的情况，通过链路追踪来排查问题。<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723431010264-81e23b34-7e3f-48bf-9d2f-c793486eaaa5.png#clientId=uc3452dac-c66b-4&from=paste&id=u5fe58af6&originHeight=571&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=uea81450a-78d7-4f36-b4b3-d46f06bcd1d&title=)<br />此时链路追踪显示的调用链路如上图所示，其中红色圆圈表示服务出现错误，可以看到此时链路中 springboot svc 1，springboot svc 2-1，springboot svc 3，springboot svc 4-2 的调用都是错误的，这些服务调用错误都是由 springboot svc 4-2 调用错误引发的连锁反应，只有 springboot svc 4-1 调用是成功的。<br />调用 springboot svc 4-2 时 skywalking span 中记录的信息如下：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723431010715-46bd0824-6688-48ae-9782-94c64a94eaf5.png#clientId=uc3452dac-c66b-4&from=paste&id=u0a632c2c&originHeight=513&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ub559a975-baf7-40f7-9d27-68d2afe57ad&title=)<br />通过以上信息我们能够知道 springboot svc 4-2 的服务端出现了问题，从而能够精准地去解决问题。
+当系统中调用链路较为复杂时，如果某个环节出现错误，排查问题对于开发者来说是一件困难的事情，现在删除 springboot svc 4-2 来模拟系统某一环节出现错误的情况，通过链路追踪来排查问题。<br />![](/img/1728551138595.png)<br />此时链路追踪显示的调用链路如上图所示，其中红色圆圈表示服务出现错误，可以看到此时链路中 springboot svc 1，springboot svc 2-1，springboot svc 3，springboot svc 4-2 的调用都是错误的，这些服务调用错误都是由 springboot svc 4-2 调用错误引发的连锁反应，只有 springboot svc 4-1 调用是成功的。<br />调用 springboot svc 4-2 时 skywalking span 中记录的信息如下：<br />![](/img/1728551138773.png)<br />通过以上信息我们能够知道 springboot svc 4-2 的服务端出现了问题，从而能够精准地去解决问题。
 <a name="Y5ocs"></a>
 ## 六、参与社区贡献
-Higress 开源贡献小组正在火热招募贡献者。早期参与开源更容易成为项目 Committer，并有更多机会成为 Higress PMC(Project Management Committee) 的一员，参与主导 Higress 社区的前进方向。欢迎加入扫描下方二维码，或钉钉搜索群号：30735012403，加入 Higress 社区群：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723431010811-84c7f687-2181-4083-8432-dbe347f9a7e8.png#clientId=uc3452dac-c66b-4&from=paste&id=u31335bea&originHeight=654&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u16bc4297-2984-4d35-aad9-b156b5ce337&title=)<br />**相关链接：<br />[1]：envoy 官方文档文档**https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/observability/tracing#overview<br />**[2]：higress-demo**<br />https://github.com/higress-group/higress-demo/tree/main/observability/skywalking
+Higress 开源贡献小组正在火热招募贡献者。早期参与开源更容易成为项目 Committer，并有更多机会成为 Higress PMC(Project Management Committee) 的一员，参与主导 Higress 社区的前进方向。欢迎加入扫描下方二维码，或钉钉搜索群号：30735012403，加入 Higress 社区群：<br />![](/img/1728551138986.png)<br />**相关链接：<br />[1]：envoy 官方文档文档**https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/observability/tracing#overview<br />**[2]：higress-demo**<br />https://github.com/higress-group/higress-demo/tree/main/observability/skywalking
 
 

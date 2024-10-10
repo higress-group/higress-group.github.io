@@ -30,7 +30,7 @@ Higress ([https://github.com/alibaba/higress](https://github.com/alibaba/higress
 高德地图提供了地图相关业务的API服务，例如地点搜索，导航等等；心知天气提供了天气情况查询的相关API服务。两个服务都提供了每日免费的API调用次数，方便用户测试。<br />使用这两个服务需要去其官方网址，注册账号，申请apiKey，有了apiKey，便可以根据官方API文档去调用API。官方文档的链接我放在下方，这里就不再赘述申请apiKey的过程。<br />高德地图：[入门指南-Web服务 API|高德地图API (amap.com)](https://lbs.amap.com/api/webservice/gettingstarted)<br />心知天气：[查看/修改你的API密钥 (yuque.com)](https://seniverse.yuque.com/hyper_data/api_v3/gc03wk)
 <a name="enn2o"></a>
 ### Higress服务配置
-为了让插件能够访问通义千问大模型以及高德地图和心知天气服务，需要在Higress的路由管理-服务中，配置服务。服务类型为DNS域名：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1724058532640-7aef3483-4790-43b2-8762-3b451adf9245.png#clientId=u76be9aab-f03b-4&id=yKidO&originHeight=369&originWidth=3188&originalType=binary&ratio=1&rotation=0&showTitle=false&size=312249&status=done&style=none&taskId=ub938b099-af89-424d-a201-3e99890e3b0)
+为了让插件能够访问通义千问大模型以及高德地图和心知天气服务，需要在Higress的路由管理-服务中，配置服务。服务类型为DNS域名：<br />![image.png](/img/1728551756722.png)
 
 <a name="pjFBL"></a>
 ### 插件参数配置
@@ -194,11 +194,11 @@ curl 'http://<这里换成网关公网IP>/api/openai/v1/chat/completions' \
 ## 三、AI Agent实现原理
 <a name="C9b06"></a>
 ### ReAct原理
-AI Agent插件的实现是使用了ReAct(Reasoning and Action)，ReAct一词来自于论文《ReAct: Synergizing Reasoning and Acting in Language Models》，其核心思想是通过思维链的方式，引导模型将复杂问题进行拆分，一步一步地推理(Reasoning)和行动(Action)，同事还引入了观察(Observation)环节，在每次执行(Action)之后，都会先观察(Observation)当前现状，然后再进行下一步的推理(Reasoning)。<br />ReAct，就是要让开发者引导大模型进行推理，然后根据推理结果，判断需要采取哪个行动（调用工具），与外界环境互动。<br />ReAct的工作流程如下：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1724058532646-d5a2eaeb-a7d6-4b90-89d2-1332eb50df19.png#clientId=u76be9aab-f03b-4&id=EKZMT&originHeight=663&originWidth=1293&originalType=binary&ratio=1&rotation=0&showTitle=false&size=108680&status=done&style=none&taskId=u3be08657-7659-46bb-b7fc-a8fa811c540)
+AI Agent插件的实现是使用了ReAct(Reasoning and Action)，ReAct一词来自于论文《ReAct: Synergizing Reasoning and Acting in Language Models》，其核心思想是通过思维链的方式，引导模型将复杂问题进行拆分，一步一步地推理(Reasoning)和行动(Action)，同事还引入了观察(Observation)环节，在每次执行(Action)之后，都会先观察(Observation)当前现状，然后再进行下一步的推理(Reasoning)。<br />ReAct，就是要让开发者引导大模型进行推理，然后根据推理结果，判断需要采取哪个行动（调用工具），与外界环境互动。<br />ReAct的工作流程如下：<br />![image.png](/img/1728551756883.png)
 
 <a name="BJkQ0"></a>
 ### 插件实现逻辑
-插件的工作流程如下：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1724058532774-2c73fdf8-77a8-42c2-a85c-1605f53e397f.png#clientId=u76be9aab-f03b-4&id=tRObU&originHeight=1473&originWidth=2733&originalType=binary&ratio=1&rotation=0&showTitle=false&size=473723&status=done&style=none&taskId=u1fea02d4-4610-47b6-bf88-a67e26f90ea)<br />AI Proxy插件配置在默认阶段，而AI Agent可以配置在确保比AI Agent优先级高的阶段，比如认证阶段。这样可以保证用户的http request可以先被AI Agent拦截到。<br />AI Agent的处理过程分为三个部分。
+插件的工作流程如下：<br />![image.png](/img/1728551757082.png)<br />AI Proxy插件配置在默认阶段，而AI Agent可以配置在确保比AI Agent优先级高的阶段，比如认证阶段。这样可以保证用户的http request可以先被AI Agent拦截到。<br />AI Agent的处理过程分为三个部分。
 <a name="F98xh"></a>
 #### 1. 参数配置
 使用AI Agent需要先按上一章节的插件参数配置的格式配置好服务以及api相关参数，也就是图中第0步要做的工作。

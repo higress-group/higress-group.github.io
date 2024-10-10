@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node runtime.js && node script/gitHubData.js && astro build",
+    "build": "node runtime.js && node script/gitHubData.js && node script/updateIntranetImg.js && astro build",
     "check": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -23,6 +23,7 @@
     "@iconify-json/basil": "^1.1.5",
     "@iconify-json/tabler": "^1.1.108",
     "@serverless-cd/goat-ui": "^0.0.28",
+    "ali-oss": "^6.21.0",
     "aos": "^2.3.4",
     "astro": "4.9.1",
     "astro-compress": "^2.2.11",
@@ -31,6 +32,7 @@
     "lodash.clonedeep": "^4.5.0",
     "lodash.get": "^4.4.2",
     "lodash.merge": "^4.6.2",
+    "node-fetch": "^2.x",
     "preact": "^10.20.2",
     "qs": "^6.12.0",
     "react": "npm:@preact/compat",

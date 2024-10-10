@@ -13,7 +13,7 @@ authors: "CH3CHO"
 时速云成立于2014年10月，致力于通过云原生技术帮助企业实现数字化转型，拥有云原生应用平台 TCAP 和云原生数据平台 KubeData 两大核心产品体系，产品包含云原生 DevOps、容器云 PaaS、中间件服务、边缘计算、微服务治理、服务网格、API 网关等。
 <a name="PRgD1"></a>
 ## 二、需求背景
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434539449-0dd1c25e-1e45-4864-a024-7a26f1cdc490.webp#clientId=ub1bb9b57-3d57-4&from=paste&id=u2309f400&originHeight=405&originWidth=720&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u4fbe122c-8e1e-452e-8e97-0dad73e1867&title=)<br />时速云的 PaaS 平台中存在着多款网关软件：
+![](/img/1728551155228.png)<br />时速云的 PaaS 平台中存在着多款网关软件：
 
 - 以 HAProxy、Nginx Ingress 为基础的流量网关
 - Spring Cloud 微服务体系的 Spring Cloud Gateway
@@ -27,7 +27,7 @@ authors: "CH3CHO"
 ```
 apiVersion: networking.k8s.io/v1kind: Ingressmetadata:  annotations:    # 兼容 Nginx Ingress 注解    nginx.ingress.kubernetes.io/rewrite-target: /    # Higress 注解，支持 method/header/query 匹配路由    higress.io/match-method: POST    higress.io/exact-match-query-higressQuery: hi    higress.io/prefix-match-header-x-higress-header: hi  name: foospec:  ingressClassName: higress  rules:  - host: foo.example.com    http:      paths:      - pathType: Prefix        path: /foo        backend:          service:            name: foo-service            port:              number: 5678
 ```
-并且 Nginx Ingress 的 Lua 代码性能比较差，Higress 对比 Nginx Ingress 的性能提升很大，如下图所示：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434541489-278a40f3-3d5b-4768-a132-a69d1b11d957.webp#clientId=ub1bb9b57-3d57-4&from=paste&id=uff462749&originHeight=639&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ud0a57763-f024-4fb7-9cbc-fdcc8b8fa9a&title=)<br />**替代 Spring Cloud Gateway**<br />Spring Cloud 微服务体系下，作为微服务网关必须跟微服务注册中心进行对接，实现服务发现。Higress 提供了 McpBridge 这个 CRD，可以很方便地跟多种注册中心对接，我们使用的 Spring Cloud 注册中心是 Nacos，McpBridge 配置如下：
+并且 Nginx Ingress 的 Lua 代码性能比较差，Higress 对比 Nginx Ingress 的性能提升很大，如下图所示：<br />![](/img/1728551155374.png)<br />**替代 Spring Cloud Gateway**<br />Spring Cloud 微服务体系下，作为微服务网关必须跟微服务注册中心进行对接，实现服务发现。Higress 提供了 McpBridge 这个 CRD，可以很方便地跟多种注册中心对接，我们使用的 Spring Cloud 注册中心是 Nacos，McpBridge 配置如下：
 ```
 apiVersion: networking.higress.io/v1kind: McpBridgemetadata:  name: default  namespace: higress-systemspec:  registries:    # 定义一个名为 my-nacos  的服务来源  - name: my-nacos    # 注册中心类型是 Nacos 2.x，支持 gRPC 协议    type: nacos2    # 注册中心的访问地址，可以是域名或者IP    domain: 127.0.0.1    # 注册中心的访问端口，Nacos 默认都是 8848    port: 8848    # Nacos 命名空间 ID    nacosNamespaceId: d8ac64f3-xxxx-xxxx-xxxx-47a814ecf358    # Nacos 服务分组    nacosGroups:    - DEFAULT_GROUP
 ```
@@ -35,7 +35,7 @@ apiVersion: networking.higress.io/v1kind: McpBridgemetadata:  name: default  nam
 ```
 apiVersion: networking.k8s.io/v1kind: Ingressmetadata:  annotations:    higress.io/destination: user-center.DEFAULT-GROUP.d8ac64f3-xxxx-xxxx-xxxx-47a814ecf358.nacos  name: user  namespace: defaultspec:  rules:  - http:      paths:      - backend:          resource:            apiGroup: networking.higress.io            kind: McpBridge            name: default        path: /        pathType: Prefix
 ```
-这样 Spring Cloud 微服务无需做任何改造，即可接入 Higress 网关。对比 Spring Cloud Gateway/Zuul 等传统 Java 微服务网关， Higress 的性能高出 2 倍以上，可以显著降低资源成本。<br />**替代 Kong**<br />时速云的 API 网关产品用于帮助企业和开发者完成 API 的创建、维护、发布、监控告警等整个生命周期的管理。通过 API 网关，以 API 的形式将后端服务开放出来，提供给各方使用。认证鉴权能力是 API 网关中的关键能力，我们的 API 网关最初是基于 Kong 来构建的，主要使用了 Kong 的 Key Auth/Basic Auth/JWT Auth/HMAC Auth 插件，而 Higress 也都提供了这些插件能力：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434539373-c731cc24-6779-4bfa-b457-9813a8377d9b.webp#clientId=ub1bb9b57-3d57-4&from=paste&id=u7fcff463&originHeight=399&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ue413007c-3541-41f8-a2a0-a29fbaa02bc&title=)<br />以 Key Auth 为例，通过 Higress 提供的 WasmPlugin CRD 做如下配置即可：
+这样 Spring Cloud 微服务无需做任何改造，即可接入 Higress 网关。对比 Spring Cloud Gateway/Zuul 等传统 Java 微服务网关， Higress 的性能高出 2 倍以上，可以显著降低资源成本。<br />**替代 Kong**<br />时速云的 API 网关产品用于帮助企业和开发者完成 API 的创建、维护、发布、监控告警等整个生命周期的管理。通过 API 网关，以 API 的形式将后端服务开放出来，提供给各方使用。认证鉴权能力是 API 网关中的关键能力，我们的 API 网关最初是基于 Kong 来构建的，主要使用了 Kong 的 Key Auth/Basic Auth/JWT Auth/HMAC Auth 插件，而 Higress 也都提供了这些插件能力：<br />![](/img/1728551155527.png)<br />以 Key Auth 为例，通过 Higress 提供的 WasmPlugin CRD 做如下配置即可：
 ```
 apiVersion: extensions.higress.io/v1alpha1kind: WasmPluginmetadata:  name: key-auth  namespace: higress-systemspec:  # 全局配置，配置认证规则  defaultConfig:    consumers:    - credential: 2bda943c-xxxx-xxxx-xxxx-00163e1250b5      name: consumer1    - credential: c8c8e9ca-xxxx-xxxx-xxxx-e700dcc40e35      name: consumer2    keys:    - x-api-key    # 从请求header识别key    in_header: true    # 开启全局认证，consumer未识别将拒绝访问    global_auth: true  # 匹配规则，配置授权规则  matchRules:  # 路由级生效配置，匹配default命名空间下名为foo的ingress  - ingress:    - default/foo    config:      # 仅允许 consumer1 访问      allow:      - consumer1  # 域名级生效配置  - domain:    - www.test.com    - *.example.com    config:      # 仅允许 consumer1 访问      allow:      - consumer2  url: oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/key-auth:1.0.0
 ```
@@ -53,7 +53,7 @@ apiVersion: networking.istio.io/v1beta1kind: Gatewaymetadata:  name: mysql   nam
 ```
 <a name="OvrOE"></a>
 ## 四、收益与展望
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434539377-9ab7a7e0-deeb-426e-959d-7d38866d575e.webp#clientId=ub1bb9b57-3d57-4&from=paste&id=ud4968553&originHeight=610&originWidth=750&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u44a8a8c0-0b8d-4e67-8575-27948d2acca&title=)<br />迁移后的架构基于 Higress 在产品层面做了各个技术栈的统一融合，增强了用户体验，具体收益如下：
+![](/img/1728551155688.png)<br />迁移后的架构基于 Higress 在产品层面做了各个技术栈的统一融合，增强了用户体验，具体收益如下：
 
 1. Higress 同时支持 K8s Ingress API 以及 Istio Gateway/VirtualService API，多个集群可以快速平滑升级
 2. 使用 Higress 进行了多种网关的统一，统一了流量入口/路由负载/安全认证的技术栈，实现了降本增效
@@ -67,5 +67,5 @@ apiVersion: networking.istio.io/v1beta1kind: Gatewaymetadata:  name: mysql   nam
 
 ---
 
-欢迎加入 Higress 社区，了解更多 Higress 动向：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723434555656-3fa9391a-f842-4697-87e7-744986ac5a63.webp#clientId=ub1bb9b57-3d57-4&from=paste&id=u05431898&originHeight=405&originWidth=720&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u25438cc8-ed73-43f4-b5c8-ea392fa6121&title=)
+欢迎加入 Higress 社区，了解更多 Higress 动向：<br />![](/img/1728551155858.png)
 

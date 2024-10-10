@@ -7,13 +7,13 @@ keywords: ["Higress"]
 authors: "CH3CHO"
 ---
 
-随着AI时代到来，基于大模型的应用对网关提出了新的要求，例如在不同LLM提供商之间进行负载均衡、构建AI应用的可观测能力、基于token的限流保护与配额管理、AI应用内容安全等等。Higress基于企业内外的丰富场景沉淀了众多面向AI的功能，推出了AI原生的API网关形态并且全部开源。<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1721300837717-eff92765-e9f6-4eca-bb73-573e7c9cb927.png#clientId=uf44bdd73-e1d6-4&from=paste&height=2045&id=ua81a750e&originHeight=4500&originWidth=8000&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=11007747&status=done&style=none&taskId=ue3e6e350-6690-4a08-83e6-c61c523db4b&title=&width=3636.3635575475787)<br />[ChatGPT-Next-Web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) 是一个开源的前端项目，用于提供大模型聊天窗口，支持接入多种大模型，本文基于Higress、通义千问以及 ChatGPT-Next-Web，演示 Higress 如何兼容 openai 协议，并逐步搭建一个体系完整的LLM应用，应用最终架构如图所示：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1722309029970-f0abf339-1a20-4486-9e89-99e9656a8057.png#clientId=u81875feb-61ba-4&from=paste&height=179&id=ub97bf679&originHeight=394&originWidth=2582&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=108669&status=done&style=none&taskId=ub16da7c7-9931-4896-9867-bc2c6b50787&title=&width=1173.636338198481)
+随着AI时代到来，基于大模型的应用对网关提出了新的要求，例如在不同LLM提供商之间进行负载均衡、构建AI应用的可观测能力、基于token的限流保护与配额管理、AI应用内容安全等等。Higress基于企业内外的丰富场景沉淀了众多面向AI的功能，推出了AI原生的API网关形态并且全部开源。<br />![image.png](/img/1728551760428.png)<br />[ChatGPT-Next-Web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) 是一个开源的前端项目，用于提供大模型聊天窗口，支持接入多种大模型，本文基于Higress、通义千问以及 ChatGPT-Next-Web，演示 Higress 如何兼容 openai 协议，并逐步搭建一个体系完整的LLM应用，应用最终架构如图所示：<br />![image.png](/img/1728551760630.png)
 <a name="rH4kG"></a>
 # AI 代理
 官方文档：[https://help.aliyun.com/zh/mse/user-guide/ai-agent?spm=a2c4g.11186623.0.0.2927178eciPER4](https://help.aliyun.com/zh/mse/user-guide/ai-agent?spm=a2c4g.11186623.0.0.2927178eciPER4)
 <a name="oHwbX"></a>
 ## 应用架构
-首先，我们先通过网关快速部署一个可以进行对话的聊天应用，其架构如下图所示：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719919280445-48f48c11-8929-403b-9ce6-7b06ff072e37.png#clientId=ud0363e53-115b-4&from=paste&height=203&id=u6a66a9f0&originHeight=446&originWidth=1236&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=343430&status=done&style=none&taskId=ue232df06-2211-47ac-bd93-55df82c0ae3&title=&width=561.8181696411009)<br />LLM服务使用通义千问，服务类型为DNS。路由及服务创建完成后如下图所示：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719891015586-43314576-c14a-4c83-a46a-6766292b7c58.png#clientId=ud0363e53-115b-4&from=paste&height=113&id=ucad28ecd&originHeight=249&originWidth=2302&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=258585&status=done&style=none&taskId=u32c2dc97-2aac-4d58-abe4-dcc71ad4219&title=&width=1046.3636136843159)<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719890813791-697f2d3f-1b31-4cd2-9ca6-c4fcd18cbeff.png#clientId=ud0363e53-115b-4&from=paste&height=138&id=u08408532&originHeight=304&originWidth=1392&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=203741&status=done&style=none&taskId=ua8f523cc-eef4-453b-af48-443f7535b6c&title=&width=632.7272590132787)
+首先，我们先通过网关快速部署一个可以进行对话的聊天应用，其架构如下图所示：<br />![image.png](/img/1728551760839.png)<br />LLM服务使用通义千问，服务类型为DNS。路由及服务创建完成后如下图所示：<br />![image.png](/img/1728551761107.png)<br />![image.png](/img/1728551761326.png)
 <a name="OHezy"></a>
 ## 插件配置
 设置路由级插件规则，选择在llm路由下生效，配置如下：
@@ -30,13 +30,13 @@ provider:
 ```
 <a name="qe1gH"></a>
 ## 插件效果
-![1719891176668-c2db8611-1431-4bac-a2f6-d7a829b708fe.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1722505434359-63b5007d-df3c-4c0e-93cc-0999526dca12.png#clientId=ufc630aba-31ca-4&from=paste&height=801&id=u86acd2c2&originHeight=1762&originWidth=2434&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=2086089&status=done&style=none&taskId=ucadc1a08-fa7d-47ad-8dd6-ce5eda73039&title=&width=1106.363612383851)
+![1719891176668-c2db8611-1431-4bac-a2f6-d7a829b708fe.png](/img/1728551761695.png)
 <a name="aoQWd"></a>
 # AI 可观测
 官方文档：[https://help.aliyun.com/zh/mse/user-guide/ai-observable?spm=a2c4g.11186623.0.0.42b4d95f14d39z](https://help.aliyun.com/zh/mse/user-guide/ai-observable?spm=a2c4g.11186623.0.0.42b4d95f14d39z)
 <a name="DguUr"></a>
 ## 应用架构
-现在，我们已经有了基础的对话功能，作为一款网关产品，我们希望在网关这个统一的入口处对各个服务、路由的请求情况进行观测。考虑到LLM请求主要以token为观测目标，网关提供了对token的观测机制，包含路由级、服务级、模型级的token用量观测。<br />现在，我们改变上文的应用架构，插入可观测插件，改造后如下图所示：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719919264130-93ce6e38-9e5f-440e-a4f7-2c743d606148.png#clientId=ud0363e53-115b-4&from=paste&height=225&id=u6b60ac28&originHeight=494&originWidth=1454&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=400291&status=done&style=none&taskId=u5fc32a53-5b18-4bb3-83a0-e8c3cc19258&title=&width=660.9090765842725)
+现在，我们已经有了基础的对话功能，作为一款网关产品，我们希望在网关这个统一的入口处对各个服务、路由的请求情况进行观测。考虑到LLM请求主要以token为观测目标，网关提供了对token的观测机制，包含路由级、服务级、模型级的token用量观测。<br />现在，我们改变上文的应用架构，插入可观测插件，改造后如下图所示：<br />![image.png](/img/1728551761989.png)
 <a name="KUhTj"></a>
 ## 插件配置
 依然是选择在llm这条路由上生效，插件配置如下：
@@ -45,16 +45,16 @@ enable: true
 ```
 <a name="Lah54"></a>
 ## 插件效果
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719899003894-22827cf8-54c9-402c-904d-ababea18c35b.png#clientId=ud0363e53-115b-4&from=paste&height=487&id=u52864bbd&originHeight=1072&originWidth=3294&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=1212199&status=done&style=none&taskId=uc5f29f99-0358-4b04-ae2c-279bdacb920&title=&width=1497.2726948202155)
+![image.png](/img/1728551762589.png)
 <a name="OnniO"></a>
 # AI 内容安全
 官方文档：[https://help.aliyun.com/zh/mse/user-guide/ai-content-security?spm=a2c4g.11186623.0.0.4408488dYGAm2X](https://help.aliyun.com/zh/mse/user-guide/ai-content-security?spm=a2c4g.11186623.0.0.4408488dYGAm2X)
 <a name="aaqW1"></a>
 ## 应用架构
-大模型通常是通过学习互联网上广泛可用的数据来训练的，它们有可能在过程中学习到并复现有害内容或不良言论，因此，当大模型未经过适当的过滤和监控就生成回应时，它们可能产生包含有害语言、误导信息、歧视性言论甚至是违反法律法规的内容。正是因为这种潜在的风险，大模型中的内容安全就显得异常重要。<br />基于AI内容安全插件，通过简单的配置即可对接[阿里云内容安全](https://help.aliyun.com/document_detail/28417.html?spm=a2c4g.28415.0.0.1dab1f55pipQr9)，为大模型问答的合规性保驾护航。<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/jpeg/90456445/1718353606448-65ea40f8-67ba-4588-a646-97ac201850d4.jpeg)<br />配置AI内容安全插件后，应用架构如下图所示：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719919247875-f93f64cd-e03a-40c3-b67d-b77346dabe5a.png#clientId=ud0363e53-115b-4&from=paste&height=195&id=uf56fe0ea&originHeight=428&originWidth=1696&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=414318&status=done&style=none&taskId=u430097ec-4abf-449b-b9cc-0d0eeab68b2&title=&width=770.9090742000867)
+大模型通常是通过学习互联网上广泛可用的数据来训练的，它们有可能在过程中学习到并复现有害内容或不良言论，因此，当大模型未经过适当的过滤和监控就生成回应时，它们可能产生包含有害语言、误导信息、歧视性言论甚至是违反法律法规的内容。正是因为这种潜在的风险，大模型中的内容安全就显得异常重要。<br />基于AI内容安全插件，通过简单的配置即可对接[阿里云内容安全](https://help.aliyun.com/document_detail/28417.html?spm=a2c4g.28415.0.0.1dab1f55pipQr9)，为大模型问答的合规性保驾护航。<br />![](/img/1728551154645.png)<br />配置AI内容安全插件后，应用架构如下图所示：<br />![image.png](/img/1728551762859.png)
 <a name="M186m"></a>
 ## 插件配置
-首先需要在网关配置内容安全的服务：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719903391779-77a1ad66-27b2-47f2-bbd2-187eca3c7575.png#clientId=ud0363e53-115b-4&from=paste&height=539&id=u103376d8&originHeight=1186&originWidth=1436&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=728523&status=done&style=none&taskId=ua9d55659-08a4-4b50-b26c-b1729e6668a&title=&width=652.7272585797904)<br />配置服务后，开启内容安全插件，选择对llm路由生效：
+首先需要在网关配置内容安全的服务：<br />![image.png](/img/1728551763173.png)<br />配置服务后，开启内容安全插件，选择对llm路由生效：
 ```yaml
 serviceSource: dns
 serviceName: green-cip
@@ -65,13 +65,13 @@ sk: xxxxxxxxxxxxxxxxx
 ```
 <a name="X22pR"></a>
 ## 插件效果
-![1719903187415-6ef2828c-6a6f-4d5e-acf8-9d4e760dd8ec.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1722505266077-c08298ee-d788-40eb-9a3c-ee3f06e1450d.png#clientId=ufc630aba-31ca-4&from=paste&height=800&id=u1e1059c0&originHeight=1760&originWidth=2430&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=2298898&status=done&style=none&taskId=u3ef7edcb-caa7-4bdf-bf97-5a334c4cddc&title=&width=1104.5454306050772)<br />登录阿里云内容安全控制台，可以查看每条请求的审计记录：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719903494716-d685847c-465d-4856-98a3-7bc92f0f0b44.png#clientId=ud0363e53-115b-4&from=paste&height=287&id=ufeed118e&originHeight=632&originWidth=2558&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=603772&status=done&style=none&taskId=u031f4f53-a889-4598-8ef0-4527f17118c&title=&width=1162.7272475258383)
+![1719903187415-6ef2828c-6a6f-4d5e-acf8-9d4e760dd8ec.png](/img/1728551763552.png)<br />登录阿里云内容安全控制台，可以查看每条请求的审计记录：<br />![image.png](/img/1728551763874.png)
 <a name="nEKyA"></a>
 # AI Token 限流
 官方文档：[https://help.aliyun.com/zh/mse/user-guide/ai-token-current-limiting?spm=a2c4g.11186623.0.i4](https://help.aliyun.com/zh/mse/user-guide/ai-token-current-limiting?spm=a2c4g.11186623.0.i4)
 <a name="vCKxn"></a>
 ## 应用架构
-`ai-token-ratelimit`插件实现了基于特定键值实现token限流，键值来源可以是 URL 参数、HTTP 请求头、客户端 IP 地址、consumer 名称、cookie中 key 名称。其借助redis实现全局的token限流。<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/jpeg/90456445/1719305294634-9bfa6ddd-4ef9-4ef0-9b69-7af3b370b8d4.jpeg)<br />创建一个redis服务并且在网关进行配置：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719910074964-11633851-b5de-4efd-9245-76ebbd7d8319.png#clientId=ud0363e53-115b-4&from=paste&height=80&id=z8176&originHeight=177&originWidth=2161&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=167269&status=done&style=none&taskId=u4c835c6a-2157-4e44-8db9-9231b37abb9&title=&width=982.2727059825397)<br />之后添加AI Token限流插件，应用架构为：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719919211717-049b4d9b-f77c-4912-a068-bfd8bde657da.png#clientId=ud0363e53-115b-4&from=paste&height=210&id=ud529d6cc&originHeight=462&originWidth=1940&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=469172&status=done&style=none&taskId=ue4648981-869d-46ba-a71f-57f74e9b99e&title=&width=881.8181627052878)
+`ai-token-ratelimit`插件实现了基于特定键值实现token限流，键值来源可以是 URL 参数、HTTP 请求头、客户端 IP 地址、consumer 名称、cookie中 key 名称。其借助redis实现全局的token限流。<br />![](/img/1728551154832.png)<br />创建一个redis服务并且在网关进行配置：<br />![image.png](/img/1728551764085.png)<br />之后添加AI Token限流插件，应用架构为：<br />![image.png](/img/1728551764332.png)
 <a name="PeR06"></a>
 ## 插件配置
 ```yaml
@@ -92,13 +92,13 @@ rejected_msg: 您的请求频率过高，请稍后再试。
 以上插件配置效果为每个ip地址每分钟内只能使用100个token，当超过token限制时，返回429，响应body为“您的请求频率过高，请稍后再试。”
 <a name="awhGj"></a>
 ## 插件效果
-![1719910233246-351b4301-12db-4515-b545-efa0f7d719c5.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1722505303402-0d85a7d6-7660-4800-a082-a45eb4fa0656.png#clientId=ufc630aba-31ca-4&from=paste&height=796&id=u546a2055&originHeight=1752&originWidth=2426&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=2591649&status=done&style=none&taskId=u1e465d4c-42e3-416f-924d-1e439e5f129&title=&width=1102.7272488263034)
+![1719910233246-351b4301-12db-4515-b545-efa0f7d719c5.png](/img/1728551764681.png)
 <a name="JsZEu"></a>
 # AI 缓存
 官方文档：[https://help.aliyun.com/zh/mse/user-guide/ai-cache?spm=a2c4g.11186623.0.0.3cdf306bbJSWdn](https://help.aliyun.com/zh/mse/user-guide/ai-cache?spm=a2c4g.11186623.0.0.3cdf306bbJSWdn)
 <a name="TC3o5"></a>
 ## 应用架构
-AI缓存插件能够缓存每个请求的响应，当有相同请求到来时，可以直接返回存储在redis中的大模型的生成内容，添加AI缓存插件后，应用架构为：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719919194226-4da1f95f-af06-4a64-bf49-b8368a5fbcca.png#clientId=ud0363e53-115b-4&from=paste&height=194&id=ud308feda&originHeight=426&originWidth=2152&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=494988&status=done&style=none&taskId=u2521937d-70a1-4eb4-b6cb-3064bef0b17&title=&width=978.1817969802987)
+AI缓存插件能够缓存每个请求的响应，当有相同请求到来时，可以直接返回存储在redis中的大模型的生成内容，添加AI缓存插件后，应用架构为：<br />![image.png](/img/1728551764978.png)
 <a name="ldB9K"></a>
 ## 插件配置
 ```yaml
@@ -111,13 +111,13 @@ redis:
 ```
 <a name="NC8cT"></a>
 ## 插件效果
-![1722505213884-217a4538-36eb-4480-99de-b1a88d28466b.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1722505330751-74a95616-200d-47ee-93cd-bbff4ecedac0.png#clientId=ufc630aba-31ca-4&from=paste&height=799&id=u74a25726&originHeight=1758&originWidth=2426&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=2355853&status=done&style=none&taskId=u52a12128-39fa-4059-8626-d51dc4f25fb&title=&width=1102.7272488263034)
+![1722505213884-217a4538-36eb-4480-99de-b1a88d28466b.png](/img/1728551765369.png)
 <a name="s8mOy"></a>
 # AI RAG
 官方文档：[https://help.aliyun.com/zh/mse/user-guide/ai-rag?spm=a2c4g.11186623.0.0.24c77267ImcfGS](https://help.aliyun.com/zh/mse/user-guide/ai-rag?spm=a2c4g.11186623.0.0.24c77267ImcfGS)
 <a name="kXWcc"></a>
 ## 应用架构
-大模型具有一个显著的局限性，那就是它们的知识截止到模型被训练的数据。一旦训练完成，模型就无法获取或学习新的信息。此外，大型语言模型的训练数据虽然浩如烟海，但仍然有可能缺少某些领域的信息，或者对某些主题的覆盖不够深入，针对这些细领域的查询可能会产生不够精确或缺乏深度的结果。检索增强生成（RAG）技术能够利用检索系统从大规模的数据库中找到相关信息，然后将这些信息提供给文本生成模型以帮助生成更精确、更丰富、更符合实际情况的文本。<br />Higress 通过对接阿里云向量检索服务能够快速实现RAG功能：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719919661684-4f474521-ffbc-41d2-9b0b-5ed2601ce386.png#clientId=ud0363e53-115b-4&from=paste&height=598&id=uc5c7e8de&originHeight=1316&originWidth=1926&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=364779&status=done&style=none&taskId=uc0b67535-c6c4-4d97-ae7c-972107f886e&title=&width=875.4545264795796)<br />添加RAG插件后，应用架构如下图所示：<br />![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1719919331532-3edb94b6-2c17-495d-8133-55d824fae1ef.png#clientId=ud0363e53-115b-4&from=paste&height=198&id=u5564fb6b&originHeight=436&originWidth=2382&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=529706&status=done&style=none&taskId=u13961540-2d10-4a07-92e2-be65e41d670&title=&width=1082.7272492597915)
+大模型具有一个显著的局限性，那就是它们的知识截止到模型被训练的数据。一旦训练完成，模型就无法获取或学习新的信息。此外，大型语言模型的训练数据虽然浩如烟海，但仍然有可能缺少某些领域的信息，或者对某些主题的覆盖不够深入，针对这些细领域的查询可能会产生不够精确或缺乏深度的结果。检索增强生成（RAG）技术能够利用检索系统从大规模的数据库中找到相关信息，然后将这些信息提供给文本生成模型以帮助生成更精确、更丰富、更符合实际情况的文本。<br />Higress 通过对接阿里云向量检索服务能够快速实现RAG功能：<br />![image.png](/img/1728551765602.png)<br />添加RAG插件后，应用架构如下图所示：<br />![image.png](/img/1728551765864.png)
 <a name="tHs8a"></a>
 ## 插件配置
 插件需要配置dashscope和dashvector两个云服务的相关信息：
@@ -136,7 +136,7 @@ dashvector:
 ```
 <a name="dSbM6"></a>
 ## 插件效果
-![1719919418372-f84d6041-4aae-437c-9f53-b302b3733fd8.png](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/90456445/1722505367871-31deb39e-2def-41e5-89ad-6d172849c645.png#clientId=ufc630aba-31ca-4&from=paste&height=799&id=u5b1be4b6&originHeight=1758&originWidth=2426&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=2218234&status=done&style=none&taskId=u312c09ec-058f-4420-979f-c5a86f7e1fc&title=&width=1102.7272488263034)
+![1719919418372-f84d6041-4aae-437c-9f53-b302b3733fd8.png](/img/1728551766221.png)
 <a name="CTsED"></a>
 # 其他
 除了以上插件，我们还提供了对prompt进行修改的插件以及对请求/响应进行智能转换的插件。
@@ -180,7 +180,7 @@ append:
 ```
 <a name="V23pX"></a>
 ## AI 请求/响应智能转换
-官方文档：[https://help.aliyun.com/zh/mse/user-guide/ai-request-response-intelligent-transformation?spm=a2c4g.11186623.0.0.4f6f63beBCZCAU](https://help.aliyun.com/zh/mse/user-guide/ai-request-response-intelligent-transformation?spm=a2c4g.11186623.0.0.4f6f63beBCZCAU)<br />请求响应转换插件支持对请求/响应进行智能转换，其工作流程如下图所示（示例中后端服务为httpbin）：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/jpeg/90456445/1718352623447-cffbbf7b-5b6a-4ddb-abbe-140f3313c6ae.jpeg)<br />此插件可用于修改经过网关的请求/响应内容，例如将xml格式的响应修改为json格式。
+官方文档：[https://help.aliyun.com/zh/mse/user-guide/ai-request-response-intelligent-transformation?spm=a2c4g.11186623.0.0.4f6f63beBCZCAU](https://help.aliyun.com/zh/mse/user-guide/ai-request-response-intelligent-transformation?spm=a2c4g.11186623.0.0.4f6f63beBCZCAU)<br />请求响应转换插件支持对请求/响应进行智能转换，其工作流程如下图所示（示例中后端服务为httpbin）：<br />![](/img/1728551155021.png)<br />此插件可用于修改经过网关的请求/响应内容，例如将xml格式的响应修改为json格式。
 <a name="rt3VL"></a>
 ## 插件配置
 ```yaml

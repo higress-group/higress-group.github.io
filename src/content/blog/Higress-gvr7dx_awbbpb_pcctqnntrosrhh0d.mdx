@@ -12,14 +12,14 @@ Higress 是遵循开源 Ingress/Gateway API 标准，提供流量调度、服务
 本次（2022/11/26）是 Higress 社区第一次周会，参会成员 50+，会议过程进行了录屏，已经发布在 Higress 开发者钉钉群，可以搜索钉群号(30565000871)入群。下面是会议过程的记录：
 <a name="E4Ikl"></a>
 ## 一、分享 Higress 基于 Istio/Envoy 架构的技术实现原理
-Listener 和 Cluster 是实现网关请求转发能力的最小化模型，Envoy 可以基于 xDS 协议从 gRPC server 获取 LIstener 和 Cluster 的配置，实现这两部分配置独立更新互不影响，如 Cluster 重建不影响 Listener 上客户端连接断开。<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723441071175-3bc41274-0fd0-4c0f-a58c-5b58870d6099.webp#clientId=u202957aa-acb9-4&from=paste&id=uff16f13a&originHeight=172&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u3b4dfc36-31fa-493c-a4f4-6e1703a07db&title=)<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723441071150-d23d1b43-a17f-4d03-a375-edea5af99d30.webp#clientId=u202957aa-acb9-4&from=paste&id=ud331c0fa&originHeight=269&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ud73461a1-2502-4edd-85c6-3e576bd5b0b&title=)<br />Listener 中的证书、路由、过滤器都可以实现基于 xDS 协议独立更新，Cluster 基于 EDS 类型实现后端节点独立更新。这是 Envoy 和 Nginx 最明显的区别：
+Listener 和 Cluster 是实现网关请求转发能力的最小化模型，Envoy 可以基于 xDS 协议从 gRPC server 获取 LIstener 和 Cluster 的配置，实现这两部分配置独立更新互不影响，如 Cluster 重建不影响 Listener 上客户端连接断开。<br />![](/img/1728551144580.png)<br />![](/img/1728551144740.png)<br />Listener 中的证书、路由、过滤器都可以实现基于 xDS 协议独立更新，Cluster 基于 EDS 类型实现后端节点独立更新。这是 Envoy 和 Nginx 最明显的区别：
 
 - **Nginx:**  基于 nginx.conf，整个配置跟 worker 进程的生命周期绑定，任何配置变更 reload，进程都要重建，跟 downstream 和 upstream 的连接都会断开
 - **Envoy：**举例来说，Listener 的生命周期只跟 Listener 的配置绑定，路由的生命周期只跟路由的配置绑定，并且都可以基于 xDS 协议独立地热更新
 
-Istio 抽象了 API 用于生成各类 xDS 配置，下图虚线箭头是 Istio API 和 xDS 配置间较直接的映射关系。Istio API 的配置来源可以是 K8s CRD，也可以是基于 xDS 协议（MCP-over-xDS）的 gRPC Server。<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723441071119-16a860c3-a925-4acc-a04a-9d3821f1481a.webp#clientId=u202957aa-acb9-4&from=paste&id=uc6a83320&originHeight=432&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=uf3abf8d9-7eea-4ea3-92f5-7a3f255b8ab&title=)<br />Higress 实现了将 K8s Ingress 转换为 Istio API 的逻辑，并通过上述 gRPC Server 向 Istio 提供配置。
+Istio 抽象了 API 用于生成各类 xDS 配置，下图虚线箭头是 Istio API 和 xDS 配置间较直接的映射关系。Istio API 的配置来源可以是 K8s CRD，也可以是基于 xDS 协议（MCP-over-xDS）的 gRPC Server。<br />![](/img/1728551144889.png)<br />Higress 实现了将 K8s Ingress 转换为 Istio API 的逻辑，并通过上述 gRPC Server 向 Istio 提供配置。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723441071107-501de1c5-8145-4ae2-9930-c6d426939746.png#clientId=u202957aa-acb9-4&from=paste&id=u2f78a63b&originHeight=439&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u6f587131-9d98-401a-8a4c-0a80f275ee9&title=)<br />以通过 Ingress 配置跨域访问为例：
+![](/img/1728551145040.png)<br />以通过 Ingress 配置跨域访问为例：
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -113,7 +113,7 @@ Higress 也支持 Ingress 和 Istio API 进行混用，对于 Ingress 无法满�
 ## 二、开源社区最新进展同步
 感谢张海彬(@NameHaibinZhang)提供了一个名为 McpBridge 的 API 实现，可以用于对接 Nacos/ZK 等注册中心实现服务发现。并且是直接基于 Nacos/ZK 的 go client 获取服务 ip，无需 Nacos/ZK 等支持 Istio MCP 协议。这也是 McpBridge 这个名字的由来。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723441071639-651f7f7c-16ac-4337-8b3b-52b8815629fa.webp#clientId=u202957aa-acb9-4&from=paste&id=u2ead46a0&originHeight=456&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u6d41ba27-5d67-4cf3-b74b-e9b03262b2f&title=)<br />配置方式为创建 McpBridge 资源，指定注册中心的地址和类型：
+![](/img/1728551145240.png)<br />配置方式为创建 McpBridge 资源，指定注册中心的地址和类型：
 ```
 apiVersion: networking.higress.io/v1kind: McpBridgemetadata:  name: default  namespace: higress-systemspec:  registries:  - domain: 127.0.0.1    nacosGroups:    - DEFAULT_GROUP    nacosNamespace: beeae72f-xxxx-xxxx-xxxx-d484cc4d7a2d    name: my-nacos-server    port: 8848    type: nacos
 ```
@@ -126,11 +126,11 @@ apiVersion: networking.k8s.io/v1kind: Ingressmetadata:  annotations:    higress.
 
 <a name="Sodwd"></a>
 ## 三、支持非 K8s 部署的架构探讨
-最后探讨了社区小伙伴最为关心的，如何支持非 K8s 场景使用的问题。实现的方式如下图所示，Higress 会借鉴 Istio 对于配置来源的抽象方式，支持从 Nacos/Etcd 等配置中心获取 Ingress/Gateway 等 API。这部分实现将作为 Higress 社区后续的重点工作进行推进。欢迎有兴趣的小伙伴一起参与共建。<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723441071651-335d35ed-4ef5-46cc-98a5-3b7981cfd7f6.webp#clientId=u202957aa-acb9-4&from=paste&id=u85e45616&originHeight=531&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=uf511a2ca-f8fd-4f48-a4d3-31b27c1fb97&title=)
+最后探讨了社区小伙伴最为关心的，如何支持非 K8s 场景使用的问题。实现的方式如下图所示，Higress 会借鉴 Istio 对于配置来源的抽象方式，支持从 Nacos/Etcd 等配置中心获取 Ingress/Gateway 等 API。这部分实现将作为 Higress 社区后续的重点工作进行推进。欢迎有兴趣的小伙伴一起参与共建。<br />![](/img/1728551145394.png)
 
 
 ---
 
-**Higress 开源贡献小组正在火热招募贡献者。**如果您有时间，有热情，有意愿，欢迎联系社区加入开源贡献小组，一起共同完善 Higress，一起主导下一代云原生网关的设计和实现。<br />社区官网（点击“阅读原文”跳转）: https://higress.io<br />社区开发者群（钉钉群）：30565000871<br />微信交流群：<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1723441071747-d801818f-7675-4476-92ad-a21626ae97e3.png#clientId=u202957aa-acb9-4&from=paste&id=u4081e9c9&originHeight=1371&originWidth=1056&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ud0f4adb3-34dc-415b-ab9c-f426335e5bf&title=)
+**Higress 开源贡献小组正在火热招募贡献者。**如果您有时间，有热情，有意愿，欢迎联系社区加入开源贡献小组，一起共同完善 Higress，一起主导下一代云原生网关的设计和实现。<br />社区官网（点击“阅读原文”跳转）: https://higress.io<br />社区开发者群（钉钉群）：30565000871<br />微信交流群：<br />![](/img/1728551145571.png)
 
 

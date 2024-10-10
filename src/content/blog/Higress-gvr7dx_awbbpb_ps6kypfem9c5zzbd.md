@@ -62,9 +62,9 @@ if __name__ == '__main__':    init()    app.run()
 
 <font style="color:rgba(0, 0, 0, 0.9);">在这个简短的 Flask 应用中，我们首先初始化了 Nacos 客户端，随后从 Nacos 中获取配置来动态调整我们的“欢迎信息”，以及将当前的服务实例注册到了 Nacos 服务端，使得其他服务也能轻易发现并与其通信。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1724723086568-16acc3a3-afeb-424d-8710-8dd849d13b11.webp)
+![](/img/1728551151316.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1724723086756-9335deb0-6689-4c18-979f-4e79454c08fd.webp)
+![](/img/1728551151501.png)
 
 **<font style="color:rgb(46, 75, 227);">FastAPI 篇 —— 模型服务的配置管理</font>**
 
@@ -100,7 +100,7 @@ if __name__ == '__main__':    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
 ```
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1724723086477-aa7c1849-3f6d-4672-9462-ec7364995fb5.webp)
+![](/img/1728551151653.png)
 
 <font style="color:rgba(0, 0, 0, 0.9);">通过这个例子，你也可以继续加工，尝试把你的 AI 算法模型包装成服务对外暴露调用，同时一些算法模型参数通过 nacos 来作为配置化动态管理。</font>
 
@@ -137,11 +137,11 @@ config_manager = NacosConfigManager()
 
 <font style="color:rgba(0, 0, 0, 0.9);">调优前：</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1724723086677-0646c8d7-a9e4-4a8b-a4c6-eb1f10bf227e.webp)
+![](/img/1728551151831.png)
 
 <font style="color:rgba(0, 0, 0, 0.9);">调优后：</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1724723086526-36f42b43-ca88-40ec-a569-f24a45f9260a.webp)
+![](/img/1728551152012.png)
 
 **<font style="color:rgb(46, 75, 227);">三、加入我们</font>**<font style="color:rgb(51, 51, 51);">  
 </font>
