@@ -1,12 +1,13 @@
+// 用于在构建前遍历所有的 Markdown 文件，替换所有的内网语雀图片链接为本地路径
 import { promises as fs } from 'fs';
 import path from 'path';
 import fetch from 'node-fetch'; 
 
-const CONTENT_DIR = path.join(process.cwd(), '/src/content');
-const IMAGE_DIR = path.join(process.cwd(), '/public/img');  // 本地存储图片的目录
+const CONTENT_DIR = path.join(process.cwd(), '../src/content');
+const IMAGE_DIR = path.join(process.cwd(), '../public/img');  // 本地存储图片的目录
 
 // 正则匹配 ![](https://intranetproxy.alipay.com/xxxx)
-const regex = /!\[\]\((https:\/\/intranetproxy\.alipay\.com[^\)]+)\)/g;
+const regex = /!\[.*?\]\((https:\/\/intranetproxy\.alipay\.com[^\)]+)\)/g;
 
 // 下载图片并保存到本地
 async function downloadImage(url) {
