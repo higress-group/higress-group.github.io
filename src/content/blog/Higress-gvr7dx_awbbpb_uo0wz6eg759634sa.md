@@ -7,7 +7,7 @@ keywords: ["Higress"]
 authors: "CH3CHO"
 ---
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726216341018-ea8af8da-3b26-41ed-925c-82d1507e1402.webp)
+![](/img/1728551158042.png)
 
 **<font style="color:rgb(46, 75, 227);">专场名称：AI 原生应用架构</font>**
 
@@ -25,7 +25,7 @@ authors: "CH3CHO"
 
 **<font style="color:rgb(0, 0, 0);">李艳林，阿</font><font style="color:rgb(0, 0, 0);">里云智能集团云原生微服务技术负责人，Spring AI Alibaba 发起人</font>**
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726216341052-d1c1ad6c-30a5-4ed8-9b87-164dbcfa355f.webp)
+![](/img/1728551158196.png)
 
 **<font style="color:rgb(46, 75, 227);">演讲提纲</font>**
 
@@ -74,7 +74,7 @@ authors: "CH3CHO"
 
 **<font style="color:rgb(0, 0, 0);">谢吉宝，</font><font style="color:rgb(0, 0, 0);">阿里云智能集团资深技术专家，云原生产品线中间件负责人</font>**
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726216341081-9a8551b8-9b3a-4d95-8d5a-db5e32fc2a75.webp)
+![](/img/1728551158355.png)
 
 **<font style="color:rgb(46, 75, 227);">演讲提纲</font>**
 
@@ -128,7 +128,7 @@ authors: "CH3CHO"
 
 **<font style="color:rgb(0, 0, 0);">邢学超，阿里云智能集团高级技术专家</font>**
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726216341098-542cbf6f-e69d-4da3-a390-f3399a69600b.webp)
+![](/img/1728551158528.png)
 
 **<font style="color:rgb(46, 75, 227);">演讲提纲</font>**
 
@@ -181,6 +181,6 @@ authors: "CH3CHO"
 
 <font style="color:rgb(0, 0, 0);">若您对上方议题内容感兴趣，欢迎在云栖大会官网进行订阅。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726216341088-bfa62573-c92f-4599-9290-a7d412f698ea.webp)
+![](/img/1728551158735.png)
 
 

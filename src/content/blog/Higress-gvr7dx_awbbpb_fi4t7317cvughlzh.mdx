@@ -97,7 +97,7 @@ kubectl apply -f wasmplugin.yaml
 基于之前生效的 quickstart.yaml，目前集群中的 Ingress 访问拓扑如下所示：
 
 <a name="Yw9qC"></a>
-## ![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723449123388-840116a1-7373-422e-9d71-7f93b5a04ab6.webp#clientId=ubaf1ae1d-09cd-4&from=paste&id=uf1c9defa&originHeight=605&originWidth=646&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u8b438616-519f-4238-8d01-b5ebb6fb6d3&title=)
+## ![](/img/1728551140704.png)
 未生效插件的情况下：
 
 - 请求/foo 将返回 HTTP 应答 "foo"
@@ -132,7 +132,7 @@ kubectl apply -f wasmplugin.yaml
 - 请求www.abc.com 将返回 HTTP 应答 "hello higress" （没有匹配的 rule，使用全局配置）
 <a name="O9xQz"></a>
 ## 插件生效原理
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723449124380-9cfe7100-697d-496d-bc1e-159d62066179.webp#clientId=ubaf1ae1d-09cd-4&from=paste&id=uf1b058b1&originHeight=527&originWidth=1080&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=ufd39fdd7-d734-4f97-9237-40eaed5d913&title=)
+![](/img/1728551140860.png)
 
 这里对插件的生效机制简单做个说明：
 
@@ -183,5 +183,5 @@ https://github.com/kubernetes/ingress-nginx/blob/main/rootfs/etc/nginx/lua/plugi
 Envoy 目前支持多种 Wasm 的运行时，例如 V8，WAMR，wasmtime 等等，这些运行时均提供了安全沙箱能力，即 Wasm 插件中出现了访问空指针、异常未捕获等逻辑，也不会令 Envoy 宿主进程 Crash。并且可以通过配置，在插件逻辑出现异常后进行 Fail Open 处理，跳过插件的执行逻辑，将对业务的影响降至最低。
 <a name="Jy8LI"></a>
 ## 开源社区
-特别感谢 Istio/Envoy 社区的前置工作，让 Higress 可以实现对 Ingress 资源启用 WasmPlugin ，增强了 Ingress Controller 的自定义扩展能力。<br />特别感谢 Tetrate 社区实现的 proxy-wasm-go-sdk，Higress 在这个基础上封装了 wasm-go sdk，降低了开发插件的上手门槛。<br />Higress 对 Istio/Envoy 的 Wasm 能力做了一些 Bugfix 的工作，目前已经都合并进了上游社区。后续的一些 Feature 能力，也会持续反哺上游社区。<br />同时欢迎大家一起为 Higress 的插件以及其他社区生态添砖加瓦，为 Higress 贡献请参考文档：<br />https://higress.cn/docs/latest/developers/guide_dev/<br />如有产品疑问，可以扫码立即加入群聊：<br />Higress社区交流3群<br />![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1723449123354-874e2ef4-789a-426e-8d3d-b2a12525f08b.webp#clientId=ubaf1ae1d-09cd-4&from=paste&id=ub225813a&originHeight=512&originWidth=522&originalType=url&ratio=1.7999999523162842&rotation=0&showTitle=false&status=done&style=none&taskId=u1f7c8c03-9174-4af6-b290-f870d42c6e1&title=)
+特别感谢 Istio/Envoy 社区的前置工作，让 Higress 可以实现对 Ingress 资源启用 WasmPlugin ，增强了 Ingress Controller 的自定义扩展能力。<br />特别感谢 Tetrate 社区实现的 proxy-wasm-go-sdk，Higress 在这个基础上封装了 wasm-go sdk，降低了开发插件的上手门槛。<br />Higress 对 Istio/Envoy 的 Wasm 能力做了一些 Bugfix 的工作，目前已经都合并进了上游社区。后续的一些 Feature 能力，也会持续反哺上游社区。<br />同时欢迎大家一起为 Higress 的插件以及其他社区生态添砖加瓦，为 Higress 贡献请参考文档：<br />https://higress.cn/docs/latest/developers/guide_dev/<br />如有产品疑问，可以扫码立即加入群聊：<br />Higress社区交流3群<br />![](/img/1728551141019.png)
 

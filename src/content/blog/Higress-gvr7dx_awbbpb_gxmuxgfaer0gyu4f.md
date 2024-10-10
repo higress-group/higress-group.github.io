@@ -17,7 +17,7 @@ authors: "CH3CHO"
 + <font style="color:rgb(1, 1, 1);">将传统的负载均衡/重试/fallback 能力延伸，支持对接多个大模型厂商 API，提高整体稳定性。</font>
 + <font style="color:rgb(1, 1, 1);">扩展可观测能力，支持不同模型之间效果的对比 A/B Test，以及对话上下⽂链路 Tracing 等。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726737511669-2e2443e0-eef6-4475-901e-c46c2fdfe936.webp)
+![](/img/1728551141848.png)
 
 <font style="color:rgb(5, 5, 5);">Higress 是阿⾥云开源的⼀款 AI Gateway，为开发者提供了一站式的 AI 插件集和增强后端模型调度处理能力，使得 AI 与网关的集成更加便捷和高效。官方提供了丰富的插件库，涵盖 AI、流量管理、安全防护等常用功能，满足 90% 以上的业务场景需求。此外还支持 Wasm 插件扩展，支持多语言编写 Wasm 插件，插件更新采用热插拔机制对流量无损。</font>
 
@@ -326,7 +326,7 @@ envsubst < 02-ai-json-resp.yaml | kubectl delete -f -
 ## **<font style="color:rgb(60, 112, 198);">AI Agent 插件</font>**
 <font style="color:rgb(5, 5, 5);">AI Agent 插件基于 Agent ReAct 能力，允许用户实现零代码快速构建 AI Agent 应用。通过简单配置 API 的作用、URL、请求参数等信息，用户即可将大模型与外部服务进行连接，使其具备特定功能，如地图助手或天气助手。AI Agent 让大模型能够根据用户的需求通过 API 接口自动调用合适的工具以完成复杂任务，从而解决大模型在垂直领域知识不足的问题。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726737511666-f7edca25-d47d-4579-a08f-434b82999bfe.webp)
+![](/img/1728551142011.png)
 
 <font style="color:rgb(5, 5, 5);">在本节中将会展示如何使用 AI Agent 插件来构建一个天气助手和航班助手，其中天气服务使用的是知心天气，航班服务使用的是 AviationStack。请读者自行注册这两个服务并创建相应的 API Token。准备好 API Token 后，将其应用到环境变量中，然后创建相关的资源。</font>
 
@@ -793,11 +793,11 @@ curl --location 'http://127.0.0.1:10000/v1/chat/completions' \
 
 <font style="color:rgb(5, 5, 5);">浏览器输入 http://skywalking.higress.io:10000 访问 SkyWalking 界面。请求的链路追踪信息如下。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726737511679-66245a7b-1b4f-41ed-b87b-f501f73900cb.webp)
+![](/img/1728551142170.png)
 
 <font style="color:rgb(5, 5, 5);">在 span tag 中可以看到这次请求的输入和输出 token 数量，以及用户输入的内容和模型名称。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726737511664-d470c80d-474b-4e7c-976a-cd73ea2e5dc6.webp)
+![](/img/1728551142319.png)
 
 <font style="color:rgb(5, 5, 5);">输入和输出 token 总数的指标信息可以通过 higress-gateway 暴露的 Prometheus 指标来查看。</font>
 
@@ -836,7 +836,7 @@ k3d cluster delete higress-ai-cluster
 
 <font style="color:rgb(0, 0, 0);">欢迎更多小伙伴一起参与到 Higress 社区的建设中，可以加入 Higress 微信/钉钉群（群号：30735012403 ）：</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/webp/299576/1726737598472-6a083499-e961-4e0e-8ae8-b6887f83089e.webp)
+![](/img/1728551142474.png)
 
 **<font style="color:rgb(46, 75, 227);"></font>**
 
