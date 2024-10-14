@@ -6,17 +6,17 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ---
 
 
-## Higress 是什么?
+## Higress 简介
 
-Higress 是基于阿里内部多年的 Envoy Gateway 实践沉淀，以开源 [Istio](https://github.com/istio/istio) 与 [Envoy](https://github.com/envoyproxy/envoy) 为核心构建的云原生 API 网关。
+Higress 是一款云原生 API 网关，内核基于 Istio 和 Envoy，可以使用多种语言编写 Wasm 插件，提供了数十个现成的通用插件，以及开箱即用的控制台（demo 点[这里](http://demo.higress.io/)）
 
-Higress 在阿里内部作为 AI 网关，承载了通义千问 APP、百炼大模型 API、机器学习 PAI 平台等 AI 业务的流量。
+Higress 在阿里内部为解决 Tengine reload 对长连接业务有损，以及 gRPC/Dubbo 负载均衡能力不足而诞生。
 
-Higress 能够用统一的协议对接国内外所有 LLM 模型厂商，同时具备丰富的 AI 可观测、多模型负载均衡/fallback、AI token 流控、AI 缓存等能力：
-
-![](https://img.alicdn.com/imgextra/i1/O1CN01fNnhCp1cV8mYPRFeS_!!6000000003605-0-tps-1080-608.jpg)
+阿里云基于 Higress 构建了云原生 API 网关产品，为大量企业客户提供 99.99% 的网关高可用保障服务能力。
 
 ### 什么是 AI 网关
+
+在 AI 时代，Higress 基于 AI 网关能力，支撑了通义千问 APP、百炼大模型 API、机器学习 PAI 平台等 AI 业务。同时服务国内头部的 AIGC 企业（如零一万物），以及 AI 产品（如 FastGPT）。
 
 AI Gateway = AI Native API Gateway
 
@@ -24,28 +24,20 @@ AI 网关的本质依然是 API 网关，AI 原生的意义在于，在这样的
 
 这是传统 API 网关的功能范畴，AI 场景下仍然有其通用价值：
 
-![](https://img.alicdn.com/imgextra/i3/O1CN010HLOBV28WZkzCkHnE_!!6000000007940-2-tps-1904-908.png)
+![](https://img.alicdn.com/imgextra/i2/O1CN01yvRXRl1Ux42Nd4bos_!!6000000002583-2-tps-1904-908.png)
 
-在 AI 场景下，API 网关的功能范畴进一步扩展：
+在 AI 场景下，基于 Higress 可以将 API 网关的功能范畴进一步扩展：
 
-![](https://img.alicdn.com/imgextra/i1/O1CN011Tlzje1gJvZrIfcCT_!!6000000004122-2-tps-1904-966.png)
-
-
+![](https://img.alicdn.com/imgextra/i1/O1CN01TtjqnE1vLVBDlhiJf_!!6000000006156-2-tps-1904-970.png)
 
 
 ## 核心优势
 
 - **生产等级**
 
-  脱胎于阿里巴巴2年多生产验证的内部产品，支持每秒请求量达数十万级的大规模场景。
+  脱胎于阿里巴巴多年生产验证的内部产品，支持每秒请求量达数十万级的大规模场景。
 
   彻底摆脱 Nginx reload 引起的流量抖动，配置变更毫秒级生效且业务无感。对 AI 业务等长连接场景特别友好。
-
-- **流式处理**
-
-  支持真正的完全流式处理请求/响应 Body，Wasm 插件很方便地自定义处理 SSE （Server-Sent Events）等流式协议的报文。
-
-  在 AI 业务等大带宽场景下，可以显著降低内存开销。  
     
 - **便于扩展**
   
@@ -55,15 +47,23 @@ AI 网关的本质依然是 API 网关，AI 原生的意义在于，在这样的
 
 - **安全易用**
   
-  基于 Ingress API 和 Gateway API 标准，提供开箱即用的 UI 控制台（demo 点[这里](http://demo.higress.io/)），WAF 防护插件、IP/Cookie CC 防护插件开箱即用。
+  基于 Ingress API 和 Gateway API 标准，提供开箱即用的 UI 控制台，WAF 防护插件、IP/Cookie CC 防护插件开箱即用。
 
   支持对接 Let's Encrypt 自动签发和续签免费证书，并且可以脱离 K8s 部署，一行 Docker 命令即可启动，方便个人开发者使用。
+
+- **流式处理**
+
+  支持真正的完全流式处理请求/响应 Body，Wasm 插件很方便地自定义处理 SSE （Server-Sent Events）等流式协议的报文。
+
+  在 AI 业务等大带宽场景下，可以显著降低内存开销。  
 
 ## 使用场景
 
 - **AI 网关**:
 
-  Higress 提供了一站式的 AI 插件集，可以增强依赖 AI 能力业务的稳定性、灵活性、可观测性，使得业务与 AI 的集成更加便捷和高效。
+  Higress 能够用统一的协议对接国内外所有 LLM 模型厂商，同时具备丰富的 AI 可观测、多模型负载均衡/fallback、AI token 流控、AI 缓存等能力：
+
+  ![](https://img.alicdn.com/imgextra/i1/O1CN01fNnhCp1cV8mYPRFeS_!!6000000003605-0-tps-1080-608.jpg)
 
 - **Kubernetes Ingress 网关**:
 
