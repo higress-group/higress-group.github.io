@@ -20,6 +20,8 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | name                  | 字符串 | 自定义的服务来源名称                                   | my-nacos                             | 是 |
 | domain                | 字符串 | 服务发现地址，一般是注册中心地址; 当类型是static或dns时，这个字段用于直接配置后端地址                             | 192.168.1.2                          | 是 |
 | port                  | 整数 | 注册中心访问端口                                     | 8848                                 | 是 |
+| protocol                  | 字符串 | 服务的协议，仅对 static/dns 类型生效，支持配置 HTTP/HTTPS/GRPC/GRPCS，默认值是 HTTP                                     | HTTPS                                 | 否 |
+| sni                  | 字符串 | 当 protocol 是 HTTPS 或 GRPCS 时，用于设置 TLS 握手时使用的 SNI                                     | www.example.com                                 | 否 |
 | zkServicesPath        | 字符串数组 | 使用zk时,填写服务注册的根路径,默认监听 /dubbo 和 /services，前者为dubbo 服务默认根路径，后者为SpringCloud服务默认根路径 | ["/service-provider"]                | 否 |
 | nacosNamespaceId      | 字符串 | nacos命名空间id                                  | d8ac64f3-xxxx-xxxx-xxxx-47a814ecf358 | 否 |
 | nacosGroups           | 字符串数组 | nacos服务分组列表                                  | ["DEFAULT_GROUP"]                    | 否 |
@@ -95,6 +97,7 @@ spec:
   registries:
   - domain: www.alibaba.com
     name: alibaba
-    port: 80
+    port: 443
+    protocol: HTTPS
     type: dns
 ```
