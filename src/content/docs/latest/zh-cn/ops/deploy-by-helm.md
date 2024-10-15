@@ -39,6 +39,8 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | global.pvc.rwxSupported | 标识目标 K8s 集群是否支持 PersistentVolumeClaim 的 ReadWriteMany 操作方式。 | true |
 | **核心组件参数** |  |  |
 | higress-core.gateway.replicas | Higress Gateway 的 pod 数量 | 2 |
+| higress-core.gateway.httpPort | Higress Gateway 将监听的 HTTP 端口。| 80 |
+| higress-core.gateway.httpsPort | Higress Gateway 将监听的 HTTPS 端口。| 443 |
 | higress-core.controller.replicas | Higress Controller 的 pod 数量 | 1 |
 | **控制台参数** |  |  |
 | higress-console.replicaCount | Higress Console 的 pod 数量 | 1 |
