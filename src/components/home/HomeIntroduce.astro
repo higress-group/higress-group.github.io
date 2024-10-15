@@ -4,7 +4,7 @@ import { SITE } from "@utils/config";
 import Button from "@/components/common/Button.astro";
 import { Github, Start } from "../icon";
 import AOS from 'aos';
-import 'aos/dist/aos.css'; 
+import 'aos/dist/aos.css';
 
 const t = useTranslations(Astro);
 const ifzh = isChinese(Astro);
@@ -30,7 +30,7 @@ const ifzh = isChinese(Astro);
     <!-- Image element, initially hidden on larger screens -->
     <div id="background-image" class="image-background"></div>
   </div>
-  
+
   <div class="introduce flex flex-col justify-center items-center bg-transparent h-full relative z-1"  >
      <div class="flex flex-col justify-center items-center h-[75%]">
       <div
@@ -71,10 +71,10 @@ const ifzh = isChinese(Astro);
     <div class="versionInfo flex justify-end items-center h-[10%]">
       <a
         class="text-xs text-link block"
-        href="https://github.com/alibaba/higress/releases/tag/v2.0.0"
+        href="https://github.com/alibaba/higress/releases/tag/v2.0.1"
         target="_blank"
       >
-        Release Note of V2.0.0
+        Release Note of V2.0.1
       </a>
     </div>
   </div>
@@ -257,12 +257,12 @@ const ifzh = isChinese(Astro);
     function updateMedia() {
       // 获取具有 class 为 'media-container' 的元素
       const mediaContainer = document.querySelector('.media-container');
-      
+
       // 检查当前窗口的宽度
       if (window.innerWidth <= 768) {
         // 如果窗口宽度小于或等于 768 像素（通常是移动设备），则插入图片
         mediaContainer.innerHTML = `
-          <div id="background-image" class="image-background" 
+          <div id="background-image" class="image-background"
                style="background-image: url('https://img.alicdn.com/imgextra/i1/O1CN01U3PG171Wiz4B85TGK_!!6000000002823-0-tps-2388-1168.jpg');"></div>
         `;
       } else {
