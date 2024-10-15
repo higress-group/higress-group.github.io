@@ -43,6 +43,8 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | higress-core.gateway.serviceAccount.annotations                | 指定需要添加到 ServiceAccount 上的注释。                                                              | {}                  |
 | higress-core.gateway.serviceAccount.name                       | 指定要使用的 ServiceAccount 的名称。                                                                | ""                  |
 | higress-core.gateway.env	                                      | 指定 Gateway 使用的环境变量。                                                                       | {}                  |
+| higress-core.gateway.httpPort	                                 | Higress Gateway 将监听的 HTTP 端口。                                                                 | 80                   |
+| higress-core.gateway.httpsPort                                 | Higress Gateway 将监听的 HTTPS 端口。                                                                 | 443                   |
 | higress-core.gateway.hostNetwork	                              | 指定是否使用宿主机网络。                                                                              | false               |
 | higress-core.gateway.labels	                                   | 指定应用于所有 gateway 资源的标签。                                                                    | {}                  |
 | higress-core.gateway.annotations	                              | 指定要应用于所有 gateway 资源的注释。                                                                   | {}                  |
