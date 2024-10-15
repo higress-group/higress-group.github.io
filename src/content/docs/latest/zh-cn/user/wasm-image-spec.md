@@ -65,7 +65,7 @@ spec:
       properties:
         consumers:
           type: array
-          x-scope: GLOBAL # 配置项作用范围。可选值：GLOBAL（全局配置）、INSTANCE（实例级配置，即在关联路由、域名、服务时的配置）、ALL（全局、实例皆可配置）。可空。缺省值为 INSTANCE。
+          x-scope: GLOBAL # 配置项作用范围。可选值：GLOBAL（全局配置）、RULE（规则级配置，即在关联到路由、域名、服务等特定时的配置）、ANY（不限制作用范围）。可空。缺省值为 ANY。
           title: 调用方列表
           x-title-i18n:
             en-US: Consumer List
