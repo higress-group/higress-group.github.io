@@ -32,3 +32,64 @@ go run generateCidr/ipRange2Cidr.go
 
 ## Usage of Properties
 In the geo-ip plugin, call proxywasm.SetProperty() to set country, city, province, and isp into request attributes so that subsequent plugins can use proxywasm.GetProperty() to obtain the geographical information corresponding to the user's IP for that request.
+
+## Expanding the AI Prompt Decorator Plugin with User Geolocation Information Based on Geo-IP Plugin Capabilities
+
+If you need to include user geolocation information before and after LLM requests, make sure both the geo-ip plugin and the AI prompt decorator plugin are enabled. Additionally, in the same request processing phase, the priority of the geo-ip plugin must be higher than that of the AI prompt decorator plugin. First, the geo-ip plugin will calculate the user's geolocation based on their IP address and then pass this information to subsequent plugins via request attributes. For example, in the default phase, the priority of the geo-ip plugin is set to 1000, while the priority of the ai-prompt-decorator plugin is set to 500.
+
+Example configuration for the geo-ip plugin:
+```yaml
+ipProtocol: "ipv4"
+```
+
+Example configuration for the AI prompt decorator plugin:
+```yaml
+prepend:
+- role: system
+  content: "The current location of the user asking the question is, country: ${geo-country}, province: ${geo-province}, city: ${geo-city}"
+append:
+- role: user
+  content: "After answering each question, try to ask a follow-up question"
+```
+
+Using the above configuration to send a request:
+
+```bash
+curl http://localhost/test \
+-H "content-type: application/json" \
+-H "x-forwarded-for: 87.254.207.100,4.5.6.7" \
+-d '{
+  "model": "gpt-3.5-turbo",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What's the weather like today?"
+    }
+  ]
+}'
+```
+
+After processing by the plugins, the actual request becomes:
+
+```bash
+curl http://localhost/test \
+-H "content-type: application/json" \
+-H "x-forwarded-for: 87.254.207.100,4.5.6.7" \
+-d '{
+  "model": "gpt-3.5-turbo",
+  "messages": [
+    {
+      "role": "system",
+      "content": "The current location of the user asking the question is, country: China, province: Beijing, city: Beijing"
+    },
+    {
+      "role": "user",
+      "content": "What's the weather like today?"
+    },
+    {
+      "role": "user",
+      "content": "After answering each question, try to ask a follow-up question"
+    }
+  ]
+}'
+```
