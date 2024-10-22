@@ -21,13 +21,13 @@ const Functionality = {
       { key: 'others', label: '其他工具' },
     ]
   },
-  authentication: {description:"认证"},
-  transformation:{description:"转换"}, 
-  traffic: {description:"流量"},
-  security: {description:"安全"},
+  authentication: { description: "认证" },
+  transformation: { description: "转换" },
+  traffic: { description: "流量" },
+  security: { description: "安全" },
 };
 
-const lang = ifzh ? "zh-cn" : "en"
+const lang = ifzh ? "zh-cn" : "en";
 
 // 拿到插件的文档
 const posts = await getCollection("docs", (item) => {
@@ -53,7 +53,6 @@ const dataSource = posts
     const functionality = Functionality[key];
     // 查找ai 副标题
     const secondaryTitle = (functionality?.children && functionality.children.find(child => child.key === childKey)?.label) || '';
-      
     return {
       Img: "",
       Title: item.data.title,
@@ -61,15 +60,23 @@ const dataSource = posts
       Des: item.data.description,
       Link: generateLink(item.slug),
       SecondaryTitle: secondaryTitle,
-      Functionality: functionality?.description || '',
+      Functionality: functionality?.description || "",
       SupportBy: "Higress",
-      GithubHigressUrl: item.data.githubHigressUrl || `https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/${item.slug.split('/').pop()}`,
+      GithubHigressUrl:
+        item.data.githubHigressUrl ||
+        `https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/${item.slug.split("/").pop()}`,
     };
   })
-  .filter((item) => item.Functionality);
+  .filter((item) => item.Functionality)
+  .sort((a, b) => {
+    // 将“大模型API供应”（key: ai，childKey: api-provider）放在最前面
+    if (a.SecondaryTitle === "大模型API供应") return -1;
+    if (b.SecondaryTitle === "大模型API供应") return 1;
+    return 0; // 默认不改变顺序
+  });
 ---
 
-<BaseLayout title={t('plugin.title')} description={t('plugin.description')}>
+<BaseLayout title={t("plugin.title")} description={t("plugin.description")}>
   <PluginIntroduce />
   <PluginHub client:load dataSource={dataSource} />
   <CloudFooter />
