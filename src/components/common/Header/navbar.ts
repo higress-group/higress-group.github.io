@@ -12,7 +12,7 @@ export default [
     route:"/docs/latest/overview/what-is-higress/"
   },
   {
-    label: "AI 插件",
+    label: "插件",
     translations: {
       en: "PLUGIN",
     },

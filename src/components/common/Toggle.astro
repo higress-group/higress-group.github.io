@@ -62,11 +62,14 @@ const Component = slot;
             <a
               href={route}
               target={target}
-              class={`toggle-text flex items-center justify-center no-underline h-full ${
-                active ? "toggle-text-active" : ""
-              }`}
+              class={`toggle-text flex items-center justify-center no-underline h-full ${active ? "toggle-text-active" : ""} ${route.includes('/plugin/')? "toggle-text-aiwrapper relative": ""}`}
             >
               {title}
+              {route.includes('/plugin/')? 
+                <span class="toggle-text-ailogo text-center rounded-xl absolute top-[0] right-[-1.5rem] color-[#ffffff] bg-[red] w-[2rem] h-[1.25rem] font-bold">
+                  AI
+                </span>
+              :null}
             </a>
           )
         }
@@ -165,6 +168,16 @@ customElements.define("toggle-component", Toggle);
     .toggle-text-active {
       font-weight: 500;
       color: var(--toggle-trigger-atc) !important;
+    }
+    
+    .toggle-text-aiwrapper .toggle-text-ailogo {
+      display: inline-block;
+      visibility: hidden;
+      transform: scale(0.8);
+      z-index: 1000;
+    }
+    .toggle-text-aiwrapper:hover .toggle-text-ailogo {
+      visibility: visible;
     }
 
     .toggle-component:hover .toggle-text {
