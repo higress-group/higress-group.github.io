@@ -3,6 +3,49 @@ import { useTranslations } from "@i18n/util";
 const t = useTranslations(Astro);
 import Button from "@components/common/Button.astro";
 import { SITE } from "@utils/config";
+
+const friendLinks = [
+  { 
+    label: 'Nacos', 
+    link: 'https://nacos.io/' 
+  },
+  { 
+    label: 'SpringCloudAlibaba', 
+    link: 'https://sca.aliyun.com/' 
+  },
+  { 
+    label: 'SpringAiAlibaba', 
+    link: 'https://sca.aliyun.com/ai/' 
+  },
+  { 
+    label: 'Arthas', 
+    link: 'https://arthas.aliyun.com/' 
+  },
+  { 
+    label: 'Dubbo', 
+    link: 'https://cn.dubbo.apache.org/zh-cn/' 
+  },
+  { 
+    label: 'Sentinel', 
+    link: 'http://sentinelguard.io' 
+  },
+  { 
+    label: 'RocketMQ', 
+    link: 'https://rocketmq.io/' 
+  },
+  { 
+    label: '可观测中文', 
+    link: 'https://observability.cn/' 
+  },
+  { 
+    label: 'OpenKruise', 
+    link: 'https://openkruise.io/' 
+  },
+  { 
+    label: 'serverless-devs', 
+    link: 'https://www.serverless-devs.com/' 
+  },
+];
 ---
 
 <footer-layout
@@ -98,6 +141,12 @@ import { SITE } from "@utils/config";
   <div
     class="bottom_watermark text-[.875rem] text-info leading-6 text-center tracking-normal lg:pb-1 lg:pt-8"
   >
+    <p class="text-neutral-500 flex flex-wrap gap-2 lg:gap-4 justify-center">
+      友情链接：
+      {
+        friendLinks.map(item => <a href={item.link} target="_blank" class="hover:text-primary transition-colors">{item.label}</a>)
+      }
+    </p>
     <br />
     © Higress Authors 2024 | Documentation Distributed under <a href="https://creativecommons.org/licenses/by/4.0"
     target="_blank">CC-BY-4.0</a>
