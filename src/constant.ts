@@ -6,9 +6,9 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "云栖回顾 | 2024 云栖大会微服务和网关相关演讲材料",
-    "mobileText": "云栖回顾 | 2024 云栖大会微服务和网关相关演讲材料",
-    "link": "https://developer.aliyun.com/ebook/8379",
+    "text": "上新｜统一多层网关架构系列视频课程",
+    "mobileText": "上新｜统一多层网关架构系列视频课程",
+    "link": "https://higress.cn/blog/higress-gvr7dx_awbbpb_ghwthc4xkdshgqgp/?source=blog",
     "target": "_blank",
     "display": true
 }
@@ -41,10 +41,7 @@ export const DOCS_ITEM = [
   },
 ];
 
-export const MEDIARESOURCE = null;
-
-// 主要特性
-export const CHOOSE_REASON_LIST: ChooseReason[] = [
+export const MEDIARESOURCE = null = [
   {
     title: "home.website.edge.1.title",
     svgKey: "adaptive",
