@@ -41,7 +41,10 @@ export const DOCS_ITEM = [
   },
 ];
 
-export const MEDIARESOURCE = null = [
+export const MEDIARESOURCE = null;
+
+// 主要特性
+export const CHOOSE_REASON_LIST: ChooseReason[] = [
   {
     title: "home.website.edge.1.title",
     svgKey: "adaptive",
