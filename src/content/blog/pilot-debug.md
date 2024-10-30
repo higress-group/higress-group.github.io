@@ -44,7 +44,7 @@ git submodule update --init
 
 ### 步骤三：安装 Higress
 
-既然只是调试 pilot，那么其他组件还是要复用现有 Higress 集群里的。所以我们需要在本地配置一个 Higress 集群。大家可以参考这篇文档：[链接](/docs/user/quickstart)。
+既然只是调试 pilot，那么其他组件还是要复用现有 Higress 集群里的。所以我们需要在本地配置一个 Higress 集群。大家可以参考这篇文档：[链接](/docs/latest/user/quickstart)。
 
 ## 开发与调试
 

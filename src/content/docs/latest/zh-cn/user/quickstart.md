@@ -37,7 +37,7 @@ kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBala
 如果 LoadBalancer IP 获取不到，说明您当前的 K8s 集群不支持 LoadBalancer 类型的 Service，可以考虑以下方案：
 
 1. 使用云厂商提供的 K8s 服务，例如[阿里云 ACK](https://www.aliyun.com/product/kubernetes)
-2. 参考[运维参数配置](https://higress.io/zh-cn/docs/user/configurations)，开启`higress-core.gateway.hostNetwork`，让 Higress 监听本机端口，再通过其他软/硬负载均衡器转发给固定机器 IP
+2. 参考[运维参数配置](https://higress.io/docs/latest/user/configurations)，开启`higress-core.gateway.hostNetwork`，让 Higress 监听本机端口，再通过其他软/硬负载均衡器转发给固定机器 IP
 3. （生产不建议）使用开源的负载均衡方案 [MetalLB](https://metallb.universe.tf/)
 
 #### 场景二：在本地 K8s 环境中使用

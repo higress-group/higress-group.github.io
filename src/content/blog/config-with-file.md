@@ -153,6 +153,6 @@ curl http://localhost/get?foo=bar -H 'Host: foo.bar.com'
 ## 参考文档
 
 更多相关信息与 Higress 的其他部署方式可查阅以下文档：
-- [快速开始](../docs/user/quickstart)
+- [快速开始](../docs/latest/user/quickstart)
 - [使用 Helm 进行云原生部署](../docs/ops/deploy-by-helm)
 - [基于 Docker Compose 进行独立部署](../docs/ops/deploy-by-docker-compose)

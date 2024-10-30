@@ -112,7 +112,7 @@ https://higress.io/zh-cn/docs/developers/developers_dev.html
 https://higress.io/zh-cn/docs/overview/roadmap.html
 https://higress.io/zh-cn/docs/overview/faq.html
 https://higress.io/zh-cn/docs/overview/terminology.html
-https://higress.io/zh-cn/docs/user/quickstart.html
+https://higress.io/zh-cn/docs/latest/user/quickstart.html
 https://higress.io/zh-cn/docs/user/wasm-go.html
 https://higress.io/zh-cn/docs/user/kruise-rollout.html
 https://higress.io/zh-cn/docs/user/nacos-route.html
