@@ -27,6 +27,8 @@ description: 自定义插件配置参考
 tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
 ```
 
+详细的编译说明，包括要使用更复杂的 Header 状态管理机制，请参考[ Go 开发插件的最佳实践](https://higress.io/docs/latest/user/wasm-go/#3-%E7%BC%96%E8%AF%91%E7%94%9F%E6%88%90-wasm-%E6%96%87%E4%BB%B6)。
+
 ### step2. 构建并推送插件的 docker 镜像
 
 使用这份简单的 Dockerfile
