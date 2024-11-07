@@ -3,7 +3,7 @@ name: higress.io deploy on github pages
 on:
   push:
     branches:
-      - develop-astro-higress
+      - main
 
 
 jobs:
