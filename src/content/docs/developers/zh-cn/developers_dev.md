@@ -45,6 +45,7 @@ description: Higress 维护者名单
 | 封宇腾 | [Ffyyt](https://github.com/Fkbqf)               | 西安邮电     |
 | 田亚涛 | [Hinsteny](https://github.com/Hinsteny)         | 蚂蚁      |
 | 屈晗煜 | [Ink-33](https://github.com/Ink-33)         | 东莞理工     |
+| 王小建 | [littlejian](https://github.com/littlejiancc)      | 金智塔     |
 | 邵佳成 | [sjcsjc123](https://github.com/sjcsjc123) | 杭电 |
 | 宋鹏远 | [songpengyuan](https://github.com/songpengyuan) | 小满科技 |
 | 彭万山 | [Uncle-Justice](https://github.com/Uncle-Justice) | 华中科技 |
