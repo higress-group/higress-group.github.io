@@ -307,7 +307,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config JwtConfig, log wrapper
 	log.Debugf("call token-server with auth request:%s", string(authRequest))
 	// 插件将使用配置的HTTP客户端向令牌服务器发送POST请求，以验证令牌的有效性
 	err2 := config.client.Post(
-		"/api/token/auth",
+		"http://www.example.com/api/token/auth",
 		[][2]string{{"content-type", "application/json"}},
 		authRequest,
 		func(statusCode int, responseHeaders http.Header, responseBody []byte) {
