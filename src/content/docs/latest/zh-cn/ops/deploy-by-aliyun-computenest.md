@@ -16,7 +16,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ## 部署步骤
 - 点击部署链接，进入部署页面。
 
- [![Deploy on AlibabaCloud ComputeNest](https://service-info-public.oss-cn-hangzhou.aliyuncs.com/computenest.svg)](https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=Higress社区版)
+  [![Deploy on AlibabaCloud ComputeNest](https://service-info-public.oss-cn-hangzhou.aliyuncs.com/computenest.svg)](https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=Higress社区版)
 
 - 部署页面中，根据界面提示，填写配置参数并提交订单。
   选择资源类型并配置ECS实例密码.
