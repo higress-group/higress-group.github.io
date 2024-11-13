@@ -232,6 +232,10 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a --use-bu
 
 Note: On Windows, you can use Unix-like shells such as Cygwin, Git Bash to execute the command above.
 
+**One-click deployment：**
+We provide a one-click deployment to Alibaba Cloud solution, more convenient operation [![Deploy on AlibabaCloud ComputeNest](https://service-info-public.oss-cn-hangzhou.aliyuncs.com/computenest-en.svg)](https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=Higress社区版)
+
+
 ### Stage 2: Configuration
 
 Open `http://127.0.0.1:8080` in browser. For the first time, you will need to configure the admin credentials.
