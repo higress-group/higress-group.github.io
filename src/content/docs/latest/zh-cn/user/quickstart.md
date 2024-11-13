@@ -257,6 +257,10 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a --use-bu
 
 注：Windows 系统下可以使用 Cygwin、Git Bash 等类 Unix Shell 中执行上述命令。
 
+**一键部署：**
+我们提供了一键部署到阿里云的解决方案，操作更加便捷 [![Deploy on AlibabaCloud ComputeNest](https://service-info-public.oss-cn-hangzhou.aliyuncs.com/computenest.svg)](https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=Higress社区版)
+
+
 ### 阶段二：配置
 
 在浏览器中输入`http://127.0.0.1:8080` 进入 Higress 控制台。首次访问时需要先初始化管理员账号。
