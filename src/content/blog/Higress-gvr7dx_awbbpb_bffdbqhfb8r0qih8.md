@@ -2,7 +2,7 @@
 title: "Higress x Kubesphere 开源沙龙成都站邀您参会"
 description: "Higress x Kubesphere 开源沙龙成都站邀您参会"
 date: "2024-11-14"
-category: "activity-preview"
+category: "event"
 keywords: ["Higress"]
 authors: "CH3CHO"
 ---
