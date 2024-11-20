@@ -637,8 +637,11 @@ tinygo build -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottiny
 ### 2.5 Envoy 请求缓存区限制
 
 当自定义插件使用 `onHttpRequestBody` 非流式传输，当请求超过 `downstream` 缓存区限制(默认是 32k)。Envoy 会给用户返回 413， 同时报 `request_payload_too_large` 错误。
-比如在 AI 长上下文中场景中可能会碰到这个问题，这个问题可以通过参考 [全局配置说明](https://higress.io/docs/latest/user/configmap/) 调整 Downstream 配置项 `connectionBufferLimits` 解决， 或者 使用 `SetRequestBodyBufferLimit` 方法设置请求 body buffer limit 解决。 关于如何使用 `SetRequestBodyBufferLimit` 可以参考 Higress 官方提供 [ai-proxy 插件](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-proxy/main.go#L81) 的实现。
+比如在 AI 长上下文中场景中可能会碰到这个问题，这个问题可以通过参考 [全局配置说明](https://higress.io/docs/latest/user/configmap/) 调整 Downstream 配置项 `connectionBufferLimits` 解决， 或者使用 `SetRequestBodyBufferLimit` 方法设置请求 body buffer limit 解决。 关于如何使用 `SetRequestBodyBufferLimit` 可以参考 Higress 官方提供 [ai-proxy 插件](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-proxy/main.go#L81) 的实现。
 
+相应的，如果使用`onHttpResponseBody` 非流式传输，如果响应 body 超过`downstream` 缓存区限制，也会导致传输失败。例如使用 curl 时可能出现报错 `curl: (18) transfer closed with outstanding read data remaining`。处理方式也是类似的，可以通过调整 Downstream 配置项 `connectionBufferLimits` 解决， 或者使用 `SetResponseBodyBufferLimit` 方法设置响应 body buffer limit 解决。
+
+当然，我们还是更建议使用流式处理，或者在 header 阶段判断出不需要处理 body 时，直接调用 `ctx.DontReadRequestBody` 或者 `ctx.DontReadResponseBody`
 
 ## 3 Envoy 属性（Attributes）
 
