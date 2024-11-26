@@ -15,8 +15,8 @@ authors: "CH3CHO"
 
 <font style="color:rgb(24, 24, 24);">Al 驱动的应用程序开发、部署和运维，给应用带来了新的生命力和想象空间。但大部分企业、尤其是中小型企业对 Al 应用的编程框架、可观测体系、网关架构的设计和使用依旧不太熟练，生产环境下的工程化实践仍不太丰富。为此我们邀请了深耕 Al 应用工程化的一线研发工程师，分享他们的生产经验，以及 Spring Al Alibaba 和 Higress 等开源项目的最新进展，并通过现场实操加固学习效果。本次活动因场地限制，采取报名审核制度，现场完成实操（需携带电脑），颁发专属证书。</font>
 
-+ **<font style="color:rgb(24, 24, 24);">活动时间：</font>****<font style="color:rgb(46, 75, 227);">2024 年 11 月 29 日（周五）13:00-17:30</font>**
-+ **<font style="color:rgb(24, 24, 24);">活动地址：</font>****<font style="color:rgb(46, 75, 227);">深圳市南山区科苑南路 3331 号阿里中心，T1-3-1-E 青云涧</font>**
++ **<font style="color:rgb(24, 24, 24);">活动时间：</font><font style="color:rgb(46, 75, 227);">2024 年 11 月 29 日（周五）13:00-17:30</font>**
++ **<font style="color:rgb(24, 24, 24);">活动地址：</font><font style="color:rgb(46, 75, 227);">深圳市南山区科苑南路 3331 号阿里中心，T1-3-1-E 青云涧</font>**
 + **<font style="color:rgb(24, 24, 24);">活动地址：</font>**[**<font style="color:rgb(46, 75, 227);">https://hd.aliyun.com/form/5292</font>**](https://hd.aliyun.com/form/5292)
 
 **<font style="color:rgb(46, 75, 227);">二、详细议程</font>**
