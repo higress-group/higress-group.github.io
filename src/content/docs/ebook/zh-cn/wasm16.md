@@ -599,6 +599,8 @@ tinygo build -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottiny
 
 表示 header 还不能继续交给下一个 filter 来处理。 但是并不停止从连接读数据，继续触发 body data 的处理。 这样可以在 body data 处理阶段可以更新 Http 请求头内容。 如果 body data 要交给下一个 filter 处理， 这时 header 是也会被一起交给下一个 filter 处理。
 
+但是要注意的是，如果后续不会有 body 触发 data 的处理，那么当前请求或响应就会一直被卡住。所以需要在 header 阶段通过 content-type 或者 content-length 来判断是否存在 body，没有 body 时不应该返回这个状态码。
+
 3. HeaderContinueAndEndStream:
 
 表示 header 可以继续交给下一个 filter 处理，但是下一个 filter 收到的 end_stream = false，也就是标记请求还未结束。以便当前 filter 再增加 body。
