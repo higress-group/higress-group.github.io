@@ -41,28 +41,7 @@ export const DOCS_ITEM = [
   },
 ];
 
-export const MEDIARESOURCE = null = [
-  {
-    title: "home.website.edge.1.title",
-    svgKey: "adaptive",
-    description: "home.website.edge.1.description",
-  },
-  {
-    title: "home.website.edge.2.title",
-    svgKey: "standard",
-    description: "home.website.edge.2.description",
-  },
-  {
-    title: "home.website.edge.3.title",
-    svgKey: "timeTested",
-    description: "home.website.edge.3.description",
-  },
-  {
-    title: "home.website.edge.4.title",
-    svgKey: "variety",
-    description: "home.website.edge.4.description",
-  },
-]
+export const MEDIARESOURCE = null
 
 // TODO: 合作客户反馈
 export const COMPANY_CUSTOMERS: Customer[] = [
