@@ -43,6 +43,30 @@ export const DOCS_ITEM = [
 
 export const MEDIARESOURCE = null
 
+// 主要特性
+export const CHOOSE_REASON_LIST: ChooseReason[] = [
+  {
+    title: "home.website.edge.1.title",
+    svgKey: "adaptive",
+    description: "home.website.edge.1.description",
+  },
+  {
+    title: "home.website.edge.2.title",
+    svgKey: "standard",
+    description: "home.website.edge.2.description",
+  },
+  {
+    title: "home.website.edge.3.title",
+    svgKey: "timeTested",
+    description: "home.website.edge.3.description",
+  },
+  {
+    title: "home.website.edge.4.title",
+    svgKey: "variety",
+    description: "home.website.edge.4.description",
+  },
+];
+
 // TODO: 合作客户反馈
 export const COMPANY_CUSTOMERS: Customer[] = [
   {
