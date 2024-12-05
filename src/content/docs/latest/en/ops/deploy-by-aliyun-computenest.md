@@ -20,16 +20,16 @@ Through Aliyun ComputeNest, a one-click deployment solution for Higress is provi
 
 - According to the interface prompt, fill in the parameters to complete the deployment.
   Select a resource type and configure an ECS instance password..
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img1.jpg)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img1.jpg)
   Configure the Nacos service. If you do not have an independently deployed Nacos service, you can use the built-in Nacos service.
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img2.jpg)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img2.jpg)
   If the Nacos service is deployed independently, set the IP address of the Nacos service. If authentication is enabled for Nacos, enter the username and password.
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img3.png)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img3.png)
   Finally, configure the zone. You can create a new VPC or use an existing VPC.
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img4.png)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img4.png)
 - After the service instance is created, go to the service instance details page. On the Overview page, you can obtain the login information of the Higress.
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img5.png)
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img6.png)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img5.png)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img6.png)
 
 
 

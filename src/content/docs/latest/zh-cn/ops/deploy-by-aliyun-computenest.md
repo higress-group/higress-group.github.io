@@ -20,16 +20,16 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 - 部署页面中，根据界面提示，填写配置参数并提交订单。
   选择资源类型并配置ECS实例密码.
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img1.jpg)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img1.jpg)
   配置Nacos服务，如果没有独立部署的Nacos服务，可以使用内置的Nacos服务，但不建议生产环境下使用
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img2.jpg)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img2.jpg)
   若有独立部署的Nacos服务，设置Nacos服务的Ip地址，如果Nacos开启了鉴权认证，则需要填写用户名和密码
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img3.png)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img3.png)
   最后配置可用区，可选择新建VPC，也可使用已有的VPC.
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img4.png)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img4.png)
 - 等到服务实例部署成功, 进入服务实例详情页，获取Higress的登录信息。
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img5.png)
-  ![image](https://github.com/aliyun-computenest/quickstart-higress/blob/main/docs/img6.png)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img5.png)
+  ![image](https://raw.githubusercontent.com/aliyun-computenest/quickstart-higress/main/docs/img6.png)
 
 
 
