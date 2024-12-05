@@ -626,14 +626,15 @@ tinygo build -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottiny
 
 表示当前 data 不能继续交给下一个 filter 处理，并且将当前 data 缓存起来。 与 header 类似，如果达到 buffer limit，在请求阶段就直接返回 413，响应阶段就直接返回 500。
 同时需要调用 proxywasm.ResumeHttpRequest()、 proxywasm.ResumeHttpResponse() 或者 proxywasm.SendHttpResponseWithDetail()  函数来恢复后续处理。
+types.ActionPause 实际上对应就是这个状态。
 
 3. DataStopIterationAndWatermark:
 
-同上，只是达到 buffer limit 会触发流控。types.ActionPause 实际上对应就是这个状态。
+同上，只是达到 buffer limit 会触发流控。
 
 4. DataStopIterationNoBuffer:
 
-表示当前 data 不能继续交给下一个 filter，但是不缓存当前 data 。
+表示当前 data 不能继续交给下一个 filter，但是不缓存当前 data。
 
 
 ### 2.5 Envoy 请求缓存区限制
@@ -650,6 +651,14 @@ tinygo build -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottiny
 属性是 Envoy 的一个特性，允许用户在插件中设置和获取这些属性，可以通过 `proxywasm.GetProperty` 和 `proxywasm.SetProperty` 方法获取和设置。
 Envoy 预定义属性包括请求属性、响应属性、连接属性、Upstream 属性、Wasm 属性、和 Metadata 等属性， 具体可以参考 [Envoy 属性](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/advanced/attributes)。
 同时用户也可以设置自定义属性，这些属性可以在插件链中不同插件共享。
+
+## 4 自定义属性（UserAttributes）
+
+自定义属性是 SDK 提供的一个特性，用于帮助用户在日志或链路追踪中快速添加自定义的属性，可以通过 `ctx.GetUserAttribute` 和 `ctx.SetUserAttribute` 方法获取和设置。
+
+如果希望写入日志，可以调用 `ctx.WriteUserAttributeToLog` 方法，并且修改 log_format 使 Envoy 打印出自定义的日志字段，例如将 log_format 设置为 `{\"custom_log\":\"%FILTER_STATE(wasm.custom_log:PLAIN)%\"}`，此时 Envoy 会将所有自定义属性合并为一个序列化后的 json 字符串写入 custom_log 日志字段。
+
+如果希望写入链路追踪，可以调用 `ctx.WriteUserAttributeToTrace` 方法，此时会将所有的 UserAttribute 依次设置为 span 中的 attribute.
 
 
 ## 参考
