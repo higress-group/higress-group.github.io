@@ -108,7 +108,7 @@ kubectl port-forward service/higress-gateway -n higress-system 80:80 443:443
 
 ### 总结
 
-通过以上步骤，你可以在Kind集群上完成Higress的部署，并为集群内的服务配置路由。请注意，实际部署时可能需要根据具体情况调整配置细节，比如根据你的网络环境调整端口映射设置或服务发现机制。Higress的官方文档[安装部署](https://higress.io/docs/latest/ops/deploy-by-helm/)提供了更多高级配置和最佳实践信息，建议进一步阅读以满足更复杂的需求。
+通过以上步骤，你可以在Kind集群上完成Higress的部署，并为集群内的服务配置路由。请注意，实际部署时可能需要根据具体情况调整配置细节，比如根据你的网络环境调整端口映射设置或服务发现机制。Higress的官方文档[安装部署](https://higress.cn/docs/latest/ops/deploy-by-helm/)提供了更多高级配置和最佳实践信息，建议进一步阅读以满足更复杂的需求。
 
 
 <font color="#949494">---------------</font> 

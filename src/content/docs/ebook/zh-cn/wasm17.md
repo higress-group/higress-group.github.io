@@ -9,7 +9,7 @@ keywords: [Higress]
 
 ## 1 Envoy 集群（Cluster）名称和服务发现来源
 
-Higress 插件的 Go SDK 在进行 HTTP 和 Redis 调用时，是通过指定的集群名称来识别并连接到相应的 Envoy 集群。 此外，Higress 利用 [McpBridge](https://higress.io/docs/latest/user/mcp-bridge/) 支持多种服务发现机制，包括静态配置（static）、DNS、Kubernetes 服务、Eureka、Consul、Nacos、以及 Zookeeper 等。
+Higress 插件的 Go SDK 在进行 HTTP 和 Redis 调用时，是通过指定的集群名称来识别并连接到相应的 Envoy 集群。 此外，Higress 利用 [McpBridge](https://higress.cn/docs/latest/user/mcp-bridge/) 支持多种服务发现机制，包括静态配置（static）、DNS、Kubernetes 服务、Eureka、Consul、Nacos、以及 Zookeeper 等。
 每种服务发现机制对应的集群名称生成规则都有所不同，这些规则在 cluster_wrapper.go 代码文件中有所体现。
 为了包装不同的服务发现机制，Higress 插件 Go SDK 定义了 Cluster 接口，该接口包含两个方法：ClusterName 和 HostName。
 ```golang
@@ -650,7 +650,7 @@ spec:
 以此类推。这种情况 Redis 调用也是一样处理。 关于回调链可以参考 Higress 官方提供 [ai-agent](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-agent/main.go#L169) 插件功能。
 
 ## 参考
-- [1][Mcp Bridge 配置说明](https://higress.io/docs/latest/user/mcp-bridge/)
+- [1][Mcp Bridge 配置说明](https://higress.cn/docs/latest/user/mcp-bridge/)
 
 
 

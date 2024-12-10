@@ -50,12 +50,12 @@ keywords: ["higress","k8s","部署"]
 ### 配置示例
 
 5. **创建路由和服务**:
-    假设您希望为一个名为`foo`的服务创建路由，使其可通过`http://foo.bar.com/foo`访问。首先，确保服务已部署，然后创建一个Ingress资源来定义路由规则。虽然这里未直接提供创建Ingress的命令，但您可以参考Higress文档中关于[路由配置](https://higress.io/docs/latest/usage/routing/)的部分来定制您的路由规则。
+    假设您希望为一个名为`foo`的服务创建路由，使其可通过`http://foo.bar.com/foo`访问。首先，确保服务已部署，然后创建一个Ingress资源来定义路由规则。虽然这里未直接提供创建Ingress的命令，但您可以参考Higress文档中关于[路由配置](https://higress.cn/docs/latest/usage/routing/)的部分来定制您的路由规则。
 
 ### 备注
 
 - 上述部署步骤适用于快速启动Higress，特别是在本地开发或测试场景中。
-- 如需启用Higress的其他内置功能，如可观测性工具等，请查阅[Higress官方文档的安装部署章节](https://higress.io/docs/latest/ops/deploy-by-helm/)。
+- 如需启用Higress的其他内置功能，如可观测性工具等，请查阅[Higress官方文档的安装部署章节](https://higress.cn/docs/latest/ops/deploy-by-helm/)。
 - 确保在执行命令前，您的环境已正确配置了`helm`与`kubectl`，并具备相应的执行权限。
 
 以上步骤应能指导您完成Higress在Kubernetes集群中的部署和基本配置。如果有更具体的配置需求或遇到任何问题，建议查阅Higress的官方文档以获取更详尽的信息。

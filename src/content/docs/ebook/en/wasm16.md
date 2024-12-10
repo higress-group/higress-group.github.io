@@ -217,7 +217,7 @@ func (ctx *CommonPluginCtx[PluginConfig]) OnPluginStart(int) types.OnPluginStart
 > 这里我们不进一步分析插件解析过程，后续在插件生效原理章节从控制面和数据面详细分析插件全局、路由、域名、服务级别生效原理。
 
 大部分情况下插件全局配置和路由、域名、服务级别配置规则是一样的，因此在定义插件时只需要调用 wrapper.ParseConfigBy(parseConfig) 来设置插件配置解析回调钩子函数。
-而有些插件（如 [basic-auth](https://higress.io/docs/latest/plugins/authentication/basic-auth/)）的全局配置和路由、域名、服务级别配置规则是不一样的。baisc-auth 插件配置 YAML 样例如下：
+而有些插件（如 [basic-auth](https://higress.cn/docs/latest/plugins/authentication/basic-auth/)）的全局配置和路由、域名、服务级别配置规则是不一样的。baisc-auth 插件配置 YAML 样例如下：
 ```yaml
 apiVersion: extensions.higress.io/v1alpha1
 kind: WasmPlugin
@@ -635,7 +635,7 @@ tinygo build -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottiny
 ### 2.5 Envoy 请求缓存区限制
 
 当自定义插件使用 `onHttpRequestBody` 非流式传输，当请求超过 `downstream` 缓存区限制(默认是 32k)。Envoy 会给用户返回 413， 同时报 `request_payload_too_large` 错误。
-比如在 AI 长上下文中场景中可能会碰到这个问题，这个问题可以通过参考 [全局配置说明](https://higress.io/docs/latest/user/configmap/) 调整 Downstream 配置项 `connectionBufferLimits` 解决， 或者 使用 `SetRequestBodyBufferLimit` 方法设置请求 body buffer limit 解决。 关于如何使用 `SetRequestBodyBufferLimit` 可以参考 Higress 官方提供 [ai-proxy 插件](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-proxy/main.go#L81) 的实现。
+比如在 AI 长上下文中场景中可能会碰到这个问题，这个问题可以通过参考 [全局配置说明](https://higress.cn/docs/latest/user/configmap/) 调整 Downstream 配置项 `connectionBufferLimits` 解决， 或者 使用 `SetRequestBodyBufferLimit` 方法设置请求 body buffer limit 解决。 关于如何使用 `SetRequestBodyBufferLimit` 可以参考 Higress 官方提供 [ai-proxy 插件](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-proxy/main.go#L81) 的实现。
 
 
 ## 3 Envoy 属性（Attributes）

@@ -45,7 +45,7 @@ Higress作为Kubernetes集群中的Ingress控制器，负责处理进入集群�
 
 4. **监控与调整**：根据实际流量情况和业务需求，通过调整权重或其他参数来优化灰度发布策略，确保服务稳定性和用户体验。
 
-通过上述分析，可以看到Higress的流量转发原理高度依赖于其灵活的路由规则配置能力和丰富的Annotation系统，从而实现了高效的灰度发布管理和跨域支持。[[安装Higress](https://higress.io/docs/latest/user/quickstart/)] 是实践这些策略的前提，而具体的配置示例已在前述知识中详细给出。
+通过上述分析，可以看到Higress的流量转发原理高度依赖于其灵活的路由规则配置能力和丰富的Annotation系统，从而实现了高效的灰度发布管理和跨域支持。[[安装Higress](https://higress.cn/docs/latest/user/quickstart/)] 是实践这些策略的前提，而具体的配置示例已在前述知识中详细给出。
 
 
 <font color="#949494">---------------</font> 

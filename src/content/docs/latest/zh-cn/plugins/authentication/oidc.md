@@ -103,7 +103,7 @@ X-Auth-Request-Redirect: https://my-oidc-provider.example.com/sign_out_page
 
 ### OIDC 服务 HTTPS 协议
 
-如果 OIDC Provider 为 HTTPS 协议，参考Higress中[配置后端服务协议：HTTPS](https://higress.io/docs/latest/user/annotation-use-case/#%E9%85%8D%E7%BD%AE%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AEhttps%E6%88%96grpc)的说明需要通过使用注解`higress.io/backend-protocol: "HTTPS"`配置请求转发至后端服务使用HTTPS协议，参考Auth0示例中Ingress配置
+如果 OIDC Provider 为 HTTPS 协议，参考Higress中[配置后端服务协议：HTTPS](https://higress.cn/docs/latest/user/annotation-use-case/#%E9%85%8D%E7%BD%AE%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AEhttps%E6%88%96grpc)的说明需要通过使用注解`higress.io/backend-protocol: "HTTPS"`配置请求转发至后端服务使用HTTPS协议，参考Auth0示例中Ingress配置
 
 ## 配置示例
 

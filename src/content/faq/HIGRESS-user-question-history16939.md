@@ -38,7 +38,7 @@ Higress之所以需要云原生网关，主要是因为以下几个原因，依�
 
 相关链接：
 - [Higress是什么?](https://link.zhihu.com/?target=https%3A//higress.cn/docs/latest/overview/what-is-higress/)
-- [Higress官方文档 - 外部认证插件](https://higress.io/docs/latest/plugins/authentication/ext-auth/?source=plugin)
+- [Higress官方文档 - 外部认证插件](https://higress.cn/docs/latest/plugins/authentication/ext-auth/?source=plugin)
 
 
 <font color="#949494">---------------</font> 
