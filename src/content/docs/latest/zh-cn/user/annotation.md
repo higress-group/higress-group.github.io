@@ -132,7 +132,11 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | nginx.ingress.kubernetes.io/proxy-ssl-server-name | 服务  | 兼容  | 开启或关闭TLS握手期间使用SNI          |
 
 #### 安全认证
+
 ##### Basic
+
+> 该注解的能力已经被 [Basic auth 插件](https://higress.cn/docs/latest/plugins/authentication/basic-auth/)替代，2.0.0 版本后不再支持
+
 | 注解                                           | 作用域     | 支持度             | 说明                                                                                                |
 |----------------------------------------------|---------|-----------------|---------------------------------------------------------------------------------------------------|
 | nginx.ingress.kubernetes.io/auth-type        | Ingress | 部分兼容。暂只支持Basic。 | 认证类型                                                                                              |
