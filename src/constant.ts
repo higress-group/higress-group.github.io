@@ -6,11 +6,11 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "活动报名 | AI 应用企业开发者沙龙·深圳站",
-    "mobileText": "活动报名 | AI 应用企业开发者沙龙·深圳站",
-    "link": "https://summit.aliyun.com/cloudnative2024-AI-shenzhen",
+    "text": "铭师堂的云原生升级实践",
+    "mobileText": "铭师堂的云原生升级实践",
+    "link": "https://higress.cn/blog/higress-gvr7dx_awbbpb_nn3cn55e35r4991g/?spm=36971b57.2ef5001f.0.0.2a932c1f3Tz5uv\u0026source=blog",
     "target": "_blank",
-    "display": false
+    "display": true
 }
 
 
@@ -42,30 +42,6 @@ export const DOCS_ITEM = [
 ];
 
 export const MEDIARESOURCE = null
-
-// 主要特性
-export const CHOOSE_REASON_LIST: ChooseReason[] = [
-  {
-    title: "home.website.edge.1.title",
-    svgKey: "adaptive",
-    description: "home.website.edge.1.description",
-  },
-  {
-    title: "home.website.edge.2.title",
-    svgKey: "standard",
-    description: "home.website.edge.2.description",
-  },
-  {
-    title: "home.website.edge.3.title",
-    svgKey: "timeTested",
-    description: "home.website.edge.3.description",
-  },
-  {
-    title: "home.website.edge.4.title",
-    svgKey: "variety",
-    description: "home.website.edge.4.description",
-  },
-];
 
 // TODO: 合作客户反馈
 export const COMPANY_CUSTOMERS: Customer[] = [
