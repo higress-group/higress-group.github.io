@@ -1,0 +1,647 @@
+const e="Higress-gvr7dx_awbbpb_goqhyerd5dw3qwvr.md",a="blog",o="higress-gvr7dx_awbbpb_goqhyerd5dw3qwvr",n=`
+# \u524D\u8A00
+
+\u5728Spring Cloud\u5E94\u7528\u4E2D\u53EF\u4EE5\u975E\u5E38\u4F4E\u6210\u672C\u5730\u96C6\u6210Nacos\u5B9E\u73B0\u914D\u7F6E\u52A8\u6001\u5237\u65B0\uFF0C\u5728\u5E94\u7528\u7A0B\u5E8F\u4EE3\u7801\u4E2D\u901A\u8FC7Spring\u5B98\u65B9\u7684\u6CE8\u89E3@Value\u548C@ConfigurationProperties\uFF0C\u5F15\u7528Spring enviroment\u4E0A\u4E0B\u6587\u4E2D\u7684\u5C5E\u6027\u503C, \u5173\u4E8E\u8FD9\u90E8\u5206\u7684\u4ECB\u7ECD\u53EF\u4EE5\u53C2\u7167[\u300ASpring Cloud+Nacos+KMS \u52A8\u6001\u914D\u7F6E\u6700\u4F73\u5B9E\u8DF5\u300B]([https://mp.weixin.qq.com/s/SdMAGMXb3RUf8TlGMYr_oA)](https://mp.weixin.qq.com/s/SdMAGMXb3RUf8TlGMYr_oA))\u4E00\u6587\uFF0C\u8FD9\u79CD\u7528\u6CD5\u7684\u6700\u5927\u4F18\u70B9\u662F\u65E0\u4EE3\u7801\u5C42\u9762\u4FB5\u5165\u6027\uFF0C\u4F46\u4E5F\u5B58\u5728\u8BF8\u591A\u9650\u5236\uFF0C\u6BD4\u5982\uFF1A
+
+
+
+        * Nacos\u4E2D\u914D\u7F6E\u662F\u4F5C\u4E3ASpring\u4E0A\u4E0B\u6587enviroment\u7684\u5C5E\u6027\u6E90\u4E4B\u4E00\uFF0C\u83B7\u53D6\u5C5E\u6027\u65F6\u4F1A\u6536\u5230\u5176\u4ED6\u5C5E\u6027\u6E90\u7684\u5E72\u6270\uFF0C\u6BD4\u5982\u901A\u8FC7JVM\u53C2\u6570\u548C\u73AF\u5883\u53D8\u91CF\u6CE8\u5165\u7684\u5C5E\u6027\u4F18\u5148\u7EA7\u6BD4Nacos\u4E2D\u7684\u66F4\u9AD8
+
+        * \u901A\u8FC7spring.config.import\u5BFC\u5165\u591A\u4E2ANacos\u914D\u7F6E\u65F6\uFF0C\u5176\u4E2D\u76F8\u540C\u7684key\u5BF9\u5E94\u7684\u5C5E\u6027\u53EA\u4F1A\u6709\u4E00\u4E2A\u751F\u6548\uFF0C\u9700\u8981\u63A7\u5236\u591A\u4E2A\u5C5E\u6027\u6E90\u7684key\u4E0D\u91CD\u590D\u6216\u8005\u5904\u7406\u56E0\u4F18\u5148\u7EA7\u95EE\u9898\u5BFC\u81F4\u7684\u5C5E\u6027\u8986\u76D6\u95EE\u9898\u3002\u65E0\u6CD5\u7CBE\u51C6\u83B7\u53D6\u6307\u5B9ANacos\u914D\u7F6E\u4E2D\u7684\u5C5E\u6027
+
+        * \u65E0\u6CD5\u5C06Nacos\u914D\u7F6E\u81EA\u52A8\u6CE8\u5165\u5BF9\u8C61\u7C7B\u578B\u7684\u5B57\u6BB5
+
+        * \u53EA\u80FD\u88AB\u52A8\u63A5\u53D7\u914D\u7F6E\u6700\u7EC8\u5185\u5BB9\uFF0C\u65E0\u6CD5\u5728\u914D\u7F6E\u53D8\u66F4\u65F6\u5BF9\u914D\u7F6E\u8FDB\u884C\u4E8C\u6B21\u5904\u7406\u6216\u8005\u89E6\u53D1\u5176\u4ED6\u4E1A\u52A1\u52A8\u4F5C\uFF0C\u65E0\u6CD5\u611F\u77E5\u6307\u5B9A\u7684\u5C5E\u6027\u53D8\u66F4\u524D\u540E\u7684\u8BE6\u7EC6\u4FE1\u606F
+
+        * \u901A\u8FC7@Value\u6CE8\u89E3\u5F15\u7528\u7684\u914D\u7F6E\u8981\u652F\u6301\u52A8\u6001\u5237\u65B0\uFF0C\u9700\u8981\u5728SpringBean\u4E0A\u6DFB\u52A0@RefreshScope\uFF0C\u914D\u7F6E\u66F4\u65B0\u65F6\u4F1A\u5148\u5C06Bean\u9500\u6BC1\u518D\u91CD\u65B0\u521B\u5EFA\u65B0\u7684Bean\uFF0C\u4F7F\u7528\u4E0D\u5F53\u6613\u4EA7\u751F\u7EBF\u4E0A\u95EE\u9898\u3002
+
+
+
+\u4E3A\u4E86\u89E3\u51B3\u4EE5\u4E0A\u95EE\u9898\uFF0C\u63D0\u5347\u5E94\u7528\u63A5\u5165Nacos\u914D\u7F6E\u4E2D\u5FC3\u7684\u6613\u7528\u6027\uFF0CSpring Cloud Alibaba\u53D1\u5E03\u4E00\u5957\u5168\u65B0\u7684Nacos\u914D\u7F6E\u4E2D\u5FC3\u7684\u6CE8\u89E3\u3002
+
+
+
+    - @NacosConfig\uFF1A\u4F5C\u7528\u4E8ESpringBean\u7684\u5B57\u6BB5\uFF0C\u5C06Nacos\u4E2D\u6307\u5B9A\u7684\u914D\u7F6E\u6CE8\u5165\u5B57\u6BB5\uFF1B\u4F5C\u7528\u4E8ESpringBean Class\uFF0C\u5C06Nacos\u4E2D\u6307\u5B9A\u7684\u914D\u7F6E\u6CE8\u5165Bean\u7684\u5C5E\u6027\u4E2D\uFF1B\u4F5C\u7528\u4E8EFactoryBean \u65B9\u6CD5\uFF0C\u5C06Nacos\u4E2D\u6307\u5B9A\u7684\u914D\u7F6E\u6CE8\u5165Bean\u7684\u5C5E\u6027\u4E2D\uFF0C\u4E0D\u4F9D\u8D56RefreshScope\u6CE8\u89E3\u5373\u53EF\u751F\u6548\u3002
+
+    - @NacosConfigListener\uFF1A\u4F5C\u7528\u4E8ESpringBean\u7684\u65B9\u6CD5\uFF0C\u5728Nacos\u4E2D\u7684\u914D\u7F6E\u53D1\u751F\u53D8\u5316\u65F6\uFF0C\u4EE5\u65B9\u6CD5\u53C2\u6570\u5F62\u5F0F\u63A5\u53D7\u53D8\u66F4\u540E\u7684\u6700\u65B0\u914D\u7F6E\u5185\u5BB9\uFF0C\u652F\u6301\u4EE5\u5BF9\u8C61\u7C7B\u578B\u63A5\u6536\u7ED3\u679C\u3002
+
+    - @NacosConfigKeysListener\uFF1A\u4F5C\u7528\u4E8ESpringBean\u7684\u65B9\u6CD5\uFF0C\u5728Nacos\u4E2D\u7684\u914D\u7F6E\u7684\u6307\u5B9A\u5C5E\u6027key\u96C6\u5408\u53D1\u751F\u53D8\u5316\u65F6\uFF0C\u4EE5\u65B9\u6CD5\u53C2\u6570ConfigChangeEvent\u63A5\u53D7\u53D8\u66F4\u524D\u540E\u7684\u5C5E\u6027\u503C\u3002
+
+
+
+\u4EE5\u4E0B\u5C06\u8BE6\u7EC6\u4ECB\u7ECD\u4E09\u79CD\u6CE8\u89E3\u7684\u7528\u6CD5\u3002
+
+
+
+# @NacosConfig\u6CE8\u89E3\u7528\u6CD5\u4ECB\u7ECD
+
+\u4F7F\u7528\u8BE5\u6CE8\u89E3\u53EF\u4EE5\u5C06\u6307\u5B9Anacos\u914D\u7F6E\u6CE8\u5165Spring Bean\u7684\u5B57\u6BB5\u4E2D\uFF0C\u53EF\u4EE5\u4F5C\u7528\u4E8ESpringBean\u7684\u5355\u4E00\u5B57\u6BB5\u4E0A\uFF0C\u4E5F\u53EF\u4EE5\u4F5C\u7528\u4E8ESpringBean\u4E0A(\u5305\u62EC\u5C06\u6CE8\u89E3\u52A0\u5728BeanClass\u4E0A\u4EE5\u53CA\u7ED3\u5408@Bean\u6CE8\u89E3\u5DE5\u5382Bean\u6CE8\u5165\u6A21\u5F0F)\uFF0C\u6CE8\u5165\u7684\u76EE\u6807\u7C7B\u578B\u4E2D\u652F\u6301\u57FA\u7840\u7C7B\u578B\uFF0CProperties\uFF0C\u96C6\u5408List<T>\uFF0CSet<T>\uFF0CMap<T>\u6CDB\u578B\uFF0C\u4EE5\u53CA\u5176\u4ED6\u4EFB\u610F\u81EA\u5B9A\u4E49Java Bean\u3002
+
+
+
+\u5982\u679C\u914D\u7F6E\u683C\u5F0F\u4E3Ayaml\u548Cproperties\uFF0C\u4E5F\u53EF\u4EE5\u989D\u5916\u6307\u5B9Akey\u5B57\u6BB5\u540D\uFF0C\u52A0\u8F7D\u6307\u5B9Akey\u5BF9\u5E94\u7684\u5C5E\u6027\u503C\u3002
+
+
+
+**\u6CE8\u89E3\u5B57\u6BB5\u89E3\u91CA**
+
+
+
+\`\`\`plain
+
+@Retention(RetentionPolicy.RUNTIME)
+
+@Target({ElementType.FIELD, ElementType.TYPE, ElementType.METHOD})
+
+@Documented
+
+public @interface NacosConfig {
+
+    
+
+    String group();
+
+
+
+    String dataId();
+
+
+
+    String key() default "";
+
+
+
+    String defaultValue() default "";
+
+}
+
+
+
+\`\`\`
+
+
+
++ group\uFF1A\u5F15\u5165\u7684\u914D\u7F6E\u6240\u5C5E\u5206\u7EC4
+
++ dataId: \u5F15\u5165\u7684\u914D\u7F6EDataId
+
++ key : \u914D\u7F6E\u683C\u5F0F\u4E3Ayaml\u548Cproperties\u65F6\uFF0C\u4E5F\u53EF\u4EE5\u989D\u5916\u6307\u5B9Akey\u5B57\u6BB5\u540D\uFF0C\u52A0\u8F7D\u6307\u5B9Akey\u5BF9\u5E94\u7684\u5C5E\u6027\u503C\u3002
+
++ defaultValue\uFF1A\u5F53\u914D\u7F6E\u4E0D\u5B58\u5728\u6216\u8005\u914D\u7F6E\u5185\u6307\u5B9Akey\u5C5E\u6027\u4E3A\u7A7A\u65F6\uFF0C\u52A0\u8F7D\u7684\u9ED8\u8BA4\u503C\u3002
+
+
+
+*\u8BBF\u95EEnacos\u7684\u5168\u5C40\u53C2\u6570\u901A\u8FC7application.properties\u4E2Dspring.cloud.nacos.config.server-addr, spring.cloud.nacos.config.namespace\u53C2\u6570\u914D\u7F6E\u3002\u901A\u8FC7spring.config.import\u5BFC\u5165\u7684\u914D\u7F6E\u4F5C\u7528\u4E8ESpring\u7684@Value\u5F15\u7528\u5C5E\u6027\u6E90\uFF0C\u548C\u901A\u8FC7\u6CE8\u89E3\u5F15\u5165\u7684\u65B9\u5F0F\u76F8\u4E92\u72EC\u7ACB\uFF0C\u4F46\u5176\u5185\u90E8\u662F\u5171\u4EAB\u540C\u4E00\u4E2ANacosClient\u5BF9\u8C61\uFF0C\u5E76\u4E14\u8BBF\u95EE\u7684\u662F\u540C\u4E00\u4E2ANacos\u5B9E\u4F8B\u4EE5\u53CA\u540C\u4E00\u4E2A\u547D\u540D\u7A7A\u95F4\u4E0B\u7684\u914D\u7F6E\u3002
+
+
+
+
+
+
+
+**\u7528\u6CD5\u793A\u4F8B**
+
+
+
+## 1\u3001\u52A0\u8F7D\u5B8C\u6574\u914D\u7F6E\u5185\u5BB9\u81F3String\u7C7B\u578B\u5B57\u6BB5
+
+\`\`\`plain
+
+@NacosConfig(dataId = "SampleApp.application.properties", group = "default")
+
+String configContent;
+
+\`\`\`
+
+
+
+\u5C06dataId=SampleApp.application.properties\uFF0Cgroup = default\u5BF9\u5E94\u7684\u914D\u7F6E\u7684\u5B8C\u6574\u5185\u5BB9\u6CE8\u5165\u5230configContent\u5B57\u6BB5\u3002
+
+
+
+## 2\u3001\u52A0\u8F7D\u914D\u7F6E\u4E2D\u7684\u6307\u5B9Akey\u5C5E\u6027\u81F3\u57FA\u7840\u7C7B\u578B\u5B57\u6BB5
+
+\`\`\`plain
+
+@NacosConfig(dataId = "SampleApp.application.properties", group = "default", key = "useCache", defaultValue = "false")
+
+boolean booleanValue;
+
+\`\`\`
+
+
+
+\u5C06dataId=SampleApp.application.properties\uFF0Cgroup = default\u5BF9\u5E94\u7684\u914D\u7F6E\u4E2D\u7684useCache\u5C5E\u6027\u503C\u6CE8\u5165\u5230booleanValue\u5B57\u6BB5\u3002
+
+
+
+*\u652F\u6301int, long,float,double,boolean 5\u79CD\u57FA\u7840\u7C7B\u578B\u4EE5\u53CA\u5176\u5C01\u88C5\u7C7B\u578B\u3002
+
+
+
+## 3\u3001\u52A0\u8F7DJSON\u683C\u5F0F\u914D\u7F6E\u81F3\u57FA\u7840\u7C7B\u578B\u6570\u7EC4\u5B57\u6BB5
+
+\`\`\`plain
+
+@NacosConfig(dataId = "scoreintArray.json", group = "default")
+
+int[] scores;
+
+\`\`\`
+
+
+
+\u5C06dataId=scoreintArray.json\uFF0Cgroup = default\u5BF9\u5E94\u7684json\u683C\u5F0F\u914D\u7F6E\u6CE8\u5165\u5230scores\u5B57\u6BB5\uFF0C\u9700\u4FDD\u8BC1\u914D\u7F6E\u683C\u5F0F\u53EF\u6B63\u5E38\u53CD\u5E8F\u5217\u5316\u3002
+
+
+
+*\u652F\u6301int, long,float,double,boolean 5\u79CD\u57FA\u7840\u7C7B\u578B\u6570\u7EC4\u4EE5\u53CA\u5176\u5C01\u88C5\u7C7B\u578B\u3002
+
+
+
+*\u914D\u7F6E\u9700\u4EE5.json\u7ED3\u5C3E\u4E14\u914D\u7F6E\u5185\u5BB9\u4E3Ajson\u683C\u5F0F\u3002
+
+
+
+## 4\u3001\u52A0\u8F7D\u914D\u7F6E\u81F3Properties\u7C7B\u578B\u5B57\u6BB5
+
+\`\`\`plain
+
+@NacosConfig(dataId = "SampleApp.application.properties", group = "default")
+
+Properties properties = new Properties();
+
+\`\`\`
+
+
+
+\u5C06dataId = "SampleApp.application.properties", group = "default"\u7684\u914D\u7F6E\u5185\u5BB9\u6CE8\u5165\u5230properties\u5B57\u6BB5\u4E2D\u3002\u53EF\u4EE5\u901A\u8FC7properties.getProperty\u65B9\u6CD5\u83B7\u53D6\u5176\u5185\u90E8\u5C5E\u6027\u503C\u3002\u5F53\u8FDC\u7AEFNacos\u914D\u7F6E\u53D1\u751F\u53D8\u5316\u4E2D\uFF0Cproperties\u5BF9\u8C61\u4F1A\u88AB\u66FF\u6362\uFF0C\u5F15\u7528\u4E5F\u4F1A\u66F4\u65B0\u3002
+
+
+
+*\u652F\u6301properties\u53CAyaml\u683C\u5F0F\uFF0CdataId\u9700\u4EE5properties,yaml,yml\u7ED3\u5C3E\uFF0C\u5176\u4E2Dyaml\u683C\u5F0F\u4E2D\u4E0D\u80FD\u5305\u542B\u6570\u7EC4\u5217\u8868\u683C\u5F0F\u5C5E\u6027\u3002
+
+
+
+## 5\u3001\u52A0\u8F7D\u81F3\u81EA\u5B9A\u4E49JavaBean\u5B57\u6BB5
+
+\`\`\`plain
+
+@NacosConfig(dataId = "myobject.json", group = "default")
+
+MyObject json2Object;
+
+
+
+@NacosConfig(dataId = "myobjectArray.json", group = "default")
+
+MyObject[] json2ObjectArray;
+
+    
+
+@NacosConfig(dataId = "myobjectArray.json", group = "default")
+
+List<MyObject> json2ObjectList;
+
+    
+
+@NacosConfig(dataId = "myobjectMap.json", group = "default")
+
+Map<String, MyObject> json2ObjectMap;
+
+\`\`\`
+
+
+
+\u5C06dataId = "myobject.json", group = "default"\u7684\u914D\u7F6E\u52A0\u8F7D\u81F3json2Object\u5B57\u6BB5
+
+
+
+\u5C06dataId = "myobjectArray.json", group = "default"\u7684json\u6570\u7EC4/\u5217\u8868\u683C\u5F0F\u7684\u914D\u7F6E\u52A0\u8F7D\u81F3json2ObjectArray\u5B57\u6BB5
+
+
+
+\u5C06dataId = "myobjectArray.json", group = "default"\u7684json\u6570\u7EC4/\u5217\u8868\u683C\u5F0F\u7684\u914D\u7F6E\u52A0\u8F7D\u81F3json2ObjectList\u5B57\u6BB5
+
+
+
+\u5C06dataId = "myobjectMap.json", group = "default"\u7684json map\u683C\u5F0F\u7684\u914D\u7F6E\u52A0\u8F7D\u81F3json2ObjectMap\u5B57\u6BB5
+
+
+
+*\u652F\u6301\u81EA\u5B9A\u4E49\u6570\u7EC4\uFF0C\u96C6\u5408\u7C7B\u578B\uFF0C\u652F\u6301\u81EA\u52A8\u6839\u636E\u6307\u5B9A\u6CDB\u578B\u8FDB\u884C\u53CD\u5E8F\u5217\u5316
+
+
+
+*\u5F53\u8FDC\u7AEFNacos\u914D\u7F6E\u53D1\u751F\u53D8\u5316\u4E2D\uFF0C\u5B57\u6BB5\u5BF9\u5E94\u7684\u5BF9\u8C61\u4F1A\u88AB\u66FF\u6362\uFF0C\u5F15\u7528\u4E5F\u4F1A\u66F4\u65B0\u3002
+
+
+
+
+
+
+
+## 6\u3001\u52A0\u8F7DJSON\u683C\u5F0F\u914D\u7F6E\u81F3SpringBean
+
+\`\`\`plain
+
+@Component
+
+@NacosConfig(dataId = "myobject.json", group = "default")
+
+public class MyObject {
+
+    
+
+    String name;
+
+    
+
+    String age;
+
+    
+
+    public String getName() {
+
+        return name;
+
+    }
+
+    
+
+    public void setName(String name) {
+
+        this.name = name;
+
+    }
+
+    
+
+    public String getAge() {
+
+        return age;
+
+    }
+
+    
+
+    public void setAge(String age) {
+
+        this.age = age;
+
+    }
+
+}
+
+\`\`\`
+
+
+
+\u5C06dataId = "myobject.json", group = "default"\u7684JSON\u914D\u7F6E\u52A0\u8F7D\u81F3\u6307\u5B9ASpringBean\u7684\u5B57\u6BB5\u4E2D\uFF0C\u914D\u7F6E\u4E2D\u7684JSON\u5C5E\u6027\u540D\u9700\u8981\u548CSpringBean\u4E2D\u5B57\u6BB5\u5B8C\u5168\u4E00\u81F4\uFF0C\u4E14\u4FDD\u8BC1\u6BCF\u4E2A\u5B57\u6BB5\u6709getter\u53CAsetter\u65B9\u6CD5\u3002
+
+
+
+*@NacosConfig\u6240\u5728\u7684\u7C7B\u5FC5\u987B\u88AB\u53D1\u5E03\u4E3A\u4E00\u4E2ASpringBean\u624D\u80FD\u751F\u6548
+
+
+
+*@NacosConfig\u7C7B\u7EA7\u522B\u7684\u6CE8\u5165\u4F18\u5148\u7EA7\u9AD8\u4E8E\u5B57\u6BB5\u7EA7\u522B\uFF0C\u5982\u5728\u5176Bean\u5185\u90E8\u5B57\u6BB5\u4E2D\u989D\u5916\u6DFB\u52A0@NacosConfig\u5C06\u4E0D\u4F1A\u751F\u6548\u3002
+
+
+
+
+
+
+
+## 7\u3001\u52A0\u8F7DJSON\u683C\u5F0F\u914D\u7F6E\u81F3\u5DE5\u5382Bean
+
+\`\`\`plain
+
+public class SampleConfiguration {
+
+  
+
+  @NacosConfig(dataId = "myobject1.json", group = "default")
+
+	@Bean
+
+	public MyObject bean1(){
+
+		return new MyObject();
+
+	}
+
+
+
+  @NacosConfig(dataId = "myobject2.json", group = "default")
+
+	@Bean
+
+	public MyObject bean2(){
+
+		return new MyObject();
+
+	}
+
+	
+
+}
+
+\`\`\`
+
+
+
+\u5C06dataId = "myobject1.json", group = "default"\u7684\u914D\u7F6E\u5185\u5BB9\u52A0\u8F7D\u81F3beanName=bean1\u7684MyObject\u7C7B\u578B\u7684SpringBean\u4E2D\u3002
+
+
+
+\u5C06dataId = "myobject2.json", group = "default"\u7684\u914D\u7F6E\u5185\u5BB9\u52A0\u8F7D\u81F3beanName=bean2\u7684MyObject\u7C7B\u578B\u7684SpringBean\u4E2D\u3002
+
+
+
+*\u5FC5\u987B\u914D\u5408@Bean\u6CE8\u89E3\u4F7F\u7528\u3002
+
+
+
+# @NacosConfigListener\u6CE8\u89E3\u7528\u6CD5\u4ECB\u7ECD
+
+NacosConfig\u6CE8\u89E3\u4F5C\u7528\u7684\u76EE\u6807\u4E3B\u4F53\u662F\u5B57\u6BB5\uFF0C\u662F\u5C06\u76EE\u6807\u5B57\u6BB5\u7684\u5C5E\u6027\u76F4\u63A5\u53D8\u66F4\uFF0C\u5F53\u6211\u4EEC\u9700\u8981\u5BF9\u914D\u7F6E\u7684\u5185\u5BB9\u8FDB\u884C\u4E8C\u6B21\u5904\u7406\u65F6\uFF0C\u6BD4\u5982\u5F53\u67D0\u4E2A\u5C5E\u6027\u53D1\u751F\u53D8\u5316\u65F6\u89E6\u52A8\u7A0B\u5E8F\u6267\u884C\u4E00\u4E2A\u4E1A\u52A1\u52A8\u4F5C\u6216\u8005\u5728\u53D8\u66F4\u540E\u7684\u914D\u7F6E\u57FA\u7840\u4E0A\u5728\u4EE3\u7801\u4E2D\u505A\u4E8C\u6B21\u5904\u7406\u65F6\uFF0CNacosConfig\u6CE8\u89E3\u5C06\u65E0\u6CD5\u80DC\u4EFB\uFF0C\u6B64\u65F6\u53EF\u4EE5\u4F7F\u7528NacosConfigListener\u6CE8\u89E3\u6765\u5B9E\u73B0\u8FD9\u4E2A\u8BC9\u6C42\uFF0C\u8BE5\u6CE8\u89E3\u4F5C\u7528\u4E8ESpringBean\u7684\u65B9\u6CD5\u4E0A\uFF0C\u652F\u6301\u6307\u5B9A\u914D\u7F6E\u53D1\u751F\u53D8\u5316\u65F6\u5C06\u914D\u7F6E\u5185\u5BB9\u4EE5\u65B9\u6CD5\u53C2\u6570\u5F62\u5F0F\u56DE\u8C03\u6307\u5B9A\u65B9\u6CD5\u3002\u548CNacosConfig\u6CE8\u89E3\u76F8\u4F3C\uFF0C\u65B9\u6CD5\u53C2\u6570\u652F\u6301\u57FA\u7840\u7C7B\u578B\uFF0CProperties\uFF0C\u6570\u7EC4\uFF0C\u96C6\u5408\u4EE5\u53CA\u81EA\u5B9A\u4E49JavaBean\u3002
+
+
+
+*\u5982\u679C\u5E0C\u671B\u5728Bean\u521D\u59CB\u5316\u65F6\u63A5\u53D7\u521D\u59CB\u56DE\u8C03\uFF0C\u53EF\u4EE5\u8BBE\u7F6EinitNotify=true\uFF0C\u9ED8\u8BA4\u4E3Afalse\u3002
+
+
+
+<font style="color:rgb(0, 0, 0);">*\u4EE5\u4E0B\u793A\u4F8B\u4E2D\u7684\u56DE\u8C03\u65B9\u6CD5\u540D\u5747\u4E3A\u793A\u4F8B\uFF0C\u65B9\u6CD5\u540D\u53EF\u4EE5\u81EA\u5B9A\u4E49</font>
+
+
+
+
+
+
+
+**\u7528\u6CD5\u793A\u4F8B**
+
+
+
+## 1\u3001String\u53C2\u6570\u65B9\u6CD5\u63A5\u6536\u539F\u751F\u914D\u7F6E\u5185\u5BB9
+
+\`\`\`plain
+
+@NacosConfigListener(dataId = "myobjectArray.json", group = "default")
+
+private void fullContentChanged(String content) {
+
+    System.out.println("receive \uFF1A" + content);
+
+}
+
+\`\`\`
+
+
+
+\u5F53dataId = "myobjectArray.json", group = "default"\u7684\u914D\u7F6E\u53D1\u751F\u53D8\u66F4\u65F6\uFF0C\u5C06\u5B8C\u6574\u5185\u5BB9\u4EE5content\u53C2\u6570\u56DE\u8C03fullContentChanged\u65B9\u6CD5\u3002
+
+
+
+## 2\u3001\u57FA\u7840\u7C7B\u578B\u53C2\u6570\u65B9\u6CD5\u63A5\u53D7\u6307\u5B9Akey\u503C\u5185\u5BB9
+
+\`\`\`plain
+
+@NacosConfigListener(dataId = "SampleApp.application.properties", group = "default",key="score")
+
+private void scoreChanged(int score) {
+
+    System.out.println("receive \uFF1A" + score);
+
+}
+
+
+
+\`\`\`
+
+
+
+\u5F53dataId = "SampleApp.application.properties", group = "default"\u7684\u914D\u7F6E\u4E2Dkey="score"\u7684\u5C5E\u6027\u503C\u53D1\u751F\u53D8\u66F4\u65F6\uFF0C\u5C06\u5BF9\u5E94\u5C5E\u6027\u503Cscore\u53C2\u6570\u56DE\u8C03scoreChanged\u65B9\u6CD5\u3002
+
+
+
+*\u652F\u6301int, long,float,double,boolean 5\u79CD\u57FA\u7840\u7C7B\u578B
+
+
+
+## 3\u3001\u57FA\u7840\u7C7B\u578B\u6570\u7EC4\u53C2\u6570\u65B9\u6CD5\u63A5\u53D7JSON\u683C\u5F0F\u914D\u7F6E\u5185\u5BB9
+
+\`\`\`plain
+
+@NacosConfigListener(dataId = "scoresArray.json", group = "default")
+
+private void scoresChanged(int[] scores) {
+
+    System.out.println("receive \uFF1A" + scores);
+
+}
+
+
+
+\`\`\`
+
+
+
+\u5F53dataId = "scoresArray.json", group = "default"\u7684JSON\u683C\u5F0F\u914D\u7F6E\u53D1\u751F\u53D8\u66F4\u65F6\uFF0C\u5C06\u914D\u7F6E\u5185\u5BB9\u53CD\u5E8F\u5217\u5316\u4E3A\u57FA\u7840\u7C7B\u578B\u6570\u7EC4\u5BF9\u8C61\u4EE5scores\u53C2\u6570\u56DE\u8C03scoresChanged\u65B9\u6CD5
+
+
+
+*\u652F\u6301int, long,float,double,boolean 5\u79CD\u57FA\u7840\u7C7B\u578B\u6570\u7EC4
+
+
+
+*\u914D\u7F6EdataId\u5FC5\u987B\u4EE5.json\u7ED3\u5C3E\uFF0C\u5E76\u4E14\u914D\u7F6E\u5185\u5BB9\u5FC5\u987B\u4E3Ajson\u6570\u7EC4\u683C\u5F0F
+
+
+
+## 4\u3001Properties\u53C2\u6570\u65B9\u6CD5\u63A5\u53D7\u5C5E\u6027\u53C2\u6570
+
+\`\`\`plain
+
+@NacosConfigListener(dataId = "SampleApp.application.properties", group = "default")
+
+private void propertiesChanged(Properties properties) {
+
+    System.out.println("receive \uFF1A" + properties);
+
+}
+
+\`\`\`
+
+
+
+\u5F53dataId = "SampleApp.application.properties", group = "default"\u7684properties\u683C\u5F0F\u914D\u7F6E\u53D1\u751F\u53D8\u66F4\u65F6\uFF0C\u5C06\u914D\u7F6E\u5185\u5BB9\u89E3\u6790\u4E3AProperties\u5BF9\u8C61\u4EE5Properties\u7C7B\u578B\u53C2\u6570\u56DE\u8C03propertiesChanged\u65B9\u6CD5\u3002
+
+
+
+## 5\u3001\u81EA\u5B9A\u4E49Java Bean\u53C2\u6570
+
+\`\`\`plain
+
+    @NacosConfigListener(dataId = "myobject.json", group = "default")
+
+    private void myObjectChanged(MyObject object) {
+
+        System.out.println("receive \uFF1A" + object);
+
+    }
+
+
+
+    @NacosConfigListener(dataId = "myobjectArray.json", group = "default")
+
+    private void myObjectArrayChanged(MyObject[] objectArray) {
+
+        System.out.println("receive \uFF1A" + objectArray);
+
+    }
+
+
+
+    @NacosConfigListener(dataId = "myobjectArray.json", group = "default")
+
+    private void myObjectListChanged(List<MyObject> objectList) {
+
+        System.out.println("receive \uFF1A" + objectList);
+
+    }
+
+
+
+    @NacosConfigListener(dataId = "myobjectMap.json", group = "default")
+
+    private void myObjectMapChanged(Map<String,MyObject> objectMap) {
+
+        System.out.println("receive \uFF1A" + objectMap);
+
+    }
+
+\`\`\`
+
+
+
+\u5F53\u6307\u5B9A\u914D\u7F6E\u5185\u5BB9\u53D1\u751F\u53D8\u66F4\u65F6\uFF0C\u4EE5\u5BF9\u8C61\uFF0C\u5BF9\u8C61\u6570\u7EC4\uFF0C\u5BF9\u8C61\u5217\u8868\uFF0C\u5BF9\u8C61\u6A21\u5F0F\u7C7B\u578B\u56DE\u8C03\u65B9\u6CD5\u3002
+
+
+
+*\u652F\u6301\u81EA\u5B9A\u4E49\u6570\u7EC4\uFF0C\u96C6\u5408\u7C7B\u578B\uFF0C\u81EA\u52A8\u6839\u636E\u6307\u5B9A\u6CDB\u578B\u8FDB\u884C\u53CD\u5E8F\u5217\u5316
+
+
+
+
+
+
+
+# @NacosConfigKeysListener\u6CE8\u89E3\u7528\u6CD5\u4ECB\u7ECD
+
+\u8BE5\u6CE8\u89E3\u652F\u6301propertie\u53CAyaml\u683C\u5F0F\u914D\u7F6E\u4E2D\u6307\u5B9Akeys\u53D1\u751F\u53D8\u66F4\u65F6\uFF0C\u901A\u8FC7ConfigChangeEvent\u53C2\u6570\u63A5\u53D7\u6307\u5B9Akeys\u53D8\u66F4\u524D\u540E\u7684\u5185\u5BB9\u3002
+
+
+
+\u901A\u8FC7interestedKeys\u6307\u5B9A\u76D1\u542C\u7684keys\u96C6\u5408\uFF0C\u901A\u8FC7interestedKeyPrefixes\u6307\u5B9A\u9700\u8981\u76D1\u542C\u7684key\u524D\u7F00\u96C6\u5408\uFF0C\u5982\u679C\u7B26\u5408\u4EFB\u610F\u4EFB\u4E00\u6761\u4EF6\u7684key\u53D1\u751F\u53D8\u5316\u65F6\u90FD\u4F1A\u89E6\u53D1\u56DE\u8C03\u3002
+
+
+
+**\u7528\u6CD5\u793A\u4F8B**
+
+
+
+\`\`\`plain
+
+@NacosConfigKeysListener(dataId = "SampleApp.122110test.properties", group = "default", interestedKeys = {
+
+        "useLocalCache,"}, interestedKeyPrefixes = {"122110."})
+
+private void onKeysChangeSingle(ConfigChangeEvent changeEvent) {
+
+    System.out.println("interestedKeyPrefixes:nacos." + changeEvent.getChangeItems());
+
+}
+
+\`\`\`
+
+
+
+*\u652F\u6301properties\u53CAyaml\u683C\u5F0F\uFF0CdataId\u9700\u4EE5properties,yaml,yml\u7ED3\u5C3E\u3002
+
+
+
+
+
+
+
+# \u7ED3\u8BED
+
+\u5F53\u524DSpring Cloud Alibaba\u5728\u5168\u7CFB\u5217\u7248\u672C(\u5305\u62EC2.2.x\uFF0C2021.x\uFF0C2022.x\uFF0C2023.x)\u4E2D\u90FD\u5DF2\u7ECF\u6B63\u5F0F\u53D1\u5E03\u65B0\u7248\u672C\u652F\u6301\u4EE5\u4E0A\u6CE8\u89E3\u3002
+
+
+
++ 2023.x \u7CFB\u5217\u9700\u5347\u7EA7\u7248\u672C\u81F32023.0.3.2
+
++ 2022.x \u7CFB\u5217\u9700\u5347\u7EA7\u7248\u672C\u81F3<font style="color:rgb(0, 0, 0);">2022.0.0.2 </font>
+
++ <font style="color:rgb(0, 0, 0);background-color:rgb(241, 241, 241);">2021.x \u7CFB\u5217\u9700\u5347\u7EA7\u7248\u672C\u81F3</font><font style="color:rgb(0, 0, 0);background-color:rgb(241, 241, 241);">2021.0.6.2</font>
+
++ 2.2.x \u7CFB\u5217\u9700\u5347\u7EA7\u81F32.2.11
+
+
+
+\u5176\u4E2D\u57282023.x\u7248\u672C\u4E2D\uFF0C\u6211\u4EEC\u5BF9spring-cloud-alibaba\u914D\u7F6E\u6A21\u5757\u8FDB\u884C\u4E86\u91CD\u6784\uFF0C\u5355\u72EC\u62BD\u53D6\u4E86spring-alibaba-nacos-config\u6A21\u5757\uFF0C\u8BE5\u6A21\u5757\u4E0D\u4F9D\u8D56SpringCloud\u6846\u67B6\uFF0C\u6240\u4EE5\u57FA\u4E8ESpringBoot3 \u7684\u5E94\u7528\u901A\u8FC7\u5355\u72EC\u5F15\u5165spring-alibaba-nacos-config\u4E5F\u53EF\u4EE5\u4F7F\u7528@Value\u5F15\u7528Nacos\u4E2D\u7684\u914D\u7F6E\u4EE5\u53CA\u672C\u6587\u4ECB\u7ECD\u7684\u4E09\u79CD\u6CE8\u89E3\u3002
+
+
+
+\`\`\`plain
+
+
+
+#pom.xml\u4E2D\u5F15\u5165spring-alibaba-nacos-config\u4F9D\u8D56
+
+<dependency>
+
+      <groupId>com.alibaba.cloud</groupId>
+
+      <artifactId>spring-alibaba-nacos-config</artifactId>
+
+      <version>2023.0.3.2</version>
+
+</dependency>
+
+
+
+#application.properties\u4E2D\u6DFB\u52A0\u5982\u4E0B\u914D\u7F6E
+
+spring.config.import=nacos:optional:nacos:{\u6B64\u5904\u6309\u9700\u66FF\u6362\u4E3A\u9700\u5BFC\u5165\u7684nacos dataId}?group={\u6B64\u5904\u6309\u9700\u66FF\u6362\u4E3A\u9700\u5BFC\u5165\u7684nacos group}&refreshEnabled=true
+
+spring.nacos.config.server-addr={\u6B64\u5904\u6309\u9700\u66FF\u6362\u4E3Anacos\u7684serverAddr}
+
+spring.nacos.config.namespace={\u6B64\u5904\u6309\u9700\u66FF\u6362\u4E3Anacos\u7684\u547D\u540D\u7A7A\u95F4\uFF0Cpublic\u8BF7\u586B\u7A7A}
+
+
+
+//\u5176\u4ED6\u53C2\u6570\u8BF7\u53C2\u7167sca\u5B98\u65B9\u6587\u6863\uFF0C\u5C06spring.cloud.nacos\u524D\u7F00\u66FF\u6362\u4E3Aspring.nacos\u5373\u53EF,\u672C\u6587\u4E2D\u7684\u6CE8\u89E3\u7528\u6CD5\u5B8C\u5168\u4E00\u81F4
+
+
+
+\`\`\`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+`,t={title:"SpringCloud\u5E94\u7528Nacos\u914D\u7F6E\u4E2D\u5FC3\u6CE8\u89E3",description:"SpringCloud\u5E94\u7528Nacos\u914D\u7F6E\u4E2D\u5FC3\u6CE8\u89E3",keywords:["Higress"],date:"2024-12-12",category:"article"},r={type:"content",filePath:"/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/blog/Higress-gvr7dx_awbbpb_goqhyerd5dw3qwvr.md",rawData:void 0};export{r as _internal,n as body,a as collection,t as data,e as id,o as slug};
