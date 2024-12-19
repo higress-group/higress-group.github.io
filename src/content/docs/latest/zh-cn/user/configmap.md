@@ -79,6 +79,7 @@ metadata:
 | timeout    | int                | 链路跟踪中间件 grpc 连接超时，单位毫秒       | 500   |
 | skywalking | 参考下面 skywalking 设置 | skywalking 配置                      | 未设置   |
 | zipkin     | 参考下面 zipkin 设置     | zipkin 配置                          | 未设置   |
+| opentelemetry     | 参考下面 opentelemetry 设置     | opentelemetry 配置                          | 未设置   |
 
 
 ##### skywalking 配置
@@ -95,8 +96,15 @@ metadata:
 | service      | string | zipkin 服务地址 | 空   |
 | port         | string | zipkin 服务端口 | 空   |
 
+##### opentelemetry 配置
+| 字段           | 类型     | 说明                     | 默认  |
+|--------------|--------|------------------------|-----|
+| service      | string | opentelemetry grpc 服务地址   | 空   |
+| port         | string | opentelemetry grpc 服务端口   | 空   |
+
+
 > 注意：
-> skywalking 和 zipkin 不能同时设置，只有一个配置能生效
+> skywalking，zipkin，opentelemetry 不能同时设置，只有一个配置能生效
 
 #### Gzip 配置说明
 
