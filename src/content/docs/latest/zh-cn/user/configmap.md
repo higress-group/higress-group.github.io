@@ -18,8 +18,8 @@ data:
       sampling: 100
       timeout: 500
       skywalking:
-       service: skywalking-oap-server.op-system.svc.cluster.local
-       port: 11800
+        service: skywalking-oap-server.op-system.svc.cluster.local
+        port: 11800
     gzip:
       enable: false
       minContentLength: 1024
