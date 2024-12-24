@@ -85,7 +85,7 @@ metadata:
 ##### skywalking 配置
 | 字段           | 类型     | 说明                     | 默认  |
 |--------------|--------|------------------------|-----|
-| service      | string | Skywalking grpc 服务地址   | 空   |
+| service      | string | Skywalking grpc 服务名称，即控制台服务列表看到的服务名称，例如 my-server.dns、my-server.my-ns.svc.cluster.local   | 空   |
 | port         | string | Skywalking grpc 服务端口   | 空   |
 | access_token | string | Skywalking grpc 服务访问凭证 | 空   |
 
@@ -93,13 +93,13 @@ metadata:
 ##### zipkin 配置
 | 字段           | 类型     | 说明          | 默认  |
 |--------------|--------|-------------|-----|
-| service      | string | zipkin 服务地址 | 空   |
+| service      | string | zipkin 服务名称，即控制台服务列表看到的服务名称，例如 my-server.dns、my-server.my-ns.svc.cluster.local | 空   |
 | port         | string | zipkin 服务端口 | 空   |
 
 ##### opentelemetry 配置
 | 字段           | 类型     | 说明                     | 默认  |
 |--------------|--------|------------------------|-----|
-| service      | string | opentelemetry grpc 服务地址   | 空   |
+| service      | string | opentelemetry grpc 服务名称，即控制台服务列表看到的服务名称，例如 my-server.dns、my-server.my-ns.svc.cluster.local   | 空   |
 | port         | string | opentelemetry grpc 服务端口   | 空   |
 
 
