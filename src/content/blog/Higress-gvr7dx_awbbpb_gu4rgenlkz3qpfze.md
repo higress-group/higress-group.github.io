@@ -1,7 +1,7 @@
 ---
 title: "智保未来：国泰产险的 AI 网关革新之旅"
 description: "智保未来：国泰产险的 AI 网关革新之旅"
-date: "2024-12-24"
+date: "2024-12-29"
 category: "case"
 keywords: ["Higress"]
 authors: "CH3CHO"
