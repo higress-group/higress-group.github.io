@@ -195,7 +195,7 @@ s.server.RunComponent(func(stop <-chan struct{}) error {
 
 #### 在ready服务记录表里注册xds服务
 
-```gog
+```go
 s.readinessProbes["xds"] = func() (bool, error) {
     return s.xdsServer.IsServerReady(), nil
 }

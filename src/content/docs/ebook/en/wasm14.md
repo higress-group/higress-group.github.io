@@ -332,7 +332,7 @@ go get github.com/tidwall/gjson
 #### 4.2.2 编写 main.go 文件
 首先，我们编写 easy-logger 插件的基本框架，暂时只读取我们设置的配置参数，不在请求和响应阶段进行任何处理。
 
-```golang
+```go
 package main
 
 import (
@@ -762,7 +762,7 @@ curl -X POST -v http://127.0.0.1:10000/hello \
 
 接下来，我们将通过自定义函数来处理请求和响应信息。通过设置插件参数，我们可以控制是否打印请求和响应信息，并根据指定的响应状态码决定是否记录响应内容。
 
-```golang
+```go
 package main
 
 import (

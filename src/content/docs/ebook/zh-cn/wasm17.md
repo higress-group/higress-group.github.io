@@ -12,7 +12,7 @@ keywords: [Higress]
 Higress 插件的 Go SDK 在进行 HTTP 和 Redis 调用时，是通过指定的集群名称来识别并连接到相应的 Envoy 集群。 此外，Higress 利用 [McpBridge](https://higress.cn/docs/latest/user/mcp-bridge/) 支持多种服务发现机制，包括静态配置（static）、DNS、Kubernetes 服务、Eureka、Consul、Nacos、以及 Zookeeper 等。
 每种服务发现机制对应的集群名称生成规则都有所不同，这些规则在 cluster_wrapper.go 代码文件中有所体现。
 为了包装不同的服务发现机制，Higress 插件 Go SDK 定义了 Cluster 接口，该接口包含两个方法：ClusterName 和 HostName。
-```golang
+```go
 type Cluster interface {
     // 返回 Envoy 集群名称
     ClusterName() string
@@ -23,7 +23,7 @@ type Cluster interface {
 
 ### 1.1 FQDN
 
-```golang
+```go
 
 type FQDNCluster struct {
 	FQDN string
@@ -40,7 +40,7 @@ Host 字段用于发送实际 HTTP 请求时的缺省配置域名，如果在发
 
 ### 1.2 当前路由的服务
 
-```golang
+```go
 type RouteCluster struct {
 	Host string
 }
@@ -48,7 +48,7 @@ type RouteCluster struct {
 集群名称是直接通过 proxywasm.GetProperty([]string{"cluster_name"}) 获取的当前路由的目标集群
 
 ### 1.3 静态配置（static）
-```golang
+```go
 type StaticIpCluster struct {
 	ServiceName string
 	Port        int64
@@ -59,7 +59,7 @@ type StaticIpCluster struct {
 - HostName 规则为：默认为  <service_name>。
 
 ### 1.4 DNS 配置（dns）
-```golang
+```go
 type DnsCluster struct {
 	ServiceName string
 	Domain      string
@@ -71,7 +71,7 @@ type DnsCluster struct {
 - HostName 规则为：如果设置 Host，返回 Host，否则返回<Domain>。
 
 ### 1.5 Kubernetes 服务（kubernetes）
-```golang
+```go
 
 type K8sCluster struct {
 	ServiceName string
@@ -85,7 +85,7 @@ type K8sCluster struct {
 - HostName 规则为：如果设置 Host，返回 Host，否则返回 <ServiceName>.<Namespace>.svc.cluster.local。
 
 ### 1.6 Nacos
-```golang
+```go
 
 type NacosCluster struct {
 	ServiceName string
@@ -103,7 +103,7 @@ type NacosCluster struct {
 - HostName 规则为：如果设置 Host，返回 Host，否则返回 <service_name>。
 
 ### 1.7 Consul
-```golang
+```go
 type ConsulCluster struct {
 	ServiceName string
 	Datacenter  string
@@ -117,7 +117,7 @@ type ConsulCluster struct {
 
 ## 2 HTTP 调用
 http_wrapper.go 部分核心代码如下：
-```golang
+```go
 // 回调函数
 type ResponseCallback func(statusCode int, responseHeaders http.Header, responseBody []byte)
 
@@ -142,7 +142,7 @@ type ClusterClient[C Cluster] struct {
 ```
 ClusterClient Get、Head、Options、Post、PUT、Patch、Delete、Connect、Trace、Call 方法最后调用 HttpCall 方法，其核心代码如下：
 
-```golang
+```go
 func HttpCall(cluster Cluster, method, rawURL string, headers [][2]string, body []byte,
 	callback ResponseCallback, timeoutMillisecond ...uint32) error {
 	// 忽略 headers 里设置的保留头
@@ -211,7 +211,7 @@ Token Server 提供 2 个接口：
 
 ### 3.1 插件部分核心代码
 
-```golang
+```go
 package main
 ...
 

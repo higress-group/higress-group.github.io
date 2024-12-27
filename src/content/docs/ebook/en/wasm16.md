@@ -41,7 +41,7 @@ Higress 插件 Go SDK 主要增强功能如下：
 
 相对应于 proxy-wasm-go-sdk 中的 VMContext、PluginContext、HttpContext 3 个上下文， 在 Higress 插件 Go SDK 中是 CommonVmCtx、CommonPluginCtx、CommonHttpCtx 3 个支持泛型的 struct。 3 个 struct 的核心内容如下：
 
-```golang
+```go
 type CommonVmCtx[PluginConfig any] struct {
     // proxy-wasm-go-sdk DefaultVMContext 默认实现
     types.DefaultVMContext
@@ -106,7 +106,7 @@ type CommonHttpCtx[PluginConfig any] struct {
 
 ### 2.1 启动入口和 VM 上下文（CommonVmCtx）
 
-```golang
+```go
 func main() {
 	wrapper.SetCtx(
 		// 插件名称
@@ -138,7 +138,7 @@ func main() {
 - 创建 CommonVmCtx 对象同时设置自定义插件回调钩子函数。
 - 然后再调用 proxywasm.SetVMContext 设置 VMContext。
 
-```golang
+```go
 func SetCtx[PluginConfig any](pluginName string, setFuncs ...SetPluginFunc[PluginConfig]) {
 	// 调用 proxywasm.SetVMContext 设置 VMContext
 	proxywasm.SetVMContext(NewCommonVmCtx(pluginName, setFuncs...))
@@ -162,7 +162,7 @@ func NewCommonVmCtx[PluginConfig any](pluginName string, setFuncs ...SetPluginFu
 
 #### 2.2.1 创建 CommonPluginCtx 对象
 通过 CommonVmCtx 的 NewPluginContext 方法创建 CommonPluginCtx 对象， 设置 CommonPluginCtx 的 vm 引用。
-```golang
+```go
 func (ctx *CommonVmCtx[PluginConfig]) NewPluginContext(uint32) types.PluginContext {
 	return &CommonPluginCtx[PluginConfig]{
 		vm: ctx,
@@ -173,7 +173,7 @@ func (ctx *CommonVmCtx[PluginConfig]) NewPluginContext(uint32) types.PluginConte
 #### 2.2.2 插件启动和插件配置解析
 
 CommonPluginCtx 的 OnPluginStart 部分核心代码如下：
-```golang
+```go
 func (ctx *CommonPluginCtx[PluginConfig]) OnPluginStart(int) types.OnPluginStartStatus {
 	// 调用 proxywasm.GetPluginConfiguration 获取插件配置
 	data, err := proxywasm.GetPluginConfiguration()
@@ -245,7 +245,7 @@ spec:
 
 可以看出 matchRule 下 config 配置内容和 defaultConfig 配置内容不一样。所以在开发插件的时候，需要同时设置 parseConfig 和 parseRuleConfig 两个回调钩子函数。
 baisc-auth 部分核心代码如下：
-```golang
+```go
 func main() {
 	wrapper.SetCtx(
 		"basic-auth",
@@ -309,7 +309,7 @@ func parseOverrideRuleConfig(json gjson.Result, global BasicAuthConfig, config *
 
 CommonPluginCtx 的 NewHttpContext 部分核心代码如下：
 
-```golang
+```go
 func (ctx *CommonPluginCtx[PluginConfig]) NewHttpContext(contextID uint32) types.HttpContext {
 	httpCtx := &CommonHttpCtx[PluginConfig]{
 		plugin:      ctx,
@@ -336,7 +336,7 @@ func (ctx *CommonPluginCtx[PluginConfig]) NewHttpContext(contextID uint32) types
 #### 2.3.2 OnHttpRequestHeaders
 
 OnHttpRequestHeaders 核心代码如下：
-```golang
+```go
 func (ctx *CommonHttpCtx[PluginConfig]) OnHttpRequestHeaders(numHeaders int, endOfStream bool) types.Action {
 	// 获取当前 HTTP 请求生效插件配置
 	config, err := ctx.plugin.GetMatchConfig()
@@ -365,7 +365,7 @@ func (ctx *CommonHttpCtx[PluginConfig]) OnHttpRequestHeaders(numHeaders int, end
 #### 2.3.3 OnHttpRequestBody
 
 OnHttpRequestBody 核心代码如下：
-```golang
+```go
 func (ctx *CommonHttpCtx[PluginConfig]) OnHttpRequestBody(bodySize int, endOfStream bool) types.Action {
 	...
 	// 如果不需要处理请求 body，则直接返回，继续后续处理
@@ -404,7 +404,7 @@ func (ctx *CommonHttpCtx[PluginConfig]) OnHttpRequestBody(bodySize int, endOfStr
 #### 2.3.4 OnHttpResponseHeaders
 
 OnHttpResponseHeaders 核心代码如下：
-```golang
+```go
 func (ctx *CommonHttpCtx[PluginConfig]) OnHttpResponseHeaders(numHeaders int, endOfStream bool) types.Action {
 	...
 	// To avoid unexpected operations, plugins do not read the binary content body
@@ -423,7 +423,7 @@ func (ctx *CommonHttpCtx[PluginConfig]) OnHttpResponseHeaders(numHeaders int, en
 #### 2.3.5 OnHttpResponseBody
 
 OnHttpResponseBody 核心代码如下：
-```golang
+```go
 func (ctx *CommonHttpCtx[PluginConfig]) OnHttpResponseBody(bodySize int, endOfStream bool) types.Action {
     ...
 	// 如果不需要处理响应 body，则直接返回，继续后续处理
@@ -461,7 +461,7 @@ func (ctx *CommonHttpCtx[PluginConfig]) OnHttpResponseBody(bodySize int, endOfSt
 #### 2.3.6 OnHttpStreamDone
 
 OnHttpStreamDone 核心代码如下：
-```golang
+```go
 func (ctx *CommonHttpCtx[PluginConfig]) OnHttpStreamDone() {
 	...
 	ctx.plugin.vm.onHttpStreamDone(ctx, *ctx.config, ctx.plugin.vm.log)
@@ -473,7 +473,7 @@ OnHttpStreamDone 比较简单，自定义插件有 onHttpStreamDone 回调钩子
 #### 2.3.7 CommonHttpCtx 方法
 
 CommonHttpCtx 提供以下方法，自定义插件可以调用，其代码和注释如下：
-```golang
+```go
 // 设置自定义上下文，这个上下文可以在自定义插件所有回调钩子函数中可以获取
 func (ctx *CommonHttpCtx[PluginConfig]) SetContext(key string, value interface{}) {
 	ctx.userContext[key] = value

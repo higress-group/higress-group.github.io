@@ -105,7 +105,7 @@ spec:
 - `_match_service_`：匹配服务生效，填写服务即可，支持通配符。
 
 Higress Controller 控制面转换代码逻辑在 `pkg/ingress/config/ingress_config.go` 文件的 `convertIstioWasmPlugin` func 中实现，其实现代码逻辑比较简单。
-```golang
+```go
 func (m *IngressConfig) convertIstioWasmPlugin(obj *higressext.WasmPlugin) (*extensions.WasmPlugin, error) {
 	...
 }
@@ -113,7 +113,7 @@ func (m *IngressConfig) convertIstioWasmPlugin(obj *higressext.WasmPlugin) (*ext
 
 同时在第`十六章 Higress 插件 Go SDK 与处理流程`中介绍 `CommonPluginCtx` 插件上下文在插件启动时候解析全局/路由/域名/服务级配置，其代码逻辑在 `plugins/wasm-go/pkg/matcher/rule_matcher.go` 文件的 `ParseRuleConfig` func 中实现。
 
-```golang
+```go
 func (m *RuleMatcher[PluginConfig]) ParseRuleConfig(config gjson.Result,
 	parsePluginConfig func(gjson.Result, *PluginConfig) error,
 	parseOverrideConfig func(gjson.Result, PluginConfig, *PluginConfig) error) error {
@@ -121,7 +121,7 @@ func (m *RuleMatcher[PluginConfig]) ParseRuleConfig(config gjson.Result,
 }
 ```
 另外在插件 `OnHttpRequestHeaders` 阶段根据当前请求的 `:authority`、`route_name`、`cluster_name` 获取对应的域名、路由、服务级和全局插件配置。其代码逻辑在 `plugins/wasm-go/pkg/matcher/rule_matcher.go` 文件的 `GetMatchConfig` func 中实现。
-```golang
+```go
 func (m RuleMatcher[PluginConfig]) GetMatchConfig() (*PluginConfig, error) {
 	host, err := proxywasm.GetHttpRequestHeader(":authority")
 	...
