@@ -666,7 +666,7 @@ TinyGo 允许禁用 GC，但由于内部需要使用映射（隐式引起分配�
 
 用 Proxy-Wasm Go SDK 实现一个简单的插件，具体样例如下：
 
-```golang
+```go
 package main
 
 import (

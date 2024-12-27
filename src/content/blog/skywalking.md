@@ -114,7 +114,7 @@ Higress是基于阿里内部的Envoy Gateway实践沉淀、以开源 Istio + Env
 业务应用通过与 [go2sky](https://github.com/SkyAPM/go2sky) 项目集成 SkyWalking 监控 Golang 应用程序，主要通过 Gin middleware 和 Http 请求手动埋点。
 
 1、集成 Gin middleware
-```golang
+```go
 func middleware(engine *gin.Engine, tracer *go2sky.Tracer) gin.HandlerFunc {
 	if engine == nil || tracer == nil {
 		return func(c *gin.Context) {
@@ -158,7 +158,7 @@ func getOperationName(c *gin.Context) string {
 
 2、Http请求手动埋点
 
-```golang
+```go
 func traceHttpCall(c *gin.Context, req *http.Request, url string, fn func(req *http.Request) (*http.Response, error)) (*http.Response, error) {
 	tracer := go2sky.GetGlobalTracer()
 	if tracer == nil {
@@ -302,8 +302,8 @@ data:
       sampling: 100
       timeout: 500
       skywalking:
-       service: skywalking-oap-server.op-system.svc.cluster.local
-       port: 11800
+        service: skywalking-oap-server.op-system.svc.cluster.local
+        port: 11800
 ```
 
 ## 七、Skywalking 链路跟踪
