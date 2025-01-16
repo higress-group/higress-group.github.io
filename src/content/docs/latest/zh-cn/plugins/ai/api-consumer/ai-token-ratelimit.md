@@ -9,10 +9,6 @@ description: AI Token限流插件配置参考
 
 `ai-token-ratelimit`插件实现了基于特定键值实现token限流，键值来源可以是 URL 参数、HTTP 请求头、客户端 IP 地址、consumer 名称、cookie中 key 名称
 
-**注意**
-
-此插件功能生效，需要同时开启[ AI 可观测插件](../api-o11y/ai-statistics.md)，实现 token 数的统计
-
 ## 运行属性
 
 插件执行阶段：`默认阶段`
