@@ -32,7 +32,7 @@ jobs:
           ./aliyun oss cp ./dist oss://higress-website-cn-hongkong/ -r -f -e oss-cn-hongkong.aliyuncs.com \
             --access-key-id ${{ secrets.ALIYUN_ACCESS_KEY_ID }} \
             --access-key-secret ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }} \
-            --region cn-hangzhou
+            --region cn-hongkong
       - name: Update Cache-Control
         uses: doggycool/ossutil-github-action@master
         with:
