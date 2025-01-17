@@ -20,11 +20,19 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Build
         run: |
-          npm install && npm run build -dd && mkdir deploy-dist && cp -R dist/* deploy-dist/
-      - run: npm i @serverless-devs/s -g  --registry=https://registry.npmmirror.com
-      - run: s config add --AccountID ${{secrets.ACCOUNT_ID}}  --AccessKeyID ${{secrets.ACCESS_KEYID}}  --AccessKeySecret ${{secrets.ACCESS_KEYSECRET}} -a higress -f
-      - name: Deploy
-        run: s deploy --use-local -y
+          npm install && npm run build
+      - name: Install Aliyun CLI
+        run: |
+          curl -O https://aliyuncli.alicdn.com/aliyun-cli-linux-latest-amd64.tgz
+          tar -xzf aliyun-cli-linux-latest-amd64.tgz
+          chmod +x aliyun
+          ./aliyun version
+      - name: Sync to OSS
+        run: |
+          ./aliyun oss cp ./dist oss://higress-website-cn-hongkong/ -r -f -e oss-cn-hongkong.aliyuncs.com \
+            --access-key-id ${{ secrets.ALIYUN_ACCESS_KEY_ID }} \
+            --access-key-secret ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }} \
+            --region cn-hangzhou
       - name: Update Cache-Control
         uses: doggycool/ossutil-github-action@master
         with:
