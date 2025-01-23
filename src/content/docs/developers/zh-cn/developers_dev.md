@@ -24,15 +24,15 @@ description: Higress 维护者名单
 ## Higress Approvers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
+| 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
+| 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
 | 范扬 | [SpecialYang](https://github.com/SpecialYang) | 字节跳动        |
 | 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
 
 ## Higress Reviewers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
-| 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
 | 凌轶群 | [Lynskylate](https://github.com/Lynskylate) | eBay  |
-| 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
 | 赵炳堃 | [sjtuzbk](https://github.com/sjtuzbk) | 阿里云        |
 | 韦鑫 | [WeixinX](https://github.com/weixinx) | 爱橙科技   |
 
