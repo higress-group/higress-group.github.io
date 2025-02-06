@@ -15,7 +15,7 @@ description: Higress 版本升级.
 kubectl apply -f https://github.com/alibaba/higress/releases/download/${higress_version}/crd.yaml
 helm repo update
 helm get values higress -n higress-system > values.yaml
-helm upgrade higress -n higress-system higress.io/higress -f values.yaml
+helm upgrade higress --version ${higress_version} -n higress-system higress.io/higress -f values.yaml
 ```
 
 不建议使用 --reuse-values，因为它会继承所有上一个版本的 values。
