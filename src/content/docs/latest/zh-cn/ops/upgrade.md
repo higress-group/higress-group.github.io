@@ -23,6 +23,9 @@ helm upgrade higress -n higress-system higress.io/higress -f values.yaml
 ## 独立部署
 
 ```bash
+wget https://higress.io/standalone/get-higress.sh
+chmod +x ./get-higress.sh
+# ${higress_version} 的值示例: v2.0.3
 # ${higress_dir} 为 Higress 独立部署的安装目录
-curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- "${higress_dir}" -u
+VERSION=${higress_version} ./get-higress.sh "${higress_dir}" -u
 ```
