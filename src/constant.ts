@@ -6,9 +6,9 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "铭师堂的云原生升级实践",
-    "mobileText": "铭师堂的云原生升级实践",
-    "link": "https://higress.cn/blog/higress-gvr7dx_awbbpb_nn3cn55e35r4991g/?spm=36971b57.2ef5001f.0.0.2a932c1f3Tz5uv\u0026source=blog",
+    "text": "Higress 助力各行各业安全可靠接入DeepSeek",
+    "mobileText": "Higress 助力各行各业安全可靠接入DeepSeek",
+    "link": "https://higress.cn/blog/higress-gvr7dx_awbbpb_hghqht52gp0ugxtk/?spm=36971b57.2ef5001f.0.0.8eb72c1fM51jEa\u0026source=blog",
     "target": "_blank",
     "display": true
 }
@@ -41,7 +41,7 @@ export const DOCS_ITEM = [
   },
 ];
 
-export const MEDIARESOURCE = null
+export const MEDIARESOURCE = []
 
 // 主要特性
 export const CHOOSE_REASON_LIST: ChooseReason[] = [
