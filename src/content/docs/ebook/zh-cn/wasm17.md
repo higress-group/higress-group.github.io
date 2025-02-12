@@ -311,11 +311,6 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config JwtConfig, log wrapper
 		[][2]string{{"content-type", "application/json"}},
 		authRequest,
 		func(statusCode int, responseHeaders http.Header, responseBody []byte) {
-			defer func() {
-				// 保证恢复请求
-				_ = proxywasm.ResumeHttpRequest()
-			}()
-
 			log.Debugf("auth response status:%d, response:%s", statusCode, string(responseBody))
 			var jsonData gjson.Result
 			jsonData = gjson.ParseBytes(responseBody)
@@ -324,11 +319,15 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config JwtConfig, log wrapper
 				message := jsonData.Get("message").String()
 				body := fmt.Sprintf(config.responseErrorBody, message)
 				proxywasm.SendHttpResponse(config.responseErrorStatusCode, [][2]string{{"content-type", "application/json"}}, []byte(body), -1)
+				// 发送响应后直接返回
+				return
 			} else {
 				// 如果验证成功，插件将从响应中提取用户ID，并将其添加到后续请求头中
 				uid := jsonData.Get("uid").Int()
 				proxywasm.AddHttpRequestHeader(AuthUIDHeader, fmt.Sprintf("%d", uid))
 			}
+			// 恢复请求
+			proxywasm.ResumeHttpRequest()
 		},
 		2000,
 	)
