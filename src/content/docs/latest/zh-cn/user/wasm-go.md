@@ -515,7 +515,7 @@ func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
 	// 使用client的Get方法发起HTTP Get调用，此处省略了timeout参数，默认超时时间500毫秒
-	config.client.Get(config.requestPath, nil,
+	err = config.client.Get(config.requestPath, nil,
 		// 回调函数，将在响应异步返回时被执行
 		func(statusCode int, responseHeaders http.Header, responseBody []byte) {
 			// 请求没有返回200状态码，进行处理
@@ -535,8 +535,15 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 			// 恢复原始请求流程，继续往下处理，才能正常转发给后端服务
 			proxywasm.ResumeHttpRequest()
 		})
-	// 需要等待异步回调完成，返回Pause状态，可以被ResumeHttpRequest恢复
-	return types.ActionPause
+ 	
+	if err != nil {
+		// 由于调用外部服务失败，放行请求，记录日志
+		log.Errorf("Error occured while calling http, it seems cannot find the service cluster.")
+		return types.ActionContinue
+	} else {
+		// 需要等待异步回调完成，返回Pause状态，可以被ResumeHttpRequest恢复
+		return types.ActionPause
+	}
 }
 ```
 
