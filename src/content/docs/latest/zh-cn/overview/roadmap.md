@@ -17,7 +17,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | v1.3.0  | 完整支持 GatewayAPI；支持 Operator 模式部署   | 2023-11   | 1.2.x  |  
 | v1.4.0  | WASM 支持 redis 调用；简化 HTTPS 证书管理  | 2024-05   | 1.2.x  | 
 | v2.0.0  | Istio/Envoy 内核版本升级，基于大量新插件提供更丰富的 API 网关能力  | 2024-08   | 2.0.x  | 
-| v2.1.0  | 控制台支持 AI 流量入口管理，降低 AI 功能相关的使用成本  | 2025-01   | 2.1.x  | 
+| v2.1.0  | 控制台支持 AI 流量入口管理，降低 AI 功能相关的使用成本  | 2025-02   | 2.1.x  | 
 
 
 > **注意**
