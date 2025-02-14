@@ -3,7 +3,8 @@ name: higress.io deploy on oss
 on:
   push:
     branches:
-      - develop-astro-higress
+      - main
+  workflow_dispatch: ~
   #This schedule only takes effect in the default branch
 jobs:
   Build-Deploy:
@@ -19,15 +20,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Build
         run: |
-          npm install && npm run build -dd && mkdir deploy-dist && cp -R dist/* deploy-dist/
-      - run: npm i @serverless-devs/s -g  --registry=https://registry.npmmirror.com
-      - run: s config add --AccountID ${{secrets.ACCOUNT_ID}}  --AccessKeyID ${{secrets.ACCESS_KEYID}}  --AccessKeySecret ${{secrets.ACCESS_KEYSECRET}} -a higress -f
-      - name: Deploy
-        run: s deploy --use-local -y
-      - name: Update Cache-Control
-        uses: doggycool/ossutil-github-action@master
-        with:
-          ossArgs: 'set-meta oss://higress-website-cn-hongkong/ Cache-Control:public,max-age=3600 -rf'
-          accessKey: ${{ secrets.ACCESS_KEYID }}
-          accessSecret: ${{ secrets.ACCESS_KEYSECRET }}
-          endpoint: oss-cn-hongkong.aliyuncs.com
+          npm install && npm run build
+      - name: Install Aliyun CLI
+        run: |
+          curl -O https://aliyuncli.alicdn.com/aliyun-cli-linux-latest-amd64.tgz
+          tar -xzf aliyun-cli-linux-latest-amd64.tgz
+          chmod +x aliyun
+          ./aliyun version
+      - name: Sync to OSS
+        run: ./aliyun oss cp ./dist oss://higress-website-cn-hongkong/ --meta Cache-Control:"max-age=3600" -r -f -e oss-cn-hongkong.aliyuncs.com --access-key-id ${{ secrets.ACCESS_KEYID }} --access-key-secret ${{ secrets.ACCESS_KEYSECRET }} --region cn-hongkong

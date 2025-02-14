@@ -23,7 +23,7 @@ keywords: ["higress","替换","spring","cloud","gateway","详细",""]
 
 ### 2. **学习Higress特性与配置**
 
-- **阅读文档**：深入研究[Higress官方文档](https://higress.io/docs/)，特别是其路由配置、Transformer插件和其它与SCG功能相对应的部分。
+- **阅读文档**：深入研究[Higress官方文档](https://higress.cn/docs/)，特别是其路由配置、Transformer插件和其它与SCG功能相对应的部分。
 - **理解Transformer插件**：特别关注[Higress Transformer插件](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/transformer)，理解它如何实现HTTP请求和响应的转换，这是与SCG Gateway Filters最直接相关的部分。
 
 ### 3. **迁移路由配置**

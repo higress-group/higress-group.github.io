@@ -20,7 +20,7 @@ keywords: ["higress","tcp","代理","配置",""]
 确保满足以下条件：
 - **Higress安装**：确认Higress已被部署在Kubernetes集群的`higress-system`命名空间下，且其Service名称为`higress-gateway`。
 - **服务目标**：需要为`default`命名空间下的`tcp-echo`服务配置四层路由，该服务监听端口为9000，与网关监听端口一致。
-- **Gateway API支持**：Higress需预先配置以支持Gateway API CRD。[相关文档](https://higress.io/docs/latest/ops/deploy-by-helm/#%E6%94%AF%E6%8C%81-gateway-api-crd%E5%8F%AF%E9%80%89)
+- **Gateway API支持**：Higress需预先配置以支持Gateway API CRD。[相关文档](https://higress.cn/docs/latest/ops/deploy-by-helm/#%E6%94%AF%E6%8C%81-gateway-api-crd%E5%8F%AF%E9%80%89)
 
 ### 2. **配置步骤**
 

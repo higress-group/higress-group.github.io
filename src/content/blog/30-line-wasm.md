@@ -12,7 +12,7 @@ category: "case"
 在11月15号的直播 《Higress 开源背后的发展历程和上手 Demo 演示》中，为大家演示了 Higress 的 Wasm 插件如何面向 Ingress 资源进行配置生效，本文对当天的 Demo 进行一个回顾，并说明背后的原理机制。
 <!--truncate-->
 本文中 Demo 运行的前提，需要在 K8s 集群中安装了 Higress，并生效了下面这份 quickstart 配置：
-[https://higress.io/samples/quickstart.yaml](https://higress.cn/samples/quickstart.yaml)
+[https://higress.cn/samples/quickstart.yaml](https://higress.cn/samples/quickstart.yaml)
 这个 Demo 要实现的功能是一个 Mock 应答的功能，需要实现根据配置的内容，返回 HTTP 应答。
 本文会按以下方式进行介绍：
 

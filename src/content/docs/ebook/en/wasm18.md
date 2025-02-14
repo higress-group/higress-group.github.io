@@ -266,7 +266,7 @@ envoy.yaml 配置文件增加了 `outbound|6379||redis.static` 集群，用于�
 ### 3.1 插件配置和配置解析
 
 插件配置和配置解析部分核心代码如下：
-```golang
+```go
 // LimitConfig 定义了限流插件的配置结构。
 type LimitConfig struct {
 	Keys                 []string            `yaml:"keys"`                    // 定义了用于提取限流信息的HTTP请求头字段名称。
@@ -445,7 +445,7 @@ Lua 脚本是在 Redis 中执行的，用于实现令牌桶限流算法。下面
 
 限流主要实现在插件 `onHttpRequestHeaders` 方法中，部分核心代码如下：
 
-```golang
+```go
 // onHttpRequestHeaders 函数在处理 HTTP 请求头时被调用，用于执行限流逻辑。
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config LimitConfig, log wrapper.Log) types.Action {
 	log.Debugf("onHttpRequestHeaders()")

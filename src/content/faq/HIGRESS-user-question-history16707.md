@@ -57,7 +57,7 @@ keywords: ["higress","获取","用户","真实","访问","IP","方法"]
 - **配置灵活性**: Higress 支持多种配置方式，具体实现可能依赖于其内置的功能或通过插件扩展，因此上述配置仅为示例，实际操作时应参照 Higress 最新文档进行。
 
 ### 注意
-请查阅 Higress 的官方文档，特别是关于配置和服务发现的部分[[Higress 配置](https://higress.io/docs/user/configurations)]，以获取最准确和最新的配置指导。如果有关于特定版本或功能的疑问，直接查询文档或社区论坛将是最佳选择。
+请查阅 Higress 的官方文档，特别是关于配置和服务发现的部分[[Higress 配置](https://higress.cn/docs/latest/user/configurations)]，以获取最准确和最新的配置指导。如果有关于特定版本或功能的疑问，直接查询文档或社区论坛将是最佳选择。
 
 
 <font color="#949494">---------------</font> 

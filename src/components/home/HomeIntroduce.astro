@@ -32,7 +32,7 @@ const ifzh = isChinese(Astro);
   </div>
 
   <div class="introduce flex flex-col justify-center items-center bg-transparent h-full relative z-1"  >
-     <div class="flex flex-col justify-center items-center h-[75%]">
+    <div class="flex flex-col justify-center items-center h-[75%]">
       <div
         class={`top-introduce-title leading-[96px] text-base-100 font-medium text-[2rem] ${ifzh ? 'sm:text-[72px]' : 'sm:text-[76px]'}`}
       >
@@ -42,8 +42,17 @@ const ifzh = isChinese(Astro);
       </div>
     </div>
 
-    <div class="flex h-[15%]">
-      <div class="shortcut flex justify-center">
+    <div class="flex mb-6 h-[10%]">
+      <a href="https://trendshift.io/repositories/10918" target="_blank" class="block md:hidden text-center flex justify-center">
+        <img src="https://trendshift.io/api/badge/repositories/10918" alt="alibaba%2Fhigress | Trendshift" class="block w-[250px] h-[55px]" width="250" height="55"/>
+      </a>
+      <a href="https://trendshift.io/repositories/10918" target="_blank" class="hidden md:block">
+        <img src="https://trendshift.io/api/badge/repositories/10918" alt="alibaba%2Fhigress | Trendshift" class="block w-[250px] h-[55px]" width="250" height="55"/>
+      </a>
+    </div>
+
+    <div class="flex h-[15%] flex-col">
+      <div class="shortcut flex justify-center items-center">
         <Button
           size="large"
           class="rounded-3xl text-neutral"
@@ -71,10 +80,10 @@ const ifzh = isChinese(Astro);
     <div class="versionInfo flex justify-end items-center h-[10%]">
       <a
         class="text-xs text-link block"
-        href="https://github.com/alibaba/higress/releases/tag/v2.0.1"
+        href="https://github.com/alibaba/higress/releases/tag/v2.0.5"
         target="_blank"
       >
-        Release Note of V2.0.1
+        Release Note of V2.0.5
       </a>
     </div>
   </div>

@@ -6,9 +6,9 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "云栖回顾 | 2024 云栖大会微服务和网关相关演讲材料",
-    "mobileText": "云栖回顾 | 2024 云栖大会微服务和网关相关演讲材料",
-    "link": "https://developer.aliyun.com/ebook/8379",
+    "text": "Higress 助力各行各业安全可靠接入DeepSeek",
+    "mobileText": "Higress 助力各行各业安全可靠接入DeepSeek",
+    "link": "https://higress.cn/blog/higress-gvr7dx_awbbpb_hghqht52gp0ugxtk/?spm=36971b57.2ef5001f.0.0.8eb72c1fM51jEa\u0026source=blog",
     "target": "_blank",
     "display": true
 }
@@ -41,7 +41,7 @@ export const DOCS_ITEM = [
   },
 ];
 
-export const MEDIARESOURCE = null;
+export const MEDIARESOURCE = []
 
 // 主要特性
 export const CHOOSE_REASON_LIST: ChooseReason[] = [
@@ -65,7 +65,7 @@ export const CHOOSE_REASON_LIST: ChooseReason[] = [
     svgKey: "variety",
     description: "home.website.edge.4.description",
   },
-]
+];
 
 // TODO: 合作客户反馈
 export const COMPANY_CUSTOMERS: Customer[] = [

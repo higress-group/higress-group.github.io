@@ -24,15 +24,15 @@ description: Higress 维护者名单
 ## Higress Approvers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
+| 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
+| 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
 | 范扬 | [SpecialYang](https://github.com/SpecialYang) | 字节跳动        |
 | 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
 
 ## Higress Reviewers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
-| 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
 | 凌轶群 | [Lynskylate](https://github.com/Lynskylate) | eBay  |
-| 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
 | 赵炳堃 | [sjtuzbk](https://github.com/sjtuzbk) | 阿里云        |
 | 韦鑫 | [WeixinX](https://github.com/weixinx) | 爱橙科技   |
 
@@ -45,6 +45,7 @@ description: Higress 维护者名单
 | 封宇腾 | [Ffyyt](https://github.com/Fkbqf)               | 西安邮电     |
 | 田亚涛 | [Hinsteny](https://github.com/Hinsteny)         | 蚂蚁      |
 | 屈晗煜 | [Ink-33](https://github.com/Ink-33)         | 东莞理工     |
+| 王小建 | [littlejian](https://github.com/littlejiancc)      | 金智塔     |
 | 邵佳成 | [sjcsjc123](https://github.com/sjcsjc123) | 杭电 |
 | 宋鹏远 | [songpengyuan](https://github.com/songpengyuan) | 小满科技 |
 | 彭万山 | [Uncle-Justice](https://github.com/Uncle-Justice) | 华中科技 |
@@ -58,58 +59,51 @@ description: Higress 维护者名单
 
 每种的头衔的获取方式如下：
 
-### Member
+### Member 头衔
 
 **条件：**
-- 获得 8 个完成 issue 的积分（good-issue +0.5, easy +1，normal +2，challenge +4）
+- 完成任意 issue
 
 > Higress开源社区为每个可认领（help wanted标签）的issue都标记了难度标签：简单(level/easy)，普通(level/normal)，有挑战(level/challenge)，完成issue后可以获得对应积分
-> 创建有价值的 issue（被标记为 good-issue 标签），也可以得 0.5 分
 
-- 贡献代码（包含文档）DIFF 行数（包含增删）达到 500+
+- 和 Higress 任意 Maintainer 保持联系，有意愿长期参与社区贡献
 
-> 不仅只有贡献代码，在Higress官网仓库（[https://github.com/higress-group/higress-group.github.io](https://github.com/higress-group/higress-group.github.io)）贡献文档，也可以满足此要求
-
-- 在社区周会进行 1 次主题分享
-
-> 重点不是分享的内容，是通过分享让大家认识你
 
 **申请方式：**
 
-满足条件，本人直接编辑本文档，提 PR 申请
+直接联系 Maintainer 申请
 
-### Reviewer
+### Reviewer 头衔
 
 **条件：**
-- 满足 Member 条件
-- 在 SIG 的核心 [issue](https://github.com/alibaba/higress/issues/547) 中做出贡献
+- 满足Member条件
+- 在一些核心 issue 中做出贡献
 
 **申请方式：**
 
-由 Approvers/Maintainer 提名，编辑本文档，提 PR 申请
+由Approvers/Maintainer提名
 
 
-### Approver
+### Approver 头衔
 
 **条件：**
-- 满足 Reviewer 条件
-- 主导一个 SIG Proposal 草案，组织并推进核心 issue 的 tasklist 完成
+- 满足Reviewer条件
+- 可以主导一个技术方向，并推进许多核心issue完成
 
 **申请方式：**
 
-由 Maintainer 提名，编辑本文档，提 PR 申请
+由Maintainer提名
 
 
-### Maintainer
+### Maintainer 头衔
 
 Maintainer是对Higress项目（包括Higress下的项目）的演进和发展做出显著贡献的个人。在社区中具有有目共睹的影响力，能够代表Higress参加重要的社区会议和活动。
 
 **条件：**
-- 满足 Approver 条件
-- 主导多个 SIG Proposal 草案，组织并推进核心 issue 的 tasklist 完成
+- 满足Approver条件
+- 主导多个技术方向，组织并推进核心issue完成
 - 积极参与开源社区的日常工作：引导新人开发，用户问题解答等
 
 **申请方式：**
 
-由 2 名以上Maintainer 提名，编辑本文档，提 PR 申请
-   
+由2名Maintainer提名

@@ -9,10 +9,10 @@ keywords: [Higress]
 
 ## 1 Envoy 集群（Cluster）名称和服务发现来源
 
-Higress 插件的 Go SDK 在进行 HTTP 和 Redis 调用时，是通过指定的集群名称来识别并连接到相应的 Envoy 集群。 此外，Higress 利用 [McpBridge](https://higress.io/docs/latest/user/mcp-bridge/) 支持多种服务发现机制，包括静态配置（static）、DNS、Kubernetes 服务、Eureka、Consul、Nacos、以及 Zookeeper 等。
+Higress 插件的 Go SDK 在进行 HTTP 和 Redis 调用时，是通过指定的集群名称来识别并连接到相应的 Envoy 集群。 此外，Higress 利用 [McpBridge](https://higress.cn/docs/latest/user/mcp-bridge/) 支持多种服务发现机制，包括静态配置（static）、DNS、Kubernetes 服务、Eureka、Consul、Nacos、以及 Zookeeper 等。
 每种服务发现机制对应的集群名称生成规则都有所不同，这些规则在 cluster_wrapper.go 代码文件中有所体现。
 为了包装不同的服务发现机制，Higress 插件 Go SDK 定义了 Cluster 接口，该接口包含两个方法：ClusterName 和 HostName。
-```golang
+```go
 type Cluster interface {
     // 返回 Envoy 集群名称
     ClusterName() string
@@ -21,8 +21,34 @@ type Cluster interface {
 }
 ```
 
-### 1.1 静态配置（static）
-```golang
+### 1.1 FQDN
+
+```go
+
+type FQDNCluster struct {
+	FQDN string
+	Host string
+	Port int64
+}
+```
+- 集群名称规则为：`outbound|<Port>||<FQDN>`。
+- HostName 规则为：如果设置 Host，返回 Host，否则返回 `<FQDN>`。
+
+FQDN 即在服务列表里看到的服务名称，形如:"my-cluster.static","your-cluster.dns","foo.default.svc.cluster.local"
+
+Host 字段用于发送实际 HTTP 请求时的缺省配置域名，如果在发送时的 URL 里指定了域名，那么将以指定的为准。下面其他的 cluster 中的 Host 字段含义也是一样的。
+
+### 1.2 当前路由的服务
+
+```go
+type RouteCluster struct {
+	Host string
+}
+```
+集群名称是直接通过 proxywasm.GetProperty([]string{"cluster_name"}) 获取的当前路由的目标集群
+
+### 1.3 静态配置（static）
+```go
 type StaticIpCluster struct {
 	ServiceName string
 	Port        int64
@@ -32,8 +58,8 @@ type StaticIpCluster struct {
 - 集群名称规则为：`outbound|<port>||<service_name>.static`。
 - HostName 规则为：默认为  <service_name>。
 
-### 1.2 DNS 配置（dns）
-```golang
+### 1.4 DNS 配置（dns）
+```go
 type DnsCluster struct {
 	ServiceName string
 	Domain      string
@@ -44,8 +70,8 @@ type DnsCluster struct {
 - 集群名称规则为：`outbound|<Port>||<ServiceName>.dns`。
 - HostName 规则为：如果设置 Host，返回 Host，否则返回<Domain>。
 
-### 1.3 Kubernetes 服务（kubernetes）
-```golang
+### 1.5 Kubernetes 服务（kubernetes）
+```go
 
 type K8sCluster struct {
 	ServiceName string
@@ -58,8 +84,8 @@ type K8sCluster struct {
 - 集群名称规则为：`outbound|<Port>|<Version>|<ServiceName>.<Namespace>.svc.cluster.local`。
 - HostName 规则为：如果设置 Host，返回 Host，否则返回 <ServiceName>.<Namespace>.svc.cluster.local。
 
-### 1.4 Nacos
-```golang
+### 1.6 Nacos
+```go
 
 type NacosCluster struct {
 	ServiceName string
@@ -76,8 +102,8 @@ type NacosCluster struct {
 - 集群名称规则为：`outbound|<Port>|<Version>|<ServiceName>.<Group>.<NamespaceID>.nacos`。
 - HostName 规则为：如果设置 Host，返回 Host，否则返回 <service_name>。
 
-### 1.5 Consul
-```golang
+### 1.7 Consul
+```go
 type ConsulCluster struct {
 	ServiceName string
 	Datacenter  string
@@ -88,37 +114,25 @@ type ConsulCluster struct {
 - 集群名称规则为：`outbound|<Port>||<ServiceName>.<Datacenter>.consul`。
 - HostName 规则为：如果设置 Host，返回 Host，否则返回 <ServiceName>。
 
-### 1.6 FQDN
-
-```golang
-
-type FQDNCluster struct {
-	FQDN string
-	Host string
-	Port int64
-}
-```
-- 集群名称规则为：`outbound|<Port>||<FQDN>`。
-- HostName 规则为：如果设置 Host，返回 Host，否则返回 `<FQDN>`。
 
 ## 2 HTTP 调用
 http_wrapper.go 部分核心代码如下：
-```golang
+```go
 // 回调函数
 type ResponseCallback func(statusCode int, responseHeaders http.Header, responseBody []byte)
 
 // HTTP 调用接口
 type HttpClient interface {
-	Get(path string, headers [][2]string, cb ResponseCallback, timeoutMillisecond ...uint32) error
-	Head(path string, headers [][2]string, cb ResponseCallback, timeoutMillisecond ...uint32) error
-	Options(path string, headers [][2]string, cb ResponseCallback, timeoutMillisecond ...uint32) error
-	Post(path string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
-	Put(path string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
-	Patch(path string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
-	Delete(path string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
-	Connect(path string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
-	Trace(path string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
-	Call(method, path string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
+	Get(rawURL string, headers [][2]string, cb ResponseCallback, timeoutMillisecond ...uint32) error
+	Head(rawURL string, headers [][2]string, cb ResponseCallback, timeoutMillisecond ...uint32) error
+	Options(rawURL string, headers [][2]string, cb ResponseCallback, timeoutMillisecond ...uint32) error
+	Post(rawURL string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
+	Put(rawURL string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
+	Patch(rawURL string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
+	Delete(rawURL string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
+	Connect(rawURL string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
+	Trace(rawURL string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
+	Call(method, rawURL string, headers [][2]string, body []byte, cb ResponseCallback, timeoutMillisecond ...uint32) error
 }
 
 // 实现 httpClient 接口
@@ -128,24 +142,36 @@ type ClusterClient[C Cluster] struct {
 ```
 ClusterClient Get、Head、Options、Post、PUT、Patch、Delete、Connect、Trace、Call 方法最后调用 HttpCall 方法，其核心代码如下：
 
-```golang
-func HttpCall(cluster Cluster, method, path string, headers [][2]string, body []byte,
+```go
+func HttpCall(cluster Cluster, method, rawURL string, headers [][2]string, body []byte,
 	callback ResponseCallback, timeoutMillisecond ...uint32) error {
-	
-	// 删除 :method, :path, :authority 
+	// 忽略 headers 里设置的保留头
 	for i := len(headers) - 1; i >= 0; i-- {
 		key := headers[i][0]
 		if key == ":method" || key == ":path" || key == ":authority" {
 			headers = append(headers[:i], headers[i+1:]...)
 		}
 	}
-	// 设置 timeout
+        // 从 URL 里解析域名和路径
+	parsedURL, err := url.Parse(rawURL)
+	if err != nil {
+		proxywasm.LogCriticalf("invalid rawURL:%s", rawURL)
+		return err
+	}
+	authority := cluster.HostName()
+	if parsedURL.Host != "" {
+		authority = parsedURL.Host
+	}
+	path := "/" + strings.TrimPrefix(parsedURL.Path, "/")
+	if parsedURL.RawQuery != "" {
+		path = fmt.Sprintf("%s?%s", path, parsedURL.RawQuery)
+	}
+	// 默认超时时间是 500ms
 	var timeout uint32 = 500
 	if len(timeoutMillisecond) > 0 {
 		timeout = timeoutMillisecond[0]
 	}
-	// 重新设置 :method, :path, :authority 
-	headers = append(headers, [2]string{":method", method}, [2]string{":path", path}, [2]string{":authority", cluster.HostName()})
+	headers = append(headers, [2]string{":method", method}, [2]string{":path", path}, [2]string{":authority", authority})
 	requestID := uuid.New().String()
 	// 调用 HTTP 请求
 	_, err := proxywasm.DispatchHttpCall(cluster.ClusterName(), headers, body, nil, timeout, func(numHeaders, bodySize, numTrailers int) {
@@ -185,7 +211,7 @@ Token Server 提供 2 个接口：
 
 ### 3.1 插件部分核心代码
 
-```golang
+```go
 package main
 ...
 
@@ -281,15 +307,10 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config JwtConfig, log wrapper
 	log.Debugf("call token-server with auth request:%s", string(authRequest))
 	// 插件将使用配置的HTTP客户端向令牌服务器发送POST请求，以验证令牌的有效性
 	err2 := config.client.Post(
-		"/api/token/auth",
+		"http://www.example.com/api/token/auth",
 		[][2]string{{"content-type", "application/json"}},
 		authRequest,
 		func(statusCode int, responseHeaders http.Header, responseBody []byte) {
-			defer func() {
-				// 保证恢复请求
-				_ = proxywasm.ResumeHttpRequest()
-			}()
-
 			log.Debugf("auth response status:%d, response:%s", statusCode, string(responseBody))
 			var jsonData gjson.Result
 			jsonData = gjson.ParseBytes(responseBody)
@@ -298,11 +319,15 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config JwtConfig, log wrapper
 				message := jsonData.Get("message").String()
 				body := fmt.Sprintf(config.responseErrorBody, message)
 				proxywasm.SendHttpResponse(config.responseErrorStatusCode, [][2]string{{"content-type", "application/json"}}, []byte(body), -1)
+				// 发送响应后直接返回
+				return
 			} else {
 				// 如果验证成功，插件将从响应中提取用户ID，并将其添加到后续请求头中
 				uid := jsonData.Get("uid").Int()
 				proxywasm.AddHttpRequestHeader(AuthUIDHeader, fmt.Sprintf("%d", uid))
 			}
+			// 恢复请求
+			proxywasm.ResumeHttpRequest()
 		},
 		2000,
 	)
@@ -624,7 +649,7 @@ spec:
 以此类推。这种情况 Redis 调用也是一样处理。 关于回调链可以参考 Higress 官方提供 [ai-agent](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-agent/main.go#L169) 插件功能。
 
 ## 参考
-- [1][Mcp Bridge 配置说明](https://higress.io/docs/latest/user/mcp-bridge/)
+- [1][Mcp Bridge 配置说明](https://higress.cn/docs/latest/user/mcp-bridge/)
 
 
 

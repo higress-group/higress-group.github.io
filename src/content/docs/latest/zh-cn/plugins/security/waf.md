@@ -20,6 +20,28 @@ waf插件实现了基于ModSecurity的规则防护引擎，可以根据用户配
 | secRules | array of string | 选填 | - | 用户自定义的waf防护规则，语法规则可参考[ModSecurity中文手册](http://www.modsecurity.cn/chm/) |
 
 ## 配置示例
+
+### 观察模式
+
+```yaml
+useCRS: true
+secRules:
+  - "SecRuleEngine DetectionOnly"
+```
+
+### 移除特定规则
+
+例如开启观察模式后，发现有一个id为10的规则导致误拦截，可以单独移除这条规则：
+
+```yaml
+useCRS: true
+secRules:
+  - "SecRuleRemoveById 10"
+  - "SecRuleEngine On"
+```
+
+### 自定义防护规则
+
 ```yaml
 useCRS: true
 secRules: 

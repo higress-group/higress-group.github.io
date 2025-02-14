@@ -40,7 +40,7 @@ description: JWT 认证插件配置参考
 | `from_params`           | array of string   | 选填     | access_token                                      | 从指定的URL参数中抽取JWT                                   |
 | `from_cookies`          | array of string   | 选填     | -                                                 | 从指定的cookie中抽取JWT                                    |
 | `clock_skew_seconds`    | number            | 选填     | 60                                                | 校验JWT的exp和iat字段时允许的时钟偏移量，单位为秒          |
-| `keep_token`            | bool              | 选填     | ture                                              | 转发给后端时是否保留JWT                                    |
+| `keep_token`            | bool              | 选填     | true                                              | 转发给后端时是否保留JWT                                    |
 
 **注意：** 
 - 只有当`from_headers`,`from_params`,`from_cookies`均未配置时，才会使用默认值

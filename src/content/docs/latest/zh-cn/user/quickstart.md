@@ -17,16 +17,12 @@ toc_max_heading_level: 4
 **Helm 安装命令**
 
 ```bash
-helm repo add higress.io https://higress.io/helm-charts
+helm repo add higress.io https://higress.cn/helm-charts
 helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes
 ```
 
-> 中国大陆用户可以使用以下方法加速安装：
-> 
-> ```bash
-> helm repo add higress.cn https://higress.cn/helm-charts
-> helm upgrade --install higress -n higress-system higress.cn/higress --create-namespace --render-subchart-notes
-> ```
+**Higress 的所有 Docker 镜像都一直使用自己独享的仓库，不受 Docker Hub 境内访问受限的影响**
+
 
 获取 Higress Gateway 的 LoadBalancer IP，并记录下来。后续可以通过该 IP 的 80 和 443 端口访问 Higress Gateway。
 ```bash
@@ -37,7 +33,7 @@ kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBala
 如果 LoadBalancer IP 获取不到，说明您当前的 K8s 集群不支持 LoadBalancer 类型的 Service，可以考虑以下方案：
 
 1. 使用云厂商提供的 K8s 服务，例如[阿里云 ACK](https://www.aliyun.com/product/kubernetes)
-2. 参考[运维参数配置](https://higress.io/zh-cn/docs/user/configurations)，开启`higress-core.gateway.hostNetwork`，让 Higress 监听本机端口，再通过其他软/硬负载均衡器转发给固定机器 IP
+2. 参考[运维参数配置](https://higress.cn/docs/latest/user/configurations)，开启`higress-core.gateway.hostNetwork`，让 Higress 监听本机端口，再通过其他软/硬负载均衡器转发给固定机器 IP
 3. （生产不建议）使用开源的负载均衡方案 [MetalLB](https://metallb.universe.tf/)
 
 #### 场景二：在本地 K8s 环境中使用
@@ -233,15 +229,33 @@ spec:
 curl http://GatewayIP/foo -H 'host: foo.bar.com'
 ```
 
-## 环境二：脱离 K8s 在 Docker Compose 中使用
 
-> **注意**
-> 
-> Standalone 模式没有大规模生产使用过，目前主要用于本地部署测试的场景，如果生产部署更建议[云原生模式](https://higress.io/zh-cn/docs/ops/deploy-by-helm)部署
+## 环境二：脱离 K8s 使用
 
 ### 阶段一：安装
 
-**安装命令一：使用独立部署的 Nacos**
+如果您是在云上部署，生产环境推荐使用企业版（无需 K8s），开发测试可以使用下面一键部署社区版：
+
+[![Deploy on AlibabaCloud ComputeNest](https://service-info-public.oss-cn-hangzhou.aliyuncs.com/computenest.svg)](https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=Higress社区版)
+
+本地开发可以使用极简方式部署，基于本地文件做配置存储：
+
+```bash
+# 创建一个工作目录
+mkdir higress; cd higress
+# 启动 higress，配置文件会写到工作目录下
+docker run -d --rm --name higress-ai -v ${PWD}:/data \
+        -p 8001:8001 -p 8080:8080 -p 8443:8443  \
+        higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
+
+```
+监听端口说明如下：
+
+- 8001 端口：Higress UI 控制台入口
+- 8080 端口：网关 HTTP 协议入口
+- 8443 端口：网关 HTTPS 协议入口
+
+或者使用下面方式，对接 Nacos 做配置存储：
 
 ```bash
 curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a -c nacos://192.168.0.1:8848 --nacos-username=nacos --nacos-password=nacos
@@ -249,18 +263,10 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a -c nacos
 
 请将 `192.168.0.1` 替换为 Nacos 服务器的 IP（如果 Nacos 部署在本机，请不要使用如 `localhost` 或 `127.0.0.1` 的 Loopback 地址），并按需调整 `--nacos-username` 和 `--nacos-password` 的取值。如果 Nacos 服务未开启认证功能，则可以移除这两个参数。
 
-**安装命令二：使用 Higress 内置 Nacos**
-
-```bash
-curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a --use-builtin-nacos
-```
-
-注：Windows 系统下可以使用 Cygwin、Git Bash 等类 Unix Shell 中执行上述命令。
 
 ### 阶段二：配置
 
-在浏览器中输入`http://127.0.0.1:8080` 进入 Higress 控制台。首次访问时需要先初始化管理员账号。
-
+进入 Higress 控制台。首次访问时需要先初始化管理员账号。
 ![image](/img/user/quickstart/zh-cn/init.png)
 
 初始化完成后，界面会自动跳转至登录页面。请使用前面设置的用户名密码登录 Higress 控制台。
@@ -279,11 +285,3 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a --use-bu
 
 ![image](/img/user/quickstart/zh-cn/route_management_standalone.png)
 
-### 阶段三：请求验证
-
-执行以下命令，验证测试路由可以正常工作：
-
-```bash
-# should output a JSON object containing request data 
-curl http://localhost/get?foo=bar -H 'host: foo.bar.com'
-```

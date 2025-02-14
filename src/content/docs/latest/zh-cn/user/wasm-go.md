@@ -191,10 +191,57 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 
 ### 3. 编译生成 WASM 文件
 
+
+使用 proxy-wasm 社区 0.2.1 版本的 ABI，在 HTTP 请求/响应处理阶段只能使用 `types.ActionContinue` 和 `types.ActionPause` 两种返回值来控制状态：
+
+1. types.ActionContinue：继续后续处理，比如继续读取请求 body，或者继续读取响应 body。
+
+2. types.ActionPause： 暂停后续处理，比如在 onHttpRequestHeaders 通过 Http 或者 Redis 调用外部服务获取认证信息，在调用外部服务回调钩子函数中调用 proxywasm.ResumeHttpRequest() 来恢复请求处理 或者调用 proxywasm.SendHttpResponseWithDetail() 来返回响应。
+
+只需这样简单的状态管理，使用下面的编译方式即可：
+
 ```bash
 go mod tidy
 tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="custommalloc nottinygc_finalizer" ./
 ```
+
+Higress 扩展了 0.2.100 版本的 ABI 来实现更丰富的 Header 状态管理，如果要使用，请用下面的编译方式：
+
+```bash
+go mod tidy
+tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="custommalloc nottinygc_finalizer proxy_wasm_version_0_2_100" ./
+```
+
+Header 的状态管理说明如下：
+
+1. HeaderContinue:
+
+表示当前 filter 已经处理完毕，可以继续交给下一个 filter 处理。 types.ActionContinue 对应就是这个状态。
+
+2. HeaderStopIteration:
+
+表示 header 还不能继续交给下一个 filter 来处理。 但是并不停止从连接读数据，继续触发 body data 的处理。 这样可以在 body data 处理阶段可以更新 Http 请求头内容。 如果 body data 要交给下一个 filter 处理， 这时 header 是也会被一起交给下一个 filter 处理。
+
+但注意返回这个状态时，要求必须有 body，如果没有 body，请求/响应将被一直阻塞。
+
+判断是否存在请求 body 可以使用 [HasRequestBody()](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/pkg/wrapper/request_wrapper.go#L86) 
+
+3. HeaderContinueAndEndStream:
+
+表示 header 可以继续交给下一个 filter 处理，但是下一个 filter 收到的 end_stream = false，也就是标记请求还未结束。以便当前 filter 再增加 body。
+
+4. HeaderStopAllIterationAndBuffer:
+
+停止所有迭代，表示 header 不能继续交给下一个 filter，并且当前 filter 也不能收到 body data。 并对当前过滤器及后续过滤器的头部、数据和尾部进行缓冲。如果缓存大小超过了 buffer limit，在请求阶段就直接返回 413，响应阶段就直接返回 500。
+同时需要调用 proxywasm.ResumeHttpRequest()、 proxywasm.ResumeHttpResponse() 或者 proxywasm.SendHttpResponseWithDetail()  函数来恢复后续处理。
+
+5. HeaderStopAllIterationAndWatermark:
+
+同上，区别是，当缓存超过了 buffer limit 会触发流控，也就是暂停从连接上读数据。 0.2.1 ABI 中的 types.ActionPause 实际上对应就是这个状态。
+
+> 关于 types.HeaderStopIteration 和 HeaderStopAllIterationAndWatermark 的使用场景可以参考 Higress 官方提供 [ai-transformer 插件](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-transformer/main.go#L93-L99) 和  [ai-quota 插件](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-quota/main.go#L179) 。
+
+
 
 如果windows下编译出现error: could not find wasm-opt, set the WASMOPT environment variable to override 则需要下载https://github.com/WebAssembly/binaryen/ 里面包含了bin\wasm-opt.exe将这个文件拷贝到tinygo的bin目录下重新编译即可。 <br />
 编译成功会在当前目录下创建文件 main.wasm。这个文件在下面本地调试的例子中也会被用到。<br />
@@ -468,28 +515,35 @@ func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
 	// 使用client的Get方法发起HTTP Get调用，此处省略了timeout参数，默认超时时间500毫秒
-	config.client.Get(config.requestPath, nil,
-		// 回调函数，将在响应异步返回时被执行
-		func(statusCode int, responseHeaders http.Header, responseBody []byte) {
-			// 请求没有返回200状态码，进行处理
-			if statusCode != http.StatusOK {
-				log.Errorf("http call failed, status: %d", statusCode)
-				proxywasm.SendHttpResponse(http.StatusInternalServerError, nil,
-					[]byte("http call failed"), -1)
-				return
-			}
-			// 打印响应的HTTP状态码和应答body
-			log.Infof("get status: %d, response body: %s", statusCode, responseBody)
-			// 从应答头中解析token字段设置到原始请求头中
-			token := responseHeaders.Get(config.tokenHeader)
-			if token != "" {
-				proxywasm.AddHttpRequestHeader(config.tokenHeader, token)
-			}
-			// 恢复原始请求流程，继续往下处理，才能正常转发给后端服务
-			proxywasm.ResumeHttpRequest()
+	err := config.client.Get(config.requestPath, nil,
+		       // 回调函数，将在响应异步返回时被执行
+		       func(statusCode int, responseHeaders http.Header, responseBody []byte) {
+			       // 请求没有返回200状态码，进行处理
+			       if statusCode != http.StatusOK {
+				       log.Errorf("http call failed, status: %d", statusCode)
+				       proxywasm.SendHttpResponse(http.StatusInternalServerError, nil,
+					       []byte("http call failed"), -1)
+				       return
+			       }
+			       // 打印响应的HTTP状态码和应答body
+			       log.Infof("get status: %d, response body: %s", statusCode, responseBody)
+			       // 从应答头中解析token字段设置到原始请求头中
+			       token := responseHeaders.Get(config.tokenHeader)
+			       if token != "" {
+				       proxywasm.AddHttpRequestHeader(config.tokenHeader, token)
+			       }
+			       // 恢复原始请求流程，继续往下处理，才能正常转发给后端服务
+			       proxywasm.ResumeHttpRequest()
 		})
-	// 需要等待异步回调完成，返回Pause状态，可以被ResumeHttpRequest恢复
-	return types.ActionPause
+ 	
+	if err != nil {
+		// 由于调用外部服务失败，放行请求，记录日志
+		log.Errorf("Error occured while calling http, it seems cannot find the service cluster.")
+		return types.ActionContinue
+	} else {
+		// 需要等待异步回调完成，返回Pause状态，可以被ResumeHttpRequest恢复
+		return types.ActionPause
+	}
 }
 ```
 

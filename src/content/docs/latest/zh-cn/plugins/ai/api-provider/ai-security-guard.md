@@ -1,11 +1,11 @@
 ---
-title: AI内容安全
+title: AI 内容安全
 keywords: [higress, AI, security]
 description: 阿里云内容安全检测
 ---
 
 ## 功能说明
-通过对接阿里云内容安全检测大模型的输入输出，保障AI应用内容合法合规。
+通过对接阿里云内容安全检测大模型的输入输出，保障 AI 应用内容合法合规。
 
 ## 运行属性
 
@@ -17,23 +17,23 @@ description: 阿里云内容安全检测
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | `serviceName` | string | requried | - | 服务名 |
 | `servicePort` | string | requried | - | 服务端口 |
-| `serviceHost` | string | requried | - | 阿里云内容安全endpoint的域名 |
-| `accessKey` | string | requried | - | 阿里云AK |
-| `secretKey` | string | requried | - | 阿里云SK |
+| `serviceHost` | string | requried | - | 阿里云内容安全 endpoint 的域名 |
+| `accessKey` | string | requried | - | 阿里云 AK |
+| `secretKey` | string | requried | - | 阿里云 SK |
 | `checkRequest` | bool | optional | false | 检查提问内容是否合规 |
 | `checkResponse` | bool | optional | false | 检查大模型的回答内容是否合规，生效时会使流式响应变为非流式 |
 | `requestCheckService` | string | optional | llm_query_moderation | 指定阿里云内容安全用于检测输入内容的服务 |
 | `responseCheckService` | string | optional | llm_response_moderation | 指定阿里云内容安全用于检测输出内容的服务 |
-| `requestContentJsonPath` | string | optional | `messages.@reverse.0.content` | 指定要检测内容在请求body中的jsonpath |
-| `responseContentJsonPath` | string | optional | `choices.0.message.content` | 指定要检测内容在响应body中的jsonpath |
-| `responseStreamContentJsonPath` | string | optional | `choices.0.delta.content` | 指定要检测内容在流式响应body中的jsonpath |
+| `requestContentJsonPath` | string | optional | `messages.@reverse.0.content` | 指定要检测内容在请求 body 中的j sonpath |
+| `responseContentJsonPath` | string | optional | `choices.0.message.content` | 指定要检测内容在响应 body 中的 jsonpath |
+| `responseStreamContentJsonPath` | string | optional | `choices.0.delta.content` | 指定要检测内容在流式响应 body 中的 jsonpath |
 | `denyCode` | int | optional | 200 | 指定内容非法时的响应状态码 |
-| `denyMessage` | string | optional | openai格式的流失/非流式响应，回答内容为阿里云内容安全的建议回答 | 指定内容非法时的响应内容 |
+| `denyMessage` | string | optional | openai 格式的流失/非流式响应，回答内容为阿里云内容安全的建议回答 | 指定内容非法时的响应内容 |
 
 
 ## 配置示例
 ### 前提条件
-由于插件中需要调用阿里云内容安全服务，所以需要先创建一个DNS类型的服务，例如：
+由于插件中需要调用阿里云内容安全服务，所以需要先创建一个 DNS 类型的服务，例如：
 
 ![](https://img.alicdn.com/imgextra/i4/O1CN013AbDcn1slCY19inU2_!!6000000005806-0-tps-1754-1320.jpg)
 

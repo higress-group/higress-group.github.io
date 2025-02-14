@@ -72,7 +72,7 @@ HigressConfig 是 higress-config Configmap 所对应数据的结构体。
 
 初始化过程入口在 NewIngressConfig， 初始化 IngressConfig 时同时构建 HigressConfigController 和 ConfigmapMgr。
 
-```golang
+```go
 // pkg/ingress/config/ingress_config.go
 func NewIngressConfig(localKubeClient kube.Client, XDSUpdater model.XDSUpdater, namespace, clusterId string) *IngressConfig {
 	// ...
@@ -89,7 +89,7 @@ func NewIngressConfig(localKubeClient kube.Client, XDSUpdater model.XDSUpdater, 
 
 通过 Higress 提供 NewCommonController 初始化 HigressConfigController 用于监听 higress-system 命名空间下 Configmap 的变化。
 
-```golang
+```go
 // pkg/ingress/kube/configmap/controller.go
 type HigressConfigController controller.Controller[listersv1.ConfigMapNamespaceLister]
 
@@ -113,7 +113,7 @@ ConfigmapMgr 初始化具体步骤如下：
 - 把 tracingController 添加到 configmapMgr itemControllers 数组里
 - 初始化 ItemEventHandler， 同时遍历 itemControllers，设置 ItemEventHandler
 
-```golang
+```go
 // pkg/ingress/kube/configmap/controller.go
 func NewConfigmapMgr(XDSUpdater model.XDSUpdater, namespace string, higressConfigController HigressConfigController, higressConfigLister listersv1.ConfigMapNamespaceLister) *ConfigmapMgr {
     //  构建 ConfigmapMgr
@@ -145,7 +145,7 @@ func NewConfigmapMgr(XDSUpdater model.XDSUpdater, namespace string, higressConfi
 
 在 IngressConfig 添加 HigressConfigController Run() 和 HasSynced() 控制流程。
 
-```golang
+```go
 // pkg/ingress/config/ingress_config.go
 func (m *IngressConfig) Run(stop <-chan struct{}) {
 	// ...
@@ -174,7 +174,7 @@ ConfigmapMgr 通过收到 HigressConfigController 通知来处理变更请求。
 - 和上次保存在本地 higressConfig 比对, 检查这次数据是否有变化，如果没有变化就返回。
 - 如果数据有变化，就遍历 ItemControllers 通知每个 itemController 数据有变化，同时保存这次变化到本地 higressConfig。
 
-```golang
+```go
 // pkg/ingress/kube/configmap/controller.go
 func (c *ConfigmapMgr) AddOrUpdateHigressConfig(name util.ClusterNamespacedName) {
 	// 只监听 higress-system 命名空间下 name 为 higress-config Configmap 的变化
@@ -225,7 +225,7 @@ TracingController 变更处理就比较简单：
 - 检查 Tracing 这部分数据是否有变更。
 - 如果有变更，DeepCopy 一份 Tracing 数据保存到本地，同时通过 eventHandler 下发变更通知。
 
-```golang
+```go
 // pkg/ingress/kube/configmap/tracing.go
 func (t *TracingController) AddOrUpdateHigressConfig(name util.ClusterNamespacedName, old *HigressConfig, new *HigressConfig) error {
 	// ...
@@ -258,7 +258,7 @@ func (t *TracingController) AddOrUpdateHigressConfig(name util.ClusterNamespaced
 
 在 ConfigmapMgr 初始化时候调用 configmapMgr.initEventHandlers()， 这个 func 会创建 ItemEventHandler, 同时遍历 ItemControllers 设置 ItemEventHandler。
 
-```golang
+```go
 // pkg/ingress/kube/configmap/config.go
 type ItemEventHandler = func(name string)
 
@@ -289,7 +289,7 @@ func (c *ConfigmapMgr) initEventHandlers() error {
 进一步跟踪可以发现在 Higress controller server 启动时执行 s.initXdsServer 函数创建 s.xdsServer，具体逻辑不在本文讨论范围, 有兴趣可以进一步阅读源码。
 
 
-```golang
+```go
 // pkg/bootstrap/server.go
 func NewServer(args *ServerArgs) (*Server, error) {
 	// ...
@@ -336,7 +336,7 @@ func (s *Server) initXdsServer() error {
 
 IngressConfig List 用于 VirtualService, DestinationRule, EnvoyFilter, ServiceEntry, WasmPlugin 等 CR 资源下发， 这里主要关注 EnvoyFilter CR 资源下发。
 
-```golang
+```go
 // pkg/ingress/config/ingress_config.go
 func (m *IngressConfig) List(typ config.GroupVersionKind, namespace string) ([]config.Config, error) {
 	if typ != gvk.Gateway &&
@@ -385,7 +385,7 @@ func (m *IngressConfig) List(typ config.GroupVersionKind, namespace string) ([]c
 
 这里比较简单，遍历一下 ItemControllers，聚合每个 itemController 返回的 EnvoyFilters.
 
-```golang
+```go
 // /pkg/ingress/kube/configmap/controller.go
 func (c *ConfigmapMgr) ConstructEnvoyFilters() ([]*config.Config, error) {
 	configs := make([]*config.Config, 0)
@@ -405,7 +405,7 @@ func (c *ConfigmapMgr) ConstructEnvoyFilters() ([]*config.Config, error) {
 
 这里就比较简单，根据保存的 Tracing 数据构建对应的 EnvoyFilter
 
-```golang
+```go
 // pkg/ingress/kube/configmap/tracing.go
 func (t *TracingController) ConstructEnvoyFilters() ([]*config.Config, error) {
 	// ...
@@ -483,7 +483,7 @@ func (t *TracingController) ConstructEnvoyFilters() ([]*config.Config, error) {
 
 ### 1. HigressConfig 结构体添加对应的扩展配置
 
-```golang
+```go
 type HigressConfig struct {
 	Tracing *Tracing `json:"tracing,omitempty"`
 	// 在这里添加对应的数据结构来扩展配置
@@ -492,7 +492,7 @@ type HigressConfig struct {
 
 ### 2. 增加扩展配置默认值
 
-```golang
+```go
 // pkg/ingress/kube/configmap/config.go
 func NewDefaultHigressConfig() *HigressConfig {
 	higressConfig := &HigressConfig{
@@ -505,7 +505,7 @@ func NewDefaultHigressConfig() *HigressConfig {
 
 ### 3. 实现 ItemController interface
 
-```golang
+```go
 type ItemController interface {
 	GetName() string
 	AddOrUpdateHigressConfig(name util.ClusterNamespacedName, old *HigressConfig, new *HigressConfig) error
@@ -517,7 +517,7 @@ type ItemController interface {
 
 ### 4. 初始化扩展配置，同时添加到 ItemControllers
 
-```golang
+```go
 func NewConfigmapMgr(XDSUpdater model.XDSUpdater, namespace string, higressConfigController HigressConfigController, higressConfigLister listersv1.ConfigMapNamespaceLister) *ConfigmapMgr {
 	// ...
 	tracingController := NewTracingController(namespace)
@@ -537,8 +537,3 @@ Higress 开源贡献小组正在火热招募贡献者。早期参与开源更容
 
 
 ![](https://img.alicdn.com/imgextra/i1/O1CN0166Gkdt1cRTVjJ2skL_!!6000000003597-2-tps-720-405.png)
-
-
-
-
-

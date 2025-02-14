@@ -40,7 +40,7 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ["Roboto", "SourceHanSans", "sans-serif"],
-				mono: ["Roboto", "SourceHanSans", "sans-serif"],
+				mono: ["SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"],
 			},
 			keyframes: {
 				fadeByGroup: {

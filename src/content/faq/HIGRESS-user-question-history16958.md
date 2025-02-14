@@ -75,7 +75,7 @@ keywords: ["higress","管理面板","安装","使用"]
 
 ### **总结**
 
-通过上述步骤，您完成了Higress管理面板的安装、服务路由配置以及功能验证。无论是通过命令行使用Ingress资源还是直观的Higress控制台，都能灵活地管理Kubernetes集群中的服务路由。请确保每一步操作成功后再进行下一步，以确保整个过程的顺畅。[[安装部署文档]](https://higress.io/docs/latest/ops/deploy-by-helm/)提供了更多高级配置和使用细节，可供进一步探索。
+通过上述步骤，您完成了Higress管理面板的安装、服务路由配置以及功能验证。无论是通过命令行使用Ingress资源还是直观的Higress控制台，都能灵活地管理Kubernetes集群中的服务路由。请确保每一步操作成功后再进行下一步，以确保整个过程的顺畅。[[安装部署文档]](https://higress.cn/docs/latest/ops/deploy-by-helm/)提供了更多高级配置和使用细节，可供进一步探索。
 
 
 <font color="#949494">---------------</font> 
