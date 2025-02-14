@@ -10,10 +10,6 @@ authors: "CH3CHO"
 作者：<font style="color:rgba(0, 0, 0, 0.3);">梧同、望宸</font>
 
 # 背景
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/6356291/1739001714064-7b8ad61a-731f-4dd0-9e4b-a94f55d504b8.png)
-
-
-
 目前，和 DeepSeek 相关的需求总结为两类：
 
 + 因官方 APP/Web 服务经常无法返回结果，各类云厂商、硬件或软件企业提供满血版或蒸馏版的 API + 算力服务，还有不少基于开源+家用计算和存储设备的本地部署方案，以分担 DeepSeek 官方的服务压力。
@@ -94,7 +90,6 @@ Serverless 部署（魔搭社区+FC）：[https://mp.weixin.qq.com/s/yk5t0oIv7XQ
 
 
 ## 需求一：自建的 DeepSeek 服务并发有限，调用失败怎么兜底？
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/6356291/1739002389314-1f109f2f-d386-415f-ac83-3161b646cab0.png)
 
 DeepSeek-R1拥有 671B 的庞大参数，部署成本较高，可以部署一些 R1 系列的蒸馏模型进行兜底，如基于 Qwen 模型训练的 [DeepSeek-R1-Distill-Qwen-32B](https://modelscope.cn/models/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B) 是个不错的选择。
 
@@ -107,7 +102,6 @@ DeepSeek-R1拥有 671B 的庞大参数，部署成本较高，可以部署一些
 如图，配置了 DeepSeek 的服务，Fallback 策略为调用 qwen-max。
 
 ## 需求二：自建的 DeepSeek 服务怎么保证内容安全？
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/6356291/1739001417632-95903902-487c-4c48-a5cc-dd7c0978d6a1.png)
 
 DeepSeek的 R1 系列开源模型的输出风格整体是偏“自由”的，如果使用其提供对外服务，难免会有对内容安全的担忧，一旦模型对一些敏感问题做了回复，可能会为企业带来一些额外的解释成本。
 
@@ -150,7 +144,6 @@ DeepSeek的 R1 系列开源模型的输出风格整体是偏“自由”的，�
 
 
 ## 需求三：我想把 API 授权给特定的用户使用，并且控制他们的额度
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/6356291/1739002550971-e1a986cf-c851-4f63-9c2c-0f66cad56ed9.png)
 
 基于云原生 API 网关的消费者鉴权能力支持模型服务的分租，用户可以像模型服务商一样在网关上签发自己的 API Key 供用户使用，并能够控制消费者的调用权限和调用额度，配合可观测能力，还可以对每个消费者的 token 用量进行观测统计。
 
@@ -163,14 +156,12 @@ DeepSeek的 R1 系列开源模型的输出风格整体是偏“自由”的，�
 
 
 ## 需求四：现在已经有在使用别的 LLM，想切一点流量到 DeepSeek 看看效果
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/6356291/1739003462019-d25bb9bc-b2a6-4c02-b657-175c8134d721.png)
 
 云原生 API 网关支持模型按比例灰度能力，便于用户在模型间迁移，如下图所示，请求流量将有90%被路由到 openai，10%被路由到 DeepSeek，后续灰度的切换也只需修改配置并发布，不需要做任何代码层级的变更。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/6356291/1738999475950-591a105a-dc35-4ae2-a6e0-22918a7adb99.png)
 
 ## 需求五：部署模型推理的成本很高，常见的请求能用缓存挡掉就好了
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/6356291/1739005154307-cd52eadb-07fb-4fb4-a66f-0a8bb2186159.png)
 
 <font style="color:rgb(51, 51, 51);">云原生 API 网关支持对 LLM 生产结果进行缓存，开启缓存能力后，一些常用的请求，如打招呼、询问产品能力等，均可通过命中的缓存直接回复，不会进入到后端模型，占用宝贵的推理资源。</font>
 
