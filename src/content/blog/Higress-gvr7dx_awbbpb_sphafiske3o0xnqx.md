@@ -67,7 +67,7 @@ authors: "CH3CHO"
 
 AI Agent 的相关逻辑都在 ai_agent.py 这个文件中。AI 网关使用 Higress，只需要一行命令就可以安装完成：
 
-`curl -sS  [https://higress.cn/ai-gateway/install.sh](https://higress.cn/ai-gateway/install.sh) | bash` 
+`curl -sS  https://higress.cn/ai-gateway/install.sh | bash` 
 
 
 
