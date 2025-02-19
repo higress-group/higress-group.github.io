@@ -5,7 +5,7 @@ description: Higress Ingress Annotation 配置说明。
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/annotation.md
 ---
 
-# Ingress Annotaion 配置说明
+# Nginx Ingress Annotation 兼容说明
 标准的K8s Ingress资源只能处理简单场景下的HTTP(S)流量路由，无法处理流量切分，超时重试，Header控制和跨域等问题。因此，不同的Ingress Controller利用自定义的Ingress Annotation增强Ingress能力。常见的Nginx Ingress Controller引入了100多个Annotation对Ingress在流量治理和安全防护上进行了扩展实现。目前，Higress已经全面兼容了大部分Nginx Ingress Annotation，方便用户从Nginx Ingress无缝迁移至Higress，本文主要介绍Higress关于Ingress Annotation的配置说明。
 
 ## Ingress Annotation
