@@ -182,7 +182,7 @@ data:
 ### 配置说明
 | 字段                       | 类型      | 说明                                                                            | 默认                    |
 |--------------------------|---------|-------------------------------------------------------------------------------|-----------------------|
-| name                     | boolean | 是否启动通过 ACME Issuer 来签发证书                                                      | true                  |
+| automaticHttps                     | boolean | 是否启动通过 ACME Issuer 来签发证书                                                      | true                  |
 | renewBeforeDays          | int     | 证书过期前多少天自动Renew， 最大值为90天                                                      | 30                    |
 | fallbackForInvalidSecret | boolean | 如果开启，当 ingress TLS 里配置 secretName 不存在时，会在 credentialConfig 配置里根据域名匹配 secret | false                 |
 | acmeIssuer               | array   | acmeIssuer 设置                                                                 | 参考下面 acmeIssuer       |
