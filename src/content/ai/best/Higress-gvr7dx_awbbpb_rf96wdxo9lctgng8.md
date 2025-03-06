@@ -1,8 +1,6 @@
 ---
-title: "GeoIP 结合 Prompt 赋能 LLM：基
-于 AI 网关实现个性化与精确化问答"
-description: "GeoIP 结合 Prompt 赋能 LLM：基
-于 AI 网关实现个性化与精确化问答"
+title: "GeoIP 结合 Prompt 赋能 LLM：基于 AI 网关实现个性化与精确化问答"
+description: "GeoIP 结合 Prompt 赋能 LLM：基于 AI 网关实现个性化与精确化问答"
 date: "2024-08-28"
 category: "article"
 keywords: ["Higress"]
