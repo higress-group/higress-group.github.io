@@ -7,6 +7,11 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # Mcp Bridge 配置说明
 
+> **注意**
+
+> 当前仅会监听在 higress 安装命名空间下命名为 `default` 的 mcpbridge 资源
+
+
 ## McpBridge 字段说明
 | 字段         | 类型 | 说明                | 示例值     | 是否必填              |
 |------------| --- |-------------------|---------|-------------------|
