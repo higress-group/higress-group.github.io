@@ -83,7 +83,7 @@ curl https://example.com/v1/chat/completions/quota/delta -d "consumer=consumer1&
 
 ### 配置根据模型参数路由时如何访问
 
-当路由配置根据请求 body 中的 model 参数路由生效时，按上述方式访问 quota API 会出现 404 的情况，因为 quota API 并不遵循 openapi 的 body 协议，无法提取出 model 参数。
+当路由配置根据请求 body 中的 model 参数路由生效时，按上述方式访问 quota API 会出现 404 的情况，因为 quota API 并不遵循 openai 的 body 协议，无法提取出 model 参数。
 
 此时若希望命中匹配特定 model 参数的路由，可以通过附加 `x-higress-llm-model` 请求头来实现，例如：
 
