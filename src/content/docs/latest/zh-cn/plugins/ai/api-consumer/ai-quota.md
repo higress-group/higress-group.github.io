@@ -53,17 +53,43 @@ redis:
 ###  刷新 quota
 
 如果当前请求 url 的后缀符合 admin_path，例如插件在 example.com/v1/chat/completions 这个路由上生效，那么更新 quota 可以通过
-curl https://example.com/v1/chat/completions/quota/refresh -H "Authorization: Bearer credential3" -d "consumer=consumer1&quota=10000" 
+
+```bash
+curl https://example.com/v1/chat/completions/quota/refresh -H "Authorization: Bearer credential3" -d "consumer=consumer1&quota=10000"
+```
 
 Redis 中 key 为 chat_quota:consumer1 的值就会被刷新为 10000
 
+
 ### 查询 quota
 
-查询特定用户的 quota 可以通过 curl https://example.com/v1/chat/completions/quota?consumer=consumer1 -H "Authorization: Bearer credential3"
+查询特定用户的 quota 可以通过 
+
+```bash
+curl https://example.com/v1/chat/completions/quota?consumer=consumer1 -H "Authorization: Bearer credential3"
+```
+
 将返回： {"quota": 10000, "consumer": "consumer1"}
 
 ### 增减 quota 
 
-增减特定用户的 quota 可以通过 curl https://example.com/v1/chat/completions/quota/delta -d "consumer=consumer1&value=100" -H "Authorization: Bearer credential3"
+增减特定用户的 quota 可以通过 
+
+```bash
+curl https://example.com/v1/chat/completions/quota/delta -d "consumer=consumer1&value=100" -H "Authorization: Bearer credential3"
+```
+
 这样 Redis 中 Key 为 chat_quota:consumer1 的值就会增加100，可以支持负数，则减去对应值。
 
+### 配置根据模型参数路由时如何访问
+
+当路由配置根据请求 body 中的 model 参数路由生效时，按上述方式访问 quota API 会出现 404 的情况，因为 quota API 并不遵循 openapi 的 body 协议，无法提取出 model 参数。
+
+此时若希望命中匹配特定 model 参数的路由，可以通过附加 `x-higress-llm-model` 请求头来实现，例如：
+
+```bash
+### 以刷新 quota 为例，其他也是一样
+curl https://example.com/v1/chat/completions/quota/refresh -H 'x-higress-llm-model: deepseek-r1' -H "Authorization: Bearer credential3" -d "consumer=consumer1&quota=10000" 
+```
+
+这样就可以命中模型参数匹配 `deepseek-r1` 的路由，当然还需要注意路由本身的 Method 和路径匹配规则，可以匹配到 quota API
