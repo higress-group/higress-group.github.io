@@ -7,39 +7,31 @@ keywords: ["Higress"]
 authors: "子釉"
 ---
 
-<h1 id="bskZG">场景描述</h1>
+# 场景描述
 AI网关能够对大模型使用的Token数量进行追踪，在消费者使用超额时进行限制，从而更好管理调用AI应用的用户额度，为Token使用分析提供数据支持。
 
 Token管控场景基于消费者认证、Token限流、Token配额插件，集合可观测能力，将Token资源转化为可量化、可管控、可优化的服务单元，基于自定义的策略，保障高并发下服务的稳定性、安全性与公平性。
 
 
 
-<h1 id="uEsio">部署Higress.AI</h1>
-本指南中基于docker部署，如您需要其他部署方式（k8s、helm等），请参照[https://higress.cn/docs/latest/user/quickstart/](https://higress.cn/docs/latest/user/quickstart/)。
+# 部署Higress.AI
+本指南中基于docker部署，如您需要其他部署方式（k8s、helm等），请参照[快速开始](https://higress.cn/docs/latest/user/quickstart/)。
 
 
 
 执行以下命令：
 
-`<font style="color:rgb(53, 56, 65);">curl -sS https://higress.cn/ai-gateway/install.sh | bash</font>`
+```bash
+curl -sS https://higress.cn/ai-gateway/install.sh | bash
+```
 
-<font style="color:rgb(53, 56, 65);">按照指引可以分别录入 Aliyun Dashscope或其他API-KEY；也可以键入回车后跳过，之后在控制台中修改。</font>
-
-本指南中基于docker部署，如您需要其他部署方式（k8s、helm等），请参照[https://higress.cn/docs/latest/user/quickstart/](https://higress.cn/docs/latest/user/quickstart/)。
-
-
-
-执行以下命令：
-
-`<font style="color:rgb(53, 56, 65);">curl -sS https://higress.cn/ai-gateway/install.sh | bash</font>`
-
-<font style="color:rgb(53, 56, 65);">按照指引可以分别录入 Aliyun Dashscope或其他API-KEY；也可以键入回车后跳过，之后在控制台中修改。</font>
+按照指引可以分别录入 Aliyun Dashscope或其他API-KEY；也可以键入回车后跳过，之后在控制台中修改。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
 
 
 
-<font style="color:rgb(53, 56, 65);">上述命令的默认的HTTP的服务端口为8080，HTTPS的服务端口为8443，控制台的服务端口为8001。如您需要使用其他端口，可使用 </font>`<font style="color:rgb(53, 56, 65);">wget https://higress.cn/ai-gateway/install.sh</font>`<font style="color:rgb(53, 56, 65);">下载部署脚本后，修改</font>_<font style="color:rgb(53, 56, 65);">DEFAULT_GATEWAY_HTTP_PORT</font>_<font style="color:rgb(53, 56, 65);">/</font>_<font style="color:rgb(53, 56, 65);">DEFAULT_GATEWAY_HTTPS_PORT</font>_<font style="color:rgb(53, 56, 65);">/</font>_<font style="color:rgb(53, 56, 65);">DEFAULT_CONSOLE_PORT</font>_<font style="color:rgb(53, 56, 65);">结果；然后是使用bash执行脚本。</font>
+上述命令的默认的HTTP的服务端口为8080，HTTPS的服务端口为8443，控制台的服务端口为8001。如您需要使用其他端口，可使用 `wget https://higress.cn/ai-gateway/install.sh`下载部署脚本后，修改*DEFAULT_GATEWAY_HTTP_PORT/DEFAULT_GATEWAY_HTTPS_PORT/DEFAULT_CONSOLE_PORT*结果；然后是使用bash执行脚本。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
 
@@ -49,7 +41,7 @@ Token管控场景基于消费者认证、Token限流、Token配额插件，集�
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063935811-ddf2eef7-967d-49a8-92e6-f99613b7dbf7.png)
 
-<h1 id="IH9ir">控制台配置</h1>
+# 控制台配置
 通过浏览器访问控制台界面[http://localhost:8001/](http://localhost:8001/)，首次登录需要配置管理员及密码。
 
 在AI服务提供者管理界面，可以配置已集成供应商的API-KEY。当前已集成的供应商有阿里云、DeepSeek、Azure OpenAI、OpenAI、豆包等。这里我们为阿里云配置API-KEY，如您在上一步中已经配置，则直接忽略。
@@ -58,7 +50,7 @@ Token管控场景基于消费者认证、Token限流、Token配额插件，集�
 
 
 
-<h2 id="qsj9d">配置消费者</h2>
+## 配置消费者
 在控制台中的消费者管理界面，为当前网关添加消费者以管理配额、发送请求。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741163343009-d86b6ab1-ac65-4bff-85d5-b10470cdb5d2.png)
@@ -71,12 +63,12 @@ Token管控场景基于消费者认证、Token限流、Token配额插件，集�
 
 
 
-<h2 id="UzFkE">配置Redis存储服务</h2>
+## 配置Redis存储服务
 Token的信息需要临时存储以供访问，因此需要创建一个Redis服务用于缓存。本文示例基于docker搭建一个本地Redis服务，提供给Higress使用。
 
 
 
-<h3 id="TCAPF">Redis服务构建</h3>
+### Redis服务构建
 1. 使用docker命令启动一个redis容器
 
 ```plain
@@ -96,7 +88,7 @@ docker run --name my-redis -p 6379:6379 -d redis
 
 
 
-<h3 id="AnaF1">Redis服务配置</h3>
+### Redis服务配置
 在控制台服务来源的界面，创建服务来源，填写对应的字段：
 
 + 类型：固定地址
@@ -107,8 +99,8 @@ docker run --name my-redis -p 6379:6379 -d redis
 
 
 
-<h2 id="QEUQQ">配置AI路由策略</h2>
-<h3 id="XpIMS">消费者认证配置</h3>
+## 配置AI路由策略
+### 消费者认证配置
 在AI路由管理界面中，为阿里云配置消费者，点击编辑。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741166983812-8a2d6ce9-4c09-4415-a591-2a7fe6eea38f.png)
@@ -121,7 +113,7 @@ docker run --name my-redis -p 6379:6379 -d redis
 
 
 
-<h3 id="sNHGP">Token配额配置</h3>
+### Token配额配置
 在AI路由管理界面中，为阿里云配置Token配额，点击策略进行配置，选择AI配额管理。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082325606-a8bed434-c49d-4daa-aba6-1a0e2bb8b7d8.png)
@@ -140,7 +132,7 @@ redis:
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741167559447-bd6ecc5b-9c07-4fdc-b006-526399707731.png)
 
-<h3 id="sbQ1W">Token限流配置</h3>
+### Token限流配置
 在AI路由管理界面中，为阿里云配置Token限流，点击策略进行配置。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082325606-a8bed434-c49d-4daa-aba6-1a0e2bb8b7d8.png)
@@ -166,7 +158,7 @@ redis:
 
 
 
-<h1 id="kcnFW">调试</h1>
+# 调试
 打开系统自带命令行，通过以下命令进行请求（如HTTP服务未部署在8080端口上，修改为对应端口即可）
 
 ```yaml
@@ -211,7 +203,7 @@ curl 'http://localhost:8080/v1/chat/completions' \
 
 
 
-<h1 id="b0l07">结果观测</h1>
+# 结果观测
 在AI监控面板界面，可以对AI请求进行观测。观测指标包括每秒输入输出Token数量、各供应商/模型Token使用数量、消费者使用Token情况等。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741191602518-6e6009a6-ee53-4450-9066-4a2dcc312bbf.png)

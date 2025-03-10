@@ -6,41 +6,28 @@ category: "article"
 keywords: ["Higress"]
 authors: "子釉"
 ---
-<h1 id="bskZG">场景描述</h1>
+# 场景描述
 AI网关支持精确缓存及语义缓存推理的结果上下文，对于常见的相似/重复的问题节省Token并减小时延，从而提升调用体验。
 
 AI网关通过在内存数据库中缓存 LLM 响应，并以网关插件的形式来改善推理的延迟和成本，在网关层自动缓存对应用户的历史对话，在后续对话中自动填充到上下文，从而实现大模型对上下文语义的理解。
 
-<h1 id="uEsio">部署Higress.AI</h1>
-本指南中基于docker部署，如您需要其他部署方式（k8s、helm等），请参照[https://higress.cn/docs/latest/user/quickstart/](https://higress.cn/docs/latest/user/quickstart/)。
+# 部署Higress.AI
+本指南中基于docker部署，如您需要其他部署方式（k8s、helm等），请参照[快速开始](https://higress.cn/docs/latest/user/quickstart/)。
 
 
 
 执行以下命令：
 
-`<font style="color:rgb(53, 56, 65);">curl -sS https://higress.cn/ai-gateway/install.sh | bash</font>`
+```bash
+curl -sS https://higress.cn/ai-gateway/install.sh | bash
+```
 
-<font style="color:rgb(53, 56, 65);">按照指引可以分别录入 Aliyun Dashscope或其他API-KEY；也可以键入回车后跳过，之后在控制台中修改。</font>
-
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
-
-
-
-本指南中基于docker部署，如您需要其他部署方式（k8s、helm等），请参照[https://higress.cn/docs/latest/user/quickstart/](https://higress.cn/docs/latest/user/quickstart/)。
-
-
-
-执行以下命令：
-
-`<font style="color:rgb(53, 56, 65);">curl -sS https://higress.cn/ai-gateway/install.sh | bash</font>`
-
-<font style="color:rgb(53, 56, 65);">按照指引可以分别录入 Aliyun Dashscope或其他API-KEY；也可以键入回车后跳过，之后在控制台中修改。</font>
+按照指引可以分别录入 Aliyun Dashscope或其他API-KEY；也可以键入回车后跳过，之后在控制台中修改。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
 
 
-
-<font style="color:rgb(53, 56, 65);">上述命令的默认的HTTP的服务端口为8080，HTTPS的服务端口为8443，控制台的服务端口为8001。如您需要使用其他端口，可使用 </font>`<font style="color:rgb(53, 56, 65);">wget https://higress.cn/ai-gateway/install.sh</font>`<font style="color:rgb(53, 56, 65);">下载部署脚本后，修改</font>_<font style="color:rgb(53, 56, 65);">DEFAULT_GATEWAY_HTTP_PORT</font>_<font style="color:rgb(53, 56, 65);">/</font>_<font style="color:rgb(53, 56, 65);">DEFAULT_GATEWAY_HTTPS_PORT</font>_<font style="color:rgb(53, 56, 65);">/</font>_<font style="color:rgb(53, 56, 65);">DEFAULT_CONSOLE_PORT</font>_<font style="color:rgb(53, 56, 65);">结果；然后是使用bash执行脚本。</font>
+上述命令的默认的HTTP的服务端口为8080，HTTPS的服务端口为8443，控制台的服务端口为8001。如您需要使用其他端口，可使用 `wget https://higress.cn/ai-gateway/install.sh`下载部署脚本后，修改*DEFAULT_GATEWAY_HTTP_PORT/DEFAULT_GATEWAY_HTTPS_PORT/DEFAULT_CONSOLE_PORT*结果；然后是使用bash执行脚本。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
 
@@ -52,7 +39,7 @@ AI网关通过在内存数据库中缓存 LLM 响应，并以网关插件的形�
 
 
 
-<h1 id="IH9ir">控制台配置</h1>
+# 控制台配置
 通过浏览器访问控制台界面[http://localhost:8001/](http://localhost:8001/)，首次登录需要配置管理员及密码。
 
 在AI服务提供者管理界面，可以配置已集成供应商的API-KEY。当前已集成的供应商有阿里云、DeepSeek、Azure OpenAI、OpenAI、豆包等。这里我们为阿里云配置API-KEY，如您在上一步中已经配置，则直接忽略。
@@ -61,7 +48,7 @@ AI网关通过在内存数据库中缓存 LLM 响应，并以网关插件的形�
 
 
 
-<h2 id="xhyn6">配置向量缓存服务</h2>
+## 配置向量缓存服务
 Higress语义缓存调用文本向量化服务进行embedding、调用向量数据库服务进行向量存储及检索；这里以阿里云百炼text-embedding-v3文本向量化服务、阿里云DashVector向量检索服务为例，需要在阿里云内容安全开通对应的服务及权限：[阿里云百炼Embedding](https://help.aliyun.com/zh/model-studio/user-guide/embedding)、[向量检索服务](https://help.aliyun.com/product/2510217.html)。其中，向量检索服务需要创建cluster及存储向量的collection；创建的collection配置的向量维度为1024（text-embedding-v3对应维度），度量距离为Cosine。
 
 在控制台服务来源界面中，创建服务来源。
@@ -84,7 +71,7 @@ Higress语义缓存调用文本向量化服务进行embedding、调用向量数�
 
 
 
-<h2 id="Wfadl">配置AI路由策略</h2>
+## 配置AI路由策略
 在AI路由管理界面中，为阿里云配置插件策略，选择AI缓存。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082325606-a8bed434-c49d-4daa-aba6-1a0e2bb8b7d8.png)
@@ -114,7 +101,7 @@ embedding:
 
 
 
-<h1 id="kcnFW">调试</h1>
+# 调试
 打开系统自带命令行，通过以下命令进行请求（如HTTP服务未部署在8080端口上，修改为对应端口即可）
 
 ```yaml
@@ -146,7 +133,7 @@ curl 'http://localhost:8080/v1/chat/completions' \
 
 
 
-<h1 id="b0l07">结果观测</h1>
+# 结果观测
 在AI监控面板界面，可以对AI请求进行观测。观测指标包括每秒输入输出Token数量、各供应商/模型Token使用数量等。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741077322520-55959b84-3f15-442c-a7fb-12cc333f1b0f.png)
