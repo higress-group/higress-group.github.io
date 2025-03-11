@@ -2,7 +2,7 @@
 title: "自建DeepSeek时代已来，联网搜索如何高效实现"
 description: "自建DeepSeek时代已来，联网搜索如何高效实现"
 date: "2025-02-26"
-category: "article"
+category: "case"
 keywords: ["Higress"]
 authors: "CH3CHO"
 ---
