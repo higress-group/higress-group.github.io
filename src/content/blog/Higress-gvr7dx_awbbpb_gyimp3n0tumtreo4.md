@@ -2,7 +2,7 @@
 title: "DeepSeek-R1来了，如何从OpenAI平滑迁移到DeepSeek"
 description: "DeepSeek-R1来了，如何从OpenAI平滑迁移到DeepSeek"
 date: "2025-01-22"
-category: "article"
+category: "case"
 keywords: ["Higress"]
 authors: "CH3CHO"
 ---
