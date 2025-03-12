@@ -87,6 +87,7 @@ custom-setting会遵循如下表格，根据`name`和协议来替换对应的字
 | healthCheckInterval | int    | 非必填             | 5000  | 健康检测的间隔时间，单位毫秒              |
 | healthCheckTimeout | int    | 非必填             | 5000  | 健康检测的超时时间，单位毫秒              |
 | healthCheckModel | string | 启用 failover 时必填 |      | 健康检测使用的模型                   |
+| failoverOnStatus | array of string | 非必填 | `["4.*", "5.*"]` | 需要进行 failover 的原始请求的状态码，支持正则表达式匹配 |
 
 `retryOnFailure` 的配置字段说明如下：
 
@@ -95,6 +96,7 @@ custom-setting会遵循如下表格，根据`name`和协议来替换对应的字
 | enabled | bool   | 非必填             | false | 是否启用失败请求重试  |
 | maxRetries | int    | 非必填             | 1     | 最大重试次数      |
 | retryTimeout | int    | 非必填             | 30000 | 重试超时时间，单位毫秒 |
+| retryOnStatus | array of string | 非必填 | `["4.*", "5.*"]` | 需要进行重试的原始请求的状态码，支持正则表达式匹配 |
 
 ### 提供商特有配置
 
