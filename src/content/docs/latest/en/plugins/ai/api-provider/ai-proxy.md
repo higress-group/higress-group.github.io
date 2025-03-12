@@ -38,6 +38,8 @@ Plugin execution priority: `100`
 | `protocol`     | string          | Optional   | -      | API contract provided by the plugin. Currently supports the following values: openai (default, uses OpenAI's interface contract), original (uses the raw interface contract of the target service provider)                                                                                                                          |
 | `context`      | object          | Optional   | -      | Configuration for AI conversation context information                                                                                                                                                                                                                                         |
 | `customSettings` | array of customSetting | Optional   | -      | Specifies overrides or fills parameters for AI requests                                                                                                                                                                                                                                 |
+| `failover`       | object | Optional   | -      | Configure failover strategy for apiToken. When an apiToken is unavailable, it will be removed from the apiToken list, and added back after the health check passes                                                                  |
+| `retryOnFailure` | object | Optional   | -      | Immediate retry when a request fails     |
 
 **Details for the `context` configuration fields:**
 
@@ -68,6 +70,27 @@ The `custom-setting` adheres to the following table, replacing the corresponding
 
 If raw mode is enabled, `custom-setting` will directly alter the JSON content using the input `name` and `value`, without any restrictions or modifications to the parameter names.
 For most protocols, `custom-setting` modifies or fills parameters at the root path of the JSON content. For the `qwen` protocol, ai-proxy configures under the `parameters` subpath. For the `gemini` protocol, it configures under the `generation_config` subpath.
+
+Configuration fields for `failover` are as follows:
+
+| Name               | Data Type   | Required            | Default Value | Description                         |
+|------------------|--------|-----------------|-------|-----------------------------|
+| enabled | bool   | Optional             | false | Whether to enable the apiToken failover mechanism |
+| failureThreshold | int    | Optional             | 3     | Threshold (number of times) of consecutive request failures to trigger failover  |
+| successThreshold | int    | Optional             | 1     | Success threshold (number of times) for health checks              |
+| healthCheckInterval | int    | Optional             | 5000  | Health check interval, in milliseconds              |
+| healthCheckTimeout | int    | Optional             | 5000  | Health check timeout, in milliseconds             |
+| healthCheckModel | string | Required when failover is enabled |      | Model used for health checks                  |
+| failoverOnStatus | array of string | Optional | `["4.*", "5.*"]` | Status codes of the original request that need to be failed over, supporting regular expression matching |
+
+Configuration fields for `retryOnFailure` are as follows:
+
+| Name               | Data Type   | Required            | Default Value | Description          |
+|------------------|--------|-----------------|-------|-------------|
+| enabled | bool   | Optional             | false | Whether to enable request retry on failure |
+| maxRetries | int    | Optional             | 1     | Maximum number of retries     |
+| retryTimeout | int    | Optional             | 30000 | Retry timeout, in milliseconds |
+| retryOnStatus | array of string | Optional | `["4.*", "5.*"]` | Status codes of the original request that need to be retried, supporting regular expression matching |
 
 ### Provider-Specific Configurations
 
@@ -132,11 +155,11 @@ For Groq, the corresponding `type` is `groq`. It has no unique configuration fie
 
 For ERNIE Bot, the corresponding `type` is `baidu`. It has no unique configuration fields.
 
-### 360 Brain
+#### 360 Brain
 
 For 360 Brain, the corresponding `type` is `ai360`. It has no unique configuration fields.
 
-### Mistral
+#### Mistral
 
 For Mistral, the corresponding `type` is `mistral`. It has no unique configuration fields.
 
@@ -200,7 +223,7 @@ For Gemini, the corresponding `type` is `gemini`. Its unique configuration field
 |---------------------|----------|----------------------|---------------|---------------------------------------------------------------------------------------------------------|
 | `geminiSafetySetting` | map of string   | Optional             | -             | Gemini AI content filtering and safety level settings. Refer to [Safety settings](https://ai.google.dev/gemini-api/docs/safety-settings). |
 
-### DeepL
+#### DeepL
 
 For DeepL, the corresponding `type` is `deepl`. Its unique configuration field is:
 
