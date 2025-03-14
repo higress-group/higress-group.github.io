@@ -12,13 +12,13 @@ import Pagination from "@astrojs/starlight/components/Pagination.astro";
 
 const t = useTranslations(Astro);
 
-export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
-  }));
-}
+// export async function getStaticPaths() {
+//   const posts = await getCollection("blog");
+//   return posts.map((post) => ({
+//     params: { slug: post.slug },
+//     props: post,
+//   }));
+// }
 
 const blogArticle = {
   article: "blog.article.technical",

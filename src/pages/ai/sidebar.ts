@@ -21,3 +21,17 @@ export const sidebarData: SidebarEntry[] = [
   }
 ];
 
+export const sidebarDataEn: SidebarEntry[] = [
+  {
+    type: 'group',
+    label: 'AI',
+    entries: [
+      {
+        type: 'group',
+        label: 'Scene Guide',
+        fileName: 'scene-guide',
+        entries: []
+      }
+    ]
+  }
+];
