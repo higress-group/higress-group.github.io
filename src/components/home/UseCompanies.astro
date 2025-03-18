@@ -3,6 +3,9 @@ import { Image } from "astro:assets";
 import { useTranslations } from "@i18n/util";
 const t = useTranslations(Astro);
 const companiesLogosTop = [
+  // 第一张图片用于解决百度搜索引擎的问题
+  "https://img.alicdn.com/imgextra/i1/O1CN01Q9UWyF23bY1R0U0KE_!!6000000007274-2-tps-2560-1440.png",
+  // 以下为各公司logo
   "https://img.alicdn.com/imgextra/i1/O1CN01TleQq128FAP8POtL5_!!6000000007902-2-tps-241-42.png",
   "https://img.alicdn.com/imgextra/i4/O1CN01IOIk0s1bWgJ05f4HF_!!6000000003473-2-tps-1200-699.png",
   "https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png",
@@ -50,8 +53,8 @@ const companiesLogosTop = [
               <Image
                 src={logo}
                 alt="log"
-                width="112"
-                height="96"
+                width={index? "112": '1'}
+                height={index? "96": "1"}
                 class="object-contain opacity-70"
               />
             </li>
@@ -65,8 +68,8 @@ const companiesLogosTop = [
               <Image
                 src={logo}
                 alt="log"
-                width="112"
-                height="96"
+                width={index? "112": '1'}
+                height={index? "96": "1"}
                 class="object-contain opacity-70"
               />
             </li>

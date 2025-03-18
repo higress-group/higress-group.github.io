@@ -296,6 +296,7 @@ export default {
 	'blog.article.case.best.practices':'Best Practices',
 	'blog.article.release.time':'Release Time',
 	'blog.article.ecosystem.articles':'Ecological Articles',
+	'blog.article.event.articles':'Community Activities',
 	'page.blog.card.website':'Spring Cloud Alibaba Blog',
 	'page.blog.news.all':'All News',
 	'page.blog.news.personnel.promotion':'Personnel Promotion',
