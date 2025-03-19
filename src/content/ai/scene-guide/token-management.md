@@ -1,6 +1,6 @@
 ---
-title: "Token管控"
-description: "Token管控场景开源运行流程"
+title: "令牌限流"
+description: "令牌限流开源运行流程"
 date: "2025-03-03"
 category: "article"
 keywords: ["Higress"]
