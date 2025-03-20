@@ -1,5 +1,5 @@
 ---
-title: "Semantic Caching
+title: "Semantic Caching"
 description: "Open-source workflow for semantic caching"
 date: "2025-03-03"
 category: "article"
