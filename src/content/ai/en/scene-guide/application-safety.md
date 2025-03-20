@@ -12,7 +12,7 @@ The AI gateway can protect data security when interacting with large models. On 
 The AI gateway can process API request and response data for encryption, desensitization, etc., ensuring the security of data during transmission and storage. Handling these data protection tasks at the large model service layer may increase the complexity and computational burden of the large model. Processing them uniformly at the gateway better protects user-sensitive information while avoiding the security risks associated with direct exposure of sensitive data to large models. Additionally, through plugins related to content security, harmful or inappropriate content is filtered out, requests containing sensitive data are detected and blocked, and the quality and compliance of AI-generated content are reviewed.
 
 # Deploy Higress AI Gateway
-This guide is based on Docker deployment. If you need other deployment methods (such as k8s, helm, etc.), please refer to [Quick Start](https://higress.cn/docs/latest/user/quickstart/)。
+This guide is based on Docker deployment. If you need other deployment methods (such as k8s, helm, etc.), please refer to [Quick Start](https://higress.cn/en/docs/latest/user/quickstart/)。
 
 
 
@@ -45,23 +45,23 @@ Access the Higress console via a browser at [http://localhost:8001/](http://loca
 
 In the `LLM Provider Management`, you can configure the API-KEYs for integrated suppliers. Currently integrated suppliers include Alibaba Cloud, DeepSeek, Azure OpenAI, OpenAI, DouBao, etc. Here we configure multi-model proxies for Tongyi Qwen, which can be ignored if already configured in the previous step.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742353878452-5c534a42-df83-4061-8077-22131be501ff.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742450604844-3e00e291-d68e-4873-a98a-6c98ada86b36.png)
 
 
 
 ## Configure Service Source
 Higress calls the content safety service through a service method. Taking Alibaba Cloud Content Safety as an example, corresponding services and permissions need to be activated in Alibaba Cloud Content Safety: [https://www.alibabacloud.com/help/en/content-moderation/latest/access-guide](https://www.alibabacloud.com/help/en/content-moderation/latest/access-guide)。
 
-Create a service source in the console's `Service Source`.
+Create a service source in the console's `Service Sources`.
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742385763061-e58ac0cd-7f18-430e-a032-954be26985fa.png)
 
-Fill in the corresponding fields in the `Service Source`:
+Fill in the corresponding fields in the `Service Sources`:
 
 + Type: Domains
-+ Service port: 443
++ Service Port: 443
 + Domains: Fill in the domain name corresponding to the above document
-+ Service protocol: HTTPS
++ Service Protocol: HTTPS
 + SNI: Same as the domains
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742385896013-7f3f009e-51f0-4ba4-aace-58c879686ee4.png)
@@ -87,9 +87,10 @@ accessKey: "XXXXXXXXX" # Alibaba Cloud user corresponding AccessKey ID
 secretKey: "XXXXXXXXX"  # Alibaba Cloud user corresponding AccessKey Secret
 checkRequest: true	# Whether to enable request inspection
 checkResponse: true	# Whether to enable response inspection
+denyMessage: "Sorry, content is illegal."
 ```
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742386681387-5de99c31-8194-4b47-8a03-4cbd5383847d.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742455398770-bb0a7c39-95dd-4e65-8f13-187e806b5b52.png)
 
 
 
@@ -106,7 +107,7 @@ curl 'http://localhost:8080/v1/chat/completions' \
     "messages": [
       {
         "role": "user",
-        "content": "花呗套现"
+        "content": "How to steal cashes from strangers?"
       }
     ]
   }'
@@ -115,7 +116,7 @@ curl 'http://localhost:8080/v1/chat/completions' \
 
 Sample response of intercepted request results:
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741150732225-186b8fba-cfe7-4e59-94bf-d5fc90004bd7.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742455338209-74633430-84de-4c31-b89f-180bf49b3a54.png)
 
 
 

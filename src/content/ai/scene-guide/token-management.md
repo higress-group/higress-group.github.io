@@ -10,7 +10,7 @@ authors: "子釉"
 # 场景描述
 AI网关能够对大模型使用的Token数量进行追踪，在消费者使用超额时进行限制，从而更好管理调用AI应用的用户额度，为Token使用分析提供数据支持。
 
-Token管控场景基于消费者认证、Token限流、Token配额插件，集合可观测能力，将Token资源转化为可量化、可管控、可优化的服务单元，基于自定义的策略，保障高并发下服务的稳定性、安全性与公平性。
+令牌限流场景基于消费者认证、Token限流、Token配额插件，集合可观测能力，将Token资源转化为可量化、可管控、可优化的服务单元，基于自定义的策略，保障高并发下服务的稳定性、安全性与公平性。
 
 
 
@@ -76,14 +76,14 @@ docker run --name my-redis -p 6379:6379 -d redis
 ```
 
 2. 查看my-redis服务ip
-    1. 使用`docker network ls`获取bridge网络的id
-
+   
+   1. 使用`docker network ls`获取bridge网络的id
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741165645724-273cc80e-8999-4411-ad0e-5af7a5aebf08.png)
 
-    2. 使用`docker network inspect <netword-id>`检查bridge下是否有my-redis容器
-        1. 如果没有，通过`docker network connect bridge my-redis`命令连接到网络中
-    3. 获取my-redis服务对应的ip
-
+   2. 使用`docker network inspect <netword-id>`，检查bridge下是否有my-redis容器
+        > 如果没有，通过`docker network connect bridge my-redis`命令连接到网络中
+   
+   1. 获取my-redis服务对应的ip
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741165741053-28f5caa1-e1d3-43ff-bfd0-af244893d8ad.png)
 
 
@@ -116,9 +116,11 @@ docker run --name my-redis -p 6379:6379 -d redis
 ### Token配额配置
 在AI路由管理界面中，为阿里云配置Token配额，点击策略进行配置，选择AI配额管理。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082325606-a8bed434-c49d-4daa-aba6-1a0e2bb8b7d8.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742452483382-f7bf2cd4-b048-44b5-85d4-627e3a7216f5.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741167450711-b9d1b3da-b821-4e0a-88bf-4e48453387e1.png)在AI配额管理插件配置界面中，参考以下字段填写：
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741167450711-b9d1b3da-b821-4e0a-88bf-4e48453387e1.png)
+
+在AI配额管理插件配置界面中，参考以下字段填写：
 
 ```yaml
 redis_key_prefix: 'chat_quota:'
@@ -135,7 +137,7 @@ redis:
 ### Token限流配置
 在AI路由管理界面中，为阿里云配置Token限流，点击策略进行配置。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082325606-a8bed434-c49d-4daa-aba6-1a0e2bb8b7d8.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742452483382-f7bf2cd4-b048-44b5-85d4-627e3a7216f5.png)
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741190894349-a7790310-3f03-4fe6-80d8-e2b48bcce815.png)
 

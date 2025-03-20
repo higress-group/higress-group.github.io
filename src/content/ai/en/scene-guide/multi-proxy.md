@@ -12,7 +12,7 @@ The AI gateway can forward external calls to different large models through a un
 During the evaluation of large models, the multi-model proxy function can construct a unified dataset, forwarding model requests to backend models to verify the effectiveness of the models. Combined with observability plugins, it can clearly track the chains of different models.
 
 # Deploy Higress AI Gateway
-This guide is based on Docker deployment. If you need other deployment methods (such as k8s, helm, etc.), please refer to [Quick Start](https://higress.cn/docs/latest/user/quickstart/)。
+This guide is based on Docker deployment. If you need other deployment methods (such as k8s, helm, etc.), please refer to [Quick Start](https://higress.cn/en/docs/latest/user/quickstart/)。
 
 
 
