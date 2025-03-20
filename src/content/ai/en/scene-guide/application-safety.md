@@ -6,7 +6,7 @@ category: "article"
 keywords: ["Higress"]
 authors: "子釉"
 ---
-# 场景描述
+# Scene Description
 The AI gateway can protect data security when interacting with large models. On one hand, it protects the privacy of data input to external models, and on the other hand, it filters the data output to users.
 
 The AI gateway can process API request and response data for encryption, desensitization, etc., ensuring the security of data during transmission and storage. Handling these data protection tasks at the large model service layer may increase the complexity and computational burden of the large model. Processing them uniformly at the gateway better protects user-sensitive information while avoiding the security risks associated with direct exposure of sensitive data to large models. Additionally, through plugins related to content security, harmful or inappropriate content is filtered out, requests containing sensitive data are detected and blocked, and the quality and compliance of AI-generated content are reviewed.

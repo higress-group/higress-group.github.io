@@ -1,15 +1,15 @@
 ---
-title: "语义缓存"
-description: "语义缓存场景开源运行流程"
+title: "Semantic Caching
+description: "Open-source workflow for semantic caching"
 date: "2025-03-03"
 category: "article"
 keywords: ["Higress"]
 authors: "子釉"
 ---
 # 场景描述
-AI网关支持精确缓存及语义缓存推理的结果上下文，对于常见的相似/重复的问题节省Token并减小时延，从而提升调用体验。
+The AI gateway supports precise caching and semantic caching of inference result contexts. For common similar or repeated questions, it saves tokens and reduces latency, thereby enhancing the calling experience.
 
-AI网关通过在内存数据库中缓存 LLM 响应，并以网关插件的形式来改善推理的延迟和成本，在网关层自动缓存对应用户的历史对话，在后续对话中自动填充到上下文，从而实现大模型对上下文语义的理解。
+The AI gateway caches LLM responses in an in-memory database and improves inference latency and cost in the form of a gateway plugin. It automatically caches the historical conversations of corresponding users at the gateway level and automatically fills them into the context in subsequent conversations, thus enabling large models to understand the semantics of the context.
 
 # Deploy Higress AI Gateway
 This guide is based on Docker deployment. If you need other deployment methods (such as k8s, helm, etc.), please refer to [Quick Start](https://higress.cn/docs/latest/user/quickstart/)。
@@ -50,15 +50,13 @@ In the `LLM Provider Management`, you can configure the API-KEYs for integrated 
 
 
 ## 配置向量缓存服务
-Higress语义缓存调用文本向量化服务进行embedding、调用向量数据库服务进行向量存储及检索；这里以阿里云百炼text-embedding-v3文本向量化服务、阿里云DashVector向量检索服务为例，需要在阿里云内容安全开通对应的服务及权限：[阿里云百炼Embedding](https://help.aliyun.com/zh/model-studio/user-guide/embedding)、[向量检索服务](https://help.aliyun.com/product/2510217.html)。其中，向量检索服务需要创建cluster及存储向量的collection；创建的collection配置的向量维度为1024（text-embedding-v3对应维度），度量距离为Cosine。
+Semantic caching in Higress calls the text vectorization service for embedding and the vector database service for vector storage and retrieval. Here, we use Alibaba Cloud BaiLian text-embedding-v3 text embedding service and Alibaba Cloud DashVector vector search service as examples. You need to activate the corresponding services and permissions in Alibaba Cloud console:[Alibaba Cloud BaiLian text-embedding](https://help.aliyun.com/zh/model-studio/user-guide/embedding), [Alibaba Cloud DashVector](https://help.aliyun.com/product/2510217.html)。Among these, the DashVector requires creating a cluster and a collection for storing embedded vectors. The configuration of the created collection specifies a vector dimension of 1024 (corresponding to text-embedding-v3) and a distance metric of Cosine.
 
-在控制台服务来源界面中，创建服务来源。
+Create a service source in the console's `Service Source`.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082407459-06808672-bfa1-4423-bf3f-25b4ad46cfb5.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742385763061-e58ac0cd-7f18-430e-a032-954be26985fa.png)
 
-在服务来源的界面，填写对应的字段：
-
-文本向量化服务：
+Fill in the corresponding fields in the Service Source:
 
 + 类型：DNS域名
 + 服务端口：443
@@ -134,8 +132,8 @@ curl 'http://localhost:8080/v1/chat/completions' \
 
 
 
-# 结果观测
-在AI监控面板界面，可以对AI请求进行观测。观测指标包括每秒输入输出Token数量、各供应商/模型Token使用数量等。
+# Observability
+In the `AI Dashboard`, you can observe AI requests. Observability metrics include the number of input/output tokens per second, token usage by each provider/model, etc.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741077322520-55959b84-3f15-442c-a7fb-12cc333f1b0f.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742354552167-7efc3978-1942-4935-83ce-fcf3a229e859.png)
 
