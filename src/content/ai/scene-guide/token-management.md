@@ -116,9 +116,11 @@ docker run --name my-redis -p 6379:6379 -d redis
 ### Token配额配置
 在AI路由管理界面中，为阿里云配置Token配额，点击策略进行配置，选择AI配额管理。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082325606-a8bed434-c49d-4daa-aba6-1a0e2bb8b7d8.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742452483382-f7bf2cd4-b048-44b5-85d4-627e3a7216f5.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741167450711-b9d1b3da-b821-4e0a-88bf-4e48453387e1.png)在AI配额管理插件配置界面中，参考以下字段填写：
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741167450711-b9d1b3da-b821-4e0a-88bf-4e48453387e1.png)
+
+在AI配额管理插件配置界面中，参考以下字段填写：
 
 ```yaml
 redis_key_prefix: 'chat_quota:'
@@ -135,7 +137,7 @@ redis:
 ### Token限流配置
 在AI路由管理界面中，为阿里云配置Token限流，点击策略进行配置。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082325606-a8bed434-c49d-4daa-aba6-1a0e2bb8b7d8.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742452483382-f7bf2cd4-b048-44b5-85d4-627e3a7216f5.png)
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741190894349-a7790310-3f03-4fe6-80d8-e2b48bcce815.png)
 

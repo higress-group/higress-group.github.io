@@ -59,9 +59,9 @@ Create a service source in the console's `Service Sources`.
 Fill in the corresponding fields in the `Service Sources`:
 
 + Type: Domains
-+ Service port: 443
++ Service Port: 443
 + Domains: Fill in the domain name corresponding to the above document
-+ Service protocol: HTTPS
++ Service Protocol: HTTPS
 + SNI: Same as the domains
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742385896013-7f3f009e-51f0-4ba4-aace-58c879686ee4.png)

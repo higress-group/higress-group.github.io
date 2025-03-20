@@ -50,7 +50,7 @@ In the `LLM Provider Management`, you can configure the API-KEYs for integrated 
 
 
 ## Configure Vector Cache Service
-Semantic caching in Higress calls the text vectorization service for embedding and the vector database service for vector storage and retrieval. Here, we use Alibaba Cloud BaiLian text-embedding-v3 text embedding service and Alibaba Cloud DashVector vector search service as examples. You need to activate the corresponding services and permissions in Alibaba Cloud console:[Alibaba Cloud BaiLian text-embedding](https://www.alibabacloud.com/help/en/model-studio/user-guide/embedding), [Alibaba Cloud DashVector](https://www.alibabacloud.com/help/en/vrs/latest/opening-service)。Among these, the DashVector requires creating a cluster and a collection for storing embedded vectors. The configuration of the created collection specifies a vector dimension of 1024 (corresponding to text-embedding-v3) and a distance metric of Cosine.
+Semantic caching in Higress calls the text embedding service for embedding and the vector database service for vector storage and retrieval. Here, we use Alibaba Cloud BaiLian text-embedding-v3 text embedding service and Alibaba Cloud DashVector vector search service as examples. You need to activate the corresponding services and permissions in Alibaba Cloud console:[Alibaba Cloud BaiLian text-embedding](https://www.alibabacloud.com/help/en/model-studio/user-guide/embedding), [Alibaba Cloud DashVector](https://www.alibabacloud.com/help/en/vrs/latest/opening-service). Among these, the DashVector requires creating a cluster and a collection for storing embedded vectors. The configuration of the created collection specifies a vector dimension of 1024 (corresponding to text-embedding-v3) and a distance metric of Cosine.
 
 Create a service source in the console's `Service Sources`.
 
@@ -59,11 +59,11 @@ Create a service source in the console's `Service Sources`.
 Fill in the corresponding fields in the `Service Sources`:
 
 + Type: Domains
-+ Service port: 443
++ Service Port: 443
 + Domains: 
     - Alibaba Cloud text-embedding-v3 service: dashscope.aliyuncs.com
-    - Alibaba Cloud DashVector service: Endpoint address of the corresponding cluster, viewed in DashVector Console - Cluster - Collection
-+ Service protocol: HTTPS
+    - Alibaba Cloud DashVector service: Endpoint address of the corresponding cluster, viewed in *DashVector Console - Cluster - Collection*
++ Service Protocol: HTTPS
 + SNI: Same as the domains
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742450867742-ede6faa3-cb64-4c59-81f5-361443facfa3.png)
