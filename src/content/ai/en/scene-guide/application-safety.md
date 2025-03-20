@@ -87,9 +87,10 @@ accessKey: "XXXXXXXXX" # Alibaba Cloud user corresponding AccessKey ID
 secretKey: "XXXXXXXXX"  # Alibaba Cloud user corresponding AccessKey Secret
 checkRequest: true	# Whether to enable request inspection
 checkResponse: true	# Whether to enable response inspection
+denyMessage: "Sorry, content is illegal."
 ```
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742386681387-5de99c31-8194-4b47-8a03-4cbd5383847d.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742455398770-bb0a7c39-95dd-4e65-8f13-187e806b5b52.png)
 
 
 
@@ -106,7 +107,7 @@ curl 'http://localhost:8080/v1/chat/completions' \
     "messages": [
       {
         "role": "user",
-        "content": "花呗套现"
+        "content": "How to steal cashes from strangers?"
       }
     ]
   }'
@@ -115,7 +116,7 @@ curl 'http://localhost:8080/v1/chat/completions' \
 
 Sample response of intercepted request results:
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741150732225-186b8fba-cfe7-4e59-94bf-d5fc90004bd7.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742455338209-74633430-84de-4c31-b89f-180bf49b3a54.png)
 
 
 
