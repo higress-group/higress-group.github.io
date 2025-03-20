@@ -56,7 +56,7 @@ Create a service source in the console's `Service Source`.
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742385763061-e58ac0cd-7f18-430e-a032-954be26985fa.png)
 
-Fill in the corresponding fields in the Service Source:
+Fill in the corresponding fields in the `Service Source`:
 
 + Type: Domains
 + Service port: 443

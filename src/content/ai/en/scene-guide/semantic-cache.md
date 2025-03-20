@@ -6,7 +6,7 @@ category: "article"
 keywords: ["Higress"]
 authors: "子釉"
 ---
-# 场景描述
+# Scene Description
 The AI gateway supports precise caching and semantic caching of inference result contexts. For common similar or repeated questions, it saves tokens and reduces latency, thereby enhancing the calling experience.
 
 The AI gateway caches LLM responses in an in-memory database and improves inference latency and cost in the form of a gateway plugin. It automatically caches the historical conversations of corresponding users at the gateway level and automatically fills them into the context in subsequent conversations, thus enabling large models to understand the semantics of the context.
@@ -49,14 +49,14 @@ In the `LLM Provider Management`, you can configure the API-KEYs for integrated 
 
 
 
-## 配置向量缓存服务
+## Configure Vector Cache Service
 Semantic caching in Higress calls the text vectorization service for embedding and the vector database service for vector storage and retrieval. Here, we use Alibaba Cloud BaiLian text-embedding-v3 text embedding service and Alibaba Cloud DashVector vector search service as examples. You need to activate the corresponding services and permissions in Alibaba Cloud console:[Alibaba Cloud BaiLian text-embedding](https://help.aliyun.com/zh/model-studio/user-guide/embedding), [Alibaba Cloud DashVector](https://help.aliyun.com/product/2510217.html)。Among these, the DashVector requires creating a cluster and a collection for storing embedded vectors. The configuration of the created collection specifies a vector dimension of 1024 (corresponding to text-embedding-v3) and a distance metric of Cosine.
 
 Create a service source in the console's `Service Source`.
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742385763061-e58ac0cd-7f18-430e-a032-954be26985fa.png)
 
-Fill in the corresponding fields in the Service Source:
+Fill in the corresponding fields in the `Service Source`:
 
 + Type: Domains
 + Service port: 443
