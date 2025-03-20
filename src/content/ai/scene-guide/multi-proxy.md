@@ -7,7 +7,7 @@ keywords: ["Higress"]
 authors: "子釉"
 ---
 # 场景描述
-AI网关能够将外部调用不同大模型的请求，通过统一的调用方式转发到内部对应的大模型上，使得后端模型调度更加灵活；Higress.ai支持常用的100+个模型的统一协议转换，并支持模型级Fallback。
+AI网关能够将外部调用不同大模型的请求，通过统一的调用方式转发到内部对应的大模型上，使得后端模型调度更加灵活；Higress AI网关支持常用的100+个模型的统一协议转换，并支持模型级Fallback。
 
 在大模型评测过程中，多模型代理功能可以构造统一数据集，将模型请求转发到后端模型，验证模型的效果；结合可观测插件，能够清晰地追踪不同模型的链路。
 
@@ -43,7 +43,7 @@ curl -sS https://higress.cn/ai-gateway/install.sh | bash
 # 控制台配置
 通过浏览器访问控制台界面[http://localhost:8001/](http://localhost:8001/)，首次登录需要配置管理员及密码。
 
-在AI服务提供者管理界面，可以配置已集成供应商的API-KEY。当前已集成的供应商有阿里云、DeepSeek、Azure OpenAI、OpenAI、豆包等。这里我们配置上阿里云及DeepSeek的多模型代理。
+在AI服务提供者管理界面，可以配置已集成供应商的API-KEY。当前已集成的供应商有阿里云、DeepSeek、Azure OpenAI、OpenAI、豆包等。这里我们配置上通义千问及DeepSeek的多模型代理。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741072990161-d335d2e4-e728-4bae-9ef1-541f400161df.png)
 
@@ -51,7 +51,7 @@ curl -sS https://higress.cn/ai-gateway/install.sh | bash
 
 
 
-在AI路由管理中，为DeepSeek路由进行降级配置；当请求目标服务失败（如限流、访问失败等）时，降级到阿里云deepseek-turbo模型。
+在AI路由管理中，为DeepSeek路由进行降级配置；当请求目标服务失败（如限流、访问失败等）时，降级到阿里云qwen-turbo模型。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741072959247-9398700a-4090-4c25-bb12-b816ad91a879.png)
 

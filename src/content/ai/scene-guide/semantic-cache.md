@@ -49,15 +49,13 @@ curl -sS https://higress.cn/ai-gateway/install.sh | bash
 
 
 ## 配置向量缓存服务
-Higress语义缓存调用文本向量化服务进行embedding、调用向量数据库服务进行向量存储及检索；这里以阿里云百炼text-embedding-v3文本向量化服务、阿里云DashVector向量检索服务为例，需要在阿里云内容安全开通对应的服务及权限：[阿里云百炼Embedding](https://help.aliyun.com/zh/model-studio/user-guide/embedding)、[向量检索服务](https://help.aliyun.com/product/2510217.html)。其中，向量检索服务需要创建cluster及存储向量的collection；创建的collection配置的向量维度为1024（text-embedding-v3对应维度），度量距离为Cosine。
+Higress语义缓存调用文本向量化服务进行embedding、调用向量数据库服务进行向量存储及检索；这里以阿里云百炼text-embedding-v3文本向量化服务、阿里云DashVector向量检索服务为例，需要在阿里云控制台开通对应的服务及权限：[阿里云百炼Embedding](https://help.aliyun.com/zh/model-studio/user-guide/embedding)、[向量检索服务](https://help.aliyun.com/product/2510217.html)。其中，向量检索服务需要创建cluster及存储向量的collection；创建的collection配置的向量维度为1024（text-embedding-v3对应维度），度量距离为Cosine。
 
 在控制台服务来源界面中，创建服务来源。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082407459-06808672-bfa1-4423-bf3f-25b4ad46cfb5.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742385778415-b004e604-a95c-4b4f-b15f-74f9a6336691.png)
 
 在服务来源的界面，填写对应的字段：
-
-文本向量化服务：
 
 + 类型：DNS域名
 + 服务端口：443

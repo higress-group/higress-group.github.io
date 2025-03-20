@@ -1,66 +1,65 @@
 ---
-title: "多模型代理"
-description: "多模型代理场景开源运行流程"
+title: "Multi-Model Proxy"
+description: "Open-source workflow for multi-model proxy"
 date: "2025-03-03"
 category: "article"
 keywords: ["Higress"]
 authors: "子釉"
 ---
-# 场景描述
-AI网关能够将外部调用不同大模型的请求，通过统一的调用方式转发到内部对应的大模型上，使得后端模型调度更加灵活；Higress.ai支持常用的100+个模型的统一协议转换，并支持模型级Fallback。
+# Scene Description
+The AI gateway can forward external calls to different large models through a unified invocation method to the corresponding large models internally, making backend model scheduling more flexible. Higress AI Gateway supports the unified protocol conversion of over 100 commonly used models and also supports model-level fallback.
 
-在大模型评测过程中，多模型代理功能可以构造统一数据集，将模型请求转发到后端模型，验证模型的效果；结合可观测插件，能够清晰地追踪不同模型的链路。
+During the evaluation of large models, the multi-model proxy function can construct a unified dataset, forwarding model requests to backend models to verify the effectiveness of the models. Combined with observability plugins, it can clearly track the chains of different models.
 
-# 部署Higress.AI
-本指南中基于docker部署，如您需要其他部署方式（k8s、helm等），请参照[快速开始](https://higress.cn/docs/latest/user/quickstart/)。
+# Deploy Higress AI Gateway
+This guide is based on Docker deployment. If you need other deployment methods (such as k8s, helm, etc.), please refer to [Quick Start](https://higress.cn/docs/latest/user/quickstart/)。
 
 
 
-执行以下命令：
+Execute the following command:
 
 ```bash
 curl -sS https://higress.cn/ai-gateway/install.sh | bash
 ```
 
-按照指引可以分别录入 Aliyun Dashscope或其他API-KEY；也可以键入回车后跳过，之后在控制台中修改。
+Follow the prompts to enter the Aliyun Dashscope or other API-KEY; you can also press Enter to skip and modify it later in the console. You can also press `Enter` to skip and modify it later in the console.
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
 
 
 
-上述命令的默认的HTTP的服务端口为8080，HTTPS的服务端口为8443，控制台的服务端口为8001。如您需要使用其他端口，可使用 `wget https://higress.cn/ai-gateway/install.sh`下载部署脚本后，修改*DEFAULT_GATEWAY_HTTP_PORT/DEFAULT_GATEWAY_HTTPS_PORT/DEFAULT_CONSOLE_PORT*结果；然后是使用bash执行脚本。
+The default HTTP service port is 8080, the HTTPS service port is 8443, and the console service port is 8001. If you need to use other ports, download the deployment script using `wget https://higress.cn/ai-gateway/install.sh`, modify DEFAULT_GATEWAY_HTTP_PORT/DEFAULT_GATEWAY_HTTPS_PORT/DEFAULT_CONSOLE_PORT, and then execute the script using bash.
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
 
 
 
-部署完成后，会出现以下界面：
+After the deployment is completed, the following command display will appear.
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063935811-ddf2eef7-967d-49a8-92e6-f99613b7dbf7.png)
 
 
 
-# 控制台配置
-通过浏览器访问控制台界面[http://localhost:8001/](http://localhost:8001/)，首次登录需要配置管理员及密码。
+# Console Configuration
+Access the Higress console via a browser at [http://localhost:8001/](http://localhost:8001/). The first login requires setting up an administrator account and password.
 
-在AI服务提供者管理界面，可以配置已集成供应商的API-KEY。当前已集成的供应商有阿里云、DeepSeek、Azure OpenAI、OpenAI、豆包等。这里我们配置上阿里云及DeepSeek的多模型代理。
+In the `LLM Provider Management`, you can configure the API-KEYs for integrated suppliers. Currently integrated suppliers include Alibaba Cloud, DeepSeek, Azure OpenAI, OpenAI, DouBao, etc. Here we configure multi-model proxies for Tongyi Qwen and DeepSeek.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741072990161-d335d2e4-e728-4bae-9ef1-541f400161df.png)
-
-
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742353878452-5c534a42-df83-4061-8077-22131be501ff.png)
 
 
 
-在AI路由管理中，为DeepSeek路由进行降级配置；当请求目标服务失败（如限流、访问失败等）时，降级到阿里云deepseek-turbo模型。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741072959247-9398700a-4090-4c25-bb12-b816ad91a879.png)
+In the `AI Route Config`, configure the fallback settings for the DeepSeek route. When the request to the target service fails (e.g., due to rate limiting or access failure), it will fallback to the Alibaba Cloud qwen-turbo model.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741073269504-fcac5d3c-8e41-4977-a25e-4fb0f9d19fe7.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742353967779-6091c4f0-1a72-46af-8a0d-494564c398f8.png)
+
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742354050172-98109fda-ae0c-4993-ad2e-d0f1fe6ecaaa.png)
 
 
 
-# 调试
-打开系统自带命令行，通过以下命令进行请求（如HTTP服务未部署在8080端口上，修改为对应端口即可）
+# Debugging
+Open the system's built-in command line and send a request using the following command (if the HTTP service is not deployed on port 8080, modify it to the corresponding port):
 
 ```yaml
 curl 'http://localhost:8080/v1/chat/completions' \
@@ -70,21 +69,21 @@ curl 'http://localhost:8080/v1/chat/completions' \
     "messages": [
       {
         "role": "user",
-        "content": "你是谁"
+        "content": "Who are you?"
       }
     ]
   }'
 
 ```
 
-请求结果示例：
+Sample response:
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741074397724-5d96c60b-a61c-43cc-8eac-a1b9bebc244f.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742354509233-53a38717-3b3d-49cb-9c4e-7d9b6ec5c77d.png)
 
 
 
-# 结果观测
-在AI监控面板界面，可以对AI请求进行观测。观测指标包括每秒输入输出Token数量、各供应商/模型Token使用数量等。
+# Observability
+In the `AI Dashboard`, you can observe AI requests. Observability metrics include the number of input/output tokens per second, token usage by each provider/model, etc.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741077322520-55959b84-3f15-442c-a7fb-12cc333f1b0f.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742354552167-7efc3978-1942-4935-83ce-fcf3a229e859.png)
 
