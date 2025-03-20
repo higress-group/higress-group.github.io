@@ -15,7 +15,7 @@ The token management scenario is based on consumer authentication, token rate li
 
 
 # Deploy Higress AI Gateway
-This guide is based on Docker deployment. If you need other deployment methods (such as k8s, helm, etc.), please refer to [Quick Start](https://higress.cn/docs/latest/user/quickstart/)。
+This guide is based on Docker deployment. If you need other deployment methods (such as k8s, helm, etc.), please refer to [Quick Start](https://higress.cn/en/docs/latest/user/quickstart/)。
 
 
 
@@ -48,7 +48,7 @@ Access the Higress console via a browser at [http://localhost:8001/](http://loca
 
 In the `LLM Provider Management`, you can configure the API-KEYs for integrated suppliers. Currently integrated suppliers include Alibaba Cloud, DeepSeek, Azure OpenAI, OpenAI, DouBao, etc. Here we configure multi-model proxies for Tongyi Qwen, which can be ignored if already configured in the previous step.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742353878452-5c534a42-df83-4061-8077-22131be501ff.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742450604844-3e00e291-d68e-4873-a98a-6c98ada86b36.png)
 
 
 
@@ -90,7 +90,7 @@ docker run --name my-redis -p 6379:6379 -d redis
 
 
 ### Configure Redis Service Source
-Create a service source in the console's `Service Source`. Fill in the corresponding fields in the `Service Source`:
+Create a service source in the console's `Service Sources`. Fill in the corresponding fields in the `Service Sources`:
 
 + Type: Domains
 + Service port: 443

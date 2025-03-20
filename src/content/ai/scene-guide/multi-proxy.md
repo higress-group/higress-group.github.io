@@ -53,7 +53,7 @@ curl -sS https://higress.cn/ai-gateway/install.sh | bash
 
 在AI路由管理中，为DeepSeek路由进行降级配置；当请求目标服务失败（如限流、访问失败等）时，降级到阿里云qwen-turbo模型。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741072959247-9398700a-4090-4c25-bb12-b816ad91a879.png)
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742353981781-486b5569-9e37-4b6e-9d90-3958dbb9456c.png)
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741073269504-fcac5d3c-8e41-4977-a25e-4fb0f9d19fe7.png)
 
