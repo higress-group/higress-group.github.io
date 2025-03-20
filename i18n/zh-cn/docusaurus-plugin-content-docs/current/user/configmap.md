@@ -46,6 +46,7 @@ data:
         maxConcurrentStreams: 100
       idleTimeout: 180
       maxRequestHeadersKb: 60
+      routeTimeout: 0
     upstream:
       connectionBufferLimits: 1048576
       idleTimeout: 10
@@ -125,6 +126,10 @@ metadata:
 | http2     | 参考下面 http2 设置 | http2 设置              | 参考下面 http2 默认值 |
 | idleTimeout    | int            | 连接空闲超时时间，单位秒，0表示关闭该配置 | 180               |
 | maxRequestHeadersKb    | int            | 最大请求头大小，单位Kb，最大为8192Kb  | 60               |
+| routeTimeout    | int            | 等待上游完成响应的时间，单位秒，0表示关闭该配置。若存在WebSocket业务，请勿开启此配置。 | 0            |
+
+关于 timeouts 参数配置详细说明可以参考 envoy 官方文档 [How do I configure timeouts](https://www.envoyproxy.io/docs/envoy/latest/faq/configuration/timeouts)
+
 
 ##### http2 配置说明
 
