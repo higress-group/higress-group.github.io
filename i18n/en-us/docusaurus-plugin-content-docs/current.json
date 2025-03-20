@@ -27,6 +27,10 @@
     "message": "Ops",
     "description": "The label for category Ops in sidebar docs"
   },
+  "sidebar.docs.category.How-tos": {
+    "message": "How-tos",
+    "description": "The label for category How-tos in sidebar docs"
+  },
   "sidebar.docs.category.Deploy": {
     "message": "Deploy",
     "description": "The label for category Deploy in sidebar docs"

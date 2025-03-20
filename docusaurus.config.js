@@ -106,7 +106,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      metadata: [{ name: 'keywords', content: 'higress,higress官网,云原生网关' }],
+      metadata: [{ name: 'keywords', content: 'higress,higress官网,云原生网关' }, {name:'baidu-site-verification', content: 'codeva-T2MeTQHYnM'}],
       // Replace with your project's social card
       image: 'img/higress_logo_small.png',
       colorMode: {

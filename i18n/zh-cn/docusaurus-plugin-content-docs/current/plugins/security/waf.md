@@ -8,11 +8,6 @@ description: WAF 防护插件配置参考
 
 开源版 WAF 插件，支持基于 OWASP ModSecurity Core Rule Set (CRS) 的 WAF 规则配置。
 
-## 运行属性
-
-- 插件执行阶段：`授权阶段`
-- 插件执行优先级：`330`
-
 ## 配置字段
 
 | 名称 | 数据类型 | 填写要求 |  默认值 | 描述                                                                                                                                              |

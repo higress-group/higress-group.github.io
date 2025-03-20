@@ -36,13 +36,19 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | 韦鑫 | [WeixinX](https://github.com/weixinx) | NUAA   |
 
 ## Higress Members
-| 姓名  | github                        | 公司             |
-|-----|-------------------------------| --------------- |
-| 李强林 | [Charlie17Li](https://github.com/Charlie17Li) | ZJU-SEL        |
-| 封宇腾 | [Ffyyt](https://github.com/Fkbqf) | XUPT   |
-| 田亚涛 | [Hinsteny](https://github.com/Hinsteny) | Ant   |
-| 宋鹏远 | [songpengyuan](https://github.com/songpengyuan) | Okki.com        |
-| 赵伟基 | [vikizhao156](https://github.com/vikizhao156) | SJTU   |
+| 姓名   | github                                          | 组织     |
+|--------|-------------------------------------------------|----------|
+| 张正好 | [alexzzh](https://github.com/alexzzh)   | koal safety  |
+| 李强林 | [Charlie17Li](https://github.com/Charlie17Li)   | ZJU  |
+| 封宇腾 | [Ffyyt](https://github.com/Fkbqf)               | XUPT     |
+| 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | Finv      |
+| 田亚涛 | [Hinsteny](https://github.com/Hinsteny)         | Ant      |
+| 屈晗煜 | [Ink-33](https://github.com/Ink-33)         | DGUT     |
+| 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
+| 邵佳成 | [sjcsjc123](https://github.com/sjcsjc123) | HDU |
+| 宋鹏远 | [songpengyuan](https://github.com/songpengyuan) | Okki.com |
+| 彭万山 | [Uncle-Justice](https://github.com/Uncle-Justice) | HUST |
+| 赵伟基 | [vikizhao156](https://github.com/vikizhao156)   | SJTU     |
 
 
 
@@ -55,9 +61,10 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ### Member
 
 **条件：**
-- 获得 8 个完成 issue 的积分（easy +1，normal +2，challenge +4）
+- 获得 8 个完成 issue 的积分（good-issue +0.5, easy +1，normal +2，challenge +4）
 
 > Higress开源社区为每个可认领（help wanted标签）的issue都标记了难度标签：简单(level/easy)，普通(level/normal)，有挑战(level/challenge)，完成issue后可以获得对应积分
+> 创建有价值的 issue（被标记为 good-issue 标签），也可以得 0.5 分
 
 - 贡献代码（包含文档）DIFF 行数（包含增删）达到 500+
 

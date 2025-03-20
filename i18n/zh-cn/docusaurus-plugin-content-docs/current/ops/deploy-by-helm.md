@@ -35,6 +35,8 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | global.enableIstioAPI | 若为`true`，Higress Controller 将同时监听 istio 资源 | false |
 | global.enableGatewayAPI | 若为`true`，Higress Controller 将同时监听 Gateway API 资源 | false |
 | global.onlyPushRouteCluster | 若为`true`，Higress Controller 将会只推送被路由关联的服务 | true |
+| global.o11y.enabled | 若为 `true`，将同时安装可观测性套件（Grafana、Promethues、Loki、PromTail） | false |
+| global.pvc.rwxSupported | 标识目标 K8s 集群是否支持 PersistentVolumeClaim 的 ReadWriteMany 操作方式。 | true |
 | **核心组件参数** |  |  |
 | higress-core.gateway.replicas | Higress Gateway 的 pod 数量 | 2 |
 | higress-core.controller.replicas | Higress Controller 的 pod 数量 | 1 |
@@ -42,8 +44,6 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | higress-console.replicaCount | Higress Console 的 pod 数量 | 1 |
 | higress-console.service.type | Higress Console 所使用的 K8s Service 类型 | ClusterIP |
 | higress-console.web.login.prompt | 登录页面上显示的提示信息 | "" |
-| higress-console.o11y.enabled | 若为 `true`，将同时安装可观测性套件（Grafana + Promethues） | false |
-| higress-console.pvc.rwxSupported | 标识目标 K8s 集群是否支持 PersistentVolumeClaim 的 ReadWriteMany 操作方式。 | true |
 
 ## 支持 Istio CRD（可选）
 

@@ -1,7 +1,7 @@
 ---
-title: AI 内容审核
+title: AI 内容安全
 keywords: [ higress, ai]
-description: AI 内容审核插件配置参考
+description: AI 内容安全插件配置参考
 ---
 
 ## 功能说明 
