@@ -27,7 +27,6 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | global.onlyPushRouteCluster | 若为`true`，Higress Controller 将会只推送被路由关联的服务                                                                                                                                                                                                         | true |
 | global.priorityClassName | Higress Controller 和 Higress Gateway Pod 的 PriorityClass 名称                                                                                                                                                                                       |  |
 
-
 ## meshConfig参数
 | 参数                                | 参数说明                                                                     | 默认值                       |
 |-----------------------------------|--------------------------------------------------------------------------|---------------------------|
@@ -38,8 +37,8 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ## Gateway参数
 | 参数                                                             | 参数说明                                                                                      | 默认值                 |
 |----------------------------------------------------------------|:------------------------------------------------------------------------------------------|---------------------|
-|higress-core.gateway.kind| Higress gateway 的部署方式，可选项为 `DaemonSet` 和 `Controller` | Controller |
-| higress-core.gateway.replicas	                                 | Higress Gateway 的 pod 数量，仅在`higress-core.gateway.kind` 为 `Controller` 时生效。                                                                 | 2                   |
+| higress-core.gateway.kind                                      | Higress gateway 的部署方式，可选项为 `DaemonSet` 和 `Deployment` | Deployment |
+| higress-core.gateway.replicas	                                 | Higress Gateway 的 pod 数量，仅在`higress-core.gateway.kind` 为 `Deployment` 时生效。                                                                 | 2                   |
 | higress-core.gateway.rbac.enabled	                             | 如果启用，则将创建 roles 以便从 Gateways 访问证书。但在使用 http://gateway-api.org/ 时，这不是必需的                   | true                |
 | higress-core.gateway.serviceAccount.create	                    | 指定是否创建 ServiceAccount, 否则，使用默认值。                                                          | true                |
 | higress-core.gateway.serviceAccount.annotations                | 指定需要添加到 ServiceAccount 上的注释。                                                              | {}                  |
