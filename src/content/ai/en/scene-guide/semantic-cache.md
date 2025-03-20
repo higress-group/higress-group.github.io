@@ -58,41 +58,41 @@ Create a service source in the console's `Service Source`.
 
 Fill in the corresponding fields in the Service Source:
 
-+ 类型：DNS域名
-+ 服务端口：443
-+ 域名列表：
-    - 阿里云文本向量化服务：dashscope.aliyuncs.com
-    - 阿里云向量数据库服务：对应cluster的端点地址，在_向量检索服务控制台-cluster-collection_中查看
-+ 服务协议：HTTPS
-+ SNI：和域名列表相同
++ Type: Domains
++ Service port: 443
++ Domains: 
+    - Alibaba Cloud text-embedding-v3 service: dashscope.aliyuncs.com
+    - Alibaba Cloud DashVector service: Endpoint address of the corresponding cluster, viewed in DashVector Console - Cluster - Collection
++ Service protocol: HTTPS
++ SNI: Same as the domains
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741158247961-49ea8c56-2e1b-4c0f-87a7-426acfafef47.png)![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741158647414-5582124c-0353-454b-b3a2-0c4cbebd4ec1.png)
 
 
 
-## 配置AI路由策略
-在AI路由管理界面中，为阿里云配置插件策略，选择AI缓存。
+## Configure AI Route Strategy
+In the `AI Route Config`, configure strategy for aliyun and select `AI Cache`.
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082325606-a8bed434-c49d-4daa-aba6-1a0e2bb8b7d8.png)
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741159081909-6b3665ca-a0a9-47a4-b2ca-f4aef8538ec7.png)
 
-在AI缓存插件配置界面中，参考以下字段填写：
+In the `AI Cache`, fill in the following fields as a reference:
 
 ```yaml
 vector:
   type: dashvector
   serviceName: "aliyun-dashvector.dns"
-  collectionID: "XXXXX"	#存储向量的collection名称
-  serviceHost: "vrs-cn-xxxxxx.dashvector.cn-hangzhou.aliyuncs.com"	#存储cluster的端点地址
-  apiKey: "sk-xxxxxxxxxxxxxxxxxx"	#向量检索api-key
+  collectionID: "XXXXX"	# Name of the collection storing vectors
+  serviceHost: "vrs-cn-xxxxxx.dashvector.cn-hangzhou.aliyuncs.com"	# Endpoint address of the cluster
+  apiKey: "sk-xxxxxxxxxxxxxxxxxx"	# api-key of DashVector
   threshold: 0.12
 
 embedding:
   type: dashscope
   serviceName: "aliyun-embedding.dns"
-  apiKey: "sk-xxxxxxxxxx"	#阿里云百炼api-key
-  model: "text-embedding-v3" #使用的embedding模型
+  apiKey: "sk-xxxxxxxxxx"	#api-key of Alibaba Cloud text-embedding-v3
+  model: "text-embedding-v3" #embedding model
 
 ```
 
@@ -100,8 +100,8 @@ embedding:
 
 
 
-# 调试
-打开系统自带命令行，通过以下命令进行请求（如HTTP服务未部署在8080端口上，修改为对应端口即可）
+# Debugging
+Open the system's built-in command line and send a request using the following command (if the HTTP service is not deployed on port 8080, modify it to the corresponding port):
 
 ```yaml
 curl 'http://localhost:8080/v1/chat/completions' \
@@ -111,7 +111,7 @@ curl 'http://localhost:8080/v1/chat/completions' \
     "messages": [
       {
         "role": "user",
-        "content": "星星是什么"
+        "content": "What are stars?"
       }
     ]
   }'
@@ -120,13 +120,13 @@ curl 'http://localhost:8080/v1/chat/completions' \
 
 
 
-可以尝试以下问题：
+You can try the following questions:
 
-+ 星星是什么
-+ 什么是星星
-+ 星星通常指什么
++ What are stars?
++ What is a star?
++ What does the term star usually refer to?
 
-请求结果示例：
+Sample response:
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741159983902-4f27c181-68d4-4bff-bad1-81fff4514038.png)
 
