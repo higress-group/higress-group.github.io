@@ -211,3 +211,7 @@ In the `AI Dashboard`, you can observe AI requests. Observability metrics includ
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742453607727-3136de22-22d2-48ef-bdc1-b9a015abe83d.png)
 
+
+> If you encounter any issues during deployment, feel free to leave your information in the [Higress Github Issue](https://github.com/alibaba/higress/issues).
+>
+> If you are interested in future updates of Higress or wish to provide feedback, welcome to star [Higress Github Repo](https://github.com/alibaba/higress/).

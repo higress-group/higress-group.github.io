@@ -210,3 +210,7 @@ curl 'http://localhost:8080/v1/chat/completions' \
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741191602518-6e6009a6-ee53-4450-9066-4a2dcc312bbf.png)
 
+
+> 如您在部署过程中遇到问题，可在 [Higress Github Issue](https://github.com/alibaba/higress/issues) 中留下您的信息。
+> 
+> 如您对 Higress 后续更新感兴趣，或希望给 Higress 提供反馈，欢迎 Star [Higress Github Repo](https://github.com/alibaba/higress/)。
