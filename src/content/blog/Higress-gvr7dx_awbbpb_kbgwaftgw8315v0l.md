@@ -1,6 +1,6 @@
 ---
-title: "大模型无缝切换，QwQ-32B和DeepSeek-R1 全都要"
-description: "大模型无缝切换，QwQ-32B和DeepSeek-R1 全都要"
+title: "大模型无缝切换，QwQ-32B 和 DeepSeek-R1  全都要"
+description: "大模型无缝切换，QwQ-32B 和 DeepSeek-R1  全都要"
 date: "2025-03-25"
 category: "article"
 keywords: ["Higress"]
