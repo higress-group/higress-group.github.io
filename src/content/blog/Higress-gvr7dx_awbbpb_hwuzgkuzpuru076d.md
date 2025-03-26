@@ -1,7 +1,7 @@
 ---
 title: "大模型 Token 的消耗可能是一笔糊涂账"
 description: "大模型 Token 的消耗可能是一笔糊涂账"
-date: "2025-03-25"
+date: "2025-03-12"
 category: "article"
 keywords: ["Higress"]
 authors: "CH3CHO"
