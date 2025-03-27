@@ -52,15 +52,24 @@ sortedPosts.forEach((item) => {
 	if (item.data.category === post.data.category) {
 		if (post.id === item.id) currentIndex = articlePosts[0].entries.length;
 		articlePosts[0].entries.forEach((entries)=>{
-			if(item.slug.split("/")[0] === entries.fileName) {
-				entries.entries.push({
+			if(entries.type === "group" && (item.slug.split("/")[0] === entries.fileName)) {
+				entries.entries.unshift({
 					type: "link",
 					label: item.data.title,
 					href: `/ai/${item.slug}/`,
 					isCurrent: post.id === item.id,
 					attrs: {},
 				});
-			}
+			};
+			if (item.slug.split("/").length === 1) {
+				articlePosts[0].entries.unshift({
+					type: "link",
+					label: item.data.title,
+					href: `/ai/${item.slug}/`,
+					isCurrent: post.id === item.id,
+					attrs: {},
+				})
+			};
 		})
 	}
 });
