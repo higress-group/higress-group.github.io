@@ -1,7 +1,7 @@
 ---
 title: "Higress.ai 站点全新发布，轻松解锁 AI 新能力，开启全球服务！"
 description: "Higress.ai 站点全新发布，轻松解锁 AI 新能力，开启全球服务！"
-date: "2025-03-25"
+date: "2025-03-20"
 category: "article"
 keywords: ["Higress"]
 authors: "CH3CHO"

@@ -1,7 +1,7 @@
 ---
 title: "大模型上下文协议 MCP 带来了哪些货币化机会"
 description: "大模型上下文协议 MCP 带来了哪些货币化机会"
-date: "2025-03-25"
+date: "2025-03-24"
 category: "article"
 keywords: ["Higress"]
 authors: "CH3CHO"

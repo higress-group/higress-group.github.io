@@ -1,7 +1,7 @@
 ---
 title: "大模型带火 API 后，分享我对 API 安全之认证鉴权的实践"
 description: "大模型带火 API 后，分享我对 API 安全之认证鉴权的实践"
-date: "2025-03-26"
+date: "2025-03-11"
 category: "article"
 keywords: ["Higress"]
 authors: "CH3CHO"
