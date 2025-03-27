@@ -41,14 +41,23 @@ sortedPosts.forEach((item) => {
 		if (post.id === item.id) currentIndex = articlePosts[0].entries.length;
 		articlePosts[0].entries.forEach((entries)=>{
 			if(item.slug.split("/")[1] === entries.fileName) {
-				entries.entries.push({
+				entries.entries.unshift({
 					type: "link",
 					label: item.data.title,
 					href: `/${item.slug.replace("en/","en/ai/")}/`,
 					isCurrent: post.id === item.id,
 					attrs: {},
 				});
-			}
+			};
+			if (item.slug.split("/").length === 2) {
+				articlePosts[0].entries.unshift({
+					type: "link",
+					label: item.data.title,
+					href: `/${item.slug.replace("en/","en/ai/")}/`,
+					isCurrent: post.id === item.id,
+					attrs: {},
+				})
+			};
 		})
 	}
 });
