@@ -5,6 +5,7 @@ import TocComponent from "@components/markdownSet/TocComponents/TocComponent.ast
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Button } from "@serverless-cd/goat-ui";
 import { Icon } from "@astrojs/starlight/components";
+import { sidebarData } from "@/pages/ai/sidebar";
 import Sidebar from "@components/starlight/Sidebar.astro";
 import { useTranslations } from "@i18n/util";
 import { SITE } from "@utils/config";
@@ -43,26 +44,33 @@ const sortedPosts = posts.sort(
 );
 sortedPosts.unshift(...introPost);
 
-const articlePosts = [
-	{
-		type: "group",
-		label: "AI",
-		entries: [],
-	},
-];
+const articlePosts = JSON.parse(JSON.stringify(sidebarData));
 
 let currentIndex;
 
 sortedPosts.forEach((item) => {
 	if (item.data.category === post.data.category) {
 		if (post.id === item.id) currentIndex = articlePosts[0].entries.length;
-		articlePosts[0].entries.push({
-			type: "link",
-			label: item.data.title,
-			href: `/ai/${item.slug}/`,
-			isCurrent: post.id === item.id,
-			attrs: {},
-		});
+		articlePosts[0].entries.forEach((entries)=>{
+			if(entries.type === "group" && (item.slug.split("/")[0] === entries.fileName)) {
+				entries.entries.unshift({
+					type: "link",
+					label: item.data.title,
+					href: `/ai/${item.slug}/`,
+					isCurrent: post.id === item.id,
+					attrs: {},
+				});
+			};
+			if (item.slug.split("/").length === 1) {
+				articlePosts[0].entries.unshift({
+					type: "link",
+					label: item.data.title,
+					href: `/ai/${item.slug}/`,
+					isCurrent: post.id === item.id,
+					attrs: {},
+				})
+			};
+		})
 	}
 });
 

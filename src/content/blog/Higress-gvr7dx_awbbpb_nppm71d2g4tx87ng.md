@@ -2,7 +2,7 @@
 title: "基于API网关践行API First开发实践"
 description: "基于API网关践行API First开发实践"
 date: "2025-02-06"
-category: "article"
+category: "case"
 keywords: ["Higress"]
 authors: "CH3CHO"
 ---

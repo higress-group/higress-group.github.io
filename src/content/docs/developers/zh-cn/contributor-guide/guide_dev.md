@@ -31,7 +31,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 Higress 基于 WASM 等方式具备了很好的可扩展性，具体贡献方式请参考此处[说明](https://github.com/alibaba/higress/tree/main/plugins)
 
-对于使用 GO 语言开发 WASM 插件，可以参考这篇[文档](../user/wasm-go.md)
+对于使用 GO 语言开发 WASM 插件，可以参考这篇[文档](../../latest/user/wasm-go.md)
 
 
 ## 报告安全问题

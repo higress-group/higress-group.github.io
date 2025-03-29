@@ -2,7 +2,7 @@
 title: "大模型应用部署过程中流量管控的常见需求和应对方案"
 description: "大模型应用部署过程中流量管控的常见需求和应对方案"
 date: "2025-02-10"
-category: "article"
+category: "case"
 keywords: ["Higress"]
 authors: "CH3CHO"
 ---
