@@ -15,12 +15,12 @@ Higress AI 网关支持统一代理多个 MCP Server，可通过 [Wasm](https://
 
 在开始使用 MCP Server 之前，需要先部署 Higress。您可以参考 [Higress 快速入门指南](https://higress.cn/docs/latest/user/quickstart) 完成部署。
 
-## ConfigMap 配置 postgres MCP Server
-在 ConfigMap 中配置 MCP Server 的相关参数。
+## ConfigMap 配置 MCP Server
+在 ConfigMap 中配置 MCP Server 的相关全局参数
 ```bash
 kubectl edit configmap -n higress-system
 ```
-包含 Redis 的地址以及 MCP Server 类型，配置以 postgres 数据库和夸克搜索为例，数据库连接dsn参考[gorm](https://gorm.io/docs/connecting_to_the_database.html)
+包含 Redis 的地址以及匹配列表，所有 MCP Server必须配置在匹配列表规则中
 ```yaml
 mcpServer:
   sse_path_suffix: /sse
@@ -36,6 +36,13 @@ mcpServer:
     - match_rule_domain: "*"
       match_rule_path: /quark
       match_rule_type: "prefix"
+  serves: 
+```
+**Note:** 目前golang filter 类型的 MCP Server 在 Config Map中配置，wasm 插件类型在higress控制台配置
+
+## Config Map 配置 postgres MCP Server
+在 Config Map 中配置 postgres MCP Server 类型的 MCP Server，数据库连接dsn参考[gorm](https://gorm.io/docs/connecting_to_the_database.html)
+```yaml
   servers:
     - name: postgres
       path: /postgres
@@ -44,6 +51,7 @@ mcpServer:
         dsn: "your postgres database connect dsn" # 填写连接postgre数据库的dsn
         dbType: "postgres"
 ```
+
 ## 夸克搜索 MCP Server Wasm 插件配置
 
 ### 申请API Key
