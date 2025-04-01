@@ -6,9 +6,9 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "大促采购季，新用户首购低至5折",
-    "mobileText": "大促采购季，新用户首购低至5折",
-    "link": "https://www.aliyun.com/activity/purchase/mseapiwg20251",
+    "text": "Higress 助力各行各业安全可靠接入DeepSeek",
+    "mobileText": "Higress 助力各行各业安全可靠接入DeepSeek",
+    "link": "https://higress.cn/blog/higress-gvr7dx_awbbpb_hghqht52gp0ugxtk/?spm=36971b57.2ef5001f.0.0.8eb72c1fM51jEa\u0026source=blog",
     "target": "_blank",
     "display": true
 }
