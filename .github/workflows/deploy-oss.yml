@@ -14,18 +14,32 @@ jobs:
         node-version: [ 18.19.x ]
     steps:
       - uses: actions/checkout@v3
+
+      - name: Free Up GitHub Actions Ubuntu Runner Disk Space 🔧
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Build
         run: |
           npm install && npm run build
+
       - name: Install Aliyun CLI
         run: |
           curl -O https://aliyuncli.alicdn.com/aliyun-cli-linux-latest-amd64.tgz
           tar -xzf aliyun-cli-linux-latest-amd64.tgz
           chmod +x aliyun
           ./aliyun version
+
       - name: Sync to OSS
         run: ./aliyun oss cp ./dist oss://higress-website-cn-hongkong/ --meta Cache-Control:"max-age=3600" -r -f -e oss-cn-hongkong.aliyuncs.com --access-key-id ${{ secrets.ACCESS_KEYID }} --access-key-secret ${{ secrets.ACCESS_KEYSECRET }} --region cn-hongkong
