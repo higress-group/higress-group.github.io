@@ -6,9 +6,9 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "Higress 助力各行各业安全可靠接入DeepSeek",
-    "mobileText": "Higress 助力各行各业安全可靠接入DeepSeek",
-    "link": "https://higress.cn/blog/higress-gvr7dx_awbbpb_hghqht52gp0ugxtk/?spm=36971b57.2ef5001f.0.0.8eb72c1fM51jEa\u0026source=blog",
+    "text": "Higress 开源 Remote MCP Server 托管方案，并将上线 MCP 市场",
+    "mobileText": "Higress 开源 Remote MCP Server 托管方案，并将上线 MCP 市场",
+    "link": "https://higress.cn/en/blog/higress-gvr7dx_awbbpb_xq8kol5ncmllabkk/?spm=36971b57.c984973.0.0.40d67a85mhNAB9\u0026source=blog",
     "target": "_blank",
     "display": true
 }
