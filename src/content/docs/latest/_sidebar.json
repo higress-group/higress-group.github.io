@@ -337,6 +337,13 @@
                 "en": "Modify gateway ports"
               },
               "link": "docs/ops/how-tos/gateway-ports"
+            },
+            {
+              "label": "使用 HTTP/HTTPS 协议加载 Wasm 插件",
+              "translations": {
+                "en": "Load Wasm plugins with HTTP/HTTPS protocol"
+              },
+              "link": "docs/ops/how-tos/load-wasm-with-http"
             }
           ]
         },
