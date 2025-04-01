@@ -15,13 +15,25 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Free Up GitHub Actions Ubuntu Runner Disk Space 🔧
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Build
         run: |
           npm install && npm run build -dd && mkdir -p deploy-dist && cp -R dist/* deploy-dist/ 
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v2.8.0
         env:
