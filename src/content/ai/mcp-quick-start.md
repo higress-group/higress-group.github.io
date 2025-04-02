@@ -11,7 +11,7 @@ authors: "静择"
 
 > **注意：** 本文档中的 MCP Server 功能需要 Higress 2.1.0 或更高版本。
 
-Higress AI 网关支持统一代理多个 MCP Server，可通过 [Wasm](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/mcp-servers) 或 [Golang Filter](https://github.com/alibaba/higress/blob/main/plugins/golang-filter/mcp-server/README.md) 实现，均提供封装的 MCP Server 框架。本文将以 [Golang Filter 实现的 postgres MCP Server](https://github.com/alibaba/higress/tree/main/plugins/golang-filter/mcp-server/servers/gorm) 和 [Wasm 实现的夸克搜索](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/mcp-servers/quark-search) 为例，介绍配置流程。
+MCP Server 是 Higress AI 网关提供的一种统一代理能力，可以帮助 AI Agent 快速对接各类数据源。通过 MCP Server，AI Agent 可以方便地访问数据库、搜索引擎等外部服务，无需关心具体的连接细节。其中，数据库对接能力是网关内置的能力，不能跟随插件动态更新。本文将以 postgres 数据库和夸克搜索为例，介绍配置流程。
 
 ## 前提条件
 
@@ -21,7 +21,7 @@ Higress AI 网关支持统一代理多个 MCP Server，可通过 [Wasm](https://
 helm install higress -n higress-system [...其他参数...] --set global.enableRedis=true
 ```
 
-MCP Server 需要依赖 Redis 服务，启用后您可以在后续的 ConfigMap 配置中使用 Redis 的连接信息。您可以通过以下命令查看 Redis 服务的地址：
+MCP Server 需要依赖 Redis 服务用于数据缓存，启用后您可以通过以下命令查看 Redis 服务的地址：
 
 ```bash
 kubectl get svc redis-stack-server -n higress-system -o wide
@@ -37,17 +37,17 @@ kubectl get svc redis-stack-server -n higress-system -o wide
 kubectl edit configmap higress-config -n higress-system
 ```
 
-包含 Redis 的地址以及匹配列表，所有 MCP Server 必须配置在匹配列表规则中：
+配置 Redis 连接信息和 MCP Server 的路由规则：
 
 ```yaml
 mcpServer:
-  sse_path_suffix: /sse
-  enable: true
+  sse_path_suffix: /sse  # SSE 连接的路径后缀
+  enable: true          # 启用 MCP Server
   redis:
-    address: your-redis-cluster-ip:6379 # 填写 Redis 服务的地址
-    username: your-redis-username # 填写 Redis 服务的用户(如果安装时设置了用户名)
-    password: your-redis-password # 填写 Redis 服务的密码(如果安装时设置了密码)
-  match_list:
+    address: your-redis-cluster-ip:6379 # Redis 服务地址
+    username: your-redis-username # Redis 用户名（可选）
+    password: your-redis-password # Redis 密码（可选）
+  match_list:          # MCP Server 路由规则
     - match_rule_domain: "*"
       match_rule_path: /postgres
       match_rule_type: "prefix"
@@ -57,23 +57,25 @@ mcpServer:
   serves: 
 ```
 
-> **注意：** 目前 golang filter 类型的 MCP Server 在 Config Map 中配置，wasm 插件类型在 Higress 控制台配置。
+> **注意：** 数据库类型的 MCP Server 在 Config Map 中配置，插件类型在 Higress 控制台配置。
 
 ### 配置 postgres MCP Server
 
-在 Config Map 中配置 postgres MCP Server 类型的 MCP Server，数据库连接 dsn 参考 [gorm](https://gorm.io/docs/connecting_to_the_database.html)：
+在 Config Map 中配置 postgres MCP Server：
 
 ```yaml
 servers:
-  - name: postgres
-    path: /postgres
-    type: database
+  - name: postgres      # MCP Server 名称
+    path: /postgres     # 访问路径，需要与 match_list 中的配置匹配
+    type: database      # 类型为数据库
     config:
-      dsn: "your postgres database connect dsn" # 填写连接 postgres 数据库的 dsn
-      dbType: "postgres"
+      dsn: "your postgres database connect dsn" # 数据库连接串
+      dbType: "postgres"                        # 数据库类型
 ```
 
-### 配置夸克搜索 MCP Server Wasm 插件
+数据库连接串格式请参考 [gorm 文档](https://gorm.io/docs/connecting_to_the_database.html)。
+
+### 配置夸克搜索 MCP Server
 
 #### 1. 申请 API Key
 
@@ -91,26 +93,26 @@ servers:
 
 ![配置路由](https://gw.alicdn.com/imgextra/i1/O1CN01Yx0SDr1YLHsTz23OD_!!6000000003042-0-tps-2522-738.jpg)
 
-#### 4. 配置 Wasm 插件
+#### 4. 配置插件
 
 对创建的路由点击策略按键添加插件：
 
 <div align="center">
-<img src="https://gw.alicdn.com/imgextra/i4/O1CN01vrUE1z1fClp4Lr0dv_!!6000000003971-0-tps-1286-1072.jpg" width="500" alt="Wasm" />
+<img src="https://gw.alicdn.com/imgextra/i4/O1CN01vrUE1z1fClp4Lr0dv_!!6000000003971-0-tps-1286-1072.jpg" width="500" alt="插件配置" />
 </div>
 
-对添加的 Wasm 插件配置：
+对添加的插件进行配置：
 
 <div align="center">
-<img src="https://gw.alicdn.com/imgextra/i1/O1CN01RkKZa01gZxUVFVm1l_!!6000000004157-0-tps-1302-692.jpg" width="500" alt="yaml"/>
+<img src="https://gw.alicdn.com/imgextra/i1/O1CN01RkKZa01gZxUVFVm1l_!!6000000004157-0-tps-1302-692.jpg" width="500" alt="插件参数"/>
 </div>
 
 ## MCP Server 使用
 
-在 AI Agent 中配置 MCP Server 的 SSE 连接，以 cursor 为例，替换部署的 Higress 地址：
+在 AI Agent 中配置 MCP Server 的 SSE 连接，以 cursor 为例：
 
-* golang filter 类型的 MCP Server SSE 连接地址为 ConfigMap 配置的 Path 加上配置的 sse_path_suffix
-* Wasm 插件类型的 MCP Server SSE 连接地址为配置路由的 Path 加上配置的 sse_path_suffix
+* 数据库类型的 MCP Server：使用 ConfigMap 中配置的 path + sse_path_suffix
+* 插件类型的 MCP Server：使用控制台配置的路由 path + sse_path_suffix
 
 ```yaml
 "mcpServers": {
@@ -126,3 +128,13 @@ servers:
 cursor 中配置完成：
 
 ![cursor配置完成](https://gw.alicdn.com/imgextra/i3/O1CN01WS1eN01xovuMAlRQh_!!6000000006491-0-tps-1918-622.jpg)
+
+## 使用场景
+
+MCP Server 主要用于以下场景：
+
+1. **数据库访问**：AI Agent 需要查询数据库时，可以通过 MCP Server 直接访问，无需处理数据库连接和查询逻辑
+2. **搜索引擎集成**：AI Agent 需要搜索信息时，可以通过 MCP Server 调用搜索引擎服务
+3. **外部服务对接**：AI Agent 需要调用其他外部服务时，可以通过 MCP Server 统一管理
+
+通过 MCP Server，您可以快速为 AI Agent 添加各种数据源支持，提高开发效率。
