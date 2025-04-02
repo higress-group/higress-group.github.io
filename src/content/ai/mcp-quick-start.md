@@ -27,7 +27,7 @@ MCP Server 需要依赖 Redis 服务，启用后您可以在后续的 ConfigMap 
 kubectl get svc redis-stack-server -n higress-system -o wide
 ```
 
-## ConfigMap 配置 MCP Server
+## ConfigMap 配置 MCP Server 全局参数
 在 ConfigMap 中配置 MCP Server 的相关全局参数
 ```bash
 kubectl edit configmap higress-config -n higress-system
@@ -52,7 +52,7 @@ mcpServer:
 ```
 **Note:** 目前 golang filter 类型的 MCP Server 在 Config Map 中配置，wasm 插件类型在 Higress 控制台配置
 
-## Config Map 配置 postgres MCP Server
+## 配置 postgres MCP Server
 在 Config Map 中配置 postgres MCP Server 类型的 MCP Server，数据库连接 dsn 参考 [gorm](https://gorm.io/docs/connecting_to_the_database.html)
 ```yaml
   servers:
@@ -64,30 +64,10 @@ mcpServer:
         dbType: "postgres"
 ```
 
-## 夸克搜索 MCP Server Wasm 插件配置
+## 配置夸克搜索 MCP Server
 
 ### 申请 API Key
 [申请夸克搜索调用的 API Key](https://help.aliyun.com/document_detail/2872258.html?spm=a2c4g.11186623.0.0.632e3350xkb4hu)
-
-### 配置 Wasm 插件
-```yaml
-apiVersion: extensions.higress.io/v1alpha1
-kind: WasmPlugin
-metadata:
-  name: quark-search
-  namespace: higress-system
-spec:
-  defaultConfig:
-  matchRules:
-  - ingress:
-    - default/quark
-    config:
-      server:
-        name: quark-search
-        config:
-          apiKey: you-quark-api-key # 填写配置申请的 API Key 
-  url: registry.cn-hangzhou.aliyuncs.com/jingze/quark-search:1.0.0
-```
 
 ### 添加服务来源
 在 Higress 控制台添加夸克搜索的服务来源
@@ -95,7 +75,19 @@ spec:
 
 ### 配置路由
 在 Higress 控制台添加夸克搜索的路由指向对应的服务来源
-![配置路由](https://gw.alicdn.com/imgextra/i2/O1CN01cvbrNB1OS1XobfsLS_!!6000000001703-0-tps-2488-416.jpg)
+![配置路由](https://gw.alicdn.com/imgextra/i1/O1CN01Yx0SDr1YLHsTz23OD_!!6000000003042-0-tps-2522-738.jpg)
+
+### 配置 Wasm 插件
+对创建的路由点击策略按键添加插件`registry.cn-hangzhou.aliyuncs.com/jingze/quark-search:1.0.0`
+
+<div style="text-align: center;">
+<img src="https://gw.alicdn.com/imgextra/i4/O1CN01vrUE1z1fClp4Lr0dv_!!6000000003971-0-tps-1286-1072.jpg" width="600" alt="Wasm" />
+</div>
+
+对添加的 Wasm 插件配置
+<div style="text-align: center;">
+<img src="https://gw.alicdn.com/imgextra/i1/O1CN01RkKZa01gZxUVFVm1l_!!6000000004157-0-tps-1302-692.jpg" width="600" alt="yaml" />
+</div>
 
 ## MCP Server 使用
 在 AI Agent 中配置 MCP Server 的 SSE 连接，以 cursor 为例，替换部署的 Higress 地址
