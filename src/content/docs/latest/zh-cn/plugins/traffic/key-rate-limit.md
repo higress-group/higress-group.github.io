@@ -2,6 +2,7 @@
 title: 基于 Key 的本地限流
 keywords: [higress,key rate limit]
 description: Key 本地限流插件配置参考
+githubHigressUrl: https://github.com/alibaba/higress/tree/main/plugins/wasm-cpp/extensions/key_rate_limit
 ---
 
 ## 功能说明

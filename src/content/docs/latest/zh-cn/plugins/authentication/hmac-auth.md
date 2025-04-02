@@ -2,6 +2,7 @@
 title: HMAC 认证
 keywords: [higress,hmac auth]
 description: HMAC 认证插件配置参考
+githubHigressUrl: https://github.com/alibaba/higress/tree/main/plugins/wasm-cpp/extensions/hmac_auth
 ---
 
 ## 功能说明
