@@ -3,6 +3,15 @@ import CommunityMenu from "./CommunityMenu.astro";
 
 export default [
   {
+    label: "AI 网关",
+    translations: {
+      en: "AI Gateway",
+    },
+    trigger: "click",
+    target: "_blank",
+    route: "https://higress.ai/",
+  },
+  {
     label: "文档",
     translations: {
       en: "DOCS",

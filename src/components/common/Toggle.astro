@@ -70,6 +70,11 @@ const Component = slot;
                   AI
                 </span>
               :null}
+              {route.includes('higress.ai')? 
+                <span class="toggle-text-ailogo text-xs text-center rounded-xl absolute top-[0.5rem] right-[-0.5rem] color-[#ffffff] bg-[red] w-[2rem] h-[1rem] font-medium">
+                  NEW
+                </span>
+              :null}
             </a>
           )
         }
