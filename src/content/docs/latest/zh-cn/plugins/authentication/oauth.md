@@ -2,6 +2,7 @@
 title: OAuth2 认证
 keywords: [higress,oauth2]
 description: OAuth2 认证插件配置参考
+githubHigressUrl: https://github.com/alibaba/higress/tree/main/plugins/wasm-cpp/extensions/oauth
 ---
 
 ## 功能说明

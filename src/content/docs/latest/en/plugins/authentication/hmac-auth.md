@@ -2,6 +2,7 @@
 title: HMAC Authentication
 keywords: [higress,hmac auth]
 description: HMAC Authentication plugin configuration reference
+githubHigressUrl: https://github.com/alibaba/higress/tree/main/plugins/wasm-cpp/extensions/hmac_auth
 ---
 ## Function Description
 The `hmac-auth` plugin implements the generation of tamper-proof signatures for HTTP requests based on the HMAC algorithm, and performs authentication and authorization based on the signature.
