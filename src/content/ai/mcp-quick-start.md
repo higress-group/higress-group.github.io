@@ -15,10 +15,10 @@ Higress AI 网关支持统一代理多个 MCP Server，可通过 [Wasm](https://
 
 ## 前提条件
 
-在开始使用 MCP Server 之前，需要先部署 Higress。您可以参考 [Higress 快速入门指南](https://higress.cn/docs/latest/user/quickstart) 完成部署。在 Helm 安装 Higress 时，请确保使用以下命令启用 Redis：
+在开始使用 MCP Server 之前，需要先部署 Higress。您可以参考 [Higress 快速入门指南](https://higress.cn/docs/latest/user/quickstart) 完成部署。在安装 Higress 时，请确保在 Helm 命令中添加以下参数：
 
 ```bash
---set global.enableRedis=true
+helm install higress -n higress-system [...其他参数...] --set global.enableRedis=true
 ```
 
 MCP Server 需要依赖 Redis 服务，启用后您可以在后续的 ConfigMap 配置中使用 Redis 的连接信息。您可以通过以下命令查看 Redis 服务的地址：
@@ -27,12 +27,18 @@ MCP Server 需要依赖 Redis 服务，启用后您可以在后续的 ConfigMap 
 kubectl get svc redis-stack-server -n higress-system -o wide
 ```
 
-## ConfigMap 配置 MCP Server 全局参数
-在 ConfigMap 中配置 MCP Server 的相关全局参数
+## 配置 MCP Server
+
+### ConfigMap 全局参数配置
+
+在 ConfigMap 中配置 MCP Server 的相关全局参数：
+
 ```bash
 kubectl edit configmap higress-config -n higress-system
 ```
-包含 Redis 的地址以及匹配列表，所有 MCP Server 必须配置在匹配列表规则中
+
+包含 Redis 的地址以及匹配列表，所有 MCP Server 必须配置在匹配列表规则中：
+
 ```yaml
 mcpServer:
   sse_path_suffix: /sse
@@ -50,49 +56,66 @@ mcpServer:
       match_rule_type: "prefix"
   serves: 
 ```
-**Note:** 目前 golang filter 类型的 MCP Server 在 Config Map 中配置，wasm 插件类型在 Higress 控制台配置
 
-## 配置 postgres MCP Server
-在 Config Map 中配置 postgres MCP Server 类型的 MCP Server，数据库连接 dsn 参考 [gorm](https://gorm.io/docs/connecting_to_the_database.html)
+> **注意：** 目前 golang filter 类型的 MCP Server 在 Config Map 中配置，wasm 插件类型在 Higress 控制台配置。
+
+### 配置 postgres MCP Server
+
+在 Config Map 中配置 postgres MCP Server 类型的 MCP Server，数据库连接 dsn 参考 [gorm](https://gorm.io/docs/connecting_to_the_database.html)：
+
 ```yaml
-  servers:
-    - name: postgres
-      path: /postgres
-      type: database
-      config:
-        dsn: "your postgres database connect dsn" # 填写连接 postgres 数据库的 dsn
-        dbType: "postgres"
+servers:
+  - name: postgres
+    path: /postgres
+    type: database
+    config:
+      dsn: "your postgres database connect dsn" # 填写连接 postgres 数据库的 dsn
+      dbType: "postgres"
 ```
 
-## 配置夸克搜索 MCP Server
+### 配置夸克搜索 MCP Server Wasm 插件
 
-### 申请 API Key
+#### 1. 申请 API Key
+
 [申请夸克搜索调用的 API Key](https://help.aliyun.com/document_detail/2872258.html?spm=a2c4g.11186623.0.0.632e3350xkb4hu)
 
-### 添加服务来源
+#### 2. 添加服务来源
+
 在 Higress 控制台添加夸克搜索的服务来源
-![添加服务来源](https://gw.alicdn.com/imgextra/i3/O1CN018CbgsB1o7Zs7LNCO7_!!6000000005178-0-tps-2434-146.jpg)
 
-### 配置路由
+<div style="text-align: center;">
+<img src="https://gw.alicdn.com/imgextra/i3/O1CN018CbgsB1o7Zs7LNCO7_!!6000000005178-0-tps-2434-146.jpg" width="800" alt="添加服务来源" />
+</div>
+
+#### 3. 配置路由
+
 在 Higress 控制台添加夸克搜索的路由指向对应的服务来源
-![配置路由](https://gw.alicdn.com/imgextra/i1/O1CN01Yx0SDr1YLHsTz23OD_!!6000000003042-0-tps-2522-738.jpg)
 
-### 配置 Wasm 插件
-对创建的路由点击策略按键添加插件`registry.cn-hangzhou.aliyuncs.com/jingze/quark-search:1.0.0`
+<div style="text-align: center;">
+<img src="https://gw.alicdn.com/imgextra/i1/O1CN01Yx0SDr1YLHsTz23OD_!!6000000003042-0-tps-2522-738.jpg" width="800" alt="配置路由" />
+</div>
+
+#### 4. 配置 Wasm 插件
+
+对创建的路由点击策略按键添加插件
 
 <div style="text-align: center;">
 <img src="https://gw.alicdn.com/imgextra/i4/O1CN01vrUE1z1fClp4Lr0dv_!!6000000003971-0-tps-1286-1072.jpg" width="600" alt="Wasm" />
 </div>
 
 对添加的 Wasm 插件配置
+
 <div style="text-align: center;">
 <img src="https://gw.alicdn.com/imgextra/i1/O1CN01RkKZa01gZxUVFVm1l_!!6000000004157-0-tps-1302-692.jpg" width="600" alt="yaml" />
 </div>
 
 ## MCP Server 使用
-在 AI Agent 中配置 MCP Server 的 SSE 连接，以 cursor 为例，替换部署的 Higress 地址
+
+在 AI Agent 中配置 MCP Server 的 SSE 连接，以 cursor 为例，替换部署的 Higress 地址：
+
 * golang filter 类型的 MCP Server SSE 连接地址为 ConfigMap 配置的 Path 加上配置的 sse_path_suffix
 * Wasm 插件类型的 MCP Server SSE 连接地址为配置路由的 Path 加上配置的 sse_path_suffix
+
 ```yaml
 "mcpServers": {
   "postgres": {
@@ -103,5 +126,9 @@ mcpServer:
   }
 }
 ```
-cursor 中配置完成
-![cursor](https://gw.alicdn.com/imgextra/i3/O1CN01WS1eN01xovuMAlRQh_!!6000000006491-0-tps-1918-622.jpg)
+
+cursor 中配置完成：
+
+<div style="text-align: center;">
+<img src="https://gw.alicdn.com/imgextra/i3/O1CN01WS1eN01xovuMAlRQh_!!6000000006491-0-tps-1918-622.jpg" width="800" alt="cursor配置完成" />
+</div>
