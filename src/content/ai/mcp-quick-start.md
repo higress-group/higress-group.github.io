@@ -81,32 +81,28 @@ servers:
 
 #### 2. 添加服务来源
 
-在 Higress 控制台添加夸克搜索的服务来源
+在 Higress 控制台添加夸克搜索的服务来源：
 
-<div style="text-align: center;">
-<img src="https://gw.alicdn.com/imgextra/i3/O1CN018CbgsB1o7Zs7LNCO7_!!6000000005178-0-tps-2434-146.jpg" width="800" alt="添加服务来源" />
-</div>
+![添加服务来源](https://gw.alicdn.com/imgextra/i3/O1CN018CbgsB1o7Zs7LNCO7_!!6000000005178-0-tps-2434-146.jpg)
 
 #### 3. 配置路由
 
-在 Higress 控制台添加夸克搜索的路由指向对应的服务来源
+在 Higress 控制台添加夸克搜索的路由指向对应的服务来源：
 
-<div style="text-align: center;">
-<img src="https://gw.alicdn.com/imgextra/i1/O1CN01Yx0SDr1YLHsTz23OD_!!6000000003042-0-tps-2522-738.jpg" width="800" alt="配置路由" />
-</div>
+![配置路由](https://gw.alicdn.com/imgextra/i1/O1CN01Yx0SDr1YLHsTz23OD_!!6000000003042-0-tps-2522-738.jpg)
 
 #### 4. 配置 Wasm 插件
 
-对创建的路由点击策略按键添加插件
+对创建的路由点击策略按键添加插件：
 
-<div style="text-align: center;">
-<img src="https://gw.alicdn.com/imgextra/i4/O1CN01vrUE1z1fClp4Lr0dv_!!6000000003971-0-tps-1286-1072.jpg" width="600" alt="Wasm" />
+<div align="center">
+<img src="https://gw.alicdn.com/imgextra/i4/O1CN01vrUE1z1fClp4Lr0dv_!!6000000003971-0-tps-1286-1072.jpg" width="500" alt="Wasm" />
 </div>
 
-对添加的 Wasm 插件配置
+对添加的 Wasm 插件配置：
 
-<div style="text-align: center;">
-<img src="https://gw.alicdn.com/imgextra/i1/O1CN01RkKZa01gZxUVFVm1l_!!6000000004157-0-tps-1302-692.jpg" width="600" alt="yaml" />
+<div align="center">
+<img src="https://gw.alicdn.com/imgextra/i1/O1CN01RkKZa01gZxUVFVm1l_!!6000000004157-0-tps-1302-692.jpg" width="500" alt="yaml"/>
 </div>
 
 ## MCP Server 使用
@@ -129,6 +125,4 @@ servers:
 
 cursor 中配置完成：
 
-<div style="text-align: center;">
-<img src="https://gw.alicdn.com/imgextra/i3/O1CN01WS1eN01xovuMAlRQh_!!6000000006491-0-tps-1918-622.jpg" width="800" alt="cursor配置完成" />
-</div>
+![cursor配置完成](https://gw.alicdn.com/imgextra/i3/O1CN01WS1eN01xovuMAlRQh_!!6000000006491-0-tps-1918-622.jpg)
