@@ -44,7 +44,10 @@ mcpServer:
   sse_path_suffix: /sse  # SSE 连接的路径后缀
   enable: true          # 启用 MCP Server
   redis:
-    address: redis-stack-server.higress-system.svc.cluster.local:6379 # Redis 服务地址
+    address: redis-stack-server.higress-system.svc.cluster.local:6379 # Redis服务地址
+    username: # Redis用户名（可选）
+    password: # Redis密码（可选）
+    db: # Redis数据库（可选）
   match_list:          # MCP Server 路由规则
     - match_rule_domain: "*"
       match_rule_path: /postgres
@@ -119,6 +122,8 @@ tools:
       {{- end }}
 ```
 更多关于如何配置 REST API 到 MCP Server 的详细信息，请参考 [MCP Server 插件配置参考](../ai/mcp-server.md)。
+
+> **注意：** 对于 2025-03-26 [MCP streamable HTTP](https://spec.modelcontextprotocol.io/specification/2025-03-26/) 协议，可以无需配置Configmap
 ## MCP Server 使用
 
 在 AI Agent 中配置 MCP Server 的 SSE 连接，以 cursor 为例：
