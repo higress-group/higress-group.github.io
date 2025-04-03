@@ -1,12 +1,12 @@
 ---
-title: MCP 服务器插件配置
-description: MCP 服务器插件配置参考
+title: MCP Server 插件配置
+description: MCP Server 插件配置参考
 date: "2025-04-03"
 category: "article"
 keywords: [higress,mcp,ai]
 authors: "澄潭"
 ---
-# MCP 服务器插件配置
+# MCP Server 插件配置
 
 ## 功能说明
 
@@ -32,12 +32,12 @@ authors: "澄潭"
 
 ## 配置字段
 
-### 服务器配置
+### Server 配置
 
 | 名称         | 数据类型   | 填写要求 | 默认值 | 描述                           |
 | ------------ | ---------- | -------- | ------ | ------------------------------ |
-| `server.name` | string     | 必填     | -      | MCP 服务器的名称。如果使用插件内置的 MCP 服务器（如 quark-search），只需配置此字段为对应的名称，无需配置 tools 字段。如果是 REST-to-MCP 场景，此字段可以填写任意值。 |
-| `server.config` | object     | 选填     | {}     | 服务器配置，如 API 密钥等      |
+| `server.name` | string     | 必填     | -      | MCP Server的名称。如果使用插件内置的 MCP Server（如 quark-search），只需配置此字段为对应的名称，无需配置 tools 字段。如果是 REST-to-MCP 场景，此字段可以填写任意值。 |
+| `server.config` | object     | 选填     | {}     | MCP Server 配置，如 API 密钥等      |
 | `server.allowTools` | array of string | 选填 | - | 允许调用的工具列表。如不指定，则允许所有工具 |
 
 ### REST-to-MCP 工具配置
@@ -219,7 +219,7 @@ GJSON 提供了强大的 JSON 查询能力：
 
 ## 配置示例
 
-### 使用内置 MCP 服务器示例：配置 quark-search
+### 使用内置 MCP Server 示例：配置 quark-search
 
 ```yaml
 server:
@@ -228,7 +228,7 @@ server:
     apiKey: "xxxx"
 ```
 
-此配置使用了 Higress 内置的 quark-search MCP 服务器。在这种情况下，只需要指定服务器名称和必要的配置（如 API 密钥），无需配置 tools 字段，因为工具已经在服务器中预定义好了。
+此配置使用了 Higress 内置的 quark-search MCP Server 。在这种情况下，只需要指定Server 名称和必要的配置（如 API 密钥），无需配置 tools 字段，因为工具已经在 MCP Server 中预定义好了。
 
 ### 基础配置示例：转换高德地图 API
 
