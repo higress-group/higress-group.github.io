@@ -1,8 +1,10 @@
 ---
 title: MCP 服务器插件配置
-keywords: [higress,mcp,ai]
 description: MCP 服务器插件配置参考
 date: "2025-04-03"
+category: "article"
+keywords: [higress,mcp,ai]
+authors: "澄潭"
 ---
 # MCP 服务器插件配置
 
