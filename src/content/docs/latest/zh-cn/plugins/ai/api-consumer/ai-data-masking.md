@@ -2,6 +2,7 @@
 title: AI 数据脱敏
 keywords: [higress,ai data masking]
 description: AI 数据脱敏插件配置参考
+githubHigressUrl: https://github.com/alibaba/higress/tree/main/plugins/wasm-rust/extensions/ai-data-masking
 ---
 
 ## 功能说明
