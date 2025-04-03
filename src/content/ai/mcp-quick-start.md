@@ -118,7 +118,7 @@ tools:
       - **Phone**: {{.phone}}
       {{- end }}
 ```
-更多关于如何配置 REST API 到 MCP Server 的详细信息，请参考 [MCP Server 插件配置参考](../ai/mcp-server)。
+更多关于如何配置 REST API 到 MCP Server 的详细信息，请参考 [MCP Server 插件配置参考](../ai/mcp-server.md)。
 ## MCP Server 使用
 
 在 AI Agent 中配置 MCP Server 的 SSE 连接，以 cursor 为例：
