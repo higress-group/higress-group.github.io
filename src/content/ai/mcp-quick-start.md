@@ -73,7 +73,7 @@ servers:
 
 数据库连接串格式请参考 [gorm 文档](https://gorm.io/docs/connecting_to_the_database.html)。
 
-### 配置 REST API 到 MCP Server
+### 配置 REST API MCP Server
 
 任何 REST API 都可以通过以下步骤快速转换为 MCP Server：
 
@@ -118,7 +118,7 @@ tools:
       - **Phone**: {{.phone}}
       {{- end }}
 ```
-
+更多关于如何配置 REST API 到 MCP Server 的详细信息，请参考 [MCP Server 插件配置参考](/ai/mcp-server)。
 ## MCP Server 使用
 
 在 AI Agent 中配置 MCP Server 的 SSE 连接，以 cursor 为例：
@@ -143,8 +143,6 @@ cursor 中配置完成：
 
 
 通过 MCP Server，您可以快速为 AI Agent 添加各种数据源支持，提高开发效率。任何 REST API 都可以通过简单的配置转换为 MCP Server，无需编写额外的代码。
-
-更多关于如何配置 REST API 到 MCP Server 的详细信息，请参考 [MCP Server 插件配置参考](/ai/mcp-server)。
 
 > 如您在使用 MCP Server 过程中遇到问题，可在 [Higress Github Issue](https://github.com/alibaba/higress/issues) 中留下您的信息。
 > 
