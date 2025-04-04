@@ -6,16 +6,10 @@ category: "article"
 keywords: ["Higress"]
 authors: "子釉"
 ---
-Higress 是一款云原生 API 网关，内核基于 Istio 和 Envoy，将流量网关、微服务网关、安全网关和 AI 网关四合一，可以用 Go/Rust/JS 等编写 Wasm 插件，提供了数十个现成的通用插件，以及开箱即用的控制台。
-
-
-
-其中，Higress AI 网关集成了如 OpenAI、DeepSeek、通义千问等 AI 服务提供商代理协议，并支持了如令牌限流、消费者鉴权、WAF防护、语义缓存等多个功能插件，帮助开发者和企业快速搭建可靠的 AI 服务。
-
-
 
 本指南基于 docker 提供 Higress AI 网关一键快速部署的方式，如您需要使用其他部署方式（如标准k8s集群、本地k8s集群等），请参照 [快速开始](https://higress.cn/docs/latest/user/quickstart/)。
 
+基于 Higress AI 网关实现 Remote MCP Server 托管，请参照[MCP Server 快速开始](../ai/mcp-quick-start.md)。
 
 # 安装 Higress AI 网关
 
