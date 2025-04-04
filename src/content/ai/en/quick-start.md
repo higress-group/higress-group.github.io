@@ -9,7 +9,7 @@ authors: "子釉"
 
 This guide provides a quick deployment method for the Higress AI Gateway using **Docker**. If you need to use other deployment methods (such as standard Kubernetes clusters or local Kubernetes clusters), please refer to the [Quick Start](https://higress.cn/en/docs/latest/user/quickstart/).
 
-Achieve Remote MCP Server hosting based on Higress AI Gateway, please refer to [MCP Server Quick Start](../en/mcp-quick-start.md).
+Achieve Remote MCP Server hosting based on Higress AI Gateway, please refer to [MCP Server Quick Start](../ai/mcp-quick-start.md).
 
 # Install Higress AI Gateway
 
