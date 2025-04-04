@@ -40,29 +40,38 @@ kubectl edit configmap higress-config -n higress-system
 配置 Redis 连接信息和 MCP Server 的路由规则：
 
 ```yaml
-mcpServer:
-  sse_path_suffix: /sse  # SSE 连接的路径后缀
-  enable: true          # 启用 MCP Server
-  redis:
-    address: redis-stack-server.higress-system.svc.cluster.local:6379 # Redis服务地址
-    username: # Redis用户名（可选）
-    password: # Redis密码（可选）
-    db: # Redis数据库（可选）
-  match_list:          # MCP Server 路由规则
-    - match_rule_domain: "*"
-      match_rule_path: /postgres
-      match_rule_type: "prefix"
-    - match_rule_domain: "*"
-      match_rule_path: /user
-      match_rule_type: "prefix"
-  serves: 
+apiVersion: v1
+data:
+  higress: |-
+    mcpServer:
+      sse_path_suffix: /sse  # SSE 连接的路径后缀
+      enable: true          # 启用 MCP Server
+      redis:
+        address: redis-stack-server.higress-system.svc.cluster.local:6379 # Redis服务地址
+        username: # Redis用户名（可选）
+        password: # Redis密码（可选）
+        db: # Redis数据库（可选）
+      match_list:          # MCP Server 路由规则
+        - match_rule_domain: "*"
+          match_rule_path: /postgres
+          match_rule_type: "prefix"
+        - match_rule_domain: "*"
+          match_rule_path: /user
+          match_rule_type: "prefix"
+      servers:
+...
+
+kind: ConfigMap
+metadata:
+  name: higress-config
+  namespace: higress-system
 ```
 
 > **注意：** 数据库类型的 MCP Server 在 Config Map 中配置，REST API 类型在 Higress 控制台配置。
 
-### 配置 PostgreSQL MCP Server
+### 配置 Database MCP Server
 
-在 Config Map 中配置 PostgreSQL MCP Server：
+在 Config Map 中配置 Database MCP Server：
 
 ```yaml
 servers:
@@ -71,7 +80,7 @@ servers:
     type: database      # 类型为数据库
     config:
       dsn: "your postgres database connect dsn" # 数据库连接串
-      dbType: "postgres"                        # 数据库类型
+      dbType: "postgres"                        # 数据库类型，目前已支持 postgres/mysql/clickhouse/sqlite
 ```
 
 数据库连接串格式请参考 [gorm 文档](https://gorm.io/docs/connecting_to_the_database.html)。
@@ -121,7 +130,7 @@ tools:
       - **Phone**: {{.phone}}
       {{- end }}
 ```
-更多关于如何配置 REST API 到 MCP Server 的详细信息，请参考 [MCP Server 插件配置参考](../ai/mcp-server.md)。
+更多关于如何配置 REST API 到 MCP Server 的详细信息，请参考 [MCP Server 插件配置参考](../ai/mcp-server.md)和[Higress Wasm插件使用简介](https://higress.cn/docs/latest/plugins/intro/?spm=36971b57.2ef5001f.0.0.2a932c1fWNtqNf)
 
 > **注意：** 对于 2025-03-26 [MCP streamable HTTP](https://spec.modelcontextprotocol.io/specification/2025-03-26/) 协议，可以无需配置Configmap
 ## MCP Server 使用
