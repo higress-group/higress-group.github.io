@@ -1,6 +1,6 @@
 ---
 title: MCP Server 快速开始
-description: MCP Server 快速开始指南
+description: Higress AI 网关提供 MCP Server 统一托管能力，可以帮助 AI Agent 快速对接各类数据源。通过 MCP Server，AI Agent 可以方便地访问数据库、REST API 等外部服务，无需关心具体的连接细节。其中，数据库对接能力是网关内置的能力；而对于 REST API，任何外部 REST API 都可以通过简单的配置转换成 MCP Server
 date: "2025-04-03"
 category: "article"
 keywords: ["MCP Server"]
