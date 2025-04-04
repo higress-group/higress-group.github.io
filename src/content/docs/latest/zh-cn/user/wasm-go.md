@@ -7,6 +7,12 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # 使用 GO 语言开发 WASM 插件
 
+> **注意**：
+
+> 使用 TinyGo 对版本有限定要求，目前经大规模验证稳定的版本组合是：tinygo 0.29 + go 1.20，可以参考这个官方 [Makefile](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/Makefile)
+>
+> go 1.24 已经原生支持编译 wasm 文件，相关文档补充中
+
 ## 一、工具准备
 需要先安装 Golang 和 TinyGo 两个程序
 
