@@ -7,14 +7,9 @@ keywords: ["Higress"]
 authors: "子釉"
 ---
 
-Higress is a cloud-native API gateway with a core based on Istio and Envoy. It integrates traffic gateways, microservice gateways, security gateways, and AI gateways into one solution. It supports writing Wasm plugins in Go/Rust/JS, provides dozens of ready-to-use general plugins, and offers an out-of-the-box console.
+This guide provides a quick deployment method for the Higress AI Gateway using **Docker**. If you need to use other deployment methods (such as standard Kubernetes clusters or local Kubernetes clusters), please refer to the [Quick Start](https://higress.cn/en/docs/latest/user/quickstart/).
 
-
-Among these, the Higress AI Gateway integrates protocols for AI service providers such as OpenAI, DeepSeek, and Qwen, and supports multiple functional plugins like token rate limiting, consumer authentication, WAF protection, and semantic caching etc., helping developers and enterprises quickly build reliable AI services.
-
-
-This guide provides a quick deployment method for the Higress AI Gateway using **Docker**. If you need to use other deployment methods (such as standard Kubernetes clusters or local Kubernetes clusters), please refer to the [Quick Start](https://higress.cn/en/docs/latest/user/quickstart/)。
-
+Achieve Remote MCP Server hosting based on Higress AI Gateway, please refer to [MCP Server Quick Start](../en/mcp-quick-start.md).
 
 # Install Higress AI Gateway
 
