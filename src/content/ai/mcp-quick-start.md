@@ -48,17 +48,17 @@ data:
       enable: true          # 启用 MCP Server
       redis:
         address: redis-stack-server.higress-system.svc.cluster.local:6379 # Redis服务地址
-        username: # Redis用户名（可选）
-        password: # Redis密码（可选）
-        db: # Redis数据库（可选）
-      match_list:          # MCP Server 路由规则
+        username: "" # Redis用户名（可选）
+        password: "" # Redis密码（可选）
+        db: 0 # Redis数据库（可选）
+      match_list:          # MCP Server 会话保持路由规则（当匹配下面路径时，将被识别为一个 MCP 会话，通过 SSE 等机制进行会话保持）
         - match_rule_domain: "*"
           match_rule_path: /postgres
           match_rule_type: "prefix"
         - match_rule_domain: "*"
           match_rule_path: /user
           match_rule_type: "prefix"
-      servers:
+      servers: []
 ...
 
 kind: ConfigMap
@@ -67,7 +67,9 @@ metadata:
   namespace: higress-system
 ```
 
-> **注意：** 数据库类型的 MCP Server 在 Config Map 中配置，REST API 类型在 Higress 控制台配置。
+> **注意：**
+>
+> 数据库类型的 MCP Server 在 ConfigMap 中配置，REST API 类型在 Higress 控制台配置。
 
 ### 配置 Database MCP Server
 
@@ -111,8 +113,6 @@ servers:
 
 ```yaml
 server:
-  allowTools:
-  - "get-user"
   name: "random-user-server"
 tools:
 - description: "Get random user information"
@@ -132,7 +132,8 @@ tools:
 ```
 更多关于如何配置 REST API 到 MCP Server 的详细信息，请参考 [MCP Server 插件配置参考](../ai/mcp-server.md)和[Higress Wasm插件使用简介](https://higress.cn/docs/latest/plugins/intro/?spm=36971b57.2ef5001f.0.0.2a932c1fWNtqNf)
 
-> **注意：** 对于 2025-03-26 [MCP streamable HTTP](https://spec.modelcontextprotocol.io/specification/2025-03-26/) 协议，可以无需配置Configmap
+> **注意：** 对于 2025-03-26 [MCP streamable HTTP](https://spec.modelcontextprotocol.io/specification/2025-03-26/) 协议，可以直接使用此插件，无需全局 ConfigMap 配置
+
 ## MCP Server 使用
 
 在 AI Agent 中配置 MCP Server 的 SSE 连接，以 cursor 为例：
