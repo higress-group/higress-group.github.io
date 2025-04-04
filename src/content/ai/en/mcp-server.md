@@ -8,22 +8,22 @@ authors: "Chengtan"
 ---
 # MCP Server Plugin Configuration
 
-## Feature Overview
+## Feature Description
 
-The `mcp-server` plugin provides AI tool integration capabilities based on the Model Context Protocol (MCP). MCP is a protocol specifically designed for AI assistants, defining a standard way for AI models to interact with external tools and resources. Through this plugin, you can:
+The `mcp-server` plugin provides AI tool integration capabilities based on the Model Context Protocol (MCP). MCP is a protocol designed specifically for AI assistants, defining a standard way for AI models to interact with external tools and resources. Through this plugin, you can:
 
-1. Transform existing REST APIs into AI-callable tools without writing code
+1. Convert existing REST APIs into tools callable by AI assistants without writing any code
 2. Leverage Higress gateway's unified authentication, authorization, rate limiting, and observability capabilities
 3. Quickly build and deploy AI tools and services
 
 ![](https://img.alicdn.com/imgextra/i1/O1CN01wv8H4g1mS4MUzC1QC_!!6000000004952-2-tps-1764-597.png)
 
-By hosting MCP Server through Higress, you can achieve:
-- Unified authentication and authorization mechanisms to ensure AI tool call security
+By hosting MCP Servers with Higress, you can achieve:
+- Unified authentication and authorization mechanisms, ensuring the security of AI tool calls
 - Fine-grained rate limiting to prevent abuse and resource exhaustion
-- Complete audit logs to record all tool call behaviors
-- Rich observability to monitor tool call performance and health status
-- Simplified deployment and management through Higress plugin mechanism to quickly add new MCP Servers
+- Comprehensive audit logs recording all tool call behaviors
+- Rich observability for monitoring the performance and health of tool calls
+- Simplified deployment and management through Higress's plugin mechanism for quickly adding new MCP Servers
 
 ## Runtime Properties
 
@@ -34,58 +34,58 @@ Plugin execution priority: `30`
 
 ### Server Configuration
 
-| Name | Data Type | Required | Default | Description |
+| Name         | Data Type   | Required | Default | Description                           |
 | ------------ | ---------- | -------- | ------ | ------------------------------ |
-| `server.name` | string | Required | - | Name of the MCP Server. For built-in MCP Servers (like quark-search), only this field needs to be configured with the corresponding name, no tools field configuration needed. For REST-to-MCP scenarios, this field can be any value. |
-| `server.config` | object | Optional | {} | MCP Server configuration, such as API keys |
-| `server.allowTools` | array of string | Optional | - | List of allowed tools. If not specified, all tools are allowed |
+| `server.name` | string     | Yes     | -      | Name of the MCP server. If using a pre-integrated MCP server (like quark-search), you only need to configure this field with the corresponding name and don't need to configure the tools field. For REST-to-MCP scenarios, this field can be any arbitrary value. |
+| `server.config` | object     | No     | {}     | Server configuration, such as API keys      |
+| `server.allowTools` | array of string | No | - | List of tools allowed to be called. If not specified, all tools are allowed |
 
 ### REST-to-MCP Tool Configuration
 
-| Name | Data Type | Required | Default | Description |
+| Name                          | Data Type        | Required | Default | Description                           |
 | ----------------------------- | --------------- | -------- | ------ | ------------------------------ |
-| `tools` | array of object | Optional | [] | REST-to-MCP tool configuration list |
-| `tools[].name` | string | Required | - | Tool name |
-| `tools[].description` | string | Required | - | Tool function description |
-| `tools[].args` | array of object | Required | [] | Tool parameter definitions |
-| `tools[].args[].name` | string | Required | - | Parameter name |
-| `tools[].args[].description` | string | Required | - | Parameter description |
-| `tools[].args[].type` | string | Optional | string | Parameter type (string, number, integer, boolean, array, object) |
-| `tools[].args[].required` | boolean | Optional | false | Whether the parameter is required |
-| `tools[].args[].default` | any | Optional | - | Parameter default value |
-| `tools[].args[].enum` | array | Optional | - | List of allowed parameter values |
-| `tools[].args[].items` | object | Optional | - | Array item schema (when type is array) |
-| `tools[].args[].properties` | object | Optional | - | Object property schema (when type is object) |
-| `tools[].requestTemplate` | object | Required | - | HTTP request template |
-| `tools[].requestTemplate.url` | string | Required | - | Request URL template |
-| `tools[].requestTemplate.method` | string | Required | - | HTTP method (GET/POST etc.) |
-| `tools[].requestTemplate.headers` | array of object | Optional | [] | Request header templates |
-| `tools[].requestTemplate.headers[].key` | string | Required | - | Request header name |
-| `tools[].requestTemplate.headers[].value` | string | Required | - | Request header value template |
-| `tools[].requestTemplate.body` | string | Optional | - | Request body template (mutually exclusive with argsToJsonBody, argsToUrlParam, argsToFormBody) |
-| `tools[].requestTemplate.argsToJsonBody` | boolean | Optional | false | When true, parameters will be used directly as JSON request body (mutually exclusive with body, argsToUrlParam, argsToFormBody) |
-| `tools[].requestTemplate.argsToUrlParam` | boolean | Optional | false | When true, parameters will be added to URL as query parameters (mutually exclusive with body, argsToJsonBody, argsToFormBody) |
-| `tools[].requestTemplate.argsToFormBody` | boolean | Optional | false | When true, parameters will be encoded in request body in application/x-www-form-urlencoded format (mutually exclusive with body, argsToJsonBody, argsToUrlParam) |
-| `tools[].responseTemplate` | object | Required | - | HTTP response transformation template |
-| `tools[].responseTemplate.body` | string | Required | - | Response body transformation template |
+| `tools`                       | array of object | No     | []     | List of REST-to-MCP tool configurations       |
+| `tools[].name`                | string          | Yes     | -      | Tool name                       |
+| `tools[].description`         | string          | Yes     | -      | Tool functionality description                   |
+| `tools[].args`                | array of object | Yes     | []     | Tool parameter definitions                   |
+| `tools[].args[].name`         | string          | Yes     | -      | Parameter name                       |
+| `tools[].args[].description`  | string          | Yes     | -      | Parameter description                       |
+| `tools[].args[].type`         | string          | No     | string | Parameter type (string, number, integer, boolean, array, object) |
+| `tools[].args[].required`     | boolean         | No     | false  | Whether the parameter is required                   |
+| `tools[].args[].default`      | any             | No     | -      | Parameter default value                     |
+| `tools[].args[].enum`         | array           | No     | -      | List of allowed values for the parameter               |
+| `tools[].args[].items`        | object          | No     | -      | Schema for array items (when type is array)  |
+| `tools[].args[].properties`   | object          | No     | -      | Schema for object properties (when type is object)|
+| `tools[].requestTemplate`     | object          | Yes     | -      | HTTP request template                  |
+| `tools[].requestTemplate.url` | string          | Yes     | -      | Request URL template                  |
+| `tools[].requestTemplate.method` | string       | Yes     | -      | HTTP method (GET/POST, etc.)          |
+| `tools[].requestTemplate.headers` | array of object | No | [] | Request header templates                     |
+| `tools[].requestTemplate.headers[].key` | string | Yes   | -      | Request header name                     |
+| `tools[].requestTemplate.headers[].value` | string | Yes | -      | Request header value template                   |
+| `tools[].requestTemplate.body` | string         | No     | -      | Request body template (mutually exclusive with argsToJsonBody, argsToUrlParam, argsToFormBody) |
+| `tools[].requestTemplate.argsToJsonBody` | boolean | No  | false  | When true, arguments will be used directly as the JSON request body (mutually exclusive with body, argsToUrlParam, argsToFormBody) |
+| `tools[].requestTemplate.argsToUrlParam` | boolean | No  | false  | When true, arguments will be added to the URL as query parameters (mutually exclusive with body, argsToJsonBody, argsToFormBody) |
+| `tools[].requestTemplate.argsToFormBody` | boolean | No  | false  | When true, arguments will be encoded as application/x-www-form-urlencoded in the request body (mutually exclusive with body, argsToJsonBody, argsToUrlParam) |
+| `tools[].responseTemplate`    | object          | Yes     | -      | HTTP response transformation template              |
+| `tools[].responseTemplate.body` | string        | Yes     | -      | Response body transformation template                 |
 
 ## Parameter Type Support
 
-REST-to-MCP tools support various parameter types to define tool parameters more precisely:
+REST-to-MCP tools support various parameter types, allowing you to define tool parameters more precisely:
 
 - **string**: String type (default)
 - **number**: Number type (floating point)
 - **integer**: Integer type
 - **boolean**: Boolean type (true/false)
-- **array**: Array type, use `items` field to define array element schema
-- **object**: Object type, use `properties` field to define object property schema
+- **array**: Array type, using the `items` field to define the schema for array elements
+- **object**: Object type, using the `properties` field to define the schema for object properties
 
 Example:
 
 ```yaml
 args:
 - name: query
-  description: "Search keywords"
+  description: "Search keyword"
   type: string
   required: true
 - name: limit
@@ -116,9 +116,9 @@ args:
 
 ## Request Parameter Passing Methods
 
-REST-to-MCP tools support four different request parameter passing methods. These options are **mutually exclusive**, and only one can be chosen:
+REST-to-MCP tools support four different request parameter passing methods, which are **mutually exclusive** - only one can be used:
 
-1. **body**: Manually construct request body using templates. This is the most flexible way, allowing complete control over request body format.
+1. **body**: Manually construct the request body using a template. This is the most flexible approach, allowing you complete control over the request body format.
    ```yaml
    requestTemplate:
      body: |
@@ -131,7 +131,7 @@ REST-to-MCP tools support four different request parameter passing methods. Thes
        }
    ```
 
-2. **argsToJsonBody**: When set to `true`, tool parameters will be sent directly as a JSON object in the request body, and `Content-Type: application/json; charset=utf-8` header will be added automatically.
+2. **argsToJsonBody**: When set to `true`, tool parameters will be sent directly as a JSON object in the request body, and the `Content-Type: application/json; charset=utf-8` header will be automatically added.
    ```yaml
    requestTemplate:
      argsToJsonBody: true
@@ -143,17 +143,17 @@ REST-to-MCP tools support four different request parameter passing methods. Thes
      argsToUrlParam: true
    ```
 
-4. **argsToFormBody**: When set to `true`, tool parameters will be encoded in the request body in `application/x-www-form-urlencoded` format, and the corresponding Content-Type header will be added automatically.
+4. **argsToFormBody**: When set to `true`, tool parameters will be encoded as `application/x-www-form-urlencoded` in the request body, and the appropriate Content-Type header will be automatically added.
    ```yaml
    requestTemplate:
      argsToFormBody: true
    ```
 
-These options simplify the configuration of common API call patterns without manually constructing request bodies or URL parameters. Note that these four options are mutually exclusive, and only one can be used in a tool configuration. If multiple options are configured, the system will reject loading the tool configuration with an error.
+These options simplify the configuration of common API call patterns without having to manually construct request bodies or URL parameters. Note that these four options are mutually exclusive, and only one can be used in a tool configuration. If multiple options are configured simultaneously, the system will return an error and refuse to load the tool configuration.
 
 ## Template Syntax
 
-REST-to-MCP functionality uses the [GJSON Template](https://github.com/higress-group/gjson_template) library for template rendering, which combines Go template syntax with GJSON's powerful path syntax:
+The REST-to-MCP feature uses the [GJSON Template](https://github.com/higress-group/gjson_template) library for template rendering, which combines Go's template syntax with GJSON's powerful path syntax:
 
 ### Request Templates
 
@@ -163,59 +163,59 @@ Used to construct HTTP request URLs, headers, and bodies:
 
 ### Response Templates
 
-Used to transform HTTP responses into AI-consumable format:
-- Use GJSON path syntax to access JSON response fields
+Used to transform HTTP responses into formats suitable for AI consumption:
+- Access JSON response fields using GJSON path syntax
 - Use template functions like `add`, `upper`, `lower`, etc.
 - Use control structures like `if`, `range`, etc.
 
-GJSON Template includes all [Sprig](https://github.com/Masterminds/sprig) functions, providing 70+ template functions for string operations, mathematical calculations, date formatting, etc., equivalent to Helm's template capabilities.
+GJSON Template includes all [Sprig](https://github.com/Masterminds/sprig) functions, providing 70+ template functions for string manipulation, mathematical operations, date formatting, and more, making it functionally equivalent to Helm's template capabilities.
 
 Commonly used Sprig functions include:
 
-- **String Operations**: `trim`, `upper`, `lower`, `replace`, `plural`, `nospace`
-- **Math Operations**: `add`, `sub`, `mul`, `div`, `max`, `min`
-- **Date Formatting**: `now`, `date`, `dateInZone`, `dateModify`
-- **List Operations**: `list`, `first`, `last`, `uniq`, `sortAlpha`
-- **Dictionary Operations**: `dict`, `get`, `set`, `hasKey`, `pluck`
-- **Flow Control**: `ternary`, `default`, `empty`, `coalesce`
-- **Type Conversion**: `toString`, `toJson`, `toPrettyJson`, `toRawJson`
-- **Encoding/Decoding**: `b64enc`, `b64dec`, `urlquery`, `urlqueryescape`
-- **UUID Generation**: `uuidv4`
+- **String manipulation**: `trim`, `upper`, `lower`, `replace`, `plural`, `nospace`
+- **Math operations**: `add`, `sub`, `mul`, `div`, `max`, `min`
+- **Date formatting**: `now`, `date`, `dateInZone`, `dateModify`
+- **List operations**: `list`, `first`, `last`, `uniq`, `sortAlpha`
+- **Dictionary operations**: `dict`, `get`, `set`, `hasKey`, `pluck`
+- **Flow control**: `ternary`, `default`, `empty`, `coalesce`
+- **Type conversion**: `toString`, `toJson`, `toPrettyJson`, `toRawJson`
+- **Encoding/decoding**: `b64enc`, `b64dec`, `urlquery`, `urlqueryescape`
+- **UUID generation**: `uuidv4`
 
-For a complete reference of all available functions, please refer to the [Helm Function Documentation](https://helm.sh/docs/chart_template_guide/function_list/), as GJSON Template includes the same function set.
+For a complete reference of all available functions, see the [Helm function documentation](https://helm.sh/docs/chart_template_guide/function_list/), as GJSON Template includes the same function set.
 
 ### GJSON Path Syntax
 
 GJSON provides powerful JSON querying capabilities:
 
-- **Dot Notation**: `address.city`
-- **Array Indexing**: `users.0.name`
-- **Array Iteration**: `users.#.name`
-- **Array Filtering**: `users.#(age>=30)#.name`
+- **Dot notation**: `address.city`
+- **Array indexing**: `users.0.name`
+- **Array iteration**: `users.#.name`
+- **Array filtering**: `users.#(age>=30)#.name`
 - **Modifiers**: `users.@reverse.#.name`
-- **Multiple Paths**: `{name:users.0.name,count:users.#}`
-- **Escape Characters**: `path.with\.dot`
+- **Multipath**: `{name:users.0.name,count:users.#}`
+- **Escape characters**: `path.with\.dot`
 
-For more complex queries, use the `gjson` function:
+For more complex queries, you can use the `gjson` function:
 
 ```
-<!-- Using gjson function for complex queries -->
-Active Users: {{gjson "users.#(active==true)#.name"}}
+<!-- Using the gjson function for complex queries -->
+Active users: {{gjson "users.#(active==true)#.name"}}
 
 <!-- Array filtering with multiple conditions -->
 Active developers over 30: {{gjson "users.#(active==true && age>30)#.name"}}
 
 <!-- Using modifiers -->
-Usernames (reversed): {{gjson "users.@reverse.#.name"}}
+User names (reversed): {{gjson "users.@reverse.#.name"}}
 
 <!-- Iterating over filtered results -->
-Administrators:
+Admins:
 {{range $user := gjson "users.#(roles.#(==admin)>0)#"}}
   - {{$user.name}} ({{$user.age}})
 {{end}}
 ```
 
-For complete GJSON path syntax reference, see [GJSON Documentation](https://github.com/tidwall/gjson#path-syntax).
+For a complete reference of GJSON path syntax, see the [GJSON documentation](https://github.com/tidwall/gjson#path-syntax).
 
 ## Configuration Examples
 
@@ -228,9 +228,9 @@ server:
     apiKey: "xxxx"
 ```
 
-This configuration uses Higress's built-in quark-search MCP Server. In this case, only the Server name and necessary configuration (such as API key) need to be specified, no tools field configuration is needed as the tools are predefined in the MCP Server.
+This configuration uses Higress's built-in quark-search MCP server. In this case, you only need to specify the server name and necessary configuration (such as API key), without configuring the tools field, as the tools are already predefined in the server.
 
-### Basic Configuration Example: Converting AMap API
+### Basic Example: Converting AMap API
 
 ```yaml
 server:
@@ -239,14 +239,14 @@ server:
     apiKey: your-api-key-here
 tools:
 - name: maps-geo
-  description: "Convert detailed structured addresses into latitude and longitude coordinates. Supports parsing landmarks, scenic spots, and building names into coordinates"
+  description: "Convert structured address information to latitude and longitude coordinates. Supports parsing landmarks, scenic spots, and building names into coordinates."
   args:
   - name: address
-    description: "Structured address information to be parsed"
+    description: "The structured address to parse"
     type: string
     required: true
   - name: city
-    description: "Specify the query city"
+    description: "The city to search in"
     type: string
     required: false
   - name: output
@@ -273,21 +273,21 @@ tools:
       - **City Code**: {{ $geo.citycode }}
       - **District**: {{ $geo.district }}
       - **Street**: {{ $geo.street }}
-      - **Street Number**: {{ $geo.number }}
+      - **Number**: {{ $geo.number }}
       - **Administrative Code**: {{ $geo.adcode }}
       - **Coordinates**: {{ $geo.location }}
       - **Level**: {{ $geo.level }}
       {{- end }}
 ```
 
-This configuration converts AMap's geocoding API into an AI-callable tool. When AI calls this tool:
+This configuration converts AMap's geocoding API into a tool callable by AI. When the AI calls this tool:
 
-1. Builds API request using provided address and city parameters
-2. Calls AMap API
-3. Transforms JSON response into easy-to-read Markdown format
-4. Returns formatted results to AI assistant
+1. It builds an API request using the provided address and city parameters
+2. Calls the AMap API
+3. Transforms the JSON response into an easy-to-read Markdown format
+4. Returns the formatted result to the AI assistant
 
-### Advanced Configuration Example: Complex Response Processing with Conditional Logic
+### Advanced Example: Complex Response Processing with Conditional Logic
 
 ```yaml
 server:
@@ -308,7 +308,7 @@ tools:
     required: false
     default: 3
   - name: include_hourly
-    description: "Whether to include hourly forecast"
+    description: "Whether to include hourly forecasts"
     type: boolean
     default: true
   requestTemplate:
@@ -324,7 +324,7 @@ tools:
 
       **Current Temperature**: {{.current.temp_c}}°C
       **Feels Like**: {{.current.feelslike_c}}°C
-      **Weather Condition**: {{.current.condition.text}}
+      **Conditions**: {{.current.condition.text}}
       **Humidity**: {{.current.humidity}}%
       **Wind Speed**: {{.current.wind_kph}} km/h
 
@@ -332,13 +332,13 @@ tools:
       {{range $index, $day := .forecast.forecastday}}
       ### {{$day.date}} ({{dateFormat "Monday" $day.date_epoch | title}})
       
-      {{if gt $day.day.maxtemp_c 30}}🔥 **High Temperature Warning!**{{end}}
-      {{if lt $day.day.mintemp_c 0}}❄️ **Low Temperature Warning!**{{end}}
+      {{if gt $day.day.maxtemp_c 30}}🔥 **High Temperature Alert!**{{end}}
+      {{if lt $day.day.mintemp_c 0}}❄️ **Low Temperature Alert!**{{end}}
       
-      - **Maximum Temperature**: {{$day.day.maxtemp_c}}°C
-      - **Minimum Temperature**: {{$day.day.mintemp_c}}°C
+      - **Max Temperature**: {{$day.day.maxtemp_c}}°C
+      - **Min Temperature**: {{$day.day.mintemp_c}}°C
       - **Chance of Rain**: {{$day.day.daily_chance_of_rain}}%
-      - **Weather Condition**: {{$day.day.condition.text}}
+      - **Conditions**: {{$day.day.condition.text}}
       
       #### Hourly Forecast
       {{range $hour := slice $day.hour 6 24 3}}
@@ -348,17 +348,18 @@ tools:
 ```
 
 This example demonstrates:
-- Using conditional statements (`if`) for temperature warnings
+- Using conditional statements (`if`) for temperature alerts
 - Using date formatting functions (`dateFormat`)
-- Using array slicing (`slice`) to select specific time weather
+- Using array slicing (`slice`) to select specific weather times
 - Nested loops to iterate through multiple days and time periods of weather data
 
-## AI Prompt Template for Generation
 
-When working with AI assistants to generate REST-to-MCP configurations, you can use the following prompt:
+## AI Prompt for Template Generation
+
+When working with AI assistants to generate templates for REST-to-MCP configuration, you can use the following prompt:
 
 ```
-Please help me create a Higress REST-to-MCP configuration to convert a REST API into an MCP tool.
+Please help me create a REST-to-MCP configuration for Higress that converts a REST API to an MCP tool.
 
 ## Configuration Format
 
@@ -368,27 +369,27 @@ The configuration should follow this format:
 server:
   name: rest-api-server
   config:
-    apiKey: your-api-key
+    apiKey: your-api-key-here
 tools:
 - name: tool-name
-  description: "Detailed description of this tool's functionality"
+  description: "Detailed description of what this tool does"
   args:
   - name: arg1
-    description: "Description of parameter 1"
-    type: string  # Available types: string, number, integer, boolean, array, object
+    description: "Description of argument 1"
+    type: string  # Optional types: string, number, integer, boolean, array, object
     required: true
   - name: arg2
-    description: "Description of parameter 2"
+    description: "Description of argument 2"
     type: integer
     required: false
     default: 10
   - name: arg3
-    description: "Description of parameter 3"
+    description: "Description of argument 3"
     type: array
     items:
       type: string
   - name: arg4
-    description: "Description of parameter 4"
+    description: "Description of argument 4"
     type: object
     properties:
       subfield1:
@@ -398,14 +399,14 @@ tools:
   requestTemplate:
     url: "https://api.example.com/endpoint"
     method: POST
-    # The following four options are mutually exclusive, choose only one
-    argsToUrlParam: true  # Add parameters to URL query parameters
-    # or
-    # argsToJsonBody: true  # Send parameters as JSON object in request body
-    # or
-    # argsToFormBody: true  # Send parameters form-encoded in request body
-    # or
-    # body: |  # Manually construct request body
+    # The following four options are mutually exclusive, only one can be used
+    argsToUrlParam: true  # Add arguments to URL query parameters
+    # OR
+    # argsToJsonBody: true  # Send arguments as a JSON object in the request body
+    # OR
+    # argsToFormBody: true  # Send arguments as form-encoded in the request body
+    # OR
+    # body: |  # Manually construct the request body
     #   {
     #     "param1": "{{.args.arg1}}",
     #     "param2": {{.args.arg2}},
@@ -416,7 +417,7 @@ tools:
       value: "{{.config.apiKey}}"
   responseTemplate:
     body: |
-      # Results
+      # Result
       {{- range $index, $item := .items }}
       ## Item {{add $index 1}}
       - **Name**: {{ $item.name }}
@@ -426,10 +427,10 @@ tools:
 
 ## Template Syntax
 
-Templates use GJSON Template syntax (https://github.com/higress-group/gjson_template), which combines Go templates and GJSON path syntax for JSON processing. The template engine supports:
+The templates use GJSON Template syntax (https://github.com/higress-group/gjson_template), which combines Go templates with GJSON path syntax for JSON processing. The template engine supports:
 
 1. Basic dot notation for accessing fields: {{.fieldName}}
-2. gjson function for complex queries: {{gjson "users.#(active==true)#.name"}}
+2. The gjson function for complex queries: {{gjson "users.#(active==true)#.name"}}
 3. All Sprig template functions (like Helm): {{add}}, {{upper}}, {{lower}}, {{date}}, etc.
 4. Control structures: {{if}}, {{range}}, {{with}}, etc.
 5. Variable assignment: {{$var := .value}}
@@ -440,15 +441,5 @@ For complex JSON responses, consider using GJSON's powerful filtering and queryi
 
 The REST API I want to convert is:
 
-[Describe your API here, including endpoints, parameters, and response format, or paste Swagger/OpenAPI specification]
+[Describe your API here, including endpoints, parameters, and response format, or paste a Swagger/OpenAPI specification]
 ```
-
-Please generate a complete configuration based on the above information, including:
-1. Descriptive name and appropriate server configuration
-2. Define all necessary parameters with clear descriptions and appropriate types, required/default values
-3. Choose suitable parameter passing method (argsToUrlParam, argsToJsonBody, argsToFormBody, or custom body)
-4. Create responseTemplate that transforms API response into AI-consumable readable format
-
-> If you encounter any issues while using MCP Server, please leave your information in [Higress Github Issue](https://github.com/alibaba/higress/issues).
-> 
-> If you are interested in future updates of Higress or would like to provide feedback, welcome to Star [Higress Github Repo](https://github.com/alibaba/higress/). 
