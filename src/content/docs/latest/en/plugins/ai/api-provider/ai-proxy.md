@@ -100,7 +100,7 @@ For OpenAI, the corresponding `type` is `openai`. Its unique configuration field
 
 | Name              | Data Type | Requirement | Default | Description                                                                          |
 |-------------------|----------|----------|--------|-------------------------------------------------------------------------------|
-| `openaiCustomUrl` | string   | Optional   | -      | Custom backend URL based on the OpenAI protocol, e.g., www.example.com/myai/v1/chat/completions |
+| `openaiCustomUrl` | string   | Optional   | -      | Custom BaseURL based on the OpenAI protocol, e.g., www.example.com/myai/v1 |
 | `responseJsonSchema` | object | Optional | - | Predefined Json Schema that OpenAI responses must adhere to; note that currently only a few specific models support this usage|
 
 #### Azure OpenAI
