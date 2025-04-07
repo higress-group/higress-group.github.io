@@ -32,12 +32,12 @@ authors: "澄潭"
 
 ## 配置字段
 
-### Server 配置
+### 服务器配置
 
 | 名称         | 数据类型   | 填写要求 | 默认值 | 描述                           |
 | ------------ | ---------- | -------- | ------ | ------------------------------ |
-| `server.name` | string     | 必填     | -      | MCP Server的名称。如果使用插件内置的 MCP Server（如 quark-search），只需配置此字段为对应的名称，无需配置 tools 字段。如果是 REST-to-MCP 场景，此字段可以填写任意值。 |
-| `server.config` | object     | 选填     | {}     | MCP Server 配置，如 API 密钥等      |
+| `server.name` | string     | 必填     | -      | MCP 服务器的名称。如果使用插件内置的 MCP 服务器（如 quark-search），只需配置此字段为对应的名称，无需配置 tools 字段。如果是 REST-to-MCP 场景，此字段可以填写任意值。 |
+| `server.config` | object     | 选填     | {}     | 服务器配置，如 API 密钥等      |
 | `server.allowTools` | array of string | 选填 | - | 允许调用的工具列表。如不指定，则允许所有工具 |
 
 ### REST-to-MCP 工具配置
@@ -67,7 +67,9 @@ authors: "澄潭"
 | `tools[].requestTemplate.argsToUrlParam` | boolean | 选填  | false  | 当为true时，参数将作为查询参数添加到URL中（与body、argsToJsonBody、argsToFormBody互斥） |
 | `tools[].requestTemplate.argsToFormBody` | boolean | 选填  | false  | 当为true时，参数将以application/x-www-form-urlencoded格式编码在请求体中（与body、argsToJsonBody、argsToUrlParam互斥） |
 | `tools[].responseTemplate`    | object          | 必填     | -      | HTTP 响应转换模板              |
-| `tools[].responseTemplate.body` | string        | 必填     | -      | 响应体转换模板                 |
+| `tools[].responseTemplate.body` | string        | 选填     | -      | 响应体转换模板（与prependBody和appendBody互斥） |
+| `tools[].responseTemplate.prependBody` | string | 选填     | -      | 在响应体前插入的文本（与body互斥） |
+| `tools[].responseTemplate.appendBody` | string  | 选填     | -      | 在响应体后插入的文本（与body互斥） |
 
 ## 参数类型支持
 
@@ -219,7 +221,7 @@ GJSON 提供了强大的 JSON 查询能力：
 
 ## 配置示例
 
-### 使用内置 MCP Server 示例：配置 quark-search
+### 使用内置 MCP 服务器示例：配置 quark-search
 
 ```yaml
 server:
@@ -228,7 +230,7 @@ server:
     apiKey: "xxxx"
 ```
 
-此配置使用了 Higress 内置的 quark-search MCP Server 。在这种情况下，只需要指定Server 名称和必要的配置（如 API 密钥），无需配置 tools 字段，因为工具已经在 MCP Server 中预定义好了。
+此配置使用了 Higress 内置的 quark-search MCP 服务器。在这种情况下，只需要指定服务器名称和必要的配置（如 API 密钥），无需配置 tools 字段，因为工具已经在服务器中预定义好了。
 
 ### 基础配置示例：转换高德地图 API
 
@@ -353,6 +355,59 @@ tools:
 - 使用数组切片 (`slice`) 选择特定时间的天气
 - 嵌套循环遍历多天和多时段的天气数据
 
+### 使用 PrependBody 和 AppendBody 的示例：OpenAPI 转换
+
+当您想保留原始 API 响应但添加额外的上下文信息时，`prependBody` 和 `appendBody` 字段非常有用。这在将 OpenAPI/Swagger 规范转换为 MCP 工具时特别有价值，因为您可以保留原始 JSON 响应，同时为 AI 助手提供字段含义的说明。
+
+```yaml
+server:
+  name: product-api-server
+  config:
+    apiKey: your-api-key-here
+tools:
+- name: get-product
+  description: "获取产品详细信息"
+  args:
+  - name: product_id
+    description: "产品ID"
+    type: string
+    required: true
+  requestTemplate:
+    url: "https://api.example.com/products/{{.args.product_id}}"
+    method: GET
+    headers:
+    - key: Authorization
+      value: "Bearer {{.config.apiKey}}"
+  responseTemplate:
+    prependBody: |
+      # 产品信息
+      
+      以下是产品的详细信息，以JSON格式返回。字段说明：
+      
+      - **id**: 产品唯一标识符
+      - **name**: 产品名称
+      - **description**: 产品描述
+      - **price**: 产品价格（美元）
+      - **category**: 产品类别
+      - **inventory**: 库存信息
+        - **quantity**: 当前库存数量
+        - **warehouse**: 仓库位置
+      - **ratings**: 用户评分列表
+        - **score**: 评分（1-5）
+        - **comment**: 评论内容
+      
+      原始JSON响应：
+      
+    appendBody: |
+      
+      您可以使用这些信息来了解产品的详细信息、价格、库存状态和用户评价。
+```
+
+此示例展示了：
+- 使用 `prependBody` 在原始 JSON 响应前添加字段说明
+- 使用 `appendBody` 在响应末尾添加使用建议
+- 保留原始 JSON 响应，使 AI 助手可以直接访问所有数据
+
 
 ## AI 提示词生成模板
 
@@ -416,6 +471,7 @@ tools:
     - key: x-api-key
       value: "{{.config.apiKey}}"
   responseTemplate:
+    # 以下三个选项互斥，只能选择其中一种
     body: |
       # 结果
       {{- range $index, $item := .items }}
@@ -423,6 +479,17 @@ tools:
       - **名称**: {{ $item.name }}
       - **值**: {{ $item.value }}
       {{- end }}
+    # 或者
+    # prependBody: |
+    #   # API响应说明
+    #   
+    #   以下是原始JSON响应，字段含义如下：
+    #   - field1: 字段1的含义
+    #   - field2: 字段2的含义
+    #   
+    # appendBody: |
+    #   
+    #   您可以使用这些数据来...
 ```
 
 ## 模板语法
@@ -448,8 +515,4 @@ tools:
 1. 具有描述性名称和适当的服务器配置
 2. 定义所有必要的参数，并提供清晰的描述和适当的类型、必填/默认值
 3. 选择合适的参数传递方式（argsToUrlParam、argsToJsonBody、argsToFormBody 或自定义 body）
-4. 创建将 API 响应转换为适合 AI 消费的可读格式的 responseTemplate 
-
-> 如您在使用 MCP Server 过程中遇到问题，可在 [Higress Github Issue](https://github.com/alibaba/higress/issues) 中留下您的信息。
-> 
-> 如您对 Higress 后续更新感兴趣，或希望给 Higress 提供反馈，欢迎 Star [Higress Github Repo](https://github.com/alibaba/higress/)。
+4. 创建将 API 响应转换为适合 AI 消费的可读格式的 responseTemplate
