@@ -85,6 +85,25 @@ servers:
 
 For database connection string format, please refer to the [gorm documentation](https://gorm.io/docs/connecting_to_the_database.html).
 
+### Configuring Nacos MCP Registry in Config Map
+```yaml
+servers:
+  - name: nacos-mcp-registry
+    type: nacos-mcp-registry
+    path: /registry
+    config:
+      serverAddr: "nacos server address"
+      namespace: "nacos namespace"
+      serviceMatcher:
+        your-service-group: "service-match-pattern"
+```
+Notes:
+The Nacos MCP Registry only exposes services that match the serviceMatcher AND have an mcp-tools configuration file as MCP services. Ensure that the service group and configuration file group are in the same namespace and group.
+
++ The key of serviceMatcher represents the service group.
++ The value is a regular expression used to match the service names.
++ To match all services, use .*.
+
 ### Configuring REST API MCP Server
 
 Any REST API can be quickly transformed into an MCP Server through the following steps:
