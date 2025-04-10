@@ -60,48 +60,6 @@ If you want to record ai-statistic related statistical values ​​​​in the
 
 ### Empty
 #### Metric
-```
-route_upstream_model_metric_input_token{ai_route="llm",ai_cluster="outbound|443||qwen.dns",ai_model="qwen-turbo"} 10
-route_upstream_model_metric_llm_duration_count{ai_route="llm",ai_cluster="outbound|443||qwen.dns",ai_model="qwen-turbo"} 1
-route_upstream_model_metric_llm_first_token_duration{ai_route="llm",ai_cluster="outbound|443||qwen.dns",ai_model="qwen-turbo"} 309
-route_upstream_model_metric_llm_service_duration{ai_route="llm",ai_cluster="outbound|443||qwen.dns",ai_model="qwen-turbo"} 1955
-route_upstream_model_metric_output_token{ai_route="llm",ai_cluster="outbound|443||qwen.dns",ai_model="qwen-turbo"} 69
-```
-
-#### Log
-```json
-{
-  "ai_log":"{\"model\":\"qwen-turbo\",\"input_token\":\"10\",\"output_token\":\"69\",\"llm_first_token_duration\":\"309\",\"llm_service_duration\":\"1955\"}"
-}
-```
-
-#### Trace
-When the configuration is empty, no additional attributes will be added to the span.
-
-### Extract token usage information from non-openai protocols
-When setting the protocol to original in ai-proxy, taking Alibaba Cloud Bailian as an example, you can make the following configuration to specify how to extract `model`, `input_token`, `output_token`
-
-```yaml
-attributes:
-  - key: model
-    value_source: response_body
-    value: usage.models.0.model_id
-    apply_to_log: true
-    apply_to_span: false
-  - key: input_token
-    value_source: response_body
-    value: usage.models.0.input_tokens
-    apply_to_log: true
-    apply_to_span: false
-  - key: output_token
-    value_source: response_body
-    value: usage.models.0.output_tokens
-    apply_to_log: true
-    apply_to_span: false
-```
-#### Metric
-
-Here is the English translation:
 
 ```
 # counter, cumulative count of input tokens
@@ -139,6 +97,46 @@ Average process duration of both streaming and non-streaming requests:
 irate(route_upstream_model_consumer_metric_llm_service_duration[2m])
 /
 irate(route_upstream_model_consumer_metric_llm_duration_count[2m])
+```
+
+#### Log
+```json
+{
+  "ai_log":"{\"model\":\"qwen-turbo\",\"input_token\":\"10\",\"output_token\":\"69\",\"llm_first_token_duration\":\"309\",\"llm_service_duration\":\"1955\"}"
+}
+```
+
+#### Trace
+When the configuration is empty, no additional attributes will be added to the span.
+
+### Extract token usage information from non-openai protocols
+When setting the protocol to original in ai-proxy, taking Alibaba Cloud Bailian as an example, you can make the following configuration to specify how to extract `model`, `input_token`, `output_token`
+
+```yaml
+attributes:
+  - key: model
+    value_source: response_body
+    value: usage.models.0.model_id
+    apply_to_log: true
+    apply_to_span: false
+  - key: input_token
+    value_source: response_body
+    value: usage.models.0.input_tokens
+    apply_to_log: true
+    apply_to_span: false
+  - key: output_token
+    value_source: response_body
+    value: usage.models.0.output_tokens
+    apply_to_log: true
+    apply_to_span: false
+```
+#### Metric
+
+```
+route_upstream_model_consumer_metric_input_token{ai_route="bailian",ai_cluster="qwen",ai_model="qwen-max"} 343
+route_upstream_model_consumer_metric_output_token{ai_route="bailian",ai_cluster="qwen",ai_model="qwen-max"} 153
+route_upstream_model_consumer_metric_llm_service_duration{ai_route="bailian",ai_cluster="qwen",ai_model="qwen-max"} 3725
+route_upstream_model_consumer_metric_llm_duration_count{ai_route="bailian",ai_cluster="qwen",ai_model="qwen-max"} 1
 ```
 
 #### Log
