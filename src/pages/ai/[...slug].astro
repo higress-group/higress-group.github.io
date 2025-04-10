@@ -2,9 +2,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import BlogPost from "@components/markdownSet/MarkdownDetail.astro";
 import TocComponent from "@components/markdownSet/TocComponents/TocComponent.astro";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import { Button } from "@serverless-cd/goat-ui";
-import { Icon } from "@astrojs/starlight/components";
+import AIBaseLayout from "@layouts/AIBaseLayout.astro";
 import Sidebar from "@components/starlight/Sidebar.astro";
 import { useTranslations } from "@i18n/util";
 import { SITE } from "@utils/config";
@@ -84,7 +82,7 @@ const baseLayout_title = post?.data?.title || `${SITE.name} Blog`;
 const description = post?.data?.description || "";
 ---
 
-	<BaseLayout 
+	<AIBaseLayout 
 		align="docs" 
 		title={baseLayout_title} 
 		description={description}
@@ -99,16 +97,6 @@ const description = post?.data?.description || "";
 			<div
 				class="w-full 2xl:ml-[20%] xl:ml-[20%] lg:ml-[20%] md:ml-[20%] 2xl:w-[60%] xl:w-[60%] lg:w-[80%] md:w-[80%] inline-block"
 			>
-				<div id="back-btn" class="pt-4 pl-6">
-					<Button
-						variant="secondary"
-						target="_self"
-						class="rounded-3xl"
-					>
-						<Icon name="left-arrow" class="text-lg align-middle" />
-						<span class="ml-0.5">BACK</span>
-					</Button>
-				</div>
 				<BlogPost {...post.data}>
 					<Content />
 				</BlogPost>
@@ -139,7 +127,7 @@ const description = post?.data?.description || "";
 				<TocComponent headings={headings} />
 			</div>
 		</div>
-	</BaseLayout>
+	</AIBaseLayout>
 <script>
 	function addBackBtnClick() {
 		const url = new URL(window.location.href);
