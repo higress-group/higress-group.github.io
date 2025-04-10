@@ -2,6 +2,7 @@
 title: Key-based Local Rate Limiting
 keywords: [higress,key rate limit]
 description: Configuration reference for Key local rate limiting plugin
+githubHigressUrl: https://github.com/alibaba/higress/tree/main/plugins/wasm-cpp/extensions/key_rate_limit
 ---
 
 ## Functional Description

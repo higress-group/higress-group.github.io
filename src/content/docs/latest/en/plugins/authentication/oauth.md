@@ -2,6 +2,7 @@
 title: OAuth2 Authentication
 keywords: [higress,oauth2]
 description: OAuth2 authentication plugin configuration reference
+githubHigressUrl: https://github.com/alibaba/higress/tree/main/plugins/wasm-cpp/extensions/oauth
 ---
 ## Function Description
 `OAuth2` plugin implements the capability of issuing OAuth2 Access Tokens based on JWT (JSON Web Tokens), complying with the [RFC9068](https://datatracker.ietf.org/doc/html/rfc9068) specification.

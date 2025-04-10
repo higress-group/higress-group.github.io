@@ -62,13 +62,15 @@ sortedPosts.forEach((item) => {
 				});
 			};
 			if (item.slug.split("/").length === 1) {
-				articlePosts[0].entries.unshift({
-					type: "link",
-					label: item.data.title,
-					href: `/ai/${item.slug}/`,
-					isCurrent: post.id === item.id,
-					attrs: {},
-				})
+				if (!articlePosts[0].entries.some(entry => entry.label === item.data.title)) {
+					articlePosts[0].entries.unshift({
+						type: "link",
+						label: item.data.title,
+						href: `/ai/${item.slug}/`,
+						isCurrent: post.id === item.id,
+						attrs: {},
+					})
+				};
 			};
 		})
 	}
@@ -82,14 +84,13 @@ const baseLayout_title = post?.data?.title || `${SITE.name} Blog`;
 const description = post?.data?.description || "";
 ---
 
-<span class="blog-slug-wrapper">
 	<BaseLayout 
 		align="docs" 
 		title={baseLayout_title} 
 		description={description}
-    channel={"AI"}
+		channel={"AI"}
 	>
-		<div class="w-full">
+		<div class="w-full blog-slug-wrapper">
 			<div
 				class="w-[20%] sidebar-content fixed overflow-auto h-full hidden 2xl:inline-block xl:inline-block lg:inline-block md:inline-block"
 			>
@@ -139,7 +140,6 @@ const description = post?.data?.description || "";
 			</div>
 		</div>
 	</BaseLayout>
-</span>
 <script>
 	function addBackBtnClick() {
 		const url = new URL(window.location.href);

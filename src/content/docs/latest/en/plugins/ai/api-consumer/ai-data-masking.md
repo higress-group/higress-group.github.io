@@ -2,6 +2,7 @@
 title: AI Data Masking
 keywords: [higress, ai data masking]
 description: AI Data Masking Plugin Configuration Reference
+githubHigressUrl: https://github.com/alibaba/higress/tree/main/plugins/wasm-rust/extensions/ai-data-masking
 ---
 ## Function Description
   Interception and replacement of sensitive words in requests/responses

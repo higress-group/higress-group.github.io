@@ -6,9 +6,9 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "大促采购季，新用户首购低至5折",
-    "mobileText": "大促采购季，新用户首购低至5折",
-    "link": "https://www.aliyun.com/activity/purchase/mseapiwg20251",
+    "text": "Higress 开源 Remote MCP Server 托管方案，并将上线 MCP 市场",
+    "mobileText": "Higress 开源 Remote MCP Server 托管方案，并将上线 MCP 市场",
+    "link": "https://higress.cn/en/blog/higress-gvr7dx_awbbpb_xq8kol5ncmllabkk/?spm=36971b57.c984973.0.0.40d67a85mhNAB9\u0026source=blog",
     "target": "_blank",
     "display": true
 }
