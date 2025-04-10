@@ -1,0 +1,75 @@
+---
+import "@starlight/style/props.css";
+import "@starlight/style/reset.css";
+import "@starlight/style/shiki.css";
+import "@starlight/style/util.css";
+import "../style/global.css";
+import "../style/fonts.css";
+import "@starlight/style/asides.css";
+import locales from "@i18n/languages";
+import { useTranslations } from "@i18n/util";
+import Head from "@components/starlight/Head.astro";
+import AIHomeHeader from "@components/common/Header/AIindex.astro";
+import "aos/dist/aos.css"; // 导入 AOS 样式
+
+const t = useTranslations(Astro);
+
+export type Props = {
+  title: string;
+  channel?: string;
+  description?: string;
+  lang?: string;
+  keywords?:(string | number)[] | string;
+  align?: "home" | "docs";
+};
+
+const { title, description, keywords, align = "home", channel = "" } = Astro.props;
+const headEntry = {
+  data: {
+    description: description,
+    keywords: keywords || t("commmon.base.layout.keywords"),
+    title: `${title}${channel? "_":""}${channel}`,
+    head: [],
+  },
+};
+
+const url = new URL(Astro.url);
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const hasBase = url.pathname.startsWith(base);
+if (hasBase) url.pathname = url.pathname.replace(base, "");
+const [_leadingSlash, baseSegment] = url.pathname.split("/");
+let lang = locales.root.lang;
+if (baseSegment && baseSegment in locales) {
+  lang = baseSegment;
+}
+Astro.props.lang = lang;
+---
+
+<html lang={Astro.props.lang} data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <!-- @ts-ignore -->
+    <Head entry={headEntry} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow" />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta property="og:image" content="https://img.alicdn.com/imgextra/i1/O1CN01Q9UWyF23bY1R0U0KE_!!6000000007274-2-tps-2560-1440.png" />
+    <link
+      data-rh="true"
+      rel="icon"
+      href="https://img.alicdn.com/imgextra/i4/O1CN01AViQMJ1J2lY4OPRgv_!!6000000000971-2-tps-376-375.png"
+    />
+  </head>
+  <body>
+    <AIHomeHeader align={align} lang={Astro.props.lang} {...Astro.props} />
+    <slot />
+    <script >
+      import('aos').then(AOS => {
+        AOS.init({
+          duration: 1200, // 动画持续时间
+          easing: 'ease-in-out', // 动画曲线
+        });
+      });
+    </script>
+  </body>
+</html>

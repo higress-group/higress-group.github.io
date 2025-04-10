@@ -14,9 +14,10 @@ const [comt, events] = COMMUNITY_MENU_LIST;
 const { blogDescrip, blogImgs, posts } = await getBlogContentList(
   HEADER_ACTIVITY_CARD
 ) as any;
+const isAipage = Astro.url.href.includes('/ai/');
 ---
 
-<MenuContainer>
+<MenuContainer isAipage={isAipage}>
   <MenuList menuData={{ comt, events }} slot="left" />
   <BlogCardContainer
     blogData={{ categoryMap, blogDescrip, blogImgs, posts }}

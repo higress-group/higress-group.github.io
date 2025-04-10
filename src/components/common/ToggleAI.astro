@@ -6,7 +6,6 @@ interface Props {
   trigger?: "hover" | "click";
   class?: string;
   active?: boolean;
-  isAipage?: boolean;
   target?: "_blank" | "_self";
   slot?: HTMLElement;
   // 如果下拉窗口内容比较多，可以相对视图定位，自定义下拉内容
@@ -26,7 +25,6 @@ const {
   showArrow = true,
   target = "_self",
   top = "4rem",
-  isAipage = false,
   relativePosition = 'parent'
 } = Astro.props;
 
@@ -34,6 +32,15 @@ const {
 const parentPosition = relativePosition === 'page'?'static':'relative'
 const ifdropdown = slot && !route;
 const Component = slot;
+
+// let components = [];
+// if (slot.indexOf('DocsDrop')) {
+//   components = slot && await Astro.glob('./Header2/TextDrop.astro');
+// } else if (slot.indexOf('ComtDrop')) {
+//   components = slot && await Astro.glob('./Header2/ComtDrop.astro');
+// }
+
+// const [component, ] = components;
 ---
 
 <span class="toggle-wrapper">
@@ -47,7 +54,7 @@ const Component = slot;
             <div
               class={`toggle-text flex items-center justify-center h-full ${
                 active ? "toggle-text-active" : ""
-              } ${isAipage ? "toggle-text-acai" : "" }`}
+              }`}
             >
               {title}
             </div>
@@ -59,12 +66,12 @@ const Component = slot;
             >
               {title}
               {route.includes('/plugin/')? 
-                <span class="toggle-text-ailogo text-center rounded-xl absolute top-[0] right-[-1.5rem] text-white bg-[red] w-[2rem] h-[1.25rem] font-bold">
+                <span class="toggle-text-ailogo text-center rounded-xl absolute top-[0] right-[-1.5rem] color-[#ffffff] bg-[red] w-[2rem] h-[1.25rem] font-bold">
                   AI
                 </span>
               :null}
               {route.includes('higress.ai')? 
-                <span class="toggle-text-ailogo text-xs text-center rounded-xl absolute top-[0.5rem] right-[-0.5rem] text-white bg-[red] w-[2rem] h-[1rem] font-medium">
+                <span class="toggle-text-ailogo text-xs text-center rounded-xl absolute top-[0.5rem] right-[-0.5rem] color-[#ffffff] bg-[red] w-[2rem] h-[1rem] font-medium">
                   NEW
                 </span>
               :null}
@@ -158,13 +165,6 @@ customElements.define("toggle-component", Toggle);
 
     .toggle-component a {
       color: inherit;
-    }
-
-    .toggle-component .toggle-text-acai{
-      color: rgb(18, 19, 22)!important;
-    }
-    .toggle-component .toggle-text-acai:hover{
-      color: rgb(62, 92, 244)!important;
     }
 
     .toggle-trigger {
