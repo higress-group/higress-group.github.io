@@ -122,6 +122,8 @@ Add a route in the Higress console and point it to the corresponding service sou
 
 #### 3. Configure MCP Server Plugin
 
+**Recommendation: You can use the [OpenAPI to MCP](https://github.com/higress-group/openapi-to-mcpserver) tool to automatically convert API documentation into MCP Server plugin configurations.**
+
 Click the *Strategy* button in the action of the route.
 
 Add and configure the MCP Server plugin for the created route:
