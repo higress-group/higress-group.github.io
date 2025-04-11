@@ -33,10 +33,8 @@ const sortedPosts = posts.sort(
 
 const articlePosts = JSON.parse(JSON.stringify(sidebarData));
 
-let currentIndex;
 sortedPosts.forEach((item) => {
 	if (item.data.category === post.data.category) {
-		if (post.id === item.id) currentIndex = articlePosts[0].entries.length;
 		articlePosts[0].entries.forEach((entries)=>{
 			if(item.slug.split("/")[1] === entries.fileName) {
 				entries.entries.unshift({
@@ -62,8 +60,19 @@ sortedPosts.forEach((item) => {
 	}
 });
 
-const prev = articlePosts[0].entries[currentIndex - 1];
-const next = articlePosts[0].entries[currentIndex + 1];
+const PaginationList = [];
+articlePosts[0].entries?.forEach((item) => {
+	if(item.type !== "group") {
+		PaginationList.push(item);
+	} else {
+		item.entries.forEach((item) => {
+			PaginationList.push(item);
+		})
+	}
+});
+let currentIndex = PaginationList.findIndex((item) => item.isCurrent);
+let prev = PaginationList[currentIndex - 1];
+let next = PaginationList[currentIndex + 1];
 const baseLayout_title = post?.data?.title || `${SITE.name} Blog`;
 const description = post?.data?.description || "";
 ---
@@ -79,6 +88,7 @@ const description = post?.data?.description || "";
 			<div
 				class="w-[20%] sidebar-content fixed overflow-auto h-full hidden 2xl:inline-block xl:inline-block lg:inline-block md:inline-block"
 			>
+				<!-- @ts-ignore -->
 				<Sidebar sidebar={articlePosts} />
 			</div>
 			<div
@@ -90,14 +100,11 @@ const description = post?.data?.description || "";
 				<div class="pb-6">
 					{
 						(prev || next) && (
+							//  @ts-ignore
 							<Pagination
 								labels={{
-									"page.previousLink": t(
-										"commmon.base.page.previousLink",
-									),
-									"page.nextLink": t(
-										"commmon.base.page.nextLink",
-									),
+									"page.previousLink": t("commmon.base.page.previousLink"),
+									"page.nextLink": t("commmon.base.page.nextLink"),
 								}}
 								pagination={{
 									prev: prev,
