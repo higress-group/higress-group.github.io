@@ -121,6 +121,8 @@ Nacos MCP Registry 只会将 serviceMatcher 匹配的并且配置了 mcp-tools �
 
 #### 3. 配置 MCP Server 插件
 
+**推荐：可以使用 [OpenAPI to MCP](https://github.com/higress-group/openapi-to-mcpserver) 工具，实现 API 文档到 MCP Server 插件配置的自动转换**
+
 对创建的路由添加 MCP Server 插件并进行配置：
 
 ![配置MCP Server插件](https://gw.alicdn.com/imgextra/i4/O1CN01HLJt6I26ehbSLSA57_!!6000000007687-0-tps-2940-1184.jpg)
