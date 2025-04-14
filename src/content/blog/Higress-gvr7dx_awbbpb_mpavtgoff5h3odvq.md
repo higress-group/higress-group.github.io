@@ -18,9 +18,7 @@ authors: "CH3CHO"
 
 <font style="color:rgb(33, 37, 41);">经典互联网应用，例如高德、支付宝等均以开放平台的方式对外提供 API 服务；公共云服务，例如阿里云通过 OpenAPI Explorer 向用户提供 API 服务，使得开发者可以通过这些应用程序接口来管理云上资源、数据和服务等内容。再例如人工智能大模型，通义、DeepSeek、OpenAI 均以 API 的方式，对外提供大模型的调用服务。这些 API 均遵循 OpenAPI 规范，有了规范，协作才会高效。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/133108/1744267023189-f4e5391e-967a-4fdf-9917-d9b0f83e0eff.png)
-
-<font style="color:rgb(33, 37, 41);"></font>
+![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1744625432031-347ffade-1ead-4227-976a-b1acc8511f52.png)
 
 ## <font style="color:rgb(33, 37, 41);">02 将存量 OpenAPI 转化为 MCP Server 的常规做法</font>
 MCP 是允许 LLM 能够通过标准化的方式，访问外部资源、数据和服务。将存量 OpenAPI 转化为 MCP Server，是一种利旧，是实现经济效益的高校路径，目的是使自身的服务能被外部的 AI 应用进行调用，从而提升存量服务的价值。仍然以高德地图为例，高德提供将存量的 OpenAPI 服务，例如 IP 定位、地理编码转化为 MCP Server，就可以让外部应用调用高德地图的能力，从而提升服务的活跃度。
