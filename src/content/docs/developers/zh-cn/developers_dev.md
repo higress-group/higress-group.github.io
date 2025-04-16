@@ -42,6 +42,7 @@ description: Higress 维护者名单
 | 刘毅杰 | [007gzs](https://github.com/007gzs) | 棱镜七彩 |
 | 张正好 | [alexzzh](https://github.com/alexzzh)   | 格尔软件  |
 | 李强林 | [Charlie17Li](https://github.com/Charlie17Li)   | 浙大  |
+| 冯晓强 | [Fengxq2014](https://github.com/Fengxq2014)     | 多飞科技   |
 | 封宇腾 | [Ffyyt](https://github.com/Fkbqf)               | 西安邮电     |
 | 田亚涛 | [Hinsteny](https://github.com/Hinsteny)         | 蚂蚁      |
 | 屈晗煜 | [Ink-33](https://github.com/Ink-33)         | 东莞理工     |
