@@ -94,11 +94,11 @@ servers:
   - name: nacos-mcp-registry
     type: nacos-mcp-registry
     path: /registry
-      config: 
-        serverAddr: "nacos server address"
-        namespace: "nacos namespace"
-        serviceMatcher:
-          your-service-group: "service-match-pattern"
+    config: 
+      serverAddr: "nacos server address"
+      namespace: "nacos namespace"
+      serviceMatcher:
+        your-service-group: "service-match-pattern"
 ```
 Nacos MCP Registry 只会将 serviceMatcher 匹配的并且配置了 mcp-tools 配置文件的服务暴露为MCP 服务。请注意服务的分组和配置文件的分组必须在同一个命名空间和分组下。serviceMatcher 的key是服务的分组， value是服务的正则匹配表达式，如果需要匹配所有服务可以使用 `.*`
 
