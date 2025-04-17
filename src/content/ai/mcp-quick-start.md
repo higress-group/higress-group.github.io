@@ -100,7 +100,7 @@ servers:
       serviceMatcher:
         your-service-group: "service-match-pattern"
 ```
-Nacos MCP Registry 只会将 serviceMatcher 匹配的并且配置了 mcp-tools 配置文件的服务暴露为MCP 服务。请注意服务的分组和配置文件的分组必须在同一个命名空间和分组下。serviceMatcher 的key是服务的分组， value是服务的正则匹配表达式，如果需要匹配所有服务可以使用 `.*`
+Nacos MCP Registry 只会将 serviceMatcher 匹配的并且配置了 mcp-tools 配置文件的服务暴露为MCP 服务。请注意服务的分组和配置文件的分组必须在同一个命名空间和分组下。serviceMatcher 的key是服务的分组， value是服务的正则匹配表达式，如果需要匹配所有服务可以使用 `.*`，serverAddr 为 Nacos 的地址无需填写端口，目前默认为8848
 
 
 ### 配置 REST API MCP Server

@@ -98,7 +98,7 @@ servers:
         your-service-group: "service-match-pattern"
 ```
 Notes:
-The Nacos MCP Registry only exposes services that match the serviceMatcher AND have an mcp-tools configuration file as MCP services. Ensure that the service group and configuration file group are in the same namespace and group.
+The Nacos MCP Registry only exposes services that match the serviceMatcher AND have an mcp-tools configuration file as MCP services. Ensure that the service group and configuration file group are in the same namespace and group.The serverAddr is the Nacos address without needing to specify the port, as the default is 8848.
 
 + The key of serviceMatcher represents the service group.
 + The value is a regular expression used to match the service names.
