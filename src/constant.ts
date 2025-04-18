@@ -6,8 +6,8 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "下载《AI 应用 \u0026 AI Agent 开发新范式》电子书 了解构建 AI Agent 和 MCP Server 的一线实践",
-    "mobileText": "下载《AI 应用 \u0026 AI Agent 开发新范式》电子书，了解构建 AI Agent 和 MCP Server 的一线实践",
+    "text": "下载《AI 应用 \u0026 AI Agent 开发新范式》电子书  了解构建 AI Agent 和 MCP Server 的一线实践",
+    "mobileText": "下载《AI 应用 \u0026 AI Agent 开发新范式》电子书  了解构建 AI Agent 和 MCP Server 的一线实践",
     "link": "https://developer.aliyun.com/ebook/8442",
     "target": "_blank",
     "display": true
