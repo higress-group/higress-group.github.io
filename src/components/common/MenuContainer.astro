@@ -1,4 +1,8 @@
 ---
+interface Props {
+  isAipage?: boolean;
+}
+const { isAipage=false } = Astro.props as Props;
 import { useTranslations } from "@i18n/util";
 import { Email, Ding, Github } from "../icon";
 import {SITE} from "@utils/config"
@@ -8,7 +12,7 @@ const t = useTranslations(Astro);
 <menu-container
   class="menu-container dropdown-docs w-screen h-screen flex flex-col justify-start items-center"
 >
-  <div class="bg-neutral p-10 w-full flex justify-center">
+  <div class=`bg-neutral p-10 w-full flex justify-center ${isAipage? "menu-container-ai":""}`>
     <div class="w-fit">
       <div class="flex justify-between mb-[3.5rem]">
         <slot name="left" />
@@ -90,6 +94,16 @@ const t = useTranslations(Astro);
     .card-link-icon {
       transition: width 0.3s ease;
     }
+  }
+  .menu-container-ai {
+      background: rgba(255, 255, 255, 0.98)!important;
+      .contact-us {
+        background: rgba(76, 80, 93, 0.6);
+
+        &>span, &>div>a>span, &>div>div>span>span {
+          color: rgb(18, 19, 22)!important;
+        }
+      }
   }
   
 </style>

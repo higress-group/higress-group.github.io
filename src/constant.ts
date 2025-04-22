@@ -6,9 +6,9 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "Higress 开源 Remote MCP Server 托管方案，并将上线 MCP 市场",
-    "mobileText": "Higress 开源 Remote MCP Server 托管方案，并将上线 MCP 市场",
-    "link": "https://higress.cn/en/blog/higress-gvr7dx_awbbpb_xq8kol5ncmllabkk/?spm=36971b57.c984973.0.0.40d67a85mhNAB9\u0026source=blog",
+    "text": "下载《AI 应用 \u0026 AI Agent 开发新范式》电子书  了解构建 AI Agent 和 MCP Server 的一线实践",
+    "mobileText": "下载《AI 应用 \u0026 AI Agent 开发新范式》电子书  了解构建 AI Agent 和 MCP Server 的一线实践",
+    "link": "https://developer.aliyun.com/ebook/8442",
     "target": "_blank",
     "display": true
 }

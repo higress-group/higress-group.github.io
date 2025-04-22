@@ -98,7 +98,7 @@ servers:
         your-service-group: "service-match-pattern"
 ```
 Notes:
-The Nacos MCP Registry only exposes services that match the serviceMatcher AND have an mcp-tools configuration file as MCP services. Ensure that the service group and configuration file group are in the same namespace and group.
+The Nacos MCP Registry only exposes services that match the serviceMatcher AND have an mcp-tools configuration file as MCP services. Ensure that the service group and configuration file group are in the same namespace and group. The serverAddr is the Nacos address without needing to specify the port, as the default is 8848.
 
 + The key of serviceMatcher represents the service group.
 + The value is a regular expression used to match the service names.
@@ -121,6 +121,8 @@ Add a route in the Higress console and point it to the corresponding service sou
 ![Configure Route](https://github.com/user-attachments/assets/639426c3-3c74-4268-b12f-c0173c1620ab)
 
 #### 3. Configure MCP Server Plugin
+
+**Recommendation: You can use the [OpenAPI to MCP](https://github.com/higress-group/openapi-to-mcpserver) tool to automatically convert API documentation into MCP Server plugin configurations.**
 
 Click the *Strategy* button in the action of the route.
 

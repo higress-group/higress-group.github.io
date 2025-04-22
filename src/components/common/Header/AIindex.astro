@@ -1,0 +1,243 @@
+---
+import { useTranslations } from "@i18n/util";
+import Navbar from "@components/common/Navbar.astro";
+import { LanguageToggle } from "@serverless-cd/goat-ui"
+import MobileNavbar from "@components/common/MobileNavbar.astro";
+import SearchComp from "./searchComp/index.astro";
+import { SITE } from "@utils/config";
+import Alert from "./Alert.astro";
+import { isChinese } from "@i18n/util";
+
+interface Props {
+  align?: "home" | "docs";
+  position?: "static" | "sticky";
+  lang: "zh-cn" | "en" | string;
+}
+const ifzh = isChinese(Astro);
+
+const t = useTranslations(Astro);
+const { align = "home", position = "sticky", lang } = Astro.props;
+
+let height,
+  width,
+  xpadding = "";
+(() => {
+  switch (align) {
+    case "home":
+      height = "4rem";
+      width = "85.125rem";
+      xpadding = "0";
+      return;
+    case "docs":
+      height = "3.5rem";
+      width = "100%";
+      xpadding = "1.5rem";
+      return;
+  }
+})();
+---
+
+<span class="header-wrapper ai-header-wrapper">
+  <Alert />
+  <my-layout
+    style={`position: ${position}; height: ${height}`}
+    class="w-full backdrop-blur-md top-0 z-[10] flex justify-center"
+  >
+    <!-- 方便控制header宽度 -->
+    <div class="header-content flex items-center justify-between">
+      <div class="left-content h-full flex flex-1 items-center after:content-[''] after:grow after:invisible">
+        <a class="no-underline flex" href={ifzh?"/":"/en"}>
+          <img class="logo" src="https://framerusercontent.com/images/pQ8aJuFZIMiP89TbxUoG075mc.png" alt=`${SITE.name}-logo` />
+        </a>
+        <MobileNavbar top={height} class="mobile-navbar h-full ml-4" svgColor="gray"/>
+      </div>
+
+      <div class="center-content justify-center flex-2 h-full">
+        <Navbar top={height} class="pc-navbar h-full" />
+      </div>
+  
+      <div class="right-content flex flex-1 items-center md:gap-4  before:content-[''] before:grow before:invisible">
+        <LanguageToggle id="pc-toggle" lang={lang.toLowerCase()} theme="info"/>
+        <SearchComp />
+      </div>
+    </div>
+    
+  </my-layout>
+</span>
+
+<script>
+  // animation
+  let script = document.createElement("script");
+  script.src =
+    "https://g.alicdn.com/cm-design/mw-vendor/1.6.12/web-animations-next.min.js?spm=defwork.home.0.0.413a5c4bEOqptl&file=web-animations-next.min.js";
+  script.onload = function () {
+    if (!document.getAnimations) {
+      document.getAnimations = window.Element.prototype.getAnimations;
+    }
+  };
+  document.head.appendChild(script);
+</script>
+
+<script>
+  function addCopilot() {
+    const copilotJSScript = document.createElement("script");
+    copilotJSScript.type = "text/javascript";
+    copilotJSScript.src = "https://g.alicdn.com/cm-design/copilot-booter/0.0.27/copilot-booter.js";
+    copilotJSScript.addEventListener("load", function () {
+      if (window.CNPilot) {
+        window.CNPilot.mounted({
+          CNPilot_OPEN_SOURCE: ["higress.cn","higress.io"],
+          CNPilot_OPEN_SOURCE_API: "https://ai.nacos.io",
+          CNPilot_OPEN_SOURCE_PRODUCT_NAME: "higress",
+          showFloatICON: true,
+          globalStyle: {
+            top: "0",
+            height: "100vh",
+          },
+          entryIconProps: {
+            'position-type':'updown',
+            'icon-hover-text':'专家答疑',
+            'icon-url':'https://img.alicdn.com/imgextra/i3/O1CN013gOExm1X2g7hKMTjC_!!6000000002866-2-tps-92-92.png',
+            'icon-style': { 
+              color:'white', 
+              width: '80px',
+              height: '80px',
+              background: '#3D57DA',
+              border:'none',
+              paddingTop: '12px'
+            },
+            'image-style': {
+              width: '46px',
+              height: '46px',
+              borderRadius: '16px',
+            },
+            'icon-text': {
+              color: '#F4F4F6',
+              width: '100%',
+              fontSize: '10px',
+              fontFamily: " Source Han Sans",
+              fontWeight: "normal",
+              lineHeight: "normal",
+              textAlign: "center",
+              letterSpacing: "0em"
+            }
+          },
+          headerProps: {
+            closeIcon: { show: true },
+            titleText: "AI答疑专家",
+          },
+        });
+      }
+    });
+    document.body.append(copilotJSScript);
+  };
+
+  addCopilot();
+
+  document.addEventListener("astro:page-load", function () {
+    if (window.CNPilot) window.CNPilot.unmounted();
+    addCopilot();
+  });
+</script>
+
+<script>
+  class HeaderLayout2 extends HTMLElement {
+    private ifscroll: boolean;
+    constructor() {
+      super();
+      this.ifscroll = false;
+      window.addEventListener("scroll", this.handleScroll);
+    }
+
+    handleScroll = () => {
+      if (window.innerWidth <= 800) return;
+    };
+  }
+  customElements.define("my-layout", HeaderLayout2);
+</script>
+
+<style define:vars={{ width, height, xpadding }} is:global>
+  .header-wrapper {
+    my-layout {
+      --header-content-width: var(--width);
+      --logo-height: 2rem;
+      --header-height: var(--height);
+      --header-xl-padding: var(--xpadding);
+    }
+
+    .header-content {
+      width: var(--header-content-width);
+      padding-left: var(--header-xl-padding);
+      padding-right: var(--header-xl-padding);
+      background-color: rgba(224, 233, 251, 0.45)!important;
+      /* .toggle-wrapper .toggle-component a */
+      .toggle-wrapper {
+        .toggle-component {
+          a {
+            color: rgb(18, 19, 22);
+            &:hover {
+              color: rgb(62, 92, 244);
+            }
+            .toggle-text-ailogo {
+              color: #fff!important;
+            }
+          }
+        }
+      }
+    }
+
+    .left-content .logo {
+      vertical-align: sub;
+      height: var(--logo-height);
+    }
+
+    .left-content .mobile-navbar {
+      display: none;
+    }
+
+    @media (max-width: 85.125rem) {
+      /* 在这里编写屏幕宽度小于85.125rem的CSS样式 */
+      .header-content {
+        width: 100%;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+
+    @media (max-width: 1070px) {
+      /** header 特殊处理 屏幕小于 1070px 就显示不完全 */
+      .header-content {
+        width: 100%;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      .left-content .mobile-navbar {
+        display: block;
+      }
+      .center-content {
+        display: none;
+      }
+      .code-toggle {
+        padding: 0 !important;
+        background-color: transparent !important;
+        span {
+          display: none;
+        }
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+    }
+  }
+  .ai-header-wrapper {
+    .DocSearch-Button {
+      background-color: rgba(224, 233, 251, 0.45)!important;
+      color: #333;
+      padding:0 8px;
+      .DocSearch-Search-Icon {
+        color: #333;
+      }
+    }
+  }
+</style>
