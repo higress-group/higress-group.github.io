@@ -339,6 +339,13 @@
               "link": "docs/ops/how-tos/gateway-ports"
             },
             {
+              "label": "修改内置插件镜像地址",
+              "translations": {
+                "en": "Modify image URLs of built-in plugins"
+              },
+              "link": "docs/ops/how-tos/builtin-plugin-url"
+            },
+            {
               "label": "使用 HTTP/HTTPS 协议加载 Wasm 插件",
               "translations": {
                 "en": "Load Wasm plugins with HTTP/HTTPS protocol"
