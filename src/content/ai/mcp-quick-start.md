@@ -86,8 +86,6 @@ servers:
 ```
 
 ### 配置 Nacos MCP Registry
-> **注意：**
-> 需要Nacos版本为3.0及以上
 
 在mcpbridge中配置nacos mcp registry服务来源
 具体的配置信息见文档 [Mcp Bridge 配置说明](https://higress.cn/docs/latest/user/mcp-bridge/?spm=36971b57.31888769.0.0.559550f86sCJw2)
@@ -99,7 +97,7 @@ registries:
   port: 8848
   type: nacos3
 ```
-mcpServerBaseUrl的默认值为 /mcp-registry。之后
+
 在 Config Map 中配置 Nacos MCP Registry 前缀匹配：
 ```yaml
 match_list:
@@ -107,9 +105,9 @@ match_list:
     match_rule_path: you_custom_url_prefix
     match_rule_type: "prefix"
 ```
-配置中registries[].mcpServerBaseUrl 和 match_list[].match_rule_path 需要保持一致。
+配置中registries[].mcpServerBaseUrl 和 match_list[].match_rule_path 需要保持一致。需要NacosServer版本为最新的3.0.
 配置完成后，即可通过higress访问注册在nacos中的mcp服务。
-访问的endpoint为 http://{higresshost}/you_custom_url_prefix/{nacos中MCP服务的名称}/{nacos中mcp服务配置中的访问路径}
+访问的endpoint为 http://{higresshost}/you_custom_url_prefix/{nacos中mcp服务配置中的访问路径}
 
 ### 配置 REST API MCP Server
 
