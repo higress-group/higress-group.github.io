@@ -85,26 +85,24 @@ servers:
 
 For database connection string format, please refer to the [gorm documentation](https://gorm.io/docs/connecting_to_the_database.html).
 
-### Configure Nacos MCP Registry
-
-Configure the Nacos MCP registry service source in mcpbridge. For detailed configuration information, see the documentation [Mcp Bridge Configuration](https://higress.cn/en/docs/latest/user/mcp-bridge/?spm=36971b57.35684624.0.0.4b3d7cdcfQgsaa)
+### Configuring Nacos MCP Registry in Config Map
 ```yaml
-registries:
-- domain: localhost                            # Address of Nacos, either IP address or domain name
-  mcpServerBaseUrl: you_custom_url_prefix
-  name: you_custom_name
-  port: 8848
-  type: nacos3
+servers:
+  - name: nacos-mcp-registry
+    type: nacos-mcp-registry
+    path: /registry
+    config:
+      serverAddr: "nacos server address"
+      namespace: "nacos namespace"
+      serviceMatcher:
+        your-service-group: "service-match-pattern"
 ```
+Notes:
+The Nacos MCP Registry only exposes services that match the serviceMatcher AND have an mcp-tools configuration file as MCP services. Ensure that the service group and configuration file group are in the same namespace and group. The serverAddr is the Nacos address without needing to specify the port, as the default is 8848.
 
-Configure the prefix matching for Nacos MCP Registry in the Config Map:
-```yaml
-match_list:
-  - match_rule_domain: "*"
-    match_rule_path: you_custom_url_prefix
-    match_rule_type: "prefix"
-```
-The registries[].mcpServerBaseUrl and match_list[].match_rule_path in the configuration need to be consistent. The NacosServer version needs to be the latest 3.0. Once configured, you can access MCP services registered in Nacos through Higress. The endpoint for access is http://{higresshost}/you_custom_url_prefix/{access path in Nacos MCP service configuration}.
++ The key of serviceMatcher represents the service group.
++ The value is a regular expression used to match the service names.
++ To match all services, use .*.
 
 ### Configuring REST API MCP Server
 
