@@ -96,15 +96,7 @@ registries:
   port: 8848
   type: nacos3
 ```
-the default value of mcpServerBaseUrl is /mcp-registry
-Configure the prefix matching for Nacos MCP Registry in the Config Map:
-```yaml
-match_list:
-  - match_rule_domain: "*"
-    match_rule_path: you_custom_url_prefix
-    match_rule_type: "prefix"
-```
-The registries[].mcpServerBaseUrl and match_list[].match_rule_path in the configuration need to be consistent. The NacosServer version needs to be the latest 3.0. Once configured, you can access MCP services registered in Nacos through Higress. The endpoint for access is http://{higresshost}/you_custom_url_prefix/{service name in Nacos MCP Service configuration}/{access path in Nacos MCP service configuration}.
+Once configured, you can access MCP services registered in Nacos through Higress. The endpoint for access is http://{higresshost}/you_custom_url_prefix/{service name in Nacos MCP Service configuration}/{access path in Nacos MCP service configuration}.
 
 ### Configuring REST API MCP Server
 

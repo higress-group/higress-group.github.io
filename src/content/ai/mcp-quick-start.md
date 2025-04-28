@@ -99,15 +99,6 @@ registries:
   port: 8848
   type: nacos3
 ```
-mcpServerBaseUrl的默认值为 /mcp-registry。之后
-在 Config Map 中配置 Nacos MCP Registry 前缀匹配：
-```yaml
-match_list:
-  - match_rule_domain: "*"
-    match_rule_path: you_custom_url_prefix
-    match_rule_type: "prefix"
-```
-配置中registries[].mcpServerBaseUrl 和 match_list[].match_rule_path 需要保持一致。
 配置完成后，即可通过higress访问注册在nacos中的mcp服务。
 访问的endpoint为 http://{higresshost}/you_custom_url_prefix/{nacos中MCP服务的名称}/{nacos中mcp服务配置中的访问路径}
 
