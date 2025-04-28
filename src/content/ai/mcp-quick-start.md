@@ -87,7 +87,7 @@ servers:
 
 ### 配置 Nacos MCP Registry
 > **注意：**
-> 需要Nacos版本为3.0及以上
+> 需要Nacos版本为3.0及以上，Higress版本在2.1.2及以上
 
 在mcpbridge中配置nacos mcp registry服务来源
 具体的配置信息见文档 [Mcp Bridge 配置说明](https://higress.cn/docs/latest/user/mcp-bridge/?spm=36971b57.31888769.0.0.559550f86sCJw2)

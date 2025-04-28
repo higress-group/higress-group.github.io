@@ -86,6 +86,8 @@ servers:
 For database connection string format, please refer to the [gorm documentation](https://gorm.io/docs/connecting_to_the_database.html).
 
 ### Configure Nacos MCP Registry
+> **Note：**
+> Nacos version >= 3.0，Higress version >= 2.1.2
 
 Configure the Nacos MCP registry service source in mcpbridge. For detailed configuration information, see the documentation [Mcp Bridge Configuration](https://higress.cn/en/docs/latest/user/mcp-bridge/?spm=36971b57.35684624.0.0.4b3d7cdcfQgsaa)
 ```yaml
