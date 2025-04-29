@@ -85,24 +85,20 @@ servers:
 
 For database connection string format, please refer to the [gorm documentation](https://gorm.io/docs/connecting_to_the_database.html).
 
-### Configuring Nacos MCP Registry in Config Map
-```yaml
-servers:
-  - name: nacos-mcp-registry
-    type: nacos-mcp-registry
-    path: /registry
-    config:
-      serverAddr: "nacos server address"
-      namespace: "nacos namespace"
-      serviceMatcher:
-        your-service-group: "service-match-pattern"
-```
-Notes:
-The Nacos MCP Registry only exposes services that match the serviceMatcher AND have an mcp-tools configuration file as MCP services. Ensure that the service group and configuration file group are in the same namespace and group. The serverAddr is the Nacos address without needing to specify the port, as the default is 8848.
+### Configure Nacos MCP Registry
+> **Note：**
+> Nacos version >= 3.0，Higress version >= 2.1.2
 
-+ The key of serviceMatcher represents the service group.
-+ The value is a regular expression used to match the service names.
-+ To match all services, use .*.
+Configure the Nacos MCP registry service source in mcpbridge. For detailed configuration information, see the documentation [Mcp Bridge Configuration](https://higress.cn/en/docs/latest/user/mcp-bridge/?spm=36971b57.35684624.0.0.4b3d7cdcfQgsaa)
+```yaml
+registries:
+- domain: localhost                            # Address of Nacos, either IP address or domain name
+  mcpServerBaseUrl: you_custom_url_prefix
+  name: you_custom_name
+  port: 8848
+  type: nacos3
+```
+Once configured, you can access MCP services registered in Nacos through Higress. The endpoint for access is http://{higresshost}/you_custom_url_prefix/{service name in Nacos MCP Service configuration}/{access path in Nacos MCP service configuration}.
 
 ### Configuring REST API MCP Server
 
