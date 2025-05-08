@@ -100,7 +100,7 @@ docker run -d --rm --name higress-ai -v ${PWD}:/data \
 
 #### 1. 打开 Higress 控制台
 
-在浏览器中访问 `http://localhost:8080`。
+在浏览器中访问 `http://localhost:8001`。
 
 首次访问将会要求配置登录账号信息。配置完成后，请使用配置好的账号登录。
 
