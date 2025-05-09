@@ -70,8 +70,9 @@ LLM 结果缓存插件，默认配置方式可以直接用于 openai 协议的�
 
 
 ## 缓存服务（cache）
-| cache.type | string | required | "" | 缓存服务类型，例如 redis |
+| Name | Type | Requirement | Default | Description |
 | --- | --- | --- | --- | --- |
+| cache.type | string | required | "" | 缓存服务类型，例如 redis |
 | cache.serviceName | string | required | "" | 缓存服务名称 |
 | cache.serviceHost | string | required | "" | 缓存服务域名 |
 | cache.servicePort | int64 | optional | 6379 | 缓存服务端口 |
