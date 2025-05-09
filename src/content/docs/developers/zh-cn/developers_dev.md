@@ -18,6 +18,7 @@ description: Higress 维护者名单
 | 董艺荃 | [CH3CHO](https://github.com/CH3CHO) | 携程        |
 | 耿蕾蕾 | [gengleilei](https://github.com/gengleilei) | 阿里云        |
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | 阿里云        |
+| 徐靖峰 | [lexburner](https://github.com/lexburner) | 阿里云        |
 | 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
 | 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
 
