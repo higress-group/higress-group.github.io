@@ -4,7 +4,7 @@ description: Higress AI 网关提供 MCP Server 统一托管能力，可以帮�
 date: "2025-05-10"
 category: "article"
 keywords: ["MCP Server"]
-authors: "CH3CHO","dingyue"
+authors: ["CH3CHO","dingyue"]
 ---
 
 ## 概述
