@@ -17,6 +17,8 @@ description: Higress 维护者名单
 | 吴新军 | [2456868764](https://github.com/2456868764) | 独立开发者      |
 | 董艺荃 | [CH3CHO](https://github.com/CH3CHO) | 携程        |
 | 耿蕾蕾 | [gengleilei](https://github.com/gengleilei) | 阿里云        |
+| 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
+| 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | 阿里云        |
 | 徐靖峰 | [lexburner](https://github.com/lexburner) | 阿里云        |
 | 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
@@ -25,8 +27,6 @@ description: Higress 维护者名单
 ## Higress Approvers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
-| 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
-| 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
 | 范扬 | [SpecialYang](https://github.com/SpecialYang) | 字节跳动        |
 | 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
 
