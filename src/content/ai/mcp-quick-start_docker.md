@@ -1,49 +1,80 @@
 ---
-title: MCP Server 快速开始（Docker 版）
+title: MCP Server 快速开始（Docker Compose 版）
 description: Higress AI 网关提供 MCP Server 统一托管能力，可以帮助 AI Agent 快速对接各类数据源。通过 MCP Server，AI Agent 可以方便地访问数据库、REST API 等外部服务，无需关心具体的连接细节。其中，数据库对接能力是网关内置的能力；而对于 REST API，任何外部 REST API 都可以通过简单的配置转换成 MCP Server
-date: "2025-04-20"
+date: "2025-05-10"
 category: "article"
 keywords: ["MCP Server"]
-authors: "CH3CHO"
+authors: ["CH3CHO","dingyue"]
 ---
 
-## 概述 
+## 概述
 
 Higress AI 网关提供 MCP Server 统一托管能力，可以帮助 AI Agent 快速对接各类数据源。通过 MCP Server，AI Agent 可以方便地访问数据库、REST API 等外部服务，无需关心具体的连接细节。其中，数据库对接能力是网关内置的能力；而对于 REST API，任何外部 REST API 都可以通过简单的配置转换成 MCP Server。本文将以 一个简单的 REST API 为例，介绍通过 Higress 将一个 REST API 转化为 MCP Server 的配置流程。
 
 ## 前提条件
 
-1. 确认本机安装有 Docker 且 `docker` 命令可用。
+1. 确认本机安装有 Docker 且 `docker`,`docker-compose` 命令可用。
   ```bash
   docker
+  docker compose
   ```
 2. 确认本机可以访问外网。
 
-## 部署 Higress
+## 部署 Higress 和 Redis
+
+### 部署 Higress
 
 在开始使用 MCP Server 之前，需要先部署 Higress。我们这里使用的是 all-in-one 镜像的部署方式。
+
+
+
+**重要：**后续操作过程中，请勿切换终端的工作目录。应使其保持在新创建的 `higress` 目录下。
+
+您也可以参考 [Higress 快速入门指南](https://higress.cn/docs/latest/user/quickstart) 完成这部分的部署工作。
+
+### 部署 Redis
+
+MCP Server 的 SSE 功能需要依赖 Redis 服务用于数据缓存。我们可以使用以下命令在后台启动一个 Redis 服务容器，并将其 6379 端口映射到本机。
+
 
 ```bash
 # 创建一个工作目录
 mkdir higress; cd higress
 # 拉取最新的 Higress all-in-one 镜像
 docker pull higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
-# 启动 Higress，配置文件会写到工作目录下
-docker run -d --rm --name higress-ai -v ${PWD}:/data \
-        -p 8001:8001 -p 8080:8080 -p 8443:8443 \
-        higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
-```
+# 拉取最新的 redis 镜像
+docker pull higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/redis-stack-server:7.4.0-v3
 
-**重要：**后续操作过程中，请勿切换终端的工作目录。应使其保持在新创建的 `higress` 目录下。
+# 写入docker-compose.yaml 配置文件
+cat <<EOF > docker-compose.yaml
+version: '3.8' # 您可以使用如 '3.8' 或 '3.9' 的最新版本
 
-您也可以参考 [Higress 快速入门指南](https://higress.cn/docs/latest/user/quickstart) 完成这部分的部署工作。
+services:
+  higress-ai:
+    container_name: higress-ai
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
+    ports:
+      - "8001:8001" # Higress UI 控制台入口
+      - "8080:8080" # Gateway HTTP 协议入口
+      - "8443:8443" # Gateway HTTPS 协议入口
+    volumes:
+      - "${PWD}:/data" # 将当前目录挂载到容器内的 /data 目录，用于配置持久化
+    restart: unless-stopped # 除非明确停止，否则容器将自动重启
 
-## 部署 Redis
+  redis:
+    container_name: higress-redis
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/redis-stack-server:7.4.0-v3
+    ports:
+      - "6379:6379" # 将宿主机端口 6379 映射到容器端口 6379
+    restart: unless-stopped # 除非明确停止，否则容器将自动重启
+    # 如果需要持久化 Redis 数据，可以添加 volumes 配置，例如：
+    # volumes:
+    #   - redis_data:/data
+EOF
 
-MCP Server 的 SSE 功能需要依赖 Redis 服务用于数据缓存。我们可以使用以下命令在后台启动一个 Redis 服务容器，并将其 6379 端口映射到本机。
+# 通过docker-compose 命令 启动 Higress 和 redis，配置文件会写到工作目录下
+docker-compose up -d
 
-```bash
-docker run -d --rm --name higress-redis -p 6379:6379 higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/redis-stack-server:7.4.0-v3
 ```
 
 ## 配置 MCP Server
@@ -72,7 +103,7 @@ data:
       sse_path_suffix: /sse  # SSE 连接的路径后缀
       enable: true          # 启用 MCP Server
       redis:
-        address: IP:6379 # Redis服务地址。这里需要使用本机的内网 IP，不可以使用 127.0.0.1
+        address: redis:6379 # Redis服务地址
         username: "" # Redis用户名（可选）
         password: "" # Redis密码（可选）
         db: 0 # Redis数据库（可选）
@@ -82,16 +113,23 @@ data:
           match_rule_type: "prefix"
       servers: []
     downstream:
-    # 以下配置无需修改，此处省略
+      connectionBufferLimits: 32768
+      http2:
+        initialConnectionWindowSize: 1048576
+        initialStreamWindowSize: 65535
+        maxConcurrentStreams: 100
+      idleTimeout: 180
+      maxRequestHeadersKb: 60
+      routeTimeout: 0
+    upstream:
+      connectionBufferLimits: 10485760
+      idleTimeout: 10
 ```
 
 **注意：**受 Docker 运行环境的限制，非 Linux 操作系统在修改 yaml 文件之后，需要等待一段时间才能让新的配置生效。如果希望立即生效的话，可以使用以下命令重启 higress-ai 容器：
 
 ```bash
-docker stop higress-ai
-docker run -d --rm --name higress-ai -v ${PWD}:/data \
-        -p 8001:8001 -p 8080:8080 -p 8443:8443 \
-        higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
+docker-compose restart
 ```
 
 ### 配置 REST API MCP Server
