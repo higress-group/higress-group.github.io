@@ -2,7 +2,7 @@
 title: 修改内置插件的镜像地址
 keywords: [ops,config,plugin,repository,url]
 description: 介绍如何修改 Higress Console 中内置插件的镜像地址
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/config/builtin-plugin-repository.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/ops/how-tos/builtin-plugin-url.md
 ---
 
 # 修改内置插件的镜像地址
