@@ -311,11 +311,18 @@
           },
           "items":[
             {
-              "label": "查看 Higress 的运行日志",
+              "label": "查看日志",
               "translations": {
                 "en": "View Logs"
               },
-              "link": "docs/ops/how-tos/log-viewing"
+              "link": "docs/ops/how-tos/view-logs"
+            },
+            {
+              "label": "查看运行时配置",
+              "translations": {
+                "en": "View Runtime Configs"
+              },
+              "link": "docs/ops/how-tos/view-configs"
             },
             {
               "label": "配置路由指向 gRPC 服务",
