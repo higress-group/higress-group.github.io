@@ -2,7 +2,7 @@
 title: Wasm 插件镜像规范
 keywords: [wasm,image,oci]
 description: Wasm 插件镜像规范
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/wasm-image-spec.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/user/wasm-image-spec.md
 ---
 
 # Wasm 插件镜像规范

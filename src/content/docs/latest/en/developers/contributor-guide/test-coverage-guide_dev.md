@@ -2,7 +2,7 @@
 title: Test coverage guide
 keywords: [Higress, coverage]
 description: Test coverage guide.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/contributor-guide/test-coverage-guide_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/developers/contributor-guide/test-coverage-guide_dev.md
 ---
 
 # Test coverage guide

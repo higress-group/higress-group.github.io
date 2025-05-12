@@ -2,7 +2,7 @@
 title: Rapid deployment through Aliyun ComputeNest
 keywords: [deploy,docker compose,docker,ops,aliyun,computenest]
 description: How to Use Aliyun ComputeNest to Rapidly Deploy Higress.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en/docusaurus-plugin-content-docs/current/ops/deploy-by-aliyun-computenest.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/ops/deploy-by-aliyun-computenest.md
 ---
 
 # Rapid deployment through Aliyun ComputeNest

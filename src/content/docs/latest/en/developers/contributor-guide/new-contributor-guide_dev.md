@@ -2,7 +2,7 @@
 title: New contributor guide
 keywords: [Higress, contributor]
 description: This is a guide for new comers who wants to contribute to Higress.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/contributor-guide/new-contributor-guide_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/developers/contributor-guide/new-contributor-guide_dev.md
 ---
 
 # New contributor guide

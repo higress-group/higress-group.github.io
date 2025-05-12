@@ -2,7 +2,7 @@
 title: Wasm Plugin Image Specification
 keywords: [wasm,image,oci]
 description: Wasm Plugin Image Specification
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en-us/docusaurus-plugin-content-docs/current/user/wasm-image-spec.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/user/wasm-image-spec.md
 ---
 
 # Wasm Plugin Image Specification

@@ -2,7 +2,7 @@
 title: Component Compilation Instructions
 keywords: [higress,architecture]
 description: Higress Component Compilation Instructions.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/dev/architecture.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/dev/architecture.md
 ---
 
 # Component Compilation Instructions

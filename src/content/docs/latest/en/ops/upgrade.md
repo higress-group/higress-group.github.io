@@ -2,7 +2,7 @@
 title: Upgrade
 keywords: [Higress]
 description: Higress Upgrade.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en-us/docusaurus-plugin-content-docs/current/ops/upgrade.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/ops/upgrade.md
 ---
 
 # Upgrade

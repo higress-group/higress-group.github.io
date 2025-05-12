@@ -2,7 +2,7 @@
 title: Developing a WASM plugin with Golang
 keywords: [wasm]
 description: Developing a WASM plugin with Golang
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/wasm-go.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/user/wasm-go.md
 ---
 
 # Implement a WASM plugin with Golang
