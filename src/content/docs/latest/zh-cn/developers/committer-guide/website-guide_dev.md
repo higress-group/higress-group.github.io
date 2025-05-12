@@ -2,7 +2,7 @@
 title: 网站向导
 keywords: [Higress]
 description: Higress 网站向导。
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/committer-guide/website-guide_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/developers/committer-guide/website-guide_dev.md
 ---
 
 # 网站向导

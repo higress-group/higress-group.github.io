@@ -2,7 +2,7 @@
 title: 全局配置说明
 keywords: [Ingress]
 description: 全局配置说明。
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/configmap.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/user/configmap.md
 ---
 
 ## 通用全局配置

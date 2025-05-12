@@ -4,7 +4,7 @@ keywords: [Higress,wasm,AI plugin]
 description: 介绍Higress如何通过AI proxy plugin对接AI大模型并实现网关级API管理
 author: 赵伟基(兆维)
 date: "2023-07-12"
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/ai_plugin.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/blog/ai_plugin.md
 category: "article"
 ---
 以 ChatGPT 为代表的 AIGC 技术为企业生产带来了巨大的变化，并在企业应用开发领域占据一席之地。AI 大模型凭借其强大的学习能力，可以帮助人们完成各种复杂的任务，例如帮助开发人员编写与调试代码、研究人员快速了解科研领域、营销人员撰写产品描述、设计人员设计新作品等等。许多企业探索如何降低 AI 大模型的使用成本。通过网关进行 AI 大模型的 API 管理成为了很常规的需求。

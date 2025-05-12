@@ -2,7 +2,7 @@
 title: Developers
 keywords: [Higress, Developers]
 description: Higress Team.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/developers_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/developers/en/developers_dev.md
 ---
 
 ## Higress Team

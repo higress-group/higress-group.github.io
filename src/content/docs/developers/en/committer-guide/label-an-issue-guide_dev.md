@@ -2,7 +2,7 @@
 title: Label an Issue
 keywords: [Higress]
 description: Label an Issue.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/committer-guide/label-an-issue-guide_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/developers/en/committer-guide/label-an-issue-guide_dev.md
 ---
 
 # Label an Issue

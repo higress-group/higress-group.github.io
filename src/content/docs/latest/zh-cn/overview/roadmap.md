@@ -2,7 +2,7 @@
 title: 版本计划
 keywords: [Higress,roadmap]
 description: Higress 版本计划.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/overview/roadmap.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/overview/roadmap.md
 ---
 
 # 版本计划

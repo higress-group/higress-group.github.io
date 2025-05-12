@@ -4,7 +4,7 @@ keywords: [higress,console]
 description: 介绍如何在本地使用IDE等开发工具进行Higress控制台相关的开发和调试工作。
 author: CH3CHO
 date: "2024-03-02"
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en/docusaurus-plugin-content-blog/console-dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/blog/console-dev.md
 category: "article"
 ---
 

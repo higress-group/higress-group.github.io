@@ -2,7 +2,7 @@
 title: 基于 Docker Compose 进行独立部署
 keywords: [deploy,docker compose,docker,ops]
 description: 如何使用 Docker Compose 实现 Higress 的独立部署
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/deploy-by-docker-compose.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/ops/deploy-by-docker-compose.md
 ---
 
 # 基于 Docker Compose 进行独立部署
