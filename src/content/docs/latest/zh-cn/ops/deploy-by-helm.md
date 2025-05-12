@@ -2,7 +2,7 @@
 title: 使用 Helm 进行云原生部署
 keywords: [deploy,helm,kubernetes,k8s,ops]
 description: Higress Helm部署.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/deploy-by-helm.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/ops/deploy-by-helm.md
 ---
 
 # 使用 Helm 进行云原生部署

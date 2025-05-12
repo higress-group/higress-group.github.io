@@ -2,7 +2,7 @@
 title: Request Monitoring Based on Prometheus
 keywords: [Higress,Prometheus]
 description: Request Monitoring Based on Prometheus
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en-us/docusaurus-plugin-content-docs/current/user/prometheus.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/user/prometheus.md
 ---
 
 # Request Monitoring Based on Prometheus

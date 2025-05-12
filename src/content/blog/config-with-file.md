@@ -4,7 +4,7 @@ keywords: [higress,file,config]
 description: 介绍如何使用文件来管理 Higress 配置信息并实现独立部署
 author: CH3CHO
 date: "2023-08-25"
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/config-with-file.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/blog/config-with-file.md
 category: "article"
 ---
 ## 前置准备

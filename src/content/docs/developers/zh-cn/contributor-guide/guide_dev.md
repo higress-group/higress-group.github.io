@@ -2,7 +2,7 @@
 title: 参与贡献
 keywords: [Higress]
 description: 如果您有兴趣攻克Higress，欢迎您。首先，我们非常鼓励这种意愿。这是为您提供帮助的列表。
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/guide_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/developers/zh-cn/contributor-guide/guide_dev.md
 ---
 
 # 为Higress贡献

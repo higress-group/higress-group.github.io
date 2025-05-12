@@ -2,7 +2,7 @@
 title: New contributor guide
 keywords: [Higress, contributor]
 description: This is a guide for new contributor who wants to contribute to Higress.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/contributor-guide/reporting-security-issues_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/developers/en/contributor-guide/reporting-security-issues_dev.md
 ---
 
 # Reporting Security Issues

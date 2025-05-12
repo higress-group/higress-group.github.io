@@ -4,7 +4,7 @@ keywords: [higress]
 description: 通过分析higress-core源码，了解higress-core自启动以来做了哪些事情
 author: SJC
 date: "2024-1-25"
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en/docusaurus-plugin-content-blog/higress-code.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/blog/higress-code.md
 category: "article"
 ---
 

@@ -2,7 +2,7 @@
 title: 通过 OpenKruise Rollout 实现灰度发布
 keywords: [rollout,gray]
 description: 通过 OpenKruise Rollout 实现灰度发布
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/kruise-rollout.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/user/kruise-rollout.md
 ---
 
 # 通过 OpenKruise Rollout 实现灰度发布

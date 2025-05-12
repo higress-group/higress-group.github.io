@@ -2,7 +2,7 @@
 title: hgctl 工具使用说明
 keywords: [Ingress]
 description: hgctl 工具使用说明。
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/hgctl.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/ops/hgctl.md
 ---
 
 ## 如何下载 hgctl

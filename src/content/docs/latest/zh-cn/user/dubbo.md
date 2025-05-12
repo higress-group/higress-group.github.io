@@ -2,7 +2,7 @@
 title: Higress 对接 Dubbo 服务
 keywords: [Dubbo,discovery]
 description: 实现 Dubbo 服务发现和路由
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/dubbo.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/user/dubbo.md
 ---
 
 # Higress 对接 Dubbo 服务

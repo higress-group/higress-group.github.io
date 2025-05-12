@@ -2,7 +2,7 @@
 title: 测试覆盖率向导
 keywords: [Higress]
 description: 测试覆盖率向导。
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/contributor-guide/test-coverage-guide_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/developers/contributor-guide/test-coverage-guide_dev.md
 ---
 
 # 测试覆盖率向导

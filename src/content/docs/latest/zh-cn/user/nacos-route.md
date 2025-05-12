@@ -2,7 +2,7 @@
 title: 配置 Ingress 转发给注册在 Nacos 的服务
 keywords: [ingress,higress nacos]
 description: 配置 Ingress 转发给注册在 Nacos 的服务
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/nacos-route.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/user/nacos-route.md
 ---
 
 # 配置 Ingress 转发给注册在 Nacos 的服务
