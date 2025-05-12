@@ -1,0 +1,5 @@
+import{c as u,__tla as g}from"./astro-component.m4CCZO6J.js";import{r as c,m,u as _,__tla as h}from"./constant.CYSm-e82.js";import{__tla as p}from"./astro/assets-service.BhtN0nM5.js";let r,i,e,n,a,l,s,d=Promise.all([(()=>{try{return g}catch{}})(),(()=>{try{return h}catch{}})(),(()=>{try{return p}catch{}})()]).then(async()=>{let t;t="<p>TBD</p>",n={title:"\u4ECE Nginx Ingress Controller \u5E73\u6ED1\u8FC1\u79FB",keywords:["Ingress"],description:"\u4ECE Nginx Ingress Controller \u5E73\u6ED1\u8FC1\u79FB",custom_edit_url:"https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/user/nginx-ingress-migrate.md"},e="/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/zh-cn/user/nginx-ingress-migrate.md",s=void 0,l=function(){return`
+# \u4ECE Nginx Ingress Controller \u5E73\u6ED1\u8FC1\u79FB
+
+TBD
+`},i=function(){return t},a=function(){return[]},r=u((f,b,x)=>{const{layout:C,...o}=n;return o.file=e,o.url=s,c`${m()}${_(t)}`})});export{r as Content,d as __tla,i as compiledContent,r as default,e as file,n as frontmatter,a as getHeadings,l as rawContent,s as url};
