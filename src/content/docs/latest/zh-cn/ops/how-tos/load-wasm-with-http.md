@@ -2,7 +2,7 @@
 title: 使用 HTTP/HTTPS 协议加载 Wasm 插件
 keywords: [ops,config,wasm,plugin,http,https]
 description: 介绍如何为使用 HTTP/HTTPS 协议加载 Wasm 插件
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/config/load-wasm-with-http.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/ops/how-tos/load-wasm-with-http.md
 ---
 
 # 使用 HTTP/HTTPS 协议加载 Wasm 插件
