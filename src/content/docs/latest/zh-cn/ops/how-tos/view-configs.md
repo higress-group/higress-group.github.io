@@ -1,7 +1,7 @@
 ---
 title: 查看运行时配置
-keywords: [ops,logging,log]
-description: 介绍如何查看 Higress 的运行日志
+keywords: [ops,runtime,config]
+description: 介绍如何查看 Higress 的运行时配置
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/ops/how-tos/view-configs.md
 ---
 # 查看运行时配置
