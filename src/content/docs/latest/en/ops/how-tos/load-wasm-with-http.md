@@ -1,7 +1,7 @@
 ---
 title: Load Wasm plugins with HTTP/HTTPS protocol
 keywords: [ops,config,wasm,plugin,http,https]
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en-us/docusaurus-plugin-content-docs/current/ops/config/load-wasm-with-http.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/ops/how-tos/load-wasm-with-http.md
 ---
 
 # Load Wasm plugins with HTTP/HTTPS protocol

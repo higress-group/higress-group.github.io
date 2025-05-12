@@ -311,6 +311,13 @@
           },
           "items":[
             {
+              "label": "查看 Higress 的运行日志",
+              "translations": {
+                "en": "View Logs"
+              },
+              "link": "docs/ops/how-tos/log-viewing"
+            },
+            {
               "label": "配置路由指向 gRPC 服务",
               "translations": {
                 "en": "Configure a route with gRPC upstream"
