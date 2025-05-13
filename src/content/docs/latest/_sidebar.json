@@ -38,9 +38,9 @@
               "link": "docs/user/configmap"
             },
             {
-              "label": "Ingress Annotaion 配置说明",
+              "label": "Nginx Ingress Annotation 兼容说明",
               "translations": {
-                "en": "Higress Annotaion"
+                "en": "Nginx Ingress Annotation Compatibility"
               },
               "link": "docs/user/annotation"
             },
