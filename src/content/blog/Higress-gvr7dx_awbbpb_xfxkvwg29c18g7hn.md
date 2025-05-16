@@ -7,12 +7,41 @@ keywords: ["Higress"]
 authors: "CH3CHO"
 ---
 
-
 Higress 作为一款强大的 AI 原生 API 网关，致力于铺设 AI 与现实世界之间最短、最安全、最具成本效益的连接路径。其核心能力之一便是支持将现有的 OpenAPI 规范无缝转换为 MCP Server，让 AI 能够快速、便捷地调用各类存量 API 服务。借助 Higress，企业和开发者可以瞬间将其宝贵的 API 资产转化为 AI 可用的远程 MCP Server，从而极大地加速 AI 应用的落地和创新。
 
-为了进一步增强这一连接的安全性与灵活性，Higress MCP Server 插件现已推出全面的 API 认证功能。本次更新的核心目标是，在将 OpenAPI 转换为 MCP Server 后，能够严格遵循 OpenAPI 规范中定义的认证方式，对后端 API 进行安全、可靠的认证访问。这意味着，无论是 HTTP Basic、Bearer Token 还是 API Key 等多种认证机制，Higress MCP Server 都能提供原生支持，确保您的 AI 工具在与后端服务交互时，身份验证过程既标准又安全。
+当通过 Higress 托管的 MCP Server 集成 AI 与外部服务时，通常需要考虑两个主要的认证阶段：
 
-## 本次新增核心认证功能概览
+1.  **客户端到 MCP Server 的认证**：这是指 MCP 客户端（例如 AI Agent）对 Higress 网关上托管 MCP Server 的端点进行的认证。Higress 为此阶段提供了强大的网关级认证机制，例如 Key Auth、JWT Auth 以及 OAuth2 支持。这些现有的 Higress 功能确保只有授权的客户端才能访问您的 MCP Server。
+
+2.  **MCP Server 到后端 API 的认证**：一旦授权客户端调用某个 MCP 工具，MCP Server 插件本身可能需要向该工具所代理的最终后端 REST API 进行认证。
+
+本次发布聚焦于对**第二阶段**的重大增强：在 Higress MCP Server 插件内部为其与后端 REST API 的通信提供全面的 API 认证能力。此更新使开发者能够通过在 MCP Server 插件中进行配置，并遵循 OpenAPI 标准，以灵活且健壮的机制管理凭证和认证流程，从而安全地集成更广泛的后端服务。
+
+下图阐释了这两个认证阶段：
+
+```mermaid
+sequenceDiagram
+    participant C as MCP 客户端 (AI Agent)
+    participant H as Higress 网关
+    participant P as MCP Server 插件 (运行于 Higress)
+    participant B as 后端 REST API
+
+    C->>H: 请求 (携带客户端凭证)
+    activate H
+    Note over H: 认证阶段1: 客户端到 MCP Server<br/>(由 Higress 网关处理：Key Auth, JWT, OAuth2 等)
+    H->>P: 转发已验证的请求
+    deactivate H
+    activate P
+    Note over P: 认证阶段2: MCP Server 到后端 API<br/>(插件新功能：HTTP Basic, Bearer, API Key, 透传)
+    P->>B: 请求 (携带后端凭证)
+    activate B
+    B-->>P: 响应
+    deactivate B
+    P-->>C: 响应
+    deactivate P
+```
+
+## 本次新增核心认证功能概览 (针对 MCP Server 到后端 API)
 
 此版本引入了多项核心功能来管理 API 认证：
 
@@ -94,7 +123,7 @@ tools:
 
 **工作原理**:
 
-1.  **客户端认证方案定义**：MCP Server 需要知道客户端如何进行认证。这也通过 `server.securitySchemes` 中的一个方案来定义。
+1.  **客户端认证方案定义**：MCP Server 需要知道客户端如何进行自我认证。这也通过 `server.securitySchemes` 中的一个方案来定义。
 2.  **工具级安全配置 (`tools[].security`)**:
     *   `id`: 引用*客户端*在调用此 MCP 工具时应使用的认证方案。MCP Server 将使用此方案来提取客户端的凭证。
     *   `passthrough: true`: 此标志启用透传机制。
@@ -158,7 +187,10 @@ tools:
 
 ## 开始使用
 
-请更新您的 Higress MCP Server 插件，并参阅 [MCP Server README 文档](https://higress.cn/ai/mcp-server) 获取详细的配置说明和更多示例。
+如果您使用开源版 Higress 请更新您的 Higress MCP Server 插件，并参阅 [MCP Server README 文档](https://higress.cn/ai/mcp-server) 获取详细的配置说明和更多示例。
+
+如果您使用企业版 Higress（阿里云 AI 网关），请参考我们的[企业版产品文档](https://help.aliyun.com/zh/api-gateway/ai-gateway/user-guide/mcp-services-management)，我们提供了更易用的产品化封装，并提供全托管免运维的服务，以及99.99%的SLA可用性保障:
+![undefined](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/22499/1747386241050-bb0333e2-7ecb-4f7f-b56a-a728547dd875.png) 
 
 我们致力于将 Higress 打造成一个强大且开发者友好的 AI 原生 API 网关，能够对接 LLM API、MCP API 和 Agent API。敬请期待更多更新！
 
