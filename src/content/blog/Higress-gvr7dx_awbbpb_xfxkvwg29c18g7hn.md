@@ -7,6 +7,8 @@ keywords: ["Higress"]
 authors: "CH3CHO"
 ---
 
+# Higress MCP Server 安全再升级：API 认证为 AI 连接保驾护航
+
 Higress 作为一款强大的 AI 原生 API 网关，致力于铺设 AI 与现实世界之间最短、最安全、最具成本效益的连接路径。其核心能力之一便是支持将现有的 OpenAPI 规范无缝转换为 MCP Server，让 AI 能够快速、便捷地调用各类存量 API 服务。借助 Higress，企业和开发者可以瞬间将其宝贵的 API 资产转化为 AI 可用的远程 MCP Server，从而极大地加速 AI 应用的落地和创新。
 
 当通过 Higress 托管的 MCP Server 集成 AI 与外部服务时，通常需要考虑两个主要的认证阶段：
@@ -19,27 +21,7 @@ Higress 作为一款强大的 AI 原生 API 网关，致力于铺设 AI 与现�
 
 下图阐释了这两个认证阶段：
 
-```mermaid
-sequenceDiagram
-    participant C as MCP 客户端 (AI Agent)
-    participant H as Higress 网关
-    participant P as MCP Server 插件 (运行于 Higress)
-    participant B as 后端 REST API
-
-    C->>H: 请求 (携带客户端凭证)
-    activate H
-    Note over H: 认证阶段1: 客户端到 MCP Server<br/>(由 Higress 网关处理：Key Auth, JWT, OAuth2 等)
-    H->>P: 转发已验证的请求
-    deactivate H
-    activate P
-    Note over P: 认证阶段2: MCP Server 到后端 API<br/>(插件新功能：HTTP Basic, Bearer, API Key, 透传)
-    P->>B: 请求 (携带后端凭证)
-    activate B
-    B-->>P: 响应
-    deactivate B
-    P-->>C: 响应
-    deactivate P
-```
+![Description](https://img.alicdn.com/imgextra/i4/O1CN01wxaByb1wVPQ7HmLsS_!!6000000006313-2-tps-1043-544.png)
 
 ## 本次新增核心认证功能概览 (针对 MCP Server 到后端 API)
 
