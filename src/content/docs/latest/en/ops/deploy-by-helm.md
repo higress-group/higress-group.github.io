@@ -36,9 +36,10 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | global.pvc.rwxSupported | Set to `false` when installing to a standard K8s cluster and the target cluster doesn't support the ReadWriteMany access mode of PersistentVolumeClaim. | true |
 | **Core Paramters** |  |  |
 | higress-core.gateway.replicas | Number of Higress Gateway pods | 2 |
-| higress-core.controller.replicas | Number of Higress Controller pods | 1 |
 | higress-core.gateway.httpPort | HTTP port to be listened by Higress Gateway | 80 |
 | higress-core.gateway.httpsPort | HTTPS port to be listened by Higress Gateway | 443 |
+| higress-core.gateway.kind | The kind of resource used to deploy Higress Gateway, Deployment or DaemonSet | Deployment |
+| higress-core.controller.replicas | Number of Higress Controller pods | 1 |
 | **Console Paramters** |  |  |
 | higress-console.replicaCount | Number of Higress Console pods | 1 |
 | higress-console.service.type | K8s service type used by Higress Console | ClusterIP |
