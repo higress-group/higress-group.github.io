@@ -1,0 +1,5 @@
+import{c as u,__tla as g}from"./astro-component.m4CCZO6J.js";import{r as l,m,u as p,__tla as _}from"./constant.C798a0v1.js";import{__tla as d}from"./astro/assets-service.BhtN0nM5.js";let r,o,s,i,a,c,n,h=Promise.all([(()=>{try{return g}catch{}})(),(()=>{try{return _}catch{}})(),(()=>{try{return d}catch{}})()]).then(async()=>{let t;t="<p>TBD</p>",i={title:"Nginx Ingress compatibility description",keywords:["ingress","nginx"],description:"Nginx Ingress compatibility description.",custom_edit_url:"https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/user/nginx-ingress.md"},s="/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/docs/latest/en/user/nginx-ingress.md",n=void 0,c=function(){return`
+# Nginx Ingress compatibility description
+
+TBD
+`},o=function(){return t},a=function(){return[]},r=u((f,b,y)=>{const{layout:x,...e}=i;return e.file=s,e.url=n,l`${m()}${p(t)}`})});export{r as Content,h as __tla,o as compiledContent,r as default,s as file,i as frontmatter,a as getHeadings,c as rawContent,n as url};
