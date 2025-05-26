@@ -59,7 +59,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ### 3. 修改 `higress-gateway` Service
 
-1. 执行命令，进度 `higress-gateway` Service 的编辑状态：
+1. 执行命令，进入 `higress-gateway` Service 的编辑状态：
     ```bash
     kubectl edit service higress-gateway -n higress-system
     ```
