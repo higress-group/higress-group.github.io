@@ -2,31 +2,91 @@
 title: What Is Higress?
 keywords: [Higress]
 description: Higress introduction
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/overview/what-is-higress.md
 ---
 
-# What Is Higress?
 
- Higress is a next-generation cloud-native gateway built on the core of open-source Istio + Envoy based on Alibaba's internal Envoy Gateway practice. It realizes the high integration capability of three-in-one traffic gateway + microservice gateway + security gateway, and deeply integrates Dubbo and Nacos , Sentinel and other micro-service technology stacks can help users greatly reduce the cost of gateway deployment and operation and maintenance without compromising capabilities; fully support Ingress and Gateway APIs in terms of standards, and actively embrace the standard API specifications under cloud native; at the same time, Higress The Controller also supports smooth migration of Nginx Ingress, helping users quickly migrate to Higress at zero cost.
+## Higress Introduction
 
-![image](https://img.alicdn.com/imgextra/i1/O1CN01iO9ph825juHbOIg75_!!6000000007563-2-tps-2483-2024.png)
+Higress is a cloud-native API gateway with a kernel based on Istio and Envoy. It allows writing Wasm plugins using Go/Rust/JS and other languages, provides dozens of ready-to-use general-purpose plugins, and comes with an out-of-the-box console (click [here](http://demo.higress.io/) for a demo).
 
-## Classification of traditional gateways
+Higress was born within Alibaba to solve the issue of Tengine reload causing damage to long-connection services, as well as insufficient load balancing capabilities for gRPC/Dubbo.
 
-In the industry, gateways are usually divided into two categories: traffic gateways and business gateways. Traffic gateways mainly provide global policy configurations that have nothing to do with back-end business. For example, Ali’s internal unified access gateway Tengine is a typical traffic gateway. As the name suggests, the business gateway mainly provides independent business domain-level, tightly coupled policy configuration with the back-end business. With the evolution of the application architecture model from a single body to the current distributed micro-service, the business gateway also has a new name - micro-service gateway ( Illustrations are shown below). In the current cloud-native era dominated by container technology and K8s, is the next-generation gateway model still the same?
+Alibaba Cloud has built a cloud-native API gateway product based on Higress, providing 99.99% gateway high-availability guarantee service capabilities for a large number of enterprise customers.
 
-## Positioning
+Higress, with its AI gateway capabilities, supports AI services such as Tongyi Qianwen APP, Bailian large model API, and machine learning PAI platform. It also serves leading domestic AIGC enterprises (such as Zero One Infinite) and AI products (such as FastGPT).
 
-Under the microservice architecture in the virtualization era, the business usually adopts a two-tier architecture of traffic gateway + microservice gateway. The traffic gateway is responsible for north-south traffic scheduling and security protection, and the microservice gateway is responsible for east-west traffic scheduling and service governance. In the cloud-native era dominated by K8s, Ingress has become the gateway standard of the K8s ecosystem, endowing the gateway with a new mission and making it possible to combine traffic gateway + microservice gateway into one.
+![](https://img.alicdn.com/imgextra/i2/O1CN011AbR8023V8R5N0HcA_!!6000000007260-2-tps-1080-606.png)
 
-As a north-south public network gateway, it is a common requirement to use Waf to protect abnormal traffic. As the Internet environment becomes more and more complex, users' demands for protection continue to increase. The conventional method is to access the traffic first. The Waf security gateway, after filtering, forwards the traffic to the traffic gateway, and finally reaches the microservice gateway; Higress hopes that through the built-in Waf module, the user's request link can be simultaneously completed Waf protection, traffic distribution, and microservice governance only through Higress. It can improve the link RT and reduce the operation and maintenance complexity of the gateway. Therefore, Higress realizes the high integration capability of three-in-one traffic gateway + microservice gateway + security gateway.
 
-## Why did Higress choose Envoy/Istio as the engine 
+### What is an AI Gateway
 
-In the context of containerized cloud native, Kubernetes has become a standard interface between infrastructure and upper-layer applications. The natural internal and external network isolation environment of Kubernetes clusters requires external traffic to enter the Kubernetes cluster through an ingress gateway. Therefore, Kubernetes is standardized through Ingress The definition and standard of the ingress gateway. Although the Ingress standard has some shortcomings such as weak routing expression ability, the community has been actively promoting the definition of the Gateway API standard to solve it. However, it is undeniable that the Ingress standard still occupies the mainstream. CNCF annual report The usage of Ingress Provider (the implementers of the Ingress standard are collectively referred to as Ingress Provider) is also counted separately.
+AI Gateway = AI Native API Gateway
 
-Although Nginx Ingress still occupies the top spot of K8s Ingress Provider, Envoy has the fastest growth, from less than 20% in 2019 to 37% in 2020, and only after Nginx Ingress , the growth momentum is very rapid, which shows that choosing Envoy as the core is in line with the development trend of cloud native; and as Service Mesh is gradually recognized by the public, the system of Istio + Envoy can cover both the Mesh and Ingress fields at the same time, realizing a set of technical architecture The goal of dispatching east-west and north-south global traffic is also very meaningful to users.
+The essence of an AI gateway remains an API gateway, with the significance of AI-native being that AI is a first-class citizen in such an API gateway. API development, API supply, API consumption, and API observation are all based on requirements in AI scenarios, evolving into entirely new capabilities.
 
-## Higress practise inside Alibaba
+These are the functional domains of traditional API gateways, which still have universal value in AI scenarios:
 
-Higress was incubated from Alibaba's internal "Local Life Campaign" in May 2020. It was originally built to meet the demands of Alibaba Group and Ant Group to directly use RPC to request mutual visits, and the project also successfully incubated Dubbo 3.0's Triple Therefore, Higress is also the first internal application that supports the Triple protocol. In the same year, Higress also successfully supported major promotional activities such as Double 11 and Double 12. With the expansion of business scope, Higress has already supported Youku, DingTalk, For businesses such as Dharma Academy and Ant, the business scenarios have also been extended to global traffic scheduling in east-west and north-south directions.
+![](https://img.alicdn.com/imgextra/i2/O1CN01yvRXRl1Ux42Nd4bos_!!6000000002583-2-tps-1904-908.png)
 
+In AI scenarios, the functional domain of API gateways can be further expanded based on Higress:
+
+![](https://img.alicdn.com/imgextra/i1/O1CN01TtjqnE1vLVBDlhiJf_!!6000000006156-2-tps-1904-970.png)
+
+
+## Core Advantages
+
+- **Production Grade**
+
+  Born from an internal product validated through years of production at Alibaba, supporting large-scale scenarios with hundreds of thousands of requests per second.
+
+  Completely eliminates traffic fluctuations caused by Nginx reload, with configuration changes taking effect in milliseconds without affecting business. Particularly friendly to long-connection scenarios such as AI services.
+    
+- **Easy to Extend**
+  
+  Provides a rich library of official plugins covering common functions such as AI, traffic management, and security protection, meeting over 90% of business scenario requirements.
+
+  Focuses on Wasm plugin extensions, ensuring memory safety through sandbox isolation, supporting multiple programming languages, allowing independent version upgrades of plugins, and achieving lossless hot updates of gateway logic.
+
+- **Secure and User-Friendly**
+  
+  Based on Ingress API and Gateway API standards, provides an out-of-the-box UI console, with WAF protection plugins and IP/Cookie CC protection plugins ready to use.
+
+  Supports interfacing with Let's Encrypt for automatic issuance and renewal of free certificates, and can be deployed outside of K8s, starting with a single Docker command, convenient for individual developers.
+
+- **Stream Processing**
+
+  Supports true complete stream processing of request/response bodies, with Wasm plugins easily customizing the handling of streaming protocol messages such as SSE (Server-Sent Events).
+
+  Significantly reduces memory overhead in high-bandwidth scenarios such as AI services.
+
+## Use Cases
+
+- **AI Gateway**:
+
+  Higress can interface with all domestic and international LLM model providers using a unified protocol, while possessing rich AI observability, multi-model load balancing/fallback, AI token flow control, AI caching, and other capabilities:
+
+  ![](https://img.alicdn.com/imgextra/i1/O1CN01fNnhCp1cV8mYPRFeS_!!6000000003605-0-tps-1080-608.jpg)
+
+- **Kubernetes Ingress Gateway**:
+
+  Higress can serve as the Ingress entry gateway for K8s clusters and is compatible with many K8s Nginx Ingress annotations, allowing for quick and smooth migration from K8s Nginx Ingress to Higress.
+  
+  Supports the [Gateway API](https://gateway-api.sigs.k8s.io/) standard, enabling users to smoothly migrate from Ingress API to Gateway API.
+
+  Compared to ingress-nginx, resource overhead is significantly reduced, and the speed of route change implementation is improved tenfold:
+
+  ![](https://img.alicdn.com/imgextra/i1/O1CN01bhEtb229eeMNBWmdP_!!6000000008093-2-tps-750-547.png)
+  ![](https://img.alicdn.com/imgextra/i1/O1CN01bqRets1LsBGyitj4S_!!6000000001354-2-tps-887-489.png)
+  
+- **Microservice Gateway**:
+
+  Higress can function as a microservice gateway, capable of interfacing with various types of registry centers to discover service configuration routes, such as Nacos, ZooKeeper, Consul, Eureka, etc.
+  
+  It is also deeply integrated with microservice technology stacks such as [Dubbo](https://github.com/apache/dubbo), [Nacos](https://github.com/alibaba/nacos), and [Sentinel](https://github.com/alibaba/Sentinel). With the excellent performance of the Envoy C++ gateway kernel, compared to traditional Java-type microservice gateways, it can significantly reduce resource utilization and costs.
+
+  ![](https://img.alicdn.com/imgextra/i4/O1CN01v4ZbCj1dBjePSMZ17_!!6000000003698-0-tps-1613-926.jpg)
+  
+- **Security Protection Gateway**:
+
+  Higress can serve as a security protection gateway, providing WAF capabilities and supporting various authentication and authorization strategies, such as key-auth, hmac-auth, jwt-auth, basic-auth, oidc, etc.
