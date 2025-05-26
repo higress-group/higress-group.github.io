@@ -1,24 +1,85 @@
 ---
-title: Developing a WASM plugin with Golang
-keywords: [wasm]
-description: Developing a WASM plugin with Golang
+title: Developing WASM Plugins with Go
+keywords: [wasm, go, golang, plugin, development]
+description: A comprehensive guide to developing WASM plugins for Higress using the Go programming language
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/user/wasm-go.md
 ---
 
-# Implement a WASM plugin with Golang
+# Developing WASM Plugins with Go
 
-## 1. Prepare Development Tools
+> **Note**:
+>
+> TinyGo has specific version requirements. The current stable version combination that has been extensively validated is: TinyGo 0.29 + Go 1.20. You can refer to this official [Makefile](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/Makefile)
+>
+> Go 1.24 now natively supports compiling WASM files. Documentation updates are in progress.
 
-First, install Golang and Tinygo.
+## 1. Tool Preparation
+
+You need to install both Golang and TinyGo.
 
 ### 1. Golang
-
-Min Version: 1.18<br />Official download link: [https://go.dev/doc/install](https://go.dev/doc/install)
+(Requires version 1.18 or higher)  
+Official installation guide: [https://go.dev/doc/install](https://go.dev/doc/install)
 
 #### Windows
 
 1. Download the installer: [https://go.dev/dl/go1.19.windows-amd64.msi](https://go.dev/dl/go1.19.windows-amd64.msi)
-2. Run the downloaded installer to start the installation. It will be installed to `Program Files` or `Program Files (x86)` folder by default.
+2. Run the downloaded installer. By default, it will be installed in the `Program Files` or `Program Files (x86)` directory
+3. After installation, press "Win+R" to open the Run dialog, type "cmd" and press Enter to open the command prompt. Then type: `go version` to verify the installation
+
+#### macOS
+
+1. Download the installer: [https://go.dev/dl/go1.19.darwin-amd64.pkg](https://go.dev/dl/go1.19.darwin-amd64.pkg)
+2. Run the downloaded installer. By default, it will be installed in the `/usr/local/go` directory
+3. Open Terminal and type: `go version` to verify the installation
+
+#### Linux
+
+1. Download the archive: [https://go.dev/dl/go1.19.linux-amd64.tar.gz](https://go.dev/dl/go1.19.linux-amd64.tar.gz)
+2. Run the following commands to install:
+```bash
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+```
+3. Type `go version` to verify the installation
+
+### 2. TinyGo
+(Requires version 0.28.1 or higher)  
+Official installation guide: [https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
+
+#### Windows
+
+1. Download the installer: [https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip)
+2. Extract the archive to your desired directory
+3. If you extracted to `C:\tinygo`, add `C:\tinygo\bin` to your `PATH` environment variable, for example by running:
+```bash
+set PATH=%PATH%;"C:\tinygo\bin";
+```
+4. Open a command prompt and type `tinygo version` to verify the installation
+
+#### macOS
+
+1. Download and extract the archive:
+```bash
+wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.darwin-amd64.tar.gz
+tar -zxf tinygo0.28.1.darwin-amd64.tar.gz
+```
+2. If you extracted to `/tmp`, add `/tmp/tinygo/bin` to your `PATH`:
+```bash
+export PATH=/tmp/tinygo/bin:$PATH
+```
+3. Open Terminal and type `tinygo version` to verify the installation
+
+#### Linux
+For Ubuntu on amd64 architecture (other systems please refer to the official guide):
+
+1. Download and install the DEB package:
+```bash
+wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo_0.28.1_amd64.deb
+sudo dpkg -i tinygo_0.28.1_amd64.deb
+export PATH=$PATH:/usr/local/bin
+```
+2. Open Terminal and type `tinygo version` to verify the installation
 3. After completed the installation, open "Run" dialog with hotkey "Win+R". Type "cmd" in the dialog and click "OK" to open Command Line Prompt. Type: `go version`. If version info is displayed, the package has been successfully installed.
 
 #### MacOS
@@ -108,9 +169,121 @@ go get github.com/alibaba/higress/plugins/wasm-go@main
 go get github.com/tidwall/gjson
 ```
 
-### 2. Write main.go
+## 2. Writing the Plugin
 
-You can find a simple sample below, which provides following functions:
+### 1. Initialize the Project
+
+1. Create a new project directory, for example `wasm-demo-go`
+2. In the created directory, run the following command to initialize a Go module:
+```bash
+go mod init wasm-demo-go
+```
+3. For users in China, you may need to set up a proxy for downloading dependencies:
+```bash
+go env -w GOPROXY=https://proxy.golang.com.cn,direct
+```
+4. Download the required dependencies for building the plugin:
+```bash
+go get github.com/higress-group/proxy-wasm-go-sdk
+go get github.com/alibaba/higress/plugins/wasm-go@main
+go get github.com/tidwall/gjson
+```
+
+### 2. Writing main.go
+
+Below is a simple example that implements the following functionality:
+- When the plugin is configured with `mockEnable: true`, it directly returns a "hello world" response
+- When no plugin configuration is provided or `mockEnable: false`, it adds a `hello: world` request header to the original request
+
+> Note: The plugin configuration in the gateway console is in YAML format, but it will be automatically converted to JSON format when delivered to the plugin. Therefore, the example directly parses the configuration from JSON.
+
+```go
+package main
+
+import (
+	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/tidwall/gjson"
+)
+
+func main() {
+	wrapper.SetCtx(
+		// Plugin name
+		"my-plugin",
+		// Custom function for parsing plugin configuration
+		wrapper.ParseConfigBy(parseConfig),
+		// Custom function for processing request headers
+		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+	)
+}
+
+// Custom plugin configuration
+type MyConfig struct {
+	mockEnable bool
+}
+
+// The YAML configuration from the console is automatically converted to JSON
+// We can directly parse the configuration from the json parameter
+func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
+	// Parse the configuration and update the config object
+	config.mockEnable = json.Get("mockEnable").Bool()
+	return nil
+}
+
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+	proxywasm.AddHttpRequestHeader("hello", "world")
+	if config.mockEnable {
+		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
+	}
+	return types.ActionContinue
+}
+```
+
+#### HTTP Processing Hooks
+
+In the example above, we used `wrapper.ProcessRequestHeadersBy` to register our custom function `onHttpRequestHeaders` to handle requests during the "HTTP Request Headers" phase. You can also register handlers for other phases using the following methods:
+
+| HTTP Processing Phase | Trigger | Hook Method |
+|----------------------|---------|-------------|
+| HTTP Request Headers | When the gateway receives request headers from the client | wrapper.ProcessRequestHeadersBy |
+| HTTP Request Body | When the gateway receives request body from the client | wrapper.ProcessRequestBodyBy |
+| HTTP Response Headers | When the gateway receives response headers from the backend | wrapper.ProcessResponseHeadersBy |
+| HTTP Response Body | When the gateway receives response body from the backend | wrapper.ProcessResponseBodyBy |
+
+#### Utility Methods
+
+The example uses `proxywasm.AddHttpRequestHeader` and `proxywasm.SendHttpResponse`, which are utility methods provided by the SDK. Here are the main utility methods available:
+
+| Category | Method | Description | Applicable HTTP Processing Phases |
+|----------|--------|-------------|----------------------------------|
+| Request Headers | GetHttpRequestHeaders | Get all request headers | HTTP Request Headers |
+|  | ReplaceHttpRequestHeaders | Replace all request headers | HTTP Request Headers |
+|  | GetHttpRequestHeader | Get a specific request header | HTTP Request Headers |
+|  | RemoveHttpRequestHeader | Remove a specific request header | HTTP Request Headers |
+|  | ReplaceHttpRequestHeader | Replace a specific request header | HTTP Request Headers |
+|  | AddHttpRequestHeader | Add a new request header | HTTP Request Headers |
+| Request Body | GetHttpRequestBody | Get the request body | HTTP Request Body |
+|  | AppendHttpRequestBody | Append data to the end of the request body | HTTP Request Body |
+|  | PrependHttpRequestBody | Add data to the beginning of the request body | HTTP Request Body |
+|  | ReplaceHttpRequestBody | Replace the entire request body | HTTP Request Body |
+| Response Headers | GetHttpResponseHeaders | Get all response headers | HTTP Response Headers |
+|  | ReplaceHttpResponseHeaders | Replace all response headers | HTTP Response Headers |
+|  | GetHttpResponseHeader | Get a specific response header | HTTP Response Headers |
+|  | RemoveHttpResponseHeader | Remove a specific response header | HTTP Response Headers |
+|  | ReplaceHttpResponseHeader | Replace a specific response header | HTTP Response Headers |
+|  | AddHttpResponseHeader | Add a new response header | HTTP Response Headers |
+| Response Body | GetHttpResponseBody | Get the response body | HTTP Response Body |
+|  | AppendHttpResponseBody | Append data to the end of the response body | HTTP Response Body |
+|  | PrependHttpResponseBody | Add data to the beginning of the response body | HTTP Response Body |
+|  | ReplaceHttpResponseBody | Replace the entire response body | HTTP Response Body |
+| HTTP Calls | DispatchHttpCall | Send an HTTP request | - |
+|  | GetHttpCallResponseHeaders | Get response headers from DispatchHttpCall | - |
+|  | GetHttpCallResponseBody | Get response body from DispatchHttpCall | - |
+|  | GetHttpCallResponseTrailers | Get response trailers from DispatchHttpCall | - |
+| Direct Response | SendHttpResponse | Return a specific HTTP response | - |
+| Flow Control | ResumeHttpRequest | Resume a previously paused request | - |
+|  | ResumeHttpResponse | Resume a previously paused response | - |
 
 1. If `mockEnable` is set to `true`, send `hello world` directly as the response.
 2. If `mockEnable` is not set or set to `false`, add an extra HTTP header `hello: world` to the original request.
@@ -192,11 +365,11 @@ In the sample above, `proxywasm.AddHttpRequestHeader` and `proxywasm.SendHttpRes
 |  | GetHttpResponseHeader | Get the specified header in the response. | HTTP response header processing stage |
 |  | RemoveHttpResponseHeader | Remove the specified header from the response. | HTTP response header processing stage |
 |  | ReplaceHttpResponseHeader | Replace the specified header in the response. | HTTP response header processing stage |
-|  | AddHttpResponseHeader | Add a new header to the response. | HTTP response header processing stage |
-| Response Body Processing | GetHttpResponseBody | Get the response body received from upstream. | HTTP response body processing stage |
-|  | AppendHttpResponseBody | Append the specified binary data to the response body. | HTTP response body processing stage |
-|  | PrependHttpResponseBody | Prepend the specified binary data to the response body. | HTTP response body processing stage |
-|  | ReplaceHttpResponseBody | Replace the entire response body with specific data. | HTTP response body processing stage |
+|  | AddHttpResponseHeader | Add a new header to the response | HTTP response headers processing stage |
+| Response Body | GetHttpResponseBody | Get the response body received from the backend | HTTP response body processing stage |
+|  | AppendHttpResponseBody | Append binary data to the end of the response body | HTTP response body processing stage |
+|  | PrependHttpResponseBody | Add binary data to the beginning of the response body | HTTP response body processing stage |
+|  | ReplaceHttpResponseBody | Replace the entire response body with new data | HTTP response body processing stage |
 | HTTP Call | DispatchHttpCall | Send an HTTP request. | - |
 |  | GetHttpCallResponseHeaders | Get the response headers associated with a DispatchHttpCall call. | - |
 |  | GetHttpCallResponseBody | Get the response body associated with a DispatchHttpCall call. | - |
@@ -205,7 +378,9 @@ In the sample above, `proxywasm.AddHttpRequestHeader` and `proxywasm.SendHttpRes
 | Process Resuming | ResumeHttpRequest | Resume the request processing workflow paused before. | - |
 |  | ResumeHttpResponse | Resume the response processing workflow paused before. | - |
 
-### 3. Build WASM file
+### 3. Compile and Generate WASM File
+
+Using proxy-wasm community version 0.2.1 ABI, in the HTTP request/response processing phases, you can only use `types.ActionContinue` and `types.ActionPause` as return values to control the flow.
 
 - If your project directory is in the [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) directory, see 3.1.
 - If you are using a self-initialized directory, see 3.2.
@@ -308,10 +483,10 @@ type MyConfig struct {
 }
 
 func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
-	config.tokenHeader = json.Get("tokenHeader").String()
-	if config.tokenHeader == "" {
-		return errors.New("missing tokenHeader in config")
-	}
+	// Get the service name with full FQDN, e.g., my-redis.dns, redis.my-ns.svc.cluster.local
+	serviceName := json.Get("serviceName").String()
+	servicePort := json.Get("servicePort").Int()
+	if servicePort == 0 {
 	config.requestPath = json.Get("requestPath").String()
 	if config.requestPath == "" {
 		return errors.New("missing requestPath in config")
