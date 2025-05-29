@@ -1,12 +1,12 @@
 ---
-title: HTTP转Dubbo 配置说明
+title: HTTP 转 Dubbo 配置说明
 keywords: [Dubbo,discovery]
-description: HTTP转Dubbo Http2Rpc相关配置
+description: HTTP 转 Dubbo Http2Rpc 相关配置
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/user/dubbo-http2rpc.md
 ---
 
-# HTTP转Dubbo 配置说明
-本文介绍了Http2Rpc这个自定义CRD的相关配置项。
+# HTTP 转 Dubbo 配置说明
+本文介绍了 Http2Rpc 这个自定义 CRD 的相关配置项。
 ### spec.dubbo
 | 字段         | 类型        |            说明              |             |
 | ----------- | --------------------------- | ----------- | ----------- |

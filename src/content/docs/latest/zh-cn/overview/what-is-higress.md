@@ -1,7 +1,7 @@
 ---
-title: Higress是什么?
+title: Higress 是什么?
 keywords: [Higress]
-description: Higress是什么
+description: Higress 是什么
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/overview/what-is-higress.md
 ---
 

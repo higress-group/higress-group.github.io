@@ -1,43 +1,55 @@
 ---
-title: Code Reading Instructions
+title: Code Reading Guide
 keywords: [higress,coding]
-description: Higress Code Reading Instructions
+description: Higress Code Reading Guide.
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/dev/code.md
 ---
 
-# Code Reading Instructions
+# Code Reading Guide
 
-If you would like to constribute source code for Higress, please check out the [Contribute Guide](../developers/guide_dev.md)
+If you want to contribute code to Higress, please refer to the [Contribution Guide](../developers/guide_dev.md)
 
-Code base structure descriptions:
+Code directory structure explanation:
 
-- cmd: Containing functions of parsing command-line arguments, etc.
+- cmd: Command-line parameter parsing and processing code
 
-- pkg/ingress: Containing functions of converting Ingress resources to Istio resources.
+- pkg/ingress: Code related to converting Ingress resources to Istio resources
 
-- pkg/bootstrap: Containing functions of starting gRPC/xDS/HTTP servers.
+- pkg/bootstrap: Code for starting gRPC/xDS/HTTP servers, etc.
 
-- registry: Implementations of various service registries.
+- registry: Code implementing service discovery with various service registries
 
-- envoy: Containing the referred official envoy codebase and corresponding patches.
+- envoy: Envoy repository commit dependency
 
-- istio: Containing the referred official istio codebase and corresponding patches.
+- istio: Istio repository commit dependency
 
-- plugins: Higress plugin SDK and official built-in plugins.
+- plugins: Higress plugin SDK and official built-in plugin code
 
-- tools: Building related scripts.
+- script: Compilation-related scripts
 
-- docker: Docker image building related scripts.
+- docker: Docker image building scripts
 
-During compilation, `make prebuild` will be executed automatically, generating an `external` folder, which contains all the external dependencies, including envoy and istios, with all the patches applied.
+During compilation, `make prebuild` will be executed automatically, generating an `external` directory containing the envoy and istio dependencies that will be used.
 
-If you would like to modify the source code of envoy or istio, you can do it directly in the `external` folder, then execute the prebuild command and generate the patch file with diff later. For example:
+If you want to modify envoy and istio code, you can modify it directly in the external directory, rename it, then execute prebuild, and afterward compare to generate patch files, for example:
 
 ```bash
 mv external/envoy external/envoy_new
 make prebuild
 cd external
-diff -Naur envoy envoy_new > ../envoy/1.20/patches/envoy/$(date +%Y%m%d)-what-changed.patch
+diff -Naur envoy envoy_new > envoy.patch
 ```
 
-Please be aware that patches will be applied in the order of file names. So please use timestamp as a prefix when naming a new patch file.
+After testing is complete, you can patch the corresponding patch files to the envoy or istio repository for submission.
+
+First fork Higress's [envoy](https://github.com/higress-group/envoy) or [istio](https://github.com/higress-group/istio) repository, then push your changes and submit a PR, for example:
+
+```bash
+git clone https://github.com/<your-fork>/envoy.git
+cd envoy
+git checkout -b <Your branch name>
+patch -p1 < envoy.patch
+git add -u
+git commit -m <Your change info>
+git push origin <Your branch name>
+```

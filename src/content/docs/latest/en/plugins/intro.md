@@ -1,24 +1,24 @@
 ---
-title: Introduction to the use of Wasm plugins
+title: Plugin Usage Guide
 keywords: [higress,wasm]
-description: Introduction to the Higress Wasm plugin
+description: Higress Wasm Plugin Usage Guide
 ---
 
-## Configure through the Higress console
+## Configuration through the Higress Console
 
-The Higress console provides 3 entries for plug-in configuration:
+The Higress console provides 3 entry points for plugin configuration:
 
-1. Global configuration: plug-in market -> select plug-in to configure
-2. Domain-level configuration: domain name management->select domain name->click policy->select plug-in to configure
-3. Routing-level configuration: Routing configuration->select routing->click policy->select plug-in to configure
+1. Global configuration: Plugin Market -> Select plugin to configure
+2. Domain-level configuration: Domain Management -> Select domain -> Click Policies -> Select plugin to configure
+3. Route-level configuration: Route Configuration -> Select route -> Click Policies -> Select plugin to configure
 
-The effective priority of these three configurations is: route level > domain name level > global
+The priority order of these three configurations is: Route-level > Domain-level > Global
 
-That is, the global configuration will only take effect for requests that do not match a specific route or domain name
+This means that global configurations only take effect for requests that don't match any specific route or domain.
 
-For general plugins, including custom plugins, the routing/domain name level configuration fields are exactly the same as the global configuration fields;
+For general plugins, including custom plugins, the route/domain-level configuration fields are identical to the global configuration fields.
 
-For authentication plug-ins (Key authentication, HMAC authentication, Basic authentication, JWT authentication, etc.), it is different. The global configuration only configures the Consumer credential and whether to enable global authentication, and configures the allowed access through the `allow` field at the routing/domain name level. Consumer list, for details, please refer to [Configuration Instructions](./authentication/key-auth.md) of Key Authentication
+For authentication plugins (Key Auth, HMAC Auth, Basic Auth, JWT Auth, etc.), the approach is different. Global configuration only handles Consumer credential configuration and whether to enable global authentication, while at the route/domain level, the `allow` field configures the list of Consumers permitted to access. For details, please refer to the [Key Authentication configuration guide](./authentication/key-auth.md).
 
 ## Configuration via Higress WasmPlugin CRD
 
@@ -27,15 +27,15 @@ The Higress WasmPlugin CRD extends the Istio [WasmPlugin](https://istio.io/lates
 | Field Name | Data Type | Filling Requirements | Description |
 | ------- | ------- | -------- | --- |
 | `defaultConfig` | object | Optional | The default configuration of the plugin, which takes effect globally for requests that do not match specific domain names and routing configurations |
-| `matchRules` | array of object | optional | configurations that match domain names or routes to take effect |
+| `matchRules` | array of object | Optional | Configurations that match domain names or routes to take effect |
 
 Description of configuration fields for each item in `matchRules`:
 
-| Field Name | Data Type | Filling Requirements | Configuration Example |Description |
-| ------- | ------- | -------- | --- |--- |
-| `ingress` | array of string | one of `ingress` and `domain` is required | ["default/foo","default/bar"] | Matching ingress resource object, the matching format is: `namespace/ingress name` |
-| `domain` | array of string | one of `ingress` and `domain` is required | ["example.com","*.test.com"] | match domain name, support generic domain name |
-| `config` | object | optional | - | plug-in configuration that takes effect after matching |
+| Field Name | Data Type | Filling Requirements | Configuration Example | Description |
+| ------- | ------- | -------- | --- | --- |
+| `ingress` | array of string | One of `ingress` and `domain` is required | ["default/foo","default/bar"] | Matching ingress resource object, the matching format is: `namespace/ingress name` |
+| `domain` | array of string | One of `ingress` and `domain` is required | ["example.com","*.test.com"] | Match domain name, supports wildcard domains |
+| `config` | object | Optional | - | Plugin configuration that takes effect after matching |
 
 Take the [Request Blocking](./traffic/request-block.md) plugin as an example, if you want the following configuration of the plugin to take effect globally (please refer to the [Request Blocking](./traffic/request-block.md) document for configuration field descriptions):
 
@@ -129,3 +129,7 @@ Enable plugins via UI interaction using the Higress console, without needing to 
 https://github.com/higress-group/higress-console/blob/main/backend/sdk/src/main/resources/plugins/plugins.properties
 
 Currently, the stable version for all plugins is 1.0.0, while the latest development version is tagged as `latest`. To consistently use the stable version, you may pin the image tag to a specific version. To leverage the newest capabilities of the plugins, set the image tag to `latest`, which will automatically pull the newest version of the plugin whenever there are configuration updates available.
+
+## Wasm Plugin Principles Introduction
+
+Please check the e-book: ["Wasm Plugin Development"](https://higress.cn/docs/ebook/wasm19/)

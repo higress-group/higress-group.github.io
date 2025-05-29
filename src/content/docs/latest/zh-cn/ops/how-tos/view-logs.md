@@ -4,7 +4,7 @@ keywords: [ops,logging,log]
 description: 介绍如何查看 Higress 的运行日志
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/ops/how-tos/view-logs.md
 ---
-# 如何查看 Higress 的运行日志
+# 查看日志
 
 ## 查看组件日志
 

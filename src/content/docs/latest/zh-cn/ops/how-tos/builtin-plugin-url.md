@@ -96,7 +96,7 @@ helm get values higress -n higress-system > values.yaml
 
 #### 2. 修改配置
 
-添加以下节点：
+添加以下配置：
 
 ```yaml
 higress-core:
