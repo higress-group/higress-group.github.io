@@ -24,7 +24,7 @@ description: 基于 Key 集群限流插件配置参考
 | ----------------------- | ------ | ---- | ------ |-----------------------------------------------------------------------------|
 | rule_name               | string | 是 | - | 限流规则名称，根据限流规则名称 + 限流类型 + 限流 key 名称 + 限流 key 对应的实际值来拼装 redis key             |
 | global_threshold | Object | 否，`global_threshold` 或 `rule_items` 选填一项 | - | 对整个自定义规则组进行限流 |
-| rule_items | array of object | 否，`global_threshold` 或 `rule_items` 选填一项 | -                 | 限流规则项，按照 rule_items 下的排列顺序，匹配第一个 rule_item 后命中限流规则，后续规则将被忽略                 |
+| rule_items | array of object | 否，`global_threshold` 或 `rule_items` 选填一项 | -                 | 限流规则项数组，**按顺序匹配**，命中第一个符合条件的规则项后触发限流，**后续规则不再执行** |
 | show_limit_quota_header | bool | 否 | false | 响应头中是否显示 `X-RateLimit-Limit`（限制的总请求数）和 `X-RateLimit-Remaining`（剩余还可以发送的请求数） |
 | rejected_code           | int | 否 | 429 | 请求被限流时，返回的 HTTP 状态码                                                         |
 | rejected_msg            | string | 否 | Too many requests | 请求被限流时，返回的响应体                                                               |
@@ -82,7 +82,7 @@ description: 基于 Key 集群限流插件配置参考
 ```yaml
 rule_name: routeA-global-limit-rule
 global_threshold:
-  query_per_minute: 1000 # 自定义规则组每分钟最多1000次请求
+  query_per_minute: 1000 # 自定义规则组限1000次请求/分钟
 redis:
   service_name: redis.static
 show_limit_quota_header: true
@@ -101,13 +101,13 @@ rule_items:
         query_per_hour: 100
   - limit_by_per_param: apikey
     limit_keys:
-      # 正则表达式，匹配以 a 开头的所有字符串，每个 apikey 对应的请求 10qds
+      # 正则匹配a开头的apikey，每个匹配项独立限10次/秒
       - key: "regexp:^a.*"
         query_per_second: 10
-      # 正则表达式，匹配以 b 开头的所有字符串，每个 apikey 对应的请求 100qd
+      # 正则匹配b开头的apikey，每个匹配项独立限100次/分钟
       - key: "regexp:^b.*"
         query_per_minute: 100
-      # 兜底用，匹配所有请求，每个 apikey 对应的请求 1000qdh
+      # 兜底规则：通配所有apikey，每个独立限1000次/小时
       - key: "*"
         query_per_hour: 1000
 redis:
@@ -128,13 +128,13 @@ rule_items:
         query_per_hour: 10
   - limit_by_per_header: x-ca-key
     limit_keys:
-      # 正则表达式，匹配以 a 开头的所有字符串，每个 apikey 对应的请求 10qds
+      # 正则匹配a开头的apikey，每个匹配项独立限10次/秒
       - key: "regexp:^a.*"
         query_per_second: 10
-      # 正则表达式，匹配以b开头的所有字符串，每个 apikey 对应的请求 100qd
+      # 正则匹配b开头的apikey，每个匹配项独立限100次/分钟
       - key: "regexp:^b.*"
         query_per_minute: 100
-      # 兜底用，匹配所有请求，每个 apikey 对应的请求 1000qdh
+      # 兜底规则：通配所有apikey，每个独立限1000次/小时
       - key: "*"
         query_per_hour: 1000
 redis:
@@ -147,15 +147,15 @@ show_limit_quota_header: true
 ```yaml
 rule_name: routeA-client-ip-limit-rule
 rule_items:
-  - limit_by_per_ip: from-header-x-forwarded-for
+  - limit_by_per_ip: from-header-x-forwarded-for # 基于x-forwarded-for头的IP限流
     limit_keys:
-      # 精确 IP
+      # 精确IP：1.1.1.1，限10次/天
       - key: 1.1.1.1
         query_per_day: 10
-      # IP 段，符合这个 IP 段的 IP，每个 IP 100qpd
+      # IP段1.1.1.0/24：每个IP独立限100次/天
       - key: 1.1.1.0/24
         query_per_day: 100
-      # 兜底用，即默认每个 IP 1000 qpd
+      # 兜底规则：所有IP，每个独立限1000次/天
       - key: 0.0.0.0/0
         query_per_day: 1000
 redis:
@@ -176,13 +176,13 @@ rule_items:
         query_per_hour: 100
   - limit_by_per_consumer: ''
     limit_keys:
-      # 正则表达式，匹配以 a 开头的所有字符串，每个 consumer 对应的请求 10qds
+      # 正则匹配a开头的consumer，每个匹配项独立限10次/秒
       - key: "regexp:^a.*"
         query_per_second: 10
-      # 正则表达式，匹配以 b 开头的所有字符串，每个 consumer 对应的请求 100qd
+      # 正则匹配b开头的consumer，每个匹配项独立限100次/分钟
       - key: "regexp:^b.*"
         query_per_minute: 100
-      # 兜底用，匹配所有请求，每个 consumer 对应的请求 1000qdh
+      # 兜底规则：通配所有apikey，每个独立限1000次/小时
       - key: "*"
         query_per_hour: 1000
 redis:
@@ -195,21 +195,23 @@ show_limit_quota_header: true
 ```yaml
 rule_name: routeA-cookie-limit-rule
 rule_items:
-  - limit_by_cookie: key1
+  - limit_by_cookie: key1 # 基于Cookie键key1限流
     limit_keys:
+    	# 固定值value1：限10次/分钟
       - key: value1
         query_per_minute: 10
+      # 固定值value2：限100次/小时
       - key: value2
         query_per_hour: 100
-  - limit_by_per_cookie: key1
+  - limit_by_per_cookie: key1 # 基于Cookie键key1的每个值独立限流
     limit_keys:
-      # 正则表达式，匹配以 a 开头的所有字符串，每个 cookie 中的 value 对应的请求 10qds
+    	# 正则匹配a开头的value，每个独立限10次/秒
       - key: "regexp:^a.*"
         query_per_second: 10
-      # 正则表达式，匹配以 b 开头的所有字符串，每个 cookie 中的 value 对应的请求 100qd
+      # 正则匹配b开头的value，每个独立限100次/分钟
       - key: "regexp:^b.*"
         query_per_minute: 100
-      # 兜底用，匹配所有请求，每个 cookie 中的 value 对应的请求 1000qdh
+      # 兜底规则：所有value，每个独立限1000次/小时
       - key: "*"
         query_per_hour: 1000
 rejected_code: 200

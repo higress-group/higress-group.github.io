@@ -22,15 +22,15 @@ It supports two rate limiting modes:
 
 ## Configuration Instructions
 
-| Configuration Item       | Type          | Required                                  | Default Value       | Description                                                                |  
-|--------------------------|---------------|-------------------------------------------|---------------------|----------------------------------------------------------------------------|  
-| rule_name                | string        | Yes                                       | -                   | Name of the rate limiting rule. Used to construct the Redis key in the format: `rule_name:rate_limit_type:key_name:key_value`. |  
-| global_threshold         | Object        | No (choose either `global_threshold` or `rule_items`) | -                 | Apply rate limiting to the entire custom rule group.|  
-| rule_items               | array of object | No (choose either `global_threshold` or `rule_items`) | -               | Rate limiting rule items. Rules are matched in the order of the array; once the first matching rule is hit, subsequent rules are ignored. |  
-| show_limit_quota_header  | bool          | No                                        | false             | Whether to display `X-RateLimit-Limit` (total allowed requests) and `X-RateLimit-Remaining` (remaining allowed requests) in the response header. |  
-| rejected_code            | int           | No                                        | 429               | HTTP status code returned when a request is rate-limited.                  |  
-| rejected_msg             | string        | No                                        | Too many requests | Response body returned when a request is rate-limited.                      |  
-| redis                    | object        | Yes                                       | -                   | Configuration for Redis.                                                   |  
+| Configuration Item       | Type          | Required                                  | Default Value       | Description                                                                |
+|--------------------------|---------------|-------------------------------------------|---------------------|----------------------------------------------------------------------------|
+| rule_name                | string        | Yes                                       | -                   | Name of the rate limiting rule. Used to construct the Redis key in the format: `rule_name:rate_limit_type:key_name:key_value`. |
+| global_threshold         | Object        | No (choose either `global_threshold` or `rule_items`) | -                 | Apply rate limiting to the entire custom rule group.|
+| rule_items               | array of object | No (choose either `global_threshold` or `rule_items`) | -               | The rate limiting rule items array is **matched in order**. When the first qualifying rule item is hit, rate limiting triggers and **subsequent rules are not executed**. |
+| show_limit_quota_header  | bool          | No                                        | false             | Whether to display `X-RateLimit-Limit` (total allowed requests) and `X-RateLimit-Remaining` (remaining allowed requests) in the response header. |
+| rejected_code            | int           | No                                        | 429               | HTTP status code returned when a request is rate-limited.                  |
+| rejected_msg             | string        | No                                        | Too many requests | Response body returned when a request is rate-limited.                      |
+| redis                    | object        | Yes                                       | -                   | Configuration for Redis.                                                   |
 
 ### Configuration Fields for `global_threshold`
 
@@ -84,7 +84,7 @@ It supports two rate limiting modes:
 ```yaml  
 rule_name: routeA-global-limit-rule
 global_threshold:
-  query_per_minute: 1000 # Maximum 1000 requests per minute for this rule group
+  query_per_minute: 1000 # Global limit: 1000 requests/minute for the custom rule group
 redis:
   service_name: redis.static
 show_limit_quota_header: true
@@ -97,20 +97,17 @@ rule_name: routeA-request-param-limit-rule
 rule_items:
   - limit_by_param: apikey
     limit_keys:
-      - key: 9a342114-ba8a-11ec-b1bf-00163e1250b5
+      - key: 9a342114-ba8a-11ec-b1bf-00163e1250b5 # Fixed value1: 10 requests/minute
         query_per_minute: 10
-      - key: a6a6d7f2-ba8a-11ec-bec2-00163e1250b5
+      - key: a6a6d7f2-ba8a-11ec-bec2-00163e1250b5 # Fixed value2: 100 requests/hour
         query_per_hour: 100
   - limit_by_per_param: apikey
     limit_keys:
-      # Regular expression to match all strings starting with "a"; 10 requests per second for each apikey  
-      - key: "regexp:^a.*"
+      - key: "regexp:^a.*" # Regex match a-starting apikey: 10 requests/second per key
         query_per_second: 10
-      # Regular expression to match all strings starting with "b"; 100 requests per minute for each apikey  
-      - key: "regexp:^b.*"
+      - key: "regexp:^b.*" # Regex match b-starting apikey: 100 requests/minute per key
         query_per_minute: 100
-      # Fallback rule to match all requests; 1000 requests per hour for each apikey  
-      - key: "*"
+      - key: "*" # Fallback rule: all apikeys, 1000 requests/hour per key
         query_per_hour: 1000
 redis:
   service_name: redis.static
@@ -124,20 +121,17 @@ rule_name: routeA-request-header-limit-rule
 rule_items:
   - limit_by_header: x-ca-key
     limit_keys:
-      - key: 102234
+      - key: 102234 # Fixed value1: 10 requests/minute
         query_per_minute: 10
-      - key: 308239
+      - key: 308239 # Fixed value2: 10 requests/hour
         query_per_hour: 10
   - limit_by_per_header: x-ca-key
     limit_keys:
-      # Regular expression to match all strings starting with "a"; 10 requests per second for each key  
-      - key: "regexp:^a.*"
+      - key: "regexp:^a.*" # Regex match a-starting x-ca-key: 10 requests/second per key
         query_per_second: 10
-      # Regular expression to match all strings starting with "b"; 100 requests per minute for each key  
-      - key: "regexp:^b.*"
+      - key: "regexp:^b.*" # Regex match b-starting x-ca-key: 100 requests/minute per key
         query_per_minute: 100
-      # Fallback rule to match all requests; 1000 requests per hour for each key  
-      - key: "*"
+      - key: "*" # Fallback rule: all x-ca-keys, 1000 requests/hour per key
         query_per_hour: 1000
 redis:
   service_name: redis.static
@@ -149,16 +143,13 @@ show_limit_quota_header: true
 ```yaml  
 rule_name: routeA-client-ip-limit-rule
 rule_items:
-  - limit_by_per_ip: from-header-x-forwarded-for
+  - limit_by_per_ip: from-header-x-forwarded-for # IP rate limiting via x-forwarded-for header
     limit_keys:
-      # Exact IP match  
-      - key: 1.1.1.1
+      - key: 1.1.1.1 # Exact IP: 1.1.1.1, 10 requests/day
         query_per_day: 10
-      # CIDR block match; 100 requests per day for each IP in the block  
-      - key: 1.1.1.0/24
+      - key: 1.1.1.0/24 # IP range 1.1.1.0/24: 100 requests/day per IP
         query_per_day: 100
-      # Fallback rule for all IPs; 1000 requests per day for each IP  
-      - key: 0.0.0.0/0
+      - key: 0.0.0.0/0 # Fallback rule: all IPs, 1000 requests/day per IP
         query_per_day: 1000
 redis:
   service_name: redis.static
@@ -172,20 +163,17 @@ rule_name: routeA-consumer-limit-rule
 rule_items:
   - limit_by_consumer: ''
     limit_keys:
-      - key: consumer1
+      - key: consumer1 # Consumer1: 10 requests/second
         query_per_second: 10
-      - key: consumer2
+      - key: consumer2 # Consumer2: 100 requests/hour
         query_per_hour: 100
   - limit_by_per_consumer: ''
     limit_keys:
-      # Regular expression to match all consumer names starting with "a"; 10 requests per second for each consumer  
-      - key: "regexp:^a.*"
+      - key: "regexp:^a.*" # Regex match a-starting consumer: 10 requests/second per key
         query_per_second: 10
-      # Regular expression to match all consumer names starting with "b"; 100 requests per minute for each consumer  
-      - key: "regexp:^b.*"
+      - key: "regexp:^b.*" # Regex match b-starting consumer: 100 requests/minute per key
         query_per_minute: 100
-      # Fallback rule to match all consumers; 1000 requests per hour for each consumer  
-      - key: "*"
+      - key: "*" # Fallback rule: all consumers, 1000 requests/hour per key
         query_per_hour: 1000
 redis:
   service_name: redis.static
@@ -197,25 +185,22 @@ show_limit_quota_header: true
 ```yaml  
 rule_name: routeA-cookie-limit-rule
 rule_items:
-  - limit_by_cookie: key1
+  - limit_by_cookie: key1 # Rate limit by Cookie key "key1"
     limit_keys:
-      - key: value1
+      - key: value1 # Fixed value1: 10 requests/minute
         query_per_minute: 10
-      - key: value2
+      - key: value2 # Fixed value2: 100 requests/hour
         query_per_hour: 100
-  - limit_by_per_cookie: key1
+  - limit_by_per_cookie: key1 # Rate limit by each value of Cookie key "key1"
     limit_keys:
-      # Regular expression to match all cookie values starting with "a"; 10 requests per second for each value  
-      - key: "regexp:^a.*"
+      - key: "regexp:^a.*" # Regex match a-starting value: 10 requests/second per key
         query_per_second: 10
-      # Regular expression to match all cookie values starting with "b"; 100 requests per minute for each value  
-      - key: "regexp:^b.*"
+      - key: "regexp:^b.*" # Regex match b-starting value: 100 requests/minute per key
         query_per_minute: 100
-      # Fallback rule to match all cookie values; 1000 requests per hour for each value  
-      - key: "*"
+      - key: "*" # Fallback rule: all values, 1000 requests/hour per key
         query_per_hour: 1000
-rejected_code: 200
-rejected_msg: '{"code":-1,"msg":"Too many requests"}'
+rejected_code: 200 # HTTP status code for rate-limited requests
+rejected_msg: '{"code":-1,"msg":"Too many requests"}' # Response body for rate-limited requests
 redis:
   service_name: redis.static
 show_limit_quota_header: true
