@@ -39,7 +39,7 @@ This page shows the Higress development team. Please add your information to the
 
 ## Higress Members
 | Name | GitHub | Organization |
-|-----|-------------------------------| --------------- |
+|--|-------------------------------| --------------- |
 | Yijie Liu | [007gzs](https://github.com/007gzs) | Prism Seven Colors |
 | Zhenghao Zhang | [alexzzh](https://github.com/alexzzh) | Koal Software |
 | Qianglin Li | [Charlie17Li](https://github.com/Charlie17Li) | Zhejiang University |
@@ -53,6 +53,7 @@ This page shows the Higress development team. Please add your information to the
 | Wanshan Peng | [Uncle-Justice](https://github.com/Uncle-Justice) | Huazhong University of Science and Technology |
 | Weiji Zhao | [vikizhao156](https://github.com/vikizhao156) | Shanghai Jiao Tong University |
 | Yunyang Xing | [xingyunyang01](https://github.com/xingyunyang01) | China Unicom Digital Technology |
+| Xingyuan Cheng | [undertaker86001](https://github.com/undertaker86001) | Sucheon Technology |
 
 
 ## How to Obtain Higress Developer Titles
