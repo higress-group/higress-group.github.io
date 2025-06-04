@@ -53,7 +53,7 @@ description: Higress 维护者名单
 | 彭万山 | [Uncle-Justice](https://github.com/Uncle-Justice)     | 华中科技 |
 | 赵伟基 | [vikizhao156](https://github.com/vikizhao156)         | 上交 |
 | 邢云阳 | [xingyunyang01](https://github.com/xingyunyang01)     | 联通数科 |
-| 程兴源 | [undertaker86001](https://github.com/undertaker86001) | 家里蹲公司 |
+| 程兴源 | [undertaker86001](https://github.com/undertaker86001) | 硕橙科技 |
   
 
 
