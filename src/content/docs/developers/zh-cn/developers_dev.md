@@ -54,7 +54,7 @@ description: Higress 维护者名单
 | 赵伟基 | [vikizhao156](https://github.com/vikizhao156)         | 上交 |
 | 邢云阳 | [xingyunyang01](https://github.com/xingyunyang01)     | 联通数科 |
 | 程兴源 | [undertaker86001](https://github.com/undertaker86001) | 硕橙科技 |
-  
+| 潘舒新 | [psxjoy](https://github.com/psxjoy) | 同花顺 |
 
 
 

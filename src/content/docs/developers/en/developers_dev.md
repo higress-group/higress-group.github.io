@@ -54,7 +54,7 @@ This page shows the Higress development team. Please add your information to the
 | Weiji Zhao | [vikizhao156](https://github.com/vikizhao156) | Shanghai Jiao Tong University |
 | Yunyang Xing | [xingyunyang01](https://github.com/xingyunyang01) | China Unicom Digital Technology |
 | Xingyuan Cheng | [undertaker86001](https://github.com/undertaker86001) | Sucheon Technology |
-
+| Shuxin Pan | [psxjoy](https://github.com/psxjoy) | Hithink RoyalFlush |
 
 ## How to Obtain Higress Developer Titles
 
