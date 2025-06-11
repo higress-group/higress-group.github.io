@@ -89,16 +89,19 @@ For database connection string format, please refer to the [gorm documentation](
 > **Note：**
 > Nacos version >= 3.0，Higress version >= 2.1.2
 
-Configure the Nacos MCP registry service source in mcpbridge. For detailed configuration information, see the documentation [Mcp Bridge Configuration](https://higress.cn/en/docs/latest/user/mcp-bridge/?spm=36971b57.35684624.0.0.4b3d7cdcfQgsaa)
-```yaml
-registries:
-- domain: localhost                            # Address of Nacos, either IP address or domain name
-  mcpServerBaseUrl: you_custom_url_prefix
-  name: you_custom_name
-  port: 8848
-  type: nacos3
-```
-Once configured, you can access MCP services registered in Nacos through Higress. The endpoint for access is http://{higresshost}/you_custom_url_prefix/{service name in Nacos MCP Service configuration}/{access path in Nacos MCP service configuration}.
+Add Service Source  
+![Add Service Source](https://img.alicdn.com/imgextra/i3/O1CN01Ksd48C1ru4g6ep9SU_!!6000000005690-2-tps-2422-198.png)
+
+Create a Nacos 3.x service source and complete the relevant information.
+
+![Add Nacos 3.x Service Source](https://img.alicdn.com/imgextra/i3/O1CN01FGvSE71HVVGHTp1Cu_!!6000000000763-2-tps-588-1039.png)
+
+Access the endpoint through the following rules:
++ REST API to MCP type: `http://{domain of associated MCP Server}/{MCP Server route path prefix}/{name of MCP Server in Nacos}`. For example, if the associated domain for the Nacos service source is `mcp-registry.com`, the MCP server route path is `/mcp`, and the name of the MCP service in Nacos is `test`, then the final SSE protocol access path will be:
+  `http://mcp-registry.com/mcp/test/sse`
+
++ Directly proxy the native MCP type: `http://{domain of associated MCP Server}/{MCP Server route path prefix}/{name of MCP Server in Nacos}/{SSE path of the original service}`. For example, if the associated domain for the Nacos service source is `mcp-registry.com`, the MCP server route path is `/mcp`, the name of the MCP service in Nacos is `test`, and the original SSE path for the `test` service is `/mcp/sse`, then the final SSE protocol access path will be:
+  `http://mcp-registry.com/mcp/test/mcp/sse`
 
 ### Configuring REST API MCP Server
 

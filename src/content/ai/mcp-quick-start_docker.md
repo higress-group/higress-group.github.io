@@ -94,6 +94,23 @@ docker run -d --rm --name higress-ai -v ${PWD}:/data \
         higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
 ```
 
+### 配置 Nacos MCP Registry
+> **注意：**
+> 需要Nacos版本为3.0及以上，Higress版本在2.1.2及以上
+
+新增服务来源
+![添加服务来源](https://img.alicdn.com/imgextra/i3/O1CN01Ksd48C1ru4g6ep9SU_!!6000000005690-2-tps-2422-198.png)
+
+创建nacos3.x服务来源并完善相关信息
+
+![添加Nacos3.x服务来源](https://img.alicdn.com/imgextra/i3/O1CN01FGvSE71HVVGHTp1Cu_!!6000000000763-2-tps-588-1039.png)
+
+通过以下规则访问接入点
++ REST API 转 MCP 类型。http://{关联MCP Server的域名}/{MCP Server路由路径前缀}/{Nacos中MCP Server的名称}，例如关联Nacos服务来源关联的域名是mcp-registry.com, mcp server 路由路径 为 /mcp，nacos中mcp服务的名称为test，则最终的sse协议的访问路径为
+http://mcp-registry.com/mcp/test/sse
+
++ 直接代理原生 MCP 类型。http://{关联MCP Server的域名}/{MCP Server路由路径前缀}/{Nacos中MCP Server的名称}/{原生服务的sse路径}，例如关联Nacos服务来源关联的域名是mcp-registry.com, mcp server 路由路径 为 /mcp，acos中mcp服务的名称为test，test服务原本的sse路径为/mcp/sse，则最终的sse协议访问路径为 http://mcp-registry.com/mcp/test/mcp/sse
+
 ### 配置 REST API MCP Server
 
 任何 REST API 都可以通过以下步骤快速转换为 MCP Server：

@@ -89,18 +89,12 @@ servers:
 > **注意：**
 > 需要Nacos版本为3.0及以上，Higress版本在2.1.2及以上
 
-在mcpbridge中配置nacos mcp registry服务来源
-具体的配置信息见文档 [Mcp Bridge 配置说明](https://higress.cn/docs/latest/user/mcp-bridge/?spm=36971b57.31888769.0.0.559550f86sCJw2)
-```yaml
-registries:
-- domain: localhost                            #nacos的地址，ip地址或者域名
-  mcpServerBaseUrl: you_custom_url_prefix
-  name: you_custom_name
-  port: 8848
-  type: nacos3
-```
-配置完成后，即可通过higress访问注册在nacos中的mcp服务。
-访问的endpoint为 http://{higresshost}/you_custom_url_prefix/{nacos中MCP服务的名称}/{nacos中mcp服务配置中的访问路径}
+新增服务来源
+![添加服务来源](https://img.alicdn.com/imgextra/i3/O1CN01Ksd48C1ru4g6ep9SU_!!6000000005690-2-tps-2422-198.png)
+
+创建nacos3.x服务来源并完善相关信息
+
+![添加Nacos3.x服务来源](https://img.alicdn.com/imgextra/i3/O1CN01FGvSE71HVVGHTp1Cu_!!6000000000763-2-tps-588-1039.png)
 
 ### 配置 REST API MCP Server
 
