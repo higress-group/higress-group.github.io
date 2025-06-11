@@ -1073,15 +1073,11 @@ spec:
 
 通过配置流量镜像，可以复制流量到指定服务，常用于操作审计和流量测试等场景。
 
-higress.io/mirror-target-service：复制流量转发到指定镜像服务。服务格式为：namespace/name:port。
-
-namespace: K8s Service所在的命名空间，可选，默认为Ingress所在的命名空间。
-
-name：K8s Service的名称，必选。
-
-port：待转发至K8s Service的端口，可选，默认为第一个端口。
-
-higress.io/mirror-percentage：复制流量的比例。可配置的值的范围为：0~100，默认100。
+- higress.io/mirror-target-service：复制流量转发到指定镜像服务。服务格式为：namespace/name:port。
+  - namespace: K8s Service所在的命名空间，可选，默认为Ingress所在的命名空间。
+  - name：K8s Service的名称，必选。
+  - port：待转发至K8s Service的端口，可选，默认为第一个端口。
+- higress.io/mirror-percentage：复制流量的比例。可配置的值的范围为：0~100，默认100。
 
 > **重要提醒： 复制的流量在转发给目标服务时，原始请求中的Host会被自动加上-shadow后缀。**
 
