@@ -1055,7 +1055,7 @@ metadata:
     higress.io/tls-max-protocol-version: "TLSv1.2"
   name: demo
 spec:
-  ingressClassName: mse
+  ingressClassName: higress
   rules:
     - host: example.com
       http:
@@ -1068,3 +1068,72 @@ spec:
             path: /test
             pathType: Exact
 ```
+
+## 流量镜像
+
+通过配置流量镜像，可以复制流量到指定服务，常用于操作审计和流量测试等场景。
+
+higress.io/mirror-target-service：复制流量转发到指定镜像服务。服务格式为：namespace/name:port。
+
+namespace: K8s Service所在的命名空间，可选，默认为Ingress所在的命名空间。
+
+name：K8s Service的名称，必选。
+
+port：待转发至K8s Service的端口，可选，默认为第一个端口。
+
+higress.io/mirror-percentage：复制流量的比例。可配置的值的范围为：0~100，默认100。
+
+> **重要提醒： 复制的流量在转发给目标服务时，原始请求中的Host会被自动加上-shadow后缀。**
+
+下面例子是将example.com/test的流量复制并转发到目标服务：命名空间为test，服务名为app，端口为8080，且复制比例为100%。
+本示例中，复制的流量在转发给目标服务时，Host会被自动改写为example.com-shadow：
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    higress.io/mirror-target-service: test/app:8080
+  name: demo
+spec:
+  ingressClassName: higress
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: demo-service
+                port: 
+                  number: 80
+            path: /test
+            pathType: Exact
+```
+
+下面例子是将example.com/test的流量复制并转发到目标服务：命名空间为test，服务名为app，端口为8080，且复制比例为10%。
+本示例中，复制的流量在转发给目标服务时，Host会被自动改写为example.com-shadow：
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    higress.io/mirror-target-service: test/app:8080
+    higress.io/mirror-percentage: 10
+  name: demo
+spec:
+  ingressClassName: higress
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: demo-service
+                port: 
+                  number: 80
+            path: /test
+            pathType: Exact
+```
+
+
