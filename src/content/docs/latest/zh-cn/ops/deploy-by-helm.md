@@ -24,29 +24,29 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 
 完整参数介绍请查看[运维参数说明](../user/configurations.md)
 
-| **参数名** | **参数说明** | **默认值** |
-|---|---|---|
-| **全局参数** |  |  |
-| global.local | 如果要安装至本地 K8s 集群（如 Kind、Rancher Desktop 等），请设置为 `true` | false |
-| global.ingressClass | 用于过滤被 Higress Controller 监听的 Ingress 资源的 [IngressClass](https://kubernetes.io/zh-cn/docs/concepts/services-networking/ingress/#ingress-class)。<br />在集群内部署了多个网关时，可以使用这一参数来区分每个网关的职责范围。<br />IngressClass 有一些特殊的取值：<br />1. 如果设置为“nginx”，Higress Controller 将监听 Ingress 为 `nginx` 或为空的 Ingress 资源。<br />2. 如果设为空，Higress Controller 将监听 K8s 集群内的全部 Ingress 资源。 | higress |
-| global.watchNamespace | 如果值不为空，Higress Controller 将只会监听指定命名空间下的资源。<br />当基于 K8s 命名空间进行业务系统隔离时，若需要对每个命名空间部署一套独立的网关，可以通过这一参数来限制 Higress 监听指定命名空间内的 Ingress。 | "" |
-| global.disableAlpnH2 | 是否在 ALPN 中禁用 HTTP/2 协议 | false |
-| global.enableStatus | 若为`true`， Higress Controller 将会更新 Ingress 资源的 `status` 字段。<br />为避免从 Nginx Ingress 迁移过程中，覆盖 Ingress 对象的 `status` 字段，可以将这一参数设置为`false`，这样 Higress 默认就不会将入口 IP 写入 Ingress 的 `status` 字段。 | true |
-| global.enableIstioAPI | 若为`true`，Higress Controller 将同时监听 istio 资源 | false |
-| global.enableGatewayAPI | 若为`true`，Higress Controller 将同时监听 Gateway API 资源 | false |
-| global.onlyPushRouteCluster | 若为`true`，Higress Controller 将会只推送被路由关联的服务 | true |
-| global.o11y.enabled | 若为 `true`，将同时安装可观测性套件（Grafana、Promethues、Loki、PromTail） | false |
-| global.pvc.rwxSupported | 标识目标 K8s 集群是否支持 PersistentVolumeClaim 的 ReadWriteMany 操作方式。 | true |
-| **核心组件参数** |  |  |
-| higress-core.gateway.replicas | Higress Gateway 的 pod 数量 | 2 |
-| higress-core.gateway.httpPort | Higress Gateway 将监听的 HTTP 端口。| 80 |
-| higress-core.gateway.httpsPort | Higress Gateway 将监听的 HTTPS 端口。| 443 |
+| **参数名** | **参数说明** | **默认值**    |
+|---|---|------------|
+| **全局参数** |  |            |
+| global.local | 如果要安装至本地 K8s 集群（如 Kind、Rancher Desktop 等），请设置为 `true` | false      |
+| global.ingressClass | 用于过滤被 Higress Controller 监听的 Ingress 资源的 [IngressClass](https://kubernetes.io/zh-cn/docs/concepts/services-networking/ingress/#ingress-class)。<br />在集群内部署了多个网关时，可以使用这一参数来区分每个网关的职责范围。<br />IngressClass 有一些特殊的取值：<br />1. 如果设置为“nginx”，Higress Controller 将监听 Ingress 为 `nginx` 或为空的 Ingress 资源。<br />2. 如果设为空，Higress Controller 将监听 K8s 集群内的全部 Ingress 资源。 | higress    |
+| global.watchNamespace | 如果值不为空，Higress Controller 将只会监听指定命名空间下的资源。<br />当基于 K8s 命名空间进行业务系统隔离时，若需要对每个命名空间部署一套独立的网关，可以通过这一参数来限制 Higress 监听指定命名空间内的 Ingress。 | ""         |
+| global.disableAlpnH2 | 是否在 ALPN 中禁用 HTTP/2 协议 | false      |
+| global.enableStatus | 若为`true`， Higress Controller 将会更新 Ingress 资源的 `status` 字段。<br />为避免从 Nginx Ingress 迁移过程中，覆盖 Ingress 对象的 `status` 字段，可以将这一参数设置为`false`，这样 Higress 默认就不会将入口 IP 写入 Ingress 的 `status` 字段。 | true       |
+| global.enableIstioAPI | 若为`true`，Higress Controller 将同时监听 istio 资源 | false      |
+| global.enableGatewayAPI | 若为`true`，Higress Controller 将同时监听 Gateway API 资源 | false      |
+| global.onlyPushRouteCluster | 若为`true`，Higress Controller 将会只推送被路由关联的服务 | true       |
+| global.o11y.enabled | 若为 `true`，将同时安装可观测性套件（Grafana、Promethues、Loki、PromTail） | false      |
+| global.pvc.rwxSupported | 标识目标 K8s 集群是否支持 PersistentVolumeClaim 的 ReadWriteMany 操作方式。 | false      |
+| **核心组件参数** |  |            |
+| higress-core.gateway.replicas | Higress Gateway 的 pod 数量 | 2          |
+| higress-core.gateway.httpPort | Higress Gateway 将监听的 HTTP 端口。| 80         |
+| higress-core.gateway.httpsPort | Higress Gateway 将监听的 HTTPS 端口。| 443        |
 | higress-core.gateway.kind | 用于部署 Higress Gateway 的资源类型，Deployment 或 DaemonSet | Deployment |
-| higress-core.controller.replicas | Higress Controller 的 pod 数量 | 1 |
-| **控制台参数** |  |  |
-| higress-console.replicaCount | Higress Console 的 pod 数量 | 1 |
-| higress-console.service.type | Higress Console 所使用的 K8s Service 类型 | ClusterIP |
-| higress-console.web.login.prompt | 登录页面上显示的提示信息 | "" |
+| higress-core.controller.replicas | Higress Controller 的 pod 数量 | 1          |
+| **控制台参数** |  |            |
+| higress-console.replicaCount | Higress Console 的 pod 数量 | 1          |
+| higress-console.service.type | Higress Console 所使用的 K8s Service 类型 | ClusterIP  |
+| higress-console.web.login.prompt | 登录页面上显示的提示信息 | ""         |
 
 ## 支持 Istio CRD（可选）
 

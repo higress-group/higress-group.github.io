@@ -27,13 +27,12 @@ keywords: ["higress","prometheus","监控","metrics","使用","方法","教程"]
    ```
 
 2. **安装Higress并启用监控功能：**
-   接下来，使用Helm安装Higress，并通过设置`global.o11y.enabled=true`来启用内置的监控套件。如果您的Kubernetes集群不支持`ReadWriteMany`访问模式，请同时设置`global.pvc.rwxSupported=false`。安装命令如下：
+   接下来，使用Helm安装Higress，并通过设置`global.o11y.enabled=true`来启用内置的监控套件。安装命令如下：
    ```bash
    helm install higress -n higress-system higress.io/higress \
        --create-namespace \
        --render-subchart-notes \
-       --set global.o11y.enabled=true \
-       [--set global.pvc.rwxSupported=false]  # 根据实际情况决定是否添加此行
+       --set global.o11y.enabled=true
    ```
 
 3. **访问监控面板：**
