@@ -16,13 +16,6 @@ helm repo add higress.io https://higress.io/helm-charts
 helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.o11y.enabled=true
 ```
 
-注意：在安装到标准 K8s 集群（即未指定 `global.local=true` 参数）时，监控系统所配置的 PersistentVolumeClaim 默认使用 `ReadWriteMany` 访问模式。如果目标 K8s 集群不支持这一访问模式，则可以在命令行中额外添加 `--set global.pvc.rwxSupported=false` 参数来将访问模式切换为 `ReadyWriteOnce`。
-
-```bash
-helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.o11y.enabled=true --set global.pvc.rwxSupported=false
-```
-
 完成安装后，在浏览器中访问 Higress Console，点击左侧导航栏“监控面板”，页面右侧就会展示出系统内置的监控面板。
 
 ![image](/img/user/prometheus/zh-cn/builtin.png)

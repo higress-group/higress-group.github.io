@@ -10,22 +10,22 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 The following operational parameters can be configured using the `--set` or `--values` flags with the Helm command, or through the `values` field in the `hgctl` profile file.
 
 ## Global Parameters
-| Parameter | Description | Default |
-|-----------|-------------|---------|
+| Parameter | Description | Default   |
+|-----------|-------------|-----------|
 | `global.ingressClass` | The IngressClass parameter is used to filter which Ingress resources the Higress controller should watch. When multiple gateways are deployed in a cluster, this parameter can be used to distinguish the responsibilities of each gateway. Special values: 1. If set to "nginx", Higress Controller will watch Ingress resources with `ingress.class: nginx` or no ingress class. 2. If left empty, Higress Controller will watch all Ingress resources in the Kubernetes cluster. | `higress` |
-| `global.watchNamespace` | If not empty, Higress Controller will only watch resources in the specified namespace. When isolating business systems by Kubernetes namespaces, you can deploy an independent gateway for each namespace by limiting Higress to watch only the specified namespace. | `""` |
-| `global.disableAlpnH2` | Whether to disable HTTP/2 protocol in ALPN | `false` |
-| `global.enableStatus` | If true, Higress Controller will update the status field of Ingress resources. To prevent overwriting the status field of Ingress objects during migration from Nginx Ingress, set this parameter to false. | `true` |
-| `global.local` | Set to true if installing to a local Kubernetes cluster (e.g., Kind, Rancher Desktop) | `false` |
-| `global.enableIstioAPI` | If true, Higress Controller will also watch Istio resources | `false` |
-| `global.enableGatewayAPI` | If true, Higress Controller will also watch Gateway API resources | `false` |
-| `global.imagePullPolicy` | If you don't want to use the default behavior, you can specify the image pull policy. Default behavior: The latest image will always be pulled with `Always` policy, otherwise it will be pulled with `IfNotPresent`. | `""` |
-| `global.imagePullSecrets` | Configure ImagePullSecrets for all ServiceAccounts, which is a list of secrets in the same namespace used to pull images for any pod that references this ServiceAccount. This must be set for any cluster configured with a private Docker Registry. | `[]` |
-| `global.defaultUpstreamConcurrencyThreshold` | Maximum concurrency between a single data plane instance and a backend service (calculated independently for each service). Note that excessive concurrency may lead to high memory usage in the gateway, so adjust the data plane memory limit accordingly. | `10000` |
-| `global.o11y.enabled` | If true, the observability suite (Grafana, Prometheus, Loki, PromTail, etc.) will be installed. | `false` |
-| `global.pvc.rwxSupported` | The RwxSupported parameter indicates whether read-write-many (RWX) volumes are supported. If set to true, it means shared volumes are supported, and multiple pods can mount the same PVC for read-write operations. If set to false, only one pod can mount the PVC for read-write operations. | `true` |
-| `global.onlyPushRouteCluster` | If `true`, for Kubernetes services, Higress Controller will only push services that are associated with routes. | `true` |
-| `global.priorityClassName` | PriorityClass name for Higress Controller and Higress Gateway Pods | |
+| `global.watchNamespace` | If not empty, Higress Controller will only watch resources in the specified namespace. When isolating business systems by Kubernetes namespaces, you can deploy an independent gateway for each namespace by limiting Higress to watch only the specified namespace. | `""`      |
+| `global.disableAlpnH2` | Whether to disable HTTP/2 protocol in ALPN | `false`   |
+| `global.enableStatus` | If true, Higress Controller will update the status field of Ingress resources. To prevent overwriting the status field of Ingress objects during migration from Nginx Ingress, set this parameter to false. | `true`    |
+| `global.local` | Set to true if installing to a local Kubernetes cluster (e.g., Kind, Rancher Desktop) | `false`   |
+| `global.enableIstioAPI` | If true, Higress Controller will also watch Istio resources | `false`   |
+| `global.enableGatewayAPI` | If true, Higress Controller will also watch Gateway API resources | `false`   |
+| `global.imagePullPolicy` | If you don't want to use the default behavior, you can specify the image pull policy. Default behavior: The latest image will always be pulled with `Always` policy, otherwise it will be pulled with `IfNotPresent`. | `""`      |
+| `global.imagePullSecrets` | Configure ImagePullSecrets for all ServiceAccounts, which is a list of secrets in the same namespace used to pull images for any pod that references this ServiceAccount. This must be set for any cluster configured with a private Docker Registry. | `[]`      |
+| `global.defaultUpstreamConcurrencyThreshold` | Maximum concurrency between a single data plane instance and a backend service (calculated independently for each service). Note that excessive concurrency may lead to high memory usage in the gateway, so adjust the data plane memory limit accordingly. | `10000`   |
+| `global.o11y.enabled` | If true, the observability suite (Grafana, Prometheus, Loki, PromTail, etc.) will be installed. | `false`   |
+| `global.pvc.rwxSupported` | The RwxSupported parameter indicates whether read-write-many (RWX) volumes are supported. If set to true, it means shared volumes are supported, and multiple pods can mount the same PVC for read-write operations. If set to false, only one pod can mount the PVC for read-write operations. | `false`   |
+| `global.onlyPushRouteCluster` | If `true`, for Kubernetes services, Higress Controller will only push services that are associated with routes. | `true`    |
+| `global.priorityClassName` | PriorityClass name for Higress Controller and Higress Gateway Pods |           |
 
 ## meshConfig Parameters
 | Parameter | Description | Default |
