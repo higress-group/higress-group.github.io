@@ -1,13 +1,11 @@
 ---
-title: MCP Server 快速开始（对接现存 SSE MCP Server）
+title: MCP Server 快速开始（对接现存 SSE Server）
 description: Higress AI 网关提供 MCP Server 统一托管能力，支持对接现存使用 SSE Transport 的 MCP Server。本文将介绍如何进行相关配置。
 date: "2025-06-28"
 category: "article"
 keywords: ["MCP Server", "SSE"]
 authors: "CH3CHO"
 ---
-
-# MCP Server 快速开始（对接存量 SSE MCP Server）
 
 ## 概述
 
