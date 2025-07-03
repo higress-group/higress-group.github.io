@@ -1,0 +1,207 @@
+import{c,__tla as d}from"./astro-component.m4CCZO6J.js";import{r as o,m as v,u as h,__tla as y}from"./constant.ZI3O5-xu.js";import{__tla as E}from"./astro/assets-service.BhtN0nM5.js";let e,t,a,i,p,r,l,m=Promise.all([(()=>{try{return d}catch{}})(),(()=>{try{return y}catch{}})(),(()=>{try{return E}catch{}})()]).then(async()=>{let s;s=`<h2 id="\u6982\u8FF0">\u6982\u8FF0</h2>
+<p>\u672C\u6587\u5C06\u4ECB\u7ECD\u5982\u4F55\u5C06\u4E00\u4E2A\u73B0\u5B58\u4F7F\u7528 SSE Transport \u7684 MCP Server \u901A\u8FC7 Higress \u66B4\u9732\u7ED9 MCP Client \u8BBF\u95EE\u7684\u5B8C\u6574\u8FC7\u7A0B\u3002\u6574\u4E2A\u6D41\u7A0B\u5C06\u57FA\u4E8E\u4E00\u4E2A\u6D4B\u8BD5\u7528\u7684\u7B80\u5355\u540E\u7AEF\u670D\u52A1\u5B9E\u73B0\u8FDB\u884C\u3002\u6240\u6709\u7684\u914D\u7F6E\u5185\u5BB9\u4E5F\u5747\u4EE5\u6B64\u670D\u52A1\u6240\u63D0\u4F9B\u7684\u529F\u80FD\u4E3A\u6A21\u7248\u7F16\u5199\u3002\u5EFA\u8BAE\u5927\u5BB6\u5148\u4E25\u683C\u6309\u7167\u672C\u6587\u7684\u6B65\u9AA4\u914D\u7F6E\u5B8C\u6210\u540E\u518D\u5C1D\u8BD5\u81EA\u884C\u8C03\u6574\u914D\u7F6E\u5BF9\u63A5\u5176\u4ED6\u670D\u52A1\u3002</p>
+<h2 id="\u73AF\u5883\u51C6\u5907">\u73AF\u5883\u51C6\u5907</h2>
+<h3 id="1-\u90E8\u7F72-higress">1. \u90E8\u7F72 Higress</h3>
+<p>\u5728\u672C\u5730\u4F7F\u7528 all-in-one \u955C\u50CF\u65B9\u5F0F\u542F\u52A8 Higress\uFF1A</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.1vui4.css"><script type="module" src="/_astro/ec.dy9ns.js"><\/script><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre tabindex="0"><code><div class="ec-line"><div class="code"><span style="--0:#99A0A6"># \u521B\u5EFA\u4E00\u4E2A\u5DE5\u4F5C\u76EE\u5F55</span></div></div><div class="ec-line"><div class="code"><span style="--0:#B392F0">mkdir</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">higress</span><span style="--0:#E1E4E8">; </span><span style="--0:#79B8FF">cd</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">higress</span></div></div><div class="ec-line"><div class="code"><span style="--0:#99A0A6"># \u5F3A\u5236\u62C9\u53D6\u6700\u65B0\u7684 all-in-one \u955C\u50CF</span></div></div><div class="ec-line"><div class="code"><span style="--0:#B392F0">docker</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">pull</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest</span></div></div><div class="ec-line"><div class="code"><span style="--0:#99A0A6"># \u542F\u52A8 higress\uFF0C\u914D\u7F6E\u6587\u4EF6\u4F1A\u5199\u5230\u5DE5\u4F5C\u76EE\u5F55\u4E0B</span></div></div><div class="ec-line"><div class="code"><span style="--0:#B392F0">docker</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">run</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">-d</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">--rm</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">--name</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">higress-ai</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">-v</span><span style="--0:#E1E4E8"> \${PWD}</span><span style="--0:#9ECBFF">:/data</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">\\</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#79B8FF">-p</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">8001:8001</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">-p</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">8080:8080</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">-p</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">8443:8443</span><span style="--0:#E1E4E8">  </span><span style="--0:#79B8FF">\\</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#9ECBFF">higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="mkdir higress; cd higress\x7Fdocker pull higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest\x7Fdocker run -d --rm --name higress-ai -v \${PWD}:/data \\\x7F        -p 8001:8001 -p 8080:8080 -p 8443:8443  \\\x7F        higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest"><div></div></button></div></figure></div>
+<p>\u5B89\u88C5\u5B8C\u6210\u540E\uFF0C\u5728\u6D4F\u89C8\u5668\u4E2D\u8BBF\u95EE Higress Console\uFF0C\u786E\u8BA4\u5E95\u90E8\u663E\u793A\u7684\u7248\u672C\u53F7\u4E0D\u4F4E\u4E8E 2.1.4\u3002</p>
+<h3 id="2-\u542F\u52A8\u540E\u7AEF\u670D\u52A1">2. \u542F\u52A8\u540E\u7AEF\u670D\u52A1</h3>
+<ol>
+<li>\u6D4B\u8BD5\u670D\u52A1\u4F7F\u7528 NodeJS \u7F16\u5199\u3002\u6240\u4EE5\u8BF7\u5927\u5BB6\u5148\u8BBF\u95EE NodeJS \u5B98\u7F51\uFF08<a href="https://nodejs.org/en" referrerpolicy="unsafe-url" rel="nofollow" target="_blank">https://nodejs.org</a>\uFF09\u4E0B\u8F7D\u5E76\u5B89\u88C5 NodeJS \u8FD0\u884C\u73AF\u5883</li>
+<li>\u4E0B\u8F7D<a href="../../files/McpSampleServer.zip" referrerpolicy="unsafe-url">\u6D4B\u8BD5\u670D\u52A1\u538B\u7F29\u5305</a></li>
+<li>\u89E3\u538B\u81F3\u4EFB\u610F\u76EE\u5F55</li>
+<li>\u6267\u884C\u4EE5\u4E0B\u547D\u4EE4\u542F\u52A8\u6D4B\u8BD5\u670D\u52A1
+<div class="expressive-code"><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre tabindex="0"><code><div class="ec-line"><div class="code"><span style="--0:#B392F0">npm</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">install</span></div></div><div class="ec-line"><div class="code"><span style="--0:#B392F0">npm</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">start</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="npm install\x7Fnpm start"><div></div></button></div></figure></div>
+</li>
+<li>\u542F\u52A8\u5B8C\u6210\u540E\uFF0C\u5728\u6D4F\u89C8\u5668\u8BBF\u95EE <a href="http://localhost:3000" referrerpolicy="unsafe-url" rel="nofollow" target="_blank">http://localhost:3000/</a>\u3002\u82E5\u80FD\u591F\u663E\u793A\u201CHello world!\u201D\uFF0C\u5219\u4EE3\u8868\u670D\u52A1\u542F\u52A8\u6210\u529F\u3002</li>
+</ol>
+<h2 id="\u914D\u7F6E\u6D41\u7A0B">\u914D\u7F6E\u6D41\u7A0B</h2>
+<p>\u4EE5\u4E0B\u6240\u6709\u914D\u7F6E\u90FD\u5C06\u5728 Higress Console \u4E2D\u8FDB\u884C\u3002\u5728\u6D4F\u89C8\u5668\u4E2D\u6253\u5F00 Higress Console\uFF08<a href="http://localhost:8001/" referrerpolicy="unsafe-url" rel="nofollow" target="_blank">http://localhost:8001/</a>\uFF09</p>
+<h3 id="\u670D\u52A1\u6765\u6E90\u914D\u7F6E">\u670D\u52A1\u6765\u6E90\u914D\u7F6E</h3>
+<ol>
+<li>\u70B9\u51FB\u5DE6\u4FA7\u7684\u201C\u670D\u52A1\u6765\u6E90\u201D</li>
+<li>\u70B9\u51FB\u201C\u521B\u5EFA\u670D\u52A1\u6765\u6E90\u201D\u6309\u94AE</li>
+<li>\u53C2\u8003\u4E0B\u56FE\u586B\u5199\u670D\u52A1\u6765\u6E90\u4FE1\u606F<br>
+<img src="/img/ai/mcp-with-sse/zh/new-service-source.png" alt="new-service-source" referrerpolicy="no-referrer"></li>
+<li>\u70B9\u51FB\u201C\u786E\u5B9A\u201D\u6309\u94AE</li>
+<li>\u70B9\u51FB\u5DE6\u4FA7\u7684\u201C\u670D\u52A1\u5217\u8868\u201D\uFF0C\u786E\u8BA4\u5217\u8868\u4E2D\u51FA\u73B0\u4E86\u6211\u4EEC\u521A\u521A\u521B\u5EFA\u7684 MCP Server<br>
+<img src="/img/ai/mcp-with-sse/zh/service-list.png" alt="service-list" referrerpolicy="no-referrer"></li>
+</ol>
+<h3 id="\u8DEF\u7531\u914D\u7F6E">\u8DEF\u7531\u914D\u7F6E</h3>
+<ol>
+<li>\u70B9\u51FB\u5DE6\u4FA7\u7684\u201C\u8DEF\u7531\u914D\u7F6E\u201D</li>
+<li>\u70B9\u51FB\u201C\u521B\u5EFA\u8DEF\u7531\u201D\u6309\u94AE</li>
+<li>\u53C2\u8003\u4E0B\u56FE\u586B\u5199\u8DEF\u7531\u4FE1\u606F<br>
+<img src="/img/ai/mcp-with-sse/zh/new-route.png" alt="new-route" referrerpolicy="no-referrer"></li>
+<li>\u70B9\u51FB\u201C\u786E\u5B9A\u201D\u6309\u94AE</li>
+<li>\u70B9\u51FB\u65B0\u521B\u5EFA\u7684\u8DEF\u7531\u53F3\u4FA7\u7684\u201C\u7B56\u7565\u201D\u94FE\u63A5</li>
+<li>\u70B9\u51FB\u201C\u91CD\u5199\u201D\u7B56\u7565\u4E0B\u65B9\u7684\u914D\u7F6E\u6309\u94AE</li>
+<li>\u6309\u4E0B\u56FE\u586B\u5165\u914D\u7F6E<br>
+<img src="/img/ai/mcp-with-sse/zh/route-rewrite.png" alt="route-rewrite" referrerpolicy="no-referrer"></li>
+<li>\u70B9\u51FB\u201C\u4FDD\u5B58\u201D\u6309\u94AE</li>
+</ol>
+<h3 id="mcp-server-filter-\u914D\u7F6E">MCP Server Filter \u914D\u7F6E</h3>
+<ol>
+<li>\u70B9\u51FB\u5DE6\u4FA7\u7684\u201C\u7CFB\u7EDF\u8BBE\u7F6E\u201D</li>
+<li>\u70B9\u51FB\u53F3\u4FA7\u94FE\u63A5\u4E0B\u8F7D\u6A21\u7248\u6587\u4EF6\uFF0C\u5E76\u5C06\u6587\u4EF6\u5185\u5BB9\u5B8C\u6574\u7C98\u8D34\u5230\u8F93\u5165\u6846\u4E2D\uFF1A<a href="../../files/higress-config.yaml" referrerpolicy="unsafe-url">\u6587\u4EF6\u94FE\u63A5</a></li>
+<li>\u4FEE\u6539 <code dir="auto">higress</code> \u914D\u7F6E\u9879\u4E2D\u7684 <code dir="auto">mcpServer</code> \u914D\u7F6E
+<ol>
+<li>\u5C06 <code dir="auto">enable</code> \u6539\u4E3A <code dir="auto">true</code></li>
+<li>\u79FB\u9664 <code dir="auto">redis</code> \u914D\u7F6E\u9879</li>
+<li>\u5728 <code dir="auto">match_list</code> \u4E2D\u6DFB\u52A0\u4E00\u4E2A\u65B0\u5143\u7D20\uFF1A
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><div class="code"><span style="--0:#E1E4E8">- </span><span style="--0:#85E89D">match_rule_domain</span><span style="--0:#E1E4E8">: </span><span style="--0:#9ECBFF">"*"</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#85E89D">match_rule_path</span><span style="--0:#E1E4E8">: </span><span style="--0:#9ECBFF">/mcp/sample</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#85E89D">match_rule_type</span><span style="--0:#E1E4E8">: </span><span style="--0:#9ECBFF">prefix</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#85E89D">upstream_type</span><span style="--0:#E1E4E8">: </span><span style="--0:#9ECBFF">sse</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#85E89D">enable_path_rewrite</span><span style="--0:#E1E4E8">: </span><span style="--0:#79B8FF">true</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#85E89D">path_rewrite_prefix</span><span style="--0:#E1E4E8">: </span><span style="--0:#9ECBFF">/mcp</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="- match_rule_domain: &#x22;*&#x22;\x7F  match_rule_path: /mcp/sample\x7F  match_rule_type: prefix\x7F  upstream_type: sse\x7F  enable_path_rewrite: true\x7F  path_rewrite_prefix: /mcp"><div></div></button></div></figure></div>
+</li>
+<li>\u4FEE\u6539\u540E\u7684\u914D\u7F6E\u5982\u4E0B\u56FE\u6240\u793A<br>
+<img src="/img/ai/mcp-with-sse/zh/higress-config.png" alt="higress-config" referrerpolicy="no-referrer"></li>
+<li>\u70B9\u51FB\u201C\u63D0\u4EA4\u201D\u6309\u94AE</li>
+<li>\u63D0\u4EA4\u4E4B\u540E\u5982\u679C\u9875\u9762\u6CA1\u6709\u4EFB\u4F55\u63D0\u793A\u7684\u8BDD\uFF0C\u53EF\u4EE5\u5237\u65B0\u9875\u9762\uFF0C\u786E\u8BA4\u914D\u7F6E\u4E3A\u66F4\u65B0\u540E\u7684\u5185\u5BB9\u5373\u53EF</li>
+</ol>
+</li>
+</ol>
+<h2 id="\u6D4B\u8BD5\u9A8C\u8BC1">\u6D4B\u8BD5\u9A8C\u8BC1</h2>
+<ol>
+<li>\u5728\u6D4F\u89C8\u5668\u4E2D\u6253\u5F00 <code dir="auto">http://localhost:8080/mcp/sample/sse</code></li>
+<li>\u6B63\u5E38\u60C5\u51B5\u4E0B\u9875\u9762\u663E\u793A\u5982\u4E0B\u56FE\u6240\u793A<br>
+<img src="/img/ai/mcp-with-sse/zh/request-sse.png" alt="request-sse" referrerpolicy="no-referrer"></li>
+<li>\u7528 curl \u547D\u4EE4\u9A8C\u8BC1\u83B7\u53D6\u5DE5\u5177\u5217\u8868
+<div class="expressive-code"><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre tabindex="0"><code><div class="ec-line"><div class="code"><span style="--0:#99A0A6"># sessionId \u9700\u8981\u4F7F\u7528\u6D4F\u89C8\u5668\u4E2D\u8FD4\u56DE\u7684\u503C</span></div></div><div class="ec-line"><div class="code"><span style="--0:#B392F0">curl</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">http://localhost:8080/mcp/sample/new/messages?sessionId=62d5e258-f1d6-43e8-81a1-f7a2ae36abfb</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">\\</span></div></div><div class="ec-line"><div class="code"><span style="--0:#E1E4E8">-H </span><span style="--0:#9ECBFF">'Content-Type: application/json'</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">\\</span></div></div><div class="ec-line"><div class="code"><span style="--0:#E1E4E8">-d </span><span style="--0:#9ECBFF">'{</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">    </span></span><span style="--0:#9ECBFF">"jsonrpc": "2.0",</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">    </span></span><span style="--0:#9ECBFF">"id": 1,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">    </span></span><span style="--0:#9ECBFF">"method": "tools/list"</span></div></div><div class="ec-line"><div class="code"><span style="--0:#9ECBFF">}'</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="curl http://localhost:8080/mcp/sample/new/messages?sessionId=62d5e258-f1d6-43e8-81a1-f7a2ae36abfb \\\x7F-H &#x27;Content-Type: application/json&#x27; \\\x7F-d &#x27;{\x7F    &#x22;jsonrpc&#x22;: &#x22;2.0&#x22;,\x7F    &#x22;id&#x22;: 1,\x7F    &#x22;method&#x22;: &#x22;tools/list&#x22;\x7F}&#x27;"><div></div></button></div></figure></div>
+</li>
+<li>\u6B63\u5E38\u60C5\u51B5\u4E0B\uFF0C\u7EC8\u7AEF\u4E2D\u4F1A\u8F93\u51FA\u201CAccepted\u201D\u5B57\u6837\uFF0C\u800C\u4E4B\u524D\u7684\u6D4F\u89C8\u5668\u9875\u9762\u4E0A\u5219\u4F1A\u63A8\u9001\u5DE5\u5177\u5217\u8868\u4FE1\u606F<br>
+<img src="/img/ai/mcp-with-sse/zh/request-tools-list-1.png" alt="request-tools-list-1" referrerpolicy="no-referrer">
+<img src="/img/ai/mcp-with-sse/zh/request-tools-list-2.png" alt="request-tools-list-2" referrerpolicy="no-referrer"></li>
+<li>\u7528 curl \u547D\u4EE4\u9A8C\u8BC1\u5DE5\u5177\u8C03\u7528
+<div class="expressive-code"><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre tabindex="0"><code><div class="ec-line"><div class="code"><span style="--0:#B392F0">curl</span><span style="--0:#E1E4E8"> </span><span style="--0:#9ECBFF">http://localhost:8080/mcp/sample/new/messages?sessionId=62d5e258-f1d6-43e8-81a1-f7a2ae36abfb</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">\\</span></div></div><div class="ec-line"><div class="code"><span style="--0:#E1E4E8">-H </span><span style="--0:#9ECBFF">'Content-Type: application/json'</span><span style="--0:#E1E4E8"> </span><span style="--0:#79B8FF">\\</span></div></div><div class="ec-line"><div class="code"><span style="--0:#E1E4E8">-d </span><span style="--0:#9ECBFF">'{</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">    </span></span><span style="--0:#9ECBFF">"jsonrpc": "2.0",</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">    </span></span><span style="--0:#9ECBFF">"id": 2,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">    </span></span><span style="--0:#9ECBFF">"method": "tools/call",</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">    </span></span><span style="--0:#9ECBFF">"params": {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">        </span></span><span style="--0:#9ECBFF">"name": "add",</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">        </span></span><span style="--0:#9ECBFF">"arguments": {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">            </span></span><span style="--0:#9ECBFF">"a": 1,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">            </span></span><span style="--0:#9ECBFF">"b": 2</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">        </span></span><span style="--0:#9ECBFF">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#9ECBFF">    </span></span><span style="--0:#9ECBFF">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#9ECBFF">}'</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="curl http://localhost:8080/mcp/sample/new/messages?sessionId=62d5e258-f1d6-43e8-81a1-f7a2ae36abfb \\\x7F-H &#x27;Content-Type: application/json&#x27; \\\x7F-d &#x27;{\x7F    &#x22;jsonrpc&#x22;: &#x22;2.0&#x22;,\x7F    &#x22;id&#x22;: 2,\x7F    &#x22;method&#x22;: &#x22;tools/call&#x22;,\x7F    &#x22;params&#x22;: {\x7F        &#x22;name&#x22;: &#x22;add&#x22;,\x7F        &#x22;arguments&#x22;: {\x7F            &#x22;a&#x22;: 1,\x7F            &#x22;b&#x22;: 2\x7F        }\x7F    }\x7F}&#x27;"><div></div></button></div></figure></div>
+</li>
+<li>\u6B63\u5E38\u60C5\u51B5\u4E0B\uFF0C\u7EC8\u7AEF\u4E2D\u4F1A\u8F93\u51FA\u201CAccepted\u201D\u5B57\u6837\uFF0C\u800C\u4E4B\u524D\u7684\u6D4F\u89C8\u5668\u9875\u9762\u4E0A\u5219\u4F1A\u63A8\u9001\u8C03\u7528\u7ED3\u679C<br>
+<img src="/img/ai/mcp-with-sse/zh/request-tools-call-1.png" alt="request-tools-call-1" referrerpolicy="no-referrer">
+<img src="/img/ai/mcp-with-sse/zh/request-tools-call-2.png" alt="request-tools-call-2" referrerpolicy="no-referrer"></li>
+</ol>
+<h3 id="\u5DE5\u5177\u9A8C\u8BC1">\u5DE5\u5177\u9A8C\u8BC1</h3>
+<p>\u5728\u5B8C\u6210\u7B80\u5355\u9A8C\u8BC1\u4E4B\u540E\uFF0C\u5927\u5BB6\u5C31\u53EF\u4EE5\u628A\u8FD9\u4E2A MCP Server \u914D\u7F6E\u5230\u652F\u6301 MCP Client \u7684\u5DE5\u5177\uFF08\u5982 DeepChat\u3001Cherry Studio \u7B49\uFF09\u4E2D\u8FDB\u884C\u9A8C\u8BC1\u4E86\u3002\u5DE5\u5177\u7684 URL \u4E3A <code dir="auto">http://localhost:8080/mcp/sample/sse</code>\u3002</p>`,i={title:"MCP Server \u5FEB\u901F\u5F00\u59CB\uFF08\u5BF9\u63A5\u73B0\u5B58 SSE Server\uFF09",description:"Higress AI \u7F51\u5173\u63D0\u4F9B MCP Server \u7EDF\u4E00\u6258\u7BA1\u80FD\u529B\uFF0C\u652F\u6301\u5BF9\u63A5\u73B0\u5B58\u4F7F\u7528 SSE Transport \u7684 MCP Server\u3002\u672C\u6587\u5C06\u4ECB\u7ECD\u5982\u4F55\u8FDB\u884C\u76F8\u5173\u914D\u7F6E\u3002",date:"2025-06-28",category:"article",keywords:["MCP Server","SSE"],authors:"CH3CHO"},a="/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/ai/mcp-with-sse.md",l=void 0,r=function(){return`
+## \u6982\u8FF0
+
+\u672C\u6587\u5C06\u4ECB\u7ECD\u5982\u4F55\u5C06\u4E00\u4E2A\u73B0\u5B58\u4F7F\u7528 SSE Transport \u7684 MCP Server \u901A\u8FC7 Higress \u66B4\u9732\u7ED9 MCP Client \u8BBF\u95EE\u7684\u5B8C\u6574\u8FC7\u7A0B\u3002\u6574\u4E2A\u6D41\u7A0B\u5C06\u57FA\u4E8E\u4E00\u4E2A\u6D4B\u8BD5\u7528\u7684\u7B80\u5355\u540E\u7AEF\u670D\u52A1\u5B9E\u73B0\u8FDB\u884C\u3002\u6240\u6709\u7684\u914D\u7F6E\u5185\u5BB9\u4E5F\u5747\u4EE5\u6B64\u670D\u52A1\u6240\u63D0\u4F9B\u7684\u529F\u80FD\u4E3A\u6A21\u7248\u7F16\u5199\u3002\u5EFA\u8BAE\u5927\u5BB6\u5148\u4E25\u683C\u6309\u7167\u672C\u6587\u7684\u6B65\u9AA4\u914D\u7F6E\u5B8C\u6210\u540E\u518D\u5C1D\u8BD5\u81EA\u884C\u8C03\u6574\u914D\u7F6E\u5BF9\u63A5\u5176\u4ED6\u670D\u52A1\u3002
+
+## \u73AF\u5883\u51C6\u5907
+
+### 1. \u90E8\u7F72 Higress
+
+\u5728\u672C\u5730\u4F7F\u7528 all-in-one \u955C\u50CF\u65B9\u5F0F\u542F\u52A8 Higress\uFF1A
+
+\`\`\`bash
+# \u521B\u5EFA\u4E00\u4E2A\u5DE5\u4F5C\u76EE\u5F55
+mkdir higress; cd higress
+# \u5F3A\u5236\u62C9\u53D6\u6700\u65B0\u7684 all-in-one \u955C\u50CF
+docker pull higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
+# \u542F\u52A8 higress\uFF0C\u914D\u7F6E\u6587\u4EF6\u4F1A\u5199\u5230\u5DE5\u4F5C\u76EE\u5F55\u4E0B
+docker run -d --rm --name higress-ai -v \${PWD}:/data \\
+        -p 8001:8001 -p 8080:8080 -p 8443:8443  \\
+        higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
+\`\`\`
+
+\u5B89\u88C5\u5B8C\u6210\u540E\uFF0C\u5728\u6D4F\u89C8\u5668\u4E2D\u8BBF\u95EE Higress Console\uFF0C\u786E\u8BA4\u5E95\u90E8\u663E\u793A\u7684\u7248\u672C\u53F7\u4E0D\u4F4E\u4E8E 2.1.4\u3002
+
+### 2. \u542F\u52A8\u540E\u7AEF\u670D\u52A1
+
+1. \u6D4B\u8BD5\u670D\u52A1\u4F7F\u7528 NodeJS \u7F16\u5199\u3002\u6240\u4EE5\u8BF7\u5927\u5BB6\u5148\u8BBF\u95EE NodeJS \u5B98\u7F51\uFF08[https://nodejs.org](https://nodejs.org/en)\uFF09\u4E0B\u8F7D\u5E76\u5B89\u88C5 NodeJS \u8FD0\u884C\u73AF\u5883
+2. \u4E0B\u8F7D[\u6D4B\u8BD5\u670D\u52A1\u538B\u7F29\u5305](../files/McpSampleServer.zip)
+3. \u89E3\u538B\u81F3\u4EFB\u610F\u76EE\u5F55
+4. \u6267\u884C\u4EE5\u4E0B\u547D\u4EE4\u542F\u52A8\u6D4B\u8BD5\u670D\u52A1
+    \`\`\`bash
+    npm install
+    npm start
+    \`\`\`
+5. \u542F\u52A8\u5B8C\u6210\u540E\uFF0C\u5728\u6D4F\u89C8\u5668\u8BBF\u95EE [http://localhost:3000/](http://localhost:3000)\u3002\u82E5\u80FD\u591F\u663E\u793A\u201CHello world!\u201D\uFF0C\u5219\u4EE3\u8868\u670D\u52A1\u542F\u52A8\u6210\u529F\u3002
+
+## \u914D\u7F6E\u6D41\u7A0B
+
+\u4EE5\u4E0B\u6240\u6709\u914D\u7F6E\u90FD\u5C06\u5728 Higress Console \u4E2D\u8FDB\u884C\u3002\u5728\u6D4F\u89C8\u5668\u4E2D\u6253\u5F00 Higress Console\uFF08[http://localhost:8001/](http://localhost:8001/)\uFF09
+
+### \u670D\u52A1\u6765\u6E90\u914D\u7F6E
+
+1. \u70B9\u51FB\u5DE6\u4FA7\u7684\u201C\u670D\u52A1\u6765\u6E90\u201D
+2. \u70B9\u51FB\u201C\u521B\u5EFA\u670D\u52A1\u6765\u6E90\u201D\u6309\u94AE
+3. \u53C2\u8003\u4E0B\u56FE\u586B\u5199\u670D\u52A1\u6765\u6E90\u4FE1\u606F<br/>
+    ![new-service-source](/img/ai/mcp-with-sse/zh/new-service-source.png)
+4. \u70B9\u51FB\u201C\u786E\u5B9A\u201D\u6309\u94AE
+5. \u70B9\u51FB\u5DE6\u4FA7\u7684\u201C\u670D\u52A1\u5217\u8868\u201D\uFF0C\u786E\u8BA4\u5217\u8868\u4E2D\u51FA\u73B0\u4E86\u6211\u4EEC\u521A\u521A\u521B\u5EFA\u7684 MCP Server<br/>
+    ![service-list](/img/ai/mcp-with-sse/zh/service-list.png)
+
+### \u8DEF\u7531\u914D\u7F6E
+
+1. \u70B9\u51FB\u5DE6\u4FA7\u7684\u201C\u8DEF\u7531\u914D\u7F6E\u201D
+2. \u70B9\u51FB\u201C\u521B\u5EFA\u8DEF\u7531\u201D\u6309\u94AE
+3. \u53C2\u8003\u4E0B\u56FE\u586B\u5199\u8DEF\u7531\u4FE1\u606F<br/>
+    ![new-route](/img/ai/mcp-with-sse/zh/new-route.png)
+4. \u70B9\u51FB\u201C\u786E\u5B9A\u201D\u6309\u94AE
+5. \u70B9\u51FB\u65B0\u521B\u5EFA\u7684\u8DEF\u7531\u53F3\u4FA7\u7684\u201C\u7B56\u7565\u201D\u94FE\u63A5
+6. \u70B9\u51FB\u201C\u91CD\u5199\u201D\u7B56\u7565\u4E0B\u65B9\u7684\u914D\u7F6E\u6309\u94AE
+7. \u6309\u4E0B\u56FE\u586B\u5165\u914D\u7F6E<br/>
+    ![route-rewrite](/img/ai/mcp-with-sse/zh/route-rewrite.png)
+8. \u70B9\u51FB\u201C\u4FDD\u5B58\u201D\u6309\u94AE
+
+### MCP Server Filter \u914D\u7F6E
+
+1. \u70B9\u51FB\u5DE6\u4FA7\u7684\u201C\u7CFB\u7EDF\u8BBE\u7F6E\u201D
+2. \u70B9\u51FB\u53F3\u4FA7\u94FE\u63A5\u4E0B\u8F7D\u6A21\u7248\u6587\u4EF6\uFF0C\u5E76\u5C06\u6587\u4EF6\u5185\u5BB9\u5B8C\u6574\u7C98\u8D34\u5230\u8F93\u5165\u6846\u4E2D\uFF1A[\u6587\u4EF6\u94FE\u63A5](../files/higress-config.yaml)
+3. \u4FEE\u6539 \`higress\` \u914D\u7F6E\u9879\u4E2D\u7684 \`mcpServer\` \u914D\u7F6E
+    1.  \u5C06 \`enable\` \u6539\u4E3A \`true\`
+    2.  \u79FB\u9664 \`redis\` \u914D\u7F6E\u9879
+    3.  \u5728 \`match_list\` \u4E2D\u6DFB\u52A0\u4E00\u4E2A\u65B0\u5143\u7D20\uFF1A
+        \`\`\`yaml
+        - match_rule_domain: "*"
+          match_rule_path: /mcp/sample
+          match_rule_type: prefix
+          upstream_type: sse
+          enable_path_rewrite: true
+          path_rewrite_prefix: /mcp
+        \`\`\`
+    4.  \u4FEE\u6539\u540E\u7684\u914D\u7F6E\u5982\u4E0B\u56FE\u6240\u793A<br/>
+        ![higress-config](/img/ai/mcp-with-sse/zh/higress-config.png)
+    5.  \u70B9\u51FB\u201C\u63D0\u4EA4\u201D\u6309\u94AE
+    6.  \u63D0\u4EA4\u4E4B\u540E\u5982\u679C\u9875\u9762\u6CA1\u6709\u4EFB\u4F55\u63D0\u793A\u7684\u8BDD\uFF0C\u53EF\u4EE5\u5237\u65B0\u9875\u9762\uFF0C\u786E\u8BA4\u914D\u7F6E\u4E3A\u66F4\u65B0\u540E\u7684\u5185\u5BB9\u5373\u53EF
+
+## \u6D4B\u8BD5\u9A8C\u8BC1
+
+1. \u5728\u6D4F\u89C8\u5668\u4E2D\u6253\u5F00 \`http://localhost:8080/mcp/sample/sse\`
+2. \u6B63\u5E38\u60C5\u51B5\u4E0B\u9875\u9762\u663E\u793A\u5982\u4E0B\u56FE\u6240\u793A<br/>
+    ![request-sse](/img/ai/mcp-with-sse/zh/request-sse.png)
+3. \u7528 curl \u547D\u4EE4\u9A8C\u8BC1\u83B7\u53D6\u5DE5\u5177\u5217\u8868
+    \`\`\`bash
+    # sessionId \u9700\u8981\u4F7F\u7528\u6D4F\u89C8\u5668\u4E2D\u8FD4\u56DE\u7684\u503C
+    curl http://localhost:8080/mcp/sample/new/messages?sessionId=62d5e258-f1d6-43e8-81a1-f7a2ae36abfb \\
+    -H 'Content-Type: application/json' \\
+    -d '{
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/list"
+    }'
+    \`\`\`
+4. \u6B63\u5E38\u60C5\u51B5\u4E0B\uFF0C\u7EC8\u7AEF\u4E2D\u4F1A\u8F93\u51FA\u201CAccepted\u201D\u5B57\u6837\uFF0C\u800C\u4E4B\u524D\u7684\u6D4F\u89C8\u5668\u9875\u9762\u4E0A\u5219\u4F1A\u63A8\u9001\u5DE5\u5177\u5217\u8868\u4FE1\u606F<br/>
+    ![request-tools-list-1](/img/ai/mcp-with-sse/zh/request-tools-list-1.png)
+    ![request-tools-list-2](/img/ai/mcp-with-sse/zh/request-tools-list-2.png)
+5. \u7528 curl \u547D\u4EE4\u9A8C\u8BC1\u5DE5\u5177\u8C03\u7528
+    \`\`\`bash
+    curl http://localhost:8080/mcp/sample/new/messages?sessionId=62d5e258-f1d6-43e8-81a1-f7a2ae36abfb \\
+    -H 'Content-Type: application/json' \\
+    -d '{
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/call",
+        "params": {
+            "name": "add",
+            "arguments": {
+                "a": 1,
+                "b": 2
+            }
+        }
+    }'
+    \`\`\`
+6. \u6B63\u5E38\u60C5\u51B5\u4E0B\uFF0C\u7EC8\u7AEF\u4E2D\u4F1A\u8F93\u51FA\u201CAccepted\u201D\u5B57\u6837\uFF0C\u800C\u4E4B\u524D\u7684\u6D4F\u89C8\u5668\u9875\u9762\u4E0A\u5219\u4F1A\u63A8\u9001\u8C03\u7528\u7ED3\u679C<br/>
+    ![request-tools-call-1](/img/ai/mcp-with-sse/zh/request-tools-call-1.png)
+    ![request-tools-call-2](/img/ai/mcp-with-sse/zh/request-tools-call-2.png)
+
+### \u5DE5\u5177\u9A8C\u8BC1
+
+\u5728\u5B8C\u6210\u7B80\u5355\u9A8C\u8BC1\u4E4B\u540E\uFF0C\u5927\u5BB6\u5C31\u53EF\u4EE5\u628A\u8FD9\u4E2A MCP Server \u914D\u7F6E\u5230\u652F\u6301 MCP Client \u7684\u5DE5\u5177\uFF08\u5982 DeepChat\u3001Cherry Studio \u7B49\uFF09\u4E2D\u8FDB\u884C\u9A8C\u8BC1\u4E86\u3002\u5DE5\u5177\u7684 URL \u4E3A \`http://localhost:8080/mcp/sample/sse\`\u3002
+`},t=function(){return s},p=function(){return[{depth:2,slug:"\u6982\u8FF0",text:"\u6982\u8FF0"},{depth:2,slug:"\u73AF\u5883\u51C6\u5907",text:"\u73AF\u5883\u51C6\u5907"},{depth:3,slug:"1-\u90E8\u7F72-higress",text:"1. \u90E8\u7F72 Higress"},{depth:3,slug:"2-\u542F\u52A8\u540E\u7AEF\u670D\u52A1",text:"2. \u542F\u52A8\u540E\u7AEF\u670D\u52A1"},{depth:2,slug:"\u914D\u7F6E\u6D41\u7A0B",text:"\u914D\u7F6E\u6D41\u7A0B"},{depth:3,slug:"\u670D\u52A1\u6765\u6E90\u914D\u7F6E",text:"\u670D\u52A1\u6765\u6E90\u914D\u7F6E"},{depth:3,slug:"\u8DEF\u7531\u914D\u7F6E",text:"\u8DEF\u7531\u914D\u7F6E"},{depth:3,slug:"mcp-server-filter-\u914D\u7F6E",text:"MCP Server Filter \u914D\u7F6E"},{depth:2,slug:"\u6D4B\u8BD5\u9A8C\u8BC1",text:"\u6D4B\u8BD5\u9A8C\u8BC1"},{depth:3,slug:"\u5DE5\u5177\u9A8C\u8BC1",text:"\u5DE5\u5177\u9A8C\u8BC1"}]},e=c((g,u,F)=>{const{layout:f,...n}=i;return n.file=a,n.url=l,o`${v()}${h(s)}`})});export{e as Content,m as __tla,t as compiledContent,e as default,a as file,i as frontmatter,p as getHeadings,r as rawContent,l as url};
