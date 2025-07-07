@@ -54,6 +54,7 @@ This page shows the Higress development team. Please add your information to the
 | Weiji Zhao | [vikizhao156](https://github.com/vikizhao156) | Shanghai Jiao Tong University |
 | Yunyang Xing | [xingyunyang01](https://github.com/xingyunyang01) | China Unicom Digital Technology |
 | Xingyuan Cheng | [undertaker86001](https://github.com/undertaker86001) | Sucheon Technology |
+| Zhikai Zou | [kai2321](https://github.com/kai2321) | Beihang University |
 
 
 ## How to Obtain Higress Developer Titles
@@ -110,5 +111,4 @@ A Maintainer is an individual who has made significant contributions to the evol
 **Application Method:**
 
 Nominated by 2 Maintainers
-
 
