@@ -169,6 +169,17 @@ export const SOLUTION_LIST: Solution[] = [
     unit:'%',
     speedDes: ['100% 连接无损的配置热更新']
   },
+  {
+    checked: false,
+    src: "https://higress.cn/en/blog/higress-gvr7dx_awbbpb_vetuzf7sbuixi2b2/",
+    introduce: "阿里巴巴基于 Higress 网关实现了应用不做代码改动，快速转换 HSF（Dubbo）到 MCP Server，并实现了 MCP 的协议卸载，以及统一身份认证、流量调度、参数映射、安全审计等切面能力，将现有微服务接入 MCP 生态。在业务和技术同时不踏空的前提下，保留对 AI 原生应用基础设施的选择权。",
+    logo: 'https://img.alicdn.com/imgextra/i2/O1CN01EHQd2H1EKYxht7lvP_!!6000000000333-2-tps-512-512.png',
+    user: '行词',
+    userInfo: '阿里巴巴研发工程师',
+    speed: 'MCP',
+    unit:'',
+    speedDes: ['快速转换 HTTP 并调优']
+  },
 ];
 
 // 文档贡献板块的链接列表
