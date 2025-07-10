@@ -6,18 +6,18 @@ description: Custom plugin configuration reference
 
 ## Edit the Wasm file
 
-1. [SDK](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) for developing Higress' Wasm plugin in Go language
-2. [Example of plug-in development](../user/wasm-go.md)
+1. [SDK](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) for developing Higress Wasm plugins using Go language
+2. [Plugin development example](../user/wasm-go.md)
 
 ## Build the Wasm image
 
-You can also choose to build the wasm locally first, and then copy it to the Docker image. This requires you to build the build environment locally first.
+You can also choose to build the wasm locally first, and then copy it to the Docker image. This requires you to set up a build environment locally first.
 
-The compilation environment requirements are as follows:
-
-- Go version: >= 1.18 (need to support generic features)
-
-- TinyGo version: 0.28.1 (0.28.1 recommended)
+> **Note**:
+>
+> TinyGo has specific version requirements. Currently, the stable version combination that has been extensively validated is: tinygo 0.29 + go 1.20. You can refer to this official [Makefile](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/Makefile)
+>
+> go 1.24 now natively supports compiling wasm files, related documentation is being updated
 
 The following is an example of local steps to build the [request-block](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/request-block) plugin.
 
@@ -26,6 +26,8 @@ The following is an example of local steps to build the [request-block](https://
 ```bash
 tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
 ```
+
+For detailed compilation instructions, including how to use more complex Header state management mechanisms, please refer to [Best Practices for Go Plugin Development](https://higress.cn/docs/latest/user/wasm-go/#3-%E7%BC%96%E8%AF%91%E7%94%9F%E6%88%90-wasm-%E6%96%87%E4%BB%B6).
 
 ### step2. Build and push the docker image of the plugin
 

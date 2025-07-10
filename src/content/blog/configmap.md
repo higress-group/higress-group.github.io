@@ -4,7 +4,7 @@ keywords: [higress]
 description: Higress 全局配置控制面原理分析
 author: Jun
 date: "2023-07-23"
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/configmap.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/blog/configmap.md
 category: "article"
 ---
 

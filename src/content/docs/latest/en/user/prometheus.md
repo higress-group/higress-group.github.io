@@ -1,42 +1,35 @@
 ---
-title: Request Monitoring Based on Prometheus
-keywords: [Higress,Prometheus]
-description: Request Monitoring Based on Prometheus
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en-us/docusaurus-plugin-content-docs/current/user/prometheus.md
+title: Ingress Traffic Monitoring with Prometheus
+keywords: [Higress, Prometheus, Monitoring, Metrics, Grafana]
+description: Implement ingress traffic monitoring using Prometheus and Grafana with Higress
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/user/prometheus.md
 ---
 
-# Request Monitoring Based on Prometheus
+# Ingress Traffic Monitoring with Prometheus
 
-## Use the Higress Console Built-In Monitor Suite
+## Using Higress Console's Built-in Monitoring Suite
 
-Higress Console has a built-in monitor suite based on Prometheus + Grafana, which isn't installed by default. When installing Higress with Helm, you can enable it by adding the following argument to the command line: `--set global.o11y.enabled=true`.
+Higress Console includes a built-in monitoring suite based on Prometheus + Grafana, though it's not installed by default. To enable this monitoring suite during Helm installation, add the `--set global.o11y.enabled=true` parameter to your Helm install command:
 
 ```bash
 helm repo add higress.io https://higress.io/helm-charts
 helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.o11y.enabled=true
 ```
 
-Note: When installing to a standard K8s cluster (meaning without specifying `global.local=true`), the PersistentVolumeClaim configured in the suite uses the access mode of `ReadWriteMany` by default. If the target K8s cluster doesn't support this mode, you can add the following argument to the command line to change the access mode to `ReadWriteOnce`: `--set global.pvc.rwxSupported=false`.
+After installation is complete, access the Higress Console in your browser and click on the "Monitoring Dashboard" in the left navigation menu. The built-in monitoring dashboard will be displayed on the right side of the page.
 
-```bash
-helm repo add higress.io https://higress.io/helm-charts
-helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes --set global.o11y.enabled=true --set global.pvc.rwxSupported=false
-```
+![image](/img/user/prometheus/zh-cn/builtin.png)
 
-After installation, open Higress Console in your browser, and click "Dashboard" on the left navigation area. The built-in dashboard will be displayed on the right.
+## Using an Independently Deployed Monitoring Suite
 
-![image](/img/user/prometheus/en-us/builtin.png)
+Both the data plane and control plane components of Higress expose a series of metrics through their APIs. You can monitor Higress's internal operations by configuring Prometheus to collect these metrics and setting up dashboards in Grafana.
 
-## Use a Standalone Monitor Suite
+To get started, open Higress Console in your browser and navigate to the "Monitoring Dashboard" page in the left navigation menu. If the built-in monitoring suite isn't installed, the page will display an external dashboard URL configuration page along with setup instructions for external systems.
 
-Both the data and control planes of Higress expose a set of metrics via API. To monitor them, you just need to add probe configurations into Prometheus and configure a dashboard in Grafana.
+![image](/img/user/prometheus/zh-cn/external-before.png)
 
-Before starting the configuration, please open Higress Console in your browser and switch to "Dashboard" from the left navigation area. The external dashboard configuration page and related notes will be displayed on the right.
+Follow the instructions at the bottom of the page to update your Prometheus and Grafana configurations. Then, enter the URL of your Grafana dashboard in the input field at the top and save. The page will refresh automatically, and the configured external monitoring dashboard will appear on the right side.
 
-![image](/img/user/prometheus/en-us/external-before.png)
+![image](/img/user/prometheus/zh-cn/external-after.png)
 
-Update the configurations of Prometheus and Grafana following the notes. Then put the Grafana dashboard into the textbox above and save. The page will reload automatically and your dashboard will be shown on the right.
-
-![image](/img/user/prometheus/en-us/external-after.png)
-
-If you'd like to update the dashboard URL, you can click the "Reconfigure" button on the top left corner.
+To update the monitoring dashboard URL later, simply click the "Reconfigure" button in the top-left corner of the page.

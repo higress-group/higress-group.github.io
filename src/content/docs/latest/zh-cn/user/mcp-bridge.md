@@ -2,7 +2,7 @@
 title: Mcp Bridge 配置说明
 keywords: [discovery]
 description: Higress Mcp Bridge 配置说明。
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/user/mcp-bridge.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/user/mcp-bridge.md
 ---
 
 # Mcp Bridge 配置说明
@@ -10,6 +10,8 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 > **注意**
 
 > 当前仅会监听在 higress 安装命名空间下命名为 `default` 的 mcpbridge 资源
+>
+> 当使用 higress UI 控制台时，此配置的对应入口位于菜单项中的**服务来源**
 
 
 ## McpBridge 字段说明
@@ -21,7 +23,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ## RegistryConfig 字段说明
 | 字段                    | 类型 | 说明                                           | 示例值                                  | 是否必填 |
 |-----------------------| --- |----------------------------------------------|--------------------------------------| --- |
-| type                  | 字符串 | 服务发现类型，可选项：nacos,nacos2,zookeeper,consul,eureka,static,dns | nacos2                               | 是 |
+| type                  | 字符串 | 服务发现类型，可选项：nacos,nacos2,nacos3,zookeeper,consul,eureka,static,dns | nacos2                               | 是 |
 | name                  | 字符串 | 自定义的服务来源名称                                   | my-nacos                             | 是 |
 | domain                | 字符串 | 服务发现地址，一般是注册中心地址; 当类型是static或dns时，这个字段用于直接配置后端地址                             | 192.168.1.2                          | 是 |
 | port                  | 整数 | 注册中心访问端口                                     | 8848                                 | 是 |
@@ -33,6 +35,9 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | nacosAccessKey        | 字符串 | nacos需要认证时填写的ak信息                            | xxxx                                 | 否 |
 | nacosSecretKey        | 字符串 | nacos需要认证时填写的sk信息                            | xxxx | 否 |
 | nacosRefreshInterval  | 整数 | nacos需要认证时填写的服务刷新间隔纳秒数                       | 30000000000（30秒）                     | 否 |
+| mcpServerExportDomains| 字符串数组 | 开启mcp server时要暴露的域名，不填时在所有域名暴露    | ["example.com","a.test.com"]                     | 否 |
+| mcpServerBaseUrl      | 字符串 | 开启mcp server时要暴露的url，或者url前缀（例如使用nacos聚合多个mcp server时）  | /mcp-server                     | 否 |
+| enableMCPServer       | 布尔值 | 是否开启MCPServer（目前仅支持nacos3类型的服务来源）  | true                     | 否 |
 | consulDatacenter      | 字符串 | consul需要认证时填写的数据中心名称                         | dc1                                  | 否 |
 | consulServiceTag      | 字符串 | consul需要认证时填写的服务标签过滤                         | higress                              | 否 |
 | consulRefreshInterval | 整数 | consul需要认证时填写的服务刷新间隔纳秒数                      | 30000000000（30秒）                     | 否 |

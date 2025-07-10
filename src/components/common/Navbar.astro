@@ -75,6 +75,7 @@ const ifactive = (toggle) => {
   });
   return active;
 };
+const isAipage = Astro.url.href.includes('/ai/');
 ---
 
 <span class="navbar-wrapper">
@@ -98,6 +99,7 @@ const ifactive = (toggle) => {
           return (
             <Toggle
               title={ifzh ? label : translations?.en}
+              isAipage={isAipage}
               route={targetRoute}
               trigger={trigger}
               active={active}

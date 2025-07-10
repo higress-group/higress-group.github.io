@@ -149,10 +149,6 @@ const head = createHead(headDefaults, config.head, data.head);
             j = d.createElement(s);
         j.async = true;
         j.id = "beacon-aplus";
-        j.setAttribute(
-            "exparams",
-            "userid=&aplus&sidx=aplusSidex&ckx=aplusCkx",
-        );
         j.src = "//g.alicdn.com/alilog/mlog/aplus_v2.js";
         j.crossorigin = "anonymous";
         f.parentNode.insertBefore(j, f);
@@ -163,7 +159,7 @@ const head = createHead(headDefaults, config.head, data.head);
         t.type = "text/javascript";
         t.async = true;
         t.src =
-            "//g.alicdn.com/aes/??tracker/3.3.4/index.js,tracker-plugin-pv/3.0.5/index.js,tracker-plugin-event/3.0.0/index.js,tracker-plugin-autolog/3.0.3/index.js,tracker-plugin-survey/3.0.3/index.js,tracker-plugin-jserror/3.0.3/index.js,tracker-plugin-resourceError/3.0.3/index.js";
+            "//g.alicdn.com/aes/??tracker/3.3.4/index.js,tracker-plugin-pv/3.0.5/index.js";
         t.onload = function () {
             // TODO: 设置aem sdk环境
             if (window.location.hostname !== "higress.io" && window.location.hostname !== "higress.cn") {
@@ -177,19 +173,10 @@ const head = createHead(headDefaults, config.head, data.head);
                 pid: "ZAwmfA",
                 user_type: 6,
             });
-            window.AESPluginAutologConfig = { exposure: "auto" };
             window.AEMPluginInstances = [
                 aes.use(
                     AESPluginPV,
                     window.AESPluginPVConfig || { enableHistory: true },
-                ),
-                aes.use(AESPluginEvent, window.AESPluginEventConfig || {}),
-                aes.use(AESPluginSurvey, window.AESPluginEventConfig || {}),
-                aes.use(AESPluginAutolog, window.AESPluginAutologConfig || {}),
-                aes.use(AESPluginJSError, window.AESPluginJSError || {}),
-                aes.use(
-                    AESPluginResourceError,
-                    window.AESPluginResourceError || {},
                 ),
             ];
         };

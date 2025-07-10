@@ -1,26 +1,32 @@
 ---
-title: Upgrade
-keywords: [Higress]
-description: Higress Upgrade.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en-us/docusaurus-plugin-content-docs/current/ops/upgrade.md
+title: Version Upgrade
+keywords: [Upgrade]
+description: Higress Version Upgrade.
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/ops/upgrade.md
 ---
 
-# Upgrade
+# Version Upgrade
 
 ## Cloud-Native Deployment
 
-### Upgrade via Helm
+### Version Upgrade Based on Helm
 
 ```bash
-# Sample value of ${higress_version} : v1.1.0
-kubectl apply -f https://github.com/alibaba/higress/releases/download/${higress_version}/customresourcedefinitions.gen.yaml
+# Example value for ${higress_version}: v2.0.3
+kubectl apply -f https://github.com/alibaba/higress/releases/download/${higress_version}/crd.yaml
 helm repo update
-helm upgrade higress -n higress-system higress.io/higress
+helm get values higress -n higress-system > values.yaml
+helm upgrade higress --version ${higress_version} -n higress-system higress.io/higress -f values.yaml
 ```
+
+Using --reuse-values is not recommended as it will inherit all values from the previous version.
 
 ## Standalone Deployment
 
 ```bash
-# ${higress_dir} is the path of Higress' installation directory
-curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- "${higress_dir}" -u
+wget https://higress.io/standalone/get-higress.sh
+chmod +x ./get-higress.sh
+# Example value for ${higress_version}: v2.0.3
+# ${higress_dir} is the installation directory for Higress standalone deployment
+VERSION=${higress_version} ./get-higress.sh "${higress_dir}" -u
 ```

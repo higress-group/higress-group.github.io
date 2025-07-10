@@ -2,7 +2,7 @@
 title: Component Compilation Instructions
 keywords: [higress,architecture]
 description: Higress Component Compilation Instructions.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/dev/architecture.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/dev/architecture.md
 ---
 
 # Component Compilation Instructions
@@ -13,29 +13,53 @@ The Higress controller is a control plane that connects to Istio to generate Ist
 
 To compile the binary that can run in the local environment, execute `make build` in the higress repository directory.
 
-If need to compile the Docker image, please execute `make docker-build` .
+If you need to compile the Docker image, please execute `make docker-build`. The Istio pilot image used by Higress Controller is compiled using `make build-istio-local`.
+
+### Tips for beginners:
+
+If you encounter failures when cloning subprojects using HTTPS on a Linux server, such as connection timeouts causing dependency download errors, you can try modifying the submodule configuration to use SSH and configure GOPROXY:
+
+```bash
+# Prerequisite: you have already configured your local public key in GitHub
+# Change HTTPS method to SSH method
+sed -i 's|https://github.com/|git@github.com:|g' .gitmodules
+# Synchronize the configuration in .git/config
+git submodule sync
+# Modify the GOPROXY configuration in Makefile.core.mk
+#export GOPROXY ?= https://proxy.golang.org,direct
+export GOPROXY ?= https://goproxy.cn,direct
+```
+
+Additionally, when developing on Windows, to facilitate code development, you can execute the following steps to complete the dependency configuration:
+
+```bash
+# If you cannot clone submodules using HTTPS, modify the .gitmodules configuration as above and execute git submodule sync
+# Initialize submodules (if you find that some submodules are not cloned when executing this command, you can add --force):
+git submodule update --init
+# Using the Git Bash tool, go to the tools/hack directory and execute the following command to complete dependency loading:
+bash -x prebuild.sh
+```
 
 ## Higress Gateway
 
-The Higress gateway is a data plane that implements gateway routing and forwarding capabilities.
+The Higress gateway is a data plane program that implements gateway routing and forwarding capabilities.
 
 ### Quick Build
 
-Suitable scenario: Envoy itself isn't modified, meaning there is no need to rebuild the envoy binary.
+Applicable scenario: When you haven't modified the Envoy core, meaning there's no need to recompile the Envoy binary.
 
-Steps:
-1. Enter the higress repo in the terminal.
-2. Execute `make build-gateway-local` to start building the image of Higress Gateway.
-3. The image tag will be displayed in the terminal after the build finishes.
+Build steps:
+1. Navigate to the higress repository directory in the command line;
+2. Execute the `make build-gateway-local` command to build the Higress Gateway image;
+3. After the build is complete, the image tag will be displayed.
 
 ### Full Build
 
-Suitable scenario: The envoy binary needs to be rebuilt.
+Applicable scenario: When you need to recompile the Envoy core.
 
-Steps:
-1. Enter the higress repo in the terminal.
-2. Execute `cd external/proxy; BUILD_WITH_CONTAINER=1 make test_release` to build the envoy binary.
-3. Once the build finishes, the built artifact, envoy.tar.gz, will be placed in the `external/package` folder in the higress repo.
-4. Rename the `envoy.tar.gz` to `envoy-amd64.tar.gz` or `envoy-arm64.tar.gz`, based on your local architecture.
-5. If you want to build a multi-arch image, please re-do step 2 and 3 with another architecture, and copy the renamed built artifact here.
-6. Follow the steps mentioned above in the "Quick Build" section to build an Higress Gateway image.
+Build steps:
+1. Navigate to the higress repository directory in the command line;
+2. Execute the `make build-envoy` command to build the Envoy core;
+3. After the build is complete, the generated Envoy artifact file (a tar.gz compressed package) will be placed in the `external/package` subdirectory of the higress repository;
+4. Upload the tar.gz file to OSS or another file download server, making sure the filename ends with the architecture name, for example, `envoy-amd64.tar.gz` or `envoy-arm64.tar.gz`;
+5. Set the environment variable `ENVOY_PACKAGE_URL_PATTERN` to the download URL of the Envoy artifact file, and follow the steps in the Quick Build section above to build the Higress Gateway image.

@@ -2,7 +2,7 @@
 title: 配置 TCP 四层路由
 keywords: [ops,config,route,tcp]
 description: 介绍如何配置 TCP 四层路由
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/config/tcp-route.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/ops/how-tos/tcp-route.md
 ---
 
 # 配置 TCP 四层路由
@@ -59,7 +59,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ### 3. 修改 `higress-gateway` Service
 
-1. 执行命令，进度 `higress-gateway` Service 的编辑状态：
+1. 执行命令，进入 `higress-gateway` Service 的编辑状态：
     ```bash
     kubectl edit service higress-gateway -n higress-system
     ```

@@ -17,15 +17,16 @@ description: Higress 维护者名单
 | 吴新军 | [2456868764](https://github.com/2456868764) | 独立开发者      |
 | 董艺荃 | [CH3CHO](https://github.com/CH3CHO) | 携程        |
 | 耿蕾蕾 | [gengleilei](https://github.com/gengleilei) | 阿里云        |
+| 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
+| 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | 阿里云        |
+| 徐靖峰 | [lexburner](https://github.com/lexburner) | 阿里云        |
 | 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
 | 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
 
 ## Higress Approvers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
-| 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
-| 程治玮 | [Se7en](https://github.com/cr7258)   | SAP  |
 | 范扬 | [SpecialYang](https://github.com/SpecialYang) | 字节跳动        |
 | 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
 
@@ -37,20 +38,25 @@ description: Higress 维护者名单
 | 韦鑫 | [WeixinX](https://github.com/weixinx) | 爱橙科技   |
 
 ## Higress Members
-| 姓名   | github                                          | 公司组织     |
-|--------|-------------------------------------------------|----------|
-| 刘毅杰 | [007gzs](https://github.com/007gzs) | 棱镜七彩 |
-| 张正好 | [alexzzh](https://github.com/alexzzh)   | 格尔软件  |
-| 李强林 | [Charlie17Li](https://github.com/Charlie17Li)   | 浙大  |
-| 封宇腾 | [Ffyyt](https://github.com/Fkbqf)               | 西安邮电     |
-| 田亚涛 | [Hinsteny](https://github.com/Hinsteny)         | 蚂蚁      |
-| 屈晗煜 | [Ink-33](https://github.com/Ink-33)         | 东莞理工     |
-| 王小建 | [littlejian](https://github.com/littlejiancc)      | 金智塔     |
-| 邵佳成 | [sjcsjc123](https://github.com/sjcsjc123) | 杭电 |
-| 宋鹏远 | [songpengyuan](https://github.com/songpengyuan) | 小满科技 |
-| 彭万山 | [Uncle-Justice](https://github.com/Uncle-Justice) | 华中科技 |
-| 赵伟基 | [vikizhao156](https://github.com/vikizhao156)   | 上交     |
-| 邢云阳 | [xingyunyang01](https://github.com/xingyunyang01)   | 联通数科     |
+| 姓名  | github                                                | 公司组织 |
+|-----|-------------------------------------------------------|--|
+| 刘毅杰 | [007gzs](https://github.com/007gzs)                   | 棱镜七彩 |
+| 张正好 | [alexzzh](https://github.com/alexzzh)                 | 格尔软件 |
+| 李强林 | [Charlie17Li](https://github.com/Charlie17Li)         | 浙大 |
+| 冯晓强 | [Fengxq2014](https://github.com/Fengxq2014)           | 多飞科技 |
+| 封宇腾 | [Ffyyt](https://github.com/Fkbqf)                     | 西安邮电 |
+| 田亚涛 | [Hinsteny](https://github.com/Hinsteny)               | 蚂蚁 |
+| 屈晗煜 | [Ink-33](https://github.com/Ink-33)                   | 东莞理工 |
+| 王小建 | [littlejian](https://github.com/littlejiancc)         | 金智塔 |
+| 邵佳成 | [sjcsjc123](https://github.com/sjcsjc123)             | 杭电 |
+| 宋鹏远 | [songpengyuan](https://github.com/songpengyuan)       | 小满科技 |
+| 彭万山 | [Uncle-Justice](https://github.com/Uncle-Justice)     | 华中科技 |
+| 赵伟基 | [vikizhao156](https://github.com/vikizhao156)         | 上交 |
+| 邢云阳 | [xingyunyang01](https://github.com/xingyunyang01)     | 联通数科 |
+| 程兴源 | [undertaker86001](https://github.com/undertaker86001) | 硕橙科技 |
+| 邹志凯 | [kai2321](https://github.com/kai2321) | 北航 |
+
+
 
 
 ## 获取Higress开发者头衔

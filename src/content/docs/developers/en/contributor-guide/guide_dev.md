@@ -2,7 +2,7 @@
 title: Contributing to Higress
 keywords: [Higress]
 description: It is warmly welcomed if you have interest to hack on Higress. First, we encourage this kind of willing very much. And here is a list of contributing guide for you.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en/docusaurus-plugin-content-docs/current/developers/guide_dev.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/developers/en/contributor-guide/guide_dev.md
 ---
 
 # Contributing to Higress

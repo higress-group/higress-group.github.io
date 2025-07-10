@@ -2,7 +2,7 @@
 title: 通过阿里云计算巢快速部署
 keywords: [deploy,docker compose,docker,ops, 阿里云,计算巢]
 description: 如何使用阿里云计算巢实现Higress的快速部署
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/deploy-by-aliyun-computenest.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/ops/deploy-by-aliyun-computenest.md
 ---
 
 # 通过阿里云计算巢快速部署

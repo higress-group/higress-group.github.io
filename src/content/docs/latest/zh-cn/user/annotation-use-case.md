@@ -1009,3 +1009,127 @@ spec:
             path: /test
             pathType: Exact
 ```
+
+## 配置客户端到网关之间的TLS版本以及加密套件
+
+目前，Higress 默认最小TLS版本为TLSv1.0，默认最大TLS版本为TLSv1.3，默认加密套件为：
+
+ECDHE-ECDSA-AES128-GCM-SHA256
+
+ECDHE-RSA-AES128-GCM-SHA256
+
+ECDHE-ECDSA-AES128-SHA
+
+ECDHE-RSA-AES128-SHA
+
+AES128-GCM-SHA256
+
+AES128-SHA
+
+ECDHE-ECDSA-AES256-GCM-SHA384
+
+ECDHE-RSA-AES256-GCM-SHA384
+
+ECDHE-ECDSA-AES256-SHA
+
+ECDHE-RSA-AES256-SHA
+
+AES256-GCM-SHA384
+
+AES256-SHA
+
+您可以通过以下注解为特定的域名设置最小或者最大TLS版本以及加密套件。
+
+- higress.io/tls-min-protocol-version: 指定TLS的最小版本，默认值为TLSv1.0。合法值如：TLSv1.0/TLSv1.1/TLSv1.2/TLSv1.3
+- higress.io/tls-max-protocol-version: 指定TLS的最大版本，默认值为TLSv1.3。合法值如：TLSv1.0/TLSv1.1/TLSv1.2/TLSv1.3
+- higress.io/ssl-cipher: 指定TLS的加密套件，可以指定多个英文冒号分隔，仅当TLS握手时采用TLSv1.0~1.2生效
+
+例如，对于域名example.com，设置TLS最小版本为TLSv1.2，最大版本为TLSv1.2。配置如下：
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    higress.io/tls-min-protocol-version: "TLSv1.2"
+    higress.io/tls-max-protocol-version: "TLSv1.2"
+  name: demo
+spec:
+  ingressClassName: higress
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: demo-service
+                port: 
+                  number: 80
+            path: /test
+            pathType: Exact
+```
+
+## 流量镜像
+
+通过配置流量镜像，可以复制流量到指定服务，常用于操作审计和流量测试等场景。
+
+- higress.io/mirror-target-service：复制流量转发到指定镜像服务。服务格式为：namespace/name:port。
+  - namespace: K8s Service所在的命名空间，可选，默认为Ingress所在的命名空间。
+  - name：K8s Service的名称，必选。
+  - port：待转发至K8s Service的端口，可选，默认为第一个端口。
+- higress.io/mirror-percentage：复制流量的比例。可配置的值的范围为：0~100，默认100。
+
+> **重要提醒： 复制的流量在转发给目标服务时，原始请求中的Host会被自动加上-shadow后缀。**
+
+下面例子是将example.com/test的流量复制并转发到目标服务：命名空间为test，服务名为app，端口为8080，且复制比例为100%。
+本示例中，复制的流量在转发给目标服务时，Host会被自动改写为example.com-shadow：
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    higress.io/mirror-target-service: test/app:8080
+  name: demo
+spec:
+  ingressClassName: higress
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: demo-service
+                port: 
+                  number: 80
+            path: /test
+            pathType: Exact
+```
+
+下面例子是将example.com/test的流量复制并转发到目标服务：命名空间为test，服务名为app，端口为8080，且复制比例为10%。
+本示例中，复制的流量在转发给目标服务时，Host会被自动改写为example.com-shadow：
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    higress.io/mirror-target-service: test/app:8080
+    higress.io/mirror-percentage: 10
+  name: demo
+spec:
+  ingressClassName: higress
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: demo-service
+                port: 
+                  number: 80
+            path: /test
+            pathType: Exact
+```
+
+

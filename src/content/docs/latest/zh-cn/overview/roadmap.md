@@ -2,7 +2,7 @@
 title: 版本计划
 keywords: [Higress,roadmap]
 description: Higress 版本计划.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/overview/roadmap.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/overview/roadmap.md
 ---
 
 # 版本计划
@@ -18,6 +18,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | v1.4.0  | WASM 支持 redis 调用；简化 HTTPS 证书管理  | 2024-05   | 1.2.x  | 
 | v2.0.0  | Istio/Envoy 内核版本升级，基于大量新插件提供更丰富的 API 网关能力  | 2024-08   | 2.0.x  | 
 | v2.1.0  | 控制台支持 AI 流量入口管理，降低 AI 功能相关的使用成本  | 2025-02   | 2.1.x  | 
+| v2.2.0  | 推出 Higress Agent 能力 | 2025-10   | 2.2.x  | 
 
 
 > **注意**

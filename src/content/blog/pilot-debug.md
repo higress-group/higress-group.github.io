@@ -4,7 +4,7 @@ keywords: [higress,pilot]
 description: 介绍如何在本地开发和调试 Higress 中的 Pilot 组件
 author: CH3CHO
 date: "2024-03-16"
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/en/docusaurus-plugin-content-blog/pilot-debug.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/blog/pilot-debug.md
 category: "article"
 ---
 

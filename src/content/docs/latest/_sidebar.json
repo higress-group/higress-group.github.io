@@ -33,28 +33,28 @@
             {
               "label": "全局配置说明",
               "translations": {
-                "en": "Config Map"
+                "en": "Global Configuration"
               },
               "link": "docs/user/configmap"
             },
             {
-              "label": "Ingress Annotaion 配置说明",
+              "label": "Nginx Ingress Annotation 兼容说明",
               "translations": {
-                "en": "Higress Annotaion"
+                "en": "Nginx Ingress Annotation Compatibility"
               },
               "link": "docs/user/annotation"
             },
             {
-              "label": "通过Ingress Annotation实现高阶流量治理",
+              "label": "通过 Ingress Annotation 实现高阶流量治理",
               "translations": {
-                "en": "Annotation Use Case"
+                "en": "Advanced Traffic Management with Ingress Annotations"
               },
               "link": "docs/user/annotation-use-case"
             },
             {
-              "label": "Higress参数配置",
+              "label": "Higress 参数配置",
               "translations": {
-                "en": "Higress Parameters Guide"
+                "en": "Higress Configuration"
               },
               "link": "docs/user/configurations"
             },
@@ -66,7 +66,7 @@
               "link": "docs/user/mcp-bridge"
             },
             {
-              "label": "HTTP转Dubbo 配置说明",
+              "label": "HTTP 转 Dubbo 配置说明",
               "translations": {
                 "en": "HTTP to Dubbo"
               },
@@ -218,42 +218,42 @@
             {
               "label": "通过 OpenKruise Rollout 实现灰度发布",
               "translations": {
-                "en": "OpenKruise Rollout"
+                "en": "Canary Release with OpenKruise Rollout"
               },
               "link": "docs/user/kruise-rollout"
             },
             {
               "label": "配置 Ingress 转发给注册在 Nacos 的服务",
               "translations": {
-                "en": "Nacos Route"
+                "en": "Configuring Ingress to Forward to Services Registered in Nacos"
               },
               "link": "docs/user/nacos-route"
             },
             {
               "label": "实现 SpringCloud 服务发现和路由",
               "translations": {
-                "en": "SpringCloud"
+                "en": "Implementing SpringCloud Service Discovery and Routing"
               },
               "link": "docs/user/spring-cloud"
             },
             {
               "label": "Higress 对接 Dubbo 服务",
               "translations": {
-                "en": "Higress Dubbo"
+                "en": "Integrating Dubbo Services with Higress"
               },
               "link": "docs/user/dubbo"
             },
             {
               "label": "基于 Prometheus 实现入口流量观测",
               "translations": {
-                "en": "Request Monitoring Based on Prometheus"
+                "en": "Ingress Traffic Monitoring with Prometheus"
               },
               "link": "docs/user/prometheus"
             },
             {
               "label": "开启 WAF 防护的最佳实践",
               "translations": {
-                "en": "WAF"
+                "en": "Best Practices for Enabling WAF Protection"
               },
               "link": "docs/user/waf"
             }
@@ -311,6 +311,20 @@
           },
           "items":[
             {
+              "label": "查看日志",
+              "translations": {
+                "en": "View Logs"
+              },
+              "link": "docs/ops/how-tos/view-logs"
+            },
+            {
+              "label": "查看运行时配置",
+              "translations": {
+                "en": "View Runtime Configs"
+              },
+              "link": "docs/ops/how-tos/view-configs"
+            },
+            {
               "label": "配置路由指向 gRPC 服务",
               "translations": {
                 "en": "Configure a route with gRPC upstream"
@@ -337,6 +351,13 @@
                 "en": "Modify gateway ports"
               },
               "link": "docs/ops/how-tos/gateway-ports"
+            },
+            {
+              "label": "修改内置插件镜像地址",
+              "translations": {
+                "en": "Modify image URLs of built-in plugins"
+              },
+              "link": "docs/ops/how-tos/builtin-plugin-url"
             },
             {
               "label": "使用 HTTP/HTTPS 协议加载 Wasm 插件",

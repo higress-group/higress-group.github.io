@@ -1,54 +1,114 @@
 ---
 title: Developers
-keywords: [Higress, Developers]
-description: Higress Team.
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/developers/developers_dev.md
+keywords: [Higress, Maintainers]
+description: Higress Maintainers List
 ---
 
-## Higress Team
+## Developers
 
-This page shows Higress developers and continues to expand. The list is not prioritized.
+This page shows the Higress development team. Please add your information to the list by submitting a PR.
 
-# Higress Committer List
+**Note: Listed alphabetically by GitHub ID**
 
-| name         | github                        | company             |
-|--------------|-------------------------------| --------------- |
-| Tianyi Zhang | [johnlanni](https://github.com/johnlanni) | Alibaba        |
-| Leilei Geng  | [gengleilei](https://github.com/gengleilei) | Alibaba        |
-| Yang Fan     | [SpecialYang](https://github.com/SpecialYang) | Alibaba        |
-| Bingkun Zhao | [sjtuzbk](https://github.com/johnlanni) | Alibaba        |
-| Yiqun Ling   | [Lynskylate](https://github.com/Lynskylate) | Pdd Holdings Inc   |
-| Xunzhuo Liu | [Xunzhuo](https://github.com/Xunzhuo) | Tencent        |
-| Yiquan Dong | [CH3CHO](https://github.com/CH3CHO) | Trip.com        |
-| Qianglin Li | [Charlie17Li](https://github.com/Charlie17Li) | ZJU-SEL        |
-| Pengyuan Song | [songpengyuan](https://github.com/songpengyuan) | Okki.com        |
-| YaTao Tian | [Hinsteny](https://github.com/Hinsteny) | Ant       |
+## Higress Maintainers
 
-## Higress Developer Roles
+| Name | GitHub | Organization |
+|-----|-------------------------------| --------------- |
+| Xinjun Wu | [2456868764](https://github.com/2456868764) | Independent Developer |
+| Yiquan Dong | [CH3CHO](https://github.com/CH3CHO) | Trip.com |
+| Leilei Geng | [gengleilei](https://github.com/gengleilei) | Alibaba Cloud |
+| Xiantao Han | [hanxiantao](https://github.com/hanxiantao) | XinYe Technology |
+| Zhiwei Cheng | [Se7en](https://github.com/cr7258) | SAP |
+| Tianyi Zhang | [johnlanni](https://github.com/johnlanni) | Alibaba Cloud |
+| Jingfeng Xu | [lexburner](https://github.com/lexburner) | Alibaba Cloud |
+| Xiaorui Liu | [rinfx](https://github.com/rinfx) | Alibaba Cloud |
+| Min Ji | [slievrly](https://github.com/slievrly) | Alibaba Cloud |
 
-Higress developers include three roles: Maintainer, Committer, and Contributor. The standard definitions for each role are as follows.
+## Higress Approvers
+| Name | GitHub | Organization |
+|-----|-------------------------------| --------------- |
+| Yang Fan | [SpecialYang](https://github.com/SpecialYang) | ByteDance |
+| Xunzhuo Liu | [Xunzhuo](https://github.com/Xunzhuo) | Tencent |
 
-### Maintainer
+## Higress Reviewers
+| Name | GitHub | Organization |
+|-----|-------------------------------| --------------- |
+| Yiqun Ling | [Lynskylate](https://github.com/Lynskylate) | eBay |
+| Bingkun Zhao | [sjtuzbk](https://github.com/sjtuzbk) | Alibaba Cloud |
+| Xin Wei | [WeixinX](https://github.com/weixinx) | Aicheng Technology |
 
-Maintainer is an individual who has made a significant contribution to the evolution and development of the Higress project, including projects under the Higress group. Specifically includes the following criteria:
+## Higress Members
+| Name | GitHub | Organization |
+|--|-------------------------------| --------------- |
+| Yijie Liu | [007gzs](https://github.com/007gzs) | Prism Seven Colors |
+| Zhenghao Zhang | [alexzzh](https://github.com/alexzzh) | Koal Software |
+| Qianglin Li | [Charlie17Li](https://github.com/Charlie17Li) | Zhejiang University |
+| Xiaoqiang Feng | [Fengxq2014](https://github.com/Fengxq2014) | Duofei Technology |
+| Yuteng Feng | [Ffyyt](https://github.com/Fkbqf) | Xi'an University of Posts & Telecommunications |
+| Yatao Tian | [Hinsteny](https://github.com/Hinsteny) | Ant Group |
+| Hanyu Qu | [Ink-33](https://github.com/Ink-33) | Dongguan University of Technology |
+| Xiaojian Wang | [littlejian](https://github.com/littlejiancc) | Jinzhita |
+| Jiacheng Shao | [sjcsjc123](https://github.com/sjcsjc123) | Hangzhou Dianzi University |
+| Pengyuan Song | [songpengyuan](https://github.com/songpengyuan) | Xiaoman Technology |
+| Wanshan Peng | [Uncle-Justice](https://github.com/Uncle-Justice) | Huazhong University of Science and Technology |
+| Weiji Zhao | [vikizhao156](https://github.com/vikizhao156) | Shanghai Jiao Tong University |
+| Yunyang Xing | [xingyunyang01](https://github.com/xingyunyang01) | China Unicom Digital Technology |
+| Xingyuan Cheng | [undertaker86001](https://github.com/undertaker86001) | Sucheon Technology |
+| Zhikai Zou | [kai2321](https://github.com/kai2321) | Beihang University |
 
-*   Completing the design and development of multiple key modules or projects, is an core developer of the project.
-*   Continuous investment and passion, can actively participate in the maintenance of related matters such as community, official website, issue, PR, etc.
-*   Has a visible influence in the community and is able to represent Higress in important community meetings and events.
-*   Have the consciousness and ability to cultivate Committer and Contributor.
 
-### Committer
+## How to Obtain Higress Developer Titles
 
-Committer is an individual with write access to the Higress repository and includes the following criteria:
+**The title itself is a symbol of honor. All contributors to Higress have equal status in the open source community.**
 
-*   An individual who can contribute to the issue and PR continuously for a long time.
-*   Participate in the maintenance of the issue list and discussion of important features.
-*   Participate in code review.
+The ways to obtain each title are as follows:
 
-### Contributor
+### Member Title
 
-Contributor is an individual who contributes to the Higress project. The standard is:
+**Requirements:**
+- Complete any issue
 
-*   Submitted a PR that is merged.
+> The Higress open source community has marked difficulty labels for each available issue (with the help wanted tag): easy (level/easy), normal (level/normal), challenging (level/challenge). After completing an issue, you can earn corresponding points.
 
+- Maintain contact with any Higress Maintainer and have a willingness to contribute to the community long-term
+
+
+**Application Method:**
+
+Contact a Maintainer directly to apply
+
+### Reviewer Title
+
+**Requirements:**
+- Meet Member requirements
+- Make contributions to some core issues
+
+**Application Method:**
+
+Nominated by Approvers/Maintainer
+
+
+### Approver Title
+
+**Requirements:**
+- Meet Reviewer requirements
+- Can lead a technical direction and drive many core issues to completion
+
+**Application Method:**
+
+Nominated by Maintainer
+
+
+### Maintainer Title
+
+A Maintainer is an individual who has made significant contributions to the evolution and development of the Higress project (including projects under Higress). They have visible influence in the community and can represent Higress in important community meetings and events.
+
+**Requirements:**
+- Meet Approver requirements
+- Lead multiple technical directions, organize and drive core issues to completion
+- Actively participate in the daily work of the open source community: guide new developers, answer user questions, etc.
+
+**Application Method:**
+
+Nominated by 2 Maintainers
 

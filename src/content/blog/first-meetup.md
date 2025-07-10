@@ -4,7 +4,7 @@ keywords: [higress,meetup]
 description: 线下Meetup报名 
 author: 澄潭
 date: "2022-11-22"
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-blog/first-meetup.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/blog/first-meetup.md
 category: "event"
 ---
 <!--truncate-->

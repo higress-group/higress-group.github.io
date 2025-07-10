@@ -2,7 +2,7 @@
 title: 基于 Docker Compose 进行独立部署
 keywords: [deploy,docker compose,docker,ops]
 description: 如何使用 Docker Compose 实现 Higress 的独立部署
-custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/i18n/zh-cn/docusaurus-plugin-content-docs/current/ops/deploy-by-docker-compose.md
+custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/ops/deploy-by-docker-compose.md
 ---
 
 # 基于 Docker Compose 进行独立部署
@@ -34,7 +34,7 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- [DESTINATIO
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|--------------|
 |DESTINATION                                             |目标安装目录                                                                                                       |./higress     |
 |-a<br/>--auto-run                                          |配置完成后自动启动 Higress 网关                                                                                         |无             |
-|-c CONFIG_URL<br/>--config-url CONFIG_URL                  |配置服务的 URL。<br/>- 若使用独立部署的 Nacos 服务（版本不低于 2.0.0），URL 格式为：nacos://192.168.0.1:8848<br/>- 若在本地磁盘上保存配置，URL 格式为：file://opt/higress/conf|无             |
+|-c CONFIG_URL<br/>--config-url CONFIG_URL                  |配置服务的 URL。<br/>- 若使用独立部署的 Nacos 服务（版本不低于 2.0.0），URL 格式为：nacos://192.168.0.1:8848<br/>- 若在本地磁盘上保存配置，URL 格式为：file:///opt/higress/conf|无             |
 |--use-builtin-nacos                                     |使用内置的 Nacos 服务。不建议用于生产环境。如果设置本参数，则无需设置`-c`参数                                                                 |无             |
 |--nacos-ns=NACOS_NAMESPACE                              |用于保存 Higress 配置的 Nacos 命名空间 ID                                                                               |higress-system|
 |--nacos-username=NACOS_USERNAME                         |用于访问 Nacos 的用户名。仅用于 Nacos 启动了认证的情况下                                                                          |无             |
