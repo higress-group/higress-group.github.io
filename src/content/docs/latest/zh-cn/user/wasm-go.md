@@ -9,7 +9,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 # 使用 GO 语言开发 WASM 插件
 
 > **注意**：
-> go 1.24.4 已经原生支持编译 wasm 文件，目前 higress 已从之前的 tinygo 0.29 + go 1.20 编译方案完整迁移为 go 1.24.4 原生编译 wasm 文件。
+> go 1.24 已经原生支持编译 wasm 文件，目前 higress 已从之前的 tinygo 0.29 + go 1.20 编译方案完整迁移为 go 1.24 原生编译 wasm 文件。
 
 ## 一、工具准备
 
@@ -17,7 +17,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ### Golang
 
-（要求 1.24.4 版本以上）官方指引链接：[https://go.dev/doc/install](https://go.dev/doc/install)
+（要求 1.24 版本以上）官方指引链接：[https://go.dev/doc/install](https://go.dev/doc/install)
 
 #### Windows
 
