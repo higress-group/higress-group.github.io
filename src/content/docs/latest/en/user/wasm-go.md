@@ -8,166 +8,36 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 # Developing WASM Plugins with Go
 
 > **Note**:
+> Go 1.24 now natively supports compiling WASM files, and Higress has already migrated from TinyGo compilation to Go 1.24 native compilation.
 >
-> TinyGo has specific version requirements. The current stable version combination that has been extensively validated is: TinyGo 0.29 + Go 1.20. You can refer to this official [Makefile](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/Makefile)
->
-> Go 1.24 now natively supports compiling WASM files. Documentation updates are in progress.
 
 ## 1. Tool Preparation
-
-You need to install both Golang and TinyGo.
-
-### 1. Golang
-(Requires version 1.18 or higher)  
+Install Golang
+### Golang
+(Requires version 1.24.4 or higher)  
 Official installation guide: [https://go.dev/doc/install](https://go.dev/doc/install)
 
 #### Windows
 
-1. Download the installer: [https://go.dev/dl/go1.19.windows-amd64.msi](https://go.dev/dl/go1.19.windows-amd64.msi)
+1. Download the installer: [https://go.dev/dl/go1.24.4.windows-amd64.msi](https://go.dev/dl/go1.24.4.windows-amd64.msi)
 2. Run the downloaded installer. By default, it will be installed in the `Program Files` or `Program Files (x86)` directory
 3. After installation, press "Win+R" to open the Run dialog, type "cmd" and press Enter to open the command prompt. Then type: `go version` to verify the installation
 
 #### macOS
 
-1. Download the installer: [https://go.dev/dl/go1.19.darwin-amd64.pkg](https://go.dev/dl/go1.19.darwin-amd64.pkg)
+1. Download the installer: [https://go.dev/dl/go1.24.4.darwin-amd64.pkg](https://go.dev/dl/go1.24.4.darwin-amd64.pkg)
 2. Run the downloaded installer. By default, it will be installed in the `/usr/local/go` directory
 3. Open Terminal and type: `go version` to verify the installation
 
 #### Linux
 
-1. Download the archive: [https://go.dev/dl/go1.19.linux-amd64.tar.gz](https://go.dev/dl/go1.19.linux-amd64.tar.gz)
+1. Download the archive: [https://go.dev/dl/go1.24.4.linux-amd64.tar.gz](https://go.dev/dl/go1.24.4.linux-amd64.tar.gz)
 2. Run the following commands to install:
 ```bash
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.24.4.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 ```
 3. Type `go version` to verify the installation
-
-### 2. TinyGo
-(Requires version 0.28.1 or higher)  
-Official installation guide: [https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
-
-#### Windows
-
-1. Download the installer: [https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip)
-2. Extract the archive to your desired directory
-3. If you extracted to `C:\tinygo`, add `C:\tinygo\bin` to your `PATH` environment variable, for example by running:
-```bash
-set PATH=%PATH%;"C:\tinygo\bin";
-```
-4. Open a command prompt and type `tinygo version` to verify the installation
-
-#### macOS
-
-1. Download and extract the archive:
-```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.darwin-amd64.tar.gz
-tar -zxf tinygo0.28.1.darwin-amd64.tar.gz
-```
-2. If you extracted to `/tmp`, add `/tmp/tinygo/bin` to your `PATH`:
-```bash
-export PATH=/tmp/tinygo/bin:$PATH
-```
-3. Open Terminal and type `tinygo version` to verify the installation
-
-#### Linux
-For Ubuntu on amd64 architecture (other systems please refer to the official guide):
-
-1. Download and install the DEB package:
-```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo_0.28.1_amd64.deb
-sudo dpkg -i tinygo_0.28.1_amd64.deb
-export PATH=$PATH:/usr/local/bin
-```
-2. Open Terminal and type `tinygo version` to verify the installation
-3. After completed the installation, open "Run" dialog with hotkey "Win+R". Type "cmd" in the dialog and click "OK" to open Command Line Prompt. Type: `go version`. If version info is displayed, the package has been successfully installed.
-
-#### MacOS
-
-1. Download the installer: [https://go.dev/dl/go1.19.darwin-amd64.pkg](https://go.dev/dl/go1.19.darwin-amd64.pkg)
-2. Run the downloaded installer to start the installation. It will be installed to `/usr/local/go` folder by default.
-3. Open Terminal and type: `go version`. If version info is displayed, the package has been successfully installed.
-
-#### Linux
-
-1. Download the installer: [https://go.dev/dl/go1.19.linux-amd64.tar.gz](https://go.dev/dl/go1.19.linux-amd64.tar.gz)
-2. Execute following commands to start the installation:
-```bash
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
-export PATH=$PATH:/usr/local/go/bin
-```
-3. Execute `go version`. If version info is displayed, the package has been successfully installed.
-
-### 2. TinyGo
-
-Min Version: 0.28.1<br />Official download link: [https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
-
-#### Windows
-
-1. Download the package: [https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip)
-2. Unpack the package to the target folder
-3. If the package is unpacked to folder `C:\tinygo`, you need to add `C:\tinygo\bin` into the environment variable `PATH`, using set command in Command Line Prompt for example.
-```bash
-set PATH=%PATH%;"C:\tinygo\bin";
-```
-4. Execute `tinygo version` command in Command Line Prompt. If version info is displayed, the package has been successfully installed.
-
-#### MacOS
-
-1. Download and unpack the package
-```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.darwin-amd64.tar.gz
-tar -zxf tinygo0.28.1.darwin-amd64.tar.gz
-```
-2. If the package is unpacked to folder `/tmp`, you need to add `/tmp/tinygo/bin` to the environment variable `PATH`:
-```bash
-export PATH=/tmp/tinygo/bin:$PATH
-```
-3. Execute command `tinygo version` in Terminal.  If version info is displayed, the package has been successfully installed.
-
-#### Linux
-
-Following steps are based on Ubuntu AMD64. For other OSes, please refer to the official document.
-
-1. Download and install the DEB package.
-```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo_0.28.1_amd64.deb
-sudo dpkg -i tinygo_0.28.1_amd64.deb
-export PATH=$PATH:/usr/local/bin
-```
-2. Execute command `tinygo version` in Terminal. If version info is displayed, the package has been successfully installed.
-
-## 2. Write a plugin
-
-### 1. Initialize the project
-
-You can create your wasm-go plugin directory in the repo [higress](https://github.com/alibaba/higress)'s [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
-that you can use the scaffolding tools provided in this directory（see 1.1）；
-or create a new directory for your Go project yourself(see 1.2).
-If you are developing wasm-go plugins for the first time, it is recommended to take the former.
-
-#### 1.1 create wasm-go plugin in [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
-
-1. `git clone https://github.com/alibaba/higress.git`, to clone project to local；
-2. `cd plugins/wasm-go; mkdir wasm-demo-go`, to go to the project's plugins/wasm-go directory and create the wasm-demo-go directory.
-
-#### 1.2 create a new project yourself
-
-1. Create a new folder for the project. For example: `wasm-demo-go`.
-2. Execute following commands in the new folder to initialize the Go project:
-```bash
-go mod init wasm-demo-go
-```
-3. If you are in the Chinese mainland, you may need to set a proxy for downloading dependencies.
-```bash
-go env -w GOPROXY=https://proxy.golang.com.cn,direct
-```
-4. Download dependencies for plugin building. 
-```bash
-go get github.com/tetratelabs/proxy-wasm-go-sdk
-go get github.com/alibaba/higress/plugins/wasm-go@main
-go get github.com/tidwall/gjson
-```
 
 ## 2. Writing the Plugin
 
@@ -405,7 +275,8 @@ See [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-
 
 Execute the following command:
 ```bash
-tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
+go mod tidy
+GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
 ```
 A new file named main.wasm will be created after a successful compilation, which will be used in the local debugging sample below as well.<br />When using custom plugin function in the cloud native gateway market, you just need to upload this file.
 
