@@ -14,7 +14,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ## 1. Tool Preparation
 Install Golang
 ### Golang
-(Requires version 1.24.4 or higher)  
+(Requires version 1.24 or higher)  
 Official installation guide: [https://go.dev/doc/install](https://go.dev/doc/install)
 
 #### Windows
