@@ -10,6 +10,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 > **注意**：
 > go 1.24 已经原生支持编译 wasm 文件，目前 higress 已从之前的 tinygo 0.29 + go 1.20 编译方案完整迁移为 go 1.24 原生编译 wasm 文件。
+> 对于之前已经在用 tinygo 编译插件的用户，如果要迁移到用 go 1.24 编译，除了go mod依赖要调整外，只需将原本初始化的逻辑从main函数挪到init函数中即可，具体请参考下文的示例
 
 ## 一、工具准备
 
