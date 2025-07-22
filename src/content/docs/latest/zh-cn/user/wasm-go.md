@@ -65,7 +65,7 @@ go env -w GOPROXY=https://proxy.golang.com.cn,direct
 
 ```bash
 go get github.com/higress-group/proxy-wasm-go-sdk
-go get github.com/alibaba/higress/plugins/wasm-go@main
+go get github.com/higress-group/wasm-go@main
 go get github.com/tidwall/gjson
 ```
 
@@ -75,17 +75,20 @@ go get github.com/tidwall/gjson
 
 > 注意：在网关控制台中的插件配置为 yaml 格式，下发给插件时将自动转换为 json 格式，所以例子中的 parseConfig 可以直接从 json 中解析配置
 
-```
+```go
 package main
 
 import (
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		// 插件名称
 		"my-plugin",
@@ -102,13 +105,13 @@ type MyConfig struct {
 }
 
 // 在控制台插件配置中填写的yaml配置会自动转换为json，此处直接从json这个参数里解析配置即可
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
 	// 解析出配置，更新到config中
 	config.mockEnable = json.Get("mockEnable").Bool()
 	return nil
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	proxywasm.AddHttpRequestHeader("hello", "world")
 	if config.mockEnable {
 		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
@@ -343,7 +346,7 @@ docker compose up
 
 使用curl直接访问httpbin，可以看到不经过网关时的请求头内容，如下：
 
-```
+```bash
 curl http://127.0.0.1:12345/get
 
 {
@@ -360,7 +363,7 @@ curl http://127.0.0.1:12345/get
 
 使用curl通过网关访问httpbin，可以看到经过网关处理后的请求头的内容，如下：
 
-```
+```bash
 curl http://127.0.0.1:10000/get
 
 {
@@ -396,7 +399,7 @@ curl http://127.0.0.1:10000/get
 
 使用curl通过网关访问httpbin，可以看到经过网关处理后的请求头的内容，如下：
 
-```
+```bash
 curl http://127.0.0.1:10000/get
 
 hello world
@@ -411,16 +414,19 @@ hello world
 
 插件无需配置时，直接定义空结构体即可
 
-```
+```go
 package main
 
 import (
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		"hello-world",
 		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
@@ -429,7 +435,7 @@ func main() {
 
 type MyConfig struct {}
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
 	return types.ActionContinue
 }
@@ -439,20 +445,23 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 
 目前仅支持 http 调用，支持访问在网关控制台中设置了服务来源的 Nacos、K8s 服务，以及固定地址或 DNS 来源的服务。请注意，无法直接使用`net/http`库中的 HTTP client，必须使用如下例中封装的 HTTP client。<br />下面例子中，在配置解析阶段解析服务类型，生成对应的 HTTP client ；在请求头处理阶段根据配置的请求路径访问对应服务，解析应答头，然后再设置在原始的请求头中。
 
-```
+```go
 package main
 
 import (
 	"errors"
 	"net/http"
 	"strings"
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		"http-call",
 		wrapper.ParseConfigBy(parseConfig),
@@ -469,7 +478,7 @@ type MyConfig struct {
 	tokenHeader string
 }
 
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
 	config.tokenHeader = json.Get("tokenHeader").String()
 	if config.tokenHeader == "" {
 		return errors.New("missing tokenHeader in config")
@@ -493,7 +502,7 @@ func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
         })
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	// 使用client的Get方法发起HTTP Get调用，此处省略了timeout参数，默认超时时间500毫秒
 	err := config.client.Get(config.requestPath, nil,
 		       // 回调函数，将在响应异步返回时被执行
@@ -543,10 +552,13 @@ import (
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/resp"
 
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		"redis-demo",
 		wrapper.ParseConfigBy(parseConfig),
@@ -560,7 +572,7 @@ type RedisCallConfig struct {
 	qpm    int
 }
 
-func parseConfig(json gjson.Result, config *RedisCallConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *RedisCallConfig, log logs.Log) error {
 	// 带服务类型的完整 FQDN 名称，例如 my-redis.dns、redis.my-ns.svc.cluster.local
 	serviceName := json.Get("serviceName").String()
 	servicePort := json.Get("servicePort").Int()
@@ -588,7 +600,7 @@ func parseConfig(json gjson.Result, config *RedisCallConfig, log wrapper.Log) er
 	return config.client.Init(username, password, timeout)
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log logs.Log) types.Action {
 	now := time.Now()
 	minuteAligned := now.Truncate(time.Minute)
 	timeStamp := strconv.FormatInt(minuteAligned.Unix(), 10)
@@ -630,7 +642,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log w
 	}
 }
 
-func onHttpResponseHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log wrapper.Log) types.Action {
+func onHttpResponseHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log logs.Log) types.Action {
 	if ctx.GetContext("timeStamp") != nil {
 		proxywasm.AddHttpResponseHeader("timeStamp", ctx.GetContext("timeStamp").(string))
 	}

@@ -55,7 +55,7 @@ go env -w GOPROXY=https://proxy.golang.com.cn,direct
 4. Download the required dependencies for building the plugin:
 ```bash
 go get github.com/higress-group/proxy-wasm-go-sdk
-go get github.com/alibaba/higress/plugins/wasm-go@main
+go get github.com/higress-group/wasm-go@main
 go get github.com/tidwall/gjson
 ```
 
@@ -71,13 +71,16 @@ Below is a simple example that implements the following functionality:
 package main
 
 import (
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		// Plugin name
 		"my-plugin",
@@ -95,13 +98,13 @@ type MyConfig struct {
 
 // The YAML configuration from the console is automatically converted to JSON
 // We can directly parse the configuration from the json parameter
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
 	// Parse the configuration and update the config object
 	config.mockEnable = json.Get("mockEnable").Bool()
 	return nil
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	proxywasm.AddHttpRequestHeader("hello", "world")
 	if config.mockEnable {
 		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
@@ -161,17 +164,20 @@ More samples can be found in section 4 below.
 
 > Note: Plugin configurations use YAML format in the gateway console. But plugins receive them in JSON format. So in the sample below, actual config data are extracted from JSON by the `parseConfig` function.
 
-```
+```go
 package main
 
 import (
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
 	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		// Plugin name
 		"my-plugin",
@@ -188,13 +194,13 @@ type MyConfig struct {
 }
 
 // Plugin configurations set in the console with YAML format will be converted to JSON. So we just need to parse config data from JSON.
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
 	// Get the configuration property and set to the config object.
 	config.mockEnable = json.Get("mockEnable").Bool()
 	return nil
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log log.Log) types.Action {
 	proxywasm.AddHttpRequestHeader("hello", "world")
 	if config.mockEnable {
 		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
@@ -290,16 +296,19 @@ TBD
 
 If the plugin needs no configuration, just define an empty config struct.
 
-```
+```go
 package main
 
 import (
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+		"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		"hello-world",
 		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
@@ -308,7 +317,7 @@ func main() {
 
 type MyConfig struct {}
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
 	return types.ActionContinue
 }
@@ -323,20 +332,23 @@ Only HTTP requests are supported for now. You can send requests to Nacos and K8s
 3. Parse response headers and get token value using the specified key.
 4. Set the token value to the headers of the original request.
 
-```
+```go
 package main
 
 import (
 	"errors"
 	"net/http"
 	"strings"
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		"http-call",
 		wrapper.ParseConfigBy(parseConfig),
@@ -353,7 +365,7 @@ type MyConfig struct {
 	tokenHeader string
 }
 
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
 	// Get the service name with full FQDN, e.g., my-redis.dns, redis.my-ns.svc.cluster.local
 	serviceName := json.Get("serviceName").String()
 	servicePort := json.Get("servicePort").Int()
@@ -406,7 +418,7 @@ func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
 	}
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	// Use the Get function of the client to initiate an HTTP Get request.
 	// The timeout parameter is omitted here, whose default value is 500ms.
 	config.client.Get(config.requestPath, nil,
