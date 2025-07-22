@@ -3,86 +3,46 @@ title: 使用 GO 语言开发 WASM 插件
 keywords: [wasm]
 description: 使用 GO 语言开发 WASM 插件
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/user/wasm-go.md
+
 ---
 
 # 使用 GO 语言开发 WASM 插件
 
 > **注意**：
-
-> 使用 TinyGo 对版本有限定要求，目前经大规模验证稳定的版本组合是：tinygo 0.29 + go 1.20，可以参考这个官方 [Makefile](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/Makefile)
->
-> go 1.24 已经原生支持编译 wasm 文件，相关文档补充中
+> go 1.24 已经原生支持编译 wasm 文件，目前 higress 已从之前的 tinygo 0.29 + go 1.20 编译方案完整迁移为 go 1.24 原生编译 wasm 文件。
+> 对于之前已经在用 tinygo 编译插件的用户，如果要迁移到用 go 1.24 编译，除了go mod依赖要调整外，只需将原本初始化的逻辑从main函数挪到init函数中即可，具体请参考下文的示例
 
 ## 一、工具准备
-需要先安装 Golang 和 TinyGo 两个程序
 
-### 1. Golang
-（要求 1.18 版本以上）<br />官方指引链接：[https://go.dev/doc/install](https://go.dev/doc/install)
+需要先安装 Golang。
+
+### Golang
+
+（要求 1.24 版本以上）官方指引链接：[https://go.dev/doc/install](https://go.dev/doc/install)
 
 #### Windows
 
-1. 下载安装文件：[https://go.dev/dl/go1.19.windows-amd64.msi](https://go.dev/dl/go1.19.windows-amd64.msi)
+1. 下载安装文件：[https://go.dev/dl/go1.24.4.windows-amd64.msi](https://go.dev/dl/go1.24.4.windows-amd64.msi)
 2. 打开下载好的安装文件直接安装，默认会安装到 `Program Files` 或 `Program Files (x86)` 目录
 3. 安装完成后，使用键盘上的快捷键“Win+R”打开运行窗口，在运行窗口中输入“cmd”点击确定即可打开命令窗口，输入命令：`go version`，输出当前安装的版本，表明安装成功
 
 #### MacOS
 
-1. 下载安装文件：[https://go.dev/dl/go1.19.darwin-amd64.pkg](https://go.dev/dl/go1.19.darwin-amd64.pkg)
+1. 下载安装文件：[https://go.dev/dl/go1.24.4.darwin-amd64.pkg](https://go.dev/dl/go1.24.4.darwin-amd64.pkg)
 2. 打开下载好的安装文件直接安装，默认会安装到`/usr/local/go`目录
 3. 打开终端命令行工具，输入命令：`go version`，输出当前安装的版本，表明安装成功
 
 #### Linux
 
-1. 下载安装文件：[https://go.dev/dl/go1.19.linux-amd64.tar.gz](https://go.dev/dl/go1.19.linux-amd64.tar.gz)
+1. 下载安装文件：[https://go.dev/dl/go1.24.4.linux-amd64.tar.gz](https://go.dev/dl/go1.24.4.linux-amd64.tar.gz)
 2. 执行下列命令进行安装：
+
 ```bash
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.24.4.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 ```
 
 3. 执行 `go version`，输出当前安装的版本，表明安装成功
-
-### 2. TinyGo
-
-（要求 0.28.1 版本以上）<br />官方指引链接：[https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
-
-#### Windows
-
-1. 下载安装文件：[https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip)
-2. 解压安装文件到指定目录
-3. 如果安装解压后的目录为`C:\tinygo`，则需要将`C:\tinygo\bin`添加到环境变量`PATH`中，例如通过在命令窗口中输入 set 命令设置
-```bash
-set PATH=%PATH%;"C:\tinygo\bin";
-```
-
-4. 在命令窗口执行命令 `tinygo version`，输出当前安装的版本，表明安装成功
-
-#### MacOS
-
-1. 下载压缩包并解压
-```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.darwin-amd64.tar.gz
-tar -zxf tinygo0.28.1.darwin-amd64.tar.gz
-```
-
-2. 如果安装解压后的目录为`/tmp`，则需要将`/tmp/tinygo/bin`添加到环境变量`PATH`中：
-```bash
-export PATH=/tmp/tinygo/bin:$PATH
-```
-
-3. 在终端执行 `tinygo version`，输出当前安装的版本，表明安装成功
-
-#### Linux
-以 Ubuntu 下 amd64 架构为例，其他系统请参考官方指引链接
-
-1. 下载 DEB 文件，并安装
-```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo_0.28.1_amd64.deb
-sudo dpkg -i tinygo_0.28.1_amd64.deb
-export PATH=$PATH:/usr/local/bin
-```
-
-2. 在终端执行 `tinygo version`，输出当前安装的版本，表明安装成功
 
 
 ## 二、编写插件
@@ -91,36 +51,45 @@ export PATH=$PATH:/usr/local/bin
 
 1. 新建一个工程目录文件，例如`wasm-demo-go`
 2. 在所建目录下执行以下命令，进行 Go 工程初始化
+
 ```bash
 go mod init wasm-demo-go
 ```
 
 3. 国内环境可能需要设置下载依赖包的代理
+
 ```bash
 go env -w GOPROXY=https://proxy.golang.com.cn,direct
 ```
 
 4. 下载构建插件的依赖
+
 ```bash
 go get github.com/higress-group/proxy-wasm-go-sdk
-go get github.com/alibaba/higress/plugins/wasm-go@main
+go get github.com/higress-group/wasm-go@main
 go get github.com/tidwall/gjson
 ```
+
 ### 2. 编写 main.go 文件
+
 下面是一个简单示例，实现了在插件配置`mockEnable: true`时直接返回`hello world`应答；未做插件配置，或者设置`mockEnable: false`时给原始请求添加 `hello: world`请求头。更多例子请参考本文第四节。
+
 > 注意：在网关控制台中的插件配置为 yaml 格式，下发给插件时将自动转换为 json 格式，所以例子中的 parseConfig 可以直接从 json 中解析配置
 
-```
+```go
 package main
 
 import (
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		// 插件名称
 		"my-plugin",
@@ -137,13 +106,13 @@ type MyConfig struct {
 }
 
 // 在控制台插件配置中填写的yaml配置会自动转换为json，此处直接从json这个参数里解析配置即可
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
 	// 解析出配置，更新到config中
 	config.mockEnable = json.Get("mockEnable").Bool()
 	return nil
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	proxywasm.AddHttpRequestHeader("hello", "world")
 	if config.mockEnable {
 		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
@@ -153,47 +122,49 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 ```
 
 #### HTTP 处理挂载点
+
 上面示例代码中通过 `wrapper.ProcessRequestHeadersBy`将自定义函数 `onHttpRequestHeaders`用于`HTTP 请求头处理阶段`处理请求。除此之外，还可以通过下面方式，设置其他阶段的自定义处理函数
 
-| HTTP 处理阶段 | 触发时机 | 挂载方法 |
-| --- | --- | --- |
-| HTTP 请求头处理阶段 | 网关接收到客户端发送来的请求头数据时 | wrapper.ProcessRequestHeadersBy |
-| HTTP 请求 Body 处理阶段 | 网关接收到客户端发送来的请求 Body 数据时 | wrapper.ProcessRequestBodyBy |
-| HTTP 应答头处理阶段 | 网关接收到后端服务响应的应答头数据时 | wrapper.ProcessResponseHeadersBy |
-| HTTP 应答 Body 处理阶段 | 网关接收到后端服务响应的应答 Body 数据时 | wrapper.ProcessResponseBodyBy |
+| HTTP 处理阶段           | 触发时机                                 | 挂载方法                         |
+| ----------------------- | ---------------------------------------- | -------------------------------- |
+| HTTP 请求头处理阶段     | 网关接收到客户端发送来的请求头数据时     | wrapper.ProcessRequestHeadersBy  |
+| HTTP 请求 Body 处理阶段 | 网关接收到客户端发送来的请求 Body 数据时 | wrapper.ProcessRequestBodyBy     |
+| HTTP 应答头处理阶段     | 网关接收到后端服务响应的应答头数据时     | wrapper.ProcessResponseHeadersBy |
+| HTTP 应答 Body 处理阶段 | 网关接收到后端服务响应的应答 Body 数据时 | wrapper.ProcessResponseBodyBy    |
 
 #### 工具方法
+
 上面示例代码中的 `proxywasm.AddHttpRequestHeader` 和 `proxywasm.SendHttpResponse`是插件 SDK 提供的两个工具方法，主要的工具方法见下表：
 
-| 分类 | 方法名称 | 用途 | 可以生效的<br />HTTP 处理阶段 |
-| --- | --- | --- | --- |
-| 请求头处理 | GetHttpRequestHeaders | 获取客户端请求的全部请求头 | HTTP 请求头处理阶段<br /> |
-|  | ReplaceHttpRequestHeaders | 替换客户端请求的全部请求头 | HTTP 请求头处理阶段 |
-|  | GetHttpRequestHeader | 获取客户端请求的指定请求头 | HTTP 请求头处理阶段 |
-|  | RemoveHttpRequestHeader | 移除客户端请求的指定请求头 | HTTP 请求头处理阶段 |
-|  | ReplaceHttpRequestHeader | 替换客户端请求的指定请求头 | HTTP 请求头处理阶段 |
-|  | AddHttpRequestHeader | 新增一个客户端请求头 | HTTP 请求头处理阶段 |
-| 请求 Body 处理 | GetHttpRequestBody | 获取客户端请求 Body | HTTP 请求 Body 处理阶段 |
-|  | AppendHttpRequestBody | 将指定的字节串附加到客户端请求 Body 末尾 | HTTP 请求 Body 处理阶段 |
-|  | PrependHttpRequestBody | 将指定的字节串附加到客户端请求 Body 的开头 | HTTP 请求 Body 处理阶段 |
-|  | ReplaceHttpRequestBody | 替换客户端请求 Body | HTTP 请求 Body 处理阶段 |
-| 应答头处理 | GetHttpResponseHeaders | 获取后端响应的全部应答头 | HTTP 应答头处理阶段<br /> |
-|  | ReplaceHttpResponseHeaders | 替换后端响应的全部应答头 | HTTP 应答头处理阶段 |
-|  | GetHttpResponseHeader | 获取后端响应的指定应答头 | HTTP 应答头处理阶段 |
-|  | RemoveHttpResponseHeader | 移除后端响应的指定应答头 | HTTP 应答头处理阶段 |
-|  | ReplaceHttpResponseHeader | 替换后端响应的指定应答头 | HTTP 应答头处理阶段 |
-|  | AddHttpResponseHeader | 新增一个后端响应头 | HTTP 应答头处理阶段 |
-| 应答 Body 处理 | GetHttpResponseBody | 获取客户端请求 Body | HTTP 应答 Body 处理阶段 |
-|  | AppendHttpResponseBody | 将指定的字节串附加到后端响应 Body 末尾 | HTTP 应答 Body 处理阶段 |
-|  | PrependHttpResponseBody | 将指定的字节串附加到后端响应 Body 的开头 | HTTP 应答 Body 处理阶段 |
-|  | ReplaceHttpResponseBody | 替换后端响应 Body | HTTP 应答 Body 处理阶段 |
-| HTTP 调用 | DispatchHttpCall | 发送一个 HTTP 请求 | - |
-|  | GetHttpCallResponseHeaders | 获取 DispatchHttpCall 请求响应的应答头 | - |
-|  | GetHttpCallResponseBody | 获取 DispatchHttpCall 请求响应的应答 Body | - |
-|  | GetHttpCallResponseTrailers | 获取 DispatchHttpCall 请求响应的应答 Trailer | - |
-| 直接响应 | SendHttpResponse | 直接返回一个特定的 HTTP 应答 | - |
-| 流程恢复 | ResumeHttpRequest | 恢复先前被暂停的请求处理流程 | - |
-|  | ResumeHttpResponse | 恢复先前被暂停的应答处理流程 | - |
+| 分类           | 方法名称                    | 用途                                         | 可以生效的<br />HTTP 处理阶段 |
+| -------------- | --------------------------- | -------------------------------------------- | ----------------------------- |
+| 请求头处理     | GetHttpRequestHeaders       | 获取客户端请求的全部请求头                   | HTTP 请求头处理阶段<br />     |
+|                | ReplaceHttpRequestHeaders   | 替换客户端请求的全部请求头                   | HTTP 请求头处理阶段           |
+|                | GetHttpRequestHeader        | 获取客户端请求的指定请求头                   | HTTP 请求头处理阶段           |
+|                | RemoveHttpRequestHeader     | 移除客户端请求的指定请求头                   | HTTP 请求头处理阶段           |
+|                | ReplaceHttpRequestHeader    | 替换客户端请求的指定请求头                   | HTTP 请求头处理阶段           |
+|                | AddHttpRequestHeader        | 新增一个客户端请求头                         | HTTP 请求头处理阶段           |
+| 请求 Body 处理 | GetHttpRequestBody          | 获取客户端请求 Body                          | HTTP 请求 Body 处理阶段       |
+|                | AppendHttpRequestBody       | 将指定的字节串附加到客户端请求 Body 末尾     | HTTP 请求 Body 处理阶段       |
+|                | PrependHttpRequestBody      | 将指定的字节串附加到客户端请求 Body 的开头   | HTTP 请求 Body 处理阶段       |
+|                | ReplaceHttpRequestBody      | 替换客户端请求 Body                          | HTTP 请求 Body 处理阶段       |
+| 应答头处理     | GetHttpResponseHeaders      | 获取后端响应的全部应答头                     | HTTP 应答头处理阶段<br />     |
+|                | ReplaceHttpResponseHeaders  | 替换后端响应的全部应答头                     | HTTP 应答头处理阶段           |
+|                | GetHttpResponseHeader       | 获取后端响应的指定应答头                     | HTTP 应答头处理阶段           |
+|                | RemoveHttpResponseHeader    | 移除后端响应的指定应答头                     | HTTP 应答头处理阶段           |
+|                | ReplaceHttpResponseHeader   | 替换后端响应的指定应答头                     | HTTP 应答头处理阶段           |
+|                | AddHttpResponseHeader       | 新增一个后端响应头                           | HTTP 应答头处理阶段           |
+| 应答 Body 处理 | GetHttpResponseBody         | 获取客户端请求 Body                          | HTTP 应答 Body 处理阶段       |
+|                | AppendHttpResponseBody      | 将指定的字节串附加到后端响应 Body 末尾       | HTTP 应答 Body 处理阶段       |
+|                | PrependHttpResponseBody     | 将指定的字节串附加到后端响应 Body 的开头     | HTTP 应答 Body 处理阶段       |
+|                | ReplaceHttpResponseBody     | 替换后端响应 Body                            | HTTP 应答 Body 处理阶段       |
+| HTTP 调用      | DispatchHttpCall            | 发送一个 HTTP 请求                           | -                             |
+|                | GetHttpCallResponseHeaders  | 获取 DispatchHttpCall 请求响应的应答头       | -                             |
+|                | GetHttpCallResponseBody     | 获取 DispatchHttpCall 请求响应的应答 Body    | -                             |
+|                | GetHttpCallResponseTrailers | 获取 DispatchHttpCall 请求响应的应答 Trailer | -                             |
+| 直接响应       | SendHttpResponse            | 直接返回一个特定的 HTTP 应答                 | -                             |
+| 流程恢复       | ResumeHttpRequest           | 恢复先前被暂停的请求处理流程                 | -                             |
+|                | ResumeHttpResponse          | 恢复先前被暂停的应答处理流程                 | -                             |
 
 ### 3. 编译生成 WASM 文件
 
@@ -208,14 +179,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.
 
 ```bash
 go mod tidy
-tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="custommalloc nottinygc_finalizer" ./
-```
-
-Higress 扩展了 0.2.100 版本的 ABI 来实现更丰富的 Header 状态管理，如果要使用，请用下面的编译方式：
-
-```bash
-go mod tidy
-tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags="custommalloc nottinygc_finalizer proxy_wasm_version_0_2_100" ./
+GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
 ```
 
 Header 的状态管理说明如下：
@@ -254,16 +218,19 @@ Header 的状态管理说明如下：
 
 如果linux/mac下编译出现该错误，使用apt/brew等系统自带包管理工具安装下binaryen即可，例如`brew install binaryen`
 
-要在Higress中配合Wasmplugin CRD或者Console的UI交互配置该插件，需要将该wasm文件打包成oci或者docker镜像，可以参考这篇文档：[《自定义插件》](https://higress.cn/docs/latest/plugins/custom)
+要在 Higress 中配合 Wasmplugin CRD 或者 Console 的 UI 交互配置该插件，需要将该 wasm 文件打包成 oci 或者 docker 镜像，可以参考这篇文档：[《自定义插件》](https://higress.cn/docs/latest/plugins/custom)
 
 ## 三、本地调试
 
 ### 工具准备
+
 安装[Docker](https://docs.docker.com/engine/install/?spm=a2c4g.426926.0.0.29071f47tjgquo)
 
 ### 使用 docker compose 启动验证
+
 1. 进入在编写插件时创建的目录，例如wasm-demo目录，确认该目录下已经编译生成了main.wasm文件。
 2. 在目录下创建文件docker-compose.yaml，内容如下：
+
 ```yaml
 version: '3.7'
 services:
@@ -292,7 +259,9 @@ services:
 networks:
   wasmtest: {}
 ```
+
 3. 继续在该目录下创建文件envoy.yaml，内容如下：
+
 ```yaml
 admin:
   address:
@@ -365,16 +334,20 @@ static_resources:
                 address: httpbin
                 port_value: 80
 ```
+
 4. 执行以下命令启动docker compose。
+
 ```bash
 docker compose up
 ```
 
 ### 功能验证
+
 1. WASM功能验证
 
 使用curl直接访问httpbin，可以看到不经过网关时的请求头内容，如下：
-```
+
+```bash
 curl http://127.0.0.1:12345/get
 
 {
@@ -390,7 +363,8 @@ curl http://127.0.0.1:12345/get
 ```
 
 使用curl通过网关访问httpbin，可以看到经过网关处理后的请求头的内容，如下：
-```
+
+```bash
 curl http://127.0.0.1:10000/get
 
 {
@@ -414,6 +388,7 @@ curl http://127.0.0.1:10000/get
 2. 插件配置修改验证
 
 修改envoy.yaml，将`mockEnable`配置修改为true。
+
 ```yaml
   configuration:
     "@type": "type.googleapis.com/google.protobuf.StringValue"
@@ -425,29 +400,34 @@ curl http://127.0.0.1:10000/get
 
 使用curl通过网关访问httpbin，可以看到经过网关处理后的请求头的内容，如下：
 
-```
+```bash
 curl http://127.0.0.1:10000/get
 
 hello world
 ```
+
 说明插件配置修改生效，开启了mock应答直接返回了hello world。
 
 
 ## 更多示例
 
 ### 无配置插件
+
 插件无需配置时，直接定义空结构体即可
 
-```
+```go
 package main
 
 import (
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		"hello-world",
 		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
@@ -456,29 +436,33 @@ func main() {
 
 type MyConfig struct {}
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
 	return types.ActionContinue
 }
 ```
 
 ### 在插件中请求外部服务
+
 目前仅支持 http 调用，支持访问在网关控制台中设置了服务来源的 Nacos、K8s 服务，以及固定地址或 DNS 来源的服务。请注意，无法直接使用`net/http`库中的 HTTP client，必须使用如下例中封装的 HTTP client。<br />下面例子中，在配置解析阶段解析服务类型，生成对应的 HTTP client ；在请求头处理阶段根据配置的请求路径访问对应服务，解析应答头，然后再设置在原始的请求头中。
 
-```
+```go
 package main
 
 import (
 	"errors"
 	"net/http"
 	"strings"
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		"http-call",
 		wrapper.ParseConfigBy(parseConfig),
@@ -495,7 +479,7 @@ type MyConfig struct {
 	tokenHeader string
 }
 
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
 	config.tokenHeader = json.Get("tokenHeader").String()
 	if config.tokenHeader == "" {
 		return errors.New("missing tokenHeader in config")
@@ -519,7 +503,7 @@ func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
         })
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	// 使用client的Get方法发起HTTP Get调用，此处省略了timeout参数，默认超时时间500毫秒
 	err := config.client.Get(config.requestPath, nil,
 		       // 回调函数，将在响应异步返回时被执行
@@ -569,10 +553,13 @@ import (
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/resp"
 
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		"redis-demo",
 		wrapper.ParseConfigBy(parseConfig),
@@ -586,7 +573,7 @@ type RedisCallConfig struct {
 	qpm    int
 }
 
-func parseConfig(json gjson.Result, config *RedisCallConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *RedisCallConfig, log logs.Log) error {
 	// 带服务类型的完整 FQDN 名称，例如 my-redis.dns、redis.my-ns.svc.cluster.local
 	serviceName := json.Get("serviceName").String()
 	servicePort := json.Get("servicePort").Int()
@@ -614,7 +601,7 @@ func parseConfig(json gjson.Result, config *RedisCallConfig, log wrapper.Log) er
 	return config.client.Init(username, password, timeout)
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log logs.Log) types.Action {
 	now := time.Now()
 	minuteAligned := now.Truncate(time.Minute)
 	timeStamp := strconv.FormatInt(minuteAligned.Unix(), 10)
@@ -656,7 +643,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log w
 	}
 }
 
-func onHttpResponseHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log wrapper.Log) types.Action {
+func onHttpResponseHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log logs.Log) types.Action {
 	if ctx.GetContext("timeStamp") != nil {
 		proxywasm.AddHttpResponseHeader("timeStamp", ctx.GetContext("timeStamp").(string))
 	}

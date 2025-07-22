@@ -8,166 +8,37 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 # Developing WASM Plugins with Go
 
 > **Note**:
+> Go 1.24 now natively supports compiling WASM files, and Higress has already migrated from TinyGo compilation to Go 1.24 native compilation.
+> If you have been using TinyGo to compile plugins, and want to migrate to compiling with Go 1.24, apart from adjusting the go mod dependencies, you only need to move the original initialization logic from the main function to the init function. Please refer to the example below for details.
 >
-> TinyGo has specific version requirements. The current stable version combination that has been extensively validated is: TinyGo 0.29 + Go 1.20. You can refer to this official [Makefile](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/Makefile)
->
-> Go 1.24 now natively supports compiling WASM files. Documentation updates are in progress.
 
 ## 1. Tool Preparation
-
-You need to install both Golang and TinyGo.
-
-### 1. Golang
-(Requires version 1.18 or higher)  
+Install Golang
+### Golang
+(Requires version 1.24 or higher)  
 Official installation guide: [https://go.dev/doc/install](https://go.dev/doc/install)
 
 #### Windows
 
-1. Download the installer: [https://go.dev/dl/go1.19.windows-amd64.msi](https://go.dev/dl/go1.19.windows-amd64.msi)
+1. Download the installer: [https://go.dev/dl/go1.24.4.windows-amd64.msi](https://go.dev/dl/go1.24.4.windows-amd64.msi)
 2. Run the downloaded installer. By default, it will be installed in the `Program Files` or `Program Files (x86)` directory
 3. After installation, press "Win+R" to open the Run dialog, type "cmd" and press Enter to open the command prompt. Then type: `go version` to verify the installation
 
 #### macOS
 
-1. Download the installer: [https://go.dev/dl/go1.19.darwin-amd64.pkg](https://go.dev/dl/go1.19.darwin-amd64.pkg)
+1. Download the installer: [https://go.dev/dl/go1.24.4.darwin-amd64.pkg](https://go.dev/dl/go1.24.4.darwin-amd64.pkg)
 2. Run the downloaded installer. By default, it will be installed in the `/usr/local/go` directory
 3. Open Terminal and type: `go version` to verify the installation
 
 #### Linux
 
-1. Download the archive: [https://go.dev/dl/go1.19.linux-amd64.tar.gz](https://go.dev/dl/go1.19.linux-amd64.tar.gz)
+1. Download the archive: [https://go.dev/dl/go1.24.4.linux-amd64.tar.gz](https://go.dev/dl/go1.24.4.linux-amd64.tar.gz)
 2. Run the following commands to install:
 ```bash
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.24.4.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 ```
 3. Type `go version` to verify the installation
-
-### 2. TinyGo
-(Requires version 0.28.1 or higher)  
-Official installation guide: [https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
-
-#### Windows
-
-1. Download the installer: [https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip)
-2. Extract the archive to your desired directory
-3. If you extracted to `C:\tinygo`, add `C:\tinygo\bin` to your `PATH` environment variable, for example by running:
-```bash
-set PATH=%PATH%;"C:\tinygo\bin";
-```
-4. Open a command prompt and type `tinygo version` to verify the installation
-
-#### macOS
-
-1. Download and extract the archive:
-```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.darwin-amd64.tar.gz
-tar -zxf tinygo0.28.1.darwin-amd64.tar.gz
-```
-2. If you extracted to `/tmp`, add `/tmp/tinygo/bin` to your `PATH`:
-```bash
-export PATH=/tmp/tinygo/bin:$PATH
-```
-3. Open Terminal and type `tinygo version` to verify the installation
-
-#### Linux
-For Ubuntu on amd64 architecture (other systems please refer to the official guide):
-
-1. Download and install the DEB package:
-```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo_0.28.1_amd64.deb
-sudo dpkg -i tinygo_0.28.1_amd64.deb
-export PATH=$PATH:/usr/local/bin
-```
-2. Open Terminal and type `tinygo version` to verify the installation
-3. After completed the installation, open "Run" dialog with hotkey "Win+R". Type "cmd" in the dialog and click "OK" to open Command Line Prompt. Type: `go version`. If version info is displayed, the package has been successfully installed.
-
-#### MacOS
-
-1. Download the installer: [https://go.dev/dl/go1.19.darwin-amd64.pkg](https://go.dev/dl/go1.19.darwin-amd64.pkg)
-2. Run the downloaded installer to start the installation. It will be installed to `/usr/local/go` folder by default.
-3. Open Terminal and type: `go version`. If version info is displayed, the package has been successfully installed.
-
-#### Linux
-
-1. Download the installer: [https://go.dev/dl/go1.19.linux-amd64.tar.gz](https://go.dev/dl/go1.19.linux-amd64.tar.gz)
-2. Execute following commands to start the installation:
-```bash
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
-export PATH=$PATH:/usr/local/go/bin
-```
-3. Execute `go version`. If version info is displayed, the package has been successfully installed.
-
-### 2. TinyGo
-
-Min Version: 0.28.1<br />Official download link: [https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install/)
-
-#### Windows
-
-1. Download the package: [https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip](https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.windows-amd64.zip)
-2. Unpack the package to the target folder
-3. If the package is unpacked to folder `C:\tinygo`, you need to add `C:\tinygo\bin` into the environment variable `PATH`, using set command in Command Line Prompt for example.
-```bash
-set PATH=%PATH%;"C:\tinygo\bin";
-```
-4. Execute `tinygo version` command in Command Line Prompt. If version info is displayed, the package has been successfully installed.
-
-#### MacOS
-
-1. Download and unpack the package
-```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo0.28.1.darwin-amd64.tar.gz
-tar -zxf tinygo0.28.1.darwin-amd64.tar.gz
-```
-2. If the package is unpacked to folder `/tmp`, you need to add `/tmp/tinygo/bin` to the environment variable `PATH`:
-```bash
-export PATH=/tmp/tinygo/bin:$PATH
-```
-3. Execute command `tinygo version` in Terminal.  If version info is displayed, the package has been successfully installed.
-
-#### Linux
-
-Following steps are based on Ubuntu AMD64. For other OSes, please refer to the official document.
-
-1. Download and install the DEB package.
-```bash
-wget https://github.com/tinygo-org/tinygo/releases/download/v0.28.1/tinygo_0.28.1_amd64.deb
-sudo dpkg -i tinygo_0.28.1_amd64.deb
-export PATH=$PATH:/usr/local/bin
-```
-2. Execute command `tinygo version` in Terminal. If version info is displayed, the package has been successfully installed.
-
-## 2. Write a plugin
-
-### 1. Initialize the project
-
-You can create your wasm-go plugin directory in the repo [higress](https://github.com/alibaba/higress)'s [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
-that you can use the scaffolding tools provided in this directory（see 1.1）；
-or create a new directory for your Go project yourself(see 1.2).
-If you are developing wasm-go plugins for the first time, it is recommended to take the former.
-
-#### 1.1 create wasm-go plugin in [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
-
-1. `git clone https://github.com/alibaba/higress.git`, to clone project to local；
-2. `cd plugins/wasm-go; mkdir wasm-demo-go`, to go to the project's plugins/wasm-go directory and create the wasm-demo-go directory.
-
-#### 1.2 create a new project yourself
-
-1. Create a new folder for the project. For example: `wasm-demo-go`.
-2. Execute following commands in the new folder to initialize the Go project:
-```bash
-go mod init wasm-demo-go
-```
-3. If you are in the Chinese mainland, you may need to set a proxy for downloading dependencies.
-```bash
-go env -w GOPROXY=https://proxy.golang.com.cn,direct
-```
-4. Download dependencies for plugin building. 
-```bash
-go get github.com/tetratelabs/proxy-wasm-go-sdk
-go get github.com/alibaba/higress/plugins/wasm-go@main
-go get github.com/tidwall/gjson
-```
 
 ## 2. Writing the Plugin
 
@@ -185,7 +56,7 @@ go env -w GOPROXY=https://proxy.golang.com.cn,direct
 4. Download the required dependencies for building the plugin:
 ```bash
 go get github.com/higress-group/proxy-wasm-go-sdk
-go get github.com/alibaba/higress/plugins/wasm-go@main
+go get github.com/higress-group/wasm-go@main
 go get github.com/tidwall/gjson
 ```
 
@@ -201,13 +72,16 @@ Below is a simple example that implements the following functionality:
 package main
 
 import (
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
 	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		// Plugin name
 		"my-plugin",
@@ -225,13 +99,13 @@ type MyConfig struct {
 
 // The YAML configuration from the console is automatically converted to JSON
 // We can directly parse the configuration from the json parameter
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
 	// Parse the configuration and update the config object
 	config.mockEnable = json.Get("mockEnable").Bool()
 	return nil
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	proxywasm.AddHttpRequestHeader("hello", "world")
 	if config.mockEnable {
 		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
@@ -291,17 +165,20 @@ More samples can be found in section 4 below.
 
 > Note: Plugin configurations use YAML format in the gateway console. But plugins receive them in JSON format. So in the sample below, actual config data are extracted from JSON by the `parseConfig` function.
 
-```
+```go
 package main
 
 import (
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
 	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
 	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		// Plugin name
 		"my-plugin",
@@ -318,13 +195,13 @@ type MyConfig struct {
 }
 
 // Plugin configurations set in the console with YAML format will be converted to JSON. So we just need to parse config data from JSON.
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
 	// Get the configuration property and set to the config object.
 	config.mockEnable = json.Get("mockEnable").Bool()
 	return nil
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log log.Log) types.Action {
 	proxywasm.AddHttpRequestHeader("hello", "world")
 	if config.mockEnable {
 		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
@@ -405,13 +282,198 @@ See [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-
 
 Execute the following command:
 ```bash
-tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
+go mod tidy
+GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
 ```
 A new file named main.wasm will be created after a successful compilation, which will be used in the local debugging sample below as well.<br />When using custom plugin function in the cloud native gateway market, you just need to upload this file.
 
 ## 3. Local Debugging 
 
-TBD
+### Tools Preparation
+
+Install [Docker](https://docs.docker.com/engine/install/?spm=a2c4g.426926.0.0.29071f47tjgquo)
+
+### Use docker compose to start validate
+
+1. Make sure that the `main.wasm` file, generated by the compilation process, exists in the plugin development directory(eg. `wasm-demo`).
+2. Create the `docker-compose.yaml` file in the directory, file content is shown below:
+
+```yaml
+version: '3.7'
+services:
+  envoy:
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:v2.0.7
+    entrypoint: /usr/local/bin/envoy
+    # 注意这里对wasm开启了debug级别日志，正式部署时则默认info级别
+	# we use the debug level log here, the default level is info in production mod
+    command: -c /etc/envoy/envoy.yaml --component-log-level wasm:debug
+    depends_on:
+    - httpbin
+    networks:
+    - wasmtest
+    ports:
+    - "10000:10000"
+    volumes:
+    - ./envoy.yaml:/etc/envoy/envoy.yaml
+    - ./main.wasm:/etc/envoy/main.wasm
+
+  httpbin:
+    image: kennethreitz/httpbin:latest
+    networks:
+    - wasmtest
+    ports:
+    - "12345:80"
+
+networks:
+  wasmtest: {}
+```
+
+4. Create the file envoy.yaml in the same directory, content is shown below：
+
+```yaml
+admin:
+  address:
+    socket_address:
+      protocol: TCP
+      address: 0.0.0.0
+      port_value: 9901
+static_resources:
+  listeners:
+  - name: listener_0
+    address:
+      socket_address:
+        protocol: TCP
+        address: 0.0.0.0
+        port_value: 10000
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          scheme_header_transformation:
+            scheme_to_overwrite: https
+          stat_prefix: ingress_http
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: local_service
+              domains: ["*"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: httpbin
+          http_filters:
+          - name: wasmdemo
+            typed_config:
+              "@type": type.googleapis.com/udpa.type.v1.TypedStruct
+              type_url: type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
+              value:
+                config:
+                  name: wasmdemo
+                  vm_config:
+                    runtime: envoy.wasm.runtime.v8
+                    code:
+                      local:
+                        filename: /etc/envoy/main.wasm
+                  configuration:
+                    "@type": "type.googleapis.com/google.protobuf.StringValue"
+                    value: |
+                      {
+                        "mockEnable": false
+                      }
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+  clusters:
+  - name: httpbin
+    connect_timeout: 30s
+    type: LOGICAL_DNS
+    # Comment out the following line to test on v6 networks
+    dns_lookup_family: V4_ONLY
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: httpbin
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: httpbin
+                port_value: 80
+```
+
+4. Start the compose application by using the command below:
+
+```bash
+docker compose up
+```
+
+### Functionality Validation
+
+1. WASM plugins functionality 
+
+By using `curl` to access httpbin directly, we can see the request headers without gateway processing.
+```bash
+curl http://127.0.0.1:12345/get
+
+{
+  "args": {},
+  "headers": {
+    "Accept": "*/*",
+    "Host": "127.0.0.1:12345",
+    "User-Agent": "curl/7.79.1"
+  },
+  "origin": "172.18.0.1",
+  "url": "http://127.0.0.1:12345/get"
+}
+```
+
+Use the `curl` access the gateway, and we wil see the request headers after being processed by the gateway.
+
+```bash
+curl http://127.0.0.1:10000/get
+
+{
+  "args": {},
+  "headers": {
+    "Accept": "*/*",
+    "Hello": "world",
+    "Host": "127.0.0.1:10000",
+    "Original-Host": "127.0.0.1:10000",
+    "Req-Start-Time": "1681269273896",
+    "User-Agent": "curl/7.79.1",
+    "X-Envoy-Expected-Rq-Timeout-Ms": "15000"
+  },
+  "origin": "172.18.0.3",
+  "url": "https://127.0.0.1:10000/get"
+}
+```
+
+As we can see, the gateway has added the extra `hello:world` header to the request indicating that the `hello-world` plugin is working as expected. 
+
+2. Plugin Configuration Modification Confirm 
+
+Change the `mockEnable` value from `false` to `true` in the `envoy.yaml`.
+
+```yaml
+  configuration:
+    "@type": "type.googleapis.com/google.protobuf.StringValue"
+    value: |
+      {
+        "mockEnable": true
+      }
+```
+
+Use `curl` to access the httpbin through the gateway, we can see the response as follows: 
+
+```bash
+curl http://127.0.0.1:10000/get
+
+hello world
+```
+
+When `mockEnable` is set to `true`, the gateway return the `hello world` directly, which also means the plugins configuration has taken effect.
 
 ## More Samples
 
@@ -419,16 +481,19 @@ TBD
 
 If the plugin needs no configuration, just define an empty config struct.
 
-```
+```go
 package main
 
 import (
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+		"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		"hello-world",
 		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
@@ -437,7 +502,7 @@ func main() {
 
 type MyConfig struct {}
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
 	return types.ActionContinue
 }
@@ -452,20 +517,23 @@ Only HTTP requests are supported for now. You can send requests to Nacos and K8s
 3. Parse response headers and get token value using the specified key.
 4. Set the token value to the headers of the original request.
 
-```
+```go
 package main
 
 import (
 	"errors"
 	"net/http"
 	"strings"
-	"github.com/alibaba/higress/plugins/wasm-go/pkg/wrapper"
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
 	"github.com/tidwall/gjson"
 )
 
-func main() {
+func main() {}
+
+func init() {
 	wrapper.SetCtx(
 		"http-call",
 		wrapper.ParseConfigBy(parseConfig),
@@ -482,7 +550,7 @@ type MyConfig struct {
 	tokenHeader string
 }
 
-func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
+func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
 	// Get the service name with full FQDN, e.g., my-redis.dns, redis.my-ns.svc.cluster.local
 	serviceName := json.Get("serviceName").String()
 	servicePort := json.Get("servicePort").Int()
@@ -535,7 +603,7 @@ func parseConfig(json gjson.Result, config *MyConfig, log wrapper.Log) error {
 	}
 }
 
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log wrapper.Log) types.Action {
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	// Use the Get function of the client to initiate an HTTP Get request.
 	// The timeout parameter is omitted here, whose default value is 500ms.
 	config.client.Get(config.requestPath, nil,
