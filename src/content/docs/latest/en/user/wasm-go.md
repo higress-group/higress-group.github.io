@@ -9,6 +9,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 > **Note**:
 > Go 1.24 now natively supports compiling WASM files, and Higress has already migrated from TinyGo compilation to Go 1.24 native compilation.
+> If you have been using TinyGo to compile plugins, and want to migrate to compiling with Go 1.24, apart from adjusting the go mod dependencies, you only need to move the original initialization logic from the main function to the init function. Please refer to the example below for details.
 >
 
 ## 1. Tool Preparation
