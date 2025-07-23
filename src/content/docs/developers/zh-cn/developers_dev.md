@@ -33,6 +33,7 @@ description: Higress 维护者名单
 ## Higress Reviewers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
+| 邢国富 | [erasernoob](https://github.com/erasernoob) | 西南石油   |
 | 凌轶群 | [Lynskylate](https://github.com/Lynskylate) | eBay  |
 | 赵炳堃 | [sjtuzbk](https://github.com/sjtuzbk) | 阿里云        |
 | 韦鑫 | [WeixinX](https://github.com/weixinx) | 爱橙科技   |
