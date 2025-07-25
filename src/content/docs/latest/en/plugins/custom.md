@@ -14,17 +14,17 @@ description: Custom plugin configuration reference
 You can also choose to build the wasm locally first, and then copy it to the Docker image. This requires you to set up a build environment locally first.
 
 > **Note**:
->
-> TinyGo has specific version requirements. Currently, the stable version combination that has been extensively validated is: tinygo 0.29 + go 1.20. You can refer to this official [Makefile](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/Makefile)
->
-> go 1.24 now natively supports compiling wasm files, related documentation is being updated
+> Go 1.24 now natively supports compiling WASM files, and Higress has already migrated from TinyGo compilation to Go 1.24 native compilation.
+> If you have been using TinyGo to compile plugins, and want to migrate to compiling with Go 1.24, apart from adjusting the go mod dependencies, you only need to move the original initialization logic from the main function to the init function. Please refer to the example below for details.
+
 
 The following is an example of local steps to build the [request-block](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/request-block) plugin.
 
 ### step1. Compile wasm
 
 ```bash
-tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
+go mod tidy
+GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
 ```
 
 For detailed compilation instructions, including how to use more complex Header state management mechanisms, please refer to [Best Practices for Go Plugin Development](https://higress.cn/docs/latest/user/wasm-go/#3-%E7%BC%96%E8%AF%91%E7%94%9F%E6%88%90-wasm-%E6%96%87%E4%BB%B6).
