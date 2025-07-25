@@ -168,20 +168,6 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 
 ### 3. 编译生成 WASM 文件
 
-
-使用 proxy-wasm 社区 0.2.1 版本的 ABI，在 HTTP 请求/响应处理阶段只能使用 `types.ActionContinue` 和 `types.ActionPause` 两种返回值来控制状态：
-
-1. types.ActionContinue：继续后续处理，比如继续读取请求 body，或者继续读取响应 body。
-
-2. types.ActionPause： 暂停后续处理，比如在 onHttpRequestHeaders 通过 Http 或者 Redis 调用外部服务获取认证信息，在调用外部服务回调钩子函数中调用 proxywasm.ResumeHttpRequest() 来恢复请求处理 或者调用 proxywasm.SendHttpResponseWithDetail() 来返回响应。
-
-只需这样简单的状态管理，使用下面的编译方式即可：
-
-```bash
-go mod tidy
-GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
-```
-
 Header 的状态管理说明如下：
 
 1. HeaderContinue:
