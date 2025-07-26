@@ -365,6 +365,13 @@
                 "en": "Load Wasm plugins with HTTP/HTTPS protocol"
               },
               "link": "docs/ops/how-tos/load-wasm-with-http"
+            },
+            {
+              "label": "启用 Swagger 文档",
+              "translations": {
+                "en": "Enable Swagger UI"
+              },
+              "link": "docs/ops/how-tos/enable-swagger"
             }
           ]
         },

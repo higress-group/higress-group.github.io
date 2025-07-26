@@ -47,6 +47,7 @@ helm install higress higress.io/higress -n higress-system --create-namespace
 | higress-console.replicaCount | Higress Console 的 pod 数量 | 1          |
 | higress-console.service.type | Higress Console 所使用的 K8s Service 类型 | ClusterIP  |
 | higress-console.web.login.prompt | 登录页面上显示的提示信息 | ""         |
+| higress-console.swagger.enabled | 是否启用 Higress Console 的 Swagger UI | false                |
 
 ## 支持 Istio CRD（可选）
 
