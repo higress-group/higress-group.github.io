@@ -57,6 +57,8 @@ description: Higress 维护者名单
 | 程兴源 | [undertaker86001](https://github.com/undertaker86001) | 硕橙科技 |
 | 邹志凯 | [kai2321](https://github.com/kai2321)                 | 北航 |
 | 吴青山 | [Thomas-Eliot](https://github.com/Thomas-Eliot)       | 阿里云 |
+| 李永杰 | [JayLi52](https://github.com/JayLi52)                 | 阿里云 |
+| 刘皓杰 | [HecarimV](https://github.com/HecarimV)               | 阿里云 |
 
 
 
