@@ -244,7 +244,7 @@ For local development, you can use a minimalist deployment method, using local f
 # Create a working directory
 mkdir higress; cd higress
 # Start higress, configuration files will be written to the working directory
-docker run -d --rm --name higress-ai -v ${PWD}:/data \
+docker run -d --rm --name higress-ai -v ${PWD}:/data -e O11Y=on \
         -p 8001:8001 -p 8080:8080 -p 8443:8443  \
         higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
 

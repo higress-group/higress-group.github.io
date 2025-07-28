@@ -23,7 +23,7 @@ mkdir higress; cd higress
 # 强制拉取最新的 all-in-one 镜像
 docker pull higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
 # 启动 higress，配置文件会写到工作目录下
-docker run -d --rm --name higress-ai -v ${PWD}:/data \
+docker run -d --rm --name higress-ai -v ${PWD}:/data -e O11Y=on \
         -p 8001:8001 -p 8080:8080 -p 8443:8443  \
         higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
 ```
