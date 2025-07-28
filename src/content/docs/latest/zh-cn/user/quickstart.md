@@ -244,7 +244,7 @@ curl http://GatewayIP/foo -H 'host: foo.bar.com'
 # 创建一个工作目录
 mkdir higress; cd higress
 # 启动 higress，配置文件会写到工作目录下
-docker run -d --rm --name higress-ai -v ${PWD}:/data \
+docker run -d --rm --name higress-ai -v ${PWD}:/data -e O11Y=on \
         -p 8001:8001 -p 8080:8080 -p 8443:8443  \
         higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
 
