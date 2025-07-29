@@ -117,7 +117,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 	if config.mockEnable {
 		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
 	}
-	return types.ActionContinue
+	return types.HeaderContinue
 }
 ```
 
@@ -168,7 +168,36 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 
 ### 3. 编译生成 WASM 文件
 
-Header 的状态管理说明如下：
+#### 3.1 使用脚手架构建 wasm-go 插件镜像
+如果你的项目目录位于 plugins/wasm-go（参见 [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)），你可以使用以下命令快速构建 wasm-go 插件镜像：
+
+```Bash
+
+$ PLUGIN_NAME=wasm-demo-go make build
+... ...
+image:           wasm-demo-go:20230223-173305-3b1a471
+output wasm file: extensions/wasm-demo-go/plugin.wasm
+```
+此命令最终会构建一个 wasm 文件和一个 Docker 镜像。
+
+构建生成的本地 wasm 文件会被导出到指定的插件目录，可以直接用于本地调试。
+
+你也可以使用 make build-push 命令来同时完成构建和推送镜像的操作。
+
+更多详情，请参考 [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
+
+3.2 本地编译 wasm 文件
+如果你使用的是自定义初始化的目录，请执行以下命令来编译 wasm 文件：
+
+```Bash
+
+go mod tidy
+GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
+```
+
+成功编译后，会生成一个名为 main.wasm 的新文件。这个文件将在后续的本地调试示例中使用。当你需要在云原生网关市场中使用自定义插件功能时，你只需上传此文件即可。
+
+#### Header 的状态管理说明
 
 1. HeaderContinue:
 
@@ -197,8 +226,6 @@ Header 的状态管理说明如下：
 
 > 关于 types.HeaderStopIteration 和 HeaderStopAllIterationAndWatermark 的使用场景可以参考 Higress 官方提供 [ai-transformer 插件](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-transformer/main.go#L93-L99) 和  [ai-quota 插件](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-quota/main.go#L179) 。
 
-
-编译成功会在当前目录下创建文件 main.wasm。这个文件在下面本地调试的例子中也会被用到。<br />
 
 要在 Higress 中配合 Wasmplugin CRD 或者 Console 的 UI 交互配置该插件，需要将该 wasm 文件打包成 oci 或者 docker 镜像，可以参考这篇文档：[《自定义插件》](https://higress.cn/docs/latest/plugins/custom)
 
@@ -420,7 +447,7 @@ type MyConfig struct {}
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
-	return types.ActionContinue
+	return types.HeaderContinue
 }
 ```
 
@@ -514,7 +541,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 		return types.ActionContinue
 	} else {
 		// 需要等待异步回调完成，返回Pause状态，可以被ResumeHttpRequest恢复
-		return types.ActionPause
+		return types.HeaderStopIteration
 	}
 }
 ```
@@ -618,10 +645,10 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log l
 	if err != nil {
 		// 由于调用redis失败，放行请求，记录日志
 		log.Errorf("Error occured while calling redis, it seems cannot find the redis cluster.")
-		return types.ActionContinue
+		return types.HeaderContinue
 	} else {
 		// 请求hold住，等待redis调用完成
-		return types.ActionPause
+		return types.HeaderStopIteration
 	}
 }
 
@@ -632,6 +659,6 @@ func onHttpResponseHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log 
 	if ctx.GetContext("callTimeLeft") != nil {
 		proxywasm.AddHttpResponseHeader("callTimeLeft", ctx.GetContext("callTimeLeft").(string))
 	}
-	return types.ActionContinue
+	return types.HeaderContinue
 }
 ```
