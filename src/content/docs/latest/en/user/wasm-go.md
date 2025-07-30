@@ -55,7 +55,7 @@ go env -w GOPROXY=https://proxy.golang.com.cn,direct
 ```
 4. Download the required dependencies for building the plugin:
 ```bash
-go get github.com/higress-group/proxy-wasm-go-sdk
+go get github.com/higress-group/proxy-wasm-go-sdk@go-1.24
 go get github.com/higress-group/wasm-go@main
 go get github.com/tidwall/gjson
 ```
@@ -63,8 +63,11 @@ go get github.com/tidwall/gjson
 ### 2. Writing main.go
 
 Below is a simple example that implements the following functionality:
+
 - When the plugin is configured with `mockEnable: true`, it directly returns a "hello world" response
 - When no plugin configuration is provided or `mockEnable: false`, it adds a `hello: world` request header to the original request
+
+The more concise details and examples can be found in section 4 below.
 
 > Note: The plugin configuration in the gateway console is in YAML format, but it will be automatically converted to JSON format when delivered to the plugin. Therefore, the example directly parses the configuration from JSON.
 
@@ -110,7 +113,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 	if config.mockEnable {
 		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
 	}
-	return types.ActionContinue
+	return types.HeaderContinue
 }
 ```
 
@@ -159,105 +162,8 @@ The example uses `proxywasm.AddHttpRequestHeader` and `proxywasm.SendHttpRespons
 | Flow Control | ResumeHttpRequest | Resume a previously paused request | - |
 |  | ResumeHttpResponse | Resume a previously paused response | - |
 
-1. If `mockEnable` is set to `true`, send `hello world` directly as the response.
-2. If `mockEnable` is not set or set to `false`, add an extra HTTP header `hello: world` to the original request.
-More samples can be found in section 4 below.
-
-> Note: Plugin configurations use YAML format in the gateway console. But plugins receive them in JSON format. So in the sample below, actual config data are extracted from JSON by the `parseConfig` function.
-
-```go
-package main
-
-import (
-	"github.com/higress-group/wasm-go/pkg/wrapper"
-	logs "github.com/higress-group/wasm-go/pkg/log"
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm"
-	"github.com/tetratelabs/proxy-wasm-go-sdk/proxywasm/types"
-	"github.com/tidwall/gjson"
-)
-
-func main() {}
-
-func init() {
-	wrapper.SetCtx(
-		// Plugin name
-		"my-plugin",
-		// A custom function for parsing plugin configurations
-		wrapper.ParseConfigBy(parseConfig),
-		// A custom function for processing request headers
-		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
-	)
-}
-
-// Custom plugin configuration
-type MyConfig struct {
-	mockEnable bool
-}
-
-// Plugin configurations set in the console with YAML format will be converted to JSON. So we just need to parse config data from JSON.
-func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
-	// Get the configuration property and set to the config object.
-	config.mockEnable = json.Get("mockEnable").Bool()
-	return nil
-}
-
-func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log log.Log) types.Action {
-	proxywasm.AddHttpRequestHeader("hello", "world")
-	if config.mockEnable {
-		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
-	}
-	return types.ActionContinue
-}
-```
-
-#### HTTP Processing Pointcuts
-
-In the sample above, `wrapper.ProcessRequestHeadersBy` applies custom function `onHttpRequestHeaders` when processing requests in`HTTP request header processing stage`. Besides that, you can use following methods to set custom processing functions for various stages.
-
-| HTTP Processing Stage | Trigger Time | Pointcut Mounting Method |
-| --- | --- | --- |
-| HTTP request header processing stage | When gateway receives request headers from client | wrapper.ProcessRequestHeadersBy |
-| HTTP request body processing stage | When gateway receives request body from client | wrapper.ProcessRequestBodyBy |
-| HTTP response header processing stage | When gateway receives response headers from upstream | wrapper.ProcessResponseHeadersBy |
-| HTTP response body processing stage | When gateway receives response body from upstream | wrapper.ProcessResponseBodyBy |
-
-#### Utility Functions
-
-In the sample above, `proxywasm.AddHttpRequestHeader` and `proxywasm.SendHttpResponse` are two utility methods provided by the plugin SDK. You can find major utility functions in the table below:
-
-| Category | Name | Usage | Available<br />HTTP Processing Stage(s) |
-| --- | --- | --- | --- |
-| Request Header Processing | GetHttpRequestHeaders | Get all the request headers sent by the client | HTTP request header processing stage |
-|  | ReplaceHttpRequestHeaders | Replace all headers in the request. | HTTP request header processing stage |
-|  | GetHttpRequestHeader | Get the specified header in the request. | HTTP request header processing stage |
-|  | RemoveHttpRequestHeader | Remove the specified header from the request. | HTTP request header processing stage |
-|  | ReplaceHttpRequestHeader | Replace the specified header in the response. | HTTP request header processing stage |
-|  | AddHttpRequestHeader | Add a new header to the request. | HTTP request header processing stage |
-| Request Body Processing | GetHttpRequestBody | Get the request body received from client. | HTTP request body processing stage |
-|  | AppendHttpRequestBody | Append the specified binary data to the request body. | HTTP request body processing stage |
-|  | PrependHttpRequestBody | Prepend the specified binary data to the request body. | HTTP request body processing stage |
-|  | ReplaceHttpRequestBody | Replace the entire request body received from client. | HTTP request body processing stage |
-| Response Header Processing | GetHttpResponseHeaders | Get all the response headers received from upstream. | HTTP response header processing stage |
-|  | ReplaceHttpResponseHeaders | Replace all headers in the response. | HTTP response header processing stage |
-|  | GetHttpResponseHeader | Get the specified header in the response. | HTTP response header processing stage |
-|  | RemoveHttpResponseHeader | Remove the specified header from the response. | HTTP response header processing stage |
-|  | ReplaceHttpResponseHeader | Replace the specified header in the response. | HTTP response header processing stage |
-|  | AddHttpResponseHeader | Add a new header to the response | HTTP response headers processing stage |
-| Response Body | GetHttpResponseBody | Get the response body received from the backend | HTTP response body processing stage |
-|  | AppendHttpResponseBody | Append binary data to the end of the response body | HTTP response body processing stage |
-|  | PrependHttpResponseBody | Add binary data to the beginning of the response body | HTTP response body processing stage |
-|  | ReplaceHttpResponseBody | Replace the entire response body with new data | HTTP response body processing stage |
-| HTTP Call | DispatchHttpCall | Send an HTTP request. | - |
-|  | GetHttpCallResponseHeaders | Get the response headers associated with a DispatchHttpCall call. | - |
-|  | GetHttpCallResponseBody | Get the response body associated with a DispatchHttpCall call. | - |
-|  | GetHttpCallResponseTrailers | Get the response trailer associated with a DispatchHttpCall call. | - |
-| Respond Directly | SendHttpResponse | Return a specific HTTP response immediately. | - |
-| Process Resuming | ResumeHttpRequest | Resume the request processing workflow paused before. | - |
-|  | ResumeHttpResponse | Resume the response processing workflow paused before. | - |
 
 ### 3. Compile and Generate WASM File
-
-Using proxy-wasm community version 0.2.1 ABI, in the HTTP request/response processing phases, you can only use `types.ActionContinue` and `types.ActionPause` as return values to control the flow.
 
 - If your project directory is in the [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) directory, see 3.1.
 - If you are using a self-initialized directory, see 3.2.
@@ -287,6 +193,37 @@ GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
 ```
 A new file named main.wasm will be created after a successful compilation, which will be used in the local debugging sample below as well.<br />When using custom plugin function in the cloud native gateway market, you just need to upload this file.
 
+#### Header Status Management Instructions
+
+1.  **HeaderContinue**:
+
+    Indicates that the current filter has finished processing and can be passed to the next filter for further processing. `types.ActionContinue` corresponds to this status.
+
+2.  **HeaderStopIteration**:
+
+    Indicates that the header cannot yet be passed to the next filter for processing. However, it does not stop reading data from the connection and continues to trigger the processing of body data. This allows for updating the HTTP request header content during the body data processing stage. If the body data is to be passed to the next filter, the header will also be passed along with it.
+
+    Note that when returning this status, a body is required. If there is no body, the request/response will be blocked indefinitely.
+
+    To determine if a request has a body, you can use [`HasRequestBody()`](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/pkg/wrapper/request_wrapper.go#L86).
+
+3.  **HeaderContinueAndEndStream**:
+
+    Indicates that the header can be passed to the next filter, but the next filter will receive `end_stream = false`, meaning the request is not yet finished. This allows the current filter to add more body data.
+
+4.  **HeaderStopAllIterationAndBuffer**:
+
+    Stops all iterations, indicating that the header cannot be passed to the next filter, and the current filter will also not receive body data. It buffers headers, data, and trailers for the current and subsequent filters. If the buffer size exceeds the limit, a 413 will be returned directly during the request phase, and a 500 will be returned directly during the response phase.
+    At the same time, `proxywasm.ResumeHttpRequest()`, `proxywasm.ResumeHttpResponse()`, or `proxywasm.SendHttpResponseWithDetail()` functions need to be called to resume subsequent processing.
+
+5.  **HeaderStopAllIterationAndWatermark**:
+
+    Same as above, the difference being that when the cache exceeds the buffer limit, flow control will be triggered, i.e., pausing data reading from the connection. `types.ActionPause` in the 0.2.1 ABI actually corresponds to this status.
+
+> For usage scenarios of `types.HeaderStopIteration` and `HeaderStopAllIterationAndWatermark`, you can refer to the official Higress [ai-transformer plugin](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-transformer/main.go#L93-L99) and [ai-quota plugin](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-quota/main.go#L179).
+
+To configure this plugin in Higress with Wasmplugin CRD or Console UI interaction, you need to package the Wasm file into an OCI or Docker image. You can refer to this document: [Custom Plugins](https://higress.cn/docs/latest/plugins/custom).
+
 ## 3. Local Debugging 
 
 ### Tools Preparation
@@ -302,7 +239,7 @@ Install [Docker](https://docs.docker.com/engine/install/?spm=a2c4g.426926.0.0.29
 version: '3.7'
 services:
   envoy:
-    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:v2.0.7
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:v2.1.5
     entrypoint: /usr/local/bin/envoy
     # 注意这里对wasm开启了debug级别日志，正式部署时则默认info级别
 	# we use the debug level log here, the default level is info in production mod
@@ -504,7 +441,7 @@ type MyConfig struct {}
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
-	return types.ActionContinue
+	return types.HeaderContinue
 }
 ```
 
@@ -606,7 +543,7 @@ func parseConfig(json gjson.Result, config *MyConfig, log logs.Log) error {
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	// Use the Get function of the client to initiate an HTTP Get request.
 	// The timeout parameter is omitted here, whose default value is 500ms.
-	config.client.Get(config.requestPath, nil,
+	err :=  config.client.Get(config.requestPath, nil,
 		// A callback function which will be called asynchronously when receiving the response.
 		func(statusCode int, responseHeaders http.Header, responseBody []byte) {
 			// Process the response with a status code other than 200.
@@ -626,8 +563,129 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 			// Resume the original request processing workflow. Continue the process, so the request can be forwarded to the upstream.
 			proxywasm.ResumeHttpRequest()
 		})
+	if err != nil {
+		// failed to get the external service, then let the request continue and record the log
+		log.Errorf("Error occured while calling http, it seems cannot find the service cluster.")
+		return types.ActionContinue
+
+	}
 	// We need to wait for the callback to finish its process.
 	// Return Pause action here to pause the request processing workflow, which can be resumed by a ResumeHttpRequest call.
-	return types.ActionPause
+	return types.HeaderStopIteration
+}
+```
+### Use Redis in the plugin
+Use the following sample code to implement the Redis current limiting plugin
+
+```go
+package main
+
+import (
+	"strconv"
+	"time"
+
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm"
+	"github.com/higress-group/proxy-wasm-go-sdk/proxywasm/types"
+	"github.com/tidwall/gjson"
+	"github.com/tidwall/resp"
+
+	"github.com/higress-group/wasm-go/pkg/wrapper"
+	logs "github.com/higress-group/wasm-go/pkg/log"
+)
+
+func main() {}
+
+func init() {
+	wrapper.SetCtx(
+		"redis-demo",
+		wrapper.ParseConfigBy(parseConfig),
+		wrapper.ProcessRequestHeadersBy(onHttpRequestHeaders),
+		wrapper.ProcessResponseHeadersBy(onHttpResponseHeaders),
+	)
+}
+
+type RedisCallConfig struct {
+	client wrapper.RedisClient
+	qpm    int
+}
+
+func parseConfig(json gjson.Result, config *RedisCallConfig, log logs.Log) error {
+	// 带服务类型的完整 FQDN 名称，例如 my-redis.dns、redis.my-ns.svc.cluster.local
+	serviceName := json.Get("serviceName").String()
+	servicePort := json.Get("servicePort").Int()
+	if servicePort == 0 {
+		if strings.HasSuffix(serviceName, ".static") {
+			// 静态IP类型服务的逻辑端口是80
+			servicePort = 80
+		} else {
+			servicePort = 6379
+		}
+	}
+	username := json.Get("username").String()
+	password := json.Get("password").String()
+	// 单位是毫秒
+	timeout := json.Get("timeout").Int()
+	if timeout == 0 {
+		timeout = 1000
+	}
+	qpm := json.Get("qpm").Int()
+	config.qpm = int(qpm)
+	config.client = wrapper.NewRedisClusterClient(wrapper.FQDNCluster{
+		FQDN: serviceName,
+		Port: servicePort,
+	})
+	return config.client.Init(username, password, timeout)
+}
+
+func onHttpRequestHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log logs.Log) types.Action {
+	now := time.Now()
+	minuteAligned := now.Truncate(time.Minute)
+	timeStamp := strconv.FormatInt(minuteAligned.Unix(), 10)
+	// 如果 redis api 返回的 err != nil，一般是由于网关找不到 redis 后端服务，请检查是否误删除了 redis 后端服务
+	err := config.client.Incr(timeStamp, func(response resp.Value) {
+		if response.Error() != nil {
+			log.Errorf("call redis error: %v", response.Error())
+			proxywasm.ResumeHttpRequest()
+		} else {
+			ctx.SetContext("timeStamp", timeStamp)
+			ctx.SetContext("callTimeLeft", strconv.Itoa(config.qpm-response.Integer()))
+			if response.Integer() == 1 {
+				err := config.client.Expire(timeStamp, 60, func(response resp.Value) {
+					if response.Error() != nil {
+						log.Errorf("call redis error: %v", response.Error())
+					}
+					proxywasm.ResumeHttpRequest()
+				})
+				if err != nil {
+					log.Errorf("Error occured while calling redis, it seems cannot find the redis cluster.")
+					proxywasm.ResumeHttpRequest()
+				}
+			} else {
+				if response.Integer() > config.qpm {
+					proxywasm.SendHttpResponse(429, [][2]string{{"timeStamp", timeStamp}, {"callTimeLeft", "0"}}, []byte("Too many requests\n"), -1)
+				} else {
+					proxywasm.ResumeHttpRequest()
+				}
+			}
+		}
+	})
+	if err != nil {
+		// 由于调用redis失败，放行请求，记录日志
+		log.Errorf("Error occured while calling redis, it seems cannot find the redis cluster.")
+		return types.HeaderContinue
+	} else {
+		// 请求hold住，等待redis调用完成
+		return types.HeaderStopIteration
+	}
+}
+
+func onHttpResponseHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log logs.Log) types.Action {
+	if ctx.GetContext("timeStamp") != nil {
+		proxywasm.AddHttpResponseHeader("timeStamp", ctx.GetContext("timeStamp").(string))
+	}
+	if ctx.GetContext("callTimeLeft") != nil {
+		proxywasm.AddHttpResponseHeader("callTimeLeft", ctx.GetContext("callTimeLeft").(string))
+	}
+	return types.HeaderContinue
 }
 ```

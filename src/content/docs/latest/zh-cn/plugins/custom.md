@@ -14,10 +14,8 @@ description: 自定义插件配置参考
 你也可以选择先在本地将 wasm 构建出来，再拷贝到 Docker 镜像中。这要求你要先在本地搭建构建环境。
 
 > **注意**：
-
-> 使用 TinyGo 对版本有限定要求，目前经大规模验证稳定的版本组合是：tinygo 0.29 + go 1.20，可以参考这个官方 [Makefile](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/Makefile)
->
-> go 1.24 已经原生支持编译 wasm 文件，相关文档补充中
+> go 1.24 已经原生支持编译 wasm 文件，目前 higress 已从之前的 tinygo 0.29 + go 1.20 编译方案完整迁移为 go 1.24 原生编译 wasm 文件。
+> 对于之前已经在用 tinygo 编译插件的用户，如果要迁移到用 go 1.24 编译，除了go mod依赖要调整外，只需将原本初始化的逻辑从main函数挪到init函数中即可，具体请参考下文的示例
 
 
 下面是本地步骤构建 [request-block](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/request-block) 插件的例子。
@@ -25,7 +23,8 @@ description: 自定义插件配置参考
 ### step1. 编译 wasm
 
 ```bash
-tinygo build -o main.wasm -scheduler=none -target=wasi -gc=custom -tags='custommalloc nottinygc_finalizer' ./main.go
+go mod tidy
+GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
 ```
 
 详细的编译说明，包括要使用更复杂的 Header 状态管理机制，请参考[ Go 开发插件的最佳实践](https://higress.cn/docs/latest/user/wasm-go/#3-%E7%BC%96%E8%AF%91%E7%94%9F%E6%88%90-wasm-%E6%96%87%E4%BB%B6)。
