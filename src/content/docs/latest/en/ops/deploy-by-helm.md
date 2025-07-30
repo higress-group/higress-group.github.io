@@ -47,6 +47,7 @@ For a complete parameter description, please check the [Operations Parameters Do
 | higress-console.replicaCount | Number of Higress Console pods | 1                 |
 | higress-console.service.type | K8s Service type used by Higress Console | ClusterIP         |
 | higress-console.web.login.prompt | Prompt message displayed on the login page | ""                |
+| higress-console.swagger.enabled | Enable the Swagger UI in Higress Console or not | false                |
 
 ## Supporting Istio CRD (Optional)
 

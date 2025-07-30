@@ -23,7 +23,7 @@ mkdir higress; cd higress
 # 强制拉取最新的 all-in-one 镜像
 docker pull higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
 # 启动 higress，配置文件会写到工作目录下
-docker run -d --rm --name higress-ai -v ${PWD}:/data \
+docker run -d --rm --name higress-ai -v ${PWD}:/data -e O11Y=on \
         -p 8001:8001 -p 8080:8080 -p 8443:8443  \
         higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
 ```
@@ -33,7 +33,7 @@ docker run -d --rm --name higress-ai -v ${PWD}:/data \
 ### 2. 启动后端服务
 
 1. 测试服务使用 NodeJS 编写。所以请大家先访问 NodeJS 官网（[https://nodejs.org](https://nodejs.org/en)）下载并安装 NodeJS 运行环境
-2. 下载[测试服务压缩包](../files/McpSampleServer.zip)
+2. 下载[测试服务压缩包](/files/McpSampleServer.zip)
 3. 解压至任意目录
 4. 执行以下命令启动测试服务
     ```bash
@@ -72,8 +72,7 @@ docker run -d --rm --name higress-ai -v ${PWD}:/data \
 ### MCP Server Filter 配置
 
 1. 点击左侧的“系统设置”
-2. 点击右侧链接下载模版文件，并将文件内容完整粘贴到输入框中：[文件链接](../files/higress-config.yaml)
-3. 修改 `higress` 配置项中的 `mcpServer` 配置
+2. 修改 `higress` 配置项中的 `mcpServer` 配置
     1.  将 `enable` 改为 `true`
     2.  移除 `redis` 配置项
     3.  在 `match_list` 中添加一个新元素：

@@ -58,7 +58,7 @@ If you have enabled Higress's built-in monitoring suite, you can view request lo
 
 ### Without Built-in Monitoring Suite
 
-When the built-in monitoring suite is not enabled, access logs are recorded together with runtime logs. Refer to the runtime logs viewing methods above.
+When the built-in monitoring suite is not enabled, access logs are recorded together with runtime logs of gateway. Refer to the runtime logs viewing methods above.
 
 ## Adjusting Log Levels
 
