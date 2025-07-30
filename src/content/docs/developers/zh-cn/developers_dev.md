@@ -59,6 +59,8 @@ description: Higress 维护者名单
 | 吴青山 | [Thomas-Eliot](https://github.com/Thomas-Eliot)       | 阿里云 |
 | 李永杰 | [JayLi52](https://github.com/JayLi52)                 | 阿里云 |
 | 刘皓杰 | [HecarimV](https://github.com/HecarimV)               | 阿里云 |
+| 魏泓舟 | [hongzhouzi](https://github.com/hongzhouzi)           | 阿里云 |
+| 王显明 | [wxm155](https://github.com/wxm155)                   | 阿里云 |
 
 
 
