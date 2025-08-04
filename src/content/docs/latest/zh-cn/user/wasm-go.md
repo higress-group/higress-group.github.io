@@ -65,7 +65,7 @@ go env -w GOPROXY=https://proxy.golang.com.cn,direct
 4. 下载构建插件的依赖
 
 ```bash
-go get github.com/higress-group/proxy-wasm-go-sdk
+go get github.com/higress-group/proxy-wasm-go-sdk@go-1.24
 go get github.com/higress-group/wasm-go@main
 go get github.com/tidwall/gjson
 ```
@@ -117,7 +117,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 	if config.mockEnable {
 		proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
 	}
-	return types.ActionContinue
+	return types.HeaderContinue
 }
 ```
 
@@ -168,21 +168,36 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 
 ### 3. 编译生成 WASM 文件
 
+#### 3.1 使用脚手架构建 wasm-go 插件镜像
+如果你的项目目录位于 plugins/wasm-go（参见 [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)），你可以使用以下命令快速构建 wasm-go 插件镜像：
 
-使用 proxy-wasm 社区 0.2.1 版本的 ABI，在 HTTP 请求/响应处理阶段只能使用 `types.ActionContinue` 和 `types.ActionPause` 两种返回值来控制状态：
+```Bash
 
-1. types.ActionContinue：继续后续处理，比如继续读取请求 body，或者继续读取响应 body。
+$ PLUGIN_NAME=wasm-demo-go make build
+... ...
+image:           wasm-demo-go:20230223-173305-3b1a471
+output wasm file: extensions/wasm-demo-go/plugin.wasm
+```
+此命令最终会构建一个 wasm 文件和一个 Docker 镜像。
 
-2. types.ActionPause： 暂停后续处理，比如在 onHttpRequestHeaders 通过 Http 或者 Redis 调用外部服务获取认证信息，在调用外部服务回调钩子函数中调用 proxywasm.ResumeHttpRequest() 来恢复请求处理 或者调用 proxywasm.SendHttpResponseWithDetail() 来返回响应。
+构建生成的本地 wasm 文件会被导出到指定的插件目录，可以直接用于本地调试。
 
-只需这样简单的状态管理，使用下面的编译方式即可：
+你也可以使用 make build-push 命令来同时完成构建和推送镜像的操作。
 
-```bash
+更多详情，请参考 [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
+
+3.2 本地编译 wasm 文件
+如果你使用的是自定义初始化的目录，请执行以下命令来编译 wasm 文件：
+
+```Bash
+
 go mod tidy
 GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
 ```
 
-Header 的状态管理说明如下：
+成功编译后，会生成一个名为 main.wasm 的新文件。这个文件将在后续的本地调试示例中使用。当你需要在云原生网关市场中使用自定义插件功能时，你只需上传此文件即可。
+
+#### Header 的状态管理说明
 
 1. HeaderContinue:
 
@@ -212,12 +227,6 @@ Header 的状态管理说明如下：
 > 关于 types.HeaderStopIteration 和 HeaderStopAllIterationAndWatermark 的使用场景可以参考 Higress 官方提供 [ai-transformer 插件](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-transformer/main.go#L93-L99) 和  [ai-quota 插件](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/extensions/ai-quota/main.go#L179) 。
 
 
-
-如果windows下编译出现error: could not find wasm-opt, set the WASMOPT environment variable to override 则需要下载https://github.com/WebAssembly/binaryen/ 里面包含了bin\wasm-opt.exe将这个文件拷贝到tinygo的bin目录下重新编译即可。 <br />
-编译成功会在当前目录下创建文件 main.wasm。这个文件在下面本地调试的例子中也会被用到。<br />
-
-如果linux/mac下编译出现该错误，使用apt/brew等系统自带包管理工具安装下binaryen即可，例如`brew install binaryen`
-
 要在 Higress 中配合 Wasmplugin CRD 或者 Console 的 UI 交互配置该插件，需要将该 wasm 文件打包成 oci 或者 docker 镜像，可以参考这篇文档：[《自定义插件》](https://higress.cn/docs/latest/plugins/custom)
 
 ## 三、本地调试
@@ -235,7 +244,7 @@ Header 的状态管理说明如下：
 version: '3.7'
 services:
   envoy:
-    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:v2.0.7
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:v2.1.5
     entrypoint: /usr/local/bin/envoy
     # 注意这里对wasm开启了debug级别日志，正式部署时则默认info级别
     command: -c /etc/envoy/envoy.yaml --component-log-level wasm:debug
@@ -438,7 +447,7 @@ type MyConfig struct {}
 
 func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log) types.Action {
 	proxywasm.SendHttpResponse(200, nil, []byte("hello world"), -1)
-	return types.ActionContinue
+	return types.HeaderContinue
 }
 ```
 
@@ -532,7 +541,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 		return types.ActionContinue
 	} else {
 		// 需要等待异步回调完成，返回Pause状态，可以被ResumeHttpRequest恢复
-		return types.ActionPause
+		return types.HeaderStopIteration
 	}
 }
 ```
@@ -636,10 +645,10 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log l
 	if err != nil {
 		// 由于调用redis失败，放行请求，记录日志
 		log.Errorf("Error occured while calling redis, it seems cannot find the redis cluster.")
-		return types.ActionContinue
+		return types.HeaderContinue
 	} else {
 		// 请求hold住，等待redis调用完成
-		return types.ActionPause
+		return types.HeaderStopIteration
 	}
 }
 
@@ -650,6 +659,6 @@ func onHttpResponseHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log 
 	if ctx.GetContext("callTimeLeft") != nil {
 		proxywasm.AddHttpResponseHeader("callTimeLeft", ctx.GetContext("callTimeLeft").(string))
 	}
-	return types.ActionContinue
+	return types.HeaderContinue
 }
 ```
