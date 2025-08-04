@@ -56,7 +56,11 @@ This page shows the Higress development team. Please add your information to the
 | Xingyuan Cheng | [undertaker86001](https://github.com/undertaker86001) | Sucheon Technology |
 | Zhikai Zou | [kai2321](https://github.com/kai2321) | Beihang University |
 | Wenqi Wu | [VinciWu557](https://github.com/VinciWu557) | Xiaomi Technology |
-
+| Qingshan Wu | [Thomas-Eliot](https://github.com/Thomas-Eliot)       | Alibaba Cloud |
+| Yongjie Li | [JayLi52](https://github.com/JayLi52)                 | Alibaba Cloud |
+| Haojie Liu | [HecarimV](https://github.com/HecarimV)               | Alibaba Cloud |
+| Hongzhou Wei | [hongzhouzi](https://github.com/hongzhouzi)           | Alibaba Cloud |
+| Xianming Wang | [wxm155](https://github.com/wxm155)                   | Alibaba Cloud |
 
 ## How to Obtain Higress Developer Titles
 
