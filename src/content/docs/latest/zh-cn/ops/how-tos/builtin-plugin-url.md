@@ -64,16 +64,32 @@ helm upgrade higress --version ${higress_version} -n higress-system higress.io/h
 
 直接修改 `compose/env/console.env` 文件，添加对应的环境变量即可。需要注意的是，环境变量取值中的 `$` 字符需要转义成 `$$`，否则将无法正常生效，例如：
 
+**例 1：**
+
 ```bash
 HIGRESS_ADMIN_WASM_PLUGIN_CUSTOM_IMAGE_URL_PATTERN=http://192.168.1.1:8080/plugins/$${name}.wasm
+```
+
+**例 2：**
+
+```bash
+HIGRESS_ADMIN_WASM_PLUGIN_CUSTOM_IMAGE_URL_PATTERN=oci://hub.example.com/wasm-plugins/$${name}:$${version}
 ```
 
 ### Docker All-in-One 部署方式配置方法
 
 在启动容器的 docker 命令中添加 `-e` 参数来指定环境变量。需要注意的是，环境变量取值中的 `$` 字符需要转义成 `\$`，否则将无法正常生效，例如：
 
+**例 1：**
+
 ```bash
 -e HIGRESS_ADMIN_WASM_PLUGIN_CUSTOM_IMAGE_URL_PATTERN=http://192.168.1.1:8080/plugins/\${name}.wasm
+```
+
+**例 2：**
+
+```bash
+-e HIGRESS_ADMIN_WASM_PLUGIN_CUSTOM_IMAGE_URL_PATTERN=oci://hub.example.com/wasm-plugins/\${name}:\${version}
 ```
 
 ### 注意事项
@@ -116,14 +132,30 @@ helm upgrade higress --version ${higress_version} -n higress-system higress.io/h
 
 直接修改 `compose/env/controller.env` 文件，添加对应的环境变量即可。需要注意的是，环境变量取值中的 `$` 字符需要转义成 `$$`，否则将无法正常生效，例如：
 
+**例 1：**
+
 ```bash
 MCP_SERVER_WASM_IMAGE_URL=http://192.168.1.1:8080/plugins/mcp-server.wasm
+```
+
+**例 2：**
+
+```bash
+MCP_SERVER_WASM_IMAGE_URL=oci://hub.example.com/wasm-plugins/mcp-server:0.0.1
 ```
 
 ### Docker All-in-One 部署方式配置方法
 
 在启动容器的 docker 命令中添加 `-e` 参数来指定环境变量。需要注意的是，环境变量取值中的 `$` 字符需要转义成 `\$`，否则将无法正常生效，例如：
 
+**例 1：**
+
 ```bash
 -e MCP_SERVER_WASM_IMAGE_URL=http://192.168.1.1:8080/plugins/mcp-server.wasm
+```
+
+**例 2：**
+
+```bash
+-e MCP_SERVER_WASM_IMAGE_URL=oci://hub.example.com/wasm-plugins/mcp-server:0.0.1
 ```
