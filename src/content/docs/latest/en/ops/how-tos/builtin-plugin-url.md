@@ -64,16 +64,32 @@ helm upgrade higress --version ${higress_version} -n higress-system higress.io/h
 
 Directly modify the `compose/env/console.env` file and add the corresponding environment variable. Note that the `$` character in the environment variable value needs to be escaped as `$$`, otherwise it will not take effect properly, for example:
 
+**Example 1:**
+
 ```bash
 HIGRESS_ADMIN_WASM_PLUGIN_CUSTOM_IMAGE_URL_PATTERN=http://192.168.1.1:8080/plugins/$${name}.wasm
+```
+
+**Example 2:**
+
+```bash
+HIGRESS_ADMIN_WASM_PLUGIN_CUSTOM_IMAGE_URL_PATTERN=oci://hub.example.com/wasm-plugins/$${name}:$${version}
 ```
 
 ### Configuration Method for Docker All-in-One Deployment
 
 Add the `-e` parameter to the docker command when starting the container to specify the environment variable. Note that the `$` character in the environment variable value needs to be escaped as `\$`, otherwise it will not take effect properly, for example:
 
+**Example 1:**
+
 ```bash
 -e HIGRESS_ADMIN_WASM_PLUGIN_CUSTOM_IMAGE_URL_PATTERN=http://192.168.1.1:8080/plugins/\${name}.wasm
+```
+
+**Example 2:**
+
+```bash
+-e HIGRESS_ADMIN_WASM_PLUGIN_CUSTOM_IMAGE_URL_PATTERN=oci://hub.example.com/wasm-plugins/\${name}:\${version}
 ```
 
 ### Notes
@@ -116,14 +132,30 @@ helm upgrade higress --version ${higress_version} -n higress-system higress.io/h
 
 Directly modify the `compose/env/controller.env` file and add the corresponding environment variable. Note that the `$` character in the environment variable value needs to be escaped as `$$`, otherwise it will not take effect properly, for example:
 
+**Example 1:**
+
 ```bash
 MCP_SERVER_WASM_IMAGE_URL=http://192.168.1.1:8080/plugins/mcp-server.wasm
+```
+
+**Example 2:**
+
+```bash
+MCP_SERVER_WASM_IMAGE_URL=oci://hub.example.com/wasm-plugins/mcp-server:0.0.1
 ```
 
 ### Configuration Method for Docker All-in-One Deployment
 
 Add the `-e` parameter to the docker command when starting the container to specify the environment variable. Note that the `$` character in the environment variable value needs to be escaped as `\$`, otherwise it will not take effect properly, for example:
 
+**Example 1:**
+
 ```bash
 -e MCP_SERVER_WASM_IMAGE_URL=http://192.168.1.1:8080/plugins/mcp-server.wasm
+```
+
+**Example 2:**
+
+```bash
+-e MCP_SERVER_WASM_IMAGE_URL=oci://hub.example.com/wasm-plugins/mcp-server:0.0.1
 ```
