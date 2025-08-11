@@ -18,7 +18,7 @@ This page shows the Higress development team. Please add your information to the
 | Yiquan Dong | [CH3CHO](https://github.com/CH3CHO) | Trip.com |
 | Leilei Geng | [gengleilei](https://github.com/gengleilei) | Alibaba Cloud |
 | Xiantao Han | [hanxiantao](https://github.com/hanxiantao) | XinYe Technology |
-| Zhiwei Cheng | [Se7en](https://github.com/cr7258) | SAP |
+| Zhiwei Cheng | [Se7en](https://github.com/cr7258) | NVIDIA |
 | Tianyi Zhang | [johnlanni](https://github.com/johnlanni) | Alibaba Cloud |
 | Jingfeng Xu | [lexburner](https://github.com/lexburner) | Alibaba Cloud |
 | Xiaorui Liu | [rinfx](https://github.com/rinfx) | Alibaba Cloud |
