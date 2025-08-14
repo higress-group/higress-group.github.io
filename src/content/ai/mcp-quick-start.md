@@ -27,17 +27,19 @@ MCP Server 需要依赖 Redis 服务用于数据缓存，启用后您可以通�
 kubectl get svc redis-stack-server -n higress-system -o wide
 ```
 
-## 配置 MCP Server
-
-### ConfigMap 全局参数配置
-
-在 ConfigMap 中配置 MCP Server 的相关全局参数：
+如果 Redis 服务启动正常，你会得到类似如下形式的输出：
 
 ```bash
-kubectl edit configmap higress-config -n higress-system
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+redis-stack-server   ClusterIP   192.168.51.87   <none>        6379/TCP   10s   app.kubernetes.io/instance=higress,app.kubernetes.io/name=redis-stack-server
 ```
 
-配置 Redis 连接信息和 MCP Server 的路由规则：
+## 配置 MCP Server
+
+### 全局参数配置
+
+在系统设置中配置 MCP Server 的相关全局参数：
+![配置全局参数](https://img.alicdn.com/imgextra/i2/O1CN01CabBas1f1JxTqfEre_!!6000000003946-2-tps-3014-1594.png)
 
 ```yaml
 apiVersion: v1
@@ -51,13 +53,7 @@ data:
         username: "" # Redis用户名（可选）
         password: "" # Redis密码（可选）
         db: 0 # Redis数据库（可选）
-      match_list:          # MCP Server 会话保持路由规则（当匹配下面路径时，将被识别为一个 MCP 会话，通过 SSE 等机制进行会话保持）
-        - match_rule_domain: "*"
-          match_rule_path: /postgres
-          match_rule_type: "prefix"
-        - match_rule_domain: "*"
-          match_rule_path: /user
-          match_rule_type: "prefix"
+      match_list: []
       servers: []
 ...
 
@@ -67,62 +63,44 @@ metadata:
   namespace: higress-system
 ```
 
-> **注意：**
->
-> 数据库类型的 MCP Server 在 ConfigMap 中配置，REST API 类型在 Higress 控制台配置。
+#### 配置 REST API MCP Server 作为服务来源
 
-### 配置 Database MCP Server
-
-在 Config Map 中配置 Database MCP Server：
-
-```yaml
-servers:
-  - name: postgres      # MCP Server 名称
-    path: /postgres     # 访问路径，需要与 match_list 中的配置匹配
-    type: database      # 类型为数据库
-    config:
-      dsn: "your postgres database connect dsn" # 数据库连接串
-      dbType: "postgres"                        # 数据库类型，目前已支持 postgres/mysql/clickhouse/sqlite
-```
-
-### 配置 Nacos MCP Registry
-> **注意：**
-> 需要Nacos版本为3.0及以上，Higress版本在2.1.2及以上
-
-新增服务来源
-![添加服务来源](https://img.alicdn.com/imgextra/i3/O1CN01Ksd48C1ru4g6ep9SU_!!6000000005690-2-tps-2422-198.png)
-
-创建nacos3.x服务来源并完善相关信息
-
-![添加Nacos3.x服务来源](https://img.alicdn.com/imgextra/i3/O1CN01FGvSE71HVVGHTp1Cu_!!6000000000763-2-tps-588-1039.png)
-
-### 配置 REST API MCP Server
-
-任何 REST API 都可以通过以下步骤快速转换为 MCP Server：
-
-#### 1. 添加服务来源
-
-在 Higress 控制台添加目标 REST API 的服务来源，本示例使用 `randomuser.me` 作为服务来源：
+在 Higress 控制台添加目标 REST API 的服务来源，本示例使用公网服务 `randomuser.me` ：
 
 ![添加服务来源](https://gw.alicdn.com/imgextra/i4/O1CN0175PEY11uVI4iiRKhM_!!6000000006042-0-tps-2496-566.jpg)
 
-#### 2. 配置路由
+#### 配置 Nacos 作为服务来源 (Optional)
+> **注意：**
+> 需要Nacos版本为3.0及以上，Higress版本在2.1.2及以上
 
-在 Higress 控制台添加路由并指向对应的服务来源：
+创建Nacos3.x服务来源并完善相关信息
 
-![配置路由](https://gw.alicdn.com/imgextra/i2/O1CN01AvGOMg1ysswRGHvuM_!!6000000006635-0-tps-2528-624.jpg)
+![添加Nacos3.x服务来源](https://img.alicdn.com/imgextra/i3/O1CN01FGvSE71HVVGHTp1Cu_!!6000000000763-2-tps-588-1039.png)
 
-#### 3. 配置 MCP Server 插件
+### 配置 MCP 管理
 
-**推荐：可以使用 [OpenAPI to MCP](https://github.com/higress-group/openapi-to-mcpserver) 工具，实现 API 文档到 MCP Server 插件配置的自动转换**
+进入 MCP 管理界面：
 
-对创建的路由添加 MCP Server 插件并进行配置：
+![MCP管理界面](https://img.alicdn.com/imgextra/i1/O1CN01xzeROD1GX30611tEy_!!6000000000631-2-tps-3008-1586.png)
 
-![配置MCP Server插件](https://gw.alicdn.com/imgextra/i4/O1CN01HLJt6I26ehbSLSA57_!!6000000007687-0-tps-2940-1184.jpg)
+创建 MCP 服务：
 
-插件配置示例：
+![创建MCP服务](https://img.alicdn.com/imgextra/i1/O1CN01PYboEy1QbIq1xt1F3_!!6000000001994-2-tps-3012-1590.png)
 
-```yaml
+
+> **注意：**
+
+> 1. 对于 DB 类型的 MCP 服务需要额外配置：
+
+![DB类型MCP服务](https://img.alicdn.com/imgextra/i2/O1CN01AUuAh61fATsVvAjm8_!!6000000003966-2-tps-1156-1016.png)
+
+> 2. 对于 OpenAPI 类型的 MCP 服务，需要在创建后编辑工具规范，可以使用 OpenAPI/Swagger 规范或直接使用 MCP 工具，这里以 MCP 为例：
+
+![编辑工具](https://img.alicdn.com/imgextra/i1/O1CN016AMQp71rUsuibww0U_!!6000000005635-2-tps-3008-900.png)
+
+![Yaml编辑](https://img.alicdn.com/imgextra/i1/O1CN01ln5gRK20KebmUicsi_!!6000000006831-2-tps-3018-1588.png)
+
+```bash
 server:
   name: "random-user-server"
 tools:
@@ -141,31 +119,29 @@ tools:
       - **Phone**: {{.phone}}
       {{- end }}
 ```
-更多关于如何配置 REST API 到 MCP Server 的详细信息，请参考 [MCP Server 插件配置参考](../ai/mcp-server.md)和[Higress Wasm插件使用简介](https://higress.cn/docs/latest/plugins/intro/?spm=36971b57.2ef5001f.0.0.2a932c1fWNtqNf)
 
-> **注意：** 对于 2025-03-26 [MCP streamable HTTP](https://spec.modelcontextprotocol.io/specification/2025-03-26/) 协议，可以直接使用此插件，无需全局 ConfigMap 配置
 
-## MCP Server 使用
+## 使用 MCP Server
 
-在 AI Agent 中配置 MCP Server 的 SSE 连接，以 cursor 为例：
+在 AI Agent 中配置 MCP Server 的 Streamable HTTP/SSE 连接，参考 MCP 服务中的连接信息：
 
-* 数据库类型的 MCP Server：使用 ConfigMap 中配置的 path + sse_path_suffix
-* REST API 类型的 MCP Server：使用控制台配置的路由 path + sse_path_suffix
+![连接信息](https://img.alicdn.com/imgextra/i2/O1CN01wmYl3u1FkV17tAUAW_!!6000000000525-2-tps-3018-1590.png)
+
+以 Cursor 为例，进入 Cursor Settings - Tools & Integrations - Add Custom MCP，填入如下内容：
 
 ```yaml
-"mcpServers": {
-  "postgres": {
-    "url": "http://your-higress-address/postgres/sse"
-  },
-  "rest-api": {
-    "url": "http://your-higress-address/user/sse"
+{
+  "mcpServers": {
+    "user": {
+      "url": "http://<higress-gateway-ip>/mcp-servers/user/sse"
+    }
   }
 }
 ```
 
-cursor 中配置完成：
+Cursor 中配置完成：
 
-![cursor配置完成](https://gw.alicdn.com/imgextra/i2/O1CN01Z0nnk91NOWuMXb0Tv_!!6000000001560-0-tps-1908-638.jpg)
+![Cursor配置完成](https://img.alicdn.com/imgextra/i2/O1CN01k5hHbI1IQIORhlyQQ_!!6000000000887-2-tps-1868-1038.png)
 
 
 通过 MCP Server，您可以快速为 AI Agent 添加各种数据源支持，提高开发效率。任何 REST API 都可以通过简单的配置转换为 MCP Server，无需编写额外的代码。
@@ -173,3 +149,5 @@ cursor 中配置完成：
 > 如您在使用 MCP Server 过程中遇到问题，可在 [Higress Github Issue](https://github.com/alibaba/higress/issues) 中留下您的信息。
 > 
 > 如您对 Higress 后续更新感兴趣，或希望给 Higress 提供反馈，欢迎 Star [Higress Github Repo](https://github.com/alibaba/higress/)。
+>
+> 您可以使用 [OpenAPI to MCP](https://github.com/higress-group/openapi-to-mcpserver) 工具，实现 OpenAPI 规范文档到 MCP Server 配置的自动转换
