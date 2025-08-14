@@ -63,63 +63,19 @@ metadata:
   namespace: higress-system
 ```
 
-> **注意：**
->
-> 数据库类型的 MCP Server 在 ConfigMap 中配置，REST API 类型在 Higress 控制台配置。
+#### 配置 REST API MCP Server 作为服务来源
 
-### 配置后端服务来源
-
-在 Config Map 中配置 Database MCP Server：
-
-```yaml
-servers:
-  - name: postgres      # MCP Server 名称
-    path: /postgres     # 访问路径，需要与 match_list 中的配置匹配
-    type: database      # 类型为数据库
-    config:
-      dsn: "your postgres database connect dsn" # 数据库连接串
-      dbType: "postgres"                        # 数据库类型，目前已支持 postgres/mysql/clickhouse/sqlite
-```
-
-#### 配置 Nacos MCP Registry
-> **注意：**
-> 需要Nacos版本为3.0及以上，Higress版本在2.1.2及以上
-
-新增服务来源
-![添加服务来源](https://img.alicdn.com/imgextra/i3/O1CN01Ksd48C1ru4g6ep9SU_!!6000000005690-2-tps-2422-198.png)
-
-创建nacos3.x服务来源并完善相关信息
-
-![添加Nacos3.x服务来源](https://img.alicdn.com/imgextra/i3/O1CN01FGvSE71HVVGHTp1Cu_!!6000000000763-2-tps-588-1039.png)
-
-#### 配置 REST API MCP Server
-
-在 Higress 控制台添加目标 REST API 的服务来源，本示例使用 `randomuser.me` 作为服务来源：
+在 Higress 控制台添加目标 REST API 的服务来源，本示例使用公网服务 `randomuser.me` ：
 
 ![添加服务来源](https://gw.alicdn.com/imgextra/i4/O1CN0175PEY11uVI4iiRKhM_!!6000000006042-0-tps-2496-566.jpg)
 
+#### 配置 Nacos 作为服务来源 (Optional)
+> **注意：**
+> 需要Nacos版本为3.0及以上，Higress版本在2.1.2及以上
 
-**推荐：可以使用 [OpenAPI to MCP](https://github.com/higress-group/openapi-to-mcpserver) 工具，实现 API 文档到 MCP Server 配置的自动转换**
+创建Nacos3.x服务来源并完善相关信息
 
-```yaml
-server:
-  name: "random-user-server"
-tools:
-- description: "Get random user information"
-  name: "get-user"
-  requestTemplate:
-    method: "GET"
-    url: "https://randomuser.me/api/"
-  responseTemplate:
-    body: |-
-      # User Information
-      {{- with (index .results 0) }}
-      - **Name**: {{.name.first}} {{.name.last}}
-      - **Email**: {{.email}}
-      - **Location**: {{.location.city}}, {{.location.country}}
-      - **Phone**: {{.phone}}
-      {{- end }}
-```
+![添加Nacos3.x服务来源](https://img.alicdn.com/imgextra/i3/O1CN01FGvSE71HVVGHTp1Cu_!!6000000000763-2-tps-588-1039.png)
 
 ### 配置 MCP 管理
 
@@ -165,7 +121,7 @@ tools:
 ```
 
 
-## MCP Server 使用
+## 使用 MCP Server
 
 在 AI Agent 中配置 MCP Server 的 Streamable HTTP/SSE 连接，参考 MCP 服务中的连接信息：
 
@@ -193,3 +149,5 @@ Cursor 中配置完成：
 > 如您在使用 MCP Server 过程中遇到问题，可在 [Higress Github Issue](https://github.com/alibaba/higress/issues) 中留下您的信息。
 > 
 > 如您对 Higress 后续更新感兴趣，或希望给 Higress 提供反馈，欢迎 Star [Higress Github Repo](https://github.com/alibaba/higress/)。
+>
+> 您可以使用 [OpenAPI to MCP](https://github.com/higress-group/openapi-to-mcpserver) 工具，实现 OpenAPI 规范文档到 MCP Server 配置的自动转换
