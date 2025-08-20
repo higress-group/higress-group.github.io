@@ -62,6 +62,8 @@ description: Higress 维护者名单
 | 刘皓杰 | [HecarimV](https://github.com/HecarimV)               | 阿里云 |
 | 魏泓舟 | [hongzhouzi](https://github.com/hongzhouzi)           | 阿里云 |
 | 王显明 | [wxm155](https://github.com/wxm155)                   | 阿里云 |
+| 赵运周 | [zat366](https://github.com/zat366)                   | 转转科技 |
+
 
 
 
