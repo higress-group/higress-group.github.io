@@ -1,0 +1,207 @@
+---
+interface Props {
+    id: string; // 唯一标识符，用于区分不同实例
+    class?: string;
+    // 内容文案配置
+    tabLabels?: {
+        payAsGo: string;
+        yearly: string;
+    };
+    content?: {
+        payAsGo: string;
+        yearly: {
+            price: string;
+            description?: string;
+        };
+    };
+}
+
+const { 
+    id, 
+    class: className,
+    tabLabels = { payAsGo: '按量付费', yearly: '包年包月' },
+    content = {
+        payAsGo: '¥0.826/小时起',
+        yearly: {
+            price: '416元/月起',
+            description: '优惠：首购6折，续费原价'
+        }
+    }
+} = Astro.props;
+
+// 处理价格显示的函数
+function formatPriceDisplay(priceText: string) {
+    // 使用字符串方法分割价格和单位
+    const unitIndex = priceText.indexOf('/');
+    if (unitIndex !== -1) {
+        return {
+            price: priceText.substring(0, unitIndex),
+            unit: priceText.substring(unitIndex)
+        };
+    }
+    return {
+        price: priceText,
+        unit: ''
+    };
+}
+---
+
+<div class={`pricing-tabs-wrapper ${className || ''}`}>
+    <!-- 内嵌tab组 -->
+    <div class="flex justify-center my-2">
+        <div class="custom-sub-tab-group w-[150px] h-[40px] p-1 bg-[#121316] rounded-2xl">
+            <label 
+                class="custom-sub-tab-item w-[75px] h-8 cursor-pointer text-sm font-medium flex items-center justify-center transition-all duration-200 bg-[#2E3038] text-[#F4F4F6] rounded-2xl" 
+                data-sub-tab={`payAsGo-${id}`}
+            >
+                <input type="radio" name={`pricing-tabs-${id}`} class="hidden" value={`payAsGo-${id}`} checked />
+                <span>{tabLabels.payAsGo}</span>
+            </label>
+            <label 
+                class="custom-sub-tab-item w-[75px] h-8 cursor-pointer text-sm font-medium flex items-center justify-center transition-all duration-200 bg-transparent text-[#A3A6B3] rounded-2xl" 
+                data-sub-tab={`yearly-${id}`}
+            >
+                <input type="radio" name={`pricing-tabs-${id}`} class="hidden" value={`yearly-${id}`} />
+                <span>{tabLabels.yearly}</span>
+            </label>
+        </div>
+    </div>
+    
+    <!-- 价格信息 -->
+    <div id={`pricing-content-${id}`} class="text-[44px] font-medium leading-[48px] border-t border-b border-[#2E3038] py-[38px] min-h-[155px]">
+        <!-- 按量付费内容 -->
+        <div id={`payAsGo-${id}-content`} class="pricing-option">
+            {(() => {
+                const formatted = formatPriceDisplay(content.payAsGo);
+                return (
+                    <>
+                        <span>{formatted.price}</span>
+                        {formatted.unit && <span style="color: #DDDEE4; font-size: 14px;">{formatted.unit}</span>}
+                    </>
+                );
+            })()}
+        </div>
+        <!-- 包年包月内容 -->
+        <div id={`yearly-${id}-content`} class="pricing-option hidden">
+            <div>
+                {(() => {
+                    const formatted = formatPriceDisplay(content.yearly.price);
+                    return (
+                        <>
+                            <span>{formatted.price}</span>
+                            {formatted.unit && <span style="color: #DDDEE4; font-size: 14px;">{formatted.unit}</span>}
+                        </>
+                    );
+                })()}
+            </div>
+            {content.yearly.description && (
+                <div class="text-xs text-[#818598] mt-2">{content.yearly.description}</div>
+            )}
+        </div>
+    </div>
+</div>
+
+<script define:vars={{ id }}>
+    // 为每个实例创建独立的控制逻辑
+    document.addEventListener('DOMContentLoaded', function() {
+        const instanceId = id;
+        
+        // 获取当前实例的元素
+        const subTabButtons = document.querySelectorAll(`[data-sub-tab^="payAsGo-${instanceId}"], [data-sub-tab^="yearly-${instanceId}"]`);
+        
+        function switchSubTab(activeSubTabId) {
+            // 更新子tab按钮样式
+            subTabButtons.forEach(button => {
+                const radio = button.querySelector('input[type="radio"]');
+                if (button.dataset.subTab === activeSubTabId) {
+                    // 选中状态：#2E3038 背景，#F4F4F6 字体，1rem 圆角
+                    button.className = 'custom-sub-tab-item w-[75px] h-8 cursor-pointer text-sm font-medium flex items-center justify-center transition-all duration-200 bg-[#2E3038] text-[#F4F4F6] rounded-2xl';
+                    if (radio) radio.checked = true;
+                } else {
+                    // 未选中状态：透明背景，#A3A6B3 字体，1rem 圆角
+                    button.className = 'custom-sub-tab-item w-[75px] h-8 cursor-pointer text-sm font-medium flex items-center justify-center transition-all duration-200 bg-transparent text-[#A3A6B3] rounded-2xl';
+                    if (radio) radio.checked = false;
+                }
+            });
+            
+            // 切换价格内容显示
+            const pricingOptions = document.querySelectorAll(`#pricing-content-${instanceId} .pricing-option`);
+            pricingOptions.forEach(option => {
+                option.classList.add('hidden');
+            });
+            
+            const activeContent = document.getElementById(`${activeSubTabId}-content`);
+            if (activeContent) {
+                activeContent.classList.remove('hidden');
+            }
+        }
+        
+        // 绑定子tab点击事件
+        subTabButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const subTabId = this.dataset.subTab;
+                if (subTabId) {
+                    switchSubTab(subTabId);
+                    
+                    // 触发自定义事件
+                    window.dispatchEvent(new CustomEvent('pricingTabChanged', {
+                        detail: { 
+                            instanceId: instanceId,
+                            activeSubTab: subTabId 
+                        }
+                    }));
+                }
+            });
+        });
+        
+        // 初始化默认显示第一个tab
+        const defaultTabId = `payAsGo-${instanceId}`;
+        switchSubTab(defaultTabId);
+        
+        // 监听 radio 按钮的变化（支持键盘操作）
+        const radioButtons = document.querySelectorAll(`input[name="pricing-tabs-${instanceId}"]`);
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    const tabId = this.value;
+                    switchSubTab(tabId);
+                }
+            });
+        });
+    });
+</script>
+
+<style is:global>
+    /* 价格选项样式 */
+    .pricing-option {
+        display: block;
+    }
+    
+    .pricing-option.hidden {
+        display: none !important;
+    }
+    
+    /* 内嵌子Tab组件样式 */
+    .custom-sub-tab-group {
+        display: flex;
+        gap: 0;
+        align-items: center;
+    }
+    
+    .custom-sub-tab-item {
+        border: none;
+        outline: none;
+        transition: all 0.2s ease;
+        border-radius: 1rem;
+    }
+    
+    .custom-sub-tab-item:hover {
+        opacity: 0.8;
+    }
+    
+    .custom-sub-tab-item:focus {
+        outline: 2px solid #EDF2FC;
+        outline-offset: 2px;
+    }
+</style>

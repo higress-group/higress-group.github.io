@@ -1,0 +1,394 @@
+---
+import { useTranslations } from "@i18n/util";
+const t = useTranslations(Astro);
+interface Props {
+  class?: string;
+}
+
+// 统一的文案配置
+const textConfig = {
+  // 主 Tab 配置
+  mainTabs: [
+    { id: 'Public', label: '公共云' },
+    { id: 'Private', label: '专有云' },
+  ],
+  
+  // 公共云卡片配置
+  publicCloud: {
+    // 第一个卡片 - 社区版
+    communityCard: {
+      title: '社区版',
+      price: 'Free',
+      priceDescription: '免费使用',
+      description: '自行构建和维护，不保障 SLA',
+      buttonText: '了解详情',
+      buttonUrl: 'https://free.aliyun.com/?spm=5176.30371578.nav-v2-dropdown-menu-4.d_main_1_0.64de154ao1en4x&scm=20140722.M_10776204._.V_1&searchKey=%E4%BA%91%E5%8E%9F%E7%94%9Fapi'
+    },
+    
+    // 第二个卡片 - 云原生 API 网关
+    apiGatewayCard: {
+      title: '云原生 API 网关',
+      description: '规格：apigw.dev.x1起步',
+      buttonText: '了解详情',
+      buttonUrl: 'https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0',
+      tabLabels: {
+        payAsGo: '按量付费',
+        yearly: '包年包月'
+      },
+      content: {
+        payAsGo: '¥0.826/小时起',
+        yearly: {
+          price: '¥416元/月起',
+          description: '优惠：首购6折，续费原价'
+        }
+      }
+    },
+    
+    // 第三个卡片 - AI 网关
+    aiGatewayCard: {
+      title: 'AI 网关',
+      description: '规格：apigw.small.x1起步',
+      buttonText: '了解详情',
+      buttonUrl: 'https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0',
+      tabLabels: {
+        payAsGo: '按量付费',
+        yearly: '包年包月'
+      },
+      content: {
+        payAsGo: '¥7.934 /小时起',
+        yearly: {
+          price: '¥3997.5元/月起',
+          description: '优惠：首购6折，续费原价'
+        }
+      }
+    }
+  },
+  
+  // 专有云配置
+  privateCloud: {
+    // 第一个卡片 - 社区版（与公共云相同）
+    communityCard: {
+      title: '社区版',
+      price: 'Free',
+      priceDescription: '免费使用',
+      description: '自行构建和维护，不保障 SLA',
+      buttonText: '了解详情',
+      buttonUrl: 'https://free.aliyun.com/?spm=5176.30371578.nav-v2-dropdown-menu-4.d_main_1_0.64de154ao1en4x&scm=20140722.M_10776204._.V_1&searchKey=%E4%BA%91%E5%8E%9F%E7%94%9Fapi'
+    },
+    
+    // 第二个卡片 - 飞天专属版
+    exclusiveCard: {
+      title: '飞天专属版',
+      subtitle: '尊享服务',
+      description: '适用于企业本地化部署',
+      features: [
+        '性能与资源：匹配业务规模，弹性可伸缩',
+        'SLA：按需协商，极致保障'
+      ],
+      buttonText: '联系我们',
+      buttonUrl: 'https://survey.aliyun.com/apps/zhiliao/6Dd_gD6MB'
+    }
+  }
+};
+
+// 引入PricingTabs组件
+import PricingTabs from './PricingTabs.astro';
+---
+
+<div class="w-[85.125rem] mb-6">
+    <!-- Tab 按钮组 -->
+    <div class="custom-tab-group w-[150px] h-[40px] p-1 mb-6 bg-[#1E1F24] rounded-2xl">
+        {textConfig.mainTabs.map((tab, index) => (
+            <label 
+                class="custom-tab-item w-[75px] h-8 cursor-pointer text-sm font-medium flex items-center justify-center transition-all duration-200"
+                data-tab={tab.id}
+                class={index === 0 ? "bg-[#EDF2FC] text-[#121316] rounded-2xl" : "bg-transparent text-[#A3A6B3] rounded-2xl"}
+            >
+                <input 
+                    type="radio" 
+                    name="version-tabs" 
+                    class="hidden" 
+                    value={tab.id}
+                    checked={index === 0}
+                />
+                <span>{tab.label}</span>
+            </label>
+        ))}
+    </div>
+
+    <!-- Tab 内容区域 -->
+    <div class="tab-contents">
+        <!-- 公共云 Tab 内容 -->
+        <div class="tab-content-n" data-tab="Public" style="display: block;">
+            <div class="flex gap-0 w-full">
+                <!-- 第一个卡片 - 社区版 -->
+                <div class="card-hover-effect flex-1 bg-[#EDF2FC] rounded-2xl p-6 text-[#121316] text-center min-h-[446px] flex flex-col">
+                    <!-- 第一个div: 社区版 -->
+                    <div class="text-2xl mb-[3rem]">{textConfig.publicCloud.communityCard.title}</div>
+                    
+                    <!-- 第二个div: Free -->
+                    <div class="text-[44px] font-medium leading-[48px] border-t border-b border-[#DDDEE4] py-[38px]">
+                        {textConfig.publicCloud.communityCard.price}
+                        <div class="text-xs mt-2" style="color: #121316; font-size: 12px;">{textConfig.publicCloud.communityCard.priceDescription}</div>
+                    </div>
+                    
+                    <!-- 第三个div: 描述文案 -->
+                    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">{textConfig.publicCloud.communityCard.description}</div>
+                    
+                    <!-- 第四个div: 了解详情按钮 -->
+                    <a href={textConfig.publicCloud.communityCard.buttonUrl} target="_blank" rel="noopener noreferrer" class="first-card-button font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] bg-[#121316] text-[#EDF2FC] no-underline inline-block text-center">{textConfig.publicCloud.communityCard.buttonText}</a>
+                </div>
+                
+                <!-- 第二个卡片 - 左右间隙1rem -->
+                <div class="card-hover-effect flex-1 ml-4 mr-4 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col">
+                    <!-- 第一个div: 云原生 API 网关 -->
+                    <div class="text-2xl mb-0">{textConfig.publicCloud.apiGatewayCard.title}</div>
+                    
+                    <!-- 使用PricingTabs组件 -->
+                    <PricingTabs 
+                        id="card2" 
+                        tabLabels={textConfig.publicCloud.apiGatewayCard.tabLabels}
+                        content={textConfig.publicCloud.apiGatewayCard.content}
+                    />
+                    
+                    <!-- 第三个div: 描述文案 -->
+                    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">{textConfig.publicCloud.apiGatewayCard.description}</div>
+                    
+                    <!-- 第四个div: 了解详情按钮 -->
+                    <a href={textConfig.publicCloud.apiGatewayCard.buttonUrl} target="_blank" rel="noopener noreferrer" class="second-third-card-button font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] bg-transparent border border-[#B3B6C1] text-[#EDF2FC] no-underline inline-block text-center">{textConfig.publicCloud.apiGatewayCard.buttonText}</a>
+                </div>
+                
+                <!-- 第三个卡片 -->
+                <div class="card-hover-effect flex-1 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col">
+                    <!-- 第一个div: AI 网关 -->
+                    <div class="text-2xl mb-0">{textConfig.publicCloud.aiGatewayCard.title}</div>
+                    
+                    <!-- 使用PricingTabs组件 -->
+                    <PricingTabs 
+                        id="card3" 
+                        tabLabels={textConfig.publicCloud.aiGatewayCard.tabLabels}
+                        content={textConfig.publicCloud.aiGatewayCard.content}
+                    />
+                    
+                    <!-- 第三个div: 描述文案 -->
+                    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">{textConfig.publicCloud.aiGatewayCard.description}</div>
+                    
+                    <!-- 第四个div: 了解详情按钮 -->
+                    <a href={textConfig.publicCloud.aiGatewayCard.buttonUrl} target="_blank" rel="noopener noreferrer" class="second-third-card-button font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] bg-transparent border border-[#B3B6C1] text-[#EDF2FC] no-underline inline-block text-center">{textConfig.publicCloud.aiGatewayCard.buttonText}</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 专有云 Tab 内容 -->
+        <div class="tab-content-n hidden" data-tab="Private">
+            <div class="flex gap-0 w-full justify-center items-start">
+                <!-- 第一个卡片 - 社区版 -->
+                <div class="card-hover-effect flex-1 max-w-[442px] bg-[#EDF2FC] rounded-2xl p-6 text-[#121316] text-center min-h-[446px] flex flex-col">
+                    <!-- 第一个div: 社区版 -->
+                    <div class="text-2xl mb-[3rem]">{textConfig.privateCloud.communityCard.title}</div>
+                    
+                    <!-- 第二个div: Free -->
+                    <div class="text-[44px] font-medium leading-[48px] border-t border-b border-[#DDDEE4] py-[38px]">
+                        {textConfig.privateCloud.communityCard.price}
+                        <div class="text-xs mt-2" style="color: #121316; font-size: 12px;">{textConfig.privateCloud.communityCard.priceDescription}</div>
+                    </div>
+                    
+                    <!-- 第三个div: 描述文案 -->
+                    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">{textConfig.privateCloud.communityCard.description}</div>
+                    
+                    <!-- 第四个div: 了解详情按钮 -->
+                    <a href={textConfig.privateCloud.communityCard.buttonUrl} target="_blank" rel="noopener noreferrer" class="first-card-button font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] bg-[#121316] text-[#EDF2FC] no-underline inline-block text-center">{textConfig.privateCloud.communityCard.buttonText}</a>
+                </div>
+                
+                <!-- 第二个卡片 - 飞天专属版 -->
+                <div class="card-hover-effect flex-1 max-w-[442px] ml-4 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col">
+                    <!-- 标题部分 -->
+                    <div class="text-2xl mb-2">{textConfig.privateCloud.exclusiveCard.title}</div>
+                    <div class="text-lg mb-4 text-[#A3A6B3]">{textConfig.privateCloud.exclusiveCard.subtitle}</div>
+                    
+                    <!-- 描述部分 -->
+                    <div class="text-base mb-6 text-[#DDDEE4] border-t border-b border-[#2E3038] py-6">{textConfig.privateCloud.exclusiveCard.description}</div>
+                    
+                    <!-- 特性列表 -->
+                    <div class="text-left flex-grow space-y-3">
+                        {textConfig.privateCloud.exclusiveCard.features.map((feature) => (
+                            <div class="text-sm text-[#DDDEE4] leading-5">{feature}</div>
+                        ))}
+                    </div>
+                    
+                    <!-- 按钮 -->
+                    <a href={textConfig.privateCloud.exclusiveCard.buttonUrl} target="_blank" rel="noopener noreferrer" class="second-third-card-button font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] bg-transparent border border-[#B3B6C1] text-[#EDF2FC] no-underline inline-block text-center">{textConfig.privateCloud.exclusiveCard.buttonText}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Tab 切换功能
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabButtons = document.querySelectorAll('.custom-tab-item[data-tab]') as NodeListOf<HTMLElement>;
+        const tabContents = document.querySelectorAll('.tab-content-n');
+        
+        // 主tab切换功能
+        function switchTab(activeTabId: string) {
+        // 隐藏所有 tab 内容
+        tabContents.forEach(content => {
+            content.classList.add('hidden');
+        });
+        
+        // 显示激活的 tab 内容
+        const activeContent = document.querySelector(`.tab-content-n[data-tab="${activeTabId}"]`);
+        if (activeContent) {
+            activeContent.classList.remove('hidden');
+        }
+        
+        // 更新按钮样式
+        tabButtons.forEach(button => {
+            const radio = button.querySelector('input[type="radio"]') as HTMLInputElement;
+            if (button.dataset.tab === activeTabId) {
+                // 选中状态：#EDF2FC 背景，#121316 字体，1rem 圆角
+                button.className = 'custom-tab-item w-[75px] h-8 cursor-pointer text-sm font-medium flex items-center justify-center transition-all duration-200 bg-[#EDF2FC] text-[#121316] rounded-2xl';
+                if (radio) radio.checked = true;
+            } else {
+                // 未选中状态：透明背景，#A3A6B3 字体，1rem 圆角
+                button.className = 'custom-tab-item w-[75px] h-8 cursor-pointer text-sm font-medium flex items-center justify-center transition-all duration-200 bg-transparent text-[#A3A6B3] rounded-2xl';
+                if (radio) radio.checked = false;
+            }
+        });
+        }
+        
+        // 绑定主tab点击事件
+        tabButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tabId = (this as HTMLElement).dataset.tab;
+                if (tabId) {
+                switchTab(tabId);
+                
+                // 触发自定义事件
+                window.dispatchEvent(new CustomEvent('tabChanged', {
+                    detail: { activeTab: tabId }
+                }));
+            }
+        });
+        });
+        
+        // 初始化默认显示第一个 tab
+        if (tabButtons.length > 0) {
+            const firstTabId = (tabButtons[0] as HTMLElement).dataset.tab;
+            if (firstTabId) {
+                switchTab(firstTabId);
+            }
+        }
+        
+        // 监听 radio 按钮的变化（支持键盘操作）
+        const radioButtons = document.querySelectorAll('input[name="version-tabs"]') as NodeListOf<HTMLInputElement>;
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    const tabId = this.value;
+                    switchTab(tabId);
+                }
+            });
+        });
+    });
+</script>
+
+<style is:global>
+    /* 卡片 hover 浮动特效 */
+    .card-hover-effect {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .card-hover-effect:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* 自定义渐变按钮样式 */
+    .button-gradient {
+        background: linear-gradient(235deg, #2C46C9 -1%, rgba(0, 0, 0, 0) 36%), #121316;
+    }
+    
+    /* 第一个卡片按钮样式 */
+    .first-card-button {
+        background: #121316;
+        transition: all 0.2s ease;
+    }
+    
+    .first-card-button:hover {
+        background: linear-gradient(235deg, #2C46C9 -1%, rgba(0, 0, 0, 0) 36%), #121316;
+    }
+    
+    /* 第二、三个卡片按钮样式 */
+    .second-third-card-button {
+        transition: all 0.2s ease;
+    }
+    
+    .second-third-card-button:hover {
+        background: #EBECEF !important;
+        color: #131314 !important;
+        border-color: #EBECEF !important;
+    }
+    
+    /* 自定义 Tab 组件样式 */
+    .custom-tab-group {
+        display: flex;
+        gap: 0;
+        align-items: center;
+    }
+    
+    .custom-tab-item {
+        border: none;
+        outline: none;
+        transition: all 0.2s ease;
+        border-radius: 1rem;
+    }
+    
+    .custom-tab-item:hover {
+        opacity: 0.8;
+    }
+    
+    .custom-tab-item:focus {
+        outline: 2px solid #EDF2FC;
+        outline-offset: 2px;
+    }
+    
+    /* Tab 内容区域样式 */
+    .tab-contents {
+        width: 100%;
+        min-height: 100px;
+    }
+    
+    .tab-content-n {
+        display: block;
+        width: 100%;
+    }
+    
+    .tab-content-n.hidden {
+        display: none !important;
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        .custom-tab-group {
+            flex-direction: column;
+            width: auto !important;
+            height: auto !important;
+            padding: 0.5rem;
+        }
+        
+        .custom-tab-item {
+            width: 100% !important;
+            height: 2.5rem !important;
+            margin-bottom: 0.25rem;
+        }
+        
+        .custom-tab-item:last-child {
+            margin-bottom: 0;
+        }
+    }
+</style>
