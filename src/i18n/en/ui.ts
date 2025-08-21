@@ -332,8 +332,8 @@ export default {
 	"page.team.introduction.3.enroll.btn": 'Sign up',
 
 	// VersionComparison component related text
-	'version.comparison.main.tabs.public': 'Public Cloud',
-	'version.comparison.main.tabs.private': 'Private Cloud',
+	'version.comparison.main.tabs.public': 'Public',
+	'version.comparison.main.tabs.private': 'Private',
 	
 	// Community edition card
 	'version.comparison.community.title': 'Community Edition',
@@ -346,8 +346,8 @@ export default {
 	'version.comparison.api.gateway.title': 'Cloud Native API Gateway',
 	'version.comparison.api.gateway.description': 'Specification: apigw.dev.x1 and above',
 	'version.comparison.api.gateway.button': 'Learn More',
-	'version.comparison.api.gateway.tab.pay.as.go': 'Pay-as-you-go',
-	'version.comparison.api.gateway.tab.yearly': 'Annual/Monthly',
+	'version.comparison.api.gateway.tab.pay.as.go': 'Quantity',
+	'version.comparison.api.gateway.tab.yearly': 'MonthlySub',
 	'version.comparison.api.gateway.pay.as.go.price': '$0.826/hour and up',
 	'version.comparison.api.gateway.yearly.price': '$416/month and up',
 	'version.comparison.api.gateway.yearly.discount': 'Discount: 40% off for first purchase, regular price for renewal',
@@ -356,8 +356,8 @@ export default {
 	'version.comparison.ai.gateway.title': 'AI Gateway',
 	'version.comparison.ai.gateway.description': 'Specification: apigw.small.x1 and above',
 	'version.comparison.ai.gateway.button': 'Learn More',
-	'version.comparison.ai.gateway.tab.pay.as.go': 'Pay-as-you-go',
-	'version.comparison.ai.gateway.tab.yearly': 'Annual/Monthly',
+	'version.comparison.ai.gateway.tab.pay.as.go': 'Quantity',
+	'version.comparison.ai.gateway.tab.yearly': 'MonthlySub',
 	'version.comparison.ai.gateway.pay.as.go.price': '$7.934/hour and up',
 	'version.comparison.ai.gateway.yearly.price': '$3997.5/month and up',
 	'version.comparison.ai.gateway.yearly.discount': 'Discount: 40% off for first purchase, regular price for renewal',

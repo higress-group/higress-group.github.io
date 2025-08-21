@@ -95,9 +95,9 @@ const textConfig = {
 import PricingTabs from './PricingTabs.astro';
 ---
 
-<div class="w-[85.125rem] mb-6">
+<div class="w-full max-w-[85.125rem] mx-auto px-4 sm:px-6 lg:px-0 mb-6">
     <!-- Tab 按钮组 -->
-    <div class="custom-tab-group w-[150px] h-[40px] p-1 mb-6 bg-[#1E1F24] rounded-2xl">
+    <div class="custom-tab-group w-[150px] h-[40px] p-1 mb-6 bg-[#1E1F24] rounded-2xl mx-auto sm:mx-0">
         {textConfig.mainTabs.map((tab, index) => (
             <label 
                 class="custom-tab-item w-[75px] h-8 cursor-pointer text-sm font-medium flex items-center justify-center transition-all duration-200"
@@ -120,9 +120,9 @@ import PricingTabs from './PricingTabs.astro';
     <div class="tab-contents">
         <!-- 公共云 Tab 内容 -->
         <div class="tab-content-n" data-tab="Public" style="display: block;">
-            <div class="flex gap-0 w-full">
+            <div class="flex flex-col lg:flex-row gap-4 lg:gap-0 w-full">
                 <!-- 第一个卡片 - 社区版 -->
-                <div class="card-hover-effect flex-1 bg-[#EDF2FC] rounded-2xl p-6 text-[#121316] text-center min-h-[446px] flex flex-col">
+                <div class="card-hover-effect flex-1 lg:flex-1 bg-[#EDF2FC] rounded-2xl p-6 text-[#121316] text-center min-h-[446px] flex flex-col">
                     <!-- 第一个div: 社区版 -->
                     <div class="text-2xl mb-[3rem]">{textConfig.publicCloud.communityCard.title}</div>
                     
@@ -139,8 +139,8 @@ import PricingTabs from './PricingTabs.astro';
                     <a href={textConfig.publicCloud.communityCard.buttonUrl} target="_blank" rel="noopener noreferrer" class="first-card-button font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] bg-[#121316] text-[#EDF2FC] no-underline inline-block text-center">{textConfig.publicCloud.communityCard.buttonText}</a>
                 </div>
                 
-                <!-- 第二个卡片 - 左右间隙1rem -->
-                <div class="card-hover-effect flex-1 ml-4 mr-4 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col">
+                <!-- 第二个卡片 - 左右间隙移动端取消 -->
+                <div class="card-hover-effect flex-1 lg:ml-4 lg:mr-4 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col">
                     <!-- 第一个div: 云原生 API 网关 -->
                     <div class="text-2xl mb-0">{textConfig.publicCloud.apiGatewayCard.title}</div>
                     
@@ -159,7 +159,7 @@ import PricingTabs from './PricingTabs.astro';
                 </div>
                 
                 <!-- 第三个卡片 -->
-                <div class="card-hover-effect flex-1 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col">
+                <div class="card-hover-effect flex-1 lg:flex-1 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col">
                     <!-- 第一个div: AI 网关 -->
                     <div class="text-2xl mb-0">{textConfig.publicCloud.aiGatewayCard.title}</div>
                     
@@ -181,9 +181,9 @@ import PricingTabs from './PricingTabs.astro';
         
         <!-- 专有云 Tab 内容 -->
         <div class="tab-content-n hidden" data-tab="Private">
-            <div class="flex gap-0 w-full justify-center items-start">
+            <div class="flex flex-col lg:flex-row gap-4 lg:gap-0 w-full justify-center items-start">
                 <!-- 第一个卡片 - 社区版 -->
-                <div class="card-hover-effect flex-1 max-w-[442px] bg-[#EDF2FC] rounded-2xl p-6 text-[#121316] text-center min-h-[446px] flex flex-col">
+                <div class="card-hover-effect flex-1 max-w-full lg:max-w-[442px] bg-[#EDF2FC] rounded-2xl p-6 text-[#121316] text-center min-h-[446px] flex flex-col">
                     <!-- 第一个div: 社区版 -->
                     <div class="text-2xl mb-[3rem]">{textConfig.privateCloud.communityCard.title}</div>
                     
@@ -201,7 +201,7 @@ import PricingTabs from './PricingTabs.astro';
                 </div>
                 
                 <!-- 第二个卡片 - 飞天专属版 -->
-                <div class="card-hover-effect flex-1 max-w-[442px] ml-4 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col">
+                <div class="card-hover-effect flex-1 max-w-full lg:max-w-[442px] lg:ml-4 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col">
                     <!-- 标题部分 -->
                     <div class="text-2xl mb-2">{textConfig.privateCloud.exclusiveCard.title}</div>
                     <div class="text-lg mb-4 text-[#A3A6B3]">{textConfig.privateCloud.exclusiveCard.subtitle}</div>
@@ -373,22 +373,84 @@ import PricingTabs from './PricingTabs.astro';
     }
     
     /* 响应式调整 */
+    @media (max-width: 1023px) {
+        /* 移动端卡片调整 */
+        .card-hover-effect {
+            min-height: 400px; /* 移动端适当减少卡片高度 */
+        }
+        
+        /* 移动端禁用悬停效果 */
+        .card-hover-effect:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    }
+    
     @media (max-width: 768px) {
         .custom-tab-group {
-            flex-direction: column;
             width: auto !important;
             height: auto !important;
             padding: 0.5rem;
         }
         
         .custom-tab-item {
-            width: 100% !important;
-            height: 2.5rem !important;
-            margin-bottom: 0.25rem;
+            width: 70px !important;
+            height: 2rem !important;
+            font-size: 0.75rem;
         }
         
-        .custom-tab-item:last-child {
+        /* 移动端卡片样式调整 */
+        .card-hover-effect {
+            min-height: 350px;
+            margin-bottom: 1rem;
+        }
+        
+        .card-hover-effect:last-child {
             margin-bottom: 0;
+        }
+        
+        /* 移动端字体调整 */
+        .text-2xl {
+            font-size: 1.25rem !important; /* 20px */
+        }
+        
+        .text-[44px] {
+            font-size: 2rem !important; /* 32px */
+        }
+        
+        /* 移动端内边距调整 */
+        .card-hover-effect {
+            padding: 1rem !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        /* 小屏幕进一步优化 */
+        .custom-tab-group {
+            width: 140px !important;
+        }
+        
+        .custom-tab-item {
+            width: 65px !important;
+            font-size: 0.7rem;
+        }
+        
+        .card-hover-effect {
+            min-height: 320px;
+            padding: 0.75rem !important;
+        }
+        
+        .text-2xl {
+            font-size: 1.125rem !important; /* 18px */
+        }
+        
+        .text-[44px] {
+            font-size: 1.75rem !important; /* 28px */
+        }
+        
+        .py-[38px] {
+            padding-top: 1.5rem !important;
+            padding-bottom: 1.5rem !important;
         }
     }
 </style>
