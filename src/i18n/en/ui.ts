@@ -330,4 +330,43 @@ export default {
 	"page.team.introduction.3.collect.btn": 'Fill in and submit',
 	"page.team.introduction.3.enroll.text": 'Activity registration',
 	"page.team.introduction.3.enroll.btn": 'Sign up',
+
+	// VersionComparison component related text
+	'version.comparison.main.tabs.public': 'Public Cloud',
+	'version.comparison.main.tabs.private': 'Private Cloud',
+	
+	// Community edition card
+	'version.comparison.community.title': 'Community Edition',
+	'version.comparison.community.price': 'Free',
+	'version.comparison.community.price.description': 'Free to Use',
+	'version.comparison.community.description': 'Self-built and maintained, no SLA guarantee',
+	'version.comparison.community.button': 'Learn More',
+	
+	// Cloud Native API Gateway card
+	'version.comparison.api.gateway.title': 'Cloud Native API Gateway',
+	'version.comparison.api.gateway.description': 'Specification: apigw.dev.x1 and above',
+	'version.comparison.api.gateway.button': 'Learn More',
+	'version.comparison.api.gateway.tab.pay.as.go': 'Pay-as-you-go',
+	'version.comparison.api.gateway.tab.yearly': 'Annual/Monthly',
+	'version.comparison.api.gateway.pay.as.go.price': '$0.826/hour and up',
+	'version.comparison.api.gateway.yearly.price': '$416/month and up',
+	'version.comparison.api.gateway.yearly.discount': 'Discount: 40% off for first purchase, regular price for renewal',
+	
+	// AI Gateway card
+	'version.comparison.ai.gateway.title': 'AI Gateway',
+	'version.comparison.ai.gateway.description': 'Specification: apigw.small.x1 and above',
+	'version.comparison.ai.gateway.button': 'Learn More',
+	'version.comparison.ai.gateway.tab.pay.as.go': 'Pay-as-you-go',
+	'version.comparison.ai.gateway.tab.yearly': 'Annual/Monthly',
+	'version.comparison.ai.gateway.pay.as.go.price': '$7.934/hour and up',
+	'version.comparison.ai.gateway.yearly.price': '$3997.5/month and up',
+	'version.comparison.ai.gateway.yearly.discount': 'Discount: 40% off for first purchase, regular price for renewal',
+	
+	// Feitian Exclusive Edition card
+	'version.comparison.exclusive.title': 'Feitian Exclusive Edition',
+	'version.comparison.exclusive.subtitle': 'Premium Service',
+	'version.comparison.exclusive.description': 'Suitable for enterprise on-premises deployment',
+	'version.comparison.exclusive.feature.performance': 'Performance & Resources: Matches business scale, elastically scalable',
+	'version.comparison.exclusive.feature.sla': 'SLA: Negotiable on demand, ultimate guarantee',
+	'version.comparison.exclusive.button': 'Contact Us',
 };

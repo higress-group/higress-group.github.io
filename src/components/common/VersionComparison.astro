@@ -9,56 +9,56 @@ interface Props {
 const textConfig = {
   // 主 Tab 配置
   mainTabs: [
-    { id: 'Public', label: '公共云' },
-    { id: 'Private', label: '专有云' },
+    { id: 'Public', label: t('version.comparison.main.tabs.public') },
+    { id: 'Private', label: t('version.comparison.main.tabs.private') },
   ],
   
   // 公共云卡片配置
   publicCloud: {
     // 第一个卡片 - 社区版
     communityCard: {
-      title: '社区版',
-      price: 'Free',
-      priceDescription: '免费使用',
-      description: '自行构建和维护，不保障 SLA',
-      buttonText: '了解详情',
+      title: t('version.comparison.community.title'),
+      price: t('version.comparison.community.price'),
+      priceDescription: t('version.comparison.community.price.description'),
+      description: t('version.comparison.community.description'),
+      buttonText: t('version.comparison.community.button'),
       buttonUrl: 'https://free.aliyun.com/?spm=5176.30371578.nav-v2-dropdown-menu-4.d_main_1_0.64de154ao1en4x&scm=20140722.M_10776204._.V_1&searchKey=%E4%BA%91%E5%8E%9F%E7%94%9Fapi'
     },
     
     // 第二个卡片 - 云原生 API 网关
     apiGatewayCard: {
-      title: '云原生 API 网关',
-      description: '规格：apigw.dev.x1起步',
-      buttonText: '了解详情',
+      title: t('version.comparison.api.gateway.title'),
+      description: t('version.comparison.api.gateway.description'),
+      buttonText: t('version.comparison.api.gateway.button'),
       buttonUrl: 'https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0',
       tabLabels: {
-        payAsGo: '按量付费',
-        yearly: '包年包月'
+        payAsGo: t('version.comparison.api.gateway.tab.pay.as.go'),
+        yearly: t('version.comparison.api.gateway.tab.yearly')
       },
       content: {
-        payAsGo: '¥0.826/小时起',
+        payAsGo: t('version.comparison.api.gateway.pay.as.go.price'),
         yearly: {
-          price: '¥416元/月起',
-          description: '优惠：首购6折，续费原价'
+          price: t('version.comparison.api.gateway.yearly.price'),
+          description: t('version.comparison.api.gateway.yearly.discount')
         }
       }
     },
     
     // 第三个卡片 - AI 网关
     aiGatewayCard: {
-      title: 'AI 网关',
-      description: '规格：apigw.small.x1起步',
-      buttonText: '了解详情',
+      title: t('version.comparison.ai.gateway.title'),
+      description: t('version.comparison.ai.gateway.description'),
+      buttonText: t('version.comparison.ai.gateway.button'),
       buttonUrl: 'https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0',
       tabLabels: {
-        payAsGo: '按量付费',
-        yearly: '包年包月'
+        payAsGo: t('version.comparison.ai.gateway.tab.pay.as.go'),
+        yearly: t('version.comparison.ai.gateway.tab.yearly')
       },
       content: {
-        payAsGo: '¥7.934 /小时起',
+        payAsGo: t('version.comparison.ai.gateway.pay.as.go.price'),
         yearly: {
-          price: '¥3997.5元/月起',
-          description: '优惠：首购6折，续费原价'
+          price: t('version.comparison.ai.gateway.yearly.price'),
+          description: t('version.comparison.ai.gateway.yearly.discount')
         }
       }
     }
@@ -68,24 +68,24 @@ const textConfig = {
   privateCloud: {
     // 第一个卡片 - 社区版（与公共云相同）
     communityCard: {
-      title: '社区版',
-      price: 'Free',
-      priceDescription: '免费使用',
-      description: '自行构建和维护，不保障 SLA',
-      buttonText: '了解详情',
+      title: t('version.comparison.community.title'),
+      price: t('version.comparison.community.price'),
+      priceDescription: t('version.comparison.community.price.description'),
+      description: t('version.comparison.community.description'),
+      buttonText: t('version.comparison.community.button'),
       buttonUrl: 'https://free.aliyun.com/?spm=5176.30371578.nav-v2-dropdown-menu-4.d_main_1_0.64de154ao1en4x&scm=20140722.M_10776204._.V_1&searchKey=%E4%BA%91%E5%8E%9F%E7%94%9Fapi'
     },
     
     // 第二个卡片 - 飞天专属版
     exclusiveCard: {
-      title: '飞天专属版',
-      subtitle: '尊享服务',
-      description: '适用于企业本地化部署',
+      title: t('version.comparison.exclusive.title'),
+      subtitle: t('version.comparison.exclusive.subtitle'),
+      description: t('version.comparison.exclusive.description'),
       features: [
-        '性能与资源：匹配业务规模，弹性可伸缩',
-        'SLA：按需协商，极致保障'
+        t('version.comparison.exclusive.feature.performance'),
+        t('version.comparison.exclusive.feature.sla')
       ],
-      buttonText: '联系我们',
+      buttonText: t('version.comparison.exclusive.button'),
       buttonUrl: 'https://survey.aliyun.com/apps/zhiliao/6Dd_gD6MB'
     }
   }

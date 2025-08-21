@@ -337,4 +337,43 @@ export default {
 	"page.team.introduction.3.collect.btn": '去填报',
 	"page.team.introduction.3.enroll.text": '活动报名',
 	"page.team.introduction.3.enroll.btn": '去报名',
+
+	// VersionComparison组件相关文案
+	'version.comparison.main.tabs.public': '公共云',
+	'version.comparison.main.tabs.private': '专有云',
+	
+	// 社区版卡片
+	'version.comparison.community.title': '社区版',
+	'version.comparison.community.price': 'Free',
+	'version.comparison.community.price.description': '免费使用',
+	'version.comparison.community.description': '自行构建和维护，不保障 SLA',
+	'version.comparison.community.button': '了解详情',
+	
+	// 云原生API网关卡片
+	'version.comparison.api.gateway.title': '云原生 API 网关',
+	'version.comparison.api.gateway.description': '规格：apigw.dev.x1起步',
+	'version.comparison.api.gateway.button': '了解详情',
+	'version.comparison.api.gateway.tab.pay.as.go': '按量付费',
+	'version.comparison.api.gateway.tab.yearly': '包年包月',
+	'version.comparison.api.gateway.pay.as.go.price': '¥0.826/小时起',
+	'version.comparison.api.gateway.yearly.price': '¥416元/月起',
+	'version.comparison.api.gateway.yearly.discount': '优惠：首购6折，续费原价',
+	
+	// AI网关卡片
+	'version.comparison.ai.gateway.title': 'AI 网关',
+	'version.comparison.ai.gateway.description': '规格：apigw.small.x1起步',
+	'version.comparison.ai.gateway.button': '了解详情',
+	'version.comparison.ai.gateway.tab.pay.as.go': '按量付费',
+	'version.comparison.ai.gateway.tab.yearly': '包年包月',
+	'version.comparison.ai.gateway.pay.as.go.price': '¥7.934 /小时起',
+	'version.comparison.ai.gateway.yearly.price': '¥3997.5元/月起',
+	'version.comparison.ai.gateway.yearly.discount': '优惠：首购6折，续费原价',
+	
+	// 飞天专属版卡片
+	'version.comparison.exclusive.title': '飞天专属版',
+	'version.comparison.exclusive.subtitle': '尊享服务',
+	'version.comparison.exclusive.description': '适用于企业本地化部署',
+	'version.comparison.exclusive.feature.performance': '性能与资源：匹配业务规模，弹性可伸缩',
+	'version.comparison.exclusive.feature.sla': 'SLA：按需协商，极致保障',
+	'version.comparison.exclusive.button': '联系我们',
 };
