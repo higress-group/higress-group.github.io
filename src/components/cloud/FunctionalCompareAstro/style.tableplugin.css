@@ -5,12 +5,12 @@
   }
   td {
     height: 60px;
-    border-left: 1px dotted theme("colors.success");
-    border-right: 1px dotted theme("colors.success");
-    border-bottom: 1px dotted theme("colors.success");
+    border-left: 1px solid #dddee4;
+    border-right: 1px solid #dddee4;
+    border-bottom: 1px solid #dddee4;
   }
   th {
-    border-left: 1px dotted theme("colors.success");
+    border-left: 1px solid #dddee4;
     border-bottom: hidden;
     text-align: center;
     font-size: 24px;

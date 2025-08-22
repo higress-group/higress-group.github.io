@@ -1,0 +1,17 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div 
+  class={`w-full max-w-[85.125rem] mx-auto px-4 sm:px-6 lg:px-0 mb-6 ${className || ''}`}
+  style={{ 
+    width: '85.125rem',
+    maxWidth: '100%', // 确保在小屏幕上不超出容器
+  }}
+>
+  2222
+</div>

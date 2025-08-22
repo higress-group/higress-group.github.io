@@ -1,0 +1,646 @@
+---
+import { isSafari } from "@/utils/util.ts";
+import Tableplugin from "./Tableplugin.astro";
+import MobileTable from "./MobileTable.astro";
+import UpDown from "./UpDown.astro";
+import CloudCompare from './CloudCompare.astro';
+
+interface Props {
+  url?: string;
+  [key: string]: any;
+}
+
+const { url, ...props } = Astro.props;
+
+// 数据版本配置
+const dataVersion = ['社区版', '云原生 API 网关', 'AI 网关'];
+const versionContain = {
+  '社区版': 'free',
+  '云原生 API 网关': 'speciality',
+  'AI 网关': 'serverless',
+};
+const versionDataSource = [
+    {   title: "基础信息",
+        data: [
+            {   name: { title: '版本描述' },
+                free: { des: '具备云原生 API 网关和 AI 网关的开源能力' },
+                speciality: { des: ['将 API 管理、流量网关和微服务网关能力深度整合，是高性能、高扩展性网关。'] },
+                serverless: { des: ['统一代理大模型 API 和 MCP Server，并提供丰富的集成和治理能力。']}
+            },
+            {   name: { title: '适用场景' },
+                free: { des: '需要使用者具备一定的开发和维护能力，自行兜底稳定性、性能、云产品集成和易用性。' },
+                speciality: { des: ['开箱即用，在稳定性、性能、云产品集成和易用性上，比社区版更有优势，并提供工单、钉群、线下等商业服务支持。'] },
+                serverless: { des: ['开箱即用，在稳定性、性能、云产品集成和易用性上，比社区版更有优势，并提供工单、钉群等商业服务支持。']}
+            }
+        ]
+    },
+    {   title: "AI 能力",
+        data: [
+            {   name: { title: '代理' },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: '多模型灰度' },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: '多模型间 Failover' },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: 'Token 额度管理和流控' },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: '路由配置认证' },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: ['更丰富的认证算法： jwt/hmac/oauth2'] }
+            },
+            {   name: { title: '消费者鉴权' },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: ['更精细的鉴权粒度： MCP工具'] }
+            },
+            {   name: { title: '联网搜索' },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: '企业级可观测' },
+                free: { des: '自行构建' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: 'API-to-MCP' },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: 'MCP 协议卸载' },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: 'MCP 市场' },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: 'MCP工具组装' },
+                free: { des: '自行构建' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+        ]
+    },
+    {   title: "成本",
+        data: [
+            {   name: { title: '全托管、免运维' },
+                free: { checked: false, des: '' },
+                speciality: { checked: true, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: '系统搭建和扩缩容' },
+                free: { des: '自行构建' },
+                speciality: { checked: true, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+        ]
+    },
+    {   title: "稳定性",
+        data: [
+            {   name: { title: '多可用区部署' },
+                free: { des: '自行构建' },
+                speciality: { checked: true, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: '故障自动检测及恢复' },
+                free: { checked: false, des: '' },
+                speciality: { checked: true, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: '限流降级' },
+                free: { des: '自行构建' },
+                speciality: { des: ['支持路由级'] },
+                serverless: { des: ['支持 Token 限流'] }
+            },
+            {   name: { title: '监控告警' },
+                free: { des: '自行构建' },
+                speciality: { checked: true, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: 'SLA' },
+                free: { checked: false },
+                speciality: { des: ['99.95%'] },
+                serverless: { des: ['99.95%'] }
+            },
+        ]
+    },
+    {   title: "性能",
+        data: [
+            {   name: { title: '内核优化' },
+                free: { des: '自行调优' },
+                speciality: { des: ['90%+'] },
+                serverless: { des: ['90%+'] }
+            },
+            {   name: { title: '软硬一体' },
+                free: { checked: false },
+                speciality: { des: ['50%+'] },
+                serverless: { des: ['50%+'] }
+            },
+        ]
+    },
+    {   title: "安全合规",
+        data: [
+            {   name: { title: 'WAF 防护' },
+                free: { des: '自行构建' },
+                speciality: { checked: true, des: ['深度集成阿里云 WAF 产品'] },
+                serverless: { checked: true, des: ['深度集成阿里云 WAF 产品'] }
+            },
+            {   name: { title: 'OIDC认证' },
+                free: { des: '自行构建' },
+                speciality: { checked: true, des: ['深度集成阿里云 IDAAS 产品'] },
+                serverless: { checked: true, des: ['深度集成阿里云 IDAAS 产品'] }
+            },
+            {   name: { title: '加密凭证' },
+                free: { des: '自行构建' },
+                speciality: { checked: true, des: ['深度集成阿里云 KMS 产品'] },
+                serverless: { checked: true, des: ['深度集成阿里云 KMS 产品'] }
+            },
+            {   name: { title: 'AIGC防护（安全围栏）' },
+                free: { des: '自行构建' },
+                speciality: { checked: false },
+                serverless: { checked: true, des: ['深度集成阿里云内容安全产品'] }
+            },
+        ]
+    },
+    {   title: "易用性",
+        data: [
+            {   name: { title: 'API全生命周期管理' },
+                free: { des: '自行构建' },
+                speciality: { checked: true },
+                serverless: { checked: false }
+            },
+            {   name: { title: '面向微服务的限流降级' },
+                free: { des: '自行构建' },
+                speciality: { checked: true, des: ['集成 Sentinel，开箱即用'] },
+                serverless: { checked: false }
+            },
+            {   name: { title: '面向微服务的多种服务发现能力' },
+                free: { des: '自行构建' },
+                speciality: { checked: true, des: ['支持云产品的服务发现'] },
+                serverless: { checked: false }
+            },
+        ]
+    }
+]
+---
+
+<div class="functional-compare-astro">
+  <!-- 公有云内容 -->
+  <div class="tab-content-public" data-tab="Public" style="display: block;">
+    <functional-compare 
+      class="functional-compare-wrapper top-[100px] flex flex-col justify-center items-center mt-10 mb-10"
+    >
+      <div id='collapse-fold' class="collapse bg-error collapse-arrow">
+        <input type="checkbox" id="collapse-checkbox" class="collapse-input" />
+        <div class="collapse-title text-2xl font-normal">各个版本能力比对</div>
+        <div class="collapse-content-dynamic">
+          {versionDataSource.map((item, index) => (
+            <Tableplugin dataSource={item.data} title={item.title} isHead={index === 0} />
+          ))}
+        </div>
+      </div>
+
+      <!-- 吸底 -->
+      <div id='sticky-table-bottom' class='table table-fixed bg-error mt-6 px-4' style="display: none;">
+        <table class='w-full'>
+          <tr>
+            <th class="col1 border-0" />
+            <th class="col2 border-0" />
+            <th class="col3 overflow-hidden">
+              <p class="mb-6 text-2xl font-normal"> 社区版</p>
+              <div class='text-warning text-xs h-2 leading-8'></div>
+            </th>
+            <th class="col4">
+              <p class="mb-6 text-2xl font-normal"> 云原生 API 网关</p>
+              <div class='h-2 text-warning text-xs text-left pl-4'></div>
+            </th>
+            <th class="col5">
+              <p class="mb-6 text-2xl font-normal"> AI 网关</p>
+              <div class='h-2 text-warning text-xs text-left pl-4'></div>
+            </th>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 移动端 -->
+      <div class="mobile-content">
+        <div>
+          <label for="my_modal_6" class="text-center mb-4 inline-block w-full version-selector">
+            <span class="text-xl version-text">社区版</span>
+            <UpDown class="w-8 h-4" />
+          </label>
+
+          <input type="checkbox" id="my_modal_6" class="modal-toggle" />
+          <div class="modal mobile-modal" role="dialog" style="display: none;">
+            <div class="modal-box">
+              <div class="mb-6">
+                <span class="text-lg font-bold">选择版本</span>
+                <span class="absolute right-8 close-modal">✕</span>
+              </div>
+              <div class="flex flex-col">
+                {dataVersion.map((version) => (
+                  <button 
+                    class="btn-select h-12 mb-4 bg-gray-02" 
+                    data-version={version}
+                  >
+                    {version}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-tables">
+          {versionDataSource.map((item) => (
+            <div class="overflow-x-auto rounded-2xl mb-6">
+              <table class="table bg-secondary rounded-2xl table-fixed">
+                <tr>
+                  <td class="text-xl align-top text-left" colspan="2">
+                    {item.title}
+                  </td>
+                </tr>
+                {item.data.map((dataItem) => (
+                  <tr class="mobile-row">
+                    <td class="text-base font-normal text-neutral border-l-0 border-dotted border-r border-link border-t">
+                      {dataItem.name.title && <p>{dataItem.name.title}</p>}
+                      {dataItem.name.des && <p class="text-xs">{dataItem.name.des}</p>}
+                    </td>
+                    <td class="text-center border-dotted border-r-0 border-link border-t mobile-version-cell">
+                      <!-- 社区版内容 -->
+                      <div class="version-content" data-version="free" style="display: block;">
+                        {typeof dataItem.free?.checked === 'boolean' && (
+                          <p>
+                            {dataItem.free?.checked ? (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M392.533333 806.4L85.333333 503.466667l59.733334-59.733334 247.466666 247.466667L866.133333 213.333333l59.733334 59.733334L392.533333 806.4z" fill="#4aba49"></path>
+                              </svg>
+                            ) : (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M806.4 263.2l-45.6-45.6L512 467.2 263.2 217.6l-45.6 45.6L467.2 512 217.6 760.8l45.6 45.6L512 557.6l248.8 248.8 45.6-45.6L557.6 512z" fill="#444444"></path>
+                              </svg>
+                            )}
+                          </p>
+                        )}
+                        {dataItem.free?.des && (
+                          <p class="text-xs font-normal text-warning">
+                            {dataItem.free?.des}
+                          </p>
+                        )}
+                      </div>
+                      
+                      <!-- 专业版内容 -->
+                      <div class="version-content" data-version="speciality" style="display: none;">
+                        {typeof dataItem.speciality?.checked === 'boolean' && (
+                          <p>
+                            {dataItem.speciality?.checked ? (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M392.533333 806.4L85.333333 503.466667l59.733334-59.733334 247.466666 247.466667L866.133333 213.333333l59.733334 59.733334L392.533333 806.4z" fill="#4aba49"></path>
+                              </svg>
+                            ) : (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M806.4 263.2l-45.6-45.6L512 467.2 263.2 217.6l-45.6 45.6L467.2 512 217.6 760.8l45.6 45.6L512 557.6l248.8 248.8 45.6-45.6L557.6 512z" fill="#444444"></path>
+                              </svg>
+                            )}
+                          </p>
+                        )}
+                        {dataItem.speciality?.des && dataItem.speciality.des.map((descItem) => (
+                          <p class="text-xs font-normal text-warning mb-1">
+                            {descItem}
+                          </p>
+                        ))}
+                      </div>
+                      
+                      <!-- Serverless版内容 -->
+                      <div class="version-content" data-version="serverless" style="display: none;">
+                        {typeof dataItem.serverless?.checked === 'boolean' && (
+                          <p>
+                            {dataItem.serverless?.checked ? (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M392.533333 806.4L85.333333 503.466667l59.733334-59.733334 247.466666 247.466667L866.133333 213.333333l59.733334 59.733334L392.533333 806.4z" fill="#4aba49"></path>
+                              </svg>
+                            ) : (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M806.4 263.2l-45.6-45.6L512 467.2 263.2 217.6l-45.6 45.6L467.2 512 217.6 760.8l45.6 45.6L512 557.6l248.8 248.8 45.6-45.6L557.6 512z" fill="#444444"></path>
+                              </svg>
+                            )}
+                          </p>
+                        )}
+                        {dataItem.serverless?.des && dataItem.serverless.des.map((descItem) => (
+                          <p class="text-xs font-normal text-warning mb-1">
+                            {descItem}
+                          </p>
+                        ))}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </table>
+            </div>
+          ))}
+        </div>
+      </div>
+    </functional-compare>
+  </div>
+
+  <!-- 专有云内容 -->
+  <div class="tab-content-private hidden" data-tab="Private">
+    <CloudCompare />
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  document.addEventListener('DOMContentLoaded', function() {
+    let activeTab = 'Public';
+    let isSafariBrowser = true;
+    let version = '社区版';
+    let isSticky = false;
+    let isShow = false;
+    let isCollapsed = true;
+
+    const versionContain = {
+      '社区版': 'free',
+      '云原生 API 网关': 'speciality',
+      'AI 网关': 'serverless',
+    };
+
+    const functionalCompareWrapper = document.querySelector('.functional-compare-wrapper');
+
+    // 判断是否为safari浏览器
+    function isSafari() {
+      return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    }
+
+    // 滚动处理
+    function handleScroll() {
+      if (functionalCompareWrapper) {
+        const distanceFromTop = functionalCompareWrapper.getBoundingClientRect().top;
+        const newIsSticky = distanceFromTop < 0;
+        
+        if (newIsSticky !== isSticky) {
+          isSticky = newIsSticky;
+          const stickyTable = document.getElementById('sticky-table-bottom');
+          if (stickyTable) {
+            // 修复逻辑：当滚动到顶部且面板是折叠状态时显示吸底
+            stickyTable.style.display = isSticky && isCollapsed ? 'block' : 'none';
+          }
+        }
+      }
+    }
+
+    // Tab切换处理
+    function handleTabChange(event) {
+      activeTab = event.detail.activeTab;
+      
+      // 显示/隐藏对应内容
+      const publicContent = document.querySelector('.tab-content-public');
+      const privateContent = document.querySelector('.tab-content-private');
+      
+      if (activeTab === 'Public') {
+        if (publicContent) publicContent.style.display = 'block';
+        if (privateContent) privateContent.classList.add('hidden');
+      } else if (activeTab === 'Private') {
+        if (publicContent) publicContent.style.display = 'none';
+        if (privateContent) privateContent.classList.remove('hidden');
+      }
+    }
+
+    // 折叠面板处理
+    function handleCollapseToggle() {
+      const collapseCheckbox = document.getElementById('collapse-checkbox');
+      if (collapseCheckbox) {
+        collapseCheckbox.addEventListener('change', function() {
+          isCollapsed = this.checked;
+          const stickyTable = document.getElementById('sticky-table-bottom');
+          if (stickyTable) {
+            // 修复逻辑：当滚动到顶部且面板是折叠状态时显示吸底
+            stickyTable.style.display = isSticky && isCollapsed ? 'block' : 'none';
+          }
+        });
+      }
+    }
+
+    // 移动端版本选择处理
+    function handleMobileVersionSelect() {
+      const modal = document.querySelector('.mobile-modal');
+      const modalToggle = document.getElementById('my_modal_6');
+      const versionText = document.querySelector('.version-text');
+      const closeModal = document.querySelector('.close-modal');
+      const btnSelects = document.querySelectorAll('.btn-select');
+
+      // 打开/关闭模态框
+      if (modalToggle) {
+        modalToggle.addEventListener('change', function() {
+          isShow = this.checked;
+          if (modal) {
+            modal.style.display = isShow ? 'flex' : 'none';
+          }
+        });
+      }
+
+      // 关闭按钮
+      if (closeModal) {
+        closeModal.addEventListener('click', function() {
+          isShow = false;
+          if (modalToggle) modalToggle.checked = false;
+          if (modal) modal.style.display = 'none';
+        });
+      }
+
+      // 版本选择按钮
+      btnSelects.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const buttonElement = this;
+          version = buttonElement.dataset.version || '社区版';
+          if (versionText) versionText.textContent = version;
+          
+          // 更新移动端显示内容
+          updateMobileContent();
+          
+          // 关闭模态框
+          isShow = false;
+          if (modalToggle) modalToggle.checked = false;
+          if (modal) modal.style.display = 'none';
+        });
+      });
+    }
+
+    // 更新移动端内容显示
+    function updateMobileContent() {
+      const versionKey = versionContain[version];
+      
+      // 更新所有版本内容的显示/隐藏状态
+      const versionContents = document.querySelectorAll('.version-content');
+      versionContents.forEach(content => {
+        if (content.dataset.version === versionKey) {
+          content.style.display = 'block';
+        } else {
+          content.style.display = 'none';
+        }
+      });
+    }
+
+    // 初始化
+    function init() {
+      isSafariBrowser = isSafari();
+      
+      // 如果不是safari浏览器，显示折叠功能
+      const collapseCheckbox = document.getElementById('collapse-checkbox');
+      const collapseContent = document.querySelector('.collapse-content-dynamic');
+      
+      if (!isSafariBrowser && collapseCheckbox) {
+        collapseCheckbox.style.display = 'block';
+        // 设置 checkbox 的初始状态：isCollapsed=true 时 checkbox 应该是选中的
+        collapseCheckbox.checked = isCollapsed;
+        // 为非 Safari 浏览器添加 collapse-content 类
+        if (collapseContent) {
+          collapseContent.classList.add('collapse-content');
+        }
+      } else if (collapseCheckbox) {
+        collapseCheckbox.style.display = 'none';
+        // Safari 浏览器不添加 collapse-content 类，保持展开状态
+        if (collapseContent) {
+          collapseContent.classList.remove('collapse-content');
+        }
+      }
+
+      // 绑定事件监听器
+      window.addEventListener('scroll', handleScroll);
+      window.addEventListener('tabChanged', handleTabChange);
+      
+      // 初始化各种处理函数
+      handleCollapseToggle();
+      handleMobileVersionSelect();
+      
+      // 初始化移动端版本显示
+      updateMobileContent();
+    }
+
+    // 组件卸载时清理事件监听器
+    window.addEventListener('beforeunload', function() {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('tabChanged', handleTabChange);
+    });
+
+    // 执行初始化
+    init();
+  });
+</script>
+
+<style>
+  @import url('./style.css');
+
+  .functional-compare-astro {
+    width: 100%;
+  }
+
+  .tab-content-public,
+  .tab-content-private {
+    width: 100%;
+  }
+
+  .tab-content-private.hidden {
+    display: none !important;
+  }
+
+  /* Safari浏览器折叠功能样式 */
+  .collapse-input {
+    display: none;
+  }
+
+  .collapse-input:not(:checked) + .collapse-title + .collapse-content {
+    height: fit-content;
+  }
+
+  /* 移动端模态框样式 */
+  .mobile-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .modal-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+  }
+
+  .btn-select {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    background: white;
+  }
+
+  .btn-select:hover {
+    background-color: #f0f0f0;
+  }
+
+  .version-selector {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  /* 响应式样式 */
+  @media (max-width: 50rem) {
+    .mobile-content {
+      display: block !important;
+    }
+    
+    #collapse-fold,
+    #sticky-table-bottom {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 50rem) {
+    .mobile-content {
+      display: none !important;
+    }
+  }
+
+  /* 吸底表格样式 */
+  #sticky-table-bottom {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    width: 85.125rem;
+    max-width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+</style>

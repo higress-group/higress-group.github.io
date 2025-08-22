@@ -1,6 +1,6 @@
 functional-compare {
   .table :where(thead tr, tbody tr:not(:last-child), tbody tr:first-child:last-child) {
-      border-bottom: 1px dotted #818598;
+      border-bottom: 1px solid #dddee4;
     }
   
     .collapse-content {
@@ -13,7 +13,7 @@ functional-compare {
   }
 
   th {
-    border-left: 1px dotted theme("colors.success");
+    border-left: 1px solid #dddee4;
     border-bottom: hidden;
     text-align: center;
     font-size: 24px;
