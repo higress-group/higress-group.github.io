@@ -21,4 +21,8 @@ SPRINGDOC_SWAGGER_UI_ENABLED=true
 
 ## all-in-one Image deployment
 
-Add `-e O11Y=on` arguments to the `docker run` command.
+Add `-e SPRINGDOC_API_DOCS_ENABLED=true -e SPRINGDOC_SWAGGER_UI_ENABLED=true` arguments to the `docker run` command.
+
+## Swagger UI URL
+
+`http://<higress-console-endpoint>/swagger-ui/index.html`
