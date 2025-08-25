@@ -105,22 +105,16 @@ function formatPriceDisplay(priceText: string) {
     // 为每个实例创建独立的控制逻辑
     function initPricingTabs() {
         const instanceId = id;
-        console.log('Initializing PricingTabs for instance:', instanceId);
         
         // 获取当前实例的元素
         const subTabButtons = document.querySelectorAll(`[data-sub-tab^="payAsGo-${instanceId}"], [data-sub-tab^="yearly-${instanceId}"]`);
         
         if (subTabButtons.length === 0) {
-            console.log('PricingTabs buttons not found, retrying...', instanceId);
             setTimeout(initPricingTabs, 100);
             return;
         }
         
-        console.log('Found PricingTabs buttons:', subTabButtons.length, 'for instance:', instanceId);
-        
         function switchSubTab(activeSubTabId) {
-            console.log('Switching to sub-tab:', activeSubTabId);
-            
             // 更新子tab按钮样式
             subTabButtons.forEach(button => {
                 const radio = button.querySelector('input[type="radio"]');
@@ -144,7 +138,6 @@ function formatPriceDisplay(priceText: string) {
             const activeContent = document.getElementById(`${activeSubTabId}-content`);
             if (activeContent) {
                 activeContent.classList.remove('hidden');
-                console.log('Activated pricing content for:', activeSubTabId);
             }
         }
         
@@ -160,7 +153,6 @@ function formatPriceDisplay(priceText: string) {
                     e.preventDefault();
                     e.stopPropagation();
                     const subTabId = this.dataset.subTab;
-                    console.log('Pricing tab clicked:', subTabId);
                     if (subTabId) {
                         switchSubTab(subTabId);
                         
@@ -184,7 +176,6 @@ function formatPriceDisplay(priceText: string) {
             radio.addEventListener('change', function() {
                 if (this.checked) {
                     const tabId = this.value;
-                    console.log('Pricing radio changed:', tabId);
                     switchSubTab(tabId);
                 }
             });
@@ -193,8 +184,6 @@ function formatPriceDisplay(priceText: string) {
         // 初始化默认显示第一个tab
         const defaultTabId = `payAsGo-${instanceId}`;
         switchSubTab(defaultTabId);
-        
-        console.log('PricingTabs initialized for instance:', instanceId);
     }
     
     // 多重初始化策略

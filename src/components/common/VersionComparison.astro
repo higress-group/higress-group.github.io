@@ -185,14 +185,9 @@ import VersionCard from './VersionCard.astro';
         
         // 主tab切换功能
         function switchTab(activeTabId: string) {
-            console.log('=== Starting switchTab for:', activeTabId, '===');
-            
             // 重新获取最新的按钮和内容元素
             const currentTabButtons = document.querySelectorAll('.custom-tab-item[data-tab]') as NodeListOf<HTMLElement>;
             const currentTabContents = document.querySelectorAll('.tab-content-n');
-            
-            console.log('Found', currentTabButtons.length, 'tab buttons');
-            console.log('Found', currentTabContents.length, 'tab contents');
             
             // 强制隐藏所有 tab 内容
             currentTabContents.forEach((content, index) => {
@@ -202,8 +197,6 @@ import VersionCard from './VersionCard.astro';
                 contentElement.classList.add('hidden');
                 contentElement.style.display = 'none';
                 contentElement.style.visibility = 'hidden';
-                
-                console.log(`Hidden content ${index} with tab-id: ${tabId}`);
             });
             
             // 强制显示激活的 tab 内容
@@ -212,11 +205,6 @@ import VersionCard from './VersionCard.astro';
                 activeContent.classList.remove('hidden');
                 activeContent.style.display = 'block';
                 activeContent.style.visibility = 'visible';
-                console.log('Activated content for tab:', activeTabId);
-                console.log('Active content element:', activeContent);
-            } else {
-                console.error('Could not find content for tab:', activeTabId);
-                console.log('Available content elements:', currentTabContents);
             }
             
             // 强制更新按钮样式
@@ -231,31 +219,16 @@ import VersionCard from './VersionCard.astro';
                     // 选中状态：#EDF2FC 背景，#121316 字体
                     button.classList.add('bg-[#EDF2FC]', 'text-[#121316]');
                     if (radio) radio.checked = true;
-                    console.log(`Set ACTIVE style for button ${index} (${buttonTabId})`);
                 } else {
                     // 未选中状态：透明背景，#A3A6B3 字体
                     button.classList.add('bg-transparent', 'text-[#A3A6B3]');
                     if (radio) radio.checked = false;
-                    console.log(`Set INACTIVE style for button ${index} (${buttonTabId})`);
                 }
                 
                 // 确保按钮可以点击
                 button.style.pointerEvents = 'auto';
                 button.style.cursor = 'pointer';
             });
-            
-            // 延迟验证切换结果
-            setTimeout(() => {
-                const activeBtn = document.querySelector(`.custom-tab-item[data-tab="${activeTabId}"]`);
-                const activeContentCheck = document.querySelector(`.tab-content-n[data-tab="${activeTabId}"]`);
-                const hiddenContents = document.querySelectorAll('.tab-content-n.hidden');
-                
-                console.log('=== Verification Results ===');
-                console.log('Active button classes:', activeBtn?.className);
-                console.log('Active content visible:', activeContentCheck && !activeContentCheck.classList.contains('hidden'));
-                console.log('Number of hidden contents:', hiddenContents.length);
-                console.log('=== End Verification ===');
-            }, 100);
         }
         
         // 设置初始状态
@@ -281,7 +254,6 @@ import VersionCard from './VersionCard.astro';
                     e.preventDefault();
                     e.stopPropagation();
                     const tabId = tabButton.dataset.tab;
-                    console.log('Tab button clicked via delegation:', tabId, 'Target:', target, 'Button:', tabButton);
                     if (tabId) {
                         // 强制重新获取和切换
                         switchTab(tabId);
@@ -299,7 +271,6 @@ import VersionCard from './VersionCard.astro';
                 const target = e.target as HTMLInputElement;
                 if (target.type === 'radio' && target.name === 'version-tabs') {
                     const tabId = target.value;
-                    console.log('Radio button changed via delegation:', tabId);
                     if (tabId && target.checked) {
                         switchTab(tabId);
                     }
@@ -307,7 +278,6 @@ import VersionCard from './VersionCard.astro';
             });
             
             isEventDelegationSetup = true;
-            console.log('Event delegation setup completed');
         }
         
         // 确保所有按钮都可以点击
@@ -318,7 +288,6 @@ import VersionCard from './VersionCard.astro';
             
             // 添加hover效果来验证按钮响应
             button.addEventListener('mouseenter', function() {
-                console.log('Tab button hover:', this.dataset.tab);
                 this.style.opacity = '0.8';
             });
             
@@ -337,11 +306,6 @@ import VersionCard from './VersionCard.astro';
         
         // 标记为已初始化
         isVersionComparisonInitialized = true;
-        
-        // 调试信息
-        console.log('VersionComparison initialized with default tab:', defaultTabId);
-        console.log('Tab buttons found:', tabButtons.length);
-        console.log('Tab contents found:', tabContents.length);
     }
     
     // 强制重新初始化函数
