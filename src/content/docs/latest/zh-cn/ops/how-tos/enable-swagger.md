@@ -21,4 +21,8 @@ SPRINGDOC_SWAGGER_UI_ENABLED=true
 
 ## all-in-one 镜像部署
 
-在 `docker run` 命令中添加 `-e O11Y=on` 参数即可。
+在 `docker run` 命令中添加 `-e SPRINGDOC_API_DOCS_ENABLED=true -e SPRINGDOC_SWAGGER_UI_ENABLED=true` 参数即可。
+
+## 访问地址
+
+`http://<higress-console-endpoint>/swagger-ui/index.html`
