@@ -103,13 +103,24 @@ function formatPriceDisplay(priceText: string) {
 
 <script define:vars={{ id }}>
     // 为每个实例创建独立的控制逻辑
-    document.addEventListener('DOMContentLoaded', function() {
+    function initPricingTabs() {
         const instanceId = id;
+        console.log('Initializing PricingTabs for instance:', instanceId);
         
         // 获取当前实例的元素
         const subTabButtons = document.querySelectorAll(`[data-sub-tab^="payAsGo-${instanceId}"], [data-sub-tab^="yearly-${instanceId}"]`);
         
+        if (subTabButtons.length === 0) {
+            console.log('PricingTabs buttons not found, retrying...', instanceId);
+            setTimeout(initPricingTabs, 100);
+            return;
+        }
+        
+        console.log('Found PricingTabs buttons:', subTabButtons.length, 'for instance:', instanceId);
+        
         function switchSubTab(activeSubTabId) {
+            console.log('Switching to sub-tab:', activeSubTabId);
+            
             // 更新子tab按钮样式
             subTabButtons.forEach(button => {
                 const radio = button.querySelector('input[type="radio"]');
@@ -133,24 +144,48 @@ function formatPriceDisplay(priceText: string) {
             const activeContent = document.getElementById(`${activeSubTabId}-content`);
             if (activeContent) {
                 activeContent.classList.remove('hidden');
+                console.log('Activated pricing content for:', activeSubTabId);
             }
         }
         
+        // 先移除所有现有的事件监听器标记
+        subTabButtons.forEach(button => {
+            button.removeAttribute('data-pricing-events-bound');
+        });
+        
         // 绑定子tab点击事件
         subTabButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const subTabId = this.dataset.subTab;
-                if (subTabId) {
-                    switchSubTab(subTabId);
-                    
-                    // 触发自定义事件
-                    window.dispatchEvent(new CustomEvent('pricingTabChanged', {
-                        detail: { 
-                            instanceId: instanceId,
-                            activeSubTab: subTabId 
-                        }
-                    }));
+            if (!button.hasAttribute('data-pricing-events-bound')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const subTabId = this.dataset.subTab;
+                    console.log('Pricing tab clicked:', subTabId);
+                    if (subTabId) {
+                        switchSubTab(subTabId);
+                        
+                        // 触发自定义事件
+                        window.dispatchEvent(new CustomEvent('pricingTabChanged', {
+                            detail: { 
+                                instanceId: instanceId,
+                                activeSubTab: subTabId 
+                            }
+                        }));
+                    }
+                });
+                
+                button.setAttribute('data-pricing-events-bound', 'true');
+            }
+        });
+        
+        // 监听 radio 按钮的变化（支持键盘操作）
+        const radioButtons = document.querySelectorAll(`input[name="pricing-tabs-${instanceId}"]`);
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    const tabId = this.value;
+                    console.log('Pricing radio changed:', tabId);
+                    switchSubTab(tabId);
                 }
             });
         });
@@ -159,17 +194,20 @@ function formatPriceDisplay(priceText: string) {
         const defaultTabId = `payAsGo-${instanceId}`;
         switchSubTab(defaultTabId);
         
-        // 监听 radio 按钮的变化（支持键盘操作）
-        const radioButtons = document.querySelectorAll(`input[name="pricing-tabs-${instanceId}"]`);
-        radioButtons.forEach(radio => {
-            radio.addEventListener('change', function() {
-                if (this.checked) {
-                    const tabId = this.value;
-                    switchSubTab(tabId);
-                }
-            });
-        });
-    });
+        console.log('PricingTabs initialized for instance:', instanceId);
+    }
+    
+    // 多重初始化策略
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPricingTabs);
+    } else {
+        // DOM 已经加载完成
+        setTimeout(initPricingTabs, 0);
+    }
+    
+    // 延迟检查
+    setTimeout(initPricingTabs, 100);
+    setTimeout(initPricingTabs, 500);
 </script>
 
 <style is:global>
