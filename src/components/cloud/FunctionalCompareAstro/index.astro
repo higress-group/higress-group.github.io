@@ -575,13 +575,7 @@ const PrivateDataSource = [
   </div>
 </div>
 
-<script define:vars={{ 
-  communityTitle: t('script.version.community'),
-  apiGatewayTitle: t('script.version.api.gateway'),
-  aiGatewayTitle: t('script.version.ai.gateway'),
-  exclusiveTitle: t('script.version.exclusive'),
-  defaultFallback: t('script.default.community.fallback')
-}}>
+<script>
   // @ts-nocheck
   document.addEventListener('DOMContentLoaded', function() {
     let activeTab = 'Public';
@@ -598,18 +592,20 @@ const PrivateDataSource = [
       'exclusive': 'speciality'  // 专有云模式下的飞天专属版映射到speciality字段
     };
 
-    // 公有云数据版本配置（使用翻译变量）
+    // 公有云数据版本配置（直接使用中文）
     const dataVersion = [
-      { key: 'community', value: communityTitle },
-      { key: 'api-gateway', value: apiGatewayTitle },
-      { key: 'ai-gateway', value: aiGatewayTitle }
+      { key: 'community', value: '社区版' },
+      { key: 'api-gateway', value: '云原生 API 网关' },
+      { key: 'ai-gateway', value: 'AI 网关' }
     ];
 
-    // 专有云数据版本配置（使用翻译变量）
+    // 专有云数据版本配置（直接使用中文）
     const privateDataVersion = [
-      { key: 'community', value: communityTitle },
-      { key: 'exclusive', value: exclusiveTitle }
+      { key: 'community', value: '社区版' },
+      { key: 'exclusive', value: '飞天专属版' }
     ];
+
+    const defaultFallback = '社区版';
 
     const functionalCompareWrapper = document.querySelector('.functional-compare-wrapper');
 
@@ -625,7 +621,6 @@ const PrivateDataSource = [
         return;
       }
       
-      const distanceFromTop = functionalCompareWrapper.getBoundingClientRect().top;
       const distanceFromTop = functionalCompareWrapper.getBoundingClientRect().top;
       const newIsSticky = distanceFromTop < 0;
       
@@ -721,25 +716,21 @@ const PrivateDataSource = [
       const versionText = document.querySelector('.version-text');
       const closeModal = document.querySelector('.close-modal');
       const btnSelects = document.querySelectorAll('.btn-select');
-      const publicOptions = document.querySelector('.public-options');
-      const privateOptions = document.querySelector('.private-options');
 
-      // 打开/关闭模态框
-      if (modalToggle) {
+      // 监听checkbox状态变化
+      if (modalToggle && modal) {
         modalToggle.addEventListener('change', function() {
           isShow = this.checked;
-          if (modal) {
-            modal.style.display = isShow ? 'flex' : 'none';
-          }
+          modal.style.display = isShow ? 'flex' : 'none';
         });
       }
 
       // 关闭按钮
-      if (closeModal) {
+      if (closeModal && modalToggle && modal) {
         closeModal.addEventListener('click', function() {
           isShow = false;
-          if (modalToggle) modalToggle.checked = false;
-          if (modal) modal.style.display = 'none';
+          modalToggle.checked = false;
+          modal.style.display = 'none';
         });
       }
 
@@ -749,14 +740,12 @@ const PrivateDataSource = [
           const buttonElement = this;
           version = buttonElement.dataset.version || 'community';
           
-          // 根据当前 tab 状态和专有云数据版本配置显示名称
+          // 根据当前 tab 状态显示名称
           let displayName;
           if (activeTab === 'Private') {
-            // 专有云模式使用 privateDataVersion 数据
             const privateVersion = privateDataVersion.find(v => v.key === version);
             displayName = privateVersion ? privateVersion.value : defaultFallback;
           } else {
-            // 公有云模式使用 dataVersion 数据
             const publicVersion = dataVersion.find(v => v.key === version);
             displayName = publicVersion ? publicVersion.value : defaultFallback;
           }
@@ -819,10 +808,12 @@ const PrivateDataSource = [
       }
     }
 
-
     // 初始化
     function init() {
       isSafariBrowser = isSafari();
+      
+      // 确保页面可以正常滚动
+      document.body.style.overflow = '';
       
       // 如果不是safari浏览器，显示折叠功能
       const collapseCheckbox = document.getElementById('collapse-checkbox');
@@ -862,15 +853,9 @@ const PrivateDataSource = [
       window.removeEventListener('tabChanged', handleTabChange);
     }
     
+    // 只在页面真正卸载时清理，避免移动端弹窗交互干扰
     window.addEventListener('beforeunload', cleanupEventListeners);
     window.addEventListener('pagehide', cleanupEventListeners);
-    
-    // 为了兼容性，也在 visibilitychange 事件中清理
-    document.addEventListener('visibilitychange', function() {
-      if (document.visibilityState === 'hidden') {
-        cleanupEventListeners();
-      }
-    });
 
     // 执行初始化
     init();
@@ -913,7 +898,7 @@ const PrivateDataSource = [
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 9999;
   }
 
   .modal-box {
