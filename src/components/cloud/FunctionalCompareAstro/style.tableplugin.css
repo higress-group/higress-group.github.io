@@ -18,6 +18,14 @@
     line-height: 32px;
     color: theme("colors.neutral");
   }
+  
+  /* 确保表格头中的p元素继承th的样式 */
+  th p {
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 32px;
+    color: theme("colors.neutral");
+  }
   tr:last-child td {
     border-bottom: none;
 }
@@ -36,6 +44,23 @@
     font-size: 12px;
     font-weight: 500;
     line-height: 18px;
+  }
+  
+  /* 专有云模式：只显示两列时的样式 */
+  .private-header .col3,
+  .private-header .col4 {
+    width: 315px; /* 增加宽度以适应两列布局 */
+  }
+  
+  /* 专有云模式：表格内容的列宽样式 */
+  .private-mode .col3,
+  .private-mode .col4 {
+    width: 315px; /* 与表格头保持一致 */
+  }
+  
+  /* 专有云模式：最后一列边框处理 */
+  .private-mode .col4 {
+    border-right: none;
   }
   .col5 {
     border-right: none;

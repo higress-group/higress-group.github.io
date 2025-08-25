@@ -6,57 +6,47 @@ interface Props {
   dataSource: any[];
   title: string;
   isHead?: boolean;
+  dataVersion?: Array<{ key: string; value: string }>;
+  privateDataVersion?: Array<{ key: string; value: string }>;
+  isPrivateMode?: boolean;
 }
 
-const { dataSource, title, isHead = false } = Astro.props;
+const { dataSource, title, isHead = false, dataVersion, privateDataVersion, isPrivateMode = false } = Astro.props;
 const totalRows = dataSource.length;
 ---
 
 <div class="tableplugin overflow-x-auto rounded-2xl mb-6">
   {isHead && (
-    <table class='w-full'>
-      <tr>
-        <th class="col1 border-0" />
-        <th class="col2 border-0" />
-        <th class="col3 overflow-hidden">
-          <p class="mb-6 text-2xl font-normal"> 社区版</p>
-          {/* <div class='text-warning text-xs h-28 leading-8'>免费</div> */}
-        </th>
-        <th class="col4">
-          <p class="mb-6 text-2xl font-normal"> 云原生 API 网关</p>
-          {/* <div class='min-h-28 text-warning text-xs text-left pl-4'>
-            <p class='mb-1'>后付费：0.826元/小时起</p>
-            <p class='mb-1'>apigw.dev.x1</p>
-            <p class='mb-1'>最大客户端连接数：24000</p>
-            <p class='mb-1'>最大 HTTPS 每秒新建连接数：800</p>
-            <p class='mb-1'>最大短连接 QPS：1700</p>
-            <p class='mb-1'>最大长连接 QPS：2200</p>
-            <p class='mb-1'>无 SLA 保障</p>
-            <p class='mb-1'>资源包：249.6元/月起</p>
-            <p class='mb-1'>1. 首次购买资源包享受6折优惠，比后付费节省178元/月</p>
-            <p class='mb-1'>2. 资源包续费，比后付费节省345元/月</p>
-          </div> */}
-        </th>
-        <th class="col5">
-          <p class="mb-6 text-2xl font-normal"> AI 网关</p>
-          {/* <div class='min-h-28 text-warning text-xs text-left pl-4'>
-            <p class='mb-1'>后付费：1.935元/小时起</p>
-            <p class='mb-1'>apigw.small.x1</p>
-            <p class='mb-1'>最大客户端连接数：48000</p>
-            <p class='mb-1'>最大 HTTPS 每秒新建连接数：1600</p>
-            <p class='mb-1'>最大短连接 QPS：3400</p>
-            <p class='mb-1'>最大长连接 QPS：4400</p>
-            <p class='mb-1'>SLA：99.99%</p>
-            <p class='mb-1'>资源包：585元/月起</p>
-            <p class='mb-1'>1. 首次购买资源包享受6折优惠，比后付费节省808元/月</p>
-            <p class='mb-1'>2. 资源包续费，比后付费节省418元/月</p>
-          </div> */}
-        </th>
-      </tr>
-    </table>
+    <>
+      {/* 公有云表格头 */}
+      <table class='w-full public-header'>
+        <tr>
+          <th class="col1 border-0" />
+          <th class="col2 border-0" />
+          {dataVersion && dataVersion.map((version, index) => (
+            <th class={`col${index + 3} ${index === 0 ? 'overflow-hidden' : ''}`}>
+              <p class="mb-6 text-2xl font-normal"> {version.value}</p>
+            </th>
+          ))}
+        </tr>
+      </table>
+      
+      {/* 专有云表格头 */}
+      <table class='w-full private-header' style="display: none;">
+        <tr>
+          <th class="col1 border-0" />
+          <th class="col2 border-0" />
+          {privateDataVersion && privateDataVersion.map((version, index) => (
+            <th class={`col${index + 3} ${index === 0 ? 'overflow-hidden' : ''}`}>
+              <p class="mb-6 text-2xl font-normal"> {version.value}</p>
+            </th>
+          ))}
+        </tr>
+      </table>
+    </>
   )}
   
-  <table class="table bg-secondary rounded-2xl table-fixed">
+  <table class={`table bg-secondary rounded-2xl table-fixed ${isPrivateMode ? 'private-mode' : ''}`}>
     {dataSource.map((item, index) => (
       <tr>
         {index === 0 && (
@@ -71,40 +61,84 @@ const totalRows = dataSource.length;
           {item.name.title && <p>{item.name.title}</p>}
           {item.name.des && <p class="text-xs">{item.name.des}</p>}
         </td>
+        
+        {/* 社区版列 */}
         <td class="col3 text-center">
-          {typeof item.free.checked === 'boolean' && (
+          {typeof item.free?.checked === 'boolean' && (
             item.free.checked ? <Correct /> : <False />
           )}
-          {item.free.des && (
+          {item.free?.des && (
             <p class="text-xs font-normal color-gray-08">
               {item.free.des}
             </p>
           )}
         </td>
+        
+        {/* 第二列：公有云模式显示云原生API网关，专有云模式显示飞天专属版 */}
         <td class="col4 text-center">
-          {typeof item.speciality.checked === 'boolean' && (
+          {typeof item.speciality?.checked === 'boolean' && (
             item.speciality.checked ? <Correct /> : <False />
           )}
-          {item.speciality.des && item.speciality.des.map((descItem) => (
-            <p class="text-xs font-normal color-gray-08 mb-1">
-              {descItem}
-            </p>
-          ))}
-        </td>
-        <td class="col5 text-center">
-          {typeof item.serverless.checked === 'boolean' && (
-            item.serverless.checked ? <Correct /> : <False />
+          {item.speciality?.des && (
+            Array.isArray(item.speciality.des) ? (
+              item.speciality.des.map((descItem) => (
+                <p class="text-xs font-normal color-gray-08 mb-1">
+                  {descItem}
+                </p>
+              ))
+            ) : (
+              <p class="text-xs font-normal color-gray-08">
+                {item.speciality.des}
+              </p>
+            )
           )}
-          {item.serverless.des && item.serverless.des.map((descItem) => (
-            <p class="text-xs font-normal color-gray-08 mb-1">
-              {descItem}
-            </p>
-          ))}
         </td>
+        
+        {/* 第三列：AI网关，只在公有云模式下显示 */}
+        {!isPrivateMode && (
+          <td class="col5 text-center">
+            {typeof item.serverless?.checked === 'boolean' && (
+              item.serverless.checked ? <Correct /> : <False />
+            )}
+            {item.serverless?.des && (
+              Array.isArray(item.serverless.des) ? (
+                item.serverless.des.map((descItem) => (
+                  <p class="text-xs font-normal color-gray-08 mb-1">
+                    {descItem}
+                  </p>
+                ))
+              ) : (
+                <p class="text-xs font-normal color-gray-08">
+                  {item.serverless.des}
+                </p>
+              )
+            )}
+          </td>
+        )}
       </tr>
     ))}
   </table>
 </div>
+
+<script>
+  // @ts-nocheck
+  document.addEventListener('DOMContentLoaded', function() {
+    // 监听 tab 切换事件
+    window.addEventListener('tabChanged', function(event) {
+      const activeTab = event.detail.activeTab;
+      const publicHeaders = document.querySelectorAll('.public-header');
+      const privateHeaders = document.querySelectorAll('.private-header');
+      
+      if (activeTab === 'Public') {
+        publicHeaders.forEach(header => header.style.display = 'table');
+        privateHeaders.forEach(header => header.style.display = 'none');
+      } else if (activeTab === 'Private') {
+        publicHeaders.forEach(header => header.style.display = 'none');
+        privateHeaders.forEach(header => header.style.display = 'table');
+      }
+    });
+  });
+</script>
 
 <style>
   @import url('./style.tableplugin.css');

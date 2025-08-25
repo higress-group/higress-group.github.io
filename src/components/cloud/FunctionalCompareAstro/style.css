@@ -44,6 +44,12 @@ functional-compare {
     padding-right: 0px;
   }
 
+  /* 专有云模式：吸底表格列宽样式 */
+  #private-sticky-table .col3,
+  #private-sticky-table .col4 {
+    width: 315px; /* 与专有云表格头保持一致 */
+  }
+
   #sticky-table-bottom {
     position: sticky;
     bottom: 0;
