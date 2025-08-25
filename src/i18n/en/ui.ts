@@ -374,6 +374,13 @@ export default {
 	'functional.compare.title': 'Version Capability Comparison',
 	'mobile.version.select.title': 'Select Version',
 	
+	// Client script translations (hardcode replacement)
+	'script.version.community': 'Community Edition',
+	'script.version.api.gateway': 'Cloud Native API Gateway',
+	'script.version.ai.gateway': 'AI Gateway',
+	'script.version.exclusive': 'Feitian Exclusive Edition',
+	'script.default.community.fallback': 'Community Edition',
+	
 	// Functional comparison table data
 	'functional.compare.section.basic.info': 'Basic Information',
 	'functional.compare.section.ai.capability': 'AI Capabilities',

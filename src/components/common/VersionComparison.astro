@@ -93,6 +93,7 @@ const textConfig = {
 
 // 引入PricingTabs组件
 import PricingTabs from './PricingTabs.astro';
+import VersionCard from './VersionCard.astro';
 ---
 
 <div class="w-full max-w-[85.125rem] mx-auto px-4 sm:px-6 lg:px-0 mb-6">
@@ -121,106 +122,42 @@ import PricingTabs from './PricingTabs.astro';
         <!-- 公共云 Tab 内容 -->
         <div class="tab-content-n" data-tab="Public" style="display: block;">
             <div class="flex flex-col lg:flex-row gap-4 lg:gap-0 w-full max-w-full">
-                <!-- 第一个卡片 - 社区版 -->
-                <div class="card-hover-effect flex-1 lg:flex-1 bg-[#EDF2FC] rounded-2xl p-6 text-[#121316] text-center min-h-[446px] flex flex-col max-w-full">
-                    <!-- 第一个div: 社区版 -->
-                    <div class="text-2xl mb-[3rem]">{textConfig.publicCloud.communityCard.title}</div>
-                    
-                    <!-- 第二个div: Free -->
-                    <div class="text-[44px] font-medium leading-[48px] border-t border-b border-[#DDDEE4] py-[38px]">
-                        {textConfig.publicCloud.communityCard.price}
-                        <div class="text-xs mt-2" style="color: #121316; font-size: 12px;">{textConfig.publicCloud.communityCard.priceDescription}</div>
-                    </div>
-                    
-                    <!-- 第三个div: 描述文案 -->
-                    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">{textConfig.publicCloud.communityCard.description}</div>
-                    
-                    <!-- 第四个div: 了解详情按钮 -->
-                    <a href={textConfig.publicCloud.communityCard.buttonUrl} target="_blank" rel="noopener noreferrer" class="first-card-button font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] bg-[#121316] text-[#EDF2FC] no-underline inline-block text-center">{textConfig.publicCloud.communityCard.buttonText}</a>
-                </div>
+                <VersionCard 
+                    cardData={textConfig.publicCloud.communityCard}
+                    cardType="community"
+                    cardPosition="first"
+                />
                 
-                <!-- 第二个卡片 - 左右间隙移动端取消 -->
-                <div class="card-hover-effect flex-1 lg:ml-4 lg:mr-4 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col max-w-full">
-                    <!-- 第一个div: 云原生 API 网关 -->
-                    <div class="text-2xl mb-0">{textConfig.publicCloud.apiGatewayCard.title}</div>
-                    
-                    <!-- 使用PricingTabs组件 -->
-                    <PricingTabs 
-                        id="card2" 
-                        tabLabels={textConfig.publicCloud.apiGatewayCard.tabLabels}
-                        content={textConfig.publicCloud.apiGatewayCard.content}
-                    />
-                    
-                    <!-- 第三个div: 描述文案 -->
-                    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">{textConfig.publicCloud.apiGatewayCard.description}</div>
-                    
-                    <!-- 第四个div: 了解详情按钮 -->
-                    <a href={textConfig.publicCloud.apiGatewayCard.buttonUrl} target="_blank" rel="noopener noreferrer" class="second-third-card-button font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] bg-transparent border border-[#B3B6C1] text-[#EDF2FC] no-underline inline-block text-center">{textConfig.publicCloud.apiGatewayCard.buttonText}</a>
-                </div>
+                <VersionCard 
+                    cardData={textConfig.publicCloud.apiGatewayCard}
+                    cardType="api-gateway"
+                    cardPosition="middle"
+                />
                 
-                <!-- 第三个卡片 -->
-                <div class="card-hover-effect flex-1 lg:flex-1 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col max-w-full">
-                    <!-- 第一个div: AI 网关 -->
-                    <div class="text-2xl mb-0">{textConfig.publicCloud.aiGatewayCard.title}</div>
-                    
-                    <!-- 使用PricingTabs组件 -->
-                    <PricingTabs 
-                        id="card3" 
-                        tabLabels={textConfig.publicCloud.aiGatewayCard.tabLabels}
-                        content={textConfig.publicCloud.aiGatewayCard.content}
-                    />
-                    
-                    <!-- 第三个div: 描述文案 -->
-                    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">{textConfig.publicCloud.aiGatewayCard.description}</div>
-                    
-                    <!-- 第四个div: 了解详情按钮 -->
-                    <a href={textConfig.publicCloud.aiGatewayCard.buttonUrl} target="_blank" rel="noopener noreferrer" class="second-third-card-button font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] bg-transparent border border-[#B3B6C1] text-[#EDF2FC] no-underline inline-block text-center">{textConfig.publicCloud.aiGatewayCard.buttonText}</a>
-                </div>
+                <VersionCard 
+                    cardData={textConfig.publicCloud.aiGatewayCard}
+                    cardType="ai-gateway"
+                    cardPosition="last"
+                />
             </div>
         </div>
         
         <!-- 专有云 Tab 内容 -->
         <div class="tab-content-n hidden" data-tab="Private">
             <div class="flex flex-col lg:flex-row gap-4 lg:gap-0 w-full justify-center items-start max-w-full">
-                <!-- 第一个卡片 - 社区版 -->
-                <div class="card-hover-effect flex-1 max-w-full lg:max-w-[442px] bg-[#EDF2FC] rounded-2xl p-6 text-[#121316] text-center min-h-[446px] flex flex-col">
-                    <!-- 第一个div: 社区版 -->
-                    <div class="text-2xl mb-[3rem]">{textConfig.privateCloud.communityCard.title}</div>
-                    
-                    <!-- 第二个div: Free -->
-                    <div class="text-[44px] font-medium leading-[48px] border-t border-b border-[#DDDEE4] py-[38px]">
-                        {textConfig.privateCloud.communityCard.price}
-                        <div class="text-xs mt-2" style="color: #121316; font-size: 12px;">{textConfig.privateCloud.communityCard.priceDescription}</div>
-                    </div>
-                    
-                    <!-- 第三个div: 描述文案 -->
-                    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">{textConfig.privateCloud.communityCard.description}</div>
-                    
-                    <!-- 第四个div: 了解详情按钮 -->
-                    <a href={textConfig.privateCloud.communityCard.buttonUrl} target="_blank" rel="noopener noreferrer" class="first-card-button font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] bg-[#121316] text-[#EDF2FC] no-underline inline-block text-center">{textConfig.privateCloud.communityCard.buttonText}</a>
-                </div>
+                <VersionCard 
+                    cardData={textConfig.privateCloud.communityCard}
+                    cardType="community"
+                    cardPosition="first"
+                    isPrivateMode={true}
+                />
                 
-                <!-- 第二个卡片 - 飞天专属版 -->
-                <div class="card-hover-effect flex-1 max-w-full lg:max-w-[442px] lg:ml-4 rounded-2xl bg-[#1E1F24] p-6 text-[#DDDEE4] text-center min-h-[446px] flex flex-col">
-                    <!-- 第一个div: 飞天专属版 -->
-                    <div class="text-2xl mb-[3rem]">{textConfig.privateCloud.exclusiveCard.title}</div>
-                    
-                    <!-- 第二个div: 尊享服务 -->
-                    <div class="text-[44px] font-medium leading-[48px] border-t border-b border-[#2E3038] py-[38px]">
-                        {textConfig.privateCloud.exclusiveCard.subtitle}
-                        <div class="text-xs mt-2" style="color: #9295A5; font-size: 12px;">{textConfig.privateCloud.exclusiveCard.description}</div>
-                    </div>
-                    
-                    <!-- 第三个div: 特性列表 -->
-                    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">
-                        {textConfig.privateCloud.exclusiveCard.features.map((feature, index) => (
-                            <div class={`text-xs font-normal`} style="color: #9295A5;">{feature}</div>
-                        ))}
-                    </div>
-                    
-                    <!-- 按钮 -->
-                    <a href={textConfig.privateCloud.exclusiveCard.buttonUrl} target="_blank" rel="noopener noreferrer" class="second-third-card-button font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] bg-transparent border border-[#B3B6C1] text-[#EDF2FC] no-underline inline-block text-center">{textConfig.privateCloud.exclusiveCard.buttonText}</a>
-                </div>
+                <VersionCard 
+                    cardData={textConfig.privateCloud.exclusiveCard}
+                    cardType="exclusive"
+                    cardPosition="last"
+                    isPrivateMode={true}
+                />
             </div>
         </div>
     </div>

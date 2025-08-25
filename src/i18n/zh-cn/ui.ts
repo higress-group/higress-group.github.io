@@ -381,6 +381,13 @@ export default {
 	'functional.compare.title': '各个版本能力比对',
 	'mobile.version.select.title': '选择版本',
 	
+	// 客户端脚本用翻译（硬编码替换）
+	'script.version.community': '社区版',
+	'script.version.api.gateway': '云原生 API 网关',
+	'script.version.ai.gateway': 'AI 网关',
+	'script.version.exclusive': '飞天专属版',
+	'script.default.community.fallback': '社区版',
+	
 	// 功能比较表格数据
 	'functional.compare.section.basic.info': '基础信息',
 	'functional.compare.section.ai.capability': 'AI 能力',

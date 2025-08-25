@@ -575,7 +575,13 @@ const PrivateDataSource = [
   </div>
 </div>
 
-<script>
+<script define:vars={{ 
+  communityTitle: t('script.version.community'),
+  apiGatewayTitle: t('script.version.api.gateway'),
+  aiGatewayTitle: t('script.version.ai.gateway'),
+  exclusiveTitle: t('script.version.exclusive'),
+  defaultFallback: t('script.default.community.fallback')
+}}>
   // @ts-nocheck
   document.addEventListener('DOMContentLoaded', function() {
     let activeTab = 'Public';
@@ -592,26 +598,18 @@ const PrivateDataSource = [
       'exclusive': 'speciality'  // 专有云模式下的飞天专属版映射到speciality字段
     };
 
-    // 公有云数据版本配置（客户端硬编码）
+    // 公有云数据版本配置（使用翻译变量）
     const dataVersion = [
-      { key: 'community', value: '社区版' },
-      { key: 'api-gateway', value: '云原生 API 网关' },
-      { key: 'ai-gateway', value: 'AI 网关' }
+      { key: 'community', value: communityTitle },
+      { key: 'api-gateway', value: apiGatewayTitle },
+      { key: 'ai-gateway', value: aiGatewayTitle }
     ];
 
-    // 专有云数据版本配置（客户端硬编码）
+    // 专有云数据版本配置（使用翻译变量）
     const privateDataVersion = [
-      { key: 'community', value: '社区版' },
-      { key: 'exclusive', value: '飞天专属版' }
+      { key: 'community', value: communityTitle },
+      { key: 'exclusive', value: exclusiveTitle }
     ];
-
-    // 版本显示名称映射（客户端硬编码）
-    const versionDisplayNames = {
-      'community': '社区版',
-      'api-gateway': '云原生 API 网关',
-      'ai-gateway': 'AI 网关',
-      'exclusive': '飞天专属版'
-    };
 
     const functionalCompareWrapper = document.querySelector('.functional-compare-wrapper');
 
@@ -622,17 +620,21 @@ const PrivateDataSource = [
 
     // 滚动处理
     function handleScroll() {
-      if (functionalCompareWrapper) {
-        const distanceFromTop = functionalCompareWrapper.getBoundingClientRect().top;
-        const newIsSticky = distanceFromTop < 0;
-        
-        if (newIsSticky !== isSticky) {
-          isSticky = newIsSticky;
-          const stickyTable = document.getElementById('sticky-table-bottom');
-          if (stickyTable) {
-            // 修复逻辑：当滚动到顶部且面板是折叠状态时显示吸底
-            stickyTable.style.display = isSticky && isCollapsed ? 'block' : 'none';
-          }
+      // 添加安全检查
+      if (!functionalCompareWrapper) {
+        return;
+      }
+      
+      const distanceFromTop = functionalCompareWrapper.getBoundingClientRect().top;
+      const distanceFromTop = functionalCompareWrapper.getBoundingClientRect().top;
+      const newIsSticky = distanceFromTop < 0;
+      
+      if (newIsSticky !== isSticky) {
+        isSticky = newIsSticky;
+        const stickyTable = document.getElementById('sticky-table-bottom');
+        if (stickyTable) {
+          // 修复逻辑：当滚动到顶部且面板是折叠状态时显示吸底
+          stickyTable.style.display = isSticky && isCollapsed ? 'block' : 'none';
         }
       }
     }
@@ -752,11 +754,11 @@ const PrivateDataSource = [
           if (activeTab === 'Private') {
             // 专有云模式使用 privateDataVersion 数据
             const privateVersion = privateDataVersion.find(v => v.key === version);
-            displayName = privateVersion ? privateVersion.value : '社区版';
+            displayName = privateVersion ? privateVersion.value : defaultFallback;
           } else {
             // 公有云模式使用 dataVersion 数据
             const publicVersion = dataVersion.find(v => v.key === version);
-            displayName = publicVersion ? publicVersion.value : '社区版';
+            displayName = publicVersion ? publicVersion.value : defaultFallback;
           }
           
           if (versionText) {
@@ -781,10 +783,10 @@ const PrivateDataSource = [
         let displayName;
         if (activeTab === 'Private') {
           const privateVersion = privateDataVersion.find(v => v.key === version);
-          displayName = privateVersion ? privateVersion.value : '社区版';
+          displayName = privateVersion ? privateVersion.value : defaultFallback;
         } else {
           const publicVersion = dataVersion.find(v => v.key === version);
-          displayName = publicVersion ? publicVersion.value : '社区版';
+          displayName = publicVersion ? publicVersion.value : defaultFallback;
         }
         versionText.textContent = displayName;
       }
@@ -855,9 +857,19 @@ const PrivateDataSource = [
     }
 
     // 组件卸载时清理事件监听器
-    window.addEventListener('beforeunload', function() {
+    function cleanupEventListeners() {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('tabChanged', handleTabChange);
+    }
+    
+    window.addEventListener('beforeunload', cleanupEventListeners);
+    window.addEventListener('pagehide', cleanupEventListeners);
+    
+    // 为了兼容性，也在 visibilitychange 事件中清理
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'hidden') {
+        cleanupEventListeners();
+      }
     });
 
     // 执行初始化

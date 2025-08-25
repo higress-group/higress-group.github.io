@@ -1,0 +1,101 @@
+---
+import PricingTabs from './PricingTabs.astro';
+
+interface Props {
+  cardData: {
+    title: string;
+    price?: string;
+    priceDescription?: string;
+    subtitle?: string;
+    description: string;
+    features?: string[];
+    buttonText: string;
+    buttonUrl: string;
+    tabLabels?: any;
+    content?: any;
+  };
+  cardType: 'community' | 'api-gateway' | 'ai-gateway' | 'exclusive';
+  cardPosition: 'first' | 'middle' | 'last';
+  isPrivateMode?: boolean;
+}
+
+const { cardData, cardType, cardPosition, isPrivateMode = false } = Astro.props;
+
+// 根据卡片类型确定样式
+const getCardClasses = () => {
+  const baseClasses = "card-hover-effect flex-1 rounded-2xl p-6 text-center min-h-[446px] flex flex-col";
+  
+  if (cardType === 'community') {
+    const sizeClasses = isPrivateMode ? "max-w-full lg:max-w-[442px]" : "lg:flex-1 max-w-full";
+    return `${baseClasses} ${sizeClasses} bg-[#EDF2FC] text-[#121316]`;
+  } else if (cardType === 'exclusive') {
+    return `${baseClasses} max-w-full lg:max-w-[442px] lg:ml-4 bg-[#1E1F24] text-[#DDDEE4]`;
+  } else {
+    // api-gateway, ai-gateway
+    const marginClasses = cardPosition === 'middle' ? "lg:ml-4 lg:mr-4" : "lg:flex-1";
+    return `${baseClasses} ${marginClasses} bg-[#1E1F24] text-[#DDDEE4] max-w-full`;
+  }
+};
+
+const getButtonClasses = () => {
+  const baseClasses = "font-medium rounded-[27px] px-6 py-3 cursor-pointer mt-auto mb-[24px] no-underline inline-block text-center";
+  
+  if (cardType === 'community') {
+    return `${baseClasses} first-card-button bg-[#121316] text-[#EDF2FC]`;
+  } else {
+    return `${baseClasses} second-third-card-button bg-transparent border border-[#B3B6C1] text-[#EDF2FC]`;
+  }
+};
+
+const titleMarginClass = (cardType === 'community' || cardType === 'exclusive') ? "mb-[3rem]" : "mb-0";
+---
+
+<div class={getCardClasses()}>
+  <!-- 标题 -->
+  <div class={`text-2xl ${titleMarginClass}`}>{cardData.title}</div>
+  
+  <!-- 中间内容区域 -->
+  {cardType === 'community' && (
+    <div class="text-[44px] font-medium leading-[48px] border-t border-b border-[#DDDEE4] py-[38px]">
+      {cardData.price}
+      <div class="text-xs mt-2" style="color: #121316; font-size: 12px;">{cardData.priceDescription}</div>
+    </div>
+  )}
+  
+  {cardType === 'exclusive' && (
+    <div class="text-[44px] font-medium leading-[48px] border-t border-b border-[#2E3038] py-[38px]">
+      {cardData.subtitle}
+      <div class="text-xs mt-2" style="color: #9295A5; font-size: 12px;">{cardData.description}</div>
+    </div>
+  )}
+  
+  {(cardType === 'api-gateway' || cardType === 'ai-gateway') && cardData.tabLabels && cardData.content && (
+    <PricingTabs 
+      id={cardType === 'api-gateway' ? 'card2' : 'card3'}
+      tabLabels={cardData.tabLabels}
+      content={cardData.content}
+    />
+  )}
+  
+  <!-- 描述区域 -->
+  {cardType === 'community' && (
+    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">{cardData.description}</div>
+  )}
+  
+  {(cardType === 'api-gateway' || cardType === 'ai-gateway') && (
+    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">{cardData.description}</div>
+  )}
+  
+  {cardType === 'exclusive' && cardData.features && (
+    <div class="text-xs font-normal leading-4 text-[#818598] mt-[33px] flex-grow">
+      {cardData.features.map((feature, index) => (
+        <div class="text-xs font-normal" style="color: #9295A5;">{feature}</div>
+      ))}
+    </div>
+  )}
+  
+  <!-- 按钮 -->
+  <a href={cardData.buttonUrl} target="_blank" rel="noopener noreferrer" class={getButtonClasses()}>
+    {cardData.buttonText}
+  </a>
+</div>
