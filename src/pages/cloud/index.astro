@@ -10,7 +10,7 @@ const t = useTranslations(Astro);
 <BaseLayout title={t("cloud.title")} description={t("cloud.description")}>
   <CloudIntroduce />
 
-  <FunctionalCompareAstro /> 
+  <FunctionalCompareAstro client:load /> 
 
   <CloudFooter />
 </BaseLayout>

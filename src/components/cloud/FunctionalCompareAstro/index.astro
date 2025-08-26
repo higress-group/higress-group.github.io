@@ -290,7 +290,7 @@ const PrivateDataSource = [
       <input type="checkbox" id="collapse-checkbox" class="collapse-input" />
       <div class="collapse-title text-2xl font-normal">{t('functional.compare.title')}</div>
       <div class="collapse-content-dynamic">
-        <div id="public-tables">
+        <div id="public-tables" style="display: block;">
           {versionDataSource.map((item, index) => (
             <Tableplugin 
               dataSource={item.data} 
@@ -577,292 +577,260 @@ const PrivateDataSource = [
 
 <script>
   // @ts-nocheck
-  document.addEventListener('DOMContentLoaded', function() {
-    let activeTab = 'Public';
-    let isSafariBrowser = true;
-    let version = 'community'; // 默认选中社区版（使用key）
-    let isSticky = false;
-    let isShow = false;
-    let isCollapsed = true;
+  // 简化的初始化逻辑，适配 client:load 指令
+  
+  let activeTab = 'Public';
+  let version = 'community';
+  let isSticky = false;
+  let isShow = false;
+  let isCollapsed = true;
+  
+  const versionContain = {
+    'community': 'free',
+    'api-gateway': 'speciality', 
+    'ai-gateway': 'serverless',
+    'exclusive': 'speciality'
+  };
+  
+  // 公有云数据版本配置
+  const dataVersion = [
+    { key: 'community', value: '社区版' },
+    { key: 'api-gateway', value: '云原生 API 网关' },
+    { key: 'ai-gateway', value: 'AI 网关' }
+  ];
 
-    const versionContain = {
-      'community': 'free',
-      'api-gateway': 'speciality',
-      'ai-gateway': 'serverless',
-      'exclusive': 'speciality'  // 专有云模式下的飞天专属版映射到speciality字段
-    };
+  // 专有云数据版本配置
+  const privateDataVersion = [
+    { key: 'community', value: '社区版' },
+    { key: 'exclusive', value: '飞天专属版' }
+  ];
 
-    // 公有云数据版本配置（直接使用中文）
-    const dataVersion = [
-      { key: 'community', value: '社区版' },
-      { key: 'api-gateway', value: '云原生 API 网关' },
-      { key: 'ai-gateway', value: 'AI 网关' }
-    ];
-
-    // 专有云数据版本配置（直接使用中文）
-    const privateDataVersion = [
-      { key: 'community', value: '社区版' },
-      { key: 'exclusive', value: '飞天专属版' }
-    ];
-
-    const defaultFallback = '社区版';
-
-    const functionalCompareWrapper = document.querySelector('.functional-compare-wrapper');
-
-    // 判断是否为safari浏览器
-    function isSafari() {
-      return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    }
-
-    // 滚动处理
-    function handleScroll() {
-      // 添加安全检查
-      if (!functionalCompareWrapper) {
-        return;
+  // 判断是否为safari浏览器
+  function isSafari() {
+    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  }
+  
+  // 强制切换表格内容的函数
+  function switchTableContent(activeTabId) {
+    const publicTables = document.getElementById('public-tables');
+    const privateTables = document.getElementById('private-tables');
+    const publicStickyTable = document.getElementById('public-sticky-table');
+    const privateStickyTable = document.getElementById('private-sticky-table');
+    const publicMobileTables = document.querySelector('.public-mobile-tables');
+    const privateMobileTables = document.querySelector('.private-mobile-tables');
+    const publicOptions = document.querySelector('.public-options');
+    const privateOptions = document.querySelector('.private-options');
+    const publicHeaders = document.querySelectorAll('.public-header');
+    const privateHeaders = document.querySelectorAll('.private-header');
+    
+    // 隐藏所有内容
+    [publicTables, privateTables].forEach(el => {
+      if (el) {
+        el.style.display = 'none';
+        el.style.visibility = 'hidden';
       }
+    });
+    
+    [publicStickyTable, privateStickyTable].forEach(el => {
+      if (el) el.style.display = 'none';
+    });
+    
+    [publicMobileTables, privateMobileTables].forEach(el => {
+      if (el) el.style.display = 'none';
+    });
+    
+    [publicOptions, privateOptions].forEach(el => {
+      if (el) el.style.display = 'none';
+    });
+    
+    publicHeaders.forEach(el => {
+      el.style.display = 'none';
+      el.style.visibility = 'hidden';
+    });
+    
+    privateHeaders.forEach(el => {
+      el.style.display = 'none';
+      el.style.visibility = 'hidden';
+    });
+    
+    // 显示对应Tab内容
+    if (activeTabId === 'Public') {
+      if (publicTables) {
+        publicTables.style.display = 'block';
+        publicTables.style.visibility = 'visible';
+      }
+      if (publicStickyTable) publicStickyTable.style.display = 'table';
+      if (publicMobileTables) publicMobileTables.style.display = 'block';
+      if (publicOptions) publicOptions.style.display = 'block';
       
-      const distanceFromTop = functionalCompareWrapper.getBoundingClientRect().top;
-      const newIsSticky = distanceFromTop < 0;
+      publicHeaders.forEach(el => {
+        el.style.display = 'table';
+        el.style.visibility = 'visible';
+      });
       
-      if (newIsSticky !== isSticky) {
-        isSticky = newIsSticky;
-        const stickyTable = document.getElementById('sticky-table-bottom');
-        if (stickyTable) {
-          // 修复逻辑：当滚动到顶部且面板是折叠状态时显示吸底
-          stickyTable.style.display = isSticky && isCollapsed ? 'block' : 'none';
-        }
+    } else if (activeTabId === 'Private') {
+      if (privateTables) {
+        privateTables.style.display = 'block';
+        privateTables.style.visibility = 'visible';
       }
-    }
-
-    // Tab切换处理
-    function handleTabChange(event) {
-      activeTab = event.detail.activeTab;
+      if (privateStickyTable) privateStickyTable.style.display = 'table';
+      if (privateMobileTables) privateMobileTables.style.display = 'block';
+      if (privateOptions) privateOptions.style.display = 'block';
       
-      // 切换表格内容
-      const publicTables = document.getElementById('public-tables');
-      const privateTables = document.getElementById('private-tables');
-      const publicStickyTable = document.getElementById('public-sticky-table');
-      const privateStickyTable = document.getElementById('private-sticky-table');
-      const publicMobileTables = document.querySelector('.public-mobile-tables');
-      const privateMobileTables = document.querySelector('.private-mobile-tables');
-      const publicOptions = document.querySelector('.public-options');
-      const privateOptions = document.querySelector('.private-options');
-      
-      if (activeTab === 'Public') {
-        // 显示公有云内容
-        if (publicTables) publicTables.style.display = 'block';
-        if (privateTables) privateTables.style.display = 'none';
-        if (publicStickyTable) publicStickyTable.style.display = 'table';
-        if (privateStickyTable) privateStickyTable.style.display = 'none';
-        if (publicMobileTables) publicMobileTables.style.display = 'block';
-        if (privateMobileTables) privateMobileTables.style.display = 'none';
-        if (publicOptions) publicOptions.style.display = 'block';
-        if (privateOptions) privateOptions.style.display = 'none';
-        
-        // 通知Tableplugin组件切换到公有云模式
-        const publicHeaders = document.querySelectorAll('.public-header');
-        const privateHeaders = document.querySelectorAll('.private-header');
-        publicHeaders.forEach(header => header.style.display = 'table');
-        privateHeaders.forEach(header => header.style.display = 'none');
-        
-        // 重置移动端选中状态为社区版
-        version = 'community';
-        updateMobileVersionText();
-      } else if (activeTab === 'Private') {
-        // 显示专有云内容
-        if (publicTables) publicTables.style.display = 'none';
-        if (privateTables) privateTables.style.display = 'block';
-        if (publicStickyTable) publicStickyTable.style.display = 'none';
-        if (privateStickyTable) privateStickyTable.style.display = 'table';
-        if (publicMobileTables) publicMobileTables.style.display = 'none';
-        if (privateMobileTables) privateMobileTables.style.display = 'block';
-        if (publicOptions) publicOptions.style.display = 'none';
-        if (privateOptions) privateOptions.style.display = 'block';
-        
-        // 通知Tableplugin组件切换到专有云模式
-        const publicHeaders = document.querySelectorAll('.public-header');
-        const privateHeaders = document.querySelectorAll('.private-header');
-        publicHeaders.forEach(header => header.style.display = 'none');
-        privateHeaders.forEach(header => header.style.display = 'table');
-        
-        // 重置移动端选中状态为社区版
-        version = 'community';
-        updateMobileVersionText();
-      }
-      
-      // 更新移动端内容显示
-      updateMobileContent();
-    }
-
-    // 折叠面板处理
-    function handleCollapseToggle() {
-      const collapseCheckbox = document.getElementById('collapse-checkbox');
-      if (collapseCheckbox) {
-        collapseCheckbox.addEventListener('change', function() {
-          isCollapsed = this.checked;
-          const stickyTable = document.getElementById('sticky-table-bottom');
-          if (stickyTable) {
-            // 修复逻辑：当滚动到顶部且面板是折叠状态时显示吸底
-            stickyTable.style.display = isSticky && isCollapsed ? 'block' : 'none';
-          }
-        });
-      }
-    }
-
-    // 移动端版本选择处理
-    function handleMobileVersionSelect() {
-      const modal = document.querySelector('.mobile-modal');
-      const modalToggle = document.getElementById('my_modal_6');
-      const versionText = document.querySelector('.version-text');
-      const closeModal = document.querySelector('.close-modal');
-      const btnSelects = document.querySelectorAll('.btn-select');
-
-      // 监听checkbox状态变化
-      if (modalToggle && modal) {
-        modalToggle.addEventListener('change', function() {
-          isShow = this.checked;
-          modal.style.display = isShow ? 'flex' : 'none';
-        });
-      }
-
-      // 关闭按钮
-      if (closeModal && modalToggle && modal) {
-        closeModal.addEventListener('click', function() {
-          isShow = false;
-          modalToggle.checked = false;
-          modal.style.display = 'none';
-        });
-      }
-
-      // 版本选择按钮
-      btnSelects.forEach(btn => {
-        btn.addEventListener('click', function() {
-          const buttonElement = this;
-          version = buttonElement.dataset.version || 'community';
-          
-          // 根据当前 tab 状态显示名称
-          let displayName;
-          if (activeTab === 'Private') {
-            const privateVersion = privateDataVersion.find(v => v.key === version);
-            displayName = privateVersion ? privateVersion.value : defaultFallback;
-          } else {
-            const publicVersion = dataVersion.find(v => v.key === version);
-            displayName = publicVersion ? publicVersion.value : defaultFallback;
-          }
-          
-          if (versionText) {
-            versionText.textContent = displayName;
-          }
-          
-          // 更新移动端显示内容
-          updateMobileContent();
-          
-          // 关闭模态框
-          isShow = false;
-          if (modalToggle) modalToggle.checked = false;
-          if (modal) modal.style.display = 'none';
-        });
+      privateHeaders.forEach(el => {
+        el.style.display = 'table';
+        el.style.visibility = 'visible';
       });
     }
-
-    // 更新移动端版本文本显示
-    function updateMobileVersionText() {
-      const versionText = document.querySelector('.version-text');
-      if (versionText) {
-        let displayName;
-        if (activeTab === 'Private') {
-          const privateVersion = privateDataVersion.find(v => v.key === version);
-          displayName = privateVersion ? privateVersion.value : defaultFallback;
-        } else {
-          const publicVersion = dataVersion.find(v => v.key === version);
-          displayName = publicVersion ? publicVersion.value : defaultFallback;
-        }
-        versionText.textContent = displayName;
+    
+    updateMobileVersionText();
+  }
+  
+  // Tab切换处理
+  function handleTabChange(event) {
+    activeTab = event.detail.activeTab;
+    switchTableContent(activeTab);
+    updateMobileContent();
+  }
+  
+  // 滚动处理
+  function handleScroll() {
+    const functionalWrapper = document.querySelector('.functional-compare-wrapper');
+    if (!functionalWrapper) return;
+    
+    const distanceFromTop = functionalWrapper.getBoundingClientRect().top;
+    const newIsSticky = distanceFromTop < 0;
+    
+    if (newIsSticky !== isSticky) {
+      isSticky = newIsSticky;
+      const stickyTable = document.getElementById('sticky-table-bottom');
+      if (stickyTable) {
+        stickyTable.style.display = isSticky && isCollapsed ? 'block' : 'none';
       }
     }
-
-    // 更新移动端内容显示
-    function updateMobileContent() {
-      const versionKey = versionContain[version];
-      
-      if (activeTab === 'Private') {
-        // 专有云模式：更新专有云移动端表格的版本内容
-        const privateVersionContents = document.querySelectorAll('.private-mobile-tables .version-content-private');
-        privateVersionContents.forEach(content => {
-          if (content.dataset.version === versionKey) {
-            content.style.display = 'block';
-          } else {
-            content.style.display = 'none';
-          }
-        });
-      } else {
-        // 公有云模式：更新公有云移动端表格的版本内容
-        const publicVersionContents = document.querySelectorAll('.public-mobile-tables .version-content');
-        publicVersionContents.forEach(content => {
-          if (content.dataset.version === versionKey) {
-            content.style.display = 'block';
-          } else {
-            content.style.display = 'none';
-          }
-        });
-      }
-    }
-
-    // 初始化
-    function init() {
-      isSafariBrowser = isSafari();
-      
-      // 确保页面可以正常滚动
-      document.body.style.overflow = '';
-      
-      // 如果不是safari浏览器，显示折叠功能
-      const collapseCheckbox = document.getElementById('collapse-checkbox');
-      const collapseContent = document.querySelector('.collapse-content-dynamic');
-      
-      if (!isSafariBrowser && collapseCheckbox) {
-        collapseCheckbox.style.display = 'block';
-        // 设置 checkbox 的初始状态：isCollapsed=true 时 checkbox 应该是选中的
-        collapseCheckbox.checked = isCollapsed;
-        // 为非 Safari 浏览器添加 collapse-content 类
-        if (collapseContent) {
-          collapseContent.classList.add('collapse-content');
-        }
-      } else if (collapseCheckbox) {
-        collapseCheckbox.style.display = 'none';
-        // Safari 浏览器不添加 collapse-content 类，保持展开状态
-        if (collapseContent) {
-          collapseContent.classList.remove('collapse-content');
-        }
-      }
-
-      // 绑定事件监听器
-      window.addEventListener('scroll', handleScroll);
-      window.addEventListener('tabChanged', handleTabChange);
-      
-      // 初始化各种处理函数
-      handleCollapseToggle();
-      handleMobileVersionSelect();
-      
-      // 初始化移动端版本显示
-      updateMobileContent();
-    }
-
-    // 组件卸载时清理事件监听器
-    function cleanupEventListeners() {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('tabChanged', handleTabChange);
+  }
+  
+  // 移动端版本文本更新
+  function updateMobileVersionText() {
+    const versionText = document.querySelector('.version-text');
+    if (!versionText) return;
+    
+    let displayName = '社区版';
+    if (activeTab === 'Private') {
+      const found = privateDataVersion.find(v => v.key === version);
+      displayName = found ? found.value : '社区版';
+    } else {
+      const found = dataVersion.find(v => v.key === version);
+      displayName = found ? found.value : '社区版';
     }
     
-    // 只在页面真正卸载时清理，避免移动端弹窗交互干扰
-    window.addEventListener('beforeunload', cleanupEventListeners);
-    window.addEventListener('pagehide', cleanupEventListeners);
-
-    // 执行初始化
+    versionText.textContent = displayName;
+  }
+  
+  // 移动端内容更新
+  function updateMobileContent() {
+    const versionKey = versionContain[version];
+    
+    if (activeTab === 'Private') {
+      const contents = document.querySelectorAll('.private-mobile-tables .version-content-private');
+      contents.forEach(content => {
+        content.style.display = content.dataset.version === versionKey ? 'block' : 'none';
+      });
+    } else {
+      const contents = document.querySelectorAll('.public-mobile-tables .version-content');
+      contents.forEach(content => {
+        content.style.display = content.dataset.version === versionKey ? 'block' : 'none';
+      });
+    }
+  }
+  
+  // 初始化函数
+  function init() {
+    // 应用基础样式
+    const functionalWrapper = document.querySelector('.functional-compare-wrapper');
+    if (functionalWrapper) {
+      functionalWrapper.style.paddingLeft = '1rem';
+      functionalWrapper.style.paddingRight = '1rem';
+    }
+    
+    // Safari折叠功能处理
+    const collapseCheckbox = document.getElementById('collapse-checkbox');
+    const collapseContent = document.querySelector('.collapse-content-dynamic');
+    
+    if (!isSafari() && collapseCheckbox) {
+      collapseCheckbox.style.display = 'block';
+      collapseCheckbox.checked = isCollapsed;
+      if (collapseContent) {
+        collapseContent.classList.add('collapse-content');
+      }
+      
+      // 监听折叠状态变化
+      collapseCheckbox.addEventListener('change', function() {
+        isCollapsed = this.checked;
+        const stickyTable = document.getElementById('sticky-table-bottom');
+        if (stickyTable) {
+          stickyTable.style.display = isSticky && isCollapsed ? 'block' : 'none';
+        }
+      });
+    } else if (collapseCheckbox) {
+      collapseCheckbox.style.display = 'none';
+      if (collapseContent) {
+        collapseContent.classList.remove('collapse-content');
+      }
+    }
+    
+    // 移动端模态框处理
+    const modal = document.querySelector('.mobile-modal');
+    const modalToggle = document.getElementById('my_modal_6');
+    const closeModal = document.querySelector('.close-modal');
+    const btnSelects = document.querySelectorAll('.btn-select');
+    
+    if (modalToggle && modal) {
+      modalToggle.addEventListener('change', function() {
+        isShow = this.checked;
+        modal.style.display = isShow ? 'flex' : 'none';
+      });
+    }
+    
+    if (closeModal && modalToggle && modal) {
+      closeModal.addEventListener('click', function() {
+        isShow = false;
+        modalToggle.checked = false;
+        modal.style.display = 'none';
+      });
+    }
+    
+    btnSelects.forEach(btn => {
+      btn.addEventListener('click', function() {
+        version = this.dataset.version || 'community';
+        updateMobileVersionText();
+        updateMobileContent();
+        
+        isShow = false;
+        if (modalToggle) modalToggle.checked = false;
+        if (modal) modal.style.display = 'none';
+      });
+    });
+    
+    // 绑定事件监听器
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('tabChanged', handleTabChange);
+    
+    // 强制初始化为公有云模式
+    switchTableContent('Public');
+    updateMobileContent();
+  }
+  
+  // 确保在client:load模式下正确初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    // DOM已经加载完成，立即初始化
     init();
-  });
+  }
 </script>
 
-<style>
+<style is:global>
   @import url('./style.css');
 
   .functional-compare-astro {
@@ -876,6 +844,83 @@ const PrivateDataSource = [
 
   .tab-content-private.hidden {
     display: none !important;
+  }
+
+  /* 确保表格容器有正确的padding */
+  .functional-compare-wrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* 强制表格样式立即生效 */
+  .functional-compare-astro .tableplugin {
+    overflow-x: auto;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+    background: theme('colors.secondary');
+  }
+
+  .functional-compare-astro .tableplugin table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  .functional-compare-astro .tableplugin td {
+    height: 60px;
+    border-left: 1px solid #dddee4;
+    border-right: 1px solid #dddee4;
+    border-bottom: 1px solid #dddee4;
+    padding: 0.5rem;
+  }
+
+  .functional-compare-astro .tableplugin th {
+    border-left: 1px solid #dddee4;
+    border-bottom: hidden;
+    text-align: center;
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 32px;
+    color: theme("colors.neutral");
+    padding: 1rem;
+  }
+
+  .functional-compare-astro .col1 {
+    width: 70px;
+    border: none;
+  }
+
+  .functional-compare-astro .col2 {
+    width: 200px;
+    border-left: none;
+  }
+
+  .functional-compare-astro .col3,
+  .functional-compare-astro .col4,
+  .functional-compare-astro .col5 {
+    width: 210px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+
+  /* 专有云模式样式 */
+  .functional-compare-astro .private-header .col3,
+  .functional-compare-astro .private-header .col4 {
+    width: 315px;
+  }
+
+  .functional-compare-astro .private-mode .col3,
+  .functional-compare-astro .private-mode .col4 {
+    width: 315px;
+  }
+
+  .functional-compare-astro .private-mode .col4 {
+    border-right: none;
+  }
+
+  .functional-compare-astro .col5 {
+    border-right: none;
   }
 
   /* Safari浏览器折叠功能样式 */
@@ -946,6 +991,10 @@ const PrivateDataSource = [
     #sticky-table-bottom {
       display: none !important;
     }
+
+    .functional-compare-wrapper {
+      padding: 1.5rem;
+    }
   }
 
   @media (min-width: 50rem) {
@@ -962,5 +1011,10 @@ const PrivateDataSource = [
     width: 85.125rem;
     max-width: 100%;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 确保组件初始化时样式立即应用 */
+  .functional-compare-astro * {
+    box-sizing: border-box;
   }
 </style>
