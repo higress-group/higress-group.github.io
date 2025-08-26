@@ -1,0 +1,145 @@
+---
+import Correct from "./Correct.astro";
+import False from "./False.astro";
+
+interface Props {
+  dataSource: any[];
+  title: string;
+  isHead?: boolean;
+  dataVersion?: Array<{ key: string; value: string }>;
+  privateDataVersion?: Array<{ key: string; value: string }>;
+  isPrivateMode?: boolean;
+}
+
+const { dataSource, title, isHead = false, dataVersion, privateDataVersion, isPrivateMode = false } = Astro.props;
+const totalRows = dataSource.length;
+---
+
+<div class="tableplugin overflow-x-auto rounded-2xl mb-6">
+  {isHead && (
+    <>
+      {/* 公有云表格头 */}
+      <table class='w-full public-header bg-error' style="display: table;">
+        <tr>
+          <th class="col1 border-0" />
+          <th class="col2 border-0" />
+          {dataVersion && dataVersion.map((version, index) => (
+            <th class={`col${index + 3} ${index === 0 ? 'overflow-hidden' : ''}`}>
+              <p class="mb-6 text-2xl font-normal"> {version.value}</p>
+            </th>
+          ))}
+        </tr>
+      </table>
+      
+      {/* 专有云表格头 */}
+      <table class='w-full private-header bg-error' style="display: none;">
+        <tr>
+          <th class="col1 border-0" />
+          <th class="col2 border-0" />
+          {privateDataVersion && privateDataVersion.map((version, index) => (
+            <th class={`col${index + 3} ${index === 0 ? 'overflow-hidden' : ''}`}>
+              <p class="mb-6 text-2xl font-normal"> {version.value}</p>
+            </th>
+          ))}
+        </tr>
+      </table>
+    </>
+  )}
+  
+  <table class={`table bg-secondary table-fixed ${isPrivateMode ? 'private-mode' : ''}`}>
+    {dataSource.map((item, index) => (
+      <tr>
+        {index === 0 && (
+          <td
+            class="col1 text-[12px] align-top text-center leading-8"
+            rowspan={totalRows}
+          >
+            {title}
+          </td>
+        )}
+        <td class="col2 text-base font-normal color-gray-14">
+          {item.name.title && <p>{item.name.title}</p>}
+          {item.name.des && <p class="text-xs">{item.name.des}</p>}
+        </td>
+        
+        {/* 社区版列 */}
+        <td class="col3 text-center">
+          {typeof item.free?.checked === 'boolean' && (
+            item.free.checked ? <Correct /> : <False />
+          )}
+          {item.free?.des && (
+            <p class="text-xs font-normal color-gray-08">
+              {item.free.des}
+            </p>
+          )}
+        </td>
+        
+        {/* 第二列：公有云模式显示云原生API网关，专有云模式显示飞天专属版 */}
+        <td class="col4 text-center">
+          {typeof item.speciality?.checked === 'boolean' && (
+            item.speciality.checked ? <Correct /> : <False />
+          )}
+          {item.speciality?.des && (
+            Array.isArray(item.speciality.des) ? (
+              item.speciality.des.map((descItem) => (
+                <p class="text-xs font-normal color-gray-08 mb-1">
+                  {descItem}
+                </p>
+              ))
+            ) : (
+              <p class="text-xs font-normal color-gray-08">
+                {item.speciality.des}
+              </p>
+            )
+          )}
+        </td>
+        
+        {/* 第三列：AI网关，只在公有云模式下显示 */}
+        {!isPrivateMode && (
+          <td class="col5 text-center">
+            {typeof item.serverless?.checked === 'boolean' && (
+              item.serverless.checked ? <Correct /> : <False />
+            )}
+            {item.serverless?.des && (
+              Array.isArray(item.serverless.des) ? (
+                item.serverless.des.map((descItem) => (
+                  <p class="text-xs font-normal color-gray-08 mb-1">
+                    {descItem}
+                  </p>
+                ))
+              ) : (
+                <p class="text-xs font-normal color-gray-08">
+                  {item.serverless.des}
+                </p>
+              )
+            )}
+          </td>
+        )}
+      </tr>
+    ))}
+  </table>
+</div>
+
+<script>
+  // @ts-nocheck
+  document.addEventListener('DOMContentLoaded', function() {
+    // 监听 tab 切换事件
+    window.addEventListener('tabChanged', function(event) {
+      const activeTab = event.detail.activeTab;
+      const publicHeaders = document.querySelectorAll('.public-header');
+      const privateHeaders = document.querySelectorAll('.private-header');
+      
+      if (activeTab === 'Public') {
+        publicHeaders.forEach(header => header.style.display = 'table');
+        privateHeaders.forEach(header => header.style.display = 'none');
+      } else if (activeTab === 'Private') {
+        publicHeaders.forEach(header => header.style.display = 'none');
+        privateHeaders.forEach(header => header.style.display = 'table');
+      }
+    });
+  });
+</script>
+
+<style>
+  @import url('./style.tableplugin.css');
+</style>

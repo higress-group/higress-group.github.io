@@ -1,6 +1,6 @@
 functional-compare {
   .table :where(thead tr, tbody tr:not(:last-child), tbody tr:first-child:last-child) {
-      border-bottom: 1px dotted #818598;
+      border-bottom: 1px solid #dddee4;
     }
   
     .collapse-content {
@@ -13,7 +13,7 @@ functional-compare {
   }
 
   th {
-    border-left: 1px dotted theme("colors.success");
+    border-left: 1px solid #dddee4;
     border-bottom: hidden;
     text-align: center;
     font-size: 24px;
@@ -42,6 +42,12 @@ functional-compare {
     line-height: 18px;
     padding-left: 0px;
     padding-right: 0px;
+  }
+
+  /* 专有云模式：吸底表格列宽样式 */
+  #private-sticky-table .col3,
+  #private-sticky-table .col4 {
+    width: 315px; /* 与专有云表格头保持一致 */
   }
 
   #sticky-table-bottom {

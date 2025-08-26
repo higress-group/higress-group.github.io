@@ -337,4 +337,132 @@ export default {
 	"page.team.introduction.3.collect.btn": '去填报',
 	"page.team.introduction.3.enroll.text": '活动报名',
 	"page.team.introduction.3.enroll.btn": '去报名',
+
+	// VersionComparison组件相关文案
+	'version.comparison.main.tabs.public': '公共云',
+	'version.comparison.main.tabs.private': '专有云',
+	
+	// 社区版卡片
+	'version.comparison.community.title': '社区版',
+	'version.comparison.community.price': 'Free',
+	'version.comparison.community.price.description': '免费使用',
+	'version.comparison.community.description': '自行构建和维护，不保障 SLA',
+	'version.comparison.community.button': '了解详情',
+	
+	// 云原生API网关卡片
+	'version.comparison.api.gateway.title': '云原生 API 网关',
+	'version.comparison.api.gateway.description': '规格：apigw.dev.x1起步',
+	'version.comparison.api.gateway.button': '了解详情',
+	'version.comparison.api.gateway.tab.pay.as.go': '按量付费',
+	'version.comparison.api.gateway.tab.yearly': '包年包月',
+	'version.comparison.api.gateway.pay.as.go.price': '¥0.826/小时起',
+	'version.comparison.api.gateway.yearly.price': '¥416元/月起',
+	'version.comparison.api.gateway.yearly.discount': '优惠：首购6折，续费原价',
+	
+	// AI网关卡片
+	'version.comparison.ai.gateway.title': 'AI 网关',
+	'version.comparison.ai.gateway.description': '规格：apigw.small.x1起步',
+	'version.comparison.ai.gateway.button': '了解详情',
+	'version.comparison.ai.gateway.tab.pay.as.go': '按量付费',
+	'version.comparison.ai.gateway.tab.yearly': '包年包月',
+	'version.comparison.ai.gateway.pay.as.go.price': '¥7.934 /小时起',
+	'version.comparison.ai.gateway.yearly.price': '¥3997.5元/月起',
+	'version.comparison.ai.gateway.yearly.discount': '优惠：首购6折，续费原价',
+	
+	// 飞天专属版卡片
+	'version.comparison.exclusive.title': '飞天专属版',
+	'version.comparison.exclusive.subtitle': '尊享服务',
+	'version.comparison.exclusive.description': '适用于企业本地化部署',
+	'version.comparison.exclusive.feature.performance': '性能与资源：匹配业务规模，弹性可伸缩',
+	'version.comparison.exclusive.feature.sla': 'SLA：按需协商，极致保障',
+	'version.comparison.exclusive.button': '联系我们',
+	
+	// 功能比较组件
+	'functional.compare.title': '各个版本能力比对',
+	'mobile.version.select.title': '选择版本',
+	
+	// 客户端脚本用翻译（硬编码替换）
+	'script.version.community': '社区版',
+	'script.version.api.gateway': '云原生 API 网关',
+	'script.version.ai.gateway': 'AI 网关',
+	'script.version.exclusive': '飞天专属版',
+	'script.default.community.fallback': '社区版',
+	
+	// 功能比较表格数据
+	'functional.compare.section.basic.info': '基础信息',
+	'functional.compare.section.ai.capability': 'AI 能力',
+	'functional.compare.section.cost': '成本',
+	'functional.compare.section.stability': '稳定性',
+	'functional.compare.section.performance': '性能',
+	'functional.compare.section.security': '安全性',
+	'functional.compare.section.security.compliance': '安全合规',
+	'functional.compare.section.usability': '易用性',
+	'functional.compare.section.version.description': '版本描述',
+	
+	// 基础信息
+	'functional.compare.version.description': '版本描述',
+	'functional.compare.applicable.scenario': '适用场景',
+	'functional.compare.community.description': '具备云原生 API 网关和 AI 网关的开源能力',
+	'functional.compare.speciality.description': '将 API 管理、流量网关和微服务网关能力深度整合，是高性能、高扩展性网关；统一代理大模型 API 和 MCP Server，并提供丰富的集成和治理能力。',
+	'functional.compare.serverless.description': '统一代理大模型 API 和 MCP Server，并提供丰富的集成和治理能力。',
+	'functional.compare.community.scenario': '需要使用者具备一定的开发和维护能力，自行兜底稳定性、性能、云产品集成和易用性。',
+	'functional.compare.speciality.scenario': '开箱即用，在稳定性、性能、云产品集成和易用性上，比社区版更有优势，并提供工单、钉群、线下等商业服务支持。',
+	'functional.compare.serverless.scenario': '开箱即用，在稳定性、性能、云产品集成和易用性上，比社区版更有优势，并提供工单、钉群等商业服务支持。',
+	
+	// AI 能力
+	'functional.compare.ai.proxy': '代理',
+	'functional.compare.ai.multi.model.gray': '多模型灰度',
+	'functional.compare.ai.multi.model.failover': '多模型间 Failover',
+	'functional.compare.ai.token.management': 'Token 额度管理和流控',
+	'functional.compare.ai.route.auth': '路由配置认证',
+	'functional.compare.ai.consumer.auth': '消费者鉴权',
+	'functional.compare.ai.online.search': '联网搜索',
+	'functional.compare.ai.enterprise.observability': '企业级可观测',
+	'functional.compare.ai.api.to.mcp': 'API-to-MCP',
+	'functional.compare.ai.mcp.protocol': 'MCP 协议卸载',
+	'functional.compare.ai.mcp.market': 'MCP 市场',
+	'functional.compare.ai.mcp.tools': 'MCP工具组装',
+	'functional.compare.ai.auth.algorithms': '更丰富的认证算法： jwt/hmac/oauth2',
+	'functional.compare.ai.auth.granularity': '更精细的鉴权粒度： MCP工具',
+	
+	// 成本
+	'functional.compare.cost.managed': '全托管、免运维',
+	'functional.compare.cost.scaling': '系统搭建和扩缩容',
+	
+	// 稳定性
+	'functional.compare.stability.multi.zone': '多可用区部署',
+	'functional.compare.stability.auto.recovery': '故障自动检测及恢复',
+	'functional.compare.stability.rate.limiting': '限流降级',
+	'functional.compare.stability.monitoring': '监控告警',
+	'functional.compare.stability.sla': 'SLA',
+	'functional.compare.stability.route.level': '支持路由级',
+	'functional.compare.stability.token.limiting': '支持 Token 限流',
+	
+	// 性能
+	'functional.compare.performance.kernel': '内核优化',
+	'functional.compare.performance.hardware': '软硬一体',
+	'functional.compare.performance.optimization': '自行调优',
+	
+	// 安全性
+	'functional.compare.security.waf': 'WAF 防护',
+	'functional.compare.security.oidc': 'OIDC认证',
+	'functional.compare.security.encryption': '加密凭证',
+	'functional.compare.security.aigc': 'AIGC防护（安全围栏）',
+	'functional.compare.security.auth': '认证鉴权',
+	'functional.compare.security.waf.multi.layer': '多一层WAF网关，请求链路长',
+	'functional.compare.security.waf.builtin': '内置 WAF，链路和响应时间更短，并提供插件模式',
+	'functional.compare.security.waf.aliyun': '深度集成阿里云 WAF 产品',
+	'functional.compare.security.idaas.aliyun': '深度集成阿里云 IDAAS 产品',
+	'functional.compare.security.kms.aliyun': '深度集成阿里云 KMS 产品',
+	'functional.compare.security.content.aliyun': '深度集成阿里云内容安全产品',
+	
+	// 易用性
+	'functional.compare.usability.api.lifecycle': 'API全生命周期管理',
+	'functional.compare.usability.microservice.limiting': '面向微服务的限流降级',
+	'functional.compare.usability.microservice.discovery': '面向微服务的多种服务发现能力',
+	'functional.compare.usability.sentinel.integration': '集成 Sentinel，开箱即用',
+	'functional.compare.usability.cloud.discovery': '支持云产品的服务发现',
+	
+	// 通用
+	'functional.compare.self.build': '自行构建',
 };

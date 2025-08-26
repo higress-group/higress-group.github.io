@@ -1,0 +1,102 @@
+.tableplugin{
+  /* 保持外层容器的圆角 */
+  border-radius: 1rem;
+  overflow: hidden;
+  
+  table,
+  td {
+    border-collapse: collapse;
+  }
+  td {
+    height: 60px;
+    border-left: 1px solid #dddee4;
+    border-right: 1px solid #dddee4;
+    border-bottom: 1px solid #dddee4;
+    padding: 12px 16px;
+  }
+  
+  /* 表格头部圆角设置 */
+  .public-header th:first-child,
+  .private-header th:first-child {
+    border-top-left-radius: 1rem;
+  }
+  
+  .public-header th:last-child,
+  .private-header th:last-child {
+    border-top-right-radius: 1rem;
+  }
+  th {
+    border-left: 1px solid #dddee4;
+    border-bottom: hidden;
+    text-align: center;
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 32px;
+    color: theme("colors.neutral");
+    padding: 12px 16px;
+  }
+  
+  /* 确保表格头中的p元素继承th的样式 */
+  th p {
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 32px;
+    color: theme("colors.neutral");
+  }
+  tr:last-child td {
+    border-bottom: none;
+}
+  .col1 {
+    width: 70px;
+    border: none !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+  .col2 {
+    width: 200px;
+    border-left: none;
+  }
+  .col3,
+  .col4,
+  .col5 {
+    width: 210px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+  
+  /* 专有云模式：只显示两列时的样式 */
+  .private-header .col3,
+  .private-header .col4 {
+    width: 315px; /* 增加宽度以适应两列布局 */
+  }
+  
+  /* 专有云模式：表格内容的列宽样式 */
+  .private-mode .col3,
+  .private-mode .col4 {
+    width: 315px; /* 与表格头保持一致 */
+  }
+  
+  /* 专有云模式：最后一列边框处理 */
+  .private-mode .col4 {
+    border-right: none;
+  }
+  .col5 {
+    border-right: none;
+  }
+  .btn {
+    width: 196px ;
+  }
+  @media (min-width: 50rem) and (max-width: 86rem) {
+    .col2,
+    .col3,
+    .col4,
+    .col5,
+    .col6 {
+      width: 100px;
+    }
+    .btn {
+      width: fit-content;
+    }
+  }
+}

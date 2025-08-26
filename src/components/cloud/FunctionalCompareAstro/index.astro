@@ -1,0 +1,1188 @@
+---
+// @ts-nocheck
+import { isSafari } from "@/utils/util"
+import { useTranslations } from "@i18n/util";
+import Tableplugin from "./Tableplugin.astro";
+import MobileTable from "./MobileTable.astro";
+import UpDown from "./UpDown.astro";
+
+const t = useTranslations(Astro);
+
+interface Props {
+  url?: string;
+  [key: string]: any;
+}
+
+const { url, ...props } = Astro.props;
+
+// 公有云数据版本配置
+const dataVersion = [
+  { key: 'community', value: t('version.comparison.community.title') },
+  { key: 'api-gateway', value: t('version.comparison.api.gateway.title') },
+  { key: 'ai-gateway', value: t('version.comparison.ai.gateway.title') }
+];
+
+// 专有云数据版本配置
+const privateDataVersion = [
+  { key: 'community', value: t('version.comparison.community.title') },
+  { key: 'exclusive', value: t('version.comparison.exclusive.title') }
+];
+
+const versionContain = {
+  'community': 'free',
+  'api-gateway': 'speciality',
+  'ai-gateway': 'serverless',
+  'exclusive': 'speciality'  // 专有云模式下的飞天专属版映射到speciality字段
+};
+
+const versionDataSource = [
+    {   title: t('functional.compare.section.basic.info'),
+        data: [
+            {   name: { title: t('functional.compare.version.description') },
+                free: { des: t('functional.compare.community.description') },
+                speciality: { des: [t('functional.compare.speciality.description')] },
+                serverless: { des: [t('functional.compare.serverless.description')]}
+            },
+            {   name: { title: t('functional.compare.applicable.scenario') },
+                free: { des: t('functional.compare.community.scenario') },
+                speciality: { des: [t('functional.compare.speciality.scenario')] },
+                serverless: { des: [t('functional.compare.serverless.scenario')]}
+            }
+        ]
+    },
+    {   title: t('functional.compare.section.ai.capability'),
+        data: [
+            {   name: { title: t('functional.compare.ai.proxy') },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.ai.multi.model.gray') },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.ai.multi.model.failover') },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.ai.token.management') },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.ai.route.auth') },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [t('functional.compare.ai.auth.algorithms')] }
+            },
+            {   name: { title: t('functional.compare.ai.consumer.auth') },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [t('functional.compare.ai.auth.granularity')] }
+            },
+            {   name: { title: t('functional.compare.ai.online.search') },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.ai.enterprise.observability') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.ai.api.to.mcp') },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.ai.mcp.protocol') },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.ai.mcp.market') },
+                free: { checked: true, des: '' },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.ai.mcp.tools') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: false, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+        ]
+    },
+    {   title: t('functional.compare.section.cost'),
+        data: [
+            {   name: { title: t('functional.compare.cost.managed') },
+                free: { checked: false, des: '' },
+                speciality: { checked: true, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.cost.scaling') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: true, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+        ]
+    },
+    {   title: t('functional.compare.section.stability'),
+        data: [
+            {   name: { title: t('functional.compare.stability.multi.zone') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: true, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.stability.auto.recovery') },
+                free: { checked: false, des: '' },
+                speciality: { checked: true, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.stability.rate.limiting') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { des: [t('functional.compare.stability.route.level')] },
+                serverless: { des: [t('functional.compare.stability.token.limiting')] }
+            },
+            {   name: { title: t('functional.compare.stability.monitoring') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: true, des: [] },
+                serverless: { checked: true, des: [] }
+            },
+            {   name: { title: t('functional.compare.stability.sla') },
+                free: { checked: false },
+                speciality: { des: ['99.95%'] },
+                serverless: { des: ['99.95%'] }
+            },
+        ]
+    },
+    {   title: t('functional.compare.section.performance'),
+        data: [
+            {   name: { title: t('functional.compare.performance.kernel') },
+                free: { des: t('functional.compare.performance.optimization') },
+                speciality: { des: ['90%+'] },
+                serverless: { des: ['90%+'] }
+            },
+            {   name: { title: t('functional.compare.performance.hardware') },
+                free: { checked: false },
+                speciality: { des: ['50%+'] },
+                serverless: { des: ['50%+'] }
+            },
+        ]
+    },
+    {   title: t('functional.compare.section.security.compliance'),
+        data: [
+            {   name: { title: t('functional.compare.security.waf') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: true, des: [t('functional.compare.security.waf.aliyun')] },
+                serverless: { checked: true, des: [t('functional.compare.security.waf.aliyun')] }
+            },
+            {   name: { title: t('functional.compare.security.oidc') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: true, des: [t('functional.compare.security.idaas.aliyun')] },
+                serverless: { checked: true, des: [t('functional.compare.security.idaas.aliyun')] }
+            },
+            {   name: { title: t('functional.compare.security.encryption') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: true, des: [t('functional.compare.security.kms.aliyun')] },
+                serverless: { checked: true, des: [t('functional.compare.security.kms.aliyun')] }
+            },
+            {   name: { title: t('functional.compare.security.aigc') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: false },
+                serverless: { checked: true, des: [t('functional.compare.security.content.aliyun')] }
+            },
+        ]
+    },
+    {   title: t('functional.compare.section.usability'),
+        data: [
+            {   name: { title: t('functional.compare.usability.api.lifecycle') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: true },
+                serverless: { checked: false }
+            },
+            {   name: { title: t('functional.compare.usability.microservice.limiting') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: true, des: [t('functional.compare.usability.sentinel.integration')] },
+                serverless: { checked: false }
+            },
+            {   name: { title: t('functional.compare.usability.microservice.discovery') },
+                free: { des: t('functional.compare.self.build') },
+                speciality: { checked: true, des: [t('functional.compare.usability.cloud.discovery')] },
+                serverless: { checked: false }
+            },
+        ]
+    }
+];
+
+
+const PrivateDataSource = [
+    {   title: t('functional.compare.section.version.description'),
+        data: [
+            {   name: { title: t('functional.compare.version.description') },
+                free: { des: t('functional.compare.community.description') },
+                speciality: { des: [t('functional.compare.speciality.description')] }
+            },
+            {   name: { title: t('functional.compare.applicable.scenario') },
+                free: { des: t('functional.compare.community.scenario') },
+                speciality: { des: [t('functional.compare.speciality.scenario')] }
+            }
+        ]
+    },
+    {   title: t('functional.compare.section.ai.capability'),
+        data: [
+            {   name: { title: t('functional.compare.ai.proxy') }, free: { checked: true }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.ai.multi.model.gray') }, free: { checked: true }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.ai.multi.model.failover') }, free: { checked: true }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.ai.token.management') }, free: { checked: true }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.ai.route.auth') }, free: { checked: true }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.ai.consumer.auth') }, free: { checked: true }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.ai.online.search') }, free: { checked: true }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.ai.enterprise.observability') }, free: { checked: true }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.ai.api.to.mcp') }, free: { checked: true }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.ai.mcp.protocol') }, free: { checked: true }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.ai.mcp.market') }, free: { checked: true }, speciality: { checked: true } },
+        ]
+    },
+    {   title: t('functional.compare.section.cost'),
+        data: [
+            {   name: { title: t('functional.compare.cost.managed') }, free: { checked: false }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.cost.scaling') }, free: { des: t('functional.compare.self.build') }, speciality: { checked: true } }
+        ]
+    },
+    {   title: t('functional.compare.section.stability'),
+        data: [
+            {   name: { title: t('functional.compare.stability.multi.zone') }, free: { des: t('functional.compare.self.build') }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.stability.auto.recovery') }, free: { checked: false }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.stability.rate.limiting') }, free: { des: t('functional.compare.self.build') }, speciality: { des: [t('functional.compare.stability.route.level')] } },
+            {   name: { title: t('functional.compare.stability.monitoring') }, free: { des: t('functional.compare.self.build') }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.stability.sla') }, free: { checked: false }, speciality: { des: ['99.95%'] } },
+        ]
+    },
+    {   title: t('functional.compare.section.performance'),
+        data: [
+            {   name: { title: t('functional.compare.performance.kernel') }, free: { des: t('functional.compare.performance.optimization') }, speciality: { des: ['90%+'] } },
+            {   name: { title: t('functional.compare.performance.hardware') }, free: { checked: false }, speciality: { des: ['50%+'] } }
+        ]
+    },
+    {   title: t('functional.compare.section.security'),
+        data: [
+            {   name: { title: t('functional.compare.security.waf') }, free: { des: t('functional.compare.security.waf.multi.layer') }, speciality: { des: [t('functional.compare.security.waf.builtin')] } },
+            {   name: { title: t('functional.compare.security.auth') }, free: { des: t('functional.compare.self.build') }, speciality: { checked: true } }
+        ]
+    },
+    {   title: t('functional.compare.section.usability'),
+        data: [
+            {   name: { title: t('functional.compare.usability.api.lifecycle') }, free: { des: t('functional.compare.self.build') }, speciality: { checked: true } },
+            {   name: { title: t('functional.compare.usability.microservice.limiting') }, free: { des: t('functional.compare.self.build') }, speciality: { checked: true, des: [t('functional.compare.usability.sentinel.integration')] } },
+            {   name: { title: t('functional.compare.usability.microservice.discovery') }, free: { des: t('functional.compare.self.build') }, speciality: { checked: true, des: [t('functional.compare.usability.cloud.discovery')] } }
+        ]
+    },
+];
+---
+
+<div class="functional-compare-astro">
+  <functional-compare 
+    class="functional-compare-wrapper top-[100px] flex flex-col justify-center items-center mt-10 mb-10"
+  >
+    <div id='collapse-fold' class="collapse bg-error collapse-arrow">
+      <input type="checkbox" id="collapse-checkbox" class="collapse-input" />
+      <div class="collapse-title text-2xl font-normal">{t('functional.compare.title')}</div>
+      <div class="collapse-content-dynamic">
+        <div id="public-tables" style="display: block;">
+          {versionDataSource.map((item, index) => (
+            <Tableplugin 
+              dataSource={item.data} 
+              title={item.title} 
+              isHead={index === 0} 
+              dataVersion={dataVersion}
+              privateDataVersion={privateDataVersion}
+            />
+          ))}
+        </div>
+        <div id="private-tables" style="display: none;">
+          {PrivateDataSource.map((item, index) => (
+            <Tableplugin 
+              dataSource={item.data} 
+              title={item.title} 
+              isHead={index === 0} 
+              dataVersion={dataVersion}
+              privateDataVersion={privateDataVersion}
+              isPrivateMode={true}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- 吸底表格 -->
+    <div id='sticky-table-bottom' class='table table-fixed bg-error mt-6 px-4' style="display: none;">
+      <!-- 公有云吸底表格 -->
+      <table class='w-full' id="public-sticky-table">
+        <tr>
+          <th class="col1 border-0" />
+          <th class="col2 border-0" />
+          {dataVersion.map((version, index) => (
+            <th class={`col${index + 3} ${index === 0 ? 'overflow-hidden' : ''}`}>
+              <p class="mb-6 text-2xl font-normal"> {version.value}</p>
+              <div class={`text-warning text-xs h-2 ${index === 0 ? 'leading-8' : 'text-left pl-4'}`}></div>
+            </th>
+          ))}
+        </tr>
+      </table>
+      <!-- 专有云吸底表格 -->
+      <table class='w-full' id="private-sticky-table" style="display: none;">
+        <tr>
+          <th class="col1 border-0" />
+          <th class="col2 border-0" />
+          {privateDataVersion.map((version, index) => (
+            <th class={`col${index + 3} ${index === 0 ? 'overflow-hidden' : ''}`}>
+              <p class="mb-6 text-2xl font-normal"> {version.value}</p>
+              <div class={`text-warning text-xs h-2 ${index === 0 ? 'leading-8' : 'text-left pl-4'}`}></div>
+            </th>
+          ))}
+        </tr>
+      </table>
+    </div>
+
+      <!-- 移动端 -->
+      <div class="mobile-content">
+        <div>
+          <label for="my_modal_6" class="text-center mb-4 inline-block w-full version-selector">
+            <span class="text-xl version-text">{t('version.comparison.community.title')}</span>
+            <UpDown class="w-8 h-4" />
+          </label>
+
+          <input type="checkbox" id="my_modal_6" class="modal-toggle" />
+          <div class="modal mobile-modal" role="dialog" style="display: none;">
+            <div class="modal-box">
+              <div class="mb-6">
+                <span class="text-lg font-bold">{t('mobile.version.select.title')}</span>
+                <span class="absolute right-8 close-modal">✕</span>
+              </div>
+              <div class="flex flex-col">
+                <!-- 公有云选项 -->
+                <div class="public-options">
+                  {dataVersion.map((version) => (
+                    <button 
+                      class="btn-select h-12 mb-4 bg-gray-02" 
+                      data-version={version.key}
+                    >
+                      {version.value}
+                    </button>
+                  ))}
+                </div>
+                <!-- 专有云选项 -->
+                <div class="private-options" style="display: none;">
+                  {privateDataVersion.map((version) => (
+                    <button 
+                      class="btn-select h-12 mb-4 bg-gray-02" 
+                      data-version={version.key}
+                    >
+                      {version.value}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 公有云移动端表格 -->
+        <div class="mobile-tables public-mobile-tables">
+          {versionDataSource.map((item) => (
+            <div class="overflow-x-auto rounded-2xl mb-6">
+              <table class="table bg-secondary rounded-2xl table-fixed">
+                <tr>
+                  <td class="text-xl align-top text-left" colspan="2">
+                    {item.title}
+                  </td>
+                </tr>
+                {item.data.map((dataItem) => (
+                  <tr class="mobile-row">
+                    <td class="text-base font-normal text-neutral border-l-0 border-dotted border-r border-link border-t">
+                      {dataItem.name.title && <p>{dataItem.name.title}</p>}
+                      {dataItem.name.des && <p class="text-xs">{dataItem.name.des}</p>}
+                    </td>
+                    <td class="text-center border-dotted border-r-0 border-link border-t mobile-version-cell">
+                      <!-- 社区版内容 -->
+                      <div class="version-content" data-version="free" style="display: block;">
+                        {typeof dataItem.free?.checked === 'boolean' && (
+                          <p>
+                            {dataItem.free?.checked ? (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M392.533333 806.4L85.333333 503.466667l59.733334-59.733334 247.466666 247.466667L866.133333 213.333333l59.733334 59.733334L392.533333 806.4z" fill="#4aba49"></path>
+                              </svg>
+                            ) : (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M806.4 263.2l-45.6-45.6L512 467.2 263.2 217.6l-45.6 45.6L467.2 512 217.6 760.8l45.6 45.6L512 557.6l248.8 248.8 45.6-45.6L557.6 512z" fill="#444444"></path>
+                              </svg>
+                            )}
+                          </p>
+                        )}
+                        {dataItem.free?.des && (
+                          <p class="text-xs font-normal text-warning">
+                            {dataItem.free?.des}
+                          </p>
+                        )}
+                      </div>
+                      
+                      <!-- 专业版内容 -->
+                      <div class="version-content" data-version="speciality" style="display: none;">
+                        {typeof dataItem.speciality?.checked === 'boolean' && (
+                          <p>
+                            {dataItem.speciality?.checked ? (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M392.533333 806.4L85.333333 503.466667l59.733334-59.733334 247.466666 247.466667L866.133333 213.333333l59.733334 59.733334L392.533333 806.4z" fill="#4aba49"></path>
+                              </svg>
+                            ) : (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M806.4 263.2l-45.6-45.6L512 467.2 263.2 217.6l-45.6 45.6L467.2 512 217.6 760.8l45.6 45.6L512 557.6l248.8 248.8 45.6-45.6L557.6 512z" fill="#444444"></path>
+                              </svg>
+                            )}
+                          </p>
+                        )}
+                        {dataItem.speciality?.des && (
+                          Array.isArray(dataItem.speciality.des) ? (
+                            dataItem.speciality.des.map((descItem) => (
+                              <p class="text-xs font-normal text-warning mb-1">
+                                {descItem}
+                              </p>
+                            ))
+                          ) : (
+                            <p class="text-xs font-normal text-warning">
+                              {dataItem.speciality.des}
+                            </p>
+                          )
+                        )}
+                      </div>
+                      
+                      <!-- Serverless版内容 -->
+                      <div class="version-content" data-version="serverless" style="display: none;">
+                        {typeof dataItem.serverless?.checked === 'boolean' && (
+                          <p>
+                            {dataItem.serverless?.checked ? (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M392.533333 806.4L85.333333 503.466667l59.733334-59.733334 247.466666 247.466667L866.133333 213.333333l59.733334 59.733334L392.533333 806.4z" fill="#4aba49"></path>
+                              </svg>
+                            ) : (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M806.4 263.2l-45.6-45.6L512 467.2 263.2 217.6l-45.6 45.6L467.2 512 217.6 760.8l45.6 45.6L512 557.6l248.8 248.8 45.6-45.6L557.6 512z" fill="#444444"></path>
+                              </svg>
+                            )}
+                          </p>
+                        )}
+                        {dataItem.serverless?.des && (
+                          Array.isArray(dataItem.serverless.des) ? (
+                            dataItem.serverless.des.map((descItem) => (
+                              <p class="text-xs font-normal text-warning mb-1">
+                                {descItem}
+                              </p>
+                            ))
+                          ) : (
+                            <p class="text-xs font-normal text-warning">
+                              {dataItem.serverless.des}
+                            </p>
+                          )
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </table>
+            </div>
+          ))}
+        </div>
+
+        <!-- 专有云移动端表格 -->
+        <div class="mobile-tables private-mobile-tables" style="display: none;">
+          {PrivateDataSource.map((item) => (
+            <div class="overflow-x-auto rounded-2xl mb-6">
+              <table class="table bg-secondary rounded-2xl table-fixed">
+                <tr>
+                  <td class="text-xl align-top text-left" colspan="2">
+                    {item.title}
+                  </td>
+                </tr>
+                {item.data.map((dataItem) => (
+                  <tr class="mobile-row">
+                    <td class="text-base font-normal text-neutral border-l-0 border-dotted border-r border-link border-t">
+                      {dataItem.name.title && <p>{dataItem.name.title}</p>}
+                      {dataItem.name.des && <p class="text-xs">{dataItem.name.des}</p>}
+                    </td>
+                    <td class="text-center border-dotted border-r-0 border-link border-t mobile-version-cell">
+                      <!-- 社区版内容 -->
+                      <div class="version-content-private" data-version="free" style="display: block;">
+                        {typeof dataItem.free?.checked === 'boolean' && (
+                          <p>
+                            {dataItem.free?.checked ? (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M392.533333 806.4L85.333333 503.466667l59.733334-59.733334 247.466666 247.466667L866.133333 213.333333l59.733334 59.733334L392.533333 806.4z" fill="#4aba49"></path>
+                              </svg>
+                            ) : (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M806.4 263.2l-45.6-45.6L512 467.2 263.2 217.6l-45.6 45.6L467.2 512 217.6 760.8l45.6 45.6L512 557.6l248.8 248.8 45.6-45.6L557.6 512z" fill="#444444"></path>
+                              </svg>
+                            )}
+                          </p>
+                        )}
+                        {dataItem.free?.des && (
+                          <p class="text-xs font-normal text-warning">
+                            {dataItem.free?.des}
+                          </p>
+                        )}
+                      </div>
+                      
+                      <!-- 飞天专属版内容 -->
+                      <div class="version-content-private" data-version="speciality" style="display: none;">
+                        {typeof dataItem.speciality?.checked === 'boolean' && (
+                          <p>
+                            {dataItem.speciality?.checked ? (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M392.533333 806.4L85.333333 503.466667l59.733334-59.733334 247.466666 247.466667L866.133333 213.333333l59.733334 59.733334L392.533333 806.4z" fill="#4aba49"></path>
+                              </svg>
+                            ) : (
+                              <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M806.4 263.2l-45.6-45.6L512 467.2 263.2 217.6l-45.6 45.6L467.2 512 217.6 760.8l45.6 45.6L512 557.6l248.8 248.8 45.6-45.6L557.6 512z" fill="#444444"></path>
+                              </svg>
+                            )}
+                          </p>
+                        )}
+                        {dataItem.speciality?.des && (
+                          Array.isArray(dataItem.speciality.des) ? (
+                            dataItem.speciality.des.map((descItem) => (
+                              <p class="text-xs font-normal text-warning mb-1">
+                                {descItem}
+                              </p>
+                            ))
+                          ) : (
+                            <p class="text-xs font-normal text-warning">
+                              {dataItem.speciality.des}
+                            </p>
+                          )
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </table>
+            </div>
+          ))}
+        </div>
+      </div>
+    </functional-compare>
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  // 简化的初始化逻辑，适配 client:load 指令
+  
+  let activeTab = 'Public';
+  let version = 'community';
+  let isSticky = false;
+  let isShow = false;
+  let isCollapsed = true;
+  let scrollPosition = 0; // 记录滚动位置
+  
+  const versionContain = {
+    'community': 'free',
+    'api-gateway': 'speciality', 
+    'ai-gateway': 'serverless',
+    'exclusive': 'speciality'
+  };
+  
+  // 公有云数据版本配置
+  const dataVersion = [
+    { key: 'community', value: '社区版' },
+    { key: 'api-gateway', value: '云原生 API 网关' },
+    { key: 'ai-gateway', value: 'AI 网关' }
+  ];
+
+  // 专有云数据版本配置
+  const privateDataVersion = [
+    { key: 'community', value: '社区版' },
+    { key: 'exclusive', value: '飞天专属版' }
+  ];
+
+  // 判断是否为safari浏览器
+  function isSafari() {
+    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  }
+  
+  // 强制切换表格内容的函数
+  function switchTableContent(activeTabId) {
+    const publicTables = document.getElementById('public-tables');
+    const privateTables = document.getElementById('private-tables');
+    const publicStickyTable = document.getElementById('public-sticky-table');
+    const privateStickyTable = document.getElementById('private-sticky-table');
+    const publicMobileTables = document.querySelector('.public-mobile-tables');
+    const privateMobileTables = document.querySelector('.private-mobile-tables');
+    const publicOptions = document.querySelector('.public-options');
+    const privateOptions = document.querySelector('.private-options');
+    const publicHeaders = document.querySelectorAll('.public-header');
+    const privateHeaders = document.querySelectorAll('.private-header');
+    
+    // 隐藏所有内容
+    [publicTables, privateTables].forEach(el => {
+      if (el) {
+        el.style.display = 'none';
+        el.style.visibility = 'hidden';
+      }
+    });
+    
+    [publicStickyTable, privateStickyTable].forEach(el => {
+      if (el) el.style.display = 'none';
+    });
+    
+    [publicMobileTables, privateMobileTables].forEach(el => {
+      if (el) el.style.display = 'none';
+    });
+    
+    [publicOptions, privateOptions].forEach(el => {
+      if (el) el.style.display = 'none';
+    });
+    
+    publicHeaders.forEach(el => {
+      el.style.display = 'none';
+      el.style.visibility = 'hidden';
+    });
+    
+    privateHeaders.forEach(el => {
+      el.style.display = 'none';
+      el.style.visibility = 'hidden';
+    });
+    
+    // 显示对应Tab内容
+    if (activeTabId === 'Public') {
+      if (publicTables) {
+        publicTables.style.display = 'block';
+        publicTables.style.visibility = 'visible';
+      }
+      if (publicStickyTable) publicStickyTable.style.display = 'table';
+      if (publicMobileTables) publicMobileTables.style.display = 'block';
+      if (publicOptions) publicOptions.style.display = 'block';
+      
+      publicHeaders.forEach(el => {
+        el.style.display = 'table';
+        el.style.visibility = 'visible';
+      });
+      
+    } else if (activeTabId === 'Private') {
+      if (privateTables) {
+        privateTables.style.display = 'block';
+        privateTables.style.visibility = 'visible';
+      }
+      if (privateStickyTable) privateStickyTable.style.display = 'table';
+      if (privateMobileTables) privateMobileTables.style.display = 'block';
+      if (privateOptions) privateOptions.style.display = 'block';
+      
+      privateHeaders.forEach(el => {
+        el.style.display = 'table';
+        el.style.visibility = 'visible';
+      });
+    }
+    
+    updateMobileVersionText();
+  }
+  
+  // Tab切换处理
+  function handleTabChange(event) {
+    activeTab = event.detail.activeTab;
+    
+    // 切换到专有云模式时，如果当前版本不存在于专有云数据中，重置为默认版本
+    if (activeTab === 'Private') {
+      const privateVersionKeys = privateDataVersion.map(v => v.key);
+      if (!privateVersionKeys.includes(version)) {
+        version = 'community'; // 重置为专有云的默认版本
+      }
+    }
+    // 切换到公有云模式时，如果当前版本不存在于公有云数据中，重置为默认版本
+    else if (activeTab === 'Public') {
+      const publicVersionKeys = dataVersion.map(v => v.key);
+      if (!publicVersionKeys.includes(version)) {
+        version = 'community'; // 重置为公有云的默认版本
+      }
+    }
+    
+    switchTableContent(activeTab);
+    updateMobileContent();
+  }
+  
+  // 滚动处理
+  function handleScroll() {
+    const functionalWrapper = document.querySelector('.functional-compare-wrapper');
+    if (!functionalWrapper) return;
+    
+    const distanceFromTop = functionalWrapper.getBoundingClientRect().top;
+    const newIsSticky = distanceFromTop < 0;
+    
+    if (newIsSticky !== isSticky) {
+      isSticky = newIsSticky;
+      const stickyTable = document.getElementById('sticky-table-bottom');
+      if (stickyTable) {
+        stickyTable.style.display = isSticky && isCollapsed ? 'block' : 'none';
+      }
+    }
+  }
+  
+  // 移动端版本文本更新
+  function updateMobileVersionText() {
+    const versionText = document.querySelector('.version-text');
+    if (!versionText) return;
+    
+    let displayName = '社区版';
+    if (activeTab === 'Private') {
+      const found = privateDataVersion.find(v => v.key === version);
+      displayName = found ? found.value : '社区版';
+    } else {
+      const found = dataVersion.find(v => v.key === version);
+      displayName = found ? found.value : '社区版';
+    }
+    
+    versionText.textContent = displayName;
+  }
+  
+  // 移动端内容更新
+  function updateMobileContent() {
+    const versionKey = versionContain[version];
+    
+    if (activeTab === 'Private') {
+      const contents = document.querySelectorAll('.private-mobile-tables .version-content-private');
+      contents.forEach(content => {
+        content.style.display = content.dataset.version === versionKey ? 'block' : 'none';
+      });
+    } else {
+      const contents = document.querySelectorAll('.public-mobile-tables .version-content');
+      contents.forEach(content => {
+        content.style.display = content.dataset.version === versionKey ? 'block' : 'none';
+      });
+    }
+  }
+  
+  // 初始化函数
+  function init() {
+    // 应用基础样式
+    const functionalWrapper = document.querySelector('.functional-compare-wrapper');
+    if (functionalWrapper) {
+      functionalWrapper.style.paddingLeft = '1rem';
+      functionalWrapper.style.paddingRight = '1rem';
+    }
+    
+    // Safari折叠功能处理
+    const collapseCheckbox = document.getElementById('collapse-checkbox');
+    const collapseContent = document.querySelector('.collapse-content-dynamic');
+    
+    if (!isSafari() && collapseCheckbox) {
+      collapseCheckbox.style.display = 'block';
+      collapseCheckbox.checked = isCollapsed;
+      if (collapseContent) {
+        collapseContent.classList.add('collapse-content');
+      }
+      
+      // 监听折叠状态变化
+      collapseCheckbox.addEventListener('change', function() {
+        isCollapsed = this.checked;
+        const stickyTable = document.getElementById('sticky-table-bottom');
+        if (stickyTable) {
+          stickyTable.style.display = isSticky && isCollapsed ? 'block' : 'none';
+        }
+      });
+    } else if (collapseCheckbox) {
+      collapseCheckbox.style.display = 'none';
+      if (collapseContent) {
+        collapseContent.classList.remove('collapse-content');
+      }
+    }
+    
+    // 移动端模态框处理
+    const modal = document.querySelector('.mobile-modal');
+    const modalToggle = document.getElementById('my_modal_6');
+    const closeModal = document.querySelector('.close-modal');
+    const btnSelects = document.querySelectorAll('.btn-select');
+    const versionSelector = document.querySelector('.version-selector');
+    
+    // 双重触发机制：label点击 + 直接点击事件
+    if (versionSelector && modalToggle && modal) {
+      // 直接点击触发
+      versionSelector.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        isShow = !isShow;
+        modalToggle.checked = isShow;
+        
+        if (isShow) {
+          // 记录当前滚动位置
+          scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+          
+          modal.style.display = 'flex';
+          // 阻止页面滚动但保持位置
+          document.body.style.overflow = 'hidden';
+          document.body.style.position = 'fixed';
+          document.body.style.top = `-${scrollPosition}px`;
+          document.body.style.width = '100%';
+        } else {
+          modal.style.display = 'none';
+          // 恢复页面滚动并还原位置
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.width = '';
+          window.scrollTo(0, scrollPosition);
+        }
+      });
+      
+      // checkbox状态变化备用监听
+      modalToggle.addEventListener('change', function() {
+        isShow = this.checked;
+        if (isShow) {
+          // 记录当前滚动位置
+          scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+          
+          modal.style.display = 'flex';
+          // 阻止页面滚动但保持位置
+          document.body.style.overflow = 'hidden';
+          document.body.style.position = 'fixed';
+          document.body.style.top = `-${scrollPosition}px`;
+          document.body.style.width = '100%';
+        } else {
+          modal.style.display = 'none';
+          // 恢复页面滚动并还原位置
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.width = '';
+          window.scrollTo(0, scrollPosition);
+        }
+      });
+    }
+    
+    // 关闭按钮
+    if (closeModal && modalToggle && modal) {
+      closeModal.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        isShow = false;
+        modalToggle.checked = false;
+        modal.style.display = 'none';
+        
+        // 恢复页面滚动并还原位置
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollPosition);
+      });
+    }
+    
+    // 点击遮罩关闭模态框
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          isShow = false;
+          if (modalToggle) modalToggle.checked = false;
+          modal.style.display = 'none';
+          
+          // 恢复页面滚动并还原位置
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.width = '';
+          window.scrollTo(0, scrollPosition);
+        }
+      });
+    }
+    
+    btnSelects.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        version = this.dataset.version || 'community';
+        updateMobileVersionText();
+        updateMobileContent();
+        
+        // 关闭模态框
+        isShow = false;
+        if (modalToggle) modalToggle.checked = false;
+        if (modal) modal.style.display = 'none';
+        
+        // 恢复页面滚动并还原位置
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollPosition);
+      });
+    });
+    
+    // 绑定事件监听器
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('tabChanged', handleTabChange);
+    
+    // 添加页面隐藏时的清理机制
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        // 页面隐藏时恢复滚动状态
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        
+        // 关闭模态框
+        if (modal) modal.style.display = 'none';
+        if (modalToggle) modalToggle.checked = false;
+        isShow = false;
+      }
+    });
+    
+    // 页面卸载时清理
+    window.addEventListener('beforeunload', function() {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    });
+    
+    // 强制初始化为公有云模式
+    switchTableContent('Public');
+    updateMobileContent();
+  }
+  
+  // 确保在client:load模式下正确初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    // DOM已经加载完成，立即初始化
+    init();
+  }
+</script>
+
+<style is:global>
+  @import url('./style.css');
+
+  .functional-compare-astro {
+    width: 100%;
+  }
+
+  .tab-content-public,
+  .tab-content-private {
+    width: 100%;
+  }
+
+  .tab-content-private.hidden {
+    display: none !important;
+  }
+
+  /* 确保表格容器有正确的padding */
+  .functional-compare-wrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* tableplugin正确的圆角设置 */
+  .functional-compare-astro div.tableplugin.overflow-x-auto.mb-6 {
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+    background: transparent !important;
+  }
+  
+  /* 确保内部表格也有圆角 */
+  .functional-compare-astro .tableplugin table.bg-secondary {
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+  }
+
+  /* tableplugin基本样式 */
+  .functional-compare-astro .tableplugin {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    background: theme('colors.secondary');
+  }
+
+  .functional-compare-astro .tableplugin table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  .functional-compare-astro .col1 {
+    width: 70px;
+    border: none !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  .functional-compare-astro .col2 {
+    width: 200px;
+    border-left: none !important;
+  }
+
+  .functional-compare-astro .col3,
+  .functional-compare-astro .col4,
+  .functional-compare-astro .col5 {
+    width: 210px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+
+  /* 专有云模式样式 */
+  .functional-compare-astro .private-header .col3,
+  .functional-compare-astro .private-header .col4 {
+    width: 315px;
+  }
+
+  .functional-compare-astro .private-mode .col3,
+  .functional-compare-astro .private-mode .col4 {
+    width: 315px;
+  }
+
+  .functional-compare-astro .private-mode .col4 {
+    border-right: none;
+  }
+
+  .functional-compare-astro .col5 {
+    border-right: none;
+  }
+
+  /* 表格单元格padding样式 */
+  .functional-compare-astro .tableplugin td,
+  .functional-compare-astro .tableplugin th {
+    padding: 12px 16px !important;
+  }
+
+  /* 表格头部圆角设置 */
+  .functional-compare-astro .public-header th:first-child,
+  .functional-compare-astro .private-header th:first-child {
+    border-top-left-radius: 1rem;
+  }
+  
+  .functional-compare-astro .public-header th:last-child,
+  .functional-compare-astro .private-header th:last-child {
+    border-top-right-radius: 1rem;
+  }
+
+  /* Safari浏览器折叠功能样式 */
+  .collapse-input {
+    display: none;
+  }
+
+  .collapse-input:not(:checked) + .collapse-title + .collapse-content {
+    height: fit-content;
+  }
+
+  /* 移动端模态框样式 */
+  .mobile-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999 !important;
+    /* 阻止模态框内部滚动传播 */
+    overscroll-behavior: contain;
+    /* 确保点击可以穿透到遮罩 */
+    pointer-events: auto;
+  }
+
+  .modal-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+    /* 阻止点击传播到遮罩 */
+    pointer-events: auto;
+    /* 防止内容超出时的滚动问题 */
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .btn-select {
+    padding: 0.75rem;
+    border: 1px solid #DDDEE4;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .btn-select:hover {
+    background-color: #DDDEE4 !important;
+    border-color: #C5D7F7;
+  }
+
+  .version-selector {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    /* 增加触摸区域 */
+    padding: 0.5rem;
+    min-height: 44px;
+    /* 添加视觉反馈 */
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+    /* 确保可点击 */
+    pointer-events: auto;
+    /* 移动端优化 */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    user-select: none;
+  }
+  
+  .version-selector:active {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: scale(0.98);
+  }
+
+  /* 响应式样式 */
+  @media (max-width: 50rem) {
+    .mobile-content {
+      display: block !important;
+    }
+    
+    #collapse-fold,
+    #sticky-table-bottom {
+      display: none !important;
+    }
+
+    .functional-compare-wrapper {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (min-width: 50rem) {
+    .mobile-content {
+      display: none !important;
+    }
+  }
+
+  /* 吸底表格样式 */
+  #sticky-table-bottom {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    width: 85.125rem;
+    max-width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 确保组件初始化时样式立即应用 */
+  .functional-compare-astro * {
+    box-sizing: border-box;
+  }
+</style>

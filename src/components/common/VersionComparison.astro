@@ -1,0 +1,604 @@
+---
+import { useTranslations } from "@i18n/util";
+const t = useTranslations(Astro);
+interface Props {
+  class?: string;
+}
+
+// 统一的文案配置
+const textConfig = {
+  // 主 Tab 配置
+  mainTabs: [
+    { id: 'Public', label: t('version.comparison.main.tabs.public') },
+    { id: 'Private', label: t('version.comparison.main.tabs.private') },
+  ],
+  
+  // 公共云卡片配置
+  publicCloud: {
+    // 第一个卡片 - 社区版
+    communityCard: {
+      title: t('version.comparison.community.title'),
+      price: t('version.comparison.community.price'),
+      priceDescription: t('version.comparison.community.price.description'),
+      description: t('version.comparison.community.description'),
+      buttonText: t('version.comparison.community.button'),
+      buttonUrl: 'https://free.aliyun.com/?spm=5176.30371578.nav-v2-dropdown-menu-4.d_main_1_0.64de154ao1en4x&scm=20140722.M_10776204._.V_1&searchKey=%E4%BA%91%E5%8E%9F%E7%94%9Fapi'
+    },
+    
+    // 第二个卡片 - 云原生 API 网关
+    apiGatewayCard: {
+      title: t('version.comparison.api.gateway.title'),
+      description: t('version.comparison.api.gateway.description'),
+      buttonText: t('version.comparison.api.gateway.button'),
+      buttonUrl: 'https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0',
+      tabLabels: {
+        payAsGo: t('version.comparison.api.gateway.tab.pay.as.go'),
+        yearly: t('version.comparison.api.gateway.tab.yearly')
+      },
+      content: {
+        payAsGo: t('version.comparison.api.gateway.pay.as.go.price'),
+        yearly: {
+          price: t('version.comparison.api.gateway.yearly.price'),
+          description: t('version.comparison.api.gateway.yearly.discount')
+        }
+      }
+    },
+    
+    // 第三个卡片 - AI 网关
+    aiGatewayCard: {
+      title: t('version.comparison.ai.gateway.title'),
+      description: t('version.comparison.ai.gateway.description'),
+      buttonText: t('version.comparison.ai.gateway.button'),
+      buttonUrl: 'https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0',
+      tabLabels: {
+        payAsGo: t('version.comparison.ai.gateway.tab.pay.as.go'),
+        yearly: t('version.comparison.ai.gateway.tab.yearly')
+      },
+      content: {
+        payAsGo: t('version.comparison.ai.gateway.pay.as.go.price'),
+        yearly: {
+          price: t('version.comparison.ai.gateway.yearly.price'),
+          description: t('version.comparison.ai.gateway.yearly.discount')
+        }
+      }
+    }
+  },
+  
+  // 专有云配置
+  privateCloud: {
+    // 第一个卡片 - 社区版（与公共云相同）
+    communityCard: {
+      title: t('version.comparison.community.title'),
+      price: t('version.comparison.community.price'),
+      priceDescription: t('version.comparison.community.price.description'),
+      description: t('version.comparison.community.description'),
+      buttonText: t('version.comparison.community.button'),
+      buttonUrl: 'https://free.aliyun.com/?spm=5176.30371578.nav-v2-dropdown-menu-4.d_main_1_0.64de154ao1en4x&scm=20140722.M_10776204._.V_1&searchKey=%E4%BA%91%E5%8E%9F%E7%94%9Fapi'
+    },
+    
+    // 第二个卡片 - 飞天专属版
+    exclusiveCard: {
+      title: t('version.comparison.exclusive.title'),
+      subtitle: t('version.comparison.exclusive.subtitle'),
+      description: t('version.comparison.exclusive.description'),
+      features: [
+        t('version.comparison.exclusive.feature.performance'),
+        t('version.comparison.exclusive.feature.sla')
+      ],
+      buttonText: t('version.comparison.exclusive.button'),
+      buttonUrl: 'https://survey.aliyun.com/apps/zhiliao/6Dd_gD6MB'
+    }
+  }
+};
+
+// 引入PricingTabs组件
+import PricingTabs from './PricingTabs.astro';
+import VersionCard from './VersionCard.astro';
+---
+
+<div class="w-full max-w-[85.125rem] mx-auto px-4 sm:px-6 lg:px-0 mb-6">
+    <!-- Tab 按钮组 -->
+    <div class="custom-tab-group w-[150px] h-[40px] p-1 mb-6 bg-[#1E1F24] rounded-2xl mx-auto sm:mx-0">
+        {textConfig.mainTabs.map((tab, index) => (
+            <label 
+                class={`custom-tab-item w-[75px] h-8 cursor-pointer text-sm font-medium flex items-center justify-center transition-all duration-200 rounded-2xl ${
+                    index === 0 ? 'bg-[#EDF2FC] text-[#121316]' : 'bg-transparent text-[#A3A6B3]'
+                }`}
+                data-tab={tab.id}
+                data-is-default={index === 0 ? 'true' : 'false'}
+                style="pointer-events: auto; cursor: pointer;"
+            >
+                <input 
+                    type="radio" 
+                    name="version-tabs" 
+                    class="hidden" 
+                    value={tab.id}
+                    checked={index === 0}
+                />
+                <span>{tab.label}</span>
+            </label>
+        ))}
+    </div>
+
+    <!-- Tab 内容区域 -->
+    <div class="tab-contents">
+        <!-- 公共云 Tab 内容 -->
+        <div class="tab-content-n" data-tab="Public" style="display: block;">
+            <div class="flex flex-col lg:flex-row gap-4 lg:gap-0 w-full max-w-full">
+                <VersionCard 
+                    cardData={textConfig.publicCloud.communityCard}
+                    cardType="community"
+                    cardPosition="first"
+                />
+                
+                <VersionCard 
+                    cardData={textConfig.publicCloud.apiGatewayCard}
+                    cardType="api-gateway"
+                    cardPosition="middle"
+                />
+                
+                <VersionCard 
+                    cardData={textConfig.publicCloud.aiGatewayCard}
+                    cardType="ai-gateway"
+                    cardPosition="last"
+                />
+            </div>
+        </div>
+        
+        <!-- 专有云 Tab 内容 -->
+        <div class="tab-content-n hidden" data-tab="Private" style="display: none;">
+            <div class="flex flex-col lg:flex-row gap-4 lg:gap-0 w-full justify-center items-start max-w-full">
+                <VersionCard 
+                    cardData={textConfig.privateCloud.communityCard}
+                    cardType="community"
+                    cardPosition="first"
+                    isPrivateMode={true}
+                />
+                
+                <VersionCard 
+                    cardData={textConfig.privateCloud.exclusiveCard}
+                    cardType="exclusive"
+                    cardPosition="last"
+                    isPrivateMode={true}
+                />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // 全局变量跟踪初始化状态
+    let isVersionComparisonInitialized = false;
+    let isEventDelegationSetup = false;
+    
+    // Tab 切换功能
+    function initVersionComparison() {
+        const tabButtons = document.querySelectorAll('.custom-tab-item[data-tab]') as NodeListOf<HTMLElement>;
+        const tabContents = document.querySelectorAll('.tab-content-n');
+        
+        if (tabButtons.length === 0 || tabContents.length === 0) {
+            // 如果元素还没有加载完成，稍后再试
+            setTimeout(initVersionComparison, 100);
+            return;
+        }
+        
+        // 主tab切换功能
+        function switchTab(activeTabId: string) {
+            // 重新获取最新的按钮和内容元素
+            const currentTabButtons = document.querySelectorAll('.custom-tab-item[data-tab]') as NodeListOf<HTMLElement>;
+            const currentTabContents = document.querySelectorAll('.tab-content-n');
+            
+            // 强制隐藏所有 tab 内容
+            currentTabContents.forEach((content, index) => {
+                const contentElement = content as HTMLElement;
+                const tabId = contentElement.dataset.tab;
+                
+                contentElement.classList.add('hidden');
+                contentElement.style.display = 'none';
+                contentElement.style.visibility = 'hidden';
+            });
+            
+            // 强制显示激活的 tab 内容
+            const activeContent = document.querySelector(`.tab-content-n[data-tab="${activeTabId}"]`) as HTMLElement;
+            if (activeContent) {
+                activeContent.classList.remove('hidden');
+                activeContent.style.display = 'block';
+                activeContent.style.visibility = 'visible';
+            }
+            
+            // 强制更新按钮样式
+            currentTabButtons.forEach((button, index) => {
+                const radio = button.querySelector('input[type="radio"]') as HTMLInputElement;
+                const buttonTabId = button.dataset.tab;
+                
+                // 清除所有状态类
+                button.classList.remove('bg-[#EDF2FC]', 'text-[#121316]', 'bg-transparent', 'text-[#A3A6B3]');
+                
+                if (buttonTabId === activeTabId) {
+                    // 选中状态：#EDF2FC 背景，#121316 字体
+                    button.classList.add('bg-[#EDF2FC]', 'text-[#121316]');
+                    if (radio) radio.checked = true;
+                } else {
+                    // 未选中状态：透明背景，#A3A6B3 字体
+                    button.classList.add('bg-transparent', 'text-[#A3A6B3]');
+                    if (radio) radio.checked = false;
+                }
+                
+                // 确保按钮可以点击
+                button.style.pointerEvents = 'auto';
+                button.style.cursor = 'pointer';
+            });
+        }
+        
+        // 设置初始状态
+        function setInitialState() {
+            tabButtons.forEach(button => {
+                if (button.dataset.isDefault === 'true') {
+                    button.classList.add('bg-[#EDF2FC]', 'text-[#121316]');
+                } else {
+                    button.classList.add('bg-transparent', 'text-[#A3A6B3]');
+                }
+            });
+        }
+        
+        // 清除所有可能存在的事件监听器和重新绑定
+        // 使用事件委托来确保事件能正常触发（只设置一次）
+        if (!isEventDelegationSetup) {
+            document.addEventListener('click', function(e) {
+                const target = e.target as HTMLElement;
+                // 查找最近的tab按钮元素，包括点击其子元素的情况
+                const tabButton = target.closest('.custom-tab-item[data-tab]') as HTMLElement;
+                
+                if (tabButton && tabButton.classList.contains('custom-tab-item')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const tabId = tabButton.dataset.tab;
+                    if (tabId) {
+                        // 强制重新获取和切换
+                        switchTab(tabId);
+                        
+                        // 触发自定义事件
+                        window.dispatchEvent(new CustomEvent('tabChanged', {
+                            detail: { activeTab: tabId }
+                        }));
+                    }
+                }
+            }, true); // 使用捕获阶段
+            
+            // 也监听radio按钮的变化
+            document.addEventListener('change', function(e) {
+                const target = e.target as HTMLInputElement;
+                if (target.type === 'radio' && target.name === 'version-tabs') {
+                    const tabId = target.value;
+                    if (tabId && target.checked) {
+                        switchTab(tabId);
+                    }
+                }
+            });
+            
+            isEventDelegationSetup = true;
+        }
+        
+        // 确保所有按钮都可以点击
+        tabButtons.forEach(button => {
+            button.style.pointerEvents = 'auto';
+            button.style.cursor = 'pointer';
+            button.removeAttribute('disabled');
+            
+            // 添加hover效果来验证按钮响应
+            button.addEventListener('mouseenter', function() {
+                this.style.opacity = '0.8';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.opacity = '1';
+            });
+        });
+        
+        // 设置初始状态
+        setInitialState();
+        
+        // 初始化时确保默认选中公共云（Public）选项
+        // 无论从哪个页面跳转过来，都默认显示公共云选项
+        const defaultTabId = 'Public';
+        switchTab(defaultTabId);
+        
+        // 标记为已初始化
+        isVersionComparisonInitialized = true;
+    }
+    
+    // 强制重新初始化函数
+    function forceInitVersionComparison() {
+        isVersionComparisonInitialized = false;
+        initVersionComparison();
+    }
+    
+    // 页面完全加载后的初始化
+    function initOnLoad() {
+        // 确保在页面完全加载后初始化
+        if (document.readyState === 'complete') {
+            initVersionComparison();
+        } else {
+            window.addEventListener('load', initVersionComparison);
+        }
+    }
+    
+    // 多重初始化策略
+    // 1. DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(initVersionComparison, 0);
+    });
+    
+    // 2. 立即检查文档状态
+    if (document.readyState === 'loading') {
+        // 文档还在加载中，等待DOMContentLoaded
+    } else if (document.readyState === 'interactive') {
+        // DOM加载完成，但资源可能还在加载
+        setTimeout(initVersionComparison, 0);
+    } else {
+        // 文档已经完全加载
+        initVersionComparison();
+    }
+    
+    // 3. 页面可见性和焦点处理
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden && !isVersionComparisonInitialized) {
+            setTimeout(initVersionComparison, 100);
+        }
+    });
+    
+    window.addEventListener('focus', function() {
+        if (!isVersionComparisonInitialized) {
+            setTimeout(initVersionComparison, 100);
+        }
+    });
+    
+    // 4. 延迟检查和强制初始化
+    setTimeout(function() {
+        if (!isVersionComparisonInitialized) {
+            forceInitVersionComparison();
+        }
+    }, 500);
+    
+    // 5. 最终检查
+    setTimeout(function() {
+        const publicContent = document.querySelector('.tab-content-n[data-tab="Public"]') as HTMLElement;
+        const firstTabButton = document.querySelector('.custom-tab-item[data-tab="Public"]') as HTMLElement;
+        
+        // 检查公共云内容是否正确显示
+        if (publicContent && publicContent.classList.contains('hidden')) {
+            forceInitVersionComparison();
+        }
+        
+        // 检查第一个Tab按钮是否选中
+        if (firstTabButton && !firstTabButton.classList.contains('bg-[#EDF2FC]')) {
+            forceInitVersionComparison();
+        }
+    }, 1000);
+    
+    // 终极检查（确保按钮可点击）
+    setTimeout(function() {
+        const tabButtons = document.querySelectorAll('.custom-tab-item[data-tab]') as NodeListOf<HTMLElement>;
+        tabButtons.forEach(button => {
+            // 强制设置按钮可点击
+            button.style.pointerEvents = 'auto';
+            button.style.cursor = 'pointer';
+            button.classList.remove('opacity-50', 'cursor-not-allowed');
+            
+            // 如果按钮显示为灰色，重新初始化
+            if (button.classList.contains('text-gray-400') || 
+                button.style.color === 'gray' ||
+                !button.classList.contains('text-[#121316]') && !button.classList.contains('text-[#A3A6B3]')) {
+                forceInitVersionComparison();
+            }
+        });
+    }, 1500);
+</script>
+
+<style is:global>
+    /* 卡片 hover 浮动特效 */
+    .card-hover-effect {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .card-hover-effect:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* 自定义渐变按钮样式 */
+    .button-gradient {
+        background: linear-gradient(235deg, #2C46C9 -1%, rgba(0, 0, 0, 0) 36%), #121316;
+    }
+    
+    /* 第一个卡片按钮样式 */
+    .first-card-button {
+        background: #121316;
+        transition: all 0.2s ease;
+    }
+    
+    .first-card-button:hover {
+        background: linear-gradient(235deg, #2C46C9 -1%, rgba(0, 0, 0, 0) 36%), #121316;
+    }
+    
+    /* 第二、三个卡片按钮样式 */
+    .second-third-card-button {
+        transition: all 0.2s ease;
+    }
+    
+    .second-third-card-button:hover {
+        background: #EBECEF !important;
+        color: #131314 !important;
+        border-color: #EBECEF !important;
+    }
+    
+    /* 自定义 Tab 组件样式 */
+    .custom-tab-group {
+        display: flex;
+        gap: 0;
+        align-items: center;
+    }
+    
+    .custom-tab-item {
+        border: none;
+        outline: none;
+        transition: all 0.2s ease;
+        border-radius: 1rem;
+    }
+    
+    .custom-tab-item:hover {
+        opacity: 0.8;
+    }
+    
+    .custom-tab-item:focus {
+        outline: 2px solid #EDF2FC;
+        outline-offset: 2px;
+    }
+    
+    /* Tab 内容区域样式 */
+    .tab-contents {
+        width: 100%;
+        min-height: 100px;
+    }
+    
+    .tab-content-n {
+        display: block;
+        width: 100%;
+    }
+    
+    .tab-content-n.hidden {
+        display: none !important;
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 1023px) {
+        /* 移动端容器调整 */
+        .tab-contents {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .tab-content-n {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .tab-content-n > div {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        /* 移动端卡片调整 */
+        .card-hover-effect {
+            min-height: 400px; /* 移动端适当减少卡片高度 */
+            max-width: 100% !important; /* 强制最大宽度为100% */
+            width: 100% !important; /* 强制宽度为100% */
+        }
+        
+        /* 移动端禁用悬停效果 */
+        .card-hover-effect:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        /* Tab组件移动端样式 - 保持与大屏一致的宽度 */
+        .custom-tab-group {
+            width: 150px !important; /* 与大屏保持一致 */
+            height: 40px !important; /* 与大屏保持一致 */
+            padding: 0.25rem; /* 4px 与大屏的 1px 对应 */
+        }
+        
+        .custom-tab-item {
+            width: 75px !important; /* 与大屏保持一致 */
+            height: 2rem !important;
+            font-size: 0.875rem; /* 14px，比大屏稍小但仍清晰 */
+        }
+        
+        /* 容器样式优化 */
+        .w-full.max-w-\[85\.125rem\] {
+            max-width: 100% !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        
+        /* 移动端卡片样式调整 */
+        .card-hover-effect {
+            min-height: 350px;
+            margin-bottom: 1rem;
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+        
+        .card-hover-effect:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* 移动端字体调整 */
+        .text-2xl {
+            font-size: 1.25rem !important; /* 20px */
+        }
+        
+        .text-\[44px\] {
+            font-size: 2rem !important; /* 32px */
+        }
+        
+        /* 移动端内边距调整 */
+        .card-hover-effect {
+            padding: 1rem !important;
+        }
+        
+        /* 专有云模式移动端布局 */
+        .tab-content-n[data-tab="Private"] .flex {
+            justify-content: center !important;
+        }
+        
+        .tab-content-n[data-tab="Private"] .card-hover-effect {
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        /* 小屏幕Tab组件保持固定尺寸 */
+        .custom-tab-group {
+            width: 150px !important; /* 与大屏保持一致 */
+            height: 40px !important; /* 与大屏保持一致 */
+        }
+        
+        .custom-tab-item {
+            width: 75px !important; /* 与大屏保持一致 */
+            font-size: 0.75rem; /* 12px，适合小屏 */
+        }
+        
+        /* 超小屏幕容器优化 */
+        .w-full.max-w-\[85\.125rem\] {
+            padding-left: 0.75rem !important;
+            padding-right: 0.75rem !important;
+        }
+        
+        .card-hover-effect {
+            min-height: 320px;
+            padding: 0.75rem !important;
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+        
+        .text-2xl {
+            font-size: 1.125rem !important; /* 18px */
+        }
+        
+        .text-\[44px\] {
+            font-size: 1.75rem !important; /* 28px */
+        }
+        
+        .py-\[38px\] {
+            padding-top: 1.5rem !important;
+            padding-bottom: 1.5rem !important;
+        }
+    }
+</style>

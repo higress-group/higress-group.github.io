@@ -330,4 +330,132 @@ export default {
 	"page.team.introduction.3.collect.btn": 'Fill in and submit',
 	"page.team.introduction.3.enroll.text": 'Activity registration',
 	"page.team.introduction.3.enroll.btn": 'Sign up',
+
+	// VersionComparison component related text
+	'version.comparison.main.tabs.public': 'Public',
+	'version.comparison.main.tabs.private': 'Private',
+	
+	// Community edition card
+	'version.comparison.community.title': 'Community Edition',
+	'version.comparison.community.price': 'Free',
+	'version.comparison.community.price.description': 'Free to Use',
+	'version.comparison.community.description': 'Self-built and maintained, no SLA guarantee',
+	'version.comparison.community.button': 'Learn More',
+	
+	// Cloud Native API Gateway card
+	'version.comparison.api.gateway.title': 'Cloud Native API Gateway',
+	'version.comparison.api.gateway.description': 'Specification: apigw.dev.x1 and above',
+	'version.comparison.api.gateway.button': 'Learn More',
+	'version.comparison.api.gateway.tab.pay.as.go': 'Quantity',
+	'version.comparison.api.gateway.tab.yearly': 'MonthlySub',
+	'version.comparison.api.gateway.pay.as.go.price': '$0.826/hour and up',
+	'version.comparison.api.gateway.yearly.price': '$416/month and up',
+	'version.comparison.api.gateway.yearly.discount': 'Discount: 40% off for first purchase, regular price for renewal',
+	
+	// AI Gateway card
+	'version.comparison.ai.gateway.title': 'AI Gateway',
+	'version.comparison.ai.gateway.description': 'Specification: apigw.small.x1 and above',
+	'version.comparison.ai.gateway.button': 'Learn More',
+	'version.comparison.ai.gateway.tab.pay.as.go': 'Quantity',
+	'version.comparison.ai.gateway.tab.yearly': 'MonthlySub',
+	'version.comparison.ai.gateway.pay.as.go.price': '$7.934/hour and up',
+	'version.comparison.ai.gateway.yearly.price': '$3997.5/month and up',
+	'version.comparison.ai.gateway.yearly.discount': 'Discount: 40% off for first purchase, regular price for renewal',
+	
+	// Feitian Exclusive Edition card
+	'version.comparison.exclusive.title': 'Feitian Exclusive Edition',
+	'version.comparison.exclusive.subtitle': 'Premium Service',
+	'version.comparison.exclusive.description': 'Suitable for enterprise on-premises deployment',
+	'version.comparison.exclusive.feature.performance': 'Performance & Resources: Matches business scale, elastically scalable',
+	'version.comparison.exclusive.feature.sla': 'SLA: Negotiable on demand, ultimate guarantee',
+	'version.comparison.exclusive.button': 'Contact Us',
+	
+	// Functional comparison component
+	'functional.compare.title': 'Version Capability Comparison',
+	'mobile.version.select.title': 'Select Version',
+	
+	// Client script translations (hardcode replacement)
+	'script.version.community': 'Community Edition',
+	'script.version.api.gateway': 'Cloud Native API Gateway',
+	'script.version.ai.gateway': 'AI Gateway',
+	'script.version.exclusive': 'Feitian Exclusive Edition',
+	'script.default.community.fallback': 'Community Edition',
+	
+	// Functional comparison table data
+	'functional.compare.section.basic.info': 'Basic Information',
+	'functional.compare.section.ai.capability': 'AI Capabilities',
+	'functional.compare.section.cost': 'Cost',
+	'functional.compare.section.stability': 'Stability',
+	'functional.compare.section.performance': 'Performance',
+	'functional.compare.section.security': 'Security',
+	'functional.compare.section.security.compliance': 'Security & Compliance',
+	'functional.compare.section.usability': 'Usability',
+	'functional.compare.section.version.description': 'Version Description',
+	
+	// Basic information
+	'functional.compare.version.description': 'Version Description',
+	'functional.compare.applicable.scenario': 'Applicable Scenario',
+	'functional.compare.community.description': 'Cloud-native API Gateway and AI Gateway open source capabilities',
+	'functional.compare.speciality.description': 'Deeply integrates API management, traffic gateway and microservice gateway capabilities, providing high performance and scalability.',
+	'functional.compare.serverless.description': 'Unified proxy for large model APIs and MCP Servers with rich integration and governance capabilities.',
+	'functional.compare.community.scenario': 'Requires users to have development and maintenance capabilities, self-manage stability, performance, cloud product integration and usability.',
+	'functional.compare.speciality.scenario': 'Out-of-the-box solution with advantages over community edition in stability, performance, cloud integration and usability, providing commercial support including tickets, DingTalk groups, and offline services.',
+	'functional.compare.serverless.scenario': 'Out-of-the-box solution with advantages over community edition in stability, performance, cloud integration and usability, providing commercial support including tickets and DingTalk groups.',
+	
+	// AI capabilities
+	'functional.compare.ai.proxy': 'Proxy',
+	'functional.compare.ai.multi.model.gray': 'Multi-model Grayscale',
+	'functional.compare.ai.multi.model.failover': 'Multi-model Failover',
+	'functional.compare.ai.token.management': 'Token Quota Management and Flow Control',
+	'functional.compare.ai.route.auth': 'Route Configuration Authentication',
+	'functional.compare.ai.consumer.auth': 'Consumer Authentication',
+	'functional.compare.ai.online.search': 'Online Search',
+	'functional.compare.ai.enterprise.observability': 'Enterprise Observability',
+	'functional.compare.ai.api.to.mcp': 'API-to-MCP',
+	'functional.compare.ai.mcp.protocol': 'MCP Protocol Offloading',
+	'functional.compare.ai.mcp.market': 'MCP Marketplace',
+	'functional.compare.ai.mcp.tools': 'MCP Tool Assembly',
+	'functional.compare.ai.auth.algorithms': 'Richer authentication algorithms: jwt/hmac/oauth2',
+	'functional.compare.ai.auth.granularity': 'Finer authorization granularity: MCP tools',
+	
+	// Cost
+	'functional.compare.cost.managed': 'Fully Managed, Operation-free',
+	'functional.compare.cost.scaling': 'System Setup and Auto-scaling',
+	
+	// Stability
+	'functional.compare.stability.multi.zone': 'Multi-AZ Deployment',
+	'functional.compare.stability.auto.recovery': 'Automatic Fault Detection and Recovery',
+	'functional.compare.stability.rate.limiting': 'Rate Limiting and Degradation',
+	'functional.compare.stability.monitoring': 'Monitoring and Alerting',
+	'functional.compare.stability.sla': 'SLA',
+	'functional.compare.stability.route.level': 'Route-level Support',
+	'functional.compare.stability.token.limiting': 'Token Rate Limiting Support',
+	
+	// Performance
+	'functional.compare.performance.kernel': 'Kernel Optimization',
+	'functional.compare.performance.hardware': 'Hardware-Software Integration',
+	'functional.compare.performance.optimization': 'Self-optimization',
+	
+	// Security
+	'functional.compare.security.waf': 'WAF Protection',
+	'functional.compare.security.oidc': 'OIDC Authentication',
+	'functional.compare.security.encryption': 'Encryption Credentials',
+	'functional.compare.security.aigc': 'AIGC Protection (Security Fence)',
+	'functional.compare.security.auth': 'Authentication & Authorization',
+	'functional.compare.security.waf.multi.layer': 'Additional WAF gateway layer, longer request path',
+	'functional.compare.security.waf.builtin': 'Built-in WAF with shorter path and response time, plugin mode supported',
+	'functional.compare.security.waf.aliyun': 'Deep integration with Alibaba Cloud WAF',
+	'functional.compare.security.idaas.aliyun': 'Deep integration with Alibaba Cloud IDaaS',
+	'functional.compare.security.kms.aliyun': 'Deep integration with Alibaba Cloud KMS',
+	'functional.compare.security.content.aliyun': 'Deep integration with Alibaba Cloud Content Security',
+	
+	// Usability
+	'functional.compare.usability.api.lifecycle': 'Full API Lifecycle Management',
+	'functional.compare.usability.microservice.limiting': 'Microservice-oriented Rate Limiting',
+	'functional.compare.usability.microservice.discovery': 'Multiple Service Discovery for Microservices',
+	'functional.compare.usability.sentinel.integration': 'Sentinel integration, out-of-the-box',
+	'functional.compare.usability.cloud.discovery': 'Cloud product service discovery support',
+	
+	// Common
+	'functional.compare.self.build': 'Self-build',
 };

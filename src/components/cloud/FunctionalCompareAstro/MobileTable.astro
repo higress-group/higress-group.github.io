@@ -1,0 +1,46 @@
+---
+import Correct from "./Correct.astro";
+import False from "./False.astro";
+
+interface Props {
+  dataSource: any[];
+  title: string;
+  version: string;
+}
+
+const { dataSource, title, version } = Astro.props;
+---
+
+<div class="overflow-x-auto rounded-2xl mb-6">
+  <table class="table bg-secondary rounded-2xl table-fixed">
+    {dataSource.map((item, index) => (
+      <>
+        {index === 0 && (
+          <tr>
+            <td class="text-xl align-top text-left" colspan="2">
+              {title}
+            </td>
+          </tr>
+        )}
+        <tr>
+          <td class="text-base font-normal text-neutral border-l-0 border-dotted border-r border-link border-t">
+            {item.name.title && <p>{item.name.title}</p>}
+            {item.name.des && <p class="text-xs">{item.name.des}</p>}
+          </td>
+          <td class="text-center border-dotted border-r-0 border-link border-t">
+            {typeof item[version]?.checked === 'boolean' && (
+              <p>
+                {item[version]?.checked ? <Correct /> : <False />}
+              </p>
+            )}
+            {item[version]?.des && (
+              <p class="text-xs font-normal text-warning">
+                {item[version]?.des}
+              </p>
+            )}
+          </td>
+        </tr>
+      </>
+    ))}
+  </table>
+</div>
