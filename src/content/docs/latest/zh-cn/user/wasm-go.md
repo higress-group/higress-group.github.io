@@ -177,7 +177,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 $ PLUGIN_NAME=wasm-demo-go make build
 ... ...
 image:           wasm-demo-go:20230223-173305-3b1a471
-output wasm file: extensions/wasm-demo-go/plugin.wasm
+output wasm file: extensions/wasm-demo-go/main.wasm
 ```
 此命令最终会构建一个 wasm 文件和一个 Docker 镜像。
 
