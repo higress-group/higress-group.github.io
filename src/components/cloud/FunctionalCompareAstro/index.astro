@@ -584,6 +584,7 @@ const PrivateDataSource = [
   let isSticky = false;
   let isShow = false;
   let isCollapsed = true;
+  let scrollPosition = 0; // 记录滚动位置
   
   const versionContain = {
     'community': 'free',
@@ -784,37 +785,151 @@ const PrivateDataSource = [
     const modalToggle = document.getElementById('my_modal_6');
     const closeModal = document.querySelector('.close-modal');
     const btnSelects = document.querySelectorAll('.btn-select');
+    const versionSelector = document.querySelector('.version-selector');
     
-    if (modalToggle && modal) {
+    // 双重触发机制：label点击 + 直接点击事件
+    if (versionSelector && modalToggle && modal) {
+      // 直接点击触发
+      versionSelector.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        isShow = !isShow;
+        modalToggle.checked = isShow;
+        
+        if (isShow) {
+          // 记录当前滚动位置
+          scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+          
+          modal.style.display = 'flex';
+          // 阻止页面滚动但保持位置
+          document.body.style.overflow = 'hidden';
+          document.body.style.position = 'fixed';
+          document.body.style.top = `-${scrollPosition}px`;
+          document.body.style.width = '100%';
+        } else {
+          modal.style.display = 'none';
+          // 恢复页面滚动并还原位置
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.width = '';
+          window.scrollTo(0, scrollPosition);
+        }
+      });
+      
+      // checkbox状态变化备用监听
       modalToggle.addEventListener('change', function() {
         isShow = this.checked;
-        modal.style.display = isShow ? 'flex' : 'none';
+        if (isShow) {
+          // 记录当前滚动位置
+          scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+          
+          modal.style.display = 'flex';
+          // 阻止页面滚动但保持位置
+          document.body.style.overflow = 'hidden';
+          document.body.style.position = 'fixed';
+          document.body.style.top = `-${scrollPosition}px`;
+          document.body.style.width = '100%';
+        } else {
+          modal.style.display = 'none';
+          // 恢复页面滚动并还原位置
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.width = '';
+          window.scrollTo(0, scrollPosition);
+        }
       });
     }
     
+    // 关闭按钮
     if (closeModal && modalToggle && modal) {
-      closeModal.addEventListener('click', function() {
+      closeModal.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
         isShow = false;
         modalToggle.checked = false;
         modal.style.display = 'none';
+        
+        // 恢复页面滚动并还原位置
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollPosition);
+      });
+    }
+    
+    // 点击遮罩关闭模态框
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          isShow = false;
+          if (modalToggle) modalToggle.checked = false;
+          modal.style.display = 'none';
+          
+          // 恢复页面滚动并还原位置
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.width = '';
+          window.scrollTo(0, scrollPosition);
+        }
       });
     }
     
     btnSelects.forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
         version = this.dataset.version || 'community';
         updateMobileVersionText();
         updateMobileContent();
         
+        // 关闭模态框
         isShow = false;
         if (modalToggle) modalToggle.checked = false;
         if (modal) modal.style.display = 'none';
+        
+        // 恢复页面滚动并还原位置
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollPosition);
       });
     });
     
     // 绑定事件监听器
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('tabChanged', handleTabChange);
+    
+    // 添加页面隐藏时的清理机制
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        // 页面隐藏时恢复滚动状态
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        
+        // 关闭模态框
+        if (modal) modal.style.display = 'none';
+        if (modalToggle) modalToggle.checked = false;
+        isShow = false;
+      }
+    });
+    
+    // 页面卸载时清理
+    window.addEventListener('beforeunload', function() {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    });
     
     // 强制初始化为公有云模式
     switchTableContent('Public');
@@ -852,10 +967,22 @@ const PrivateDataSource = [
     padding-right: 1rem;
   }
 
-  /* 强制表格样式立即生效 */
+  /* tableplugin正确的圆角设置 */
+  .functional-compare-astro div.tableplugin.overflow-x-auto.mb-6 {
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+    background: transparent !important;
+  }
+  
+  /* 确保内部表格也有圆角 */
+  .functional-compare-astro .tableplugin table.bg-secondary {
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+  }
+
+  /* tableplugin基本样式 */
   .functional-compare-astro .tableplugin {
     overflow-x: auto;
-    border-radius: 1rem;
     margin-bottom: 1.5rem;
     background: theme('colors.secondary');
   }
@@ -866,33 +993,16 @@ const PrivateDataSource = [
     table-layout: fixed;
   }
 
-  .functional-compare-astro .tableplugin td {
-    height: 60px;
-    border-left: 1px solid #dddee4;
-    border-right: 1px solid #dddee4;
-    border-bottom: 1px solid #dddee4;
-    padding: 0.5rem;
-  }
-
-  .functional-compare-astro .tableplugin th {
-    border-left: 1px solid #dddee4;
-    border-bottom: hidden;
-    text-align: center;
-    font-size: 24px;
-    font-weight: normal;
-    line-height: 32px;
-    color: theme("colors.neutral");
-    padding: 1rem;
-  }
-
   .functional-compare-astro .col1 {
     width: 70px;
-    border: none;
+    border: none !important;
+    border-left: none !important;
+    border-right: none !important;
   }
 
   .functional-compare-astro .col2 {
     width: 200px;
-    border-left: none;
+    border-left: none !important;
   }
 
   .functional-compare-astro .col3,
@@ -923,6 +1033,23 @@ const PrivateDataSource = [
     border-right: none;
   }
 
+  /* 表格单元格padding样式 */
+  .functional-compare-astro .tableplugin td,
+  .functional-compare-astro .tableplugin th {
+    padding: 12px 16px !important;
+  }
+
+  /* 表格头部圆角设置 */
+  .functional-compare-astro .public-header th:first-child,
+  .functional-compare-astro .private-header th:first-child {
+    border-top-left-radius: 1rem;
+  }
+  
+  .functional-compare-astro .public-header th:last-child,
+  .functional-compare-astro .private-header th:last-child {
+    border-top-right-radius: 1rem;
+  }
+
   /* Safari浏览器折叠功能样式 */
   .collapse-input {
     display: none;
@@ -943,7 +1070,11 @@ const PrivateDataSource = [
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
+    z-index: 99999 !important;
+    /* 阻止模态框内部滚动传播 */
+    overscroll-behavior: contain;
+    /* 确保点击可以穿透到遮罩 */
+    pointer-events: auto;
   }
 
   .modal-box {
@@ -954,6 +1085,11 @@ const PrivateDataSource = [
     max-width: 400px;
     width: 90%;
     position: relative;
+    /* 阻止点击传播到遮罩 */
+    pointer-events: auto;
+    /* 防止内容超出时的滚动问题 */
+    max-height: 80vh;
+    overflow-y: auto;
   }
 
   .btn-select {
@@ -979,6 +1115,22 @@ const PrivateDataSource = [
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    /* 增加触摸区域 */
+    padding: 0.5rem;
+    min-height: 44px;
+    /* 添加视觉反馈 */
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+    /* 确保可点击 */
+    pointer-events: auto;
+    /* 移动端优化 */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    user-select: none;
+  }
+  
+  .version-selector:active {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: scale(0.98);
   }
 
   /* 响应式样式 */

@@ -1,4 +1,8 @@
 .tableplugin{
+  /* 保持外层容器的圆角 */
+  border-radius: 1rem;
+  overflow: hidden;
+  
   table,
   td {
     border-collapse: collapse;
@@ -8,6 +12,18 @@
     border-left: 1px solid #dddee4;
     border-right: 1px solid #dddee4;
     border-bottom: 1px solid #dddee4;
+    padding: 12px 16px;
+  }
+  
+  /* 表格头部圆角设置 */
+  .public-header th:first-child,
+  .private-header th:first-child {
+    border-top-left-radius: 1rem;
+  }
+  
+  .public-header th:last-child,
+  .private-header th:last-child {
+    border-top-right-radius: 1rem;
   }
   th {
     border-left: 1px solid #dddee4;
@@ -17,6 +33,7 @@
     font-weight: normal;
     line-height: 32px;
     color: theme("colors.neutral");
+    padding: 12px 16px;
   }
   
   /* 确保表格头中的p元素继承th的样式 */
@@ -31,7 +48,9 @@
 }
   .col1 {
     width: 70px;
-    border:none;
+    border: none !important;
+    border-left: none !important;
+    border-right: none !important;
   }
   .col2 {
     width: 200px;

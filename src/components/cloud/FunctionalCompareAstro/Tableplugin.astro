@@ -19,7 +19,7 @@ const totalRows = dataSource.length;
   {isHead && (
     <>
       {/* 公有云表格头 */}
-      <table class='w-full public-header' style="display: table;">
+      <table class='w-full public-header bg-error' style="display: table;">
         <tr>
           <th class="col1 border-0" />
           <th class="col2 border-0" />
@@ -32,7 +32,7 @@ const totalRows = dataSource.length;
       </table>
       
       {/* 专有云表格头 */}
-      <table class='w-full private-header' style="display: none;">
+      <table class='w-full private-header bg-error' style="display: none;">
         <tr>
           <th class="col1 border-0" />
           <th class="col2 border-0" />
@@ -46,7 +46,7 @@ const totalRows = dataSource.length;
     </>
   )}
   
-  <table class={`table bg-secondary rounded-2xl table-fixed ${isPrivateMode ? 'private-mode' : ''}`}>
+  <table class={`table bg-secondary table-fixed ${isPrivateMode ? 'private-mode' : ''}`}>
     {dataSource.map((item, index) => (
       <tr>
         {index === 0 && (
