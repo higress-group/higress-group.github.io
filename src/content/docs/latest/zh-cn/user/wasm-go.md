@@ -169,25 +169,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 
 ### 3. 编译生成 WASM 文件
 
-#### 3.1 使用脚手架构建 wasm-go 插件镜像
-如果你的项目目录位于 plugins/wasm-go（参见 [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)），你可以使用以下命令快速构建 wasm-go 插件镜像：
-
-```Bash
-
-$ PLUGIN_NAME=wasm-demo-go make build
-... ...
-image:           wasm-demo-go:20230223-173305-3b1a471
-output wasm file: extensions/wasm-demo-go/main.wasm
-```
-此命令最终会构建一个 wasm 文件和一个 Docker 镜像。
-
-构建生成的本地 wasm 文件会被导出到指定的插件目录，可以直接用于本地调试。
-
-你也可以使用 make build-push 命令来同时完成构建和推送镜像的操作。
-
-更多详情，请参考 [plugins/wasm-go](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
-
-3.2 本地编译 wasm 文件
+#### 本地编译 wasm 文件
 如果你使用的是自定义初始化的目录，请执行以下命令来编译 wasm 文件：
 
 ```Bash
