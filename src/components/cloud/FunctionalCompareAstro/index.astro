@@ -690,6 +690,22 @@ const PrivateDataSource = [
   // Tab切换处理
   function handleTabChange(event) {
     activeTab = event.detail.activeTab;
+    
+    // 切换到专有云模式时，如果当前版本不存在于专有云数据中，重置为默认版本
+    if (activeTab === 'Private') {
+      const privateVersionKeys = privateDataVersion.map(v => v.key);
+      if (!privateVersionKeys.includes(version)) {
+        version = 'community'; // 重置为专有云的默认版本
+      }
+    }
+    // 切换到公有云模式时，如果当前版本不存在于公有云数据中，重置为默认版本
+    else if (activeTab === 'Public') {
+      const publicVersionKeys = dataVersion.map(v => v.key);
+      if (!publicVersionKeys.includes(version)) {
+        version = 'community'; // 重置为公有云的默认版本
+      }
+    }
+    
     switchTableContent(activeTab);
     updateMobileContent();
   }
