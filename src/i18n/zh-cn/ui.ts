@@ -396,7 +396,7 @@ export default {
 	'functional.compare.section.performance': '性能',
 	'functional.compare.section.security': '安全性',
 	'functional.compare.section.security.compliance': '安全合规',
-	'functional.compare.section.usability': '易用性',
+	'functional.compare.section.usability': '微服务和 API 管理',
 	'functional.compare.section.version.description': '版本描述',
 	
 	// 基础信息
