@@ -389,7 +389,7 @@ export default {
 	'functional.compare.section.performance': 'Performance',
 	'functional.compare.section.security': 'Security',
 	'functional.compare.section.security.compliance': 'Security & Compliance',
-	'functional.compare.section.usability': 'Usability',
+	'functional.compare.section.usability': 'Microservices and API Management',
 	'functional.compare.section.version.description': 'Version Description',
 	
 	// Basic information
