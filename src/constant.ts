@@ -6,9 +6,9 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "新一代 Agentic Coding 平台 Qoder 来了",
-    "mobileText": "新一代 Agentic Coding 平台 Qoder 来了",
-    "link": "https://qoder.com/",
+    "text": "HiMarket 开源，打造开箱即用的 AI 开放平台",
+    "mobileText": "HiMarket 开源，打造开箱即用的 AI 开放平台",
+    "link": "https://github.com/higress-group/himarket",
     "target": "_blank",
     "display": true
 }
