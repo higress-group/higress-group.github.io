@@ -20,7 +20,9 @@ This page shows the Higress development team. Please add your information to the
 | Xiantao Han | [hanxiantao](https://github.com/hanxiantao) | XinYe Technology |
 | Zhiwei Cheng | [Se7en](https://github.com/cr7258) | NVIDIA |
 | Tianyi Zhang | [johnlanni](https://github.com/johnlanni) | Alibaba Cloud |
+| Yan Yan | [JavaerJohn](https://github.com/JavaerJohn) | Alibaba Cloud |
 | Jingfeng Xu | [lexburner](https://github.com/lexburner) | Alibaba Cloud |
+| Shengwei Pan | [panxiaojun233](https://github.com/panxiaojun233) | Alibaba Cloud |
 | Xiaorui Liu | [rinfx](https://github.com/rinfx) | Alibaba Cloud |
 | Min Ji | [slievrly](https://github.com/slievrly) | Alibaba Cloud |
 

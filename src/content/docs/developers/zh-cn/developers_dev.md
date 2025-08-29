@@ -20,7 +20,9 @@ description: Higress 维护者名单
 | 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
 | 程治玮 | [Se7en](https://github.com/cr7258)   | NVIDIA  |
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | 阿里云        |
+| 严研 | [JavaerJohn](https://github.com/JavaerJohn) | 阿里云        |
 | 徐靖峰 | [lexburner](https://github.com/lexburner) | 阿里云        |
+| 泮圣伟 | [panxiaojun233](https://github.com/panxiaojun233) | 阿里云        |
 | 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
 | 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
 
