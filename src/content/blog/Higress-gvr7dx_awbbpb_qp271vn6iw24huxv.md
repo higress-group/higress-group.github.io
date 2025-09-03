@@ -2,15 +2,15 @@
 title: "HiMarket 正式开源，为企业落地开箱即用的 AI 开放平台"
 description: "HiMarket 正式开源，为企业落地开箱即用的 AI 开放平台"
 date: "2025-09-02"
-category: "article"
+category: "announcement"
 keywords: ["Higress"]
 authors: "CH3CHO"
 ---
 
 作者：岛风、十眠、严研
 
-<h2 id="30bdb0d7"><font style="color:rgb(13, 18, 57);">HiMarket 正式开源</font></h2>
-<font style="color:rgb(13, 18, 57);">今天，由 Higress 社区和 Nacos 社区共同发起的全新开源项目 </font><font style="color:rgb(13, 18, 57);">HiMarket AI 开放平台</font><font style="color:rgb(13, 18, 57);">，正式发布。</font>
+## <font style="color:rgb(13, 18, 57);">HiMarket 正式开源</font>
+<font style="color:rgb(13, 18, 57);">8月29日，由 Higress 社区和 Nacos 社区共同发起的全新开源项目 </font>**<font style="color:rgb(13, 18, 57);">HiMarket AI 开放平台</font>**<font style="color:rgb(13, 18, 57);">，正式发布。</font>
 
 **<font style="color:rgb(13, 18, 57);">GitHub 地址：</font>**[**<font style="color:rgb(94, 92, 230);">https://github.com/higress-group/himarket</font>**](https://github.com/higress-group/himarket)
 
@@ -33,8 +33,8 @@ authors: "CH3CHO"
 
 <font style="color:rgb(13, 18, 57);">这正是我们发起 HiMarket 的初心：帮助用户从 80% 开始构建 AI 开放平台。</font>
 
-<h3 id="c052b362"><font style="color:rgb(13, 18, 57);">HiMarket 是什么？</font></h3>
-<font style="color:rgb(13, 18, 57);">HiMarket 是一个开箱即用的 AI 开放平台解决方案。它不是一个简单的 API 列表页，而是一个企业级的 “AI 能力市场与开发者生态中心”。
+### <font style="color:rgb(13, 18, 57);">HiMarket 是什么？</font>
+<font style="color:rgb(13, 18, 57);">HiMarket 是一个开箱即用的 AI 开放平台解决方案。它不是一个简单的 API 列表页，而是一个企业级的</font><font style="color:rgb(13, 18, 57);"> </font>**<font style="color:rgb(13, 18, 57);">“AI 能力市场与开发者生态中心”</font>**<font style="color:rgb(13, 18, 57);">。</font>
 
 <font style="color:rgb(13, 18, 57);">它由几大核心组件构成，完美匹配企业内不同角色的需求：</font>
 
@@ -61,11 +61,11 @@ authors: "CH3CHO"
 + **<font style="color:rgb(27, 28, 29);">数据安全与合规</font>**<font style="color:rgb(27, 28, 29);">：建立全企业统一的内容安全策略，能够有效防止企业内部的敏感数据（如客户信息、财务报表）通过 prompt 被无意或恶意地发送给外部模型，构筑起一道关键的数据防泄露屏障。</font>
 + **<font style="color:rgb(27, 28, 29);">资源复用</font>**<font style="color:rgb(27, 28, 29);">：通过部署统一的语义化缓存，对全公司范围内的高频、相似问题直接返回缓存结果，不仅能有效降低模型调用成本，更能显著提升响应速度，改善员工和客户的体验。</font>
 + **<font style="color:rgb(27, 28, 29);">效率提升：</font>**<font style="color:rgb(27, 28, 29);">以统一 AI 中台打通部门数据，复用私域数据的检索/问答/诊断能力，标准化接入与交付流程，显著加快 AI 能力在各业务线的落地。</font>
+
+
 2. **<font style="color:rgb(27, 28, 29);">私有 MCP 市场：企业 MCP 工具生态的统一入口</font>**
 
-随着 MCP 协议的普及，企业可以以标准化接口将模型与外部工具和服务“即插即用”地连接起来，显著降低对接成本并提升系统的灵活性与可扩展性。在企业侧通过 MCP 市场作为单一入口集中接入与治理 MCP 服务，AI Agent 得以用统一方式高效调用内部系统执行如订单查询、会议室预订等具体任务，同时确保流量治理与弹性扩展的一致性。企业内所有对外部工具的调用请求都必须先通过 HiMarket 进行集中的、标准化的安全管控，包括统一的认证鉴权、精细的速率限制、全面的审计日志等。这种方式避免了在每一个独立的工具服务上重复实现和维护复杂的安全逻辑，极大地简化了 MCP 工具生态的安全治理，为企业构建一个安全、可靠、可控的 AI Agent 体系提供了坚实的基础。HiMarket 可以帮助企业一键拉起私有化的MCP市场，例如 Higress 构建的开源MCP市场：[https://mcp.higress.ai/](https://mcp.higress.ai/)
-
-![](https://img.alicdn.com/imgextra/i1/O1CN01ublMgM1zNZWJUqRmS_!!6000000006702-2-tps-5080-1938.png)
+随着 MCP 协议的普及，企业可以以标准化接口将模型与外部工具和服务“即插即用”地连接起来，显著降低对接成本并提升系统的灵活性与可扩展性。在企业侧通过 MCP 市场作为单一入口集中接入与治理 MCP 服务，AI Agent 得以用统一方式高效调用内部系统执行如订单查询、会议室预订等具体任务，同时确保流量治理与弹性扩展的一致性。企业内所有对外部工具的调用请求都必须先通过 HiMarket 进行集中的、标准化的安全管控，包括统一的认证鉴权、精细的速率限制、全面的审计日志等。这种方式避免了在每一个独立的工具服务上重复实现和维护复杂的安全逻辑，极大地简化了 MCP 工具生态的安全治理，为企业构建一个安全、可靠、可控的 AI Agent 体系提供了坚实的基础。HiMarket 可以帮助企业一键拉起私有化的MCP市场，例如 Higress 构建的开源MCP市场：[https://mcp.higress.ai/](https://mcp.higress.ai/)![](https://img.alicdn.com/imgextra/i1/O1CN01ublMgM1zNZWJUqRmS_!!6000000006702-2-tps-5080-1938.png)
 
 3. **构建企业 AI 能力货币化的统一 AI 开放平台**
 
@@ -75,23 +75,23 @@ authors: "CH3CHO"
 
 HiMarket 定位成为“AI API 经济”的开源基座，帮助企业把分散的智能体、模型、RAG、工具与行业数据统一沉淀为标准化的 API 资产。通过一站式的能力目录与上架、接入校验、权限与审计、调用计量与配额、以及计费与对账接口对接，HiMarket 让能力可被快速发现、组合、分发与结算，形成从内部能力到外部营收的闭环，打造属于企业的统一 AI 开放平台与API货币化通道。
 
-<h3 id="rJkIH"><font style="color:rgb(27, 28, 29);">HiMarket：AI 加持的开放平台</font></h3>
+### <font style="color:rgb(27, 28, 29);">HiMarket：AI 加持的开放平台</font>
 面向 AI 时代的演进，HiMarket 的愿景是成为“AI 加持的开放平台”：借助对 OpenAPI、MCP Manifest、OAS Swagger 等 API 元数据的理解，探索 AI 辅助一键生成多语言 SDK、示例与契约测试；基于语义检索与任务意图实现工具的智能发现与路由；在运行期形成可用性、时延、成功率等质量画像与评分；提供 Token 成本计量与预算优化；并在提示词级落地内容安全与敏感信息防泄露策略等。
 
 上述能力目前处于路线图阶段，尚未全部实现，我们希望与社区共同验证与打磨——以开放的 RFC 与插件化架构推进原型落地，优先打通“元数据摄取—评测基准与遥测规范—质量评分与路由策略”的最小可用闭环。欢迎开发者参与讨论、提交 Issue/PR，或贡献适配器与评测集，一起把 HiMarket 打造成企业私有 AI API 市场在“发现—接入—治理—监控—优化—变现”上的统一入口与创新加速器。
 
-<h3 id="8002689b"><font style="color:rgb(13, 18, 57);">快速入门</font></h3>
+### <font style="color:rgb(13, 18, 57);">快速入门</font>
 <font style="color:rgb(13, 18, 57);">我们为你准备了详尽的快速入门指南，只需简单几步，你就能在本地将 HiMarket 运行起来，亲身体验“从 80% 开始”的快感。</font>
 
-<h4 id="7257fa4c"><font style="color:rgb(13, 18, 57);">第一步：准备环境与代码</font></h4>
+#### **<font style="color:rgb(13, 18, 57);">第一步：准备环境与代码</font>**
 <font style="color:rgb(13, 18, 57);">确保你已安装 Git, JDK 8, Maven，Node.js (v20), 并准备好一个 MySQL 数据库。</font>
 
 ```shell
 git clone https://github.com/higress-group/himarket.git
 cd himarket
-```
+```  
 
-<h4 id="da64451b"><font style="color:rgb(13, 18, 57);">第二步：启动后端服务</font></h4>
+#### **<font style="color:rgb(13, 18, 57);">第二步：启动后端服务</font>**
 <font style="color:rgb(13, 18, 57);">HiMarket 后端服务依赖数据库，请根据</font><font style="color:rgb(13, 18, 57);"> </font>`<font style="color:rgb(13, 18, 57);">portal-bootstrap/src/main/resources/application.yaml</font>`<font style="color:rgb(13, 18, 57);"> </font><font style="color:rgb(13, 18, 57);">修改配置，或在启动时通过参数传入。</font>
 
 ```shell
@@ -107,8 +107,7 @@ java -Ddb.host=YOUR_DB_HOST \
      -jar portal-bootstrap/target/portal-bootstrap-1.0-SNAPSHOT.jar
 ```
 
-<h4 id="de6c82f7"><font style="color:rgb(13, 18, 57);">第三步：启动前端</font></h4>  
-
+#### **<font style="color:rgb(13, 18, 57);">第三步：启动前端</font>**
 <font style="color:rgb(13, 18, 57);">HiMarket 包含管理后台和开发者门户两个前端。</font>
 
 ```shell
@@ -125,9 +124,8 @@ npm run dev
 # 访问 http://localhost:5173
 ```
 
-<h4 id="30dd2ee8"><font style="color:rgb(13, 18, 57);">第四步：5 分钟体验核心流程</font></h4>  
-
-1. **<font style="color:rgb(13, 18, 57);">访问管理后台 (</font>**`localhost:5174`**<font style="color:rgb(13, 18, 57);">)</font>**<font style="color:rgb(13, 18, 57);">，注册管理员账号。</font>
+#### **<font style="color:rgb(13, 18, 57);">第四步：5 分钟体验核心流程</font>**
+1. **<font style="color:rgb(13, 18, 57);">访问管理后台 (</font>**`**<font style="color:rgb(13, 18, 57);">localhost:5174</font>**`**<font style="color:rgb(13, 18, 57);">)</font>**<font style="color:rgb(13, 18, 57);">，注册管理员账号。</font>
 2. **<font style="color:rgb(13, 18, 57);">导入服务来源</font>**
 
 根据业务场景选择导入MCP Server所在的服务来源，当前支持网关跟Nacos。
@@ -138,16 +136,18 @@ npm run dev
 
 ![](https://img.alicdn.com/imgextra/i1/O1CN01crsoiK1dzeuU3XUfA_!!6000000003807-54-tps-3012-1664.apng)
 
-3. **<font style="color:rgb(13, 18, 57);">创建门户</font>**<font style="color:rgb(13, 18, 57);">：在【Portal】菜单下，创建一个属于你的 AI 门户，并为其绑定一个用于本地测试的域名（如 </font>`localhost`<font style="color:rgb(13, 18, 57);">）。  
+3. **<font style="color:rgb(13, 18, 57);">创建门户</font>**<font style="color:rgb(13, 18, 57);">：在【Portal】菜单下，创建一个属于你的 AI 门户，并为其绑定一个用于本地测试的域名（如 </font>`<font style="color:rgb(13, 18, 57);">localhost</font>`<font style="color:rgb(13, 18, 57);">）。  
 </font>![](https://img.alicdn.com/imgextra/i2/O1CN01TjON2e1rKoClqZToJ_!!6000000005613-2-tps-2858-1280.png)
+
 4. **<font style="color:rgb(13, 18, 57);">创建并发布 AI 产品</font>**<font style="color:rgb(13, 18, 57);">：在【API Products】中，将一个来自 Higress 的 MCP 服务封装成产品，并将其发布到你刚刚创建的门户。  
 </font>![](https://img.alicdn.com/imgextra/i3/O1CN01anknAg1ujUOYLVcYu_!!6000000006073-2-tps-2854-1192.png)
-5. **<font style="color:rgb(13, 18, 57);">切换到开发者门户 (</font>**`localhost:5173`**<font style="color:rgb(13, 18, 57);">)</font>**<font style="color:rgb(13, 18, 57);">，注册一个开发者账号，并等待管理员在后台审批通过。</font>
-6. **<font style="color:rgb(13, 18, 57);">订阅并调用</font>**<font style="color:rgb(13, 18, 57);">：登录开发者门户，你会看到刚才发布的 AI 产品。创建一个消费者(Consumer)来获取凭证，然后订阅该产品，即可开始调用！  
 
+5. **<font style="color:rgb(13, 18, 57);">切换到开发者门户 (</font>**`**<font style="color:rgb(13, 18, 57);">localhost:5173</font>**`**<font style="color:rgb(13, 18, 57);">)</font>**<font style="color:rgb(13, 18, 57);">，注册一个开发者账号，并等待管理员在后台审批通过。</font>
+
+6. **<font style="color:rgb(13, 18, 57);">订阅并调用</font>**<font style="color:rgb(13, 18, 57);">：登录开发者门户，你会看到刚才发布的 AI 产品。创建一个消费者(Consumer)来获取凭证，然后订阅该产品，即可开始调用！  
 </font>![](https://img.alicdn.com/imgextra/i2/O1CN01JHalCr1KD8FIoJAli_!!6000000001129-2-tps-1878-844.png)
 
-<h3 id="b34deabe"><font style="color:rgb(13, 18, 57);">我们的旅程与你的参与</font></h3>
+### <font style="color:rgb(13, 18, 57);">我们的旅程与你的参与</font>
 <font style="color:rgb(13, 18, 57);">HiMarket 目前正处于起步阶段，我们已经实现了 AI 开放平台的核心流程，但这仅仅是开始。</font>
 
 <font style="color:rgb(13, 18, 57);">HiMarket 路线图：</font>
@@ -161,8 +161,12 @@ npm run dev
 + <font style="color:rgb(13, 18, 57);"></font>**<font style="color:rgb(13, 18, 57);">Star 我们的项目</font>**<font style="color:rgb(13, 18, 57);">：这是对我们最直接的鼓励 </font>[<font style="color:rgb(94, 92, 230);">https://github.com/higress-group/himarket</font>](https://github.com/higress-group/himarket)
 + **<font style="color:rgb(13, 18, 57);">部署和试用</font>**<font style="color:rgb(13, 18, 57);">：将 HiMarket 用起来，感受它的价值。</font>
 + **<font style="color:rgb(13, 18, 57);">提交 Issue</font>**<font style="color:rgb(13, 18, 57);">：无论是 Bug 还是功能建议，你的反馈至关重要。</font>
-+ **<font style="color:rgb(13, 18, 57);">贡献代码</font>**<font style="color:rgb(13, 18, 57);">：我们已经准备了一系列 </font>`good first issue`<font style="color:rgb(13, 18, 57);">，期待你的第一个 PR。</font>
++ **<font style="color:rgb(13, 18, 57);">贡献代码</font>**<font style="color:rgb(13, 18, 57);">：我们已经准备了一系列 </font>`<font style="color:rgb(13, 18, 57);">good first issue</font>`<font style="color:rgb(13, 18, 57);">，期待你的第一个 PR。</font>
 + **<font style="color:rgb(13, 18, 57);">加入社区</font>**<font style="color:rgb(13, 18, 57);">：扫描下方二维码加入我们的社区交流群（钉钉），与核心开发者直接交流。</font>
 + **<font style="color:rgb(13, 18, 57);">共建生态</font>**<font style="color:rgb(13, 18, 57);">：坚持代码结构友好，便于二次开发与扩展，欢迎 fork 定制并回馈贡献，共同完善生态。</font>
 
 ![](https://img.alicdn.com/imgextra/i2/O1CN014Frage1uqMKtKyP6v_!!6000000006088-2-tps-864-822.png)
+
+
+
+
