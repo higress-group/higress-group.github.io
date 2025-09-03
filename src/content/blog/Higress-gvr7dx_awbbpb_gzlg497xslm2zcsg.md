@@ -2,7 +2,7 @@
 title: "Higress v2.1.7：42 项引擎更新 + 12 项控制台更新"
 description: "Higress v2.1.7：42 项引擎更新 + 12 项控制台更新"
 date: "2025-09-03"
-category: "announcement"
+category: "article"
 keywords: ["Higress"]
 authors: "CH3CHO"
 ---
