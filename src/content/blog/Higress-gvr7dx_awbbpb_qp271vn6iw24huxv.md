@@ -2,7 +2,7 @@
 title: "HiMarket 正式开源，为企业落地开箱即用的 AI 开放平台"
 description: "HiMarket 正式开源，为企业落地开箱即用的 AI 开放平台"
 date: "2025-09-02"
-category: "announcement"
+category: "article"
 keywords: ["Higress"]
 authors: "CH3CHO"
 ---
