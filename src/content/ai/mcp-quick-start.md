@@ -63,20 +63,6 @@ metadata:
   namespace: higress-system
 ```
 
-#### 配置 REST API MCP Server 作为服务来源
-
-在 Higress 控制台添加目标 REST API 的服务来源，本示例使用公网服务 `randomuser.me` ：
-
-![添加服务来源](https://gw.alicdn.com/imgextra/i4/O1CN0175PEY11uVI4iiRKhM_!!6000000006042-0-tps-2496-566.jpg)
-
-#### 配置 Nacos 作为服务来源 (Optional)
-> **注意：**
-> 需要Nacos版本为3.0及以上，Higress版本在2.1.2及以上
-
-创建Nacos3.x服务来源并完善相关信息
-
-![添加Nacos3.x服务来源](https://img.alicdn.com/imgextra/i3/O1CN01FGvSE71HVVGHTp1Cu_!!6000000000763-2-tps-588-1039.png)
-
 ### 配置 MCP 管理
 
 进入 MCP 管理界面：
@@ -87,18 +73,18 @@ metadata:
 
 ![创建MCP服务](https://img.alicdn.com/imgextra/i1/O1CN01PYboEy1QbIq1xt1F3_!!6000000001994-2-tps-3012-1590.png)
 
+#### OpenAPI 类型的 MCP Server 
 
-> **注意：**
+在 Higress 控制台添加目标 REST API 的服务来源，本示例使用公网服务 `randomuser.me` ：
 
-> 1. 对于 DB 类型的 MCP 服务需要额外配置：
+![添加服务来源](https://gw.alicdn.com/imgextra/i4/O1CN0175PEY11uVI4iiRKhM_!!6000000006042-0-tps-2496-566.jpg)
 
-![DB类型MCP服务](https://img.alicdn.com/imgextra/i2/O1CN01AUuAh61fATsVvAjm8_!!6000000003966-2-tps-1156-1016.png)
-
-> 2. 对于 OpenAPI 类型的 MCP 服务，需要在创建后编辑工具规范，可以使用 OpenAPI/Swagger 规范或直接使用 MCP 工具，这里以 MCP 为例：
+配置 OpenAPI 类型的 MCP 服务，需要在创建后编辑工具规范，可以使用 OpenAPI/Swagger 规范或直接使用 MCP 工具，这里以 MCP 为例：
 
 ![编辑工具](https://img.alicdn.com/imgextra/i1/O1CN016AMQp71rUsuibww0U_!!6000000005635-2-tps-3008-900.png)
 
 ![Yaml编辑](https://img.alicdn.com/imgextra/i1/O1CN01ln5gRK20KebmUicsi_!!6000000006831-2-tps-3018-1588.png)
+
 
 ```bash
 server:
@@ -119,6 +105,10 @@ tools:
       - **Phone**: {{.phone}}
       {{- end }}
 ```
+
+#### DB 类型的 MCP Server
+
+![DB类型MCP服务](https://img.alicdn.com/imgextra/i2/O1CN01AUuAh61fATsVvAjm8_!!6000000003966-2-tps-1156-1016.png)
 
 
 ## 使用 MCP Server
@@ -144,6 +134,19 @@ Cursor 中配置完成：
 ![Cursor配置完成](https://img.alicdn.com/imgextra/i2/O1CN01k5hHbI1IQIORhlyQQ_!!6000000000887-2-tps-1868-1038.png)
 
 
+## 配置 Nacos 作为服务来源 (Optional)
+
+通过对接Nacos自动发现，您可以复用Nacos成熟的配置管理能力来统一管理MCP服务。
+
+> **注意：**
+> 需要Nacos版本为3.0及以上，Higress版本在2.1.2及以上
+
+
+创建Nacos3.x服务来源并完善相关信息
+
+![添加Nacos3.x服务来源](https://img.alicdn.com/imgextra/i3/O1CN01FGvSE71HVVGHTp1Cu_!!6000000000763-2-tps-588-1039.png)
+
+## 结语
 通过 MCP Server，您可以快速为 AI Agent 添加各种数据源支持，提高开发效率。任何 REST API 都可以通过简单的配置转换为 MCP Server，无需编写额外的代码。
 
 > 如您在使用 MCP Server 过程中遇到问题，可在 [Higress Github Issue](https://github.com/alibaba/higress/issues) 中留下您的信息。

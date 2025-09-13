@@ -523,8 +523,8 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config MyConfig, log logs.Log
 		log.Errorf("Error occured while calling http, it seems cannot find the service cluster.")
 		return types.ActionContinue
 	} else {
-		// 需要等待异步回调完成，返回Pause状态，可以被ResumeHttpRequest恢复
-		return types.HeaderStopIteration
+		// 需要等待异步回调完成，返回HeaderStopAllIterationAndWatermark状态，可以被ResumeHttpRequest恢复
+		return types.HeaderStopAllIterationAndWatermark
 	}
 }
 ```
@@ -631,7 +631,7 @@ func onHttpRequestHeaders(ctx wrapper.HttpContext, config RedisCallConfig, log l
 		return types.HeaderContinue
 	} else {
 		// 请求hold住，等待redis调用完成
-		return types.HeaderStopIteration
+		return types.HeaderStopAllIterationAndWatermark
 	}
 }
 
