@@ -151,6 +151,18 @@ For DeepSeek, the corresponding `type` is `deepseek`. It has no unique configura
 
 For Groq, the corresponding `type` is `groq`. It has no unique configuration fields.
 
+#### Grok
+
+For Grok, the corresponding `type` is `grok`. It has no unique configuration fields.
+
+#### OpenRouter
+
+For OpenRouter, the corresponding `type` is `openrouter`. It has no unique configuration fields.
+
+#### Fireworks AI
+
+For Fireworks AI, the corresponding `type` is `fireworks`. It has no unique configuration fields.
+
 #### ERNIE Bot
 
 For ERNIE Bot, the corresponding `type` is `baidu`. It has no unique configuration fields.
@@ -230,6 +242,58 @@ For DeepL, the corresponding `type` is `deepl`. Its unique configuration field i
 | Name         | Data Type | Requirement | Default | Description                         |
 | ------------ | --------- | ----------- | ------- | ------------------------------------ |
 | `targetLang` | string    | Required    | -       | The target language required by the DeepL translation service |
+
+#### Cohere
+
+For Cohere, the corresponding `type` is `cohere`. It has no unique configuration fields.
+
+#### Together-AI
+For Together-AI, the corresponding `type` is `together-ai`. It has no unique configuration fields.
+
+#### Dify
+
+For Dify, the corresponding `type` is `dify`. Its unique configuration field is:
+
+| Name             | Data Type | Requirement | Default | Description                                                                             |
+| ---------------- | -------- | -------- | ------ | -------------------------------------------------------------------------------- |
+| `difyApiUrl`     | string   | Optional   | -      | URL for Dify self-hosted deployment                                                            |
+| `botType`        | string   | Optional   | -      | The application type in Dify: Chat/Completion/Agent/Workflow                                  |
+| `inputVariable`  | string   | Optional   | -      | When the application type in Dify is workflow, you need to set the input variable. Use together with botType set to workflow. |
+| `outputVariable` | string   | Optional   | -      | When the application type in Dify is workflow, you need to set the output variable. Use together with botType set to workflow. |
+
+#### Google Vertex AI
+For Vertex, the corresponding `type` is `vertex`. Its unique configuration field is:
+
+| Name                        | Data Type     | Requirement   | Default | Description                                                                                                                                                 |
+|-----------------------------|---------------|---------------| ------ |-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `vertexAuthKey`             | string        | Required      | -      | Google Service Account JSON Key used for authentication. The format should be PEM encoded PKCS#8 private key along with client_email and other information  |
+| `vertexRegion`              | string        | Required      | -      | Google Cloud region (e.g., us-central1, europe-west4) used to build the Vertex API address                                                                  |
+| `vertexProjectId`           | string        | Required      | -      | Google Cloud Project ID, used to identify the target GCP project                                                                                            |
+| `vertexAuthServiceName`     | string        | Required      | -      | Service name for OAuth2 authentication, used to access oauth2.googleapis.com                                                                                |
+| `vertexGeminiSafetySetting` | map of string | Optional      | -      | Gemini model content safety filtering settings.                                                                                                             |
+| `vertexTokenRefreshAhead`   | number        | Optional      | -      | Vertex access token refresh ahead time in seconds                                                                                                           |
+
+#### AWS Bedrock
+
+For AWS Bedrock, the corresponding `type` is `bedrock`. Its unique configuration field is:
+
+| Name                      | Data Type | Requirement | Default | Description                                             |
+|---------------------------|-----------|-------------|---------|---------------------------------------------------------|
+| `awsAccessKey`            | string    | Required    | -       | AWS Access Key used for authentication                  |
+| `awsSecretKey`            | string    | Required    | -       | AWS Secret Access Key used for authentication           |
+| `awsRegion`               | string    | Required    | -       | AWS region, e.g., us-east-1                             |
+| `bedrockAdditionalFields` | map       | Optional    | -       | Additional inference parameters that the model supports |
+
+#### NVIDIA Triton Interference Server
+
+For NVIDIA Triton Interference Server, the corresponding `type` is `triton`. Its unique configuration field is:
+
+| Name                        | Data Type   | Requirement | Default | Description                           |
+|---------------------------|--------|------|-----|------------------------------|
+| `awsAccessKey`            | string | Required   | -   | AWS Access Key, used for authentication        |
+| `awsSecretKey`            | string | Required   | -   | AWS Secret Access Key, used for authentication |
+| `awsRegion`               | string | Required   | -   | AWS region, e.g., us-east-1          |
+| `bedrockAdditionalFields` | map    | Optional  | -   | Additional inference parameters that the model supports             |
 
 ## Usage Examples
 
