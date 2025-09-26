@@ -68,6 +68,8 @@ helm upgrade higress -n higress-system --set global.enableIstioAPI=true higress.
 
 集群里需要提前安装好 Gateway API 的 CRD：https://github.com/kubernetes-sigs/gateway-api/releases
 
+> 注：Higress 最高支持的 Gateway API 版本为 1.0.0。
+
 以1.0.0为例：
 
 ```bash

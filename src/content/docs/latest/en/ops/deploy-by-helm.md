@@ -68,6 +68,8 @@ helm upgrade higress -n higress-system --set global.enableIstioAPI=true higress.
 
 The cluster needs to have Gateway API CRDs installed in advance: https://github.com/kubernetes-sigs/gateway-api/releases
 
+> Note: The highest version of Gateway API supported by Higress is 1.0.0.
+
 For example, for version 1.0.0:
 
 ```bash
