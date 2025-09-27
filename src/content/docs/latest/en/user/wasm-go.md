@@ -239,7 +239,7 @@ Install [Docker](https://docs.docker.com/engine/install/?spm=a2c4g.426926.0.0.29
 version: '3.7'
 services:
   envoy:
-    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:v2.1.5
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:v2.1.8
     entrypoint: /usr/local/bin/envoy
     # 注意这里对wasm开启了debug级别日志，正式部署时则默认info级别
 	# we use the debug level log here, the default level is info in production mod
