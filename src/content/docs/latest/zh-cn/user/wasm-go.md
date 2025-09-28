@@ -227,7 +227,7 @@ GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
 version: '3.7'
 services:
   envoy:
-    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:v2.1.5
+    image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:v2.1.8
     entrypoint: /usr/local/bin/envoy
     # 注意这里对wasm开启了debug级别日志，正式部署时则默认info级别
     command: -c /etc/envoy/envoy.yaml --component-log-level wasm:debug

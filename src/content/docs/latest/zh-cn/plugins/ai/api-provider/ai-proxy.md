@@ -158,6 +158,18 @@ DeepSeek所对应的 `type` 为 `deepseek`。它并无特有的配置字段。
 
 Groq 所对应的 `type` 为 `groq`。它并无特有的配置字段。
 
+#### Grok
+
+Grok 所对应的 `type` 为 `grok`。它并无特有的配置字段。
+
+#### OpenRouter
+
+OpenRouter 所对应的 `type` 为 `openrouter`。它并无特有的配置字段。
+
+#### Fireworks AI
+
+Fireworks AI 所对应的 `type` 为 `fireworks`。它并无特有的配置字段。
+
 #### 文心一言（Baidu）
 
 文心一言所对应的 `type` 为 `baidu`。它并无特有的配置字段。
@@ -249,6 +261,50 @@ Cohere 所对应的 `type` 为 `cohere`。它并无特有的配置字段。
 
 #### Together-AI
 Together-AI 所对应的 `type` 为 `together-ai`。它并无特有的配置字段。
+
+#### Dify
+
+Dify 所对应的 `type` 为 `dify`。它特有的配置字段如下:
+
+| 名称             | 数据类型 | 填写要求 | 默认值 | 描述                                                                             |
+| ---------------- | -------- | -------- | ------ | -------------------------------------------------------------------------------- |
+| `difyApiUrl`     | string   | 非必填   | -      | dify 私有化部署的 url                                                            |
+| `botType`        | string   | 非必填   | -      | dify 的应用类型，Chat/Completion/Agent/Workflow                                  |
+| `inputVariable`  | string   | 非必填   | -      | dify 中应用类型为 workflow 时需要设置输入变量，当 botType 为 workflow 时一起使用 |
+| `outputVariable` | string   | 非必填   | -      | dify 中应用类型为 workflow 时需要设置输出变量，当 botType 为 workflow 时一起使用 |
+
+#### Google Vertex AI
+
+Google Vertex AI 所对应的 type 为 vertex。它特有的配置字段如下：
+
+| 名称                         | 数据类型       | 填写要求   | 默认值    | 描述                                                                            |
+|-----------------------------|---------------|--------|--------|-------------------------------------------------------------------------------|
+| `vertexAuthKey`             | string        | 必填     | -      | 用于认证的 Google Service Account JSON Key，格式为 PEM 编码的 PKCS#8 私钥和 client_email 等信息 |
+| `vertexRegion`              | string        | 必填     | -      | Google Cloud 区域（如 us-central1, europe-west4 等），用于构建 Vertex API 地址             |
+| `vertexProjectId`           | string        | 必填     | -      | Google Cloud 项目 ID，用于标识目标 GCP 项目                                              |
+| `vertexAuthServiceName`     | string        | 必填     | -      | 用于 OAuth2 认证的服务名称，该服务为了访问oauth2.googleapis.com                                |
+| `geminiSafetySetting`       | map of string | 非必填   | -      | Gemini AI 内容过滤和安全级别设定。参考[Safety settings](https://ai.google.dev/gemini-api/docs/safety-settings)                             |
+| `vertexTokenRefreshAhead`   | number        | 非必填   | -      | Vertex access token刷新提前时间(单位秒)                                                |
+
+#### AWS Bedrock
+
+AWS Bedrock 所对应的 type 为 bedrock。它特有的配置字段如下：
+
+| 名称            | 数据类型  | 填写要求 | 默认值 | 描述                           |
+|---------------------------|--------|------|-----|------------------------------|
+| `modelVersion` | string   | 非必填  | -   | 用于指定 Triton Server 中 model version           |
+| `tritonDomain` | string   | 非必填  | -   | Triton Server 部署的指定请求 Domain            |
+
+#### NVIDIA Triton Interference Server
+
+NVIDIA Triton Interference Server 所对应的 type 为 triton。它特有的配置字段如下：
+
+| 名称                        | 数据类型   | 填写要求 | 默认值 | 描述                           |
+|---------------------------|--------|------|-----|------------------------------|
+| `awsAccessKey`            | string | 必填   | -   | AWS Access Key，用于身份认证        |
+| `awsSecretKey`            | string | 必填   | -   | AWS Secret Access Key，用于身份认证 |
+| `awsRegion`               | string | 必填   | -   | AWS 区域，例如：us-east-1          |
+| `bedrockAdditionalFields` | map    | 非必填  | -   | Bedrock 额外模型请求参数             |
 
 ## 用法示例
 
