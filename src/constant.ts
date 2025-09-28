@@ -6,8 +6,8 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "阿里云发布《AI 原生应用架构白皮书》",
-    "mobileText": "阿里云发布《AI 原生应用架构白皮书》",
+    "text": "15位专家联名推荐，《AI 原生应用架构白皮书》免费下载》",
+    "mobileText": "15位专家联名推荐，《AI 原生应用架构白皮书》免费下载",
     "link": "https://developer.aliyun.com/ebook/8479",
     "target": "_blank",
     "display": true
