@@ -1,6 +1,6 @@
 ---
-title: "解读阿里云刚发布的《AI 原生应用架构白皮书》"
-description: "解读阿里云刚发布的《AI 原生应用架构白皮书》"
+title: "解读阿里云发布的《AI 原生应用架构白皮书》"
+description: "解读阿里云发布的《AI 原生应用架构白皮书》"
 date: "2025-09-28"
 category: "article"
 keywords: ["Higress"]
@@ -11,7 +11,7 @@ authors: "CH3CHO"
 
 <font style="color:rgba(0, 0, 0, 0.9);">阿里云在云栖大会重磅发布了《AI 原生应用架构白皮书》，该</font><font style="color:rgba(0, 0, 0, 0.9);">白皮书</font>**<font style="color:rgba(0, 0, 0, 0.9);">覆盖 AI 原生应用的 11 大关键要素，获得业界 15 位专家联名推荐，来自 40 多位一线工程师实践心得，全书合计超 20w 字，分为 11 章</font>**<font style="color:rgba(0, 0, 0, 0.9);">，</font><font style="color:rgba(0, 0, 0, 0.9);">全面、系统地解构 AI 原生应用架构，包含了 AI 原生应用的 11 大关键要素，模型、框架、提示词、RAG、记忆、工具、网关、运行时、可观测、评估和安全。本文整理自阿里云智能技术专家李艳林在云栖大会现场的解读。</font>
 
-![](https://img.alicdn.com/imgextra/i2/O1CN01P7F8C623CoggdTo2T_!!6000000007220-2-tps-2810-1504.png)
+![](https://img.alicdn.com/imgextra/i1/O1CN01ywoDI421gT6B8O8SL_!!6000000007014-54-tps-1080-555.apng)
 
 
 
