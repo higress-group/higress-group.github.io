@@ -146,7 +146,7 @@ initFuncList := []func() error{
 
 - `initXdsServer`函数
 
-    1. 调用`pliot xds`的`NewDiscoveryServer`方法，创建一个`xdsServer`实例，并初始化一些资源。
+    1. 调用`pilot xds`的`NewDiscoveryServer`方法，创建一个`xdsServer`实例，并初始化一些资源。
         ```go
         s.xdsServer = xds.NewDiscoveryServer(s.environment, nil, PodName, PodNamespace, s.RegistryOptions.KubeOptions.ClusterAliases)
         s.xdsServer.McpGenerators[gvk.WasmPlugin.String()] = &mcp.WasmpluginGenerator{Server: s.xdsServer}
@@ -567,7 +567,7 @@ type IngressConfig struct {
     2. 如果存在该wasmplugin，触发`wasmPluginHandlers`的事件监听器，执行对应的操作
     ```go
     for _, f := range m.wasmPluginHandlers {
-        IngressLog.Debug("WasmPlugin triggerd update")
+        IngressLog.Debug("WasmPlugin triggered update")
         f(config.Config{Meta: metadata}, config.Config{Meta: metadata}, model.EventDelete)
     }
     ```

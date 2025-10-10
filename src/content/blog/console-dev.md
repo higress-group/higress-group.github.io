@@ -24,7 +24,7 @@ category: "article"
 
 #### SDK
 
-sdk 中包含了定义了 Higress 治理平面的核心数据模型和业务逻辑，如路由模型、Wasm 插件模型、配置模型转换和读写逻辑等。它也同样作为一个独立产品发布到了 Maven 中央仓库。开发者可以世界使用这个 SDK 来进行面向 Higress 的治理功能开发（[参考文档](/blog/admin-sdk-intro)）。
+sdk 中包含了定义了 Higress 治理平面的核心数据模型和业务逻辑，如路由模型、Wasm 插件模型、配置模型转换和读写逻辑等。它也同样作为一个独立产品发布到了 Maven 中央仓库。开发者可以直接使用这个 SDK 来进行面向 Higress 的治理功能开发（[参考文档](/blog/admin-sdk-intro)）。
 
 项目中的核心包如下：
 
