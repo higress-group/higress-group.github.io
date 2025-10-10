@@ -36,7 +36,7 @@ authors: "CH3CHO"
 <font style="color:rgb(27, 28, 29);">本次竞赛设置三个独立的子方向，参赛者可任选其一。每个方向都旨在解决当前AI网关领域的关键技术瓶颈，要求参赛作品不仅在功能上完整，更要在技术深度、理论依据和工程效果上达到业界领先水平。</font>
 
 ### <font style="color:rgb(27, 28, 29);">(一) 方向一: 加速 </font><font style="color:rgb(27, 28, 29);">AI Agent 构建</font>
-#### 1 **. 赛题基本描述** 
+#### 1**. 赛题基本描述**
 **当前现状与挑战**：AI Agent 的构建正从学术探索走向产业落地，但开发者普遍面临“从想法到生产”的巨大鸿沟。当前 Agent 的研发过程高度复杂，存在诸多挑战：首先是**集成地狱**，将 Agent 与企业内部繁杂的存量 API 和数据源（即“工具”）进行安全、可靠的连接，需要耗费大量定制开发工作；其次是**开发体验割裂**，Agent 的逻辑编排、工具开发与底层基础设施（如网关、服务网格）的管理相互脱节，减缓了迭代速度；最后，从原型到生产级的 Agent 对安全性、可观测性和治理能力提出了极高要求，而这恰恰是大多数 Agent 框架的短板。
 
 **赛题目标**：本赛题旨在利用 Higress 作为 AI 原生网关的核心能力，赋能并**加速 AI Agent 的构建过程**。参赛者需要基于 Higress 的插件化架构、LLM API 接入以及 MCP（模型上下文协议）等能力，打造一个能够帮助开发者以**零代码或少代码**方式，快速构建、测试、部署和管理生产级 AI Agent 的解决方案。最终目标是实现从一个想法到强大功能 Agent 的极速落地。
@@ -77,14 +77,14 @@ authors: "CH3CHO"
 插件的实现必须体现对RAG全链路优化的深刻理解，设计方案可以参考以下内容（不限于）：
 
 + **<font style="color:rgb(27, 28, 29);">检索前优化（Pre-Retrieval）</font>**<font style="color:rgb(27, 28, 29);">：在执行任何检索操作之前，必须对原始用户查询进行处理。参赛者需要实现相关技术，例如：</font>
-    - **<font style="color:rgb(27, 28, 29);">查询重写与分解</font>**<font style="color:rgb(27, 28, 29);">：借鉴</font>`<font style="color:rgb(87, 91, 95);">PreQRAG</font>`<font style="color:rgb(27, 28, 29);">等研究成果，插件应能自动分析查询意图，对其进行重写以提高检索召回率，或将复杂问题分解为多个可以独立检索的子问题。</font>
+    - **<font style="color:rgb(27, 28, 29);">查询重写与分解</font>**<font style="color:rgb(27, 28, 29);">：借鉴 `PreQRAG` 等研究成果，插件应能自动分析查询意图，对其进行重写以提高检索召回率，或将复杂问题分解为多个可以独立检索的子问题。</font>
     - **<font style="color:rgb(27, 28, 29);">多路混合检索（Multi-Path & Hybrid Retrieval）</font>**<font style="color:rgb(27, 28, 29);">：插件需要统一对多种数据源（如向量数据库、全文搜索引擎、结构化数据库等）的访问接口，并支持多路召回策略。特别是要实现</font>**<font style="color:rgb(27, 28, 29);">混合搜索（Hybrid Search）</font>**<font style="color:rgb(27, 28, 29);">，即结合稀疏检索（如BM25）和稠密检索（向量搜索）的优势，最大化召回相关文档。</font>
 + **<font style="color:rgb(27, 28, 29);">检索后处理（Post-Retrieval）</font>**<font style="color:rgb(27, 28, 29);">：在从数据源获取初步的文档列表后，必须进行精细化处理，包括：</font>
     - **<font style="color:rgb(27, 28, 29);">重排序（Re-ranking）</font>**<font style="color:rgb(27, 28, 29);">：使用更强大的模型（如Cross-Encoder）或算法对初步检索到的Top-K结果进行重新排序，以提升排序结果的精准度。</font>
     - **<font style="color:rgb(27, 28, 29);">上下文压缩（Compression）</font>**<font style="color:rgb(27, 28, 29);">：根据最新的文档压缩研究，对检索到的文档内容进行智能压缩或摘要，以便在有限的LLM上下文中注入更多、更关键的信息。</font>
 + **<font style="color:rgb(27, 28, 29);">纠正性检索（Corrective Retrieval）</font>**<font style="color:rgb(27, 28, 29);">：插件可以考虑实现一个纠正性检索增强生成（Corrective-Action RAG, CRAG）的闭环机制。该机制可能包括：</font>
     - <font style="color:rgb(27, 28, 29);">一个轻量级的</font>**<font style="color:rgb(27, 28, 29);">检索评估器（Retrieval Evaluator）</font>**<font style="color:rgb(27, 28, 29);">，用于评估已检索文档与查询的相关性。</font>
-    - <font style="color:rgb(27, 28, 29);">根据评估器给出的置信度，触发不同行动：若为</font>`<font style="color:rgb(87, 91, 95);">Correct</font>`<font style="color:rgb(27, 28, 29);">（正确），则对文档进行精炼后使用；若为</font>`<font style="color:rgb(87, 91, 95);">Incorrect</font>`<font style="color:rgb(27, 28, 29);">（不正确），则丢弃文档并通过网页搜索（Web Search）获取新知识；若为</font>`<font style="color:rgb(87, 91, 95);">Ambiguous</font>`<font style="color:rgb(27, 28, 29);">（模糊），则结合精炼文档和网页搜索结果。</font>
+    - <font style="color:rgb(27, 28, 29);">根据评估器给出的置信度，触发不同行动：若为`Correct`（正确），则对文档进行精炼后使用；若为`Incorrect`（不正确），则丢弃文档并通过网页搜索（Web Search）获取新知识；若为`Ambiguous`（模糊），则结合精炼文档和网页搜索结果。</font>
 
 #### <font style="color:rgb(27, 28, 29);">2. 赛题评审标准</font>
 <font style="color:rgb(27, 28, 29);">本赛题的评审将聚焦于参赛者构建的RAG管道的完整性、各项优化技术的理论深度和最终可量化的效果提升。</font>
