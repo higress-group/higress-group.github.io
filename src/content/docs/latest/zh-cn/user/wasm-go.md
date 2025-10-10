@@ -10,9 +10,13 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 > **注意**：
 > go 1.24 已经原生支持编译 wasm 文件，目前 higress 已从之前的 tinygo 0.29 + go 1.20 编译方案完整迁移为 go 1.24 原生编译 wasm 文件。
+> 
 > 注意 Higress 版本需要 >= 2.1.4
+> 
 > 对于之前已经在用 tinygo 编译插件的用户，如果要迁移到用 go 1.24 编译，除了go mod依赖要调整外，需将原本初始化的逻辑从main函数挪到init函数中即可，具体请参考下文的示例
+> 
 > 对于之前使用 tinygo 编写的插件，还需要注意以下两点：
+> 
 > 1. 在 Header 阶段如果访问外部服务，并返回 type.ActionPause，需要修改为 types.HeaderStopAllIterationAndWatermark，具体可以参考下文**在插件中请求外部服务**的例子
 > 2. 如果之前因为 tinygo 未完全支持官方库的 regexp 使用了 go-re2 的，需要替换为官方库的 regexp
 
