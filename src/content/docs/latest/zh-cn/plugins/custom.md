@@ -6,7 +6,7 @@ description: 自定义插件配置参考
 
 ## 编辑 Wasm 文件
 
-1. 用于使用 Go 语言开发 Higress 的 Wasm 插件的[SDK](https://github.com/alibaba/higress/tree/main/plugins/wasm-go)
+1. 用于使用 Go 语言开发 Higress 的 Wasm 插件的[SDK](https://github.com/higress-group/wasm-go)
 2. [插件开发示例](../user/wasm-go.md)
 
 ## 构建 Wasm 镜像
