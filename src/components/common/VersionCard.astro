@@ -95,7 +95,20 @@ const titleMarginClass = (cardType === 'community' || cardType === 'exclusive') 
   )}
   
   <!-- 按钮 -->
-  <a href={cardData.buttonUrl} target="_blank" rel="noopener noreferrer" class={getButtonClasses()}>
+  <a href="javascript:void(0)" target="_blank" rel="noopener noreferrer" class={getButtonClasses()} data-href={cardData.buttonUrl}>
     {cardData.buttonText}
   </a>
 </div>
+
+<script>
+  // 通过window.open打开链接, 阻止SPM参数被强制更改
+  document.addEventListener('click', function(e) {
+    const button = e.target.closest('[data-href]');
+    
+    if (button && button.hasAttribute('data-href')) {
+      e.preventDefault();
+      const url = button.getAttribute('data-href');
+      window.open(url, '_blank');
+    }
+  });
+</script>
