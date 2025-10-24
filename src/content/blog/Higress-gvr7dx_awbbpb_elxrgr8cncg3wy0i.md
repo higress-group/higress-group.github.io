@@ -99,12 +99,16 @@ Jina.AI 近期被 Elastic 公司收购，其 CEO 肖涵博士曾在《搜索的�
 
 
 
-+ **OpenAI Ag** **entKit 和 Apps SDK：** 提供官方级 Agent 开发工具链，直接在模型端托管 memory、tool registry、外部应用的调用逻辑，降低开发门槛。
++ **OpenAI AgentKit 和 Apps SDK：** 提供官方级 Agent 开发工具链，直接在模型端托管 memory、tool registry、外部应用的调用逻辑，降低开发门槛。
 + **Claude Skills**：允许模型自身加载和管理技能（skills），用户只需提供输入，模型在内部构建上下文与能力调用链。
 
 
 
-尤其是 Claude Skills，Skills 构建能力，MCP 连接工具，甚至不需要 MCP，Skills 执行 py 脚本直接对接 API，再由大模型生成新的 Skills。把原本开发者负责的 Agent 上下工程，转移到了框架侧，包括构建、执行和运行。
+尤其是 Claude Skills**，**Skills 构建能力，MCP 连接工具，甚至不需要 MCP，Skills 执行 py 脚本直接对接 API，再由大模型生成新的 Skills。把原本开发者负责的 Agent 上下工程，转移到了框架侧，包括构建、执行和运行。
+
+
+
+从 Claude Skills 官方的示例看，是对输出的一致性和确定性有直接帮助，尤其是协作类场景。把经验和需求，可以是xlsx/ppt/words/代码…最终以 skill.md 文件给到 Claude，作为上下文输入。例如，搭建一个新系统，想复用现有系统的权限体系和视觉规范，那参照官方文档，把现有系统权限设计的相关代码、视觉规范，制作成skill.MD文件，就可以复用，不需要重新设计和反复调试了。
 
 
 
