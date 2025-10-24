@@ -91,6 +91,8 @@ export default {
 	'home.website.button.comparison': '查看Higress和其他主流网关的比对',
 	'home.open.ecosystem.title': '生态集成',
 	'home.open.ecosystem.subtitle': '在 Istio 和 Envoy 的助力下，Higress 实现了流量网关、微服务网关和安全网关三重网关架构的集成，从而大大降低了部署和运维成本。',
+	'home.open.himarket.title': 'AI 原生应用 新平台（HiMarket 重磅发布）',
+	'home.open.himarket.subtitle': '帮助客户构建私有MCP市场/ Agent市场/ AI平台',
 	'home.ai.structure.title': 'AI 网关',
 	'home.ai.structure.subtitle': '为开发者提供了一站式的 AI 插件集和增强后端模型调度处理能力，使得 AI 与网关的集成更加便捷和高效。',
 	'home.ebook.resource': '资源',

@@ -88,6 +88,8 @@ export default {
 	'home.website.button.comparison': 'Compare Higress with other mainstream gateways',
 	'home.open.ecosystem.title': 'Ecosystem Integration',
 	'home.open.ecosystem.subtitle': 'Powered by Istio and Envoy, Higress realizes the integration of the triple gateway architecture of traffic gateway, microservice gateway and security gateway, thereby greatly reducing the costs of deployment, operation and maintenance.',
+	'home.open.himarket.title': 'AI Native Applications New Platform (HiMarket Major Release)',
+	'home.open.himarket.subtitle': 'Assisting clients in building private MCP markets/Agent markets/AI platforms',
 	'home.ai.structure.title': 'AI Gateway',
 	'home.ai.structure.subtitle': 'Powered by Istio and Envoy, Higress realizes the integration of the triple gateway architecture of traffic gateway, microservice gateway and security gateway, thereby greatly reducing the costs of deployment, operation and maintenance.',
 	'home.ebook.resource': 'RESOURCES',
