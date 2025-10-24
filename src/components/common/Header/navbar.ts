@@ -1,4 +1,5 @@
 import CommunityMenu from "./CommunityMenu.astro";
+import DemoMenu from "./DemoMenu.astro";
 
 
 export default [
@@ -70,16 +71,14 @@ export default [
     target: "_self",
     route: "/docs/developers/developers_dev/",
   },
-  
-  
+
   {
     label: "控制台样例",
     translations: {
       en: "DEMO",
     },
-    trigger: "click",
-    target: "_blank",
-    route: "http://demo.higress.io/",
+    trigger: "hover",
+    slot: DemoMenu,
   },
 
   {

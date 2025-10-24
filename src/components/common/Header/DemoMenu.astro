@@ -1,0 +1,25 @@
+---
+import { useTranslations } from "@i18n/util";
+
+const t = useTranslations(Astro);
+---
+
+<div class="bg-neutral rounded-2xl shadow-lg py-2 px-1 min-w-[140px] mt-1">
+  <a 
+    href="http://demo.higress.io" 
+    target="_blank" 
+    class="rounded-2xl block pl-2 py-3 text-gray-800 hover:bg-warning"
+  >
+    <!-- Higress 控制台 -->
+    <span>{t('commmon.header.menu.higress')}</span>
+  </a>
+  
+  <a 
+    href="http://himarket.higress.ai" 
+    target="_blank" 
+    class="rounded-2xl block py-3 pl-2 text-gray-800 hover:bg-warning"
+  >
+    <!-- HiMarket 控制台 -->
+    <span>{t('commmon.header.menu.himarket')}</span>
+  </a>
+</div>

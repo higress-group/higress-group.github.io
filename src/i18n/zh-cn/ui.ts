@@ -4,6 +4,8 @@ export default {
 	'commmon.header.menu.cloud': '企业版 NACOS',
 	'commmon.header.menu.comm': '社区',
 	'commmon.header.menu.demo': '控制台样例',
+	'commmon.header.menu.higress': 'Higress 控制台',
+	'commmon.header.menu.himarket': 'HiMarket 控制台',
 	'commmon.header.docs.docs': '文档',
 	'commmon.header.comm.comm': '社区',
 	'commmon.header.comm.report': '报告文档问题',

@@ -4,6 +4,8 @@ export default {
 	'commmon.header.menu.cloud': 'NACOS CLOUD',
 	'commmon.header.menu.comm': 'COMMUNITY',
 	'commmon.header.menu.demo': 'DEMO',
+	'commmon.header.menu.higress': 'Higress Console',
+	'commmon.header.menu.himarket': 'HiMarket Console',
 	'commmon.header.docs.docs': 'Documentation',
 	'commmon.header.comm.comm': 'COMMUNITY',
 	'commmon.header.comm.report': 'Report an issue',
