@@ -94,7 +94,7 @@ tools:
   name: "get-user"
   requestTemplate:
     method: "GET"
-    url: "https://randomuser.me/api/"
+    url: "https://randomuser.me/api/" # 注意：此处的 URL 并不会影响该 MCP Server 请求转发的目标。命中相关路由的请求永远都会被转发到它所关联的目标服务上。
   responseTemplate:
     body: |-
       # User Information

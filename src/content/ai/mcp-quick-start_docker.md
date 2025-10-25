@@ -135,6 +135,9 @@ http://mcp-registry.com/mcp/test/sse
 
 在 Higress 控制台添加路由并指向对应的服务来源：
 
+> **注意：**
+> 此处为路由选择的目标服务就是用来接受 MCP 工具请求的服务。
+
 ![配置路由-信息](/img/ai/mcp-quick-start_docker/zh/add-route-info.png)
 
 添加完成后，路由列表显示如下：
@@ -157,7 +160,7 @@ tools:
   name: "get-user"
   requestTemplate:
     method: "GET"
-    url: "https://randomuser.me/api/"
+    url: "https://randomuser.me/api/" # 注意：此处的 URL 并不会影响路由转发的目标。命中本路由的请求永远都会被转发到它所关联的目标服务上。
   responseTemplate:
     body: |-
       # User Information

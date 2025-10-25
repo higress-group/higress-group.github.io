@@ -117,6 +117,9 @@ Add the target REST API's service source in the Higress console. This example us
 
 Add a route in the Higress console and point it to the corresponding service source:
 
+> **Note:**
+> The target service bound to the route is the one which will accept MCP tool requests.
+
 ![Configure Route](https://github.com/user-attachments/assets/639426c3-3c74-4268-b12f-c0173c1620ab)
 
 #### 3. Configure MCP Server Plugin
@@ -139,7 +142,7 @@ tools:
   name: "get-user"
   requestTemplate:
     method: "GET"
-    url: "https://randomuser.me/api/"
+    url: "https://randomuser.me/api/" # Note: The URL here won't change the target service of the route.
   responseTemplate:
     body: |-
       # User Information
