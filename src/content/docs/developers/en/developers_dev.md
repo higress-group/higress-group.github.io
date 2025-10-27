@@ -26,6 +26,7 @@ This page shows the Higress development team. Please add your information to the
 | Xiaorui Liu | [rinfx](https://github.com/rinfx) | Alibaba Cloud |
 | Min Ji | [slievrly](https://github.com/slievrly) | Alibaba Cloud |
 | Shuai Liu | [EricaLiu](https://github.com/Erica177) | Alibaba Cloud |
+| Jingze Dai | [Jing-ze](https://github.com/Jing-ze) | Alibaba Cloud |
 
 ## Higress Approvers
 | Name | GitHub | Organization |
