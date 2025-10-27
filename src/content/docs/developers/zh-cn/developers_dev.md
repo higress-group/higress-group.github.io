@@ -25,6 +25,7 @@ description: Higress 维护者名单
 | 泮圣伟 | [panxiaojun233](https://github.com/panxiaojun233) | 阿里云        |
 | 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
 | 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
+| 刘帅 | [EricaLiu](https://github.com/Erica177) | 阿里云        |
 
 ## Higress Approvers
 | 姓名  | github                        | 公司组织             |
