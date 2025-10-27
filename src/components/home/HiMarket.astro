@@ -1,0 +1,115 @@
+---
+import { useTranslations } from "@i18n/util";
+import { Headline } from "@serverless-cd/goat-ui";
+
+const t = useTranslations(Astro);
+---
+
+<span class="open-ecosystem-wrapper">
+  <open-ecosystem
+    class="open-ecosystem block bg-neutral py-10 flex justify-center items-center"
+  >
+    <div
+      class="ecosystem-container flex flex-col justify-center items-center mt-6"
+      data-aos="fade-up"
+      data-aos-duration="1500"
+    >
+      <div
+        data-aos="zoom-in"
+        data-aos-duration="1500"
+        data-aos-delay="500"
+      >
+        <a class="text-[12px] text-[#818598] cursor-pointer hover:text-[#3E5CF4] group flex items-center" href="https://github.com/higress-group/himarket" target="_blank">
+          <span class="text-[12px] text-[#818598] group-hover:text-[#3E5CF4] mr-1">
+            GitHub
+          </span>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="8" height="8" viewBox="0 0 8 8" class="inline-block group-hover:hidden">
+            <g transform="matrix(-1,0,0,1,16,0)">
+              <path d="M9.27237,2.16302L9.27237,6.99801Q9.27237,7.26839,9.08915,7.45161Q8.905925,7.63483,8.636183,7.6342Q8.365805,7.6342,8.183221,7.45097Q8.000636137,7.26775,8,6.99801L8,0.636183Q8,0.365805,8.183221,0.183221Q8.366441,0.000636364,8.636183,0L14.99801,0Q15.26839,0,15.451609999999999,0.183221Q15.634830000000001,0.366441,15.63419,0.636183Q15.63419,0.906561,15.45097,1.08978Q15.26775,1.273,14.99801,1.27237L10.16302,1.27237L15.825050000000001,6.93439Q16,7.10935,16,7.37972Q16,7.6501,15.825050000000001,7.82505Q15.6501,8,15.379719999999999,8Q15.10935,8,14.93439,7.82505L9.27237,2.16302Z" fill="#818598" fill-opacity="1"/>
+            </g>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="11.313708305358887" height="11.313708305358887" viewBox="0 0 11.313708305358887 11.313708305358887" class="hidden group-hover:inline-block">
+            <g transform="matrix(-0.7071067690849304,-0.7071067690849304,-0.7071067690849304,0.7071067690849304,23.313707894616385,9.656854015765276)">
+              <path d="M12.586078305358887,7.819874152679443L12.586078305358887,12.654864152679444Q12.586078305358887,12.925244152679443,12.402858305358887,13.108464152679442Q12.219633305358887,13.291684152679444,11.949891305358888,13.291054152679443Q11.679513305358887,13.291054152679443,11.496929305358886,13.107824152679443Q11.314344442358887,12.924604152679443,11.313708305358887,12.654864152679444L11.313708305358887,6.293037152679443Q11.313708305358887,6.022659152679443,11.496929305358886,5.840075152679443Q11.680149305358887,5.657490516679443,11.949891305358888,5.656854152679443L18.311718305358887,5.656854152679443Q18.582098305358887,5.656854152679443,18.765318305358885,5.840075152679443Q18.948538305358888,6.023295152679443,18.947898305358887,6.293037152679443Q18.947898305358887,6.563415152679443,18.764678305358885,6.7466341526794436Q18.581458305358886,6.929854152679443,18.311718305358887,6.929224152679444L13.476728305358886,6.929224152679444L19.138758305358888,12.591244152679444Q19.313708305358887,12.766204152679443,19.313708305358887,13.036574152679442Q19.313708305358887,13.306954152679443,19.138758305358888,13.481904152679444Q18.96380830535889,13.656854152679443,18.693428305358886,13.656854152679443Q18.423058305358886,13.656854152679443,18.248098305358887,13.481904152679444L12.586078305358887,7.819874152679443Z" fill="#3E5CF4" fill-opacity="1"/>
+            </g>
+          </svg>
+        </a>
+      </div>
+
+      <Headline
+        classes={{ subtitle: "text-sm", container: "max-w-5xl", title: "mt-3"}}
+        title={t("home.open.himarket.title")}
+        titleTheme="error"
+        taglineTheme="info"
+        subtitle={t("home.open.himarket.subtitle")}
+        subtitleTheme="success"
+        data-aos="fade-right"
+        data-aos-duration="1500"
+        data-aos-delay="200"
+      />
+
+      <img
+        class="w-[80%]"
+        alt={t("home.open.himarket.title")}
+        src="https://img.alicdn.com/imgextra/i2/O1CN01E5Cr4Q1rzZSyMQpyO_!!6000000005702-2-tps-5440-2976.png"
+        decoding="async"
+        loading="lazy"
+        data-aos="fade-left"
+        data-aos-duration="1500"
+        data-aos-delay="400"
+      />
+
+      <!-- <div
+        data-aos="zoom-in"
+        data-aos-duration="1500"
+        data-aos-delay="500"
+      >
+      <Button
+        size="large"
+        type="normal"
+        class="open-ecosystem-btn rounded-3xl text-neutral"
+        href="https://higress.cn/plugin/"
+        iconClass="text-neutral"
+      >
+        {t("home.contributors.learn.more")}
+      </Button>
+      </div> -->
+    </div>
+  </open-ecosystem>
+</span>
+
+<style is:global>
+  .open-ecosystem-wrapper {
+    .ecosystem-container  {
+      width: 85.125rem;
+    }
+
+    /* 小于50rem  小于 800px */
+    @media (max-width: 50rem) {
+      .ecosystem-container  {
+        padding: 1.5rem;
+        width: 100%;
+      }
+    }
+
+    /* 大于50rem 小于 72rem  800px < width < 1152 */
+    @media (min-width: 50rem) and (max-width: 86rem) {
+      .ecosystem-container  {
+        padding: 2.5rem;
+        width: 100%;
+      }
+    }
+
+    .open-ecosystem-btn {
+      width: 10.375rem;
+      height: 3.25rem;
+    }
+  }
+</style>
+
+<script client:only="browser">
+  import AOS from "aos";
+  import "aos/dist/aos.css";
+
+  AOS.init();
+</script>
