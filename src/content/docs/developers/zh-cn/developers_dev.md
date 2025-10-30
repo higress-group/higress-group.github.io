@@ -44,7 +44,7 @@ description: Higress 维护者名单
 
 ## Higress Members
 | 姓名  | github                                                | 公司组织 |
-|-----|-------------------------------------------------------|--|
+|-----|-------------------------------------------------------|---|
 | 刘毅杰 | [007gzs](https://github.com/007gzs)                   | 棱镜七彩 |
 | 张正好 | [alexzzh](https://github.com/alexzzh)                 | 格尔软件 |
 | 李强林 | [Charlie17Li](https://github.com/Charlie17Li)         | 浙大 |
@@ -52,6 +52,7 @@ description: Higress 维护者名单
 | 封宇腾 | [Ffyyt](https://github.com/Fkbqf)                     | 西安邮电 |
 | 田亚涛 | [Hinsteny](https://github.com/Hinsteny)               | 蚂蚁 |
 | 屈晗煜 | [Ink-33](https://github.com/Ink-33)                   | 东莞理工 |
+| 李翠芳  | [lcfang](https://github.com/lcfang)         | 工行软开   |
 | 王小建 | [littlejian](https://github.com/littlejiancc)         | 金智塔 |
 | 邵佳成 | [sjcsjc123](https://github.com/sjcsjc123)             | 杭电 |
 | 宋鹏远 | [songpengyuan](https://github.com/songpengyuan)       | 小满科技 |
