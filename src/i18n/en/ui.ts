@@ -352,8 +352,8 @@ export default {
 	'version.comparison.api.gateway.button': 'Learn More',
 	'version.comparison.api.gateway.tab.pay.as.go': 'Quantity',
 	'version.comparison.api.gateway.tab.yearly': 'MonthlySub',
-	'version.comparison.api.gateway.pay.as.go.price': '$0.826/hour and up',
-	'version.comparison.api.gateway.yearly.price': '$416/month and up',
+	'version.comparison.api.gateway.pay.as.go.price': '￥0.826/hour and up',
+	'version.comparison.api.gateway.yearly.price': '￥416/month and up',
 	'version.comparison.api.gateway.yearly.discount': 'Discount: 40% off for first purchase, regular price for renewal',
 	
 	// AI Gateway card
@@ -362,10 +362,10 @@ export default {
 	'version.comparison.ai.gateway.button': 'Learn More',
 	'version.comparison.ai.gateway.tab.pay.as.go': 'Quantity',
 	'version.comparison.ai.gateway.tab.yearly': 'MonthlySub',
-	'version.comparison.ai.gateway.pay.as.go.price': '$7.934/hour and up',
-	'version.comparison.ai.gateway.yearly.price': '$3997.5/month and up',
+	'version.comparison.ai.gateway.pay.as.go.price': '￥7.934/hour and up',
+	'version.comparison.ai.gateway.yearly.price': '￥3997.5/month and up',
 	'version.comparison.ai.gateway.yearly.discount': 'Discount: 40% off for first purchase, regular price for renewal',
-	'version.comparison.ai.gateway.serverless.price': '￥0.005 /1000CU and up',
+	'version.comparison.ai.gateway.serverless.price': '￥0.005/1000CU and up',
 	'version.comparison.ai.gateway.serverless.discount': 'Specification: Minimum billing granularity is 1000 CU',
 	
 	// Feitian Exclusive Edition card
