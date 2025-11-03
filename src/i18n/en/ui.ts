@@ -365,6 +365,8 @@ export default {
 	'version.comparison.ai.gateway.pay.as.go.price': '$7.934/hour and up',
 	'version.comparison.ai.gateway.yearly.price': '$3997.5/month and up',
 	'version.comparison.ai.gateway.yearly.discount': 'Discount: 40% off for first purchase, regular price for renewal',
+	'version.comparison.ai.gateway.serverless.price': '￥0.005 /1000CU and up',
+	'version.comparison.ai.gateway.serverless.discount': 'Specification: Minimum billing granularity is 1000 CU',
 	
 	// Feitian Exclusive Edition card
 	'version.comparison.exclusive.title': 'Feitian Exclusive Edition',

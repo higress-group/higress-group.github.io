@@ -51,10 +51,15 @@ const textConfig = {
       buttonText: t('version.comparison.ai.gateway.button'),
       buttonUrl: 'https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0',
       tabLabels: {
+        serverless: "Serverless",
         payAsGo: t('version.comparison.ai.gateway.tab.pay.as.go'),
         yearly: t('version.comparison.ai.gateway.tab.yearly')
       },
       content: {
+        serverless: {
+            price: t('version.comparison.ai.gateway.serverless.price'),
+            description: t('version.comparison.ai.gateway.serverless.discount')
+        },
         payAsGo: t('version.comparison.ai.gateway.pay.as.go.price'),
         yearly: {
           price: t('version.comparison.ai.gateway.yearly.price'),

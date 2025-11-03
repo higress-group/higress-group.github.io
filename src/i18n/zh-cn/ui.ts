@@ -372,6 +372,8 @@ export default {
 	'version.comparison.ai.gateway.pay.as.go.price': '¥7.934 /小时起',
 	'version.comparison.ai.gateway.yearly.price': '¥3997.5元/月起',
 	'version.comparison.ai.gateway.yearly.discount': '优惠：首购6折，续费原价',
+	'version.comparison.ai.gateway.serverless.price': '￥0.005 /1000CU起',
+	'version.comparison.ai.gateway.serverless.discount': '规格：最小计费粒度为1000 CU',
 	
 	// 飞天专属版卡片
 	'version.comparison.exclusive.title': '飞天专属版',

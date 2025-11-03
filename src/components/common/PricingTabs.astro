@@ -1,13 +1,20 @@
 ---
+import { useTranslations } from "@i18n/util";
+const t = useTranslations(Astro);
 interface Props {
     id: string; // 唯一标识符，用于区分不同实例
     class?: string;
     // 内容文案配置
     tabLabels?: {
+        serverless?: string;
         payAsGo: string;
         yearly: string;
     };
     content?: {
+        serverless?: {
+            price: string;
+            description?: string;
+        };
         payAsGo: string;
         yearly: {
             price: string;
@@ -19,12 +26,20 @@ interface Props {
 const { 
     id, 
     class: className,
-    tabLabels = { payAsGo: '按量付费', yearly: '包年包月' },
+    tabLabels = { 
+        serverless: "Serverless", 
+        payAsGo: t('version.comparison.api.gateway.tab.pay.as.go'), 
+        yearly: t('version.comparison.api.gateway.tab.yearly') 
+    },
     content = {
-        payAsGo: '¥0.826/小时起',
+        serverless: {
+            price: t('version.comparison.ai.gateway.serverless.price'),
+            description: t('version.comparison.ai.gateway.serverless.discount')
+        },
+        payAsGo: t('version.comparison.api.gateway.pay.as.go.price'),
         yearly: {
-            price: '416元/月起',
-            description: '优惠：首购6折，续费原价'
+            price: t('version.comparison.api.gateway.yearly.price'),
+            description: t('version.comparison.api.gateway.yearly.discount')
         }
     }
 } = Astro.props;
@@ -49,7 +64,16 @@ function formatPriceDisplay(priceText: string) {
 <div class={`pricing-tabs-wrapper ${className || ''}`}>
     <!-- 内嵌tab组 -->
     <div class="flex justify-center my-2">
-        <div class="custom-sub-tab-group w-[150px] h-[40px] p-1 bg-[#121316] rounded-2xl">
+        <div class={`custom-sub-tab-group w-[${tabLabels?.serverless? '215px': '150px'}] h-[40px] p-1 bg-[#121316] rounded-2xl`}>
+            {   tabLabels?.serverless?
+                <label 
+                    class="custom-sub-tab-item w-[75px] h-8 cursor-pointer text-sm font-medium flex items-center justify-center transition-all duration-200 bg-[#2E3038] text-[#F4F4F6] rounded-2xl" 
+                    data-sub-tab={`serverless-${id}`}
+                >
+                    <input type="radio" name={`pricing-tabs-${id}`} class="hidden" value={`serverless-${id}`} checked />
+                    <span>{tabLabels.serverless}</span>
+                </label>: null
+            }
             <label 
                 class="custom-sub-tab-item w-[75px] h-8 cursor-pointer text-sm font-medium flex items-center justify-center transition-all duration-200 bg-[#2E3038] text-[#F4F4F6] rounded-2xl" 
                 data-sub-tab={`payAsGo-${id}`}
@@ -69,6 +93,23 @@ function formatPriceDisplay(priceText: string) {
     
     <!-- 价格信息 -->
     <div id={`pricing-content-${id}`} class="text-[44px] font-medium leading-[48px] border-t border-b border-[#2E3038] py-[38px] min-h-[155px]">
+        <!-- serverless内容 -->
+        <div id={`serverless-${id}-content`} class="pricing-option hidden">
+            <div>
+                {content.serverless?.price? (() => {
+                    const formatted = formatPriceDisplay(content.serverless?.price);
+                    return (
+                        <>
+                            <span>{formatted.price}</span>
+                            {formatted.unit && <span style="color: #DDDEE4; font-size: 14px;">{formatted.unit}</span>}
+                        </>
+                    );
+                })(): null}
+            </div>
+            {content.serverless?.description ? (
+                <div class="text-xs text-[#818598] mt-2">{content.serverless?.description}</div>
+            ): null}
+        </div>
         <!-- 按量付费内容 -->
         <div id={`payAsGo-${id}-content`} class="pricing-option">
             {(() => {
@@ -107,7 +148,7 @@ function formatPriceDisplay(priceText: string) {
         const instanceId = id;
         
         // 获取当前实例的元素
-        const subTabButtons = document.querySelectorAll(`[data-sub-tab^="payAsGo-${instanceId}"], [data-sub-tab^="yearly-${instanceId}"]`);
+        const subTabButtons = document.querySelectorAll(`[data-sub-tab^="serverless-${instanceId}"], [data-sub-tab^="payAsGo-${instanceId}"], [data-sub-tab^="yearly-${instanceId}"]`);
         
         if (subTabButtons.length === 0) {
             setTimeout(initPricingTabs, 100);
