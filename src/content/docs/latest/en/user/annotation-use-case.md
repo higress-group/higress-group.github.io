@@ -628,7 +628,7 @@ spec:
 ## Single-Instance Rate Limiting
 
 > **Tip**
-> Higress Commercial Edition has global rate limiting capabilities. For details, see the global rate limiting section in the [Commercial Edition Documentation](https://help.aliyun.com/zh/mse/user-guide/advanced-usage-of-mse-ingress?spm=a2c4g.11186623.0.0.2e3a3db3eYcspD#862f08d03d4d3)
+> Higress Commercial Edition has global rate limiting capabilities. For details, see the global rate limiting section in the [Commercial Edition Documentation](https://help.aliyun.com/zh/mse/user-guide/advanced-usage-of-mse-ingress?spm=higress-website.topbar.0.0.0)
 
 Supports single-instance rate limiting strategies at the route level, limiting the number of requests matching a certain route on each gateway replica to not exceed the threshold within the set time period. This rate limiting is at the single-instance level, meaning the configured threshold applies to flow control on each gateway instance.
 

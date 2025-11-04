@@ -108,7 +108,7 @@ OpenAI 发布了最新的 GPT-4o 模型，通义千问也在前不久刚发布�
 
 > **注意：**
 >
-> Higress 容器环境变量中的 `YOUR_DASHSCOPE_API_KEY` 需要替换为你自己的[通义千问的 API Key](https://help.aliyun.com/zh/dashscope/opening-service?spm=a2c4g.11186623.0.0.72c2369dLprd45)。
+> Higress 容器环境变量中的 `YOUR_DASHSCOPE_API_KEY` 需要替换为你自己的[通义千问的 API Key](https://help.aliyun.com/zh/dashscope/opening-service?spm=higress-website.topbar.0.0.0)。
 
 ```bash
 docker compose -p higress-ai up -d

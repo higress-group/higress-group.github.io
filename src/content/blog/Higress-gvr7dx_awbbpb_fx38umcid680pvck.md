@@ -54,7 +54,7 @@ authors: "CH3CHO"
 
 
 ### 步骤二：<font style="color:rgb(10, 10, 10);">通过Higress配置API路由</font>
-<font style="color:rgb(10, 10, 10);">Higress作为云原生网关，可以优雅地将请求路由到后端OpenAPI服务。完整手工操作可参考</font>[此文](https://higress.cn/ai/mcp-quick-start_docker/?spm=36971b57.7beea2de.0.0.d85f20a91vvGn0)，大致流程如下：
+<font style="color:rgb(10, 10, 10);">Higress作为云原生网关，可以优雅地将请求路由到后端OpenAPI服务。完整手工操作可参考</font>[此文](https://higress.cn/ai/mcp-quick-start_docker/?spm=higress-website.topbar.0.0.0)，大致流程如下：
 
 1. Configmap全局参数配置MCP server
 2. 配置存量API的服务来源。如果此处有多个存量API块，建议每个块建一个服务来源![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/63156287/1745830284100-24c67a2d-3ab1-4142-b1d3-f98260c24ed4.png)
@@ -119,7 +119,7 @@ higress的OpenAPI可访问此[地址](https://higress.cn/swagger/)
 ### 步骤五：如何优化提示词
 <font style="color:rgb(53, 56, 65);">Higress 支持结合 go template 和 gjson 表达式来对请求和响应模版进行精细化处理。</font>
 
-<font style="color:rgb(53, 56, 65);">如果实测中发现模型对MCP的理解不太清晰，可参考</font>[此文](https://higress.cn/blog/higress-gvr7dx_awbbpb_mpavtgoff5h3odvq/?spm=36971b57.5f99674.0.0.11e11182MyB8ur)<font style="color:rgb(53, 56, 65);">，进行手动调优。</font>
+<font style="color:rgb(53, 56, 65);">如果实测中发现模型对MCP的理解不太清晰，可参考</font>[此文](https://higress.cn/blog/higress-gvr7dx_awbbpb_mpavtgoff5h3odvq/?spm=higress-website.topbar.0.0.0)<font style="color:rgb(53, 56, 65);">，进行手动调优。</font>
 
 ## 结语
 <font style="color:rgb(13, 18, 57);">未来AI会怎么发展，恐怕无人能预测。也许是模型能调用气象卫星预测季风，用数据编织气候的经纬；也许是操控机械臂雕刻纳米芯片，让算法成为微观世界的造物主；甚至是解析人类千年文明的隐喻，在《荷马史诗》的韵律与敦煌壁画的裂纹中，破译连我们自己都未曾察觉的潜意识密码。</font>

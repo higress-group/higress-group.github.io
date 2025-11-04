@@ -128,7 +128,7 @@ AI网关支持创建Agent API，代理访问AI应用，并针对访问AI应用�
 
 <font style="color:rgba(0, 0, 0, 0.9);">由于访问大模型是 AI 应用最核心场景，本节将主要重点介绍 AI 网关代理大模型流量的操作方式，以及相应的高可用治理能力。</font>
 
-1. AI 网关控制台创建 LLM API，用于访问自建或三方大模型，参考[管理LLM API](https://help.aliyun.com/zh/api-gateway/ai-gateway/user-guide/manage-the-ai-api?spm=a2c4g.11186623.help-menu-29462.d_2_1_0.7460d13312enOB)
+1. AI 网关控制台创建 LLM API，用于访问自建或三方大模型，参考[管理LLM API](https://help.aliyun.com/zh/api-gateway/ai-gateway/user-guide/manage-the-ai-api?spm=higress-website.topbar.0.0.0)
 2. 前往 Dify 应用市场，安装插件 OpenAI-API-compatible
 
 ![](https://img.alicdn.com/imgextra/i3/O1CN01IxPBNn23Pdlk4aOgc_!!6000000007248-2-tps-1852-472.png)
@@ -150,7 +150,7 @@ AI网关支持创建Agent API，代理访问AI应用，并针对访问AI应用�
 
 <font style="color:rgba(0, 0, 0, 0.9);">为了实现全局级和应用级限流，需要额外引入 Redis 实例进行计数，在 Dify 系统的存储组成中，Redis 是必要组件之一，因此可以刚好复用 Dify 系统的 Redis。</font>
 
-在 AI 网关中完成 Redis 应用创建之后，在插件市场中使用<font style="color:rgb(51, 51, 51);">基于 Key 集群限流插件，通过配置插件规则，即可实现针对不同 Dify 应用的限流策略。基于集群限流插件的详细使用方式见</font>[基于 Key 集群限流](https://help.aliyun.com/zh/api-gateway/ai-gateway/user-guide/throttle-based-on-cluster-keys?spm=a2c4g.11186623.help-menu-29462.d_2_10_5_1_5.3b543465zMXnxL)<font style="color:rgb(51, 51, 51);">。</font>
+在 AI 网关中完成 Redis 应用创建之后，在插件市场中使用<font style="color:rgb(51, 51, 51);">基于 Key 集群限流插件，通过配置插件规则，即可实现针对不同 Dify 应用的限流策略。基于集群限流插件的详细使用方式见</font>[基于 Key 集群限流](https://help.aliyun.com/zh/api-gateway/ai-gateway/user-guide/throttle-based-on-cluster-keys?spm=higress-website.topbar.0.0.0)<font style="color:rgb(51, 51, 51);">。</font>
 
 <font style="color:rgb(51, 51, 51);">以下图为例，假设对某 Dify 应用设置 1 分钟只允许通过一次的请求。</font>
 
@@ -164,7 +164,7 @@ AI网关支持创建Agent API，代理访问AI应用，并针对访问AI应用�
 ### 请求与 Token 限流
 <font style="color:rgba(0, 0, 0, 0.9);">使用 AI 网关对模型调用代理，对于 Dify 应用调用模型服务的场景，可以实现不同时间尺度的请求数限流，其使用方式和效果同上文所述基本一致，差异在于限流位置，因此不再赘述。</font>
 
-<font style="color:rgba(0, 0, 0, 0.9);">除了请求数限流，对于 Dify 应用调用模型服务的场景，还可以实现基于 token 消耗的流量控制，配置示意如下图所示，更详细的使用指引请详见</font>[限流](https://help.aliyun.com/zh/api-gateway/ai-gateway/user-guide/current-limiting?spm=a2c4g.11186623.help-menu-29462.d_2_1_1_0.b4d3d133d6xeWc&scm=20140722.H_2873941._.OR_help-T_cn~zh-V_1)。
+<font style="color:rgba(0, 0, 0, 0.9);">除了请求数限流，对于 Dify 应用调用模型服务的场景，还可以实现基于 token 消耗的流量控制，配置示意如下图所示，更详细的使用指引请详见</font>[限流](https://help.aliyun.com/zh/api-gateway/ai-gateway/user-guide/current-limiting?spm=higress-website.topbar.0.0.0&scm=20140722.H_2873941._.OR_help-T_cn~zh-V_1)。
 
 ![](https://img.alicdn.com/imgextra/i4/O1CN01bQlg0V22pSTq2kiEu_!!6000000007169-2-tps-3668-946.png)
 
@@ -173,7 +173,7 @@ AI网关支持创建Agent API，代理访问AI应用，并针对访问AI应用�
 ![](https://img.alicdn.com/imgextra/i3/O1CN01rLIfAs1lnJ9UNmIit_!!6000000004863-2-tps-2402-526.png)
 
 ### Fallback
-为模型访问配置 Fallback 能力，可以保证当默认访问的模型服务响应异常时，自动 Fallback 到备用模型服务，从而保证模型调用的高可用性，进而提升 Dify 应用的整体可用性。详细的配置和使用方式详见 [AI Fallback](https://help.aliyun.com/zh/api-gateway/ai-gateway/user-guide/ai-fallback?spm=a2c4g.11186623.help-menu-29462.d_2_1_5.436c72acppE5xi&scm=20140722.H_2880076._.OR_help-T_cn~zh-V_1)。
+为模型访问配置 Fallback 能力，可以保证当默认访问的模型服务响应异常时，自动 Fallback 到备用模型服务，从而保证模型调用的高可用性，进而提升 Dify 应用的整体可用性。详细的配置和使用方式详见 [AI Fallback](https://help.aliyun.com/zh/api-gateway/ai-gateway/user-guide/ai-fallback?spm=higress-website.topbar.0.0.0&scm=20140722.H_2880076._.OR_help-T_cn~zh-V_1)。
 
 为了模拟 Fallback 的效果，在本例中，为 Dify 应用所访问的 Model API 配置一个无法访问的主模型服务，再配置一个可以正常访问的百炼模型服务。
 
@@ -190,7 +190,7 @@ AI网关支持创建Agent API，代理访问AI应用，并针对访问AI应用�
 ![](https://img.alicdn.com/imgextra/i2/O1CN01cl7EJP1lIccFrK6Xk_!!6000000004796-54-tps-920-434.apng)
 
 ### 负载均衡
-<font style="color:rgba(0, 0, 0, 0.9);">对于 Dify 访问自建模型(如在阿里云 PAI 自建)的场景，AI 网关提供了面向 LLM 服务的负载均衡策略，包括全局最小请求数负载均衡、前缀匹配负载均衡以及 GPU 感知负载均衡，能够在不增加硬件成本的前提下，提升系统的吞吐能力、降低响应延迟，并实现更公平、高效的任务调度。具体介绍和使用方式参考</font>[AI负载均衡](https://apig.console.aliyun.com/?spm=5176.56205.J_5253785160.4.1d434dfeUKuHQy&region=cn-beijing#/cn-hangzhou/ai-gateway-plugin-manage/pls-eqeargh5ckt8xxatkpba?tab=document)、[不增加 GPU，首 Token 延迟下降50%｜LLM 服务负载均衡的新实践](https://mp.weixin.qq.com/s/ndETDBo2aAbyFrkDJx7dww)。
+<font style="color:rgba(0, 0, 0, 0.9);">对于 Dify 访问自建模型(如在阿里云 PAI 自建)的场景，AI 网关提供了面向 LLM 服务的负载均衡策略，包括全局最小请求数负载均衡、前缀匹配负载均衡以及 GPU 感知负载均衡，能够在不增加硬件成本的前提下，提升系统的吞吐能力、降低响应延迟，并实现更公平、高效的任务调度。具体介绍和使用方式参考</font>[AI负载均衡](https://apig.console.aliyun.com/?spm=higress-website.topbar.0.0.0&region=cn-beijing#/cn-hangzhou/ai-gateway-plugin-manage/pls-eqeargh5ckt8xxatkpba?tab=document)、[不增加 GPU，首 Token 延迟下降50%｜LLM 服务负载均衡的新实践](https://mp.weixin.qq.com/s/ndETDBo2aAbyFrkDJx7dww)。
 
 <font style="color:rgba(0, 0, 0, 0.9);">以前缀匹配负载均衡为例，压测工具使用 NVIDIA GenAI-Perf，设置每轮输入平均为 200 token，输出平均为 800 token，并发为 20，每个会话包含 5 轮对话，共计 60 个会话，性能指标前后对比如下。能够明显地感受到，通过合理的负载均衡策略，首 Token 延迟能够下降 50%。</font>
 

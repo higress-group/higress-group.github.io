@@ -136,7 +136,7 @@ Higress 对接了阿里云内容安全，能够做到对大模型请求/响应�
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/90456445/1737428957706-a9d2ad4d-b67a-4e09-bb94-ec6cac497022.png)
 
 ## 使用阿里云云原生 API 网关
-阿里云云原生 API 网关是 Higress 的云上托管产品（可以[点击原文](https://www.aliyun.com/product/apigateway?spm=36971b57.2ef5001f.0.0.2a932c1fl5YjTj)了解详情）。云原生 API 网关特别推出了 AI API 作为 AI 流量的管理入口：
+阿里云云原生 API 网关是 Higress 的云上托管产品（可以[点击原文](https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0)了解详情）。云原生 API 网关特别推出了 AI API 作为 AI 流量的管理入口：
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/90456445/1737429188115-e48333c4-f3e4-4028-a9dc-a5566ee17ee9.png)
 

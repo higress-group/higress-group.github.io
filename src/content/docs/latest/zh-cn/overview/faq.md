@@ -200,7 +200,7 @@ Higress 基于 K8s HPA，是支持弹性伸缩的，网关无状态，是个 dep
 
 企业版和开源版本的功能基本一致，企业版主要是以开源版本为功能内核，提供了更多现成的解决方案，包括高可用、安全、可观测等方面，详细可以参考：
 
-[MSE云原生网关和开源Higress对比](https://help.aliyun.com/zh/mse/product-overview/comparison-between-mse-cloud-native-gateways-and-open-source-higress-gateways?spm=a2c4g.11186623.0.0.5c6ec925uJLUVD)
+[MSE云原生网关和开源Higress对比](https://help.aliyun.com/zh/mse/product-overview/comparison-between-mse-cloud-native-gateways-and-open-source-higress-gateways?spm=higress-website.topbar.0.0.0)
 
 [典型的企业版解决方案：同城多活](https://help.aliyun.com/zh/mse/use-cases/active-zone-redundancy-based-on-mse-cloud-native-gateways)
 

@@ -215,6 +215,6 @@ Higress 的插件市场提供了 AI Proxy 的 WASM 插件，支持对接 LLM 提
 
 [1] [https://arxiv.org/abs/2005.11401v4](https://arxiv.org/abs/2005.11401v4)
 
-[2] [https://tianchi.aliyun.com/competition/entrance/532192/information?spm=a2c22.12281976.0.0.4a612d935XQh5L](https://tianchi.aliyun.com/competition/entrance/532192/information?spm=a2c22.12281976.0.0.4a612d935XQh5L)
+[2] [https://tianchi.aliyun.com/competition/entrance/532192/information?spm=higress-website.topbar.0.0.0](https://tianchi.aliyun.com/competition/entrance/532192/information?spm=higress-website.topbar.0.0.0)
 
 
