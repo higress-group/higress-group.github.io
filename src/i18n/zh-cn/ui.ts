@@ -359,7 +359,7 @@ export default {
 	'version.comparison.api.gateway.button': '了解详情',
 	'version.comparison.api.gateway.tab.pay.as.go': '按量付费',
 	'version.comparison.api.gateway.tab.yearly': '包年包月',
-	'version.comparison.api.gateway.pay.as.go.price': '¥0.826/小时起',
+	'version.comparison.api.gateway.pay.as.go.price': '¥0.826元/小时起',
 	'version.comparison.api.gateway.yearly.price': '¥416元/月起',
 	'version.comparison.api.gateway.yearly.discount': '优惠：首购6折，续费原价',
 	
@@ -369,10 +369,10 @@ export default {
 	'version.comparison.ai.gateway.button': '了解详情',
 	'version.comparison.ai.gateway.tab.pay.as.go': '按量付费',
 	'version.comparison.ai.gateway.tab.yearly': '包年包月',
-	'version.comparison.ai.gateway.pay.as.go.price': '¥7.934 /小时起',
+	'version.comparison.ai.gateway.pay.as.go.price': '¥7.934元/小时起',
 	'version.comparison.ai.gateway.yearly.price': '¥3997.5元/月起',
 	'version.comparison.ai.gateway.yearly.discount': '优惠：首购6折，续费原价',
-	'version.comparison.ai.gateway.serverless.price': '￥0.005 /1000CU起',
+	'version.comparison.ai.gateway.serverless.price': '￥0.005元/1000CU起',
 	'version.comparison.ai.gateway.serverless.discount': '规格：最小计费粒度为1000 CU',
 	
 	// 飞天专属版卡片

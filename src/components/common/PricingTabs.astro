@@ -223,7 +223,8 @@ function formatPriceDisplay(priceText: string) {
         });
         
         // 初始化默认显示第一个tab
-        const defaultTabId = `payAsGo-${instanceId}`;
+        const serverlessDom = document.querySelectorAll(`[data-sub-tab^="serverless-${instanceId}"`);
+        const defaultTabId = `${serverlessDom?.length? 'serverless' :'payAsGo'}-${instanceId}`;
         switchSubTab(defaultTabId);
     }
     
