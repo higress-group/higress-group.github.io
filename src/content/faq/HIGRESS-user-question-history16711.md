@@ -19,7 +19,7 @@ keywords: ["higress","LLM","集成","方法","","指南","实现"]
 ### **步骤详解：**
 
 #### **1. 准备工作**
-- **获取API密钥**：首先，确保您已从阿里云获取了[通义千问的API Key](https://help.aliyun.com/zh/dashscope/opening-service?spm=a2c4g.11186623.0.0.72c2369dLprd45)。对于OpenAI ChatGPT集成，您需要准备OpenAI的API Key。
+- **获取API密钥**：首先，确保您已从阿里云获取了[通义千问的API Key](https://help.aliyun.com/zh/dashscope/opening-service?spm=higress-website.topbar.0.0.0)。对于OpenAI ChatGPT集成，您需要准备OpenAI的API Key。
 
 #### **2. 创建配置文件**
 - **编写`docker-compose.yml`**：在本地创建一个名为`docker-compose.yml`的文件，并使用文本编辑器输入下面的配置信息。请记得替换`YOUR_DASHSCOPE_API_KEY`为您自己的API Key，以及指定一个本地配置文件夹路径如`/path-to-local-config-folder`。如果您打算集成OpenAI ChatGPT，请参照后面调整说明进行环境变量的更改。

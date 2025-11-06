@@ -294,7 +294,7 @@ Higress 开源后，社区的活跃度非常高。累计发布35个版本，Folk
 
 
 
-云原生 API 网关：[https://www.aliyun.com/product/ap](https://www.aliyun.com/product/apigateway?spm=5176.28508143.nav-v2-dropdown-menu-0.d_main_6_3_0.11af154apaWEXG&scm=20140722.X_data-6c2ac598d867ce26a49d._.V_1)
+云原生 API 网关：[https://www.aliyun.com/product/ap](https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0&scm=20140722.X_data-6c2ac598d867ce26a49d._.V_1)
 
 Higress：[https://higress.cn/](https://higress.cn/)
 
@@ -310,7 +310,7 @@ Higress：[https://higress.cn/](https://higress.cn/)
 
 
 
-阅读原文链接：[https://www.aliyun.com/product/apigateway](https://www.aliyun.com/product/apigateway?spm=5176.28508143.nav-v2-dropdown-menu-0.d_main_6_3_0.11af154apaWEXG&scm=20140722.X_data-6c2ac598d867ce26a49d._.V_1)
+阅读原文链接：[https://www.aliyun.com/product/apigateway](https://www.aliyun.com/product/apigateway?spm=higress-website.topbar.0.0.0&scm=20140722.X_data-6c2ac598d867ce26a49d._.V_1)
 
 **  **
 

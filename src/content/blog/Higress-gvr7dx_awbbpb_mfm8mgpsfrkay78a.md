@@ -504,6 +504,6 @@ class MCPClient:
 ## **9.4 如何快速接入新特性**
 Higress已率先支持Streamable HTTP传输格式，并且对MCP 2025-03-26版本的多项特性都保持高优先级跟紧，如Mcp-Session-Id头的会话管理，并支持批量请求、响应和通知，以及 SSE 流的可恢复性等。
 
-详见 [《API 即 MCP｜Higress 发布 MCP Marketplace，加速存量 API 跨入 MCP 时代》](https://higress.cn/blog/higress-gvr7dx_awbbpb_igk8hdx9xt83ptqg/?spm=36971b57.2385fb13.0.0.78b8285fzhuGKT)
+详见 [《API 即 MCP｜Higress 发布 MCP Marketplace，加速存量 API 跨入 MCP 时代》](https://higress.cn/blog/higress-gvr7dx_awbbpb_igk8hdx9xt83ptqg/?spm=higress-website.topbar.0.0.0)
 
 商业化产品侧，[云原生API网关](https://www.aliyun.com/product/apigateway)也会在稍晚的时候对齐开源侧Higress的各项能力，提供企业级的各项MCP特性，欢迎咨询和关注。

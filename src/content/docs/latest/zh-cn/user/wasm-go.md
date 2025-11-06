@@ -223,7 +223,7 @@ GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
 
 ### 工具准备
 
-安装[Docker](https://docs.docker.com/engine/install/?spm=a2c4g.426926.0.0.29071f47tjgquo)
+安装[Docker](https://docs.docker.com/engine/install/?spm=higress-website.topbar.0.0.0)
 
 ### 使用 docker compose 启动验证
 

@@ -228,7 +228,7 @@ To configure this plugin in Higress with Wasmplugin CRD or Console UI interactio
 
 ### Tools Preparation
 
-Install [Docker](https://docs.docker.com/engine/install/?spm=a2c4g.426926.0.0.29071f47tjgquo)
+Install [Docker](https://docs.docker.com/engine/install/?spm=higress-website.topbar.0.0.0)
 
 ### Use docker compose to start validate
 

@@ -116,6 +116,6 @@ authors: "CH3CHO"
 ## <font style="color:rgb(0, 0, 0);">对 Higress 的展望</font>
 <font style="color:rgb(17, 17, 17);">加强用户易用性，希望能进一步完善 Higress 开源的文档，建议每个插件添加对应版本的使用文档链接地址。降低插件使用成本、提升开发及运维效率。</font>
 
-<font style="color:rgb(17, 17, 17);">小编按：Higress 企业版阿里云 API 网关提供开箱即用的能力，性能更强、稳定性更好，欢迎免费试用（点击</font>[<font style="color:rgb(0, 102, 204);">此处</font>](https://free.aliyun.com/?spm=5176.56205.nav-v2-dropdown-menu-4.d_main_0_4.26a64dfeuGSPuy&scm=20140722.M_10776204._.V_1&searchKey=%E7%BD%91%E5%85%B3)<font style="color:rgb(17, 17, 17);">）。</font>
+<font style="color:rgb(17, 17, 17);">小编按：Higress 企业版阿里云 API 网关提供开箱即用的能力，性能更强、稳定性更好，欢迎免费试用（点击</font>[<font style="color:rgb(0, 102, 204);">此处</font>](https://free.aliyun.com/?spm=higress-website.topbar.0.0.0&scm=20140722.M_10776204._.V_1&searchKey=%E7%BD%91%E5%85%B3)<font style="color:rgb(17, 17, 17);">）。</font>
 
 
