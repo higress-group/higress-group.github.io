@@ -16,6 +16,8 @@ toc_max_heading_level: 4
 
 **Helm 安装命令**
 
+> ⚠️注意：Helm 版本需要 >= 3.10
+
 ```bash
 helm repo add higress.io https://higress.cn/helm-charts
 helm install higress -n higress-system higress.io/higress --create-namespace --render-subchart-notes
