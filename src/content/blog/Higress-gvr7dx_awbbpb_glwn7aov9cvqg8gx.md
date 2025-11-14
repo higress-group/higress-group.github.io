@@ -9,7 +9,7 @@ authors: "CH3CHO"
 
 <font style="color:rgb(33, 37, 41);">作者：望宸</font>
 
-<font style="color:rgb(33, 37, 41);">昨天，Kubernetes 贡献者社区发布了一篇 blog（</font><font style="color:rgb(33, 37, 41);">Ingress NGINX Retirement: What You Need to Know</font><font style="color:rgb(33, 37, 41);">）[1]，Kubernetes SIG Network 和安全响应委员会宣布 Ingress NGINX 退役，公告核心内容包括：</font>
+<font style="color:rgb(33, 37, 41);">Kubernetes 贡献者社区发布了一篇 blog（</font><font style="color:rgb(33, 37, 41);">Ingress NGINX Retirement: What You Need to Know</font><font style="color:rgb(33, 37, 41);">）[1]，Kubernetes SIG Network 和安全响应委员会宣布 Ingress NGINX 退役，公告核心内容包括：</font>
 
 + <font style="color:rgb(33, 37, 41);">Ingress NGINX 尽力维护服务至 2026 年 3 月</font>
 + <font style="color:rgb(33, 37, 41);">不再发布任何新版本</font>
@@ -46,8 +46,8 @@ authors: "CH3CHO"
 ## <font style="color:rgb(33, 37, 41);">02 Ingress NGINX 采用者的应对措施有哪些？</font>
 <font style="color:rgb(33, 37, 41);">Ingress NGINX 官方建议：</font>
 
-+ <font style="color:rgb(33, 37, 41);">迁移到 Gateway API[1]</font>
-+ <font style="color:rgb(33, 37, 41);">如果必须继续使用 Ingress，Kubernetes 文档I[2]中列出了很多替代的 Ingress 控制器，例如 Azure 的 AKS AKS Application Gateway Ingress Controller、阿里云的 MSE Ingress、Higress 等。</font>
++ <font style="color:rgb(33, 37, 41);">迁移到 Gateway API[2]</font>
++ <font style="color:rgb(33, 37, 41);">如果必须继续使用 Ingress，Kubernetes 文档I[3]中列出了很多替代的 Ingress 控制器，例如 Azure 的 AKS AKS Application Gateway Ingress Controller、阿里云的 MSE Ingress、Higress 等。</font>
 
 ![](https://img.alicdn.com/imgextra/i4/O1CN01QTjWow1OzSW7i6OuV_!!6000000001776-2-tps-2322-1534.png)
 
