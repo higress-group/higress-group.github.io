@@ -50,7 +50,7 @@ authors: "CH3CHO"
 
 **使用方式**
 
-启用此功能需在 Higress 配置文件中设置相应的参数。例如，要配置默认的下游安全认证，可以在 `defaultDownstreamSecurity `字段中指定认证策略；类似地，上游认证则通过 `defaultUpstreamSecurity `字段进行配置。若要使用 MCP 代理服务器，需定义一个新的 `mcp-proxy `类型的服务器，并通过 `mcpServerURL `指定后端 MCP 服务器地址。此外，还可以通过 `timeout `字段控制请求超时时间。最佳实践建议尽可能利用优先级配置机制，确保工具级设置能覆盖服务器级别默认值，从而获得更细粒度的控制。
+启用此功能需在 Higress 配置文件中设置相应的参数。例如，要配置默认的下游安全认证，可以在 `defaultDownstreamSecurity`字段中指定认证策略；类似地，上游认证则通过 `defaultUpstreamSecurity`字段进行配置。若要使用 MCP 代理服务器，需定义一个新的 `mcp-proxy`类型的服务器，并通过 `mcpServerURL`指定后端 MCP 服务器地址。此外，还可以通过 `timeout`字段控制请求超时时间。最佳实践建议尽可能利用优先级配置机制，确保工具级设置能覆盖服务器级别默认值，从而获得更细粒度的控制。
 
 **功能价值**
 
@@ -70,15 +70,15 @@ authors: "CH3CHO"
 
 该 PR 主要实现了以下功能：
 
-**AI 路由管理**：新增了 list-ai-routes**、`get-ai-route`、`add-ai-route`、`update-ai-route `和 `delete-ai-route `等工具，允许用户管理 AI 路由。
+**AI 路由管理**：新增了 `list-ai-routes`、`get-ai-route`、`add-ai-route`、`update-ai-route`和 `delete-ai-route`等工具，允许用户管理 AI 路由。
 
-**AI 提供商管理**：新增了 `list-ai-providers`、`get-ai-provider`、`add-ai-provider`、`update-ai-provider `和 `delete-ai-provider `等工具，允许用户管理AI提供商。
+**AI 提供商管理**：新增了 `list-ai-providers`、`get-ai-provider`、`add-ai-provider`、`update-ai-provider`和 `delete-ai-provider`等工具，允许用户管理AI提供商。
 
-**MCP 服务器管理**：新增了 `list-mcp-servers`、`get-mcp-server`、`add-or-update-mcp-server`、`delete-mcp-server `等工具，允许用户管理 MCP 服务器及其消费者。
+**MCP 服务器管理**：新增了 `list-mcp-servers`、`get-mcp-server`、`add-or-update-mcp-server`、`delete-mcp-server`等工具，允许用户管理 MCP 服务器及其消费者。
 
-**认证配置**：使用 HTTP Basic Authentication 进行鉴权，并在客户端请求头中携带 **`Authorization `头。
+**认证配置**：使用 HTTP Basic Authentication 进行鉴权，并在客户端请求头中携带 `Authorization`头。
 
-**代码变更**：移除了用户名和密码的硬编码，改为在运行时通过 MCP Client 提供，提高了安全性。同时，新增了 **`higress-ops `模块，用于 hgctl agent 命令对接，实现 Agent 方式管理 Higress 的配置。
+**代码变更**：移除了用户名和密码的硬编码，改为在运行时通过 MCP Client 提供，提高了安全性。同时，新增了`higress-ops`模块，用于 hgctl agent 命令对接，实现 Agent 方式管理 Higress 的配置。
 
 ****
 
@@ -88,15 +88,15 @@ authors: "CH3CHO"
 
 **配置 Higress API MCP Server** **：在 Higress 配置文件中添加 Higress API MCP Server 的配置，指定 Higress Console 的 URL 地址。**
 
-**使用 hgctl agent** ：通过 `hgctl agent `命令启动交互式 Agent，可以使用自然语言的方式管理 Higress。例如，使用 `mcp add `子命令添加 remote MCP Server 到 Higress 的 MCP 管理目录中。
+**使用 hgctl agent** ：通过 `hgctl agent`命令启动交互式 Agent，可以使用自然语言的方式管理 Higress。例如，使用 `mcp add `子命令添加 remote MCP Server 到 Higress 的 MCP 管理目录中。
 
-**管理 AI 路由**：使用 `list-ai-routes`、`get-ai-route`、`add-ai-route`、`update-ai-route `和 `delete-ai-route `等工具来管理 AI 路由。
+**管理 AI 路由**：使用 `list-ai-routes`、`get-ai-route`、`add-ai-route`、`update-ai-route`和 `delete-ai-route`等工具来管理 AI 路由。
 
-**管理 AI 提供商**：使用`list-ai-providers`、`get-ai-provider`、`add-ai-provider`、`update-ai-provider `和 `delete-ai-provider `等工具来管理AI提供商。
+**管理 AI 提供商**：使用`list-ai-providers`、`get-ai-provider`、`add-ai-provider`、`update-ai-provider`和 `delete-ai-provider`等工具来管理AI提供商。
 
-**管理 MCP 服务器**：使用`list-mcp-servers`、`get-mcp-server`、`add-or-update-mcp-server`、`delete-mcp-server `等工具来管理 MCP 服务器及其消费者。 
+**管理 MCP 服务器**：使用`list-mcp-servers`、`get-mcp-server`、`add-or-update-mcp-server`、`delete-mcp-server`等工具来管理 MCP 服务器及其消费者。 
 
-注意事项：确保在使用这些工具时，正确配置鉴权信息，并在请求头中携带 `Authorization `头。
+注意事项：确保在使用这些工具时，正确配置鉴权信息，并在请求头中携带`Authorization`头。
 
 **功能价值**
 
@@ -120,22 +120,22 @@ authors: "CH3CHO"
 
 **使用背景**
 
-Higress 是一个 AI 原生的 API 网关，用于统一管理 LLM API、MCP API 和 Agent API。随着 Higress 的发展，传统的命令行工具已经不能满足用户的需求，特别是在 MCP 服务的管理和调试方面。本次 PR 引入了类似 Claude Code 的交互式 Agent，使得用户可以通过自然语言来管理 Higress。同时，新增的 `mcp add `子命令可以方便地将 Remote MCP 服务添加到 Higress 的 MCP 管理目录中，实现 MCP 流量的治理。这些功能不仅简化了 MCP 服务的配置过程，还增强了系统的可维护性和易用性。
+Higress 是一个 AI 原生的 API 网关，用于统一管理 LLM API、MCP API 和 Agent API。随着 Higress 的发展，传统的命令行工具已经不能满足用户的需求，特别是在 MCP 服务的管理和调试方面。本次 PR 引入了类似 Claude Code 的交互式 Agent，使得用户可以通过自然语言来管理 Higress。同时，新增的 `mcp add`子命令可以方便地将 Remote MCP 服务添加到 Higress 的 MCP 管理目录中，实现 MCP 流量的治理。这些功能不仅简化了 MCP 服务的配置过程，还增强了系统的可维护性和易用性。
 
 **功能详述**
 
 本次 PR 主要实现了两个新的子命令：`hgctl agent` 和 `mcp add`。
 
-**hgctl agent**：这个命令允许用户通过自然语言与 Higress 进行交互。它会调用底层的 `claude-code `代理，并在首次使用时提示用户设置必要的环境。`hgctl agent `提供了一个交互式的窗口，使用户能够以更直观的方式管理 Higress。
+**hgctl agent**：这个命令允许用户通过自然语言与 Higress 进行交互。它会调用底层的 `claude-code`代理，并在首次使用时提示用户设置必要的环境。`hgctl agent`提供了一个交互式的窗口，使用户能够以更直观的方式管理 Higress。
 
 **mcp add**：这个命令允许用户通过简单的参数添加 MCP 服务。支持两种类型的 MCP 服务：直接代理类型和基于 OpenAPI 的类型。直接代理类型的 MCP 服务可以直接调用 Higress Console API 并发布到 Higress MCP Server 管理工具中。基于 OpenAPI 的 MCP 服务则通过解析 OpenAPI 规范来生成 MCP 配置。代码变更中，新增了多个文件和大量的代码，包括 `agent.go`、`base.go`、`core.go`、`mcp.go `和 `client.go`，这些文件共同实现了上述功能。
 
 **使用方式**
 
-要启用和配置这些新功能，用户需要更新到最新版本的 `hgctl `工具。
+要启用和配置这些新功能，用户需要更新到最新版本的 `hgctl`工具。
 
 1. **启用** `hgctl agent`：
-    - 运行 `hgctl agent `命令，首次使用时会提示用户设置必要的环境，如安装 `claude-code `代理。
+    - 运行 `hgctl agent`命令，首次使用时会提示用户设置必要的环境，如安装 `claude-code`代理。
     - 通过自然语言与 Higress 进行交互，例如查询或修改配置。
 2. **使用** `mcp add`**添加 MCP 服务**：
     - 添加直接代理类型的 MCP 服务：hgctl mcp add mcp-deepwiki -t http https://mcp.deepwiki.com --user admin --password 123 --url http://localhost:8080
@@ -178,7 +178,7 @@ Higress 是一个 AI 原生的 API 网关，用于统一管理 LLM API、MCP API
 
 + **Related PR**: #3071  
 **Contributor**: @rinfx  
-**Change Log**: PR 添加了`inject_encoded_data_to_filter_chain_on_header `函数的使用示例，展示了如何在无响应 body 情况下为请求添加 body 数据。通过修改 README.md、go.mod 等文件实现。  
+**Change Log**: PR 添加了`inject_encoded_data_to_filter_chain_on_header`函数的使用示例，展示了如何在无响应 body 情况下为请求添加 body 数据。通过修改 README.md、go.mod 等文件实现。  
 **Feature Value**: 此功能允许用户在没有响应 body 的情况下向请求添加 body 数据，增强了 API 网关处理请求的能力和灵活性，特别是在需要动态生成或修改响应内容时提供了更多的可能性。  
 
 + **Related PR**: #3067  
@@ -190,7 +190,7 @@ Higress 是一个 AI 原生的 API 网关，用于统一管理 LLM API、MCP API
 
 + **Related PR**: #3060  
 **Contributor**: @erasernoob  
-**Change Log**: 此 PR 通过增强 `hgctl mcp `和 `hgctl agent `命令实现了从安装配置文件及 Kubernetes secrets 中自动获取 Higress Console 凭据的功能，优化了用户的使用体验。  
+**Change Log**: 此 PR 通过增强 `hgctl mcp`和 `hgctl agent`命令实现了从安装配置文件及 Kubernetes secrets 中自动获取 Higress Console 凭据的功能，优化了用户的使用体验。  
 **Feature Value**: 该功能减少了用户手动输入凭据的步骤，提升了操作便捷性和安全性，特别是在 Higress 通过 hgctl 安装的情况下，对用户来说是一个重要的便利性改进。  
 
 + **Related PR**: #3043  
@@ -308,7 +308,7 @@ Higress 是一个 AI 原生的 API 网关，用于统一管理 LLM API、MCP API
 
 + **Related PR**: #3069  
 **Contributor**: @Libres-coder  
-**Change Log**: 本 PR 修复了 CI 测试框架中的一个问题，即由于 `go.mod `文件未被正确更新而导致的e2e测试失败。通过在 `prebuild.sh `脚本中添加 `go mod tidy `命令来确保根目录下的 `go.mod `也得到更新。  
+**Change Log**: 本 PR 修复了 CI 测试框架中的一个问题，即由于 `go.mod`文件未被正确更新而导致的e2e测试失败。通过在 `prebuild.sh`脚本中添加 `go mod tidy`命令来确保根目录下的 `go.mod`也得到更新。  
 **Feature Value**: 该修复解决了所有触发 wasm 插件端到端测试的 PR 都可能遇到的 CI 测试失败问题，保证了构建和测试流程的稳定性，提升了开发者的体验。
 
 
@@ -334,7 +334,7 @@ Higress 是一个 AI 原生的 API 网关，用于统一管理 LLM API、MCP API
 
 + **Related PR**: #2973  
 **Contributor**: @CH3CHO  
-**Change Log**: 修复了当 `match_rule_domain `设置为空字符串时 Higress 2.1.8 版本不支持的问题，通过使用通配符匹配所有域来消除兼容性风险。  
+**Change Log**: 修复了当 `match_rule_domain`设置为空字符串时 Higress 2.1.8 版本不支持的问题，通过使用通配符匹配所有域来消除兼容性风险。  
 **Feature Value**: 此修复确保了 MCP 服务器配置的生成与旧版本向后兼容，避免因配置错误导致的服务中断或行为异常，提升了系统的稳定性和用户体验。  
 
 + **Related PR**: #2952  
@@ -447,7 +447,7 @@ Bug 修复: 10项
 
 + **Related PR**: #604  
 **Contributor**: @CH3CHO  
-**Change Log**: 此 PR 引入了使用 `higress.io/rewrite-target `注解进行路径重写的功能，支持正则表达式，增强了路径配置的灵活性。  
+**Change Log**: 此 PR 引入了使用 `higress.io/rewrite-target`注解进行路径重写的功能，支持正则表达式，增强了路径配置的灵活性。  
 **Feature Value**: 通过增加基于正则表达式的路径重写能力，用户能够更灵活地控制和转换请求路径，提升了 Higress 网关的路由处理能力，满足更多场景下的需求。
 
 
