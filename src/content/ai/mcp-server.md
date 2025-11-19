@@ -6,7 +6,6 @@ category: "article"
 keywords: [higress,mcp,ai]
 authors: "澄潭"
 ---
-# MCP Server 插件配置
 
 ## 功能说明
 
@@ -37,14 +36,108 @@ authors: "澄潭"
 | 名称         | 数据类型   | 填写要求 | 默认值 | 描述                           |
 | ------------ | ---------- | -------- | ------ | ------------------------------ |
 | `server.name` | string     | 必填     | -      | MCP 服务器的名称。如果使用插件内置的 MCP 服务器（如 quark-search），只需配置此字段为对应的名称，无需配置 tools 字段。如果是 REST-to-MCP 场景，此字段可以填写任意值。 |
+| `server.type` | string     | 选填     | rest   | MCP 服务器类型。可选值：`rest`（REST-to-MCP 转换）、`mcp-proxy`（MCP 代理）。如果不指定，默认为 `rest` 类型。 |
 | `server.config` | object     | 选填     | {}     | 服务器配置，如 API 密钥等      |
-| `server.securitySchemes` | array of object | 选填 | - | 定义可重用的认证方案，供工具引用。详见“认证与安全”章节。 |
+| `server.mcpServerURL` | string | 当 `server.type` 为 `mcp-proxy` 时必填 | - | 后端 MCP 服务器的 URL 地址。仅在 `mcp-proxy` 类型时使用。支持完整 URL（如 `http://example.com/mcp`）或路径（如 `/mcp`，将使用路由集群的基础 URL）。 |
+| `server.timeout` | integer | 选填 | 5000 | 请求后端服务的超时时间（毫秒）。适用于 `mcp-proxy` 类型。 |
+| `server.transport` | string | 当 `server.type` 为 `mcp-proxy` 时必填 | - | 传输协议类型。可选值：`http`（StreamableHTTP）、`sse`（Server-Sent Events）。 |
+| `server.passthroughAuthHeader` | boolean | 选填 | false | 是否透传 Authorization 请求头。当设置为 `true` 时，即使没有配置客户端到网关的安全认证（`defaultDownstreamSecurity` 或工具级 `security`），也会将客户端的 `Authorization` 请求头透传到后端。默认为 `false`，即在没有明确配置安全认证时会移除 `Authorization` 请求头，防止客户端凭证被错误地传递到后端。此字段适用于需要直接透传原始认证信息的场景。 |
+| `server.securitySchemes` | array of object | 选填 | - | 定义可重用的认证方案，供工具引用。详见"认证与安全"章节。 |
+| `server.defaultDownstreamSecurity` | object | 选填 | - | 服务器级别的默认客户端到网关认证配置，用于所有 tools/list 和 tools/call 请求。可被工具级别的 `security` 配置覆盖。支持 `id`（引用 securitySchemes）和 `passthrough`（透传标志）字段。 |
+| `server.defaultUpstreamSecurity` | object | 选填 | - | 服务器级别的默认网关到后端认证配置，用于所有后端请求。可被工具级别的 `requestTemplate.security` 配置覆盖。支持 `id`（引用 securitySchemes）和 `credential`（覆盖默认凭证）字段。 |
 
 ### 允许的工具配置
 
 | 名称         | 数据类型        | 填写要求 | 默认值 | 描述                                   |
 | ------------ | --------------- | -------- | ------ | -------------------------------------- |
 | `allowTools` | array of string | 选填     | -      | 允许调用的工具列表。如不指定，则允许所有工具 |
+
+#### 动态工具权限控制
+
+除了在配置中静态定义 `allowTools` 外，还支持通过 HTTP 请求头 `x-envoy-allow-mcp-tools` 动态控制工具访问权限。这使得前置插件（如认证、鉴权插件）可以根据用户身份或其他条件动态设置允许的工具列表。
+
+**Header 格式**：
+```
+x-envoy-allow-mcp-tools: tool1,tool2,tool3
+```
+
+**权限控制逻辑**：
+
+1. **配置级别 `allowTools`**（静态）：在插件配置中定义的基础工具白名单
+2. **Header 级别 `x-envoy-allow-mcp-tools`**（动态）：从请求头中读取的工具白名单
+3. **最终生效权限**：配置和 Header 中指定的工具列表的**交集**
+
+**Header 值的语义**：
+
+| Header 状态 | 行为 |
+|------------|------|
+| Header 不存在 | 没有额外限制，使用配置中的 `allowTools` |
+| Header 为空字符串 `""` | 没有额外限制，使用配置中的 `allowTools` |
+| Header 为空白字符串 `"  ,  ,  "` | 禁止访问所有工具（空集合） |
+| Header 有值 `"tool1,tool2"` | 与配置的 `allowTools` 取交集 |
+
+**使用场景示例**：
+
+1. **基于用户角色的权限控制**
+   ```yaml
+   # 配置中定义所有可用工具
+   allowTools:
+   - get-user-info
+   - update-user-info
+   - delete-user-info
+   - admin-operation
+   ```
+   
+   前置认证插件可以根据用户角色设置不同的工具权限：
+   - 普通用户：`x-envoy-allow-mcp-tools: get-user-info`
+   - 高级用户：`x-envoy-allow-mcp-tools: get-user-info,update-user-info`
+   - 管理员：不设置 header（允许所有配置中的工具）
+
+2. **多租户场景**
+   ```yaml
+   # 配置中定义租户可用的工具
+   allowTools:
+   - tenant-query-data
+   - tenant-update-data
+   - tenant-report
+   ```
+   
+   前置插件根据租户订阅套餐动态控制：
+   - 基础版：`x-envoy-allow-mcp-tools: tenant-query-data`
+   - 专业版：`x-envoy-allow-mcp-tools: tenant-query-data,tenant-update-data`
+   - 企业版：`x-envoy-allow-mcp-tools: tenant-query-data,tenant-update-data,tenant-report`
+
+3. **临时权限限制**
+   
+   在特殊情况下（如系统维护），前置插件可以临时限制某些工具的访问：
+   ```
+   x-envoy-allow-mcp-tools: read-only-tool1,read-only-tool2
+   ```
+
+**前置插件集成指南**：
+
+对于需要动态设置工具权限的前置插件（如认证、鉴权插件），**必须使用 `proxywasm.ReplaceHttpRequestHeader`** 来设置 `x-envoy-allow-mcp-tools` header：
+
+```go
+// 正确的方式：使用 ReplaceHttpRequestHeader
+// 这会覆盖用户可能传入的任何值，确保安全性
+proxywasm.ReplaceHttpRequestHeader("x-envoy-allow-mcp-tools", "tool1,tool2,tool3")
+
+// ❌ 错误的方式：使用 AddHttpRequestHeader
+// 这可能导致用户传入的值被保留，造成安全隐患
+proxywasm.AddHttpRequestHeader("x-envoy-allow-mcp-tools", "tool1,tool2,tool3")
+```
+
+使用 `ReplaceHttpRequestHeader` 可以确保：
+1. **安全性**：用户无法通过直接在请求中传入 `x-envoy-allow-mcp-tools` header 来绕过权限控制
+2. **可靠性**：前置插件设置的权限配置始终生效，不会被用户输入覆盖
+3. **可预测性**：MCP Server 插件接收到的始终是前置插件设置的权限值
+
+**注意事项**：
+- Header 值使用逗号分隔多个工具名称
+- 工具名称前后的空白字符会被自动去除
+- 当配置的 `allowTools` 为空数组时，无论 header 如何设置，都会禁止所有工具访问
+- MCP Server 插件会自动移除 `x-envoy-allow-mcp-tools` header，不会传递给后端服务
 
 ### REST-to-MCP 工具配置
 
@@ -83,10 +176,68 @@ authors: "澄潭"
 | `tools[].requestTemplate.security`    | object  | 选填     | -      | HTTP 请求模板的安全配置，用于定义 MCP Server 和 REST API 之间的认证方式。 |
 | `tools[].requestTemplate.security.id` | string  | 当 `tools[].requestTemplate.security` 配置时必填 | - | 引用在 `server.securitySchemes` 中定义的认证方案 ID。 |
 | `tools[].requestTemplate.security.credential` | string | 选填 | - | 覆盖 `server.securitySchemes` 中定义的默认凭证。如果同时启用了 `tools[].security.passthrough`，则此字段将被忽略，优先使用透传的凭证。 |
+| `tools[].errorResponseTemplate`       | string  | 选填     | -      | HTTP响应Status>=300 \\|\\| <200 时的错误响应转换模板 |
 
+## MCP 传输协议
+
+MCP 代理服务器 (`mcp-proxy` 类型) 支持两种传输协议与后端 MCP 服务器通信：
+
+### StreamableHTTP 协议 (`transport: http`)
+
+StreamableHTTP 是 MCP 的默认 HTTP 传输协议，使用标准的 HTTP 请求/响应模型：
+
+- **特点**：
+  - 简单的请求-响应模型
+  - 使用标准 HTTP POST 请求
+  - 响应为完整的 JSON 数据
+  - 适合大多数 MCP 服务器实现
+
+- **配置示例**：
+```yaml
+server:
+  name: my-mcp-proxy
+  type: mcp-proxy
+  transport: http
+  mcpServerURL: "http://backend-mcp.example.com/mcp"
+```
+
+### SSE 协议 (`transport: sse`)
+
+SSE (Server-Sent Events) 是 MCP 的流式传输协议，支持实时数据推送：
+
+- **特点**：
+  - 基于 HTTP 的单向流式通信
+  - 支持长连接和实时消息推送
+  - 适合需要实时更新的场景
+  - 协议流程：
+    1. **发现阶段**：向后端发送 POST 请求获取 SSE 端点 URL
+    2. **初始化阶段**：通过 SSE 端点发送 `initialize` 消息
+    3. **通知阶段**：发送 `notifications/initialized` 通知
+    4. **工具调用**：根据需要执行 `tools/list` 或 `tools/call` 请求
+
+- **URL 配置**：
+  - 支持完整 URL：`http://example.com/sse`
+  - 支持路径：`/sse`（将使用 `mcpServerURL` 的基础 URL）
+
+- **配置示例**：
+```yaml
+server:
+  name: my-sse-proxy
+  type: mcp-proxy
+  transport: sse
+  mcpServerURL: "http://backend-mcp.example.com"
+  timeout: 10000  # SSE 可能需要更长的超时时间
+```
 ## 认证与安全
 
-MCP Server 插件支持灵活的认证配置，以确保与后端 REST API 通信的安全性。
+MCP Server 插件支持灵活的认证配置，以确保与后端 REST API 或 MCP 服务器通信的安全性。插件支持两种服务器类型的认证配置：
+
+- **REST-to-MCP 服务器 (`rest` 类型)**：将客户端请求转换为 REST API 调用
+- **MCP 代理服务器 (`mcp-proxy` 类型)**：将客户端请求代理到后端 MCP 服务器
+
+无论哪种类型，都支持**两层认证机制**：
+1. **客户端到网关认证**：验证调用 MCP Server 的客户端身份
+2. **网关到后端认证**：MCP Server 调用后端服务时的认证方式
 
 ### 定义认证方案 (`server.securitySchemes`)
 
@@ -223,6 +374,45 @@ tools:
 **注意事项**:
 - 当 `tools[].security.passthrough` 为 `true` 时，`requestTemplate.security.credential` 字段会被忽略，优先使用透传的凭证。
 - 透传的凭证值会直接用于 `requestTemplate.security` 指定的认证方案。请确保凭证的格式与目标认证方案兼容。`extractAndRemoveIncomingCredential` 函数会尝试提取核心凭证部分（例如，Bearer token 值，Basic auth 的 base64 编码部分）。
+
+### 服务器级别默认认证配置
+
+为了简化配置和确保一致性，MCP Server 插件支持在服务器级别设置默认的认证配置。这些默认配置将应用于所有工具和非工具特定的接口（如 `tools/list`）。
+
+#### `server.defaultDownstreamSecurity`
+
+定义客户端到网关的默认认证配置。这个配置将应用于：
+- 所有没有明确配置 `security` 字段的工具
+- `tools/list` 请求（获取工具列表）
+- 其他非工具特定的 MCP 协议接口
+
+**配置字段**：
+- `id`：引用 `server.securitySchemes` 中定义的认证方案 ID
+- `passthrough`：是否启用透明认证（可选，默认为 false）
+
+#### `server.defaultUpstreamSecurity`
+
+定义网关到后端的默认认证配置。这个配置将应用于：
+- 所有没有明确配置 `requestTemplate.security` 字段的工具
+- `tools/list` 等需要访问后端服务的请求
+
+**配置字段**：
+- `id`：引用 `server.securitySchemes` 中定义的认证方案 ID
+- `credential`：覆盖默认凭证（可选）
+
+#### 优先级规则
+
+认证配置的优先级从高到低：
+1. 工具级别配置（`tools[].security` 和 `tools[].requestTemplate.security`）
+2. 服务器级别默认配置（`server.defaultDownstreamSecurity` 和 `server.defaultUpstreamSecurity`）
+3. 认证方案中的默认凭证（`server.securitySchemes[].defaultCredential`）
+
+#### 使用场景
+
+服务器级别默认认证特别适用于以下场景：
+- **统一认证策略**：所有工具都使用相同的认证方式
+- **MCP 代理服务器**：需要为 `tools/list` 等非工具特定请求提供认证
+- **简化配置**：减少每个工具重复配置相同的认证信息
 
 ## 参数类型支持
 
@@ -447,6 +637,140 @@ server:
 
 此配置使用了 Higress 内置的 quark-search MCP 服务器。在这种情况下，只需要指定服务器名称和必要的配置（如 API 密钥），无需配置 tools 字段，因为工具已经在服务器中预定义好了。
 
+### MCP 代理服务器示例：代理到后端 MCP 服务器（StreamableHTTP）
+
+```yaml
+server:
+  name: my-mcpserver-proxy
+  type: mcp-proxy
+  transport: http  # 使用 StreamableHTTP 协议
+  mcpServerURL: "http://backend-mcp.example.com/mcp"
+  timeout: 5000
+  defaultDownstreamSecurity: # 客户端到网关的默认认证
+    id: ClientApiKey
+  defaultUpstreamSecurity: # 网关到后端的默认认证
+    id: BackendApiKey
+  securitySchemes:
+  - id: ClientApiKey
+    type: apiKey
+    in: header
+    name: X-Client-API-Key
+  - id: BackendApiKey
+    type: apiKey
+    in: header
+    name: X-Backend-API-Key
+    defaultCredential: "backend-secret-key"
+
+tools:
+- name: get-secure-product
+  description: "获取安全产品信息"
+  args:
+  - name: product_id
+    description: "产品ID"
+    type: string
+    required: true
+  requestTemplate:
+    security: # 工具级别的网关到后端认证，覆盖默认配置
+      id: BackendApiKey
+      credential: "special-key-for-this-tool"
+```
+
+此配置创建了一个 MCP 代理服务器，它：
+1. 使用 StreamableHTTP 协议将客户端的 MCP 请求代理到 `http://backend-mcp.example.com/mcp`
+2. 使用服务器级别的默认认证配置处理 `tools/list` 等通用请求
+3. 工具级别的认证配置可以覆盖默认设置
+4. 支持透明认证和凭证覆盖
+
+### MCP 代理服务器示例：使用 SSE 协议
+
+```yaml
+server:
+  name: my-sse-mcpserver-proxy
+  type: mcp-proxy
+  transport: sse  # 使用 SSE 协议
+  mcpServerURL: "http://backend-mcp.example.com"
+  timeout: 10000  # SSE 连接可能需要更长的超时时间
+  defaultDownstreamSecurity:
+    id: ClientBearer
+  defaultUpstreamSecurity:
+    id: BackendBearer
+  securitySchemes:
+  - id: ClientBearer
+    type: http
+    scheme: bearer
+  - id: BackendBearer
+    type: http
+    scheme: bearer
+
+allowTools:
+- weather-tool
+- news-tool
+```
+
+此配置创建了一个使用 SSE 协议的 MCP 代理服务器：
+1. 使用 SSE 流式协议与后端通信，支持实时消息推送
+2. 自动处理 SSE 连接的生命周期（发现、初始化、通知、工具调用）
+3. 原始请求头会自动复制到后端调用中
+4. 支持 `allowTools` 过滤可用工具列表
+5. 认证头会正确传递到所有 SSE 请求中
+
+### MCP 代理服务器高级示例：透明认证
+
+```yaml
+server:
+  name: my-secure-proxy
+  type: mcp-proxy
+  mcpServerURL: "https://api.backend-mcp.com/v1/mcp"
+  timeout: 10000
+  defaultDownstreamSecurity: # 默认要求客户端提供 Bearer Token
+    id: ClientBearer
+    passthrough: true # 启用透明认证
+  defaultUpstreamSecurity: # 默认使用透传的凭证调用后端
+    id: BackendBearer
+  securitySchemes:
+  - id: ClientBearer # 客户端使用 Bearer Token
+    type: http
+    scheme: bearer
+  - id: BackendBearer # 后端也使用 Bearer Token
+    type: http
+    scheme: bearer
+  - id: AdminApiKey # 管理员工具使用特殊 API Key
+    type: apiKey
+    in: header
+    name: X-Admin-Key
+    defaultCredential: "admin-secret-key"
+
+tools:
+- name: get-user-data
+  description: "获取用户数据（使用透传认证）"
+  args:
+  - name: user_id
+    description: "用户ID"
+    type: string
+    required: true
+  # 此工具使用默认的透传认证，客户端的 Bearer Token 会传递给后端
+
+- name: admin-operation
+  description: "执行管理员操作（使用特殊认证）"
+  security: # 工具级别客户端认证：仍要求客户端提供 Bearer Token
+    id: ClientBearer
+    passthrough: false # 不透传客户端凭证
+  args:
+  - name: operation
+    description: "操作类型"
+    type: string
+    required: true
+  requestTemplate:
+    security: # 工具级别后端认证：使用管理员 API Key
+      id: AdminApiKey
+```
+
+此高级配置展示了：
+1. **透明认证**：`get-user-data` 工具会将客户端的 Bearer Token 透传给后端
+2. **混合认证**：`admin-operation` 工具要求客户端认证但使用不同的后端认证
+3. **服务器级别默认配置**：为所有 `tools/list` 请求提供统一的认证策略
+4. **灵活的认证方案**：支持 HTTP Bearer Token 和 API Key 两种认证方式
+
 ### 基础配置示例：转换高德地图 API
 
 ```yaml
@@ -623,26 +947,112 @@ tools:
 - 使用 `appendBody` 在响应末尾添加使用建议
 - 保留原始 JSON 响应，使 AI 助手可以直接访问所有数据
 
+### 使用 errorResponseTemplate自定义错误响应的示例
+
+errorResponseTemplate用于在HTTP响应status code>=300 || <200时自定义响应转换模板。支持通过_headers访问map结构的header key value, 以便在errorResponseTemplate中引用header中的值自定义错误响应结果。
+
+```yaml
+server:
+  config:
+    appCode: ""
+  name: "银行卡二三四要素"
+tools:
+- args:
+  - description: "银行卡号"
+    name: "cardno"
+    position: "query"
+    required: true
+    type: "string"
+  - description: "姓名（注意UrlEncode编码）"
+    name: "name"
+    position: "query"
+    required: false
+    type: "string"
+  - description: "预留手机号"
+    name: "mobile"
+    position: "query"
+    required: false
+    type: "string"
+  - description: "身份证号码"
+    name: "idcard"
+    position: "query"
+    required: false
+    type: "string"
+  description: "验证卡号、姓名、手机号、证件号是否一致"
+  errorResponseTemplate: |-
+    statusCode: {{gjson "_headers.\\:status"}}
+    errorCode: {{gjson "_headers.x-ca-error-code"}}
+    data: {{.data.value}}
+  name: "银行卡二三四要素验证"
+  requestTemplate:
+    argsToFormBody: false
+    argsToJsonBody: false
+    argsToUrlParam: true
+    method: "GET"
+    url: "https://ckid.market.alicloudapi.com/lundear/verifyBank"
+  responseTemplate:
+    appendBody: |2-
+        - 以下是返回参数说明
+        - 参数名称: code, 参数类型: integer, 参数描述: 响应状态码
+        - 参数名称: desc, 参数类型: string, 参数描述: 描述信息
+        - 参数名称: data, 参数类型: object, 参数描述: 无描述
+        - 参数名称: data.bankId, 参数类型: string, 参数描述: 银行编码
+        - 参数名称: data.bankName, 参数类型: string, 参数描述: 银行名称
+        - 参数名称: data.abbr, 参数类型: string, 参数描述: 银行英文缩写
+        - 参数名称: data.cardName, 参数类型: string, 参数描述: 卡名称
+        - 参数名称: data.cardType, 参数类型: string, 参数描述: 卡类型
+        - 参数名称: data.cardBin, 参数类型: string, 参数描述: 卡bin
+        - 参数名称: data.binLen, 参数类型: integer, 参数描述: 卡bin长度
+        - 参数名称: data.area, 参数类型: string, 参数描述: 卡所在地区
+        - 参数名称: data.bankPhone, 参数类型: string, 参数描述: 银行电话
+        - 参数名称: data.bankUrl, 参数类型: string, 参数描述: 银行网址
+        - 参数名称: data.bankLogo, 参数类型: string, 参数描述: 银行logo
+
+```
+此示例展示了：
+- {{gjson "_headers.\\:status"}} -> 访问HTTP响应code
+- {{gjson "_headers.x-ca-error-code"}} -> 访问Header中"x-ca-error-code"的值
+- {{.data.value}} -> 访问响应体 (e.g., JSON 字段 "data.value")
 
 ## AI 提示词生成模板
 
 在与 AI 助手一起生成 REST-to-MCP 配置的模板时，您可以使用以下提示词：
 
 ```
-请帮我创建一个 Higress 的 REST-to-MCP 配置，将 REST API 转换为 MCP 工具。
+请帮我创建一个 Higress 的 MCP 服务器配置。支持两种类型：
+1. **REST-to-MCP 服务器**：将 REST API 转换为 MCP 工具
+2. **MCP 代理服务器**：代理到后端 MCP 服务器
 
 ## 配置格式
 
-配置应遵循以下格式：
+### REST-to-MCP 服务器配置
 
 ```yaml
 server:
   name: rest-api-server
+  type: rest  # 可选，默认为 rest
   config:
     apiKey: 您的API密钥
+  # 服务器级别默认认证（可选）
+  defaultDownstreamSecurity:
+    id: ClientAuth
+  defaultUpstreamSecurity:
+    id: BackendAuth
+  securitySchemes:
+  - id: ClientAuth
+    type: http
+    scheme: bearer
+  - id: BackendAuth
+    type: apiKey
+    in: header
+    name: X-API-Key
+    defaultCredential: 您的后端API密钥
 tools:
 - name: tool-name
   description: "详细描述这个工具的功能"
+  security: # 工具级别客户端认证（可选，覆盖服务器默认）
+    id: ClientAuth
+    passthrough: true  # 启用透明认证
   args:
   - name: arg1
     description: "参数1的描述"
@@ -655,42 +1065,19 @@ tools:
     required: false
     default: 10
     position: query
-  - name: arg3
-    description: "参数3的描述"
-    type: array
-    items:
-      type: string
-    position: body
-  - name: arg4
-    description: "参数4的描述"
-    type: object
-    properties:
-      subfield1:
-        type: string
-      subfield2:
-        type: number
-    # 未指定position，将根据argsToJsonBody/argsToUrlParam/argsToFormBody处理
   requestTemplate:
     url: "https://api.example.com/endpoint"
     method: POST
+    security: # 工具级别后端认证（可选，覆盖服务器默认）
+      id: BackendAuth
+      credential: "特定工具的凭证"  # 可选，覆盖默认凭证
     # 以下四个选项互斥，只能选择其中一种
     argsToUrlParam: true  # 将参数添加到URL查询参数
-    # 或者
-    # argsToJsonBody: true  # 将参数作为JSON对象发送到请求体
-    # 或者
-    # argsToFormBody: true  # 将参数以表单编码发送到请求体
-    # 或者
-    # body: |  # 手动构建请求体
-    #   {
-    #     "param1": "{{.args.arg1}}",
-    #     "param2": {{.args.arg2}},
-    #     "complex": {{toJson .args.arg4}}
-    #   }
+    # 或者其他选项...
     headers:
     - key: x-api-key
       value: "{{.config.apiKey}}"
   responseTemplate:
-    # 以下三个选项互斥，只能选择其中一种
     body: |
       # 结果
       {{- range $index, $item := .items }}
@@ -698,17 +1085,82 @@ tools:
       - **名称**: {{ $item.name }}
       - **值**: {{ $item.value }}
       {{- end }}
-    # 或者
-    # prependBody: |
-    #   # API响应说明
-    #   
-    #   以下是原始JSON响应，字段含义如下：
-    #   - field1: 字段1的含义
-    #   - field2: 字段2的含义
-    #   
-    # appendBody: |
-    #   
-    #   您可以使用这些数据来...
+```
+
+### MCP 代理服务器配置
+
+#### StreamableHTTP 协议
+
+```yaml
+server:
+  name: mcp-proxy-server
+  type: mcp-proxy
+  transport: http  # StreamableHTTP 协议
+  mcpServerURL: "http://backend-mcp.example.com/mcp"  # 后端 MCP 服务器 URL
+  timeout: 5000  # 超时时间（毫秒）
+  # 服务器级别默认认证（推荐配置）
+  defaultDownstreamSecurity:  # 客户端到网关认证
+    id: ClientAuth
+    passthrough: true  # 启用透明认证
+  defaultUpstreamSecurity:   # 网关到后端认证
+    id: BackendAuth
+  securitySchemes:
+  - id: ClientAuth
+    type: http
+    scheme: bearer
+  - id: BackendAuth
+    type: apiKey
+    in: header
+    name: X-Backend-Key
+    defaultCredential: "后端服务密钥"
+
+# 对于 MCP 代理，tools 配置是可选的
+# 如果配置了 tools，则只有列出的工具可用
+# 如果不配置 tools，则代理所有后端 MCP 服务器的工具
+tools:
+- name: specific-tool
+  description: "特定工具的配置（可选）"
+  security: # 覆盖默认的客户端认证
+    id: ClientAuth
+    passthrough: false  # 不透传
+  args:
+  - name: param1
+    description: "参数描述"
+    type: string
+    required: true
+  requestTemplate:
+    security: # 覆盖默认的后端认证
+      id: BackendAuth
+      credential: "特定工具的后端凭证"
+```
+
+#### SSE 协议
+
+```yaml
+server:
+  name: mcp-sse-proxy-server
+  type: mcp-proxy
+  transport: sse  # SSE 协议
+  mcpServerURL: "http://backend-mcp.example.com"  # 后端 MCP 服务器基础 URL
+  timeout: 10000  # SSE 通常需要更长的超时时间
+  # 服务器级别默认认证
+  defaultDownstreamSecurity:
+    id: ClientBearer
+  defaultUpstreamSecurity:
+    id: BackendBearer
+  securitySchemes:
+  - id: ClientBearer
+    type: http
+    scheme: bearer
+  - id: BackendBearer
+    type: http
+    scheme: bearer
+    defaultCredential: "后端Bearer Token"
+
+# 可选：限制允许的工具
+allowTools:
+- tool1
+- tool2
 ```
 
 ## 模板语法
@@ -723,15 +1175,46 @@ tools:
 
 对于复杂的 JSON 响应，请考虑使用 GJSON 强大的过滤和查询能力来提取和格式化最相关的信息。
 
-## 我的 API 信息
+## 我的需求
 
-我想转换的 REST API 是：
+请选择您的需求类型：
 
-[在此描述您的 API，包括端点、参数和响应格式，或者粘贴 Swagger/OpenAPI 规范]
+### 如果要转换 REST API 为 MCP 工具
+请描述您的 REST API：
+- API 端点 URL
+- 认证方式（API Key、Bearer Token 等）
+- 参数和响应格式
+- 或者粘贴 Swagger/OpenAPI 规范
+
+### 如果要代理现有的 MCP 服务器
+请提供：
+- 后端 MCP 服务器的 URL
+- 传输协议类型（StreamableHTTP 或 SSE）
+- 认证要求（客户端认证、后端认证）
+- 是否需要透明认证（将客户端凭证传递给后端）
+- 是否需要限制可用工具（allowTools）
+- 特定工具的配置需求
+
+[在此描述您的具体需求]
 ```
 
+## 生成要求
+
 请根据以上信息生成一个完整的配置，包括：
+
+### 对于 REST-to-MCP 服务器：
 1. 具有描述性名称和适当的服务器配置
 2. 定义所有必要的参数，并提供清晰的描述和适当的类型、必填/默认值
 3. 选择合适的参数传递方式（argsToUrlParam、argsToJsonBody、argsToFormBody 或自定义 body）
 4. 创建将 API 响应转换为适合 AI 消费的可读格式的 responseTemplate
+5. 配置适当的认证方案和安全配置
+
+### 对于 MCP 代理服务器：
+1. 选择合适的传输协议（`http` 用于 StreamableHTTP，`sse` 用于 SSE）
+2. 配置后端 MCP 服务器 URL 和超时时间（SSE 建议使用更长的超时时间）
+3. 设置服务器级别的默认认证配置
+4. 根据需要配置透明认证
+5. 配置 `allowTools` 以限制可用工具（可选）
+6. 如有特殊需求，配置特定工具的认证覆盖
+7. 确保客户端到网关和网关到后端的认证链路完整
+
