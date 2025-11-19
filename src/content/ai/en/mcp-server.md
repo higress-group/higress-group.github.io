@@ -6,7 +6,6 @@ category: "article"
 keywords: [higress,mcp,ai]
 authors: "Chengtan"
 ---
-# MCP Server Plugin Configuration
 
 ## Feature Description
 
@@ -37,14 +36,107 @@ Plugin execution priority: `30`
 | Name         | Data Type   | Required | Default | Description                           |
 | ------------ | ---------- | -------- | ------ | ------------------------------ |
 | `server.name` | string     | Yes     | -      | Name of the MCP server. If using a pre-integrated MCP server (like quark-search), you only need to configure this field with the corresponding name and don't need to configure the tools field. For REST-to-MCP scenarios, this field can be any arbitrary value. |
+| `server.type` | string     | No     | rest   | MCP server type. Options: `rest` (REST-to-MCP conversion), `mcp-proxy` (MCP proxy). Defaults to `rest` if not specified. |
 | `server.config` | object     | No     | {}     | Server configuration, such as API keys      |
+| `server.mcpServerURL` | string | Required when `server.type` is `mcp-proxy` | - | Backend MCP server URL. Only used for `mcp-proxy` type. |
+| `server.timeout` | integer | No | 5000 | Request timeout in milliseconds for backend services. Applies to `mcp-proxy` type. |
+| `server.passthroughAuthHeader` | boolean | No | false | Whether to pass through the Authorization header. When set to `true`, the client's `Authorization` header will be passed through to the backend even if no downstream security configuration (`defaultDownstreamSecurity` or tool-level `security`) is configured. Defaults to `false`, meaning the `Authorization` header will be removed when no explicit security configuration is defined, preventing client credentials from being incorrectly passed to the backend. This field is suitable for scenarios that require direct passthrough of original authentication information. |
 | `server.securitySchemes` | array of object | No | - | Defines reusable security schemes that can be referenced by tools. See the Authentication and Security section for details. |
+| `server.defaultDownstreamSecurity` | object | No | - | Server-level default client-to-gateway authentication configuration for all tools/list and tools/call requests. Can be overridden by tool-level `security` configuration. Supports `id` (reference to securitySchemes) and `passthrough` (passthrough flag) fields. |
+| `server.defaultUpstreamSecurity` | object | No | - | Server-level default gateway-to-backend authentication configuration for all backend requests. Can be overridden by tool-level `requestTemplate.security` configuration. Supports `id` (reference to securitySchemes) and `credential` (override default credential) fields. |
 
 ### Allowed Tools Configuration
 
 | Name         | Data Type        | Required | Default | Description                                   |
 | ------------ | --------------- | -------- | ------ | --------------------------------------------- |
 | `allowTools` | array of string | No       | -      | List of tools allowed to be called. If not specified, all tools are allowed |
+
+#### Dynamic Tool Permission Control
+
+In addition to statically defining `allowTools` in the configuration, tool access permissions can be dynamically controlled through the HTTP request header `x-envoy-allow-mcp-tools`. This allows upstream plugins (such as authentication and authorization plugins) to dynamically set the list of allowed tools based on user identity or other conditions.
+
+**Header Format**:
+```
+x-envoy-allow-mcp-tools: tool1,tool2,tool3
+```
+
+**Permission Control Logic**:
+
+1. **Configuration-level `allowTools`** (static): Base tool whitelist defined in the plugin configuration
+2. **Header-level `x-envoy-allow-mcp-tools`** (dynamic): Tool whitelist read from request header
+3. **Effective Permissions**: **Intersection** of tools specified in both configuration and header
+
+**Header Value Semantics**:
+
+| Header State | Behavior |
+|------------|------|
+| Header not present | No additional restriction, use `allowTools` from configuration |
+| Header is empty string `""` | No additional restriction, use `allowTools` from configuration |
+| Header is whitespace string `"  ,  ,  "` | Deny access to all tools (empty set) |
+| Header has value `"tool1,tool2"` | Intersect with configured `allowTools` |
+
+**Usage Scenarios**:
+
+1. **Role-Based Access Control**
+   ```yaml
+   # Define all available tools in configuration
+   allowTools:
+   - get-user-info
+   - update-user-info
+   - delete-user-info
+   - admin-operation
+   ```
+   
+   Upstream authentication plugin can set different tool permissions based on user roles:
+   - Regular users: `x-envoy-allow-mcp-tools: get-user-info`
+   - Advanced users: `x-envoy-allow-mcp-tools: get-user-info,update-user-info`
+   - Administrators: Don't set header (allow all configured tools)
+
+2. **Multi-Tenant Scenario**
+   ```yaml
+   # Define tools available for tenants
+   allowTools:
+   - tenant-query-data
+   - tenant-update-data
+   - tenant-report
+   ```
+   
+   Upstream plugin dynamically controls based on tenant subscription plan:
+   - Basic plan: `x-envoy-allow-mcp-tools: tenant-query-data`
+   - Professional plan: `x-envoy-allow-mcp-tools: tenant-query-data,tenant-update-data`
+   - Enterprise plan: `x-envoy-allow-mcp-tools: tenant-query-data,tenant-update-data,tenant-report`
+
+3. **Temporary Permission Restriction**
+   
+   In special circumstances (e.g., system maintenance), upstream plugins can temporarily restrict access to certain tools:
+   ```
+   x-envoy-allow-mcp-tools: read-only-tool1,read-only-tool2
+   ```
+
+**Upstream Plugin Integration Guide**:
+
+For upstream plugins (such as authentication and authorization plugins) that need to dynamically set tool permissions, **you must use `proxywasm.ReplaceHttpRequestHeader`** to set the `x-envoy-allow-mcp-tools` header:
+
+```go
+// Correct way: Use ReplaceHttpRequestHeader
+// This will override any value that users might have passed in, ensuring security
+proxywasm.ReplaceHttpRequestHeader("x-envoy-allow-mcp-tools", "tool1,tool2,tool3")
+
+// ❌ Wrong way: Use AddHttpRequestHeader
+// This may retain user-provided values, creating a security vulnerability
+proxywasm.AddHttpRequestHeader("x-envoy-allow-mcp-tools", "tool1,tool2,tool3")
+```
+
+Using `ReplaceHttpRequestHeader` ensures:
+1. **Security**: Users cannot bypass permission controls by directly passing the `x-envoy-allow-mcp-tools` header in their requests
+2. **Reliability**: The permission configuration set by the upstream plugin always takes effect and won't be overridden by user input
+3. **Predictability**: The MCP Server plugin always receives the permission value set by the upstream plugin
+
+**Notes**:
+- Header value uses comma to separate multiple tool names
+- Whitespace before and after tool names is automatically trimmed
+- When configured `allowTools` is an empty array, all tool access is denied regardless of header settings
+- The MCP Server plugin automatically removes the `x-envoy-allow-mcp-tools` header and doesn't pass it to backend services
 
 ### REST-to-MCP Tool Configuration
 
@@ -83,10 +175,18 @@ Plugin execution priority: `30`
 | `tools[].requestTemplate.security`    | object  | No     | -      | Security configuration for the HTTP request template, defining authentication between MCP Server and REST API. |
 | `tools[].requestTemplate.security.id` | string  | Required when `tools[].requestTemplate.security` is configured | - | References a security scheme ID defined in `server.securitySchemes`. |
 | `tools[].requestTemplate.security.credential` | string | No | - | Overrides the default credential defined in `server.securitySchemes`. If `tools[].security.passthrough` is enabled, this field will be ignored, and the passthrough credential will be used instead. |
+| `tools[].errorResponseTemplate`       | string  | No     | -      | Error Response Template when HTTP Response Status >=300 \\|\\| <200 |
 
 ## Authentication and Security
 
-The MCP Server plugin supports flexible authentication configurations to ensure secure communication with backend REST APIs.
+The MCP Server plugin supports flexible authentication configurations to ensure secure communication with backend REST APIs or MCP servers. The plugin supports two server types with authentication configuration:
+
+- **REST-to-MCP Server (`rest` type)**: Converts client requests to REST API calls
+- **MCP Proxy Server (`mcp-proxy` type)**: Proxies client requests to backend MCP servers
+
+Both types support a **two-tier authentication mechanism**:
+1. **Client-to-Gateway Authentication**: Validates the identity of clients calling the MCP Server
+2. **Gateway-to-Backend Authentication**: Authentication method used by MCP Server when calling backend services
 
 ### Defining Security Schemes (`server.securitySchemes`)
 
@@ -223,6 +323,45 @@ tools:
 **Notes**:
 - When `tools[].security.passthrough` is `true`, the `requestTemplate.security.credential` field is ignored, and the passthrough credential takes precedence.
 - The passthrough credential value is applied directly to the authentication scheme specified by `requestTemplate.security`. Ensure that the credential format is compatible with the target authentication scheme. The `extractAndRemoveIncomingCredential` function attempts to extract the core credential part (e.g., the Bearer token value, the base64-encoded part of Basic auth).
+
+### Server-Level Default Authentication Configuration
+
+To simplify configuration and ensure consistency, the MCP Server plugin supports setting default authentication configurations at the server level. These default configurations apply to all tools and non-tool-specific interfaces (such as `tools/list`).
+
+#### `server.defaultDownstreamSecurity`
+
+Defines the default client-to-gateway authentication configuration. This configuration applies to:
+- All tools that don't have an explicit `security` field configured
+- `tools/list` requests (for retrieving tool lists)
+- Other non-tool-specific MCP protocol interfaces
+
+**Configuration Fields**:
+- `id`: References a security scheme ID defined in `server.securitySchemes`
+- `passthrough`: Whether to enable passthrough authentication (optional, defaults to false)
+
+#### `server.defaultUpstreamSecurity`
+
+Defines the default gateway-to-backend authentication configuration. This configuration applies to:
+- All tools that don't have an explicit `requestTemplate.security` field configured
+- `tools/list` and other requests that need to access backend services
+
+**Configuration Fields**:
+- `id`: References a security scheme ID defined in `server.securitySchemes`
+- `credential`: Override the default credential (optional)
+
+#### Priority Rules
+
+Authentication configuration priority from highest to lowest:
+1. Tool-level configuration (`tools[].security` and `tools[].requestTemplate.security`)
+2. Server-level default configuration (`server.defaultDownstreamSecurity` and `server.defaultUpstreamSecurity`)
+3. Default credentials in security schemes (`server.securitySchemes[].defaultCredential`)
+
+#### Use Cases
+
+Server-level default authentication is particularly useful for:
+- **Unified Authentication Strategy**: All tools use the same authentication method
+- **MCP Proxy Servers**: Need to provide authentication for `tools/list` and other non-tool-specific requests
+- **Simplified Configuration**: Reduce repetitive configuration of the same authentication information for each tool
 
 ## Parameter Type Support
 
@@ -447,6 +586,106 @@ server:
 
 This configuration uses Higress's built-in quark-search MCP server. In this case, you only need to specify the server name and necessary configuration (such as API key), without configuring the tools field, as the tools are already predefined in the server.
 
+### MCP Proxy Server Example: Proxying to Backend MCP Server
+
+```yaml
+server:
+  name: my-mcpserver-proxy
+  type: mcp-proxy
+  mcpServerURL: "http://backend-mcp.example.com/mcp"
+  timeout: 5000
+  defaultDownstreamSecurity: # Client-to-gateway default authentication
+    id: ClientApiKey
+  defaultUpstreamSecurity: # Gateway-to-backend default authentication
+    id: BackendApiKey
+  securitySchemes:
+  - id: ClientApiKey
+    type: apiKey
+    in: header
+    name: X-Client-API-Key
+  - id: BackendApiKey
+    type: apiKey
+    in: header
+    name: X-Backend-API-Key
+    defaultCredential: "backend-secret-key"
+
+tools:
+- name: get-secure-product
+  description: "Get secure product information"
+  args:
+  - name: product_id
+    description: "Product ID"
+    type: string
+    required: true
+  requestTemplate:
+    security: # Tool-level gateway-to-backend authentication, overrides default
+      id: BackendApiKey
+      credential: "special-key-for-this-tool"
+```
+
+This configuration creates an MCP proxy server that:
+1. Proxies client MCP requests to `http://backend-mcp.example.com/mcp`
+2. Uses server-level default authentication configuration for `tools/list` and other general requests
+3. Tool-level authentication configuration can override default settings
+4. Supports passthrough authentication and credential overrides
+
+### Advanced MCP Proxy Server Example: Passthrough Authentication
+
+```yaml
+server:
+  name: my-secure-proxy
+  type: mcp-proxy
+  mcpServerURL: "https://api.backend-mcp.com/v1/mcp"
+  timeout: 10000
+  defaultDownstreamSecurity: # Default requires client to provide Bearer Token
+    id: ClientBearer
+    passthrough: true # Enable passthrough authentication
+  defaultUpstreamSecurity: # Default uses passthrough credentials for backend
+    id: BackendBearer
+  securitySchemes:
+  - id: ClientBearer # Client uses Bearer Token
+    type: http
+    scheme: bearer
+  - id: BackendBearer # Backend also uses Bearer Token
+    type: http
+    scheme: bearer
+  - id: AdminApiKey # Admin tools use special API Key
+    type: apiKey
+    in: header
+    name: X-Admin-Key
+    defaultCredential: "admin-secret-key"
+
+tools:
+- name: get-user-data
+  description: "Get user data (using passthrough authentication)"
+  args:
+  - name: user_id
+    description: "User ID"
+    type: string
+    required: true
+  # This tool uses default passthrough authentication, client Bearer Token will be passed to backend
+
+- name: admin-operation
+  description: "Perform admin operation (using special authentication)"
+  security: # Tool-level client authentication: still requires client Bearer Token
+    id: ClientBearer
+    passthrough: false # Don't passthrough client credentials
+  args:
+  - name: operation
+    description: "Operation type"
+    type: string
+    required: true
+  requestTemplate:
+    security: # Tool-level backend authentication: use admin API Key
+      id: AdminApiKey
+```
+
+This advanced configuration demonstrates:
+1. **Passthrough Authentication**: `get-user-data` tool passes client Bearer Token to backend
+2. **Mixed Authentication**: `admin-operation` tool requires client authentication but uses different backend authentication
+3. **Server-Level Default Configuration**: Provides unified authentication strategy for all `tools/list` requests
+4. **Flexible Authentication Schemes**: Supports both HTTP Bearer Token and API Key authentication methods
+
 ### Basic Example: Converting AMap API
 
 ```yaml
@@ -623,26 +862,111 @@ This example demonstrates:
 - Using `appendBody` to add usage suggestions at the end of the response
 - Preserving the original JSON response, allowing the AI assistant to directly access all data
 
+### Example of Customizing Error Responses Using errorResponseTemplate
+
+The errorResponseTemplate is used to customize the response transformation template when the HTTP response status code is >= 300 or < 200. It supports accessing header key-value pairs in map structure via _headers, so that values from the header can be referenced in the errorResponseTemplate to customize the error response result.
+
+```yaml
+server:
+  config:
+    appCode: ""
+  name: "Bank Card 2nd, 3rd, and 4th Element Verification"
+tools:
+- args:
+  - description: "Bank card number"
+    name: "cardno"
+    position: "query"
+    required: true
+    type: "string"
+  - description: "Name (Note: apply UrlEncode encoding)"
+    name: "name"
+    position: "query"
+    required: false
+    type: "string"
+  - description: "Registered mobile number"
+    name: "mobile"
+    position: "query"
+    required: false
+    type: "string"
+  - description: "ID card number"
+    name: "idcard"
+    position: "query"
+    required: false
+    type: "string"
+  description: "Verify whether card number, name, mobile number, and ID card number match"
+  errorResponseTemplate: |-
+    statusCode: {{gjson "_headers.\\:status"}}
+    errorCode: {{gjson "_headers.x-ca-error-code"}}
+    data: {{.data.value}}
+  name: "Bank Card 2nd, 3rd, and 4th Element Validation"
+  requestTemplate:
+    argsToFormBody: false
+    argsToJsonBody: false
+    argsToUrlParam: true
+    method: "GET"
+    url: "https://ckid.market.alicloudapi.com/lundear/verifyBank"
+  responseTemplate:
+    appendBody: |2-
+        - Below are descriptions of the returned parameters
+        - Parameter Name: code, Parameter Type: integer, Description: Response status code
+        - Parameter Name: desc, Parameter Type: string, Description: Description message
+        - Parameter Name: data, Parameter Type: object, Description: No description
+        - Parameter Name: data.bankId, Parameter Type: string, Description: Bank code
+        - Parameter Name: data.bankName, Parameter Type: string, Description: Bank name
+        - Parameter Name: data.abbr, Parameter Type: string, Description: Bank abbreviation
+        - Parameter Name: data.cardName, Parameter Type: string, Description: Card name
+        - Parameter Name: data.cardType, Parameter Type: string, Description: Card type
+        - Parameter Name: data.cardBin, Parameter Type: string, Description: Card BIN
+        - Parameter Name: data.binLen, Parameter Type: integer, Description: Length of card BIN
+        - Parameter Name: data.area, Parameter Type: string, Description: Region where the card belongs
+        - Parameter Name: data.bankPhone, Parameter Type: string, Description: Bank phone number
+        - Parameter Name: data.bankUrl, Parameter Type: string, Description: Bank website URL
+        - Parameter Name: data.bankLogo, Parameter Type: string, Description: Bank logo URL
+```
+This example demonstrates:
+- {{gjson "_headers.\\:status"}} -> Get HTTP status code
+- {{gjson "_headers.x-ca-error-code"}} -> Get value of header key "x-ca-error-code"
+- {{.data.value}} -> Access original responseBody content (e.g., JSON field "data.value")
 
 ## AI Prompt for Template Generation
 
 When working with AI assistants to generate templates for REST-to-MCP configuration, you can use the following prompt:
 
 ```
-Please help me create a REST-to-MCP configuration for Higress that converts a REST API to an MCP tool.
+Please help me create an MCP server configuration for Higress. Supports two types:
+1. **REST-to-MCP Server**: Converts REST APIs to MCP tools
+2. **MCP Proxy Server**: Proxies to backend MCP servers
 
 ## Configuration Format
 
-The configuration should follow this format:
+### REST-to-MCP Server Configuration
 
 ```yaml
 server:
   name: rest-api-server
+  type: rest  # Optional, defaults to rest
   config:
     apiKey: your-api-key-here
+  # Server-level default authentication (optional)
+  defaultDownstreamSecurity:
+    id: ClientAuth
+  defaultUpstreamSecurity:
+    id: BackendAuth
+  securitySchemes:
+  - id: ClientAuth
+    type: http
+    scheme: bearer
+  - id: BackendAuth
+    type: apiKey
+    in: header
+    name: X-API-Key
+    defaultCredential: your-backend-api-key
 tools:
 - name: tool-name
   description: "Detailed description of what this tool does"
+  security: # Tool-level client authentication (optional, overrides server default)
+    id: ClientAuth
+    passthrough: true  # Enable passthrough authentication
   args:
   - name: arg1
     description: "Description of argument 1"
@@ -655,42 +979,19 @@ tools:
     required: false
     default: 10
     position: query
-  - name: arg3
-    description: "Description of argument 3"
-    type: array
-    items:
-      type: string
-    position: body
-  - name: arg4
-    description: "Description of argument 4"
-    type: object
-    properties:
-      subfield1:
-        type: string
-      subfield2:
-        type: number
-    # No position specified, will be handled by argsToJsonBody/argsToUrlParam/argsToFormBody
   requestTemplate:
     url: "https://api.example.com/endpoint"
     method: POST
+    security: # Tool-level backend authentication (optional, overrides server default)
+      id: BackendAuth
+      credential: "specific-tool-credential"  # Optional, override default credential
     # The following four options are mutually exclusive, only one can be used
     argsToUrlParam: true  # Add arguments to URL query parameters
-    # OR
-    # argsToJsonBody: true  # Send arguments as a JSON object in the request body
-    # OR
-    # argsToFormBody: true  # Send arguments as form-encoded in the request body
-    # OR
-    # body: |  # Manually construct the request body
-    #   {
-    #     "param1": "{{.args.arg1}}",
-    #     "param2": {{.args.arg2}},
-    #     "complex": {{toJson .args.arg4}}
-    #   }
+    # OR other options...
     headers:
     - key: x-api-key
       value: "{{.config.apiKey}}"
   responseTemplate:
-    # The following three options are mutually exclusive, only one can be used
     body: |
       # Result
       {{- range $index, $item := .items }}
@@ -698,17 +999,50 @@ tools:
       - **Name**: {{ $item.name }}
       - **Value**: {{ $item.value }}
       {{- end }}
-    # OR
-    # prependBody: |
-    #   # API Response Description
-    #   
-    #   Below is the original JSON response, with field meanings:
-    #   - field1: Meaning of field 1
-    #   - field2: Meaning of field 2
-    #   
-    # appendBody: |
-    #   
-    #   You can use this data to...
+```
+
+### MCP Proxy Server Configuration
+
+```yaml
+server:
+  name: mcp-proxy-server
+  type: mcp-proxy
+  mcpServerURL: "http://backend-mcp.example.com/mcp"  # Backend MCP server URL
+  timeout: 5000  # Timeout in milliseconds
+  # Server-level default authentication (recommended)
+  defaultDownstreamSecurity:  # Client-to-gateway authentication
+    id: ClientAuth
+    passthrough: true  # Enable passthrough authentication
+  defaultUpstreamSecurity:   # Gateway-to-backend authentication
+    id: BackendAuth
+  securitySchemes:
+  - id: ClientAuth
+    type: http
+    scheme: bearer
+  - id: BackendAuth
+    type: apiKey
+    in: header
+    name: X-Backend-Key
+    defaultCredential: "backend-service-key"
+
+# For MCP proxy, tools configuration is optional
+# If tools are configured, only listed tools are available
+# If tools are not configured, all backend MCP server tools are proxied
+tools:
+- name: specific-tool
+  description: "Specific tool configuration (optional)"
+  security: # Override default client authentication
+    id: ClientAuth
+    passthrough: false  # Don't passthrough
+  args:
+  - name: param1
+    description: "Parameter description"
+    type: string
+    required: true
+  requestTemplate:
+    security: # Override default backend authentication
+      id: BackendAuth
+      credential: "specific-tool-backend-credential"
 ```
 
 ## Template Syntax
@@ -723,9 +1057,41 @@ The templates use GJSON Template syntax (https://github.com/higress-group/gjson_
 
 For complex JSON responses, consider using GJSON's powerful filtering and querying capabilities to extract and format the most relevant information.
 
-## My API Information
+## My Requirements
 
-The REST API I want to convert is:
+Please choose your requirement type:
 
-[Describe your API here, including endpoints, parameters, and response format, or paste a Swagger/OpenAPI specification]
+### If you want to convert REST API to MCP tools
+Please describe your REST API:
+- API endpoint URLs
+- Authentication methods (API Key, Bearer Token, etc.)
+- Parameters and response formats
+- Or paste Swagger/OpenAPI specifications
+
+### If you want to proxy to an existing MCP server
+Please provide:
+- Backend MCP server URL
+- Authentication requirements (client authentication, backend authentication)
+- Whether passthrough authentication is needed (pass client credentials to backend)
+- Specific tool configuration requirements
+
+[Describe your specific requirements here]
 ```
+
+## Generation Requirements
+
+Please generate a complete configuration based on the above information, including:
+
+### For REST-to-MCP Server:
+1. Descriptive name and appropriate server configuration
+2. Define all necessary parameters with clear descriptions and appropriate types, required/default values
+3. Choose appropriate parameter passing methods (argsToUrlParam, argsToJsonBody, argsToFormBody, or custom body)
+4. Create responseTemplate that transforms API responses into formats suitable for AI consumption
+5. Configure appropriate security schemes and authentication configuration
+
+### For MCP Proxy Server:
+1. Configure backend MCP server URL and timeout
+2. Set server-level default authentication configuration
+3. Configure passthrough authentication as needed
+4. Configure tool-specific authentication overrides if required
+5. Ensure complete authentication chain from client-to-gateway and gateway-to-backend
