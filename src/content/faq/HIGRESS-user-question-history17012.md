@@ -3,7 +3,7 @@ id: "question-history-17012"
 title: "higress jwt token"
 date: "2024-09-26"
 category: "expertConsultation"
-description: "根据您的问题「higress higress jwt token」，我理解您想了解关于Higress如何使用JWT（JSON Web Token）进行认证的信息。下面我将基于提供的知识进行解答。### Higress JWT 认证概览JWT是一种常用的身份验证和授权标准，它允许安全地将信息作为JSO"
+description: "根据您的问题「higress higress jwt token」，我理解您想了解关于Higress如何使用JWT（JSON Web Token）进行认证的信息。下面我将基于提供的知识进行解答。### Higress JWT 认证概览JWT是一种常用的身份验证和授权标准，它允许安全地将信息作为JSON"
 tags: ["higress","jwt","token"]
 keywords: ["higress","jwt","token"]
 ---
