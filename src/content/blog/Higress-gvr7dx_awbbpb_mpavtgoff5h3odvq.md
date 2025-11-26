@@ -21,7 +21,7 @@ authors: "CH3CHO"
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1744625432031-347ffade-1ead-4227-976a-b1acc8511f52.png)
 
 ## <font style="color:rgb(33, 37, 41);">02 将存量 OpenAPI 转化为 MCP Server 的常规做法</font>
-MCP 是允许 LLM 能够通过标准化的方式，访问外部资源、数据和服务。将存量 OpenAPI 转化为 MCP Server，是一种利旧，是实现经济效益的高校路径，目的是使自身的服务能被外部的 AI 应用进行调用，从而提升存量服务的价值。仍然以高德地图为例，高德提供将存量的 OpenAPI 服务，例如 IP 定位、地理编码转化为 MCP Server，就可以让外部应用调用高德地图的能力，从而提升服务的活跃度。
+MCP 是允许 LLM 能够通过标准化的方式，访问外部资源、数据和服务。将存量 OpenAPI 转化为 MCP Server，是一种利旧，是实现经济效益的高效路径，目的是使自身的服务能被外部的 AI 应用进行调用，从而提升存量服务的价值。仍然以高德地图为例，高德提供将存量的 OpenAPI 服务，例如 IP 定位、地理编码转化为 MCP Server，就可以让外部应用调用高德地图的能力，从而提升服务的活跃度。
 
 
 
@@ -36,14 +36,14 @@ MCP 是允许 LLM 能够通过标准化的方式，访问外部资源、数据�
 <font style="color:rgb(33, 37, 41);"></font>
 
 ## 03 批量转化 OpenAPI 至 MCP Server
-#### 1.1 安装
+### 3.1 安装
 ```json
 go install github.com/higress-group/openapi-to-mcpserver/cmd/openapi-to-mcp@latest
 ```
 
 
 
-#### 1.2 使用
+### 3.2 使用
 ```json
 openapi-to-mcp --input path/to/openapi.json --output path/to/mcp-config.yaml
 ```
@@ -60,7 +60,7 @@ openapi-to-mcp --input path/to/openapi.json --output path/to/mcp-config.yaml
 
 
 
-#### 1.3 示例
+### 3.3 示例
 ```json
 openapi-to-mcp --input petstore.json --output petstore-mcp.yaml --server-name petstore
 ```
@@ -332,7 +332,7 @@ tools:
 
 <font style="color:rgba(0, 0, 0, 0.85) !important;">MCP 服务器在发起 API 请求时，会在正确的位置自动处理这些参数。有关如何将此配置与 Higress REST-to-MCP 结合使用的更多信息，请参考 Higress REST-to-MCP 文档。[2]</font>
 
-#### <font style="color:rgb(0, 0, 0);">1.4 功能</font>
+### 3.4 功能
 + <font style="color:rgba(0, 0, 0, 0.85) !important;">将 OpenAPI 路径转换为 MCP 工具。</font>
 + <font style="color:rgba(0, 0, 0, 0.85) !important;">支持 JSON 和 YAML 格式的 OpenAPI 规范。</font>
 + <font style="color:rgba(0, 0, 0, 0.85) !important;">生成包含服务器和工具定义的 MCP 配置。</font>
@@ -344,7 +344,7 @@ tools:
 
 
 
-#### 1.4 配置 MCP Server 插件
+### 3.5 配置 MCP Server 插件
 接下来我们将生成的文件导入<font style="color:rgba(0, 0, 0, 0.85) !important;"> Higress 控制台，并</font>添加 MCP Server 插件并进行配置<font style="color:rgba(0, 0, 0, 0.85) !important;">，就可以将其与 Higress 一起使用。</font>  
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1744338522314-85873051-fd40-4576-8167-8c3facad58aa.png)  
 
@@ -376,7 +376,7 @@ tools:
 
 
 
-#### 1.5 调用 MCP Server
+### 3.6 调用 MCP Server
 在 AI Agent 中配置 MCP Server 的 SSE 连接，以 Cursor 为例：
 
 + 数据库类型的 MCP Server：使用 ConfigMap 中配置的 path + sse_path_suffix
