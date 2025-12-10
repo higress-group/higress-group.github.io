@@ -6,9 +6,9 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "下载量破万，《AI 原生应用架构白皮书》免费下载",
-    "mobileText": "下载量破万，《AI 原生应用架构白皮书》免费下载",
-    "link": "https://developer.aliyun.com/ebook/8479",
+    "text": "AgentScope Java v1.0 重磅发布",
+    "mobileText": "AgentScope Java v1.0 重磅发布",
+    "link": "https://mp.weixin.qq.com/s/vtb3t0JnSTau3XM6wJMEkw",
     "target": "_blank",
     "display": true
 }
