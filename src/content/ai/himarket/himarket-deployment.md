@@ -151,7 +151,7 @@ vi .env
 
 ## 三、使用 Helm 进行云原生部署
 
-Helm 是一个用于自动化管理和发布 Kubernetes 软件的包管理系统。通过 Helm 一键部署脚本您可以在 Kubernetes 集群上快速部署安装 HiMarkt+Higress+Nacos，包含九个服务组件：
+Helm 是一个用于自动化管理和发布 Kubernetes 软件的包管理系统。通过 Helm 一键部署脚本您可以在 Kubernetes 集群上快速部署安装 HiMarkt+Higress+Nacos，包含十个服务组件：
 
 + **HiMarket：**
     - himarket-server：Himarket AI 开放平台的后端服务；
@@ -260,6 +260,6 @@ vi .env
 
 ## 四、云平台部署（阿里云）
 
-阿里云计算巢支持该项目的开箱即用版本，可一键部署社区版： ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/svg/142456461/1765433883141-51e33c54-9354-4e27-b0af-f2f7f73f43b0.svg)
+阿里云计算巢支持该项目的开箱即用版本，可一键部署社区版：[![Deploy on AlibabaCloud ComputeNest](https://service-info-public.oss-cn-hangzhou.aliyuncs.com/computenest.svg)](https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?type=user&ServiceId=service-b96fefcb748f47b7b958)
 
 

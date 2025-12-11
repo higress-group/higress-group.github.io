@@ -1,7 +1,7 @@
 ---
 title: "HiMarket Introduction"
 description: "HiMarket product introduction and core feature overview"
-date: "2025-12-13"
+date: "2025-12-11"
 category: "article"
 keywords: ["HiMarket", "Introduction", "Product"]
 authors: "Higress Team"
@@ -24,7 +24,7 @@ HiMarket was born to solve these problems. It is an AI open platform built on th
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/9687/1765434774789-055b2926-cca4-4e40-a422-054793bce1d9.png)
+![](https://github.com/user-attachments/assets/f410002b-4932-4dc8-baf9-226709be7246)
 
 </div>
 
@@ -36,7 +36,7 @@ HiMarket provides HiChat capabilities, replacing search with Chat mode for marke
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765375305920-9260c172-298f-4125-b7ba-7827c59ed4de.png)
+![](https://github.com/user-attachments/assets/1d17f995-cf79-4ab9-bc36-8ccde5afcd47)
 
 </div>
 
@@ -52,7 +52,7 @@ HiMarket supports building a complete AI marketplace covering Agents, MCP Server
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765374570813-2c546794-ff1f-4a32-9cb4-4e9d3ed71270.png)
+![](https://github.com/user-attachments/assets/9caefd86-7bbe-44c9-8c77-b53b74ff05fb)
 
 </div>
 
@@ -60,7 +60,7 @@ HiMarket supports building a complete AI marketplace covering Agents, MCP Server
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765280638202-c18d11c0-cfb9-41ab-970d-1b24feb9bb7a.png)
+![](https://github.com/user-attachments/assets/4c0da704-47da-484c-9d18-1711084d72a5)
 
 </div>
 
@@ -68,7 +68,7 @@ HiMarket supports building a complete AI marketplace covering Agents, MCP Server
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765376097236-352a6a04-6787-45fb-b58c-a905ecdae96a.png)
+![](https://github.com/user-attachments/assets/69184181-8cfe-498c-a0c5-494efa55d72e)
 
 </div>
 
@@ -76,7 +76,7 @@ HiMarket supports building a complete AI marketplace covering Agents, MCP Server
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765376062224-9c612034-0e46-46b4-9c97-75bcd84ada81.png)
+![](https://github.com/user-attachments/assets/2ed00358-1031-4146-8eb0-2e372b89d82e)
 
 </div>
 
@@ -105,7 +105,7 @@ HiMarket has built-in comprehensive enterprise-level management capabilities, en
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765374276534-16319e96-d2b0-4938-ace2-5931151cd4c9.png)
+![](https://github.com/user-attachments/assets/07e120fa-20e9-4eff-a30d-6c8b2651b578)
 
 </div>
 
@@ -115,7 +115,7 @@ Observation and analysis (currently v0.5.0 version depends on Alibaba Cloud comm
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/156306/1765378524741-ab057a7d-9731-4701-abbc-37165b53b4a7.png)
+![](https://github.com/user-attachments/assets/d5e7b54e-008a-439e-8753-6cd7d4f304fe)
 
 </div>
 
@@ -130,7 +130,7 @@ To quickly integrate with existing enterprise systems, HiMarket provides flexibl
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765374218840-5dd086c6-b198-48b0-9e3c-fa65ff731ccb.png)
+![](https://github.com/user-attachments/assets/06112d40-0883-4d32-8689-c0ed4c45b459)
 
 </div>
 
@@ -171,7 +171,7 @@ For detailed steps, please refer to: [HiMarket Docker One-Click Deployment Guide
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765437083011-434ff157-8737-4b2a-a32a-4a1dd93512dc.png)
+![](https://github.com/user-attachments/assets/ebc9697c-c52c-4bd0-b71a-36bd3b9934f1)
 
 </div>
 
@@ -192,7 +192,7 @@ HiMarket DingTalk Community Group (Group 2): 163370001036
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765376980816-75be2845-c2da-4ab0-8cc1-78eaddaee598.png)
+![](https://github.com/user-attachments/assets/b0705600-df08-42ef-9e1b-d28c77896415)
 
 </div>
 

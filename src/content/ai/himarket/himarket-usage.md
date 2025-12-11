@@ -1,7 +1,7 @@
 ---
 title: "HiMarket 使用指南"
 description: "HiMarket 功能使用详解与最佳实践"
-date: "2025-12-11"
+date: "2025-12-13"
 category: "article"
 keywords: ["HiMarket", "使用指南", "教程"]
 authors: "Higress Team"

@@ -151,7 +151,7 @@ vi .env
 
 ## 3. Cloud-Native Deployment with Helm
 
-Helm is a package management system for automating Kubernetes software management and release. Through the Helm one-click deployment script, you can quickly deploy and install HiMarket+Higress+Nacos on a Kubernetes cluster, including nine service components:
+Helm is a package management system for automating Kubernetes software management and release. Through the Helm one-click deployment script, you can quickly deploy and install HiMarket+Higress+Nacos on a Kubernetes cluster, including ten service components:
 
 + **HiMarket:**
     - himarket-server: HiMarket AI open platform backend service;
@@ -260,7 +260,7 @@ Note: HiMarket's Helm package is adapted for Alibaba Cloud ACK cluster use. The 
 
 ## 4. Cloud Platform Deployment (Alibaba Cloud)
 
-Alibaba Cloud Computing Nest supports the out-of-the-box version of this project, with one-click deployment of the community edition: ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/svg/142456461/1765433883141-51e33c54-9354-4e27-b0af-f2f7f73f43b0.svg)
+Alibaba Cloud Computing Nest supports the out-of-the-box version of this project, with one-click deployment of the community edition: [![Deploy on AlibabaCloud ComputeNest](https://service-info-public.oss-cn-hangzhou.aliyuncs.com/computenest.svg)](https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?type=user&ServiceId=service-b96fefcb748f47b7b958)
 
 
 
