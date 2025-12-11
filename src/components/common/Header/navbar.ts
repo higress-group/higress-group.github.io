@@ -82,9 +82,9 @@ export default [
   },
 
   {
-    label: "Himarket",
+    label: "HiMarket",
     translations: {
-      en: "Himarket",
+      en: "HiMarket",
     },
     trigger: "click",
     target: "_blank",
