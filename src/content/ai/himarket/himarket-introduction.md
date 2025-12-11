@@ -1,7 +1,7 @@
 ---
 title: "HiMarket 介绍"
 description: "HiMarket 产品介绍与核心功能概览"
-date: "2025-12-13"
+date: "2025-12-11"
 category: "article"
 keywords: ["HiMarket", "介绍", "产品"]
 authors: "Higress Team"
@@ -23,7 +23,7 @@ Himarket 正是为解决这些问题而生，它是一个基于 Higress AI 网�
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/9687/1765434774789-055b2926-cca4-4e40-a422-054793bce1d9.png)
+![](https://github.com/user-attachments/assets/f410002b-4932-4dc8-baf9-226709be7246)
 
 </div>
 
@@ -34,7 +34,7 @@ HiMarket 提供了 HiChat 能力，通过 Chat 模式替代搜索，做市场调
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765375305920-9260c172-298f-4125-b7ba-7827c59ed4de.png)
+![](https://github.com/user-attachments/assets/1d17f995-cf79-4ab9-bc36-8ccde5afcd47)
 
 </div>
 
@@ -49,7 +49,7 @@ HiMarket 支持构建涵盖 Agent、MCP Server、Model 的完整 AI 市场，让
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765374570813-2c546794-ff1f-4a32-9cb4-4e9d3ed71270.png)
+![](https://github.com/user-attachments/assets/9caefd86-7bbe-44c9-8c77-b53b74ff05fb)
 
 </div>
 
@@ -57,7 +57,7 @@ HiMarket 支持构建涵盖 Agent、MCP Server、Model 的完整 AI 市场，让
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765280638202-c18d11c0-cfb9-41ab-970d-1b24feb9bb7a.png)
+![](https://github.com/user-attachments/assets/4c0da704-47da-484c-9d18-1711084d72a5)
 
 </div>
 
@@ -65,7 +65,7 @@ HiMarket 支持构建涵盖 Agent、MCP Server、Model 的完整 AI 市场，让
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765376097236-352a6a04-6787-45fb-b58c-a905ecdae96a.png)
+![](https://github.com/user-attachments/assets/69184181-8cfe-498c-a0c5-494efa55d72e)
 
 </div>
 
@@ -73,7 +73,7 @@ HiMarket 支持构建涵盖 Agent、MCP Server、Model 的完整 AI 市场，让
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765376062224-9c612034-0e46-46b4-9c97-75bcd84ada81.png)
+![](https://github.com/user-attachments/assets/2ed00358-1031-4146-8eb0-2e372b89d82e)
 
 </div>
 
@@ -99,7 +99,7 @@ HiMarket 内置完善的企业级管理能力，确保 AI 资源的安全开放�
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765374276534-16319e96-d2b0-4938-ace2-5931151cd4c9.png)
+![](https://github.com/user-attachments/assets/07e120fa-20e9-4eff-a30d-6c8b2651b578)
 
 </div>
 
@@ -108,7 +108,7 @@ HiMarket 内置完善的企业级管理能力，确保 AI 资源的安全开放�
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/156306/1765378524741-ab057a7d-9731-4701-abbc-37165b53b4a7.png)
+![](https://github.com/user-attachments/assets/d5e7b54e-008a-439e-8753-6cd7d4f304fe)
 
 </div>
 
@@ -117,13 +117,13 @@ HiMarket 内置完善的企业级管理能力，确保 AI 资源的安全开放�
 
 为了能够快速对接企业现有的系统，HiMarket 提供了灵活的定制能力，包括：
 
-+ **门户品牌：**管理员可为门户配置自定义域名、Logo、主题色、布局样式等元素，并灵活配置首页模块、产品分类、推荐栏等功能区域。
-+ **身份认证：**支持内置账号密码和企业 OIDC 认证方式，可与企业 SSO、IDaaS 等身份系统无缝集成，实现统一的用户管理和身份认证。
-+ **审批流程：**开发者注册、凭证申请、API 订阅等关键流程可灵活配置自动或人工审批。
++ **门户品牌：** 管理员可为门户配置自定义域名、Logo、主题色、布局样式等元素，并灵活配置首页模块、产品分类、推荐栏等功能区域。
++ **身份认证：** 支持内置账号密码和企业 OIDC 认证方式，可与企业 SSO、IDaaS 等身份系统无缝集成，实现统一的用户管理和身份认证。
++ **审批流程：** 开发者注册、凭证申请、API 订阅等关键流程可灵活配置自动或人工审批。
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765374218840-5dd086c6-b198-48b0-9e3c-fa65ff731ccb.png)
+![](https://github.com/user-attachments/assets/06112d40-0883-4d32-8689-c0ed4c45b459)
 
 </div>
 
@@ -162,7 +162,7 @@ HiMarket、Higress、Nacos 三大组件自动编排部署，无需人工干预�
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765437083011-434ff157-8737-4b2a-a32a-4a1dd93512dc.png)
+![](https://github.com/user-attachments/assets/ebc9697c-c52c-4bd0-b71a-36bd3b9934f1)
 
 </div>
 
@@ -182,7 +182,7 @@ HiMarket 钉钉社区群（2群）：163370001036
 
 <div align="center">
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/11189/1765376980816-75be2845-c2da-4ab0-8cc1-78eaddaee598.png)
+![](https://github.com/user-attachments/assets/b0705600-df08-42ef-9e1b-d28c77896415)
 
 </div>
 

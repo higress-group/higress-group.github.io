@@ -1,7 +1,7 @@
 ---
 title: "HiMarket User Guide"
 description: "HiMarket feature usage details and best practices"
-date: "2025-12-11"
+date: "2025-12-13"
 category: "article"
 keywords: ["HiMarket", "User Guide", "Tutorial"]
 authors: "Higress Team"
