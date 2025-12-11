@@ -55,15 +55,10 @@ const Component = slot;
             <a
               href={route}
               target={target}
-              class={`toggle-text flex items-center justify-center no-underline h-full ${active ? "toggle-text-active" : ""} ${route.includes('/plugin/')? "toggle-text-aiwrapper relative": ""}`}
+              class={`toggle-text flex items-center justify-center no-underline h-full ${active ? "toggle-text-active" : ""}`}
             >
               {title}
-              {route.includes('/plugin/')? 
-                <span class="toggle-text-ailogo text-center rounded-xl absolute top-[0] right-[-1.5rem] text-white bg-[red] w-[2rem] h-[1.25rem] font-bold">
-                  AI
-                </span>
-              :null}
-              {route.includes('higress.ai')? 
+              {route.includes('higress.ai') || route.includes('himarket')? 
                 <span class="toggle-text-ailogo text-xs text-center rounded-xl absolute top-[0.5rem] right-[-0.5rem] text-white bg-[red] w-[2rem] h-[1rem] font-medium">
                   NEW
                 </span>
@@ -178,12 +173,9 @@ customElements.define("toggle-component", Toggle);
     
     .toggle-text-aiwrapper .toggle-text-ailogo {
       display: inline-block;
-      visibility: hidden;
+      visibility: visible;
       transform: scale(0.8);
       z-index: 1000;
-    }
-    .toggle-text-aiwrapper:hover .toggle-text-ailogo {
-      visibility: visible;
     }
 
     .toggle-component:hover .toggle-text {

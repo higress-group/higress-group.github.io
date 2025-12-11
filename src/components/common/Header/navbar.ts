@@ -82,12 +82,12 @@ export default [
   },
 
   {
-    label: "答疑样例",
+    label: "Himarket",
     translations: {
-      en: "FAQ",
+      en: "Himarket",
     },
     trigger: "click",
-    target: "_self",
-    route: "/faq/wuyi-intro/",
+    target: "_blank",
+    route: "https://github.com/higress-group/himarket/",
   },
 ];
