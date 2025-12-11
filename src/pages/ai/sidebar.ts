@@ -13,6 +13,12 @@ export const sidebarData: SidebarEntry[] = [
     entries: [
       {
         type: 'group',
+        label: 'HiMarket',
+        fileName: 'himarket',
+        entries: []
+      },
+      {
+        type: 'group',
         label: '场景体验',
         fileName: 'scene-guide',
         entries: []
@@ -26,6 +32,12 @@ export const sidebarDataEn: SidebarEntry[] = [
     type: 'group',
     label: 'AI',
     entries: [
+      {
+        type: 'group',
+        label: 'HiMarket',
+        fileName: 'himarket',
+        entries: []
+      },
       {
         type: 'group',
         label: 'Scene Guide',
