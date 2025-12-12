@@ -21,7 +21,9 @@ authors: "CH3CHO"
 
 # 一、HiMarket 是什么
 
-<video src="https://cloud.video.taobao.com/vod/tnOfI9421wtWvq1BX2-3Ev3-PvYjaoVKovKCKamLMIA.mp4" controls width="429" />
+<video controls src="https://cloud.video.taobao.com/vod/cP3PC54kBmuWt6UJ-DbJAf3-PvYjaoVKovKCKamLMIA.mp4" width="429">
+        HiMarket开放说
+</video>
 
 HiMarket 是开源的 AI 开放平台，帮助企业快速构建 Agent 市场，释放 AI 创新潜能。对企业全员提供高频 AI 场景，释放 AI 创新潜能；为开发者提供 Agent市场/MCP市场/Model市场，提升研发效能；为维护者提供 AI 治理能力，提升 AI 把控力。
 
