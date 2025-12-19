@@ -22,17 +22,18 @@ This page shows the Higress development team. Please add your information to the
 | Tianyi Zhang | [johnlanni](https://github.com/johnlanni) | Alibaba Cloud |
 | Yan Yan | [JavaerJohn](https://github.com/JavaerJohn) | Alibaba Cloud |
 | Jingfeng Xu | [lexburner](https://github.com/lexburner) | Alibaba Cloud |
-| Shengwei Pan | [panxiaojun233](https://github.com/panxiaojun233) | Alibaba Cloud |
-| Xiaorui Liu | [rinfx](https://github.com/rinfx) | Alibaba Cloud |
-| Min Ji | [slievrly](https://github.com/slievrly) | Alibaba Cloud |
-| Shuai Liu | [EricaLiu](https://github.com/Erica177) | Alibaba Cloud |
-| Jingze Dai | [Jing-ze](https://github.com/Jing-ze) | Alibaba Cloud |
+
 
 ## Higress Approvers
 | Name | GitHub | Organization |
 |-----|-------------------------------| --------------- |
 | Yang Fan | [SpecialYang](https://github.com/SpecialYang) | ByteDance |
 | Xunzhuo Liu | [Xunzhuo](https://github.com/Xunzhuo) | Tencent |
+| Shengwei Pan | [panxiaojun233](https://github.com/panxiaojun233) | Alibaba Cloud |
+| Xiaorui Liu | [rinfx](https://github.com/rinfx) | Alibaba Cloud |
+| Min Ji | [slievrly](https://github.com/slievrly) | Alibaba Cloud |
+| Shuai Liu | [EricaLiu](https://github.com/Erica177) | Alibaba Cloud |
+| Jingze Dai | [Jing-ze](https://github.com/Jing-ze) | Alibaba Cloud |
 
 ## Higress Reviewers
 | Name | GitHub | Organization |
