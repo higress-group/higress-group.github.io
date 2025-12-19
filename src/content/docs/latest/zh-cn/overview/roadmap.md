@@ -18,8 +18,9 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | v1.4.0  | WASM 支持 redis 调用；简化 HTTPS 证书管理  | 2024-05   | 1.2.x  | 
 | v2.0.0  | Istio/Envoy 内核版本升级，基于大量新插件提供更丰富的 API 网关能力  | 2024-08   | 2.0.x  | 
 | v2.1.0  | 控制台支持 AI 流量入口管理，降低 AI 功能相关的使用成本  | 2025-02   | 2.1.x  | 
-| v2.2.0  | 推出 Higress Agent 能力，升级 Istio 相关依赖，完整支持 Gateway API | 2025-12   | 2.2.x  | 
-| v2.3.0  | - | 2026-   | 2.3.x  | 
+| v2.2.0  | 支持 GIE，以实现与 CNCF AI 基础设施（如 LLM-D）的广泛集成 | 2025-12   | 2.2.x  | 
+| v2.3.0  | 支持 WebRTC 协议以支持 RealTime AI 场景 | 2026-06   | 2.3.x  | 
+| v2.4.0  | 优化 wasm 插件在内存复制场景下的性能（基于memory control提案），支持在 wasm 插件中自定义处理 WebRTC 和 WebSocket 协议的流量 | 2026-12   | 2.4.x  | 
 
 
 > **注意**
