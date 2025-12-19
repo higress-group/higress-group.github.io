@@ -19,7 +19,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | v2.0.0 | Providing richer API gateway capabilities based on numerous new plugins | 2024-08 | 2.0.x |
 | v2.1.0 | Console support for AI traffic entry management, reducing usage costs related to AI functionality | 2025-02 | 2.1.x |
 | v2.2.0 | Support [GIE](https://gateway-api-inference-extension.sigs.k8s.io/), to achieve extensive integration with CNCF AI infra such as llm-d | 2025-12 | 2.2.x |
-| v2.3.0 | Support WebRTC protocol for realtime AI scenarios | 2026-06 | 2.3.x |
+| v2.3.0 | Support comprehensive AI-native operations of Higress through Agent. Support WebRTC protocol for realtime AI scenarios | 2026-06 | 2.3.x |
 | v2.4.0 | Optimize the performance of the wasm plugin in memory copy scenarios (based on the memory control proposal), supporting custom extensions for webRTC and websocket protocols within the wasm plugin. | 2026-12 | 2.4.x |
 
 
