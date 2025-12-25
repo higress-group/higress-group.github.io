@@ -22,17 +22,18 @@ description: Higress 维护者名单
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | 阿里云        |
 | 严研 | [JavaerJohn](https://github.com/JavaerJohn) | 阿里云        |
 | 徐靖峰 | [lexburner](https://github.com/lexburner) | 阿里云        |
-| 泮圣伟 | [panxiaojun233](https://github.com/panxiaojun233) | 阿里云        |
-| 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
-| 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
-| 刘帅 | [EricaLiu](https://github.com/Erica177) | 阿里云        |
-| 戴靖泽 | [Jing-ze](https://github.com/Jing-ze) | 阿里云        |
+
 
 ## Higress Approvers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
 | 范扬 | [SpecialYang](https://github.com/SpecialYang) | 字节跳动        |
 | 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
+| 泮圣伟 | [panxiaojun233](https://github.com/panxiaojun233) | 阿里云        |
+| 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
+| 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
+| 刘帅 | [EricaLiu](https://github.com/Erica177) | 阿里云        |
+| 戴靖泽 | [Jing-ze](https://github.com/Jing-ze) | 阿里云        |
 
 ## Higress Reviewers
 | 姓名  | github                        | 公司组织             |
