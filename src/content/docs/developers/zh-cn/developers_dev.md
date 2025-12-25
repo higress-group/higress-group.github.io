@@ -34,6 +34,7 @@ description: Higress 维护者名单
 | 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
 | 刘帅 | [EricaLiu](https://github.com/Erica177) | 阿里云        |
 | 戴靖泽 | [Jing-ze](https://github.com/Jing-ze) | 阿里云        |
+| 刘宏宇 | [aias00](https://github.com/aias00) | 联通数智        |
 
 ## Higress Reviewers
 | 姓名  | github                        | 公司组织             |
