@@ -81,6 +81,8 @@ Higress AI 网关支持一行命令安装：
 curl -sS  https://higress.cn/ai-gateway/install.sh | bash
 ```
 
+> 注意：AI 网关的启动过程需要访问公网资源。请确保其运行环境具备外网访问条件。
+
 执行完命令后可以通过命令行初始化配置，可以看到，Higress 的 AI 网关能力支持对接国内外所有主流 LLM 模型供应商：
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/22499/1737430070649-ed4ca294-0222-494f-b5c2-f1069fc8c250.png)

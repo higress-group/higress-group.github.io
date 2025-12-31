@@ -17,11 +17,13 @@ authors: "CH3CHO"
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/22499/1737449122874-1f3c9a1b-73b6-448c-ae80-2f75f9d8a1c7.png)
 
 ## 快速安装 Higress
-仅需一行命令，即可快速在本地搭建好 Higress A I网关（此步骤需要有 Docker 环境）：
+仅需一行命令，即可快速在本地搭建好 Higress AI 网关（此步骤需要有 Docker 环境）：
 
 ```bash
 curl -sS  https://higress.cn/ai-gateway/install.sh | bash
 ```
+
+> 注意：AI 网关的启动过程需要访问公网资源。请确保其运行环境具备外网访问条件。
 
 执行以上命令后，会进入引导界面，可以在此处配置provider的apikey，也可以输入回车直接跳过：
 

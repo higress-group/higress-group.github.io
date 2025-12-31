@@ -43,7 +43,13 @@ QwQ-32B 已在 Hugging Face[1]和 ModelScope[2]开源，采用了 Apache 2.0 开
 
 ### 01 完整实现步骤
 ### 1. 环境准备
-# 一键安装Higress（需Docker环境）curl -sS https://higress.cn/ai-gateway/install.sh | bash
+# 一键安装Higress（需Docker环境）
+
+```bash
+curl -sS https://higress.cn/ai-gateway/install.sh | bash
+```
+
+> 注意：AI 网关的启动过程需要访问公网资源。请确保其运行环境具备外网访问条件。
 
 安装完成后访问控制台http://localhost:8001，完成初始化配置。  
 

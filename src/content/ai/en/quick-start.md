@@ -19,6 +19,8 @@ In your local console, execute the following command:
 curl -sS https://higress.cn/ai-gateway/install.sh | bash
 ```
 
+> Note: During start-up, AI Gateway needs to access Internet resources. Please make sure its runtime environment has proper Internet access.
+
 Follow the prompts to enter the API-KEYs for model providers; you can also press Enter to skip and modify it later in the console. You can also press `Enter` to skip and modify it later in the console.
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
