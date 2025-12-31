@@ -4,7 +4,7 @@ description: "大模型无缝切换，QwQ-32B 和 DeepSeek-R1  全都要"
 date: "2025-03-10"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "johnlanni"
 ---
 
 近期，通义千问发布最新推理模型 QwQ-32B。
