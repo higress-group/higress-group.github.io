@@ -26,12 +26,11 @@ curl -sS https://higress.cn/ai-gateway/install.sh | bash
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
 
 
+默认情况下，网关所使用的HTTP服务端口为8080，HTTPS服务端口为8443，控制台的服务端口为8001。如您需要使用其他端口，则可使用下方的命令，按需修改其中的默认端口即可：
 
-如您当前端口已被占用，需要使用其他端口，可使用 `wget https://higress.cn/ai-gateway/install.sh`命令下载部署脚本后，修改*DEFAULT_GATEWAY_HTTP_PORT_/_DEFAULT_GATEWAY_HTTPS_PORT_/_DEFAULT_CONSOLE_PORT*；然后使用bash执行脚本。
-
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
-
-
+```bash
+curl -sS https://higress.cn/ai-gateway/install.sh | GATEWAY_HTTP_PORT=8080 GATEWAY_HTTPS_PORT=8443 CONSOLE_PORT=8001 bash
+```
 
 部署完成后，会出现以下界面：
 
