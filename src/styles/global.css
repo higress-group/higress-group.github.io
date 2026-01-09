@@ -1,0 +1,77 @@
+@layer base, starlight, theme, components, utilities;
+
+@import "@astrojs/starlight-tailwind";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+a, body {
+  text-decoration: none;
+  /*padding: 0;*/
+  margin: 0;
+}
+
+body {
+  background-color: #F4F4F6;
+}
+
+/* Force Light mode colors for everything. */
+:root,
+:root[data-theme="light"],
+:root[data-theme="dark"] {
+  --sl-color-accent-low: #cdd4ff;
+  --sl-color-accent: #5539fe;
+  --sl-color-accent-high: #272274;
+  --sl-color-white: #17181c;
+  --sl-color-gray-1: #24272f;
+  --sl-color-gray-2: #353841;
+  --sl-color-gray-3: #545861;
+  --sl-color-gray-4: #4C505D;
+  --sl-color-gray-5: #c0c2c7;
+  --sl-color-gray-6: #eceef2;
+  --sl-color-gray-7: #f5f6f8;
+  --sl-color-black: #ffffff;
+
+  --sl-color-bg-sidebar: #fff;
+
+  --higress-primary-gradient: linear-gradient(81deg, #3E5CF4 13%, #6D5BFF 91%);
+
+  /* New reusable component colors */
+  --sl-color-bg-highlight: #E0E9FB;
+  --sl-color-bg-element: #F4F4F6;
+  --sl-color-bg-hover-light: #EFF1FF;
+  --sl-color-text-strong: #121316;
+
+  --sl-content-width: 100%;
+  /*--sl-sidebar-width: 290px;*/
+}
+
+
+@theme {
+  --color-accent-50: var(--color-indigo-50);
+  --color-accent-100: var(--color-indigo-100);
+  --color-accent-200: var(--color-indigo-200);
+  --color-accent-300: var(--color-indigo-300);
+  --color-accent-400: var(--color-indigo-400);
+  --color-accent-500: var(--color-indigo-500);
+  --color-accent-600: var(--color-indigo-600);
+  --color-accent-700: var(--color-indigo-700);
+  --color-accent-800: var(--color-indigo-800);
+  --color-accent-900: var(--color-indigo-900);
+  --color-accent-950: var(--color-indigo-950);
+  --color-gray-4: var(--sl-color-gray-4);
+  --color-gray-50: var(--color-zinc-50);
+  --color-gray-100: var(--color-zinc-100);
+  --color-gray-200: var(--color-zinc-200);
+  --color-gray-300: var(--color-zinc-300);
+  --color-gray-400: var(--color-zinc-400);
+  --color-gray-500: var(--color-zinc-500);
+  --color-gray-600: var(--color-zinc-600);
+  --color-gray-700: var(--color-zinc-700);
+  --color-gray-800: var(--color-zinc-800);
+  --color-gray-900: var(--color-zinc-900);
+  --color-gray-950: var(--color-zinc-950);
+
+  --color-primary: var(--sl-color-accent);
+  --color-black: #2E3038;
+  --color-strong: var(--sl-color-text-strong);
+}

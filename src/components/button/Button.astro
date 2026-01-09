@@ -1,0 +1,102 @@
+---
+interface Props {
+  mode?: 'primary' | 'normal';
+  width?: string;
+  class?: string;
+  type?: "button" | "submit" | "reset";
+  contentAlign?: "between" | "center"
+  [key: string]: any;
+}
+
+const {
+  mode = 'primary', width,
+  class: className = "", type = "button",
+  contentAlign = "center", ...rest
+} = Astro.props;
+
+const widthStyle = width ? `width: ${width};` : "";
+---
+
+<higress-button class:list={[className]} data-mode={mode}>
+  <button class={`btn ${contentAlign}`} type={type} style={widthStyle} {...rest}>
+    <slot />
+  </button>
+</higress-button>
+
+<style>
+  higress-button {
+    display: inline-flex;
+    vertical-align: middle;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 9999px; /* Capsule shape */
+    transition: all 0.3s ease;
+    line-height: 1.5;
+    outline: none;
+    &.center {
+      justify-content: center;
+    }
+    &.between {
+      justify-content: space-between;
+    }
+  }
+
+  /* Primary Mode */
+  higress-button[data-mode="primary"] .btn {
+    background: var(--higress-primary-gradient);
+    color: #ffffff;
+  }
+
+  higress-button[data-mode="primary"] .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(62, 92, 244, 0.4);
+  }
+
+  higress-button[data-mode="primary"] .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(62, 92, 244, 0.4);
+  }
+
+  /* Normal Mode */
+  higress-button[data-mode="normal"] .btn {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid transparent; /* Keeps sizing consistent if we add border later */
+  }
+
+  higress-button[data-mode="normal"] .btn:hover {
+    background: #f0f0f0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  higress-button[data-mode="normal"] .btn:active {
+    background: #e5e5e5;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+<script>
+  class HigressButton extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      // Optional: Add ripple effect or other logic here if needed in the future
+    }
+  }
+
+  if (!customElements.get('higress-button')) {
+    customElements.define('higress-button', HigressButton);
+  }
+</script>

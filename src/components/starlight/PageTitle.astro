@@ -1,0 +1,136 @@
+---
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import fs from 'fs/promises';
+import path from 'path';
+import Button from '../button/Button.astro';
+
+// 获取当前页面的路径信息
+const currentPath = Astro.url.pathname;
+
+// 在构建时读取 markdown 原始内容
+let markdownContent = '';
+try {
+  const mdFilePath = currentPath.split('/').filter(Boolean).join('/');
+  const fullPath = path.join(process.cwd(), 'src/content/docs', `${mdFilePath}.md`);
+
+  try {
+    markdownContent = await fs.readFile(fullPath, 'utf-8');
+  } catch (readError) {
+    // 如果 .md 不存在，尝试 .mdx
+    const mdxPath = path.join(process.cwd(), 'src/content/docs', `${mdFilePath}.mdx`);
+    try {
+      markdownContent = await fs.readFile(mdxPath, 'utf-8');
+    } catch {
+      console.warn(`Failed to read markdown file: ${fullPath}`);
+    }
+  }
+} catch (error) {
+  console.error('Failed to read markdown content:', error);
+}
+---
+
+<div class="page-header-wrapper">
+  <!-- 隐藏的 markdown 内容存储 -->
+  <div id="markdown-content-storage" style="display: none;">{markdownContent}</div>
+
+  <!-- 顶部操作栏 -->
+  <nav aria-label="Page actions" class="page-actions-nav">
+    <!-- Back 按钮 -->
+    <Button contentAlign='between' width='90px' mode="normal" id="back-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span class="button-text">Back</span>
+    </Button>
+    <Button
+      contentAlign='between'
+      mode="normal"
+      id="copy-markdown-btn"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span class="button-text ml-3">复制页面</span>
+    </Button>
+  </nav>
+
+  <!-- 原始的 PageTitle 组件 -->
+  <Default {...Astro.props} />
+</div>
+
+<script>
+  // Back 按钮功能
+  const backButton = document.getElementById('back-btn');
+
+  if (backButton) {
+    backButton.addEventListener('click', () => {
+      // 检查是否有历史记录
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        // 如果没有历史记录，返回首页
+        window.location.href = '/';
+      }
+    });
+  }
+
+  // 复制 Markdown 功能
+  const copyButton = document.getElementById('copy-markdown-btn');
+  const markdownStorage = document.getElementById('markdown-content-storage');
+
+  if (copyButton && markdownStorage) {
+    copyButton.addEventListener('click', async () => {
+      try {
+        const content = markdownStorage.textContent;
+
+        if (!content) {
+          throw new Error('Markdown content not found');
+        }
+
+        await navigator.clipboard.writeText(content);
+
+        // 更新按钮状态
+        const buttonText = copyButton.querySelector('.button-text');
+        const originalText = buttonText?.textContent;
+        if (buttonText) {
+          buttonText.textContent = '已复制';
+          copyButton.classList.add('copied');
+
+          setTimeout(() => {
+            buttonText.textContent = originalText || "";
+            copyButton.classList.remove('copied');
+          }, 2000);
+        }
+      } catch (err) {
+        console.error('复制失败:', err);
+        alert('复制失败，请重试');
+      }
+    });
+  }
+</script>
+
+<style>
+  .page-header-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  .page-actions-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    .page-actions-nav {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
+
+  }
+</style>

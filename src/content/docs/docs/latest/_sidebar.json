@@ -1,0 +1,404 @@
+[
+  {
+    "label": "概述",
+    "translations": {
+      "en": "Overview"
+    },
+    "collapsed": false,
+    "autogenerate": {
+      "directory": "overview"
+    }
+  },
+  {
+    "label": "用户指南",
+    "translations": {
+      "en": "User Doc"
+    },
+    "collapsed": false,
+    "items": [
+      {
+        "label": "快速开始",
+        "translations": {
+          "en": "Quick Start"
+        },
+        "link": "docs/user/quickstart"
+      },
+      {
+        "label": "参考手册",
+        "translations": {
+          "en": "Reference"
+        },
+        "collapsed": false,
+        "items": [
+          {
+            "label": "全局配置说明",
+            "translations": {
+              "en": "Global Configuration"
+            },
+            "link": "docs/user/configmap"
+          },
+          {
+            "label": "Nginx Ingress Annotation 兼容说明",
+            "translations": {
+              "en": "Nginx Ingress Annotation Compatibility"
+            },
+            "link": "docs/user/annotation"
+          },
+          {
+            "label": "通过 Ingress Annotation 实现高阶流量治理",
+            "translations": {
+              "en": "Advanced Traffic Management with Ingress Annotations"
+            },
+            "link": "docs/user/annotation-use-case"
+          },
+          {
+            "label": "Higress 参数配置",
+            "translations": {
+              "en": "Higress Configuration"
+            },
+            "link": "docs/user/configurations"
+          },
+          {
+            "label": "Mcp Bridge 配置说明",
+            "translations": {
+              "en": "Mcp Bridge Configuration"
+            },
+            "link": "docs/user/mcp-bridge"
+          },
+          {
+            "label": "HTTP 转 Dubbo 配置说明",
+            "translations": {
+              "en": "HTTP to Dubbo"
+            },
+            "link": "docs/user/dubbo-http2rpc"
+          },
+          {
+            "label": "Wasm 插件镜像规范",
+            "translations": {
+              "en": "Wasm Plugin Image Specification"
+            },
+            "link": "docs/user/wasm-image-spec"
+          }
+        ]
+      },
+      {
+        "label": "大模型 API 供应",
+        "collapsed": true,
+        "translations": {
+          "en": "LLM API Provide"
+        },
+        "autogenerate": {
+          "directory": "zh-cn/latest/plugins/ai/api-provider"
+        }
+      },
+      {
+        "label": "插件使用文档",
+        "translations": {
+          "en": "Plugin Doc"
+        },
+        "items": [
+          {
+            "label": "AI",
+            "collapsed": true,
+            "items": [
+              {
+                "label": "大模型 API 消费",
+                "collapsed": true,
+                "translations": {
+                  "en": "LLM API Consume"
+                },
+                "autogenerate": {
+                  "directory": "plugins/ai/api-consumer"
+                }
+              },
+              {
+                "label": "大模型 API 开发",
+                "collapsed": true,
+                "translations": {
+                  "en": "LLM API Develop"
+                },
+                "autogenerate": {
+                  "directory": "plugins/ai/api-dev"
+                }
+              },
+              {
+                "label": "大模型 API 观测",
+                "collapsed": true,
+                "translations": {
+                  "en": "LLM API Observe"
+                },
+                "autogenerate": {
+                  "directory": "plugins/ai/api-o11y"
+                }
+              },
+              {
+                "label": "其他工具",
+                "collapsed": true,
+                "translations": {
+                  "en": "others"
+                },
+                "autogenerate": {
+                  "directory": "plugins/ai/others"
+                }
+              }
+            ]
+          },
+          {
+            "label": "认证",
+            "translations": {
+              "en": "Authentication Plugins"
+            },
+            "collapsed": true,
+            "autogenerate": {
+              "directory": "plugins/authentication"
+            }
+          },
+          {
+            "label": "转换",
+            "translations": {
+              "en": "Transformation Plugins"
+            },
+            "collapsed": true,
+            "autogenerate": {
+              "directory": "plugins/transformation"
+            }
+          },
+          {
+            "label": "流量",
+            "translations": {
+              "en": "Traffic Plugins"
+            },
+            "collapsed": true,
+            "autogenerate": {
+              "directory": "plugins/traffic"
+            }
+          },
+          {
+            "label": "安全",
+            "translations": {
+              "en": "Security Plugins"
+            },
+            "collapsed": true,
+            "autogenerate": {
+              "directory": "plugins/security"
+            }
+          },
+          {
+            "label": "Wasm 插件使用简介",
+            "translations": {
+              "en": "Wasm Plugin Doc"
+            },
+            "collapsed": true,
+            "link": "docs/plugins/intro"
+          },
+          {
+            "label": "自定义插件",
+            "translations": {
+              "en": "Custom Plugin"
+            },
+            "collapsed": true,
+            "link": "docs/plugins/custom"
+          }
+        ]
+      },
+      {
+        "label": "最佳实践示例",
+        "translations": {
+          "en": "Best Practices"
+        },
+        "collapsed": true,
+        "items": [
+          {
+            "label": "使用 GO 语言开发 WASM 插件",
+            "translations": {
+              "en": "Developing a WASM Plugin with Golang"
+            },
+            "link": "docs/user/wasm-go"
+          },
+          {
+            "label": "通过 OpenKruise Rollout 实现灰度发布",
+            "translations": {
+              "en": "Canary Release with OpenKruise Rollout"
+            },
+            "link": "docs/user/kruise-rollout"
+          },
+          {
+            "label": "配置 Ingress 转发给注册在 Nacos 的服务",
+            "translations": {
+              "en": "Configuring Ingress to Forward to Services Registered in Nacos"
+            },
+            "link": "docs/user/nacos-route"
+          },
+          {
+            "label": "实现 SpringCloud 服务发现和路由",
+            "translations": {
+              "en": "Implementing SpringCloud Service Discovery and Routing"
+            },
+            "link": "docs/user/spring-cloud"
+          },
+          {
+            "label": "Higress 对接 Dubbo 服务",
+            "translations": {
+              "en": "Integrating Dubbo Services with Higress"
+            },
+            "link": "docs/user/dubbo"
+          },
+          {
+            "label": "基于 Prometheus 实现入口流量观测",
+            "translations": {
+              "en": "Ingress Traffic Monitoring with Prometheus"
+            },
+            "link": "docs/user/prometheus"
+          },
+          {
+            "label": "开启 WAF 防护的最佳实践",
+            "translations": {
+              "en": "Best Practices for Enabling WAF Protection"
+            },
+            "link": "docs/user/waf"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "运维指南",
+    "translations": {
+      "en": "Ops"
+    },
+    "collapsed": false,
+    "items": [
+      {
+        "label": "安装部署",
+        "translations": {
+          "en": "Deploy"
+        },
+        "items": [
+          {
+            "label": "hgctl 工具使用说明",
+            "translations": {
+              "en": "hgctl"
+            },
+            "link": "docs/ops/hgctl"
+          },
+          {
+            "label": "使用 Helm 进行云原生部署",
+            "translations": {
+              "en": "Deploy Higress by Helm"
+            },
+            "link": "docs/ops/deploy-by-helm"
+          },
+          {
+            "label": "基于 Docker Compose 进行独立部署",
+            "translations": {
+              "en": "Deploy Higress by Docker Compose"
+            },
+            "link": "docs/ops/deploy-by-docker-compose"
+          },
+          {
+            "label": "通过阿里云计算巢快速部署",
+            "translations": {
+              "en": "Rapid deployment through Aliyun ComputeNest"
+            },
+            "link": "docs/ops/deploy-by-aliyun-computenest"
+          }
+        ]
+      },
+      {
+        "label": "操作指南",
+        "translations": {
+          "en": "How-tos"
+        },
+        "items": [
+          {
+            "label": "查看日志",
+            "translations": {
+              "en": "View Logs"
+            },
+            "link": "docs/ops/how-tos/view-logs"
+          },
+          {
+            "label": "查看运行时配置",
+            "translations": {
+              "en": "View Runtime Configs"
+            },
+            "link": "docs/ops/how-tos/view-configs"
+          },
+          {
+            "label": "配置路由指向 gRPC 服务",
+            "translations": {
+              "en": "Configure a route with gRPC upstream"
+            },
+            "link": "docs/ops/how-tos/grpc-upstream"
+          },
+          {
+            "label": "配置路由指向 HTTPS 服务",
+            "translations": {
+              "en": "Configure a route with HTTP upstream"
+            },
+            "link": "docs/ops/how-tos/https-upstream"
+          },
+          {
+            "label": "配置 TCP 四层路由",
+            "translations": {
+              "en": "Configure a TCP route"
+            },
+            "link": "docs/ops/how-tos/tcp-route"
+          },
+          {
+            "label": "修改 Gateway 监听端口",
+            "translations": {
+              "en": "Modify gateway ports"
+            },
+            "link": "docs/ops/how-tos/gateway-ports"
+          },
+          {
+            "label": "修改内置插件镜像地址",
+            "translations": {
+              "en": "Modify image URLs of built-in plugins"
+            },
+            "link": "docs/ops/how-tos/builtin-plugin-url"
+          },
+          {
+            "label": "使用 HTTP/HTTPS 协议加载 Wasm 插件",
+            "translations": {
+              "en": "Load Wasm plugins with HTTP/HTTPS protocol"
+            },
+            "link": "docs/ops/how-tos/load-wasm-with-http"
+          },
+          {
+            "label": "启用 Swagger 文档",
+            "translations": {
+              "en": "Enable Swagger UI"
+            },
+            "link": "docs/ops/how-tos/enable-swagger"
+          }
+        ]
+      },
+      {
+        "label": "版本升级",
+        "translations": {
+          "en": "Upgrade"
+        },
+        "link": "docs/ops/upgrade"
+      },
+      {
+        "label": "日志说明",
+        "translations": {
+          "en": "Log"
+        },
+        "link": "docs/ops/log"
+      }
+    ]
+  },
+  {
+    "label": "开发者指南",
+    "translations": {
+      "en": "Developer Guide"
+    },
+    "collapsed": false,
+    "autogenerate": {
+      "directory": "dev"
+    }
+  }
+]

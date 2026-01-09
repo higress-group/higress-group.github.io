@@ -1,0 +1,307 @@
+---
+title: "Higress 发布 v1.4，开放 AI 网关能力，增强云原生能力"
+description: "Higress 发布 v1.4，开放 AI 网关能力，增强云原生能力"
+date: "2024-07-18"
+category: "article"
+keywords: ["Higress"]
+authors: "张添翼, 王晨"
+---
+
+基于大模型的 AIGC 应用或 SaaS 服务，出现了全新的需求，例如对 LLM 结果的缓存、多个 LLM 之间的容错切换、基于 toke 的限流、内容审核等，通过在网关上的插件能力可以非常优雅的满足这些需求，形成统一的流量治理，从而避免后端服务的“负重”。<br />![](/img/1728551145762.png)
+<a name="586e1c6d"></a>
+# **一、新版本简介**
+Higress 发布 v1.4，基于为通义千问，以及多家云上 AGI 厂商客户提供 AI 网关的积累沉淀，开源了大量 AI 原生的网关能力。同时也在 Ingress、可观测、流控等云原生能力上做了全方位升级。<br />AI能力全面开源：提供包含安全防护、多模型适配、可观测、缓存、提示词工程等领域在内的多个开箱即用插件，核心能力例如：
+
+- AI 代理插件：支持对接多厂商协议，共支持15家 LLM 提供商，基本涵盖国内外主流大模型厂商。
+- AI 内容审核插件：支持对接阿里云内容安全云服务，可以拦截有害语言、误导信息、歧视性言论、违法违规等内容。
+- AI 统计插件：支持统计 Token 吞吐，支持实时生成 promethus metrics，以及在访问日志中打印相关信息。
+- AI 限流插件：支持基于 Token 吞吐进行后端保护式限流，也支持面向调用租户配置精确的调用额度限制。
+- AI 开发插件集：提供包含 LLM 结果缓存、提示词装饰等相关能力，可以助力AI应用的开发构建。
+
+云原生能力升级：
+
+- 优化超大规模路由配置：10000 个路由规模下，新增一条路由的生效时间从 1.3 版本的 10 秒优化至 3 秒，对比 ingress-nginx controller 等其他网关具备显著优势。
+- 简化 HTTPS 证书管理：支持全局一份配置统一管理域名证书，解决 ingress-nginx 需要做 secret 拷贝的证书管理痛点，同时支持对接 Let's Encrypt 做免费证书自动签发和续签，且无需依赖 cert-manager。
+- 提供集群流控插件：支持对接 Redis 做集群流控，可以实现 Header/URL 参数/IP 粒度的全局统一限流。
+- 提供日志观测：Higress UI 控制台提供了开箱即用的网关日志查询能力。
+- 支持极简部署：不依赖 K8s，一个 Docker 容器即可启动，方便个人开发者在本地环境使用。
+<a name="b8163dce"></a>
+# **二、AI 能力全面开源**
+从 2020 年开始，我们团队通过服务阿里内部，以及云上客户的需求，沉淀了云原生网关 Higress，并在 2022 年云栖大会正式开源。在开源社区分享代码和知识的同时，通过大量开源用户的使用反馈，得以进一步完善自身能力。<br />今天，Higress 既是通义千问等阿里云核心 AI 业务的 API 网关，又是云上多家 AGI 厂商的的 API 网关，我们也很乐于分享在接入这些场景过程中积累的心得体会，并将相关 AI 能力全面开源：<br />![](/img/1728551145914.png)<br />上图中所有插件均已开源，在最新版本 Higress 控制台可以直接开箱使用：<br />![](/img/1728551146103.png)<br />基于 AI 的插件开发工具也将在后续 Higress 的开源官网中放出，敬请期待。
+<a name="594017b6"></a>
+## **2.1 承接 AI 流量的天然优势**
+AI场景下，经过网关的流量有以下三大特征，是区别于其他业务流量的：
+
+- 长连接：由 AI 场景常见的 Websocket 和 SSE 协议决定，长连接的比例很高，要求网关更新配置操作对长连接无影响，不影响业务。
+- 高延时：LLM 推理的响应延时比普通应用要高出很多，使得 AI 应用面向恶意攻击很脆弱，容易被构造慢请求进行并发攻击，攻击者的成本低，但服务端的开销很高。
+- 大带宽：结合 LLM 上下文来回传输，以及高延时的特性，AI 场景对带宽的消耗远超普通应用，网关如果没有实现较好的流式处理能力和内存回收机制，容易导致内存快速上涨。
+
+Higress 应对这样的流量特征，有着天然优势：
+
+- 长连接无损的热更新：不同于 Nginx 变更配置需要 Reload，导致连接断开，Higress 基于 Envoy 实现了连接无损的真正热更新。
+- 安全网关能力：基于 Higress 的安全网关能力可以提供 IP/Cookie 等多维度的 CC 防护能力，面向 AI 场景，除了QPS，还支持面向 Token 吞吐的限流防护。
+- 高效的流式传输：Higress 支持完全流式转发，并且数据面是基于 C++ 编写的 Envoy，在大带宽场景下，所需的内存占用极低。内存虽然相比 GPU 很廉价，但内存控制不当导致 OOM，导致业务宕机，损失不可估量。
+
+
+
+下图来自 Higress 的开源用户 Sealos 将网关从 Ingress-nginx 迁移到 Higress 之后的资源用量对比，内存使用下降到了十分之一：<br />![](/img/1728551146268.png)
+<a name="17e24c2b"></a>
+## **2.2 AI 代理插件**
+Higress 支持对接多家大模型厂商的 API，并且支持基于统一的协议（基于 OpenAI 的 API 协议）进行调用，可以用统一的协议来屏蔽实现细节，从而为开发者提供便利。<br />目前支持的大模型 API 有：通义千问，OpenAI/Azure OpenAI，月之暗面，百川智能，零一万物，智谱 AI，阶跃星辰，文心一言，腾讯混元，DeepSeek，Anthropic Claude，Groq，MiniMax，Ollama。<br />基本上已经涵盖了市面上主流的大模型 API，这部分工作是由多位社区开发者联合完成的，他们的 GitHub ID 分别是：**_CH3CHO, hanxiantao, lizzy-0323, goooogoooo, cr7258, xychen5, Claire-w, Chi-Kai, Suchun-sv_**。<br />感谢这些充满热情的社区开发者，帮助 Higress 的 AI 能力可以触达更多的生态。目前还有部分其他模型的协议适配任务可以认领，欢迎有兴趣的开发者到这里认领：https://github.com/alibaba/higress/issues/940<br />使用 AI 代理插件还可以对接通义千问的 Qwen long 模型，上传一份文档来实现 RAG ，如下图是我们将 Higress 文档配置在 AI 代理插件中（需要先通过通义千问提供的 API 上传获取到 fileId），然后使用的一个开源的基于 OpenAI 协议的前端工具 LobeChat 进行对话的效果，可以算是目前最简单的 RAG 应用搭建方式了：<br />![](/img/1728551146417.png)<br />![](/img/1728551146564.png)<br />如果你也想搭建类似的 RAG 应用可以参考这里：https://github.com/alibaba/higress/issues/1023#issuecomment-2163176897
+<a name="a499fefa"></a>
+## **2.3 AI 内容审核插件**
+大模型通常是通过学习互联网上广泛可用的数据来训练的，它们有可能在过程中学习到并复现有害内容或不良言论，因此，当大模型未经过适当的过滤和监控就生成回应时，它们可能产生包含有害语言、误导信息、歧视性言论甚至是违反法律法规的内容。正是因为这种潜在的风险，大模型中的内容安全就显得异常重要。<br />在 Higress 中，通过简单的配置即可对接阿里云内容安全，为大模型问答的合规性保驾护航，内容安全提供了多种检测范围，用户可以在控制台进行配置：<br />![](/img/1728551147836.png)<br />插件配置示例：
+```
+serviceSource: dns
+serviceName: safecheck
+servicePort: 443
+domain: green-cip.cn-shanghai.aliyuncs.com
+```
+请求响应示例：<br />配置后，如果请求/响应中包含了非法内容，被内容安全拦截后，网关会返回内容安全建议的回答：<br />![](/img/1728551147984.png)
+<a name="e2331b9c"></a>
+## **2.4 AI 统计插件**
+相比于传统微服务，LLM 应用中主要通过 token 来衡量流量大小，针对此特点，我们构建了路由级、服务级、模型级的 token 用量观测能力，包括日志、监控以及告警，AI统计插件提供了构建AI可观测系统的基础能力。<br />下图是对网关上部署的通义千问服务的监控：<br />![](/img/1728551148197.png)<br />也可以在日志中打印出相关统计数据：<br />![](/img/1728551148399.png)
+<a name="-1"></a>
+## **2.5 AI 限流插件**
+对于一款成熟的 API 网关产品，都应该具备两类限流能力，并且 Higress 也可以很好地满足这些需求：
+
+| 限流场景 | 限流目的 | 统计维度举例 |
+| --- | --- | --- |
+| 后端保护式限流 | 保护后端，防异常流量和恶意攻击 | API：某个 API 限制 100 QPS<br />IP：每个 IP 访问速率不可超过 10 QPS<br />Cookie：每个 Cookie 访问速率不可超过 10 QPS |
+| 调用方配额限流 | 需要搭配调用方认证机制，面向不不同调用方区分服务质量(QoS) | 调用方（Consumer）：黄金会员限制 1000 QPS，白银会员限制 100 QPS， 青铜会员限制 10 QPS |
+
+
+在 AI 场景中，限流的需求不仅限于传统的每秒/每分/每小时/每天请求次数（QPS/QPM/QPH/QPD）的限流能力，还额外扩展到了每分/每小时/每天令牌数（TPM/TPH/TPD）的管理。“T”代表令牌（Token），它是一个用于衡量大型语言模型输入输出量的单位。对于 AI 应用，相比传统的请求数计量，Token 计量更能反应资源或成本占用。<br />如下图是 OpenAI 对于不同模型在 Tier 2 这个级别的调用方的限制，大部分 AI 产品也都有类似的限制：<br />![](/img/1728551148573.png)<br />AI 场景下，后端保护式限流也很重要，而且往往容易被忽视，尤其是很多 LLM 提供商都有免费的 Web 应用，一些黑灰产可能会爬取页面调用封装成 API 来提供给用户实现牟利。这种情况下就可以使用 Higress 的 IP、Cookie 等维度的保护式限流进行防护。<br />Higress 支持丰富的限流能力：
+
+| 支持的限流维度 | 支持的计量方式 |
+| --- | --- |
+| API | QPS/QPM/QPH/QPD<br />TPS/TPM/TPH/TPD |
+| IP | QPS/QPM/QPH/QPD<br />TPS/TPM/TPH/TPD |
+| Cookie | QPS/QPM/QPH/QPD<br />TPS/TPM/TPH/TPD |
+| 请求 Header | QPS/QPM/QPH/QPD<br />TPS/TPM/TPH/TPD |
+| URL 参数 | QPS/QPM/QPH/QPD<br />TPS/TPM/TPH/TPD |
+| 调用方 | QPS/QPM/QPH/QPD<br />TPS/TPM/TPH/TPD |
+
+例如需要对每个 IP 限制每分钟令牌数不可以超过 1000，符合 1.1.1.0/24 网段的每个 IP 限制不可超过 100，并对 1.1.1.1 这个 IP 限制不可超过 10，则可以做如下配置：
+```
+rule_name: limit_ip
+rule_items:
+  - limit_by_per_ip: from-remote-addr
+    limit_keys:
+      - key: 1.1.1.1
+        token_per_minute: 10
+      - key: 1.1.1.0/24
+        token_per_minute: 100
+      - key: 0.0.0.0/0
+        token_per_minute: 1000        
+redis:
+  service_name: redis.static
+  service_port: 6379
+```
+<a name="-2"></a>
+## **2.6 AI 检索增强生成插件**
+基于该插件，可以通过对接阿里云向量检索服务实现 LLM-RAG 应用的开发，流程如图所示：<br />![](/img/1728551148742.png)<br />例如基于 CEC-Corpus 数据集包含 332 篇突发事件的新闻报道的语料和标注数据，提取其原始的新闻稿文本，将其向量化后添加到阿里云向量检索服务，再在 Higress 中做相应插件配置，即可快速打造一个私域知识助手。<br />插件配置示例：
+```
+dashscope:
+  apiKey: xxxxxxxxxxxxxxxxxxxx
+  serviceName: dashscope
+  servicePort: 443
+  domain: dashscope.aliyuncs.com
+dashvector:
+  apiKey: xxxxxxxxxxxxxxxxxxxx
+  serviceName: dashvector
+  servicePort: 443
+  domain: vrs-cn-xxxxxxxxxxxxxxxxxxxx.dashvector.cn-hangzhou.aliyuncs.com
+  collection: news_embedings
+```
+
+
+请求响应示例：<br />![](/img/1728551148934.png)
+<a name="eba46573"></a>
+## **2.7 AI 缓存插件**
+该插件实现了将 LLM 响应进行抽取并缓存的功能，对于向 LLM API 高频请求相同问题的场景可以显著降低响应时延并节省成本。我们之前用[Higress + 通义千问进行技术内容翻译](https://mp.weixin.qq.com/s?__biz=MzUzNzYxNjAzMg==&mid=2247564776&idx=1&sn=f40ed90b4e0476ba356c54bfc537d1d6&scene=21#wechat_redirect)，可以看到 LLM 的翻译能力是很强的，Higress 官网的英文文档，也将基于 LLM 进行翻译。因为文档需要持续更新迭代，我们使用 Github Action 实现自动化的 CICD。结合这个 AI 缓存插件 + 文档分片翻译（如下图所示），就可以实现低成本且高效的文档自动化翻译流程。<br />![](/img/1728551149091.png)<br />AI 缓存插件后续还将进一步演进，支持基于问题向量相似度的 LLM 响应缓存召回，可以在 RAG 等封闭知识域场景，大幅降低 LLM API 的调用成本。在成本和效果之间做 trade-off 很有挑战，对此，我们专门举办了[Higress AI 网关挑战赛](https://mp.weixin.qq.com/s?__biz=MzU0MzkyMTgzNg==&mid=2247484313&idx=1&sn=5b4185fb51b938ea4f539548ec2740d8&scene=21#wechat_redirect)，欢迎大家参与。
+<a name="81781d7a"></a>
+## **2.8 AI 提示词模版插件**
+提示词模版插件用于快速构建固定格式的 Prompt，对于特定应用需要限制问题格式的场景会比较有帮助，可以在网关上配置 Prompt 模版，并基于大模型的能力来提供对应的 API。<br />插件配置示例：
+```
+templates:
+  - name: developer-chat
+    template:
+      model: gpt-3.5-turbo
+      messages:
+        - role: system
+          content: '你是一个{{program}}专家，编程语言为{{language}}'
+        - role: user
+          content: '帮我写一个{{program}}程序'
+```
+
+
+请求示例：
+```
+{
+  "template": "developer-chat"
+  "properties": {
+    "program": "快速排序算法"
+    "language": "python"
+  }
+}
+```
+以上请求基于模板转化后向LLM发起的真实请求为：
+```
+{
+  "model": "gpt-3.5-turbo",
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一个快速排序算法专家，编程语言为python"
+    },
+    {
+      "role": "user",
+      "content": "帮我写一个快速排序算法程序"
+    }
+  ]
+}
+```
+<a name="6992249f"></a>
+## **2.9 AI 提示词修饰插件**
+提示词修饰插件同样用于对 Prompt 进行调整，支持在用户输入的 Prompt 前后添加额外的 Prompt，用户可以使用 Higress AI 网关来统一处理应用逻辑中需要操控 Prompt 的地方，让所有 LLM API 流量都经过 Higress 进行处理，自动完成 Prompt 的统一操控。<br />插件配置示例：
+```
+decorators:
+  - name: data-assistant
+    decorator:
+      prepend:
+        - role: system
+          content: 如果有人问你关于插件的问题，你应该回答出所有插件的名称、功能、执行阶段以及执行优先级。
+      append:
+        - role: user
+          content: 你应该以表格的形式回答，除了表格之外不要有其他内容。
+```
+
+
+请求响应示例：<br />![](/img/1728551149249.png)
+<a name="dfddba34"></a>
+## **2.10 AI 请求/响应转换插件**
+通过配置AI 请求/响应转换插件，用户可以不用写代码，直接使用自然语言的方式对网关的请求/响应进行修改。例如测试人员在测试 API 时，对待测 API 进行插件配置，将原始请求/响应作为 example，来生成进行边界条件测试的请求/响应。大模型很多时候会比人考虑的更全面，更容易测试出一些边界 case。<br />插件配置示例：
+```
+response:
+  enable: true
+  prompt: "帮我修改以下HTTP应答信息，要求：1. content-type修改为application/json；2. body由xml转化为json；3.移除content-length。"
+provider:
+  serviceName: qwen
+  domain: dashscope.aliyuncs.com
+  apiKey: sk-xxxxxxxxxxxxxxxxxxx
+```
+请求响应示例：<br />创建路由通过网关代理到 http://httpbin.org/xml，该接口会返回 xml 格式响应，通过插件处理可以得到 json 格式的响应：
+```
+{
+  "slideshow": {
+    "title": "Sample Slide Show",
+    "date": "Date of publication",
+    "author": "Yours Truly",
+    "slides": [
+      {
+        "type": "all",
+        "title": "Wake up to WonderWidgets!"
+      },
+      {
+        "type": "all",
+        "title": "Overview",
+        "items": [
+          "Why <em>WonderWidgets</em> are great",
+          "",
+          "Who <em>buys</em> WonderWidgets"
+        ]
+      }
+    ]
+  }
+}
+```
+<a name="cc66bf84"></a>
+# **三、云原生能力升级**
+<a name="-6"></a>
+## **3.1 支持超大规模路由配置**
+[Sealos 的 Higress 实践](https://mp.weixin.qq.com/s?__biz=MzU4NzU0MDIzOQ==&mid=2247518372&idx=1&sn=fcf66ef53d185576832086cedbe84b69&scene=21#wechat_redirect)吸引了不少同样有大规模 Ingress 管理痛点的大型企业用户采用 Higress，在用户的使用反馈下，我们持续优化这种超大规模的路由配置下，路由的变更速度。对比 1.3 版本，我们将速度提升了超过 3 倍，10000 个 Ingress 配置下，变更单个 Ingress 只需 3 秒即可生效。<br />下面是和同类网关（均为最新版本）的一组对比测试，在有 10000 个 Ingress 的情况下，新增一个 Ingress 后，请求网关验证创建路由的生效时间（判断 200 状态码）；接着再删除该 Ingress， 请求网关验证移除路由的生效时间（判断 404 状态码），Higress 的优势显著：<br />![](/img/1728551149423.png)<br />![](/img/1728551149600.png)<br />![](/img/1728551149821.png)
+<a name="7b1455fd"></a>
+## **3.2 简化 HTTPS 证书管理**
+ingress 的证书管理一直是个痛点，因为出于安全考虑， K8s 标准规范 ingress 资源只能使用相同命名空间下的 secret。所以在业务需要按命名空间隔离，但域名又相同的场景下，需要将 secret 复制多个副本到不同命名空间下，不仅让运维负担变重，也带来了安全隐患。<br />Higress 现在可以通过一份 ConfigMap 来做 Ingress 的全局证书管理：
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: higress-https
+  namespace: higress-system
+data:
+  cert: |
+  # 开启全局证书自动管理
+    automaticHttps: true
+  # 使用自动签发时，证书提前多久续签
+    renewBeforeDays: 30
+  # 证书自动签发配置，暂只支持 Let's Encrypt
+    acmeIssuer:
+    - name: letsencrypt
+      email: test@example.com
+    credentialConfig:
+  # 对 foo.com 使用 Let's Encrypt 签发证书
+    - domains:
+      - foo.com
+      tlsIssuer: letsencrypt
+      tlsSecret: foo-com-secret
+  # 对匹配的域名使用特定的 secret
+    - domains:  
+       - statica.example.org
+       - staticb.example.org
+      tlsSecret: static-example-org-certificate
+  # 兜底证书，对于不匹配上面规则的域名开启
+    - domains:  
+       - "*"
+      tlsSecret: default-certificate
+```
+这样所有 secret 都只需要放在 higress-system 命名空间下统一管理，但又可以生效到所有命名空间的 ingress 下（对应 ingress 无需再配置 secret 字段）。既减轻了运维负担，又提高了证书管理的安全性。<br />从上面这份配置也可以看到 Higress 还支持对接 Let‘s Encrypt 进行 HTTPS 免费证书的自动签发和续签，无需依赖 cert-manager。因此，Higress 不论是 K8s 场景下部署，还是 Standalone 模式部署（通过本地文件配置 ConfigMap），都可以用上这个能力。
+<a name="34a82b4f"></a>
+## **3.3 提供集群流控插件**
+Higress 在 1.4 版本支持了在 Wasm 插件中去访问 Redis 服务，基于此能力，来自社区的贡献者韩贤涛（GitHub ID：hanxiantao）基于原本的 key-rate-limit 插件实现了 cluster-key-rate-limit 插件。从而能够实现基于 Redis 的全局精确限流。并且在原本插件只支持对可枚举值进行限流的能力上进行了扩展，支持不可枚举值的限流，例如对于每个 IP，每个 Cookie 分别独立计算限流。AI 限流插件也是在此基础上扩展实现的。<br />![](/img/1728551150040.png)
+<a name="f27925d4"></a>
+## **3.4 提供日志观测**
+Higress 开箱即用的 o11y (Observability) 套件增加了日志采集和分析的能力，通过以下 Helm 安装/升级命令即可使用：
+```
+helm repo add higress https://higress.cn/helm-charts
+# 安装
+helm install higress higress/higress --set global.o11y.enabled=true -n higress-system --create-namespace
+# 升级
+helm upgrade higress higress/higress --set global.o11y.enabled=true --reuse-values -n higress-system --create-namespace
+```
+
+
+开启后即可在 Higress 控制台上看到访问日志，并可以使用 Loki 进行日志分析：<br />![](/img/1728551150194.png)
+<a name="caf52ec7"></a>
+## **3.5 支持极简部署**
+Higress 现在可以通过一个 Docker 容器完成启动，方便个人开发者在本地搭建学习，或者用于搭建个人站点。启动方式如下：
+```
+# 创建一个工作目录
+mkdir higress; cd higress
+# 启动 higress，配置文件会写到工作目录下
+docker run -d --rm --name higress-ai -v ${PWD}:/data \
+        -p 8001:8001 -p 8080:8080 -p 8443:8443  \
+        higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:1.4.1
+```
+监听端口说明如下：
+
+- 8001 端口：Higress UI 控制台入口
+- 8080 端口：网关 HTTP 协议入口
+- 8443 端口：网关 HTTPS 协议入口
+
+Higress 所有 Docker 镜像都一直使用自己独享的仓库，不受 Docker Hub 国内不可访问的影响，欢迎大家使用～
+
+<a name="35bc8bcc"></a>
+# **四、参与 Higress 社区**
+欢迎更多小伙伴一起参与到 Higress 社区的建设中，近期的社区活动有：
+
+- [22.5万奖金池｜Higress AI 网关编程挑战赛启动](https://mp.weixin.qq.com/s?__biz=MzU0MzkyMTgzNg==&mid=2247484313&idx=1&sn=5b4185fb51b938ea4f539548ec2740d8&scene=21#wechat_redirect)
+- GLCC 开源夏令营的 Higress 三大课题，均有6000元奖励
+
+了解更多社区动态，可以加入 Higress 微信/钉钉群（群号：30735012403 ）：
+
+![](/img/1728551150356.png)
+
+** 往期精选：**<br />[![](/img/1728551150510.png)](http://mp.weixin.qq.com/s?__biz=MzU0MzkyMTgzNg==&mid=2247484289&idx=1&sn=a62011e2054871865d68b37874347971&chksm=fb054042cc72c954726916cb6043a636c0d6e371ef6d63248da54013640215cb19f4daaa7195&scene=21#wechat_redirect)<br />[![](/img/1728551150683.png)](http://mp.weixin.qq.com/s?__biz=MzU0MzkyMTgzNg==&mid=2247484313&idx=1&sn=5b4185fb51b938ea4f539548ec2740d8&chksm=fb05405acc72c94c966e2198450cf92373908d0006ec131a6564d31e4615d9258587b50256d7&scene=21#wechat_redirect)<br />[![](/img/1728551150837.png)](http://mp.weixin.qq.com/s?__biz=MzU0MzkyMTgzNg==&mid=2247483918&idx=1&sn=7d02ffca5e885c855e849e7e530de03e&chksm=fb0541cdcc72c8db044ba8200ea976424a3f2f0731af70b481cac6778013bf3f77e07fcc2bea&scene=21#wechat_redirect)<br />[![](/img/1728551151012.png)](http://mp.weixin.qq.com/s?__biz=MzU0MzkyMTgzNg==&mid=2247484258&idx=1&sn=a8e1607e271f55279df8bcf62cd46cf6&chksm=fb0540a1cc72c9b70c8055a8137188d45ee99f2888851c41ad6097c545ea616024af68bf40c6&scene=21#wechat_redirect)<br />[![](/img/1728551151165.png)](http://mp.weixin.qq.com/s?__biz=MzU0MzkyMTgzNg==&mid=2247484284&idx=1&sn=8e9ebb9fc2e5d7a1e1db8933ed8629a2&chksm=fb0540bfcc72c9a982b71a9b610fe03fa0cce09d65b4498846577afaeedc1205bf195b2c13c2&scene=21#wechat_redirect)
+

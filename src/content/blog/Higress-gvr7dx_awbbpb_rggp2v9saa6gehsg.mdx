@@ -1,0 +1,120 @@
+---
+title: "Higress全新Wasm运行时，性能大幅提升"
+description: "Higress全新Wasm运行时，性能大幅提升"
+date: "2024-08-12"
+category: "article"
+keywords: ["Higress"]
+authors: "CH3CHO"
+---
+
+> 本文作者<br />澄潭, 阿里云API网关软件工程师，Higress开源项目主要贡献者<br />何良, Intel Web Platform Engineering软件工程师, WAMR开源项目主要贡献者
+
+本文介绍Higress将Wasm插件的运行时从V8切换到WebAssembly Micro Runtime (WAMR)的最新进展。通过切换到WAMR并开启AOT模式大幅提升了Wasm插件性能，从我们的测试中大部分插件平均有50%左右的性能提升，一些逻辑复杂的插件性能直接翻倍。
+<a name="kDGsg"></a>
+## Higress Wasm插件
+Higress作为首个推出Wasm扩展能力的云产品网关，从2022年就上线了Wasm插件市场，我们使用Wasm技术作为主要的网关扩展手段，是因为它能为用户带来的独特价值：
+
+1. 工程可靠性：相比Lua等动态类型+解释执行语言，Wasm可基于多种静态类型语言编译，可以做编译期检查，避免运行时出错把生产环境变成代码捉虫现场
+2. 沙箱安全性：Wasm插件运行在严格的虚拟机沙箱环境内，有自己的独立内存空间，不能直接访问外部内存，可以避免插件代码bug导致遭到缓冲区溢出、远程代码执行等攻击
+3. 热更新：Higress基于Envoy的xDS机制，插件二进制和配置都可以独立热更新，不会引起连接断开，对WebSocket/gRPC等业务场景更友好
+
+Higress站在Istio/Envoy的肩膀上，为Wasm插件机制增加了三个核心能力：
+
+1. 域名/路由级生效：Istio/Envoy自带的全局生效方式难以满足大部分场景需求，而基于Higress Wasm sdk开发的插件可以做到这点，同时编译出的插件也跟Istio/Envoy生态兼容（仅全局生效）
+2. Redis访问能力：提供了访问Redis的Host Function，插件代码可以基于Redis实现多种能力，例如全局限流，Session状态管理等
+3. 虚拟机自愈机制：开发的插件逻辑中若出现了空指针访问、数组越界、内存泄漏等问题，将被运行时系统捕获，不会导致网关崩溃；Higress支持Wasm模块异常后自动重启，并能在快速止血的同时，通过告警通知用户出现问题的代码堆栈
+
+从Higress的企业用户看Wasm插件技术的采用周期，已经跨域过鸿沟，步入早期采用大众阶段，核心的驱动力是性能红利带来的成本下降。用户使用Wasm插件来开发满足自己特定业务需求的能力，对于鉴权、加解密、会话管理等逻辑在网关完成计算资源的卸载，无需后端服务处理，从而全局降低计算成本。<br />性能数据上，之前发表的这篇文档[《通过Higress Wasm插件3倍性能实现Spring Cloud Gateway功能》](https://mp.weixin.qq.com/s/hL8VjWSILLzvFwZ1yqJjMw)反馈了过去的性能成果。<br />在Higress将Wasm运行时从V8替换为WAMR后，Wasm插件的性能对比之前又有了大幅提升。
+
+<a name="fG8W7"></a>
+## Wasm运行时升级：从V8到WAMR
+<a name="h11Dt"></a>
+### V8存在的问题
+Wasm技术诞生于浏览器场景，作为Chromium的JS引擎，V8是最早支持Wasm的运行时之一，V8引擎基于JIT模式运行Wasm模块，有着很好的性能。但也存在以下问题：
+
+1. V8项目复杂度很高：Wasm相关实现跟JS处理逻辑有较多耦合，比如早期的Envoy Wasm插件的一个[bug](https://bugs.chromium.org/p/v8/issues/detail?id=12592)就是V8为优化JS执行内存引入指针压缩导致
+2. V8社区和Envoy社区之间缺少协作：Envoy目前对于V8的版本依赖还停留在2022年的提交，无法支持Wasm GC等新特性，因为项目复杂度高，升级V8依赖的风险也很高
+3. 客户端偏好：V8的用户和开发者大多来自客户端，考虑设备兼容性，更重视JIT模式的优化，AOT模式下性能提升不大，无法完全发挥Wasm性能优势
+<a name="SHmcJ"></a>
+### WAMR的优势
+WAMR是最早由Intel团队开发，在字节码联盟（Bytecode Alliance, 面向Wasm软件生态的非盈利组织）下的一个广受欢迎的WebAssembly运行时开源项目。目前社区活跃的贡献者包含来自Intel、小米、亚马逊、索尼、Midokura、西门子、蚂蚁等公司的工程师。WAMR使用C语言开发，具有良好的平台适应性。支持解释模式、即时编译及预编译等模式运行Wasm模块，有着优良的性能，在多个公开性能测评报告中均表现优异，同时又极低的资源开销，可以在100KB内存中运行单个Wasm实例。
+
+<a name="E0wqC"></a>
+### 性能对比
+
+- **压测工具**：k6
+- **服务器CPU型号**：Intel(R) Xeon(R) Platinum 8369B CPU @ 2.90GHz
+- **压测方式**：Higress启动2个worker线程，压测期间固定k6的压力，跑满两个线程
+
+选取了部分Higress插件进行性能测试，情况如下：
+
+| 插件名称 | 插件用途 | V8<br />(ms) | WAMR<br />(ms) | 性能提升 |
+| --- | --- | --- | --- | --- |
+| bot-detect | 基于正则识别阻止互联网爬虫对站点资源的爬取 | 1.25 | 0.64 | 95% |
+| hmac-auth | 基于HMAC算法为HTTP请求生成不可伪造的签名，<br />并基于签名实现身份认证和鉴权 | 4.44 | 3.25 | 36% |
+| jwt-auth | 基于JWT(JSON Web Tokens)进行认证鉴权 | 11.98 | 7.46 | 60% |
+| jwt-logout | 基于Redis实现JWT的弱状态管理，解决JWT无法登出的问题 | 14.08 | 8.44 | 66% |
+| key-auth | 基于 API Key 进行认证鉴权 | 1.66 | 1.16 | 43% |
+| oauth | 基于JWT进行OAuth2 Access Token签发 | 10.15 | 4.75 | 113% |
+
+> 注：表格中的数据为单请求平均附加延时
+
+
+整体来看，Wasm指令越复杂的插件，WAMR的提升越明显。上述所有插件除`jwt-logout`是企业版插件未开源以外，其余插件均可以在Higress开源仓库目录下查看对应源码实现：[https://github.com/alibaba/higress/tree/main/plugins/wasm-cpp/extensions](https://github.com/alibaba/higress/tree/main/plugins/wasm-cpp/extensions)<br />编译生成AOT文件，可以使用wamrc这个WAMR提供的官方编译工具：`wamrc --invoke-c-api-import -o plugin.aot plugin.wasm`。<br />为了生成的wasm文件可以兼容JIT模式，使用WAMR仓库下的脚本生成合并文件：`python3 wasm-micro-runtime/test-tools/append-aot-to-wasm/append_aot_to_wasm.py --aot plugin.aot --wasm plugin.wasm -o plugin.aot.wasm`<br />以提升最大的oauth插件为例，可以使用下述配置进行复现：<br />**k6压测命令**：`k6 run --vus 300 ./script.js --duration 60s`<br />**k6压测脚本**：
+```javascript
+import http from 'k6/http';
+import { check } from 'k6';
+
+export default function () {
+    const res = http.get('http://11.164.3.16:10000/',{headers: {'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFwcGxpY2F0aW9uL2F0K2p3dCJ9.eyJhdWQiOiJ0ZXN0MiIsImNsaWVudF9pZCI6Ijk1MTViNTY0LTBiMWQtMTFlZS05YzRjLTAwMTYzZTEyNTBiNSIsImV4cCI6MTY2NTY3MzgyOSwiaWF0IjoxNjY1NjczODE5LCJpc3MiOiJIaWdyZXNzLUdhdGV3YXkiLCJqdGkiOiIxMDk1OWQxYi04ZDYxLTRkZWMtYmVhNy05NDgxMDM3NWI2M2MiLCJzY29wZSI6InRlc3QiLCJzdWIiOiJjb25zdW1lcjEifQ.LsZ6mlRxlaqWa0IAZgmGVuDgypRbctkTcOyoCxqLrHY'}});
+    check(res, { 'status was 200': (r) => r.status == 200 });
+}
+```
+**envoy配置片段**
+```yaml
+                  - name: envoy.filters.http.wasm
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
+                      config:
+                        name: "my_plugin"
+                        configuration:
+                          "@type": "type.googleapis.com/google.protobuf.StringValue"
+                          value: |
+                            {
+                                "consumers": [
+                                    {
+                                        "name": "consumer1",
+                                        "client_id": "9515b564-0b1d-11ee-9c4c-00163e1250b5",
+                                        "client_secret": "9e55de56-0b1d-11ee-b8ec-00163e1250b5"
+                                    }
+                                ],
+                                "clock_skew_seconds": 3153600000
+                            }
+                        vm_config:
+                          runtime: envoy.wasm.runtime.wamr
+                          #runtime: envoy.wasm.runtime.v8
+                          code:
+                            local:
+                             filename: "oauth.aot.wasm"
+                          allow_precompiled: true
+```
+
+<a name="gqXOi"></a>
+### 性能提升原因
+主要的原因包含：
+
+1. WAMR提供了深度优化的预编译的能力。在部署前，WAMR将Wasm opcodes翻译为IR，经过定制的优化流水线，生成指定平台的机器码。在运行时，执行预编译后的Wasm可以获得媲美native binary的性能。
+2. WAMR采用了高度优化的FFI。有效降低在host(c/c++)和guest(wasm)两个世界间“穿梭”时需要的类型转换和内存拷贝的次数，减少不必要的损耗。
+3. WAMR可以智能感知平台的硬件加速能力并予以充分利用。比如当运行在X86平台时，WAMR实现了学术界最新提出的"segue"算法，利用GS寄存器作为寻址方法，提升了访问Wasm线性空间的效率。
+
+<a name="H0Iyq"></a>
+## 未来展望
+在Higress团队和WAMR团队之间的紧密协作下，除了在网关场景提升Wasm插件性能，还带来了很多实用的新特性即将发布，敬请期待：
+
+1. 支持生成CPU火焰图，例如下面是Wasm插件中执行fibonacci递归看到的CPU火焰图：<br />![image.png](/img/1728551757297.png)
+2. 支持Wasm插件中逻辑问题导致Crash后，插件日志中打印完整的函数堆栈，并可以通过WAMR提供的addr2line工具定位到源代码中的具体行号
+3. 支持观测每个Wasm插件模块的CPU和内存占用情况
+4. 支持使用TypeScript编写Wasm插件，完整语法支持
+
+欢迎更多开发者一起参与Higress和WAMR开源社区，GitHub项目地址：<br />Higress: [https://github.com/alibaba/higress](https://github.com/alibaba/higress)<br />WAMR: [https://github.com/bytecodealliance/wasm-micro-runtime](https://github.com/bytecodealliance/wasm-micro-runtime)
+

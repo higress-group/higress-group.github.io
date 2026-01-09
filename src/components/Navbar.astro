@@ -1,0 +1,133 @@
+---
+// Navbar component with left-center-right layout
+import SearchButton from './SearchButton.astro';
+import LanguageSelect from './LanguageSelect.astro';
+import Dropdown from './dropdown/Dropdown.astro';
+import { useTranslations } from "../i18n/utils";
+
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
+
+const currentPath = Astro.url.pathname;
+const isEnglish = currentPath === '/en' || currentPath.startsWith('/en/');
+const homeUrl = isEnglish ? '/en' : '/';
+
+// Determine if we are on the home page
+const isHome = currentPath === '/' || currentPath === '/en' || currentPath === '/en/';
+// Set default to transparent for all pages. Scroll effect only applies to Home.
+const navClass = "bg-transparent";
+
+const navItems = [
+  {
+    type: 'dropdown',
+    label: t('navbar.product'),
+    items: [
+      { label: t('navbar.product.features'), href: '/docs/latest/overview/features' },
+      { label: t('navbar.product.benefits'), href: '/docs/latest/overview/benefits' },
+    ]
+  },
+  {
+    type: 'link',
+    label: t('navbar.docs'),
+    href: '/docs/latest/overview/what-is-higress'
+  },
+  {
+    type: 'dropdown',
+    label: t('navbar.enterprise'),
+    items: [
+      { label: t('navbar.enterprise.intro'), href: '/enterprise' },
+      { label: t('navbar.enterprise.solutions'), href: '/solutions' },
+    ]
+  },
+  {
+    type: 'dropdown',
+    label: t('navbar.community'),
+    items: [
+      { label: t('navbar.community.blog'), href: '/blog' },
+      { label: t('navbar.community.events'), href: '/community/events' },
+      { label: t('navbar.community.github'), href: 'https://github.com/alibaba/higress' },
+    ]
+  }
+];
+---
+
+<nav id="main-nav" class:list={["fixed top-0 left-0 right-0 z-50 transition-all duration-300", navClass]} data-is-home={String(isHome)}>
+  <div class="mx-auto px-10">
+    <div class="flex h-16 items-center justify-between">
+      <!-- Left: Logo -->
+      <div class="flex items-center">
+        <a href={homeUrl} class="min-w-33.75 flex items-center">
+          <img src="/images/logo.svg" alt="Higress Logo" class="h-8 w-auto" />
+        </a>
+      </div>
+
+      <!-- Center: Navigation Links -->
+      <div class="nav-links flex items-center">
+        {navItems.map((item, index) => (
+          <div class="nav-link">
+            {item.type === 'dropdown' ? (
+              <Dropdown label={item.label} items={item.items} />
+            ) : (
+              <a
+                href={item.href}
+                class="text-sm text-strong hover:text-primary no-underline transition-colors px-2"
+              >
+                {item.label}
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+      <!-- Right: Search, Theme & Language Toggle -->
+      <div class="flex items-center space-x-4">
+        <!-- Language Select -->
+        <LanguageSelect />
+        <!-- Search -->
+        <SearchButton />
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  const isHome = nav?.dataset.isHome === 'true';
+
+  if (isHome && nav) {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        nav.classList.remove('bg-transparent');
+        nav.classList.add('bg-white/20', 'backdrop-blur-sm', 'shadow-sm');
+      } else {
+        nav.classList.add('bg-transparent');
+        nav.classList.remove('bg-white/20', 'backdrop-blur-sm', 'shadow-sm');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
+  }
+</script>
+
+<style>
+  .nav-links {
+    .nav-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 1.75rem;
+      padding: 0 1rem;
+      &:not(:last-child) {
+        &::after {
+          content: "";
+          position: absolute;
+          width: 1px;
+          height: 60%;
+          background-color: var(--color-black);
+          right: 0;
+        }
+      }
+    }
+  }
+</style>

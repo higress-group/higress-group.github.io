@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+Disallow: /en/blog/
+Sitemap: https://higress.cn/sitemap-index.xml

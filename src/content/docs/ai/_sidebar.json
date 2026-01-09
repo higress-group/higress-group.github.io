@@ -1,0 +1,119 @@
+[
+  {
+    "label": "快速开始",
+    "translations": {
+      "en": "Quick Start"
+    },
+    "link": "ai/quick-start"
+  },
+  {
+    "label": "MCP 快速开始",
+    "translations": {
+      "en": "MCP Quick Start"
+    },
+    "link": "ai/mcp-quick-start"
+  },
+  {
+    "label": "MCP 快速开始 (Docker)",
+    "translations": {
+      "en": "MCP Quick Start (Docker)"
+    },
+    "link": "ai/mcp-quick-start_docker"
+  },
+  {
+    "label": "MCP with SSE",
+    "translations": {
+      "en": "MCP with SSE"
+    },
+    "link": "ai/mcp-with-sse"
+  },
+  {
+    "label": "MCP Server",
+    "translations": {
+      "en": "MCP Server"
+    },
+    "link": "ai/mcp-server"
+  },
+  {
+    "label": "HiMarket",
+    "translations": {
+      "en": "HiMarket"
+    },
+    "collapsed": false,
+    "items": [
+      {
+        "label": "HiMarket 介绍",
+        "translations": {
+          "en": "HiMarket Introduction"
+        },
+        "link": "ai/himarket/himarket-introduction"
+      },
+      {
+        "label": "HiMarket 部署",
+        "translations": {
+          "en": "HiMarket Deployment"
+        },
+        "link": "ai/himarket/himarket-deployment"
+      },
+      {
+        "label": "HiMarket 使用",
+        "translations": {
+          "en": "HiMarket Usage"
+        },
+        "link": "ai/himarket/himarket-usage"
+      },
+      {
+        "label": "HiMarket 统计",
+        "translations": {
+          "en": "HiMarket Statistics"
+        },
+        "link": "ai/himarket/himarket-statistics"
+      },
+      {
+        "label": "HiMarket AgentScope Agent",
+        "translations": {
+          "en": "HiMarket AgentScope Agent"
+        },
+        "link": "ai/himarket/himarket-agentscope-agent"
+      }
+    ]
+  },
+  {
+    "label": "场景指南",
+    "translations": {
+      "en": "Scene Guide"
+    },
+    "type": "asd",
+    "collapsed": false,
+    "items": [
+      {
+        "label": "多模型代理",
+        "translations": {
+          "en": "Multi-Proxy"
+        },
+        "link": "ai/scene-guide/multi-proxy"
+      },
+      {
+        "label": "语义缓存",
+        "translations": {
+          "en": "Semantic Cache"
+        },
+        "link": "ai/scene-guide/semantic-cache"
+      },
+      {
+        "label": "应用安全",
+        "translations": {
+          "en": "Application Safety"
+        },
+        "link": "ai/scene-guide/application-safety"
+      },
+      {
+        "label": "Token 管理",
+        "translations": {
+          "en": "Token Management"
+        },
+        "link": "ai/scene-guide/token-management"
+      }
+    ]
+  }
+]

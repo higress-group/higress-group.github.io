@@ -1,0 +1,29 @@
+---
+import Navbar from '../Navbar.astro';
+---
+
+<Navbar />
+
+<style is:global>
+  /* 移除 Starlight 默认的 header 样式 */
+  .header.astro-vrdttmbt {
+    all: unset;
+    display: block;
+    width: 100%;
+    position: static;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+  }
+
+  /* 确保 header 不影响布局 */
+  .header.astro-vrdttmbt * {
+    box-sizing: border-box;
+  }
+
+  /* 为固定导航栏添加顶部间距 */
+  body {
+    padding-top: 64px; /* navbar 高度 h-16 = 4rem = 64px */
+  }
+</style>

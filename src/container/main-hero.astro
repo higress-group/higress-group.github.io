@@ -1,0 +1,107 @@
+---
+import Button from "../components/button/Button.astro";
+
+const newsItems = [
+  {
+    title: "Higress x DeepSeek",
+    content: "Higress 全面适配 DeepSeek，提供更优的 Token 流控与缓存能力，大幅降低 API 调用成本。"
+  },
+  {
+    title: "Higress 2.0 发布",
+    content: "下一代云原生 AI 网关，引入 Wasm 插件市场与更强大的 LLM 路由策略。"
+  },
+  {
+    title: "社区双周会预告",
+    content: "本周五晚 8 点，核心维护者将分享 AI Agent 接入的最佳实践与案例解析。"
+  },
+  {
+    title: "云原生网关白皮书",
+    content: "联合多家企业发布，深度解读 AI 时代下 API 网关的架构演进与技术趋势。"
+  }
+];
+---
+
+<section class="relative w-full overflow-hidden">
+  <!-- Background Image -->
+  <div class="absolute inset-0 -z-10">
+    <img
+      src="https://framerusercontent.com/images/E72tZ6DajfVmRcxxxJBo4gnDY.png?width=2880&height=1640"
+      alt="Hero Background"
+      class="h-full w-full object-cover object-top"
+    />
+  </div>
+
+  <div class="px-8 pt-8 pb-16 sm:px-6 lg:px-8 lg:pt-36 lg:pb-24">
+    <!-- Top Section -->
+    <div class="flex flex-col items-start text-center">
+      <h1 class="text-4xl lg:text-6xl font-medium tracking-tight text-black dark:text-white mb-6">
+        AI 网关快速集成
+        <span class="scrolling-wrapper relative top-[0.1em] inline-block h-[1.2em] overflow-hidden text-left align-bottom">
+          <span class="scrolling-content block">
+            <span class="gradient-text flex items-center h-[1.2em]">LLM API</span>
+            <span class="gradient-text flex items-center h-[1.2em]">AI Agent</span>
+            <span class="gradient-text flex items-center h-[1.2em]">LLM API</span>
+          </span>
+        </span>
+      </h1>
+      <p class="text-left font-light text-lg lg:text-xl text-black dark:text-gray-300 mb-10 max-w-3xl leading-relaxed">
+        易用的生产级AI网关，为 Agent 开发、LLM API 管理提供可靠工具 <br class="hidden md:block" />
+        Higress.ai 提供免费开源及云上商业化版本，针对 DeepSeek 进行功能增强
+      </p>
+      <div class="flex flex-row gap-4 mb-20">
+        <Button mode="primary" width="160px">开源体验</Button>
+        <Button mode="normal" width="160px">了解 AI 网关</Button>
+      </div>
+    </div>
+
+    <!-- Bottom Section (News) -->
+    <div class="mb-3 text-[#6E7587] dark:text-white">News</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {newsItems.map((item) => (
+        <div role="button" class="news-card group relative flex flex-col justify-between gap-4 cursor-pointer p-6 rounded-2xl backdrop-blur-sm transition-transform hover:-translate-y-1">
+          <div class="absolute top-4 right-4 p-3 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="10" height="10" viewBox="0 0 12 12">
+              <g transform="matrix(-1,0,0,1,24,0)">
+                <path d="M13.9085488,3.2445331L13.9085488,10.49702Q13.9085488,10.902587,13.633718,11.177418Q13.358887,11.177418,12.954274,11.151293Q12.54870754,11.451293,12.27483088,11.176462Q12.00095420511,10.90163,12,10.49702L12,0.95427454Q12,0.54870796,12.27483088,0.27483124Q12.54966176,0.0009545465,12.954274,0L22.497017,0Q22.902583999999997,0,23.177414,0.27483088Q23.452244,0.54966176,23.451292000000002,0.95427454Q23.451292000000002,1.3598411,23.17646,1.6346719Q22.901628000000002,1.909503,22.497017,1.9085487L15.2445326,1.9085487L23.737576,10.401592Q24,10.664019,24,11.069584Q24,11.475149,23.737576,11.737576Q23.475149000000002,12,23.069584,12Q22.664019,12,22.401592,11.737576L13.9085488,3.2445331Z" fill="#818598" fill-opacity="1"/>
+              </g>
+            </svg>
+          </div>
+          <div class="text-lg text-gray-4 dark:text-white mb-2 line-clamp-1">
+            {item.title}
+          </div>
+          <p class="text-sm m-0 text-gray-4 dark:text-gray-200 line-clamp-2 leading-relaxed">
+            {item.content}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .news-card {
+    background-color: rgba(224, 233, 251, 0.45);
+    border-image: linear-gradient(164deg, rgba(255, 255, 255, 0.31) 7%, rgba(255, 255, 255, 0) 84%) 0;
+    &:hover {
+      background: linear-gradient(199deg, rgba(224, 233, 251, 0.79) 11%, rgba(224, 233, 251, 0) 92%);
+    }
+  }
+
+  .gradient-text {
+    background: linear-gradient(70deg, #3E5CF4 14%, #6D5BFF 92%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .scrolling-content {
+    animation: scroll-up 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes scroll-up {
+    0%, 45% { transform: translateY(0); }
+    50%, 95% { transform: translateY(-33.333%); }
+    100% { transform: translateY(-66.666%); }
+  }
+</style>

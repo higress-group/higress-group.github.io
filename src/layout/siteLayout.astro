@@ -1,0 +1,24 @@
+---
+import Navbar from '../components/Navbar.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{title}</title>
+  </head>
+  <body>
+    <Navbar />
+    <!-- <main  class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8"> -->
+    <main>
+      <slot /> <!-- your content is injected here -->
+    </main>
+  </body>
+</html>

@@ -1,0 +1,235 @@
+---
+interface Props {
+  id?: string;
+  label?: string;
+  options: {
+    label: string;
+    value: string;
+    selected?: boolean;
+  }[];
+  width?: string;
+}
+
+const { id, label, options, width = 'w-full' } = Astro.props;
+---
+
+<starlight-select class="block relative" data-width={width} id={id}>
+  {label && <label class="sr-only" for={`${id}-button`}>{label}</label>}
+  <button
+    type="button"
+    class="select-button flex items-center justify-between w-full px-3 py-2 text-sm text-left rounded-lg transition-all duration-200"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    id={`${id}-button`}
+  >
+    <span class="selected-label truncate font-medium">
+      {options.find(o => o.selected)?.label || options[0]?.label}
+    </span>
+    <svg class="icon w-4 h-4 ml-2 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <ul
+    class="select-dropdown absolute z-50 w-full mt-1 overflow-auto text-sm rounded-lg shadow-xl max-h-60 opacity-0 -translate-y-2.5 pointer-events-none transition-all duration-200 ease-out origin-top"
+    role="listbox"
+    aria-labelledby={`${id}-button`}
+    tabindex="-1"
+  >
+    {options.map((option) => (
+      <li
+        class:list={[
+          "select-option px-3 py-2 cursor-pointer select-none flex items-center justify-between transition-colors",
+          option.selected ? "selected" : ""
+        ]}
+        role="option"
+        aria-selected={option.selected ? "true" : "false"}
+        data-value={option.value}
+        data-label={option.label}
+      >
+        <span>{option.label}</span>
+        {option.selected && (
+          <svg class="check-icon w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        )}
+      </li>
+    ))}
+  </ul>
+  <!-- Hidden native select for form submission support if needed -->
+  <select name={id} class="hidden" tabindex="-1" aria-hidden="true">
+    {options.map(opt => <option value={opt.value} selected={opt.selected}>{opt.label}</option>)}
+  </select>
+</starlight-select>
+
+<style>
+  starlight-select {
+    --sl-select-bg: var(--sl-color-black);
+    --sl-select-border: var(--sl-color-gray-5);
+    --sl-select-text: var(--sl-color-gray-1);
+    --sl-select-hover: var(--sl-color-gray-6);
+    --sl-select-focus: var(--sl-color-accent);
+    --sl-select-icon: var(--sl-color-gray-3);
+  }
+
+  .select-button {
+    background-color: transparent;
+    border: 1px solid var(--sl-select-border);
+    color: var(--sl-select-text);
+  }
+
+  .select-button:hover {
+    border-color: var(--sl-select-text);
+  }
+
+  .select-button:focus-visible {
+    outline: none;
+    border-color: var(--sl-select-focus);
+  }
+
+  .select-button .icon {
+    color: var(--sl-select-icon);
+  }
+
+  .select-dropdown {
+    background-color: var(--sl-select-bg);
+    border: 1px solid var(--sl-select-border);
+    /* Reset default ul styles */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .select-option {
+    color: var(--sl-select-text);
+  }
+
+  .select-option:hover, .select-option.selected {
+    background-color: var(--sl-select-hover);
+    color: var(--sl-select-text);
+  }
+
+  .select-option.selected {
+    font-weight: 600;
+  }
+
+  .check-icon {
+    color: var(--sl-select-focus);
+  }
+</style>
+
+<script>
+  class StarlightSelect extends HTMLElement {
+    private button: HTMLButtonElement | null;
+    private list: HTMLUListElement | null;
+    private options: NodeListOf<HTMLLIElement>;
+    private nativeSelect: HTMLSelectElement | null;
+    private labelSpan: HTMLSpanElement | null;
+    private arrow: SVGElement | null;
+    private isOpen: boolean = false;
+
+    constructor() {
+      super();
+      this.button = this.querySelector('button');
+      this.list = this.querySelector('ul');
+      this.options = this.querySelectorAll('li');
+      this.nativeSelect = this.querySelector('select');
+      this.labelSpan = this.querySelector('.selected-label');
+      this.arrow = this.querySelector('button > svg');
+
+      this.init();
+    }
+
+    init() {
+      if (!this.button || !this.list) return;
+
+      this.button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.toggle();
+      });
+
+      this.options.forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.select(option);
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!this.contains(e.target as Node)) {
+          this.close();
+        }
+      });
+
+      // Keyboard navigation
+      this.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') this.close();
+      });
+    }
+
+    toggle() {
+      if (this.isOpen) this.close();
+      else this.open();
+    }
+
+    open() {
+      if (!this.list || !this.button || !this.arrow) return;
+      this.isOpen = true;
+      this.button.setAttribute('aria-expanded', 'true');
+      this.list.classList.remove('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
+      this.list.classList.add('opacity-100', 'translate-y-0');
+      this.arrow.classList.add('rotate-180');
+    }
+
+    close() {
+      if (!this.list || !this.button || !this.arrow) return;
+      this.isOpen = false;
+      this.button.setAttribute('aria-expanded', 'false');
+      this.list.classList.add('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
+      this.list.classList.remove('opacity-100', 'translate-y-0');
+      this.arrow.classList.remove('rotate-180');
+    }
+
+    select(optionEl: HTMLLIElement) {
+      const value = optionEl.dataset.value;
+      const label = optionEl.dataset.label;
+
+      if (!value || !label) return;
+
+      // Update UI
+      if (this.labelSpan) this.labelSpan.textContent = label;
+
+      this.options.forEach(o => {
+        const isSelected = o === optionEl;
+        o.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+
+        // Re-apply classes logic
+        if (isSelected) {
+            o.classList.add('selected');
+            if (!o.querySelector('.check-icon')) {
+                 const icon = document.createElement('div');
+                 icon.innerHTML = `<svg class="check-icon w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>`;
+                 o.appendChild(icon.firstChild!);
+            }
+        } else {
+            o.classList.remove('selected');
+            const icon = o.querySelector('.check-icon');
+            if (icon) icon.remove();
+        }
+      });
+
+      // Update native select
+      if (this.nativeSelect) {
+        this.nativeSelect.value = value;
+        this.nativeSelect.dispatchEvent(new Event('change'));
+      }
+
+      // Dispatch custom event
+      this.dispatchEvent(new CustomEvent('change', { detail: { value }, bubbles: true }));
+
+      this.close();
+    }
+  }
+
+  customElements.define('starlight-select', StarlightSelect);
+</script>

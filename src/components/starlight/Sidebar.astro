@@ -1,0 +1,31 @@
+---
+import SidebarPersister from "@astrojs/starlight/components/SidebarPersister.astro";
+// import SidebarSublist from "@astrojs/starlight/components/SidebarSublist.astro";
+import SidebarSublist from "./SidebarSublist.astro";
+import { sidebarCategory } from "../../utils/sign";
+
+const { sidebar: propSidebar } = Astro.props;
+const sidebar = Astro.locals.starlightRoute.sidebar || propSidebar || [];
+
+const pathname = Astro.url.pathname;
+const isLatestDocs = pathname.includes(sidebarCategory.latest);
+const isAi = pathname.includes(sidebarCategory.ai);
+
+// Filter sidebar groups based on context
+const filteredSidebar = sidebar.filter((entry) => {
+  if (isLatestDocs) {
+    return entry.label.includes(sidebarCategory.latest);
+  } else if (isAi) {
+    return entry.label.includes(sidebarCategory.ai);
+  } else {
+    false;
+  }
+}).map(v => {
+  return v.type === "group" ? v.entries : [v]
+}).flat(1);
+
+---
+
+<SidebarPersister>
+  <SidebarSublist sublist={filteredSidebar} />
+</SidebarPersister>

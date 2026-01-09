@@ -1,0 +1,176 @@
+---
+interface Props {
+  label: string;
+  items?: { label: string; href: string }[];
+  class?: string;
+}
+
+const { label, items = [], class: className = "" } = Astro.props;
+---
+
+<starlight-dropdown class:list={["relative inline-block text-left", className]}>
+  <button
+    type="button"
+    class="dropdown-button inline-flex items-center justify-center w-full gap-x-1.5 text-sm transition-colors px-2 py-1"
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    {label}
+    <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-4.182a.75.75 0 111.08 1.04l-4.25 4.785a.75.75 0 01-1.08 0l-4.25-4.785a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+    </svg>
+  </button>
+
+  <div
+    class="dropdown-menu absolute z-50 mt-2 w-40 origin-top-right rounded-md shadow-lg focus:outline-none opacity-0 scale-95 pointer-events-none transition-all duration-200 ease-out"
+    role="menu"
+    aria-orientation="vertical"
+    tabindex="-1"
+  >
+    <div class="p-2" role="none">
+      {items.map((item) => (
+        <a
+          href={item.href}
+          class="dropdown-item block px-4 py-2 text-sm mx-1 rounded-md"
+          role="menuitem"
+          tabindex="-1"
+        >
+          {item.label}
+        </a>
+      ))}
+      <slot />
+    </div>
+  </div>
+</starlight-dropdown>
+
+<style>
+  starlight-dropdown {
+    --sl-dropdown-bg: #ffffff;
+    --sl-dropdown-text: var(--sl-color-text-strong, #111827);
+    --sl-dropdown-hover-bg: var(--sl-color-bg-hover-light, #EFF1FF);
+    --sl-dropdown-hover-text: var(--sl-color-accent, #4f46e5);
+    --sl-dropdown-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .dropdown-button {
+    color: var(--sl-dropdown-text);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .dropdown-button:hover {
+    color: var(--sl-dropdown-hover-text);
+  }
+
+  .dropdown-menu {
+    background-color: var(--sl-dropdown-bg);
+    box-shadow: var(--sl-dropdown-shadow);
+    /* No border */
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px); /* Initial state: shifted up slightly */
+  }
+
+  /* Open State Classes (toggled by JS) */
+  .dropdown-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+    scale: 1;
+  }
+
+  .dropdown-item {
+    color: var(--sl-dropdown-text);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s, color 0.15s;
+  }
+
+  .dropdown-item:hover {
+    background-color: var(--sl-dropdown-hover-bg);
+    color: var(--sl-dropdown-hover-text);
+  }
+
+  /* Arrow rotation */
+  .dropdown-button[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script>
+  class StarlightDropdown extends HTMLElement {
+    private button: HTMLButtonElement | null;
+    private menu: HTMLDivElement | null;
+    private isOpen: boolean = false;
+    private timeoutId: number | null = null;
+
+    constructor() {
+      super();
+      this.button = this.querySelector('.dropdown-button');
+      this.menu = this.querySelector('.dropdown-menu');
+      this.init();
+    }
+
+    init() {
+      if (!this.button || !this.menu) return;
+
+      // Hover handling (Desktop)
+      this.addEventListener('mouseenter', () => this.open());
+      this.addEventListener('mouseleave', () => this.closeWithDelay());
+
+      // Click handling (Mobile/Tablet or fallback)
+      this.button.addEventListener('click', (e) => {
+          e.stopPropagation(); // Prevent document click from immediately closing
+          this.toggle();
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!this.contains(e.target as Node)) {
+          this.close();
+        }
+      });
+
+      // Close on Escape
+      this.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') this.close();
+      });
+    }
+
+    toggle() {
+      if (this.isOpen) this.close();
+      else this.open();
+    }
+
+    open() {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId);
+        this.timeoutId = null;
+      }
+      if (this.isOpen || !this.menu || !this.button) return;
+
+      this.isOpen = true;
+      this.button.setAttribute('aria-expanded', 'true');
+      this.menu.classList.add('open');
+      this.menu.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+    }
+
+    close() {
+      if (!this.isOpen || !this.menu || !this.button) return;
+
+      this.isOpen = false;
+      this.button.setAttribute('aria-expanded', 'false');
+      this.menu.classList.remove('open');
+      this.menu.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+    }
+
+    closeWithDelay() {
+        this.timeoutId = window.setTimeout(() => {
+            this.close();
+        }, 150); // Small delay to allow moving cursor to menu
+    }
+  }
+
+  customElements.define('starlight-dropdown', StarlightDropdown);
+</script>

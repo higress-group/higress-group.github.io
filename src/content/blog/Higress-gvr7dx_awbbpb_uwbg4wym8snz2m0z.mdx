@@ -1,0 +1,106 @@
+---
+title: "Higress 0.6.0 版本发布：更简单，更易用"
+description: "Higress 0.6.0 版本发布：更简单，更易用"
+date: "2023-01-20"
+category: "article"
+keywords: ["Higress"]
+authors: "CH3CHO"
+---
+
+<a name="tzEN3"></a>
+## 一、进展概要
+Higress 0.6.0 开源版本主要围绕易用性演进，核心进展如下：
+
+- 不再需要安装 Istio，简化安装和运维
+- wasm 插件路由级生效配置更简单易懂
+- 开源控制台提供功能预览
+<a name="lNGPX"></a>
+## 二、新特性说明
+<a name="N6QW5"></a>
+### 不再需要安装 Istio
+在上一次社区周会讨论的议题《Higress 解除对 Istio 的强依赖》中，分析了依赖 Istio 的优劣势：
+
+**优势：**
+
+- 业务可以对 Mesh 中的东西向、南北向流量实现统一的管控
+- 替换 istio ingress gateway，提供对 ingress 更好的支持
+- 站在 istio 社区的肩膀上扩展能力，不用重复造轮子
+
+**劣势：**
+
+- 引入额外的安装和运维成本
+- 对于简单的 ingress 使用场景，istio 需要安装的大量 CRD 有些多余，并对后续非 K8s 模式的支持带来负担
+
+基于此，在 Higress 0.6.0 版本中，我们将 istio 作为选装组件提供，可以通过 helm 参数 global.enableMesh=true开启，默认为 false，即无需安装 istio。
+
+Higress 安装步骤简化为一条命令:
+```
+helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress --create-namespace
+```
+如果随着业务演进，需要引入 istio 做 Service Mesh，并实现和 Higress 控制面统一，则可以通过以下命令安装 istio，并完成 Higress 适配，整个过程是平滑生效的：
+```
+helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio --create-namespacehelm upgrade higress -n higress-system --set global.enableMesh=true oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress
+```
+如果已经安装了 istio ，希望解除依赖，也可以按如下命令平滑生效：
+```
+helm upgrade higress -n higress-system --set global.enableMesh=false oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higresskubectl wait -n higress-system deployment/higress-controller deployment/higress-gateway --for=condition=Availablehelm delete istio -n istio-systemkubectl delete ns istio-systemkubectl get crd -oname | grep --color=never 'istio.io' | xargs kubectl delete
+```
+
+<a name="smF4h"></a>
+### 简化 Wasm 插件路由级生效配置
+Higress 提供的 WasmPlugin CRD 完全兼容 Istio 的 WasmPlugin，且提供了额外的两个配置字段:
+
+- defaultConfig：用作插件的默认配置，对于没有命中匹配规则的请求生效
+- matchRules：用于匹配 ingress 或者域名，并生效指定的配置
+
+以屏蔽请求的 request-block 插件为例：
+```
+apiVersion: extensions.higress.io/v1alpha1kind: WasmPluginmetadata:  name: request-block  namespace: higress-systemspec:  url: oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/request-block:1.0.0  # 默认配置  defaultConfig:    block_urls:    - "swagger.html"  # 匹配生效规则  matchRules:   - ingress:    # 匹配ingress生效，此为default命名空间下名称为foo的ingress    - default/foo    config:      block_urls:      - "/index.html"  - domain:    # 匹配域名生效    - "*.example.com"    config:      block_urls:      - "/robots.txt"      - "/index.html"
+```
+注意 defaultConfig 和 matchRules.[].config 下的字段为插件的自定义配置字段。
+<a name="oLVdJ"></a>
+## 三、控制台功能预览
+特别感谢**罗永波(abuexclusive)、项修卉(xiangxiuhui)、袁坤(heimanba)、董艺荃(CH3CHO)** 等开发者的工作，Higress 开源控制台的前端页面和后端框架已经基本完成，目前可以访问地址：http://demo.higress.io 进行功能预览：<br />路由配置：<br />![](/img/1728551158884.png)<br />服务列表：<br />![](/img/1728551159094.png)<br />域名管理：<br />![](/img/1728551159306.png)
+<a name="OFG3P"></a>
+# **四、Milestone 规划**
+Higress 下个版本将继续围绕易用性进行迭代，预计在 2 月底推出，计划提供下列功能：<br />**Higress 控制台：**
+
+- 服务来源可以配置 Nacos/Zookeeper 等注册中心
+- 完成路由配置到 Ingress 转换的完整功能
+- 提供路由/服务级的 QPS 和延时等指标监控图标
+
+**Higress 引擎侧：**
+
+- 完成 Method/Header/Query 路由匹配条件的 Ingress 注解，提供控制台集成
+- 实现 Ingress API 基于 Nacos 做配置存储，可以无需依赖 K8s 进行安装部署
+- 提供开箱即用的 WAF 插件
+
+GA 版本预计将在 3 月份推出，欢迎加入 Higress 社区群，及时了解版本动向：<br />![](/img/1728551159518.png)
+<a name="LnVhb"></a>
+# **五、参与 Higress 社区**
+Higress 开源贡献小组正在火热招募贡献者。早期参与开源更容易成为项目 Committer，并有更多机会成为 Higress PMC(Project Management Committee) 的一员，参与主导 Higress 社区的前进方向。<br />欢迎加入 Higress 开发者钉钉群，了解更多详细信息：<br />![](/img/1728551159713.png)
+<a name="nbQRf"></a>
+## **1. 参与 Higress 控制台完善**
+技术栈：TypeScript/Java<br />Github 地址：https://github.com/higress-group/higress-console<br />主要内容包括：
+
+- Higress 开源产品的交互设计和实现
+- 集成开源可观测产品，实现 Higress metrics/logging/tracing 的产品化能力
+- 基于 Higress REST API 的前后端对接
+- 基于 K8s、Nacos 等配置来源实现 Ingress 等配置的存储和解析
+<a name="PkMJE"></a>
+## **2. 参与 Higress 的 Ingress 能力实现**
+技术栈：Go<br />Github 地址：https://github.com/alibaba/higress<br />主要内容包括：
+
+- 承接 Higress 控制台需求，完成对应的 Ingress 注解或 Wasm 插件能力实现
+- 挖掘更多 Envoy 网关的技术红利，通过 Ingress 注解或 Wasm 插件的方式，使其更易被使用
+- 实现更多 Nginx Ingress 注解能力的兼容
+<a name="DLAHl"></a>
+## **3. 补充单测和 e2e 集成测试用例**
+技术栈：Go<br />Github 地址：https://github.com/alibaba/higress<br />主要内容包括：
+
+- Ingress 注解/Wasm 插件相关实现的 e2e 测试用例编写
+- Ingress 注解/Wasm 插件相关代码的单元测试编写
+
+特别感谢**刘训灼(Xunzhuo) **为 Higress 社区贡献的 e2e 测试框架：https://github.com/alibaba/higress/tree/main/test，可以很简单地基于 Yaml 配置和少量代码完成基于 Ingress 能力的 e2e 集成测试；基于 PR 自动触发测试的机制，可以很好地保障 Higress 的迭代质量。<br />最后，祝大家假期愉快，新年快乐哦 
+
+

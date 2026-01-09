@@ -1,0 +1,16 @@
+export default {
+  "page.header.gateway": "云原生 API 网关",
+  "page.header.ai": "AI 网关",
+  "page.header.market": "HiMarket",
+  "navbar.product": "产品",
+  "navbar.product.features": "功能特性",
+  "navbar.product.benefits": "核心优势",
+  "navbar.docs": "文档",
+  "navbar.enterprise": "企业版",
+  "navbar.enterprise.intro": "企业版介绍",
+  "navbar.enterprise.solutions": "解决方案",
+  "navbar.community": "社区",
+  "navbar.community.blog": "博客",
+  "navbar.community.events": "活动",
+  "navbar.community.github": "GitHub",
+};

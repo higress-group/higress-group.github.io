@@ -1,0 +1,16 @@
+export default {
+  "page.header.gateway": "Cloud Native API Gateway",
+  "page.header.ai": "AI Gateway",
+  "page.header.market": "HiMarket",
+  "navbar.product": "Product",
+  "navbar.product.features": "Features",
+  "navbar.product.benefits": "Benefits",
+  "navbar.docs": "Docs",
+  "navbar.enterprise": "Enterprise",
+  "navbar.enterprise.intro": "Introduction",
+  "navbar.enterprise.solutions": "Solutions",
+  "navbar.community": "Community",
+  "navbar.community.blog": "Blog",
+  "navbar.community.events": "Events",
+  "navbar.community.github": "GitHub",
+};

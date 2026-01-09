@@ -1,0 +1,44 @@
+---
+import Switcher from './switcher/Switcher.astro';
+
+const currentPath = Astro.url.pathname;
+const isEnglish = currentPath === '/en' || currentPath.startsWith('/en/');
+const lang = isEnglish ? 'en' : 'zh';
+
+const options = [
+  { label: 'EN', value: 'en' },
+  { label: 'ZH', value: 'zh' }
+];
+---
+
+<div class="language-select-wrapper">
+  <Switcher value={lang} options={options} id="lang-switcher" />
+</div>
+
+<script>
+  const switcher = document.getElementById('lang-switcher');
+  
+  switcher?.addEventListener('change', (e: any) => {
+    const targetIsEnglish = e.detail.value === 'en';
+    const currentPath = window.location.pathname;
+    
+    let newPath = currentPath;
+
+    // Check if currently English based on path prefix
+    const currentIsEnglish = currentPath.startsWith('/en/') || currentPath === '/en';
+
+    if (targetIsEnglish && !currentIsEnglish) {
+      // Switch to English: Add /en prefix
+      // If root '/', path becomes '/en'
+      // If '/foo', path becomes '/en/foo'
+      newPath = '/en' + (currentPath === '/' ? '' : currentPath);
+    } else if (!targetIsEnglish && currentIsEnglish) {
+      // Switch to Chinese: Remove /en prefix
+      // If '/en', path becomes '/'
+      // If '/en/foo', path becomes '/foo'
+      newPath = currentPath.replace(/^\/en/, '') || '/';
+    }
+
+    window.location.href = newPath;
+  });
+</script>

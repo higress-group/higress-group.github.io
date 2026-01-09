@@ -1,0 +1,232 @@
+---
+interface Props {
+  id?: string;
+  value: string;
+  options: {
+    label: string;
+    value: string;
+  }[];
+  class?: string;
+}
+
+interface Props {
+  id?: string;
+  value: string;
+  options: {
+    label: string;
+    value: string;
+  }[];
+  class?: string;
+  theme?: 'default' | 'light';
+}
+
+const { id, value, options, class: className = "", theme = 'light' } = Astro.props;
+
+if (options.length < 2) {
+  throw new Error("Switcher component requires at least two options.");
+}
+---
+
+<starlight-switcher data-value={value} data-component-theme={theme} data-options={JSON.stringify(options)} class={className} id={id}>
+  <div class="switch-container" role="switch">
+    <div class="switch-track">
+      <div class="switch-slider no-transition"></div>
+      {options.map(option => (
+        <button type="button" class="switch-option" data-value={option.value}>{option.label}</button>
+      ))}
+    </div>
+  </div>
+</starlight-switcher>
+
+<style>
+  starlight-switcher {
+    --switch-bg: var(--sl-color-bg-highlight);
+    --switch-border: var(--sl-color-bg-highlight);
+    --switch-text-active: var(--sl-color-text-strong);
+    --switch-text-inactive: var(--sl-color-gray-3);
+
+    --switch-slider-bg: var(--sl-color-gray-5);
+    --switch-slider-bg-light: var(--sl-color-bg-element);
+    --switch-slider-bg-dark: var(--sl-color-gray-4);
+
+    display: inline-block;
+  }
+
+  /* Theme: Light Variation */
+  starlight-switcher[data-component-theme='light'] {
+    --switch-bg: #ffffff;
+    --switch-border: #ffffff;
+    --switch-text-active: var(--sl-color-accent); /* text-primary */
+    --switch-text-inactive: #A3A6B3;
+
+    --switch-slider-bg: var(--sl-color-bg-hover-light, #EFF1FF);
+    --switch-slider-bg-light: var(--sl-color-bg-hover-light, #EFF1FF);
+    --switch-slider-bg-dark: var(--sl-color-gray-5); /* Fallback for dark mode if needed, or keep uniform */
+  }
+
+  /* In dark mode, even if component theme is 'light', we might want to adjust or stick to the requested colors?
+     The prompt says "background: white", "active background: #EFF1FF".
+     This implies a strictly light-colored component regardless of global theme, or specifically for a light context.
+     I will apply these overrides regardless of global theme if data-component-theme='light' is set,
+     but maybe adjust for dark mode legibility if necessary.
+     For now, strictly following the requested color codes.
+  */
+
+  .switch-container {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+    .switch-track {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background-color: var(--switch-bg);
+      border: 1px solid var(--switch-border);
+      border-radius: 9999px;
+      padding: 4px;
+      box-sizing: border-box;
+      width: max-content;
+    }
+
+    .switch-slider {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      left: 0;
+      /* Start invisible to avoid Flash of Unstyled Content, but appear instantly via JS */
+      opacity: 0;
+      background-color: var(--switch-slider-bg);
+      border-radius: 9999px;
+      transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.2s ease;
+      z-index: 1;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .switch-slider.no-transition {
+      transition: none !important;
+    }
+
+    :global([data-theme='light']) .switch-slider {
+      background-color: var(--switch-slider-bg-light);
+      border: none;
+    }
+
+
+    /* Override slider bg for custom theme to ignore global theme switch if needed,
+       or ensure variables map correctly.
+       If data-component-theme='light', --switch-slider-bg-light is #EFF1FF.
+    */
+
+    .switch-option {
+      position: relative;
+      z-index: 2;
+      background: none;
+      border: none;
+      font-size: 0.75rem;
+      color: var(--switch-text-inactive);
+      transition: color 0.3s ease;
+      line-height: 1;
+      padding: 8px 12px;
+      margin: 0;
+      cursor: pointer;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, sans-serif;
+      white-space: nowrap;
+    }
+  /* Active state text color */
+  .switch-option.active {
+      color: var(--switch-text-active);
+  }
+</style>
+
+<script>
+class StarlightSwitcher extends HTMLElement {
+  constructor() {
+    super();
+    this.init();
+  }
+
+  init() {
+    // Initial visual update (no animation)
+    this.updateVisuals(true);
+
+    this.querySelectorAll('.switch-option').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetVal = (btn as HTMLElement).dataset.value;
+        if (targetVal && targetVal !== this.dataset.value) {
+          this.select(targetVal);
+        }
+      });
+    });
+
+    // Recalculate on resize
+    window.addEventListener('resize', () => this.updateVisuals(false));
+  }
+
+  updateVisuals(isInit = false) {
+    const currentValue = this.dataset.value;
+    const slider = this.querySelector('.switch-slider') as HTMLElement;
+    const btns = this.querySelectorAll('.switch-option');
+
+    if (!slider) return;
+
+    let activeBtn: HTMLElement | null = null;
+
+    btns.forEach((btn) => {
+        const btnVal = (btn as HTMLElement).dataset.value;
+        const isActive = btnVal === currentValue;
+
+        if (isActive) {
+            btn.classList.add('active');
+            activeBtn = btn as HTMLElement;
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    if (activeBtn) {
+        const width = (activeBtn as HTMLElement).offsetWidth;
+        const left = (activeBtn as HTMLElement).offsetLeft;
+
+        slider.style.width = `${width}px`;
+        slider.style.transform = `translateX(${left}px)`;
+        slider.style.opacity = '1';
+
+        // If initialization, force reflow and remove no-transition
+        if (isInit) {
+            // Force reflow to apply the initial styles without transition
+            slider.offsetHeight;
+            // Small timeout to ensure the class removal happens after the paint
+            requestAnimationFrame(() => {
+                slider.classList.remove('no-transition');
+            });
+        }
+    }
+  }
+
+  select(value: string) {
+    this.dataset.value = value;
+    this.updateVisuals(false); // Animate on user interaction
+
+    this.dispatchEvent(new CustomEvent('change', {
+        detail: { value },
+        bubbles: true
+    }));
+  }
+}
+
+customElements.define('starlight-switcher', StarlightSwitcher);
+</script>
+
+<style>
+/* Additional styles for the generic switcher */
+.switch-option.active {
+    color: var(--sl-color-white);
+}
+</style>
