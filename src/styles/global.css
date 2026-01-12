@@ -81,6 +81,8 @@ body {
   --color-gray-900: var(--color-zinc-900);
   --color-gray-950: var(--color-zinc-950);
 
+  --color-blue-06: #7097E6;
+
   --color-primary: var(--sl-color-accent);
   --color-black: #2E3038;
   --color-strong: var(--sl-color-text-strong);

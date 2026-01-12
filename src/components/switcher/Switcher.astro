@@ -54,13 +54,13 @@ if (options.length < 2) {
 
   /* Theme: Light Variation */
   starlight-switcher[data-component-theme='light'] {
-    --switch-bg: #ffffff;
-    --switch-border: #ffffff;
-    --switch-text-active: var(--sl-color-accent); /* text-primary */
-    --switch-text-inactive: #A3A6B3;
+    --switch-bg: var(--sl-color-bg-highlight);
+    --switch-border: var(--sl-color-bg-highlight);
+    --switch-text-active: var(--color-black);
+    --switch-text-inactive: var(--color-black);
 
     --switch-slider-bg: var(--sl-color-bg-hover-light, #EFF1FF);
-    --switch-slider-bg-light: var(--sl-color-bg-hover-light, #EFF1FF);
+    --switch-slider-bg-light: #fff;
     --switch-slider-bg-dark: var(--sl-color-gray-5); /* Fallback for dark mode if needed, or keep uniform */
   }
 
