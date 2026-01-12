@@ -1,31 +1,91 @@
 ---
 import Button from "../components/button/Button.astro";
+
+const currentYear = new Date().getFullYear();
+const isEnglish = Astro.currentLocale === "en";
+
+const links = [
+  {
+    label: "Nacos",
+    link: "https://nacos.io",
+  },
+  {
+    label: "SpringCloudAlibaba",
+    link: "https://sca.aliyun.com",
+  },
+  {
+    label: "SpringAIAlibaba",
+    link: "https://java2ai.com",
+  },
+  {
+    label: "Arthas",
+    link: "https://arthas.aliyun.com/",
+  },
+  {
+    label: "Dubbo",
+    link: "https://cn.dubbo.apache.org",
+  },
+  {
+    label: "Sentinel",
+    link: "https://sentinelguard.io",
+  },
+  {
+    label: "RocketMQ",
+    link: "https://rocketmq.io",
+  },
+  {
+    label: "可观测中文",
+    link: "https://observability.cn",
+  },
+  {
+    label: "OpenKruise",
+    link: "https://openkruise.io",
+  },
+  {
+    label: "Serverless Devs",
+    link: "https://serverless-devs.com",
+  },
+].filter(item => {
+  if (isEnglish && item.label === "可观测中文") {
+    return false;
+  }
+  return true;
+});
+
 ---
 
-<footer class="flex flex-col w-full px-10">
-  <div class="w-full flex h-96 bg-[#EBECEF] p-10">
-    <div class="flex-4 flex flex-col gap-6">
+<footer class="page-footer flex flex-col gap-10 w-full px-4 lg:px-10 pb-10">
+  <div class="w-full flex flex-col lg:flex-row h-auto lg:h-96 bg-[#EBECEF] p-6 lg:p-10 rounded-2xl gap-8 lg:gap-0">
+    <div class="flex-1 flex flex-col gap-6">
       <div class="text-[28px] text-black font-light">联系我们</div>
       <div class="text-[18px] text-[#A3A6B3]">可以通过以下方式获取我们最新动态渠道</div>
-      <div class="flex gap-6">
+      <div class="flex flex-wrap gap-4 lg:gap-6">
         <Button width="155px" mode="normal">
-          钉钉群
+          <span class="text-xs">
+            钉钉群
+          </span>
         </Button>
         <Button width="155px" mode="normal">
-          微信
+          <span class="text-xs">
+            微信
+          </span>
         </Button>
         <Button width="155px" mode="normal">
-          Higress 公众号
+          <span class="text-xs">
+            Higress 公众号
+          </span>
         </Button>
         <Button width="155px" mode="normal">
-          云原生公众号
+          <span class="text-xs">
+            云原生公众号
+          </span>
         </Button>
       </div>
     </div>
-    <div class="flex-2">
-      <div class="flex justify-between">
+    <div class="lg:w-1/3 w-full">
+      <div class="flex justify-between lg:justify-end lg:gap-36">
         <div class="flex flex-col">
-          <div class="text-xs text-[#A3A6B3] pb-12">菜单</div>
+          <div class="text-xs text-[#A3A6B3] pb-6 lg:pb-12">菜单</div>
           <ul class="flex flex-col gap-3">
             <li>主页</li>
             <li>文档</li>
@@ -34,8 +94,8 @@ import Button from "../components/button/Button.astro";
             <li>企业版</li>
           </ul>
         </div>
-        <div class="flex flex-col mr-36">
-          <div class="text-xs text-[#A3A6B3] pb-12">资讯</div>
+        <div class="flex flex-col lg:mr-36">
+          <div class="text-xs text-[#A3A6B3] pb-6 lg:pb-12">资讯</div>
           <ul class="flex flex-col gap-3">
             <li>最新动态</li>
             <li>企业实践</li>
@@ -45,7 +105,46 @@ import Button from "../components/button/Button.astro";
       </div>
     </div>
   </div>
-  <div class="h-px w-full"></div>
-  <div>
+  <div class="h-px bg-gray-200 w-full"></div>
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-col lg:flex-row gap-2 justify-center items-center">
+      <div class="text-xs text-[#A3A6B3] whitespace-nowrap">友情链接：</div>
+      <div class="flex flex-wrap justify-center gap-y-2">
+        {links.map((item) => (
+          <a href={item.link} target="_blank" class="footer-link text-xs text-[#A3A6B3] hover:text-primary transition-colors px-3">
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </div>
+    <div class="text-xs text-gray-400 text-center flex flex-col gap-1">
+      <div>© Higress Authors {currentYear} | Documentation Distributed under CC-BY-4.0</div>
+      <div>
+        Copyright © 2022-{currentYear}, Alibaba. All rights reserved. Alibaba has registered trademarks and uses trademarks.
+      </div>
+      <div>浙公网安备 33011002016922 号 浙 ICP 备 12022327 号-1119</div>
+    </div>
   </div>
 </footer>
+
+<style>
+.page-footer {
+  li {
+    color: oklch(from var(--color-black) 50% c h);
+  }
+
+  .footer-link {
+    position: relative;
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 10px;
+      background-color: var(--color-gray-400)
+    }
+  }
+}
+</style>

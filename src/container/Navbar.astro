@@ -1,10 +1,11 @@
 ---
 // Navbar component with left-center-right layout
-import SearchButton from './SearchButton.astro';
-import LanguageSelect from './LanguageSelect.astro';
-import Dropdown from './dropdown/Dropdown.astro';
+import SearchButton from '../components/SearchButton.astro';
+import LanguageSelect from '../components/LanguageSelect.astro';
+import Dropdown from '../components/dropdown/Dropdown.astro';
 import { useTranslations } from "../i18n/utils";
-import Button from './button/Button.astro';
+import Button from '../components/button/Button.astro';
+import MobileNavbar from './mobile/MobileNavbar.astro';
 
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
@@ -44,7 +45,7 @@ const navItems = [
     label: t('navbar.community'),
     items: [
       { label: t('navbar.community.blog'), href: '/blog' },
-      { label: t('navbar.community.events'), href: '/community/events' },
+      { label: t('navbar.community.developer'), href: 'https://higress.cn/docs/developers/developers_dev' },
       { label: t('navbar.community.github'), href: 'https://github.com/alibaba/higress' },
     ]
   }
@@ -52,17 +53,17 @@ const navItems = [
 ---
 
 <nav id="main-nav" class:list={["fixed top-0 left-0 right-0 z-50 transition-all duration-300", navClass]} data-is-home={String(isHome)}>
-  <div class="mx-auto px-10">
+  <div class="mx-auto px-4 lg:px-10">
     <div class="flex h-16 items-center justify-between">
       <!-- Left: Logo -->
-      <div class="flex items-center">
+      <div class="flex flex-1 items-center">
         <a href={homeUrl} class="min-w-33.75 flex items-center">
           <img src="/images/logo.svg" alt="Higress Logo" class="h-8 w-auto" />
         </a>
       </div>
 
-      <!-- Center: Navigation Links -->
-      <div class="nav-links flex items-center">
+      <!-- Center: Navigation Links (Desktop) -->
+      <div class="nav-links hidden lg:flex items-center">
         {navItems.map((item, index) => (
           <div class="nav-link">
             {item.type === 'dropdown' ? (
@@ -80,43 +81,59 @@ const navItems = [
         ))}
       </div>
       <!-- Right: Search, Theme & Language Toggle -->
-      <div class="flex items-center gap-4">
+      <div class="flex flex-1 items-center justify-end gap-4">
         <!-- Language Select -->
         <LanguageSelect />
         <!-- Search -->
         <SearchButton />
 
-        <Button mode="black" width='120px'>
-          <a
-            class="text-white"
-            href="https://github.com/alibaba/higress"
-            target="_blank"
-          >
-            GITHUB
-          </a>
-        </Button>
+        <div class="hidden lg:block">
+          <Button mode="black" width='120px'>
+            <a
+              class="text-white"
+              href="https://github.com/alibaba/higress"
+              target="_blank"
+            >
+              GITHUB
+            </a>
+          </Button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          class="lg:hidden p-2 focus:outline-none bg-transparent"
+          aria-label="Toggle menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
+
+  <MobileNavbar navItems={navItems} homeUrl={homeUrl} />
 </nav>
 
 <script>
   const nav = document.getElementById('main-nav');
   const isHome = nav?.dataset.isHome === 'true';
 
+  // Scroll effect logic
   if (isHome && nav) {
     const handleScroll = () => {
       if (window.scrollY > 20) {
         nav.classList.remove('bg-transparent');
-        nav.classList.add('bg-white/20', 'backdrop-blur-sm', 'shadow-sm');
+        nav.classList.add('bg-white/90', 'backdrop-blur-sm', 'shadow-sm');
       } else {
         nav.classList.add('bg-transparent');
-        nav.classList.remove('bg-white/20', 'backdrop-blur-sm', 'shadow-sm');
+        nav.classList.remove('bg-white/90', 'backdrop-blur-sm', 'shadow-sm');
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    // Initial check
     handleScroll();
   }
 </script>

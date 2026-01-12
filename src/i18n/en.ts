@@ -13,4 +13,5 @@ export default {
   "navbar.community.blog": "Blog",
   "navbar.community.events": "Events",
   "navbar.community.github": "GitHub",
+  "navbar.community.developer": "Developer",
 };

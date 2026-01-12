@@ -13,4 +13,5 @@ export default {
   "navbar.community.blog": "博客",
   "navbar.community.events": "活动",
   "navbar.community.github": "GitHub",
+  "navbar.community.developer": "开发者",
 };

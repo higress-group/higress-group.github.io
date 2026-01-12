@@ -1,0 +1,138 @@
+---
+import Button from "../../components/button/Button.astro";
+
+interface Props {
+  navItems: {
+    type: string;
+    label: string;
+    href?: string;
+    target?: string;
+    items?: { label: string; href: string }[];
+  }[];
+  homeUrl: string;
+}
+
+const { navItems, homeUrl } = Astro.props;
+---
+
+<!-- Mobile Menu Overlay -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-50 bg-white hidden flex-col overflow-y-auto h-screen transition-all duration-300 ease-in-out opacity-0 translate-y-4"
+>
+  <!-- Mobile Menu Header -->
+  <div class="flex items-center justify-between px-4 h-16 border-b border-gray-100">
+    <a href={homeUrl} class="flex items-center">
+      <img src="/images/logo.svg" alt="Higress Logo" class="h-8 w-auto" />
+    </a>
+    <button
+      id="close-menu-btn"
+      type="button"
+      class="p-2 focus:outline-none bg-transparent"
+      aria-label="Close menu"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Content -->
+  <div class="p-4 flex flex-col gap-6">
+    <ul class="flex flex-col gap-4">
+      {navItems.map((item) => (
+        item.type === 'dropdown' ? (
+          <li>
+            <details class="group">
+              <summary class="flex items-center justify-between font-medium text-gray-900 cursor-pointer list-none py-2">
+                {item.label}
+                <svg class="w-4 h-4 transition-transform duration-200 group-open:rotate-180 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <ul class="mt-2 ml-4 flex flex-col gap-3 pl-4 py-2">
+                {item.items?.map((sub) => (
+                  <li>
+                    <a
+                      href={sub.href}
+                      class="text-sm text-gray-600 hover:text-primary block py-1"
+                    >
+                      {sub.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </li>
+        ) : (
+          <li>
+            <a
+              href={item.href}
+              target={item.target}
+              class="font-medium text-gray-900 block py-2"
+            >
+              {item.label}
+            </a>
+          </li>
+        )
+      ))}
+    </ul>
+
+    <div class="w-full">
+      <Button mode="black" width="100%" class="w-full">
+        <a
+          class="text-white block w-full text-center"
+          href="https://github.com/alibaba/higress"
+          target="_blank"
+        >
+          GITHUB
+        </a>
+      </Button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const closeMenuBtn = document.getElementById('close-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  function toggleMenu(show: boolean) {
+    if (!mobileMenu) return;
+    if (show) {
+      mobileMenu.style.top = '0px';
+      mobileMenu.style.height = '100vh';
+      mobileMenu.classList.remove('hidden');
+      mobileMenu.classList.add('flex');
+      // Trigger reflow to ensure transition works
+      requestAnimationFrame(() => {
+        mobileMenu.classList.remove('opacity-0', 'translate-y-4');
+        mobileMenu.classList.add('opacity-100', 'translate-y-0');
+      });
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    } else {
+      mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+      mobileMenu.classList.add('opacity-0', 'translate-y-4');
+
+      // Wait for transition to finish before hiding
+      mobileMenu.addEventListener('transitionend', () => {
+        if (mobileMenu.classList.contains('opacity-0')) {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+        }
+      }, { once: true });
+
+      document.body.style.overflow = '';
+    }
+  }
+
+  mobileMenuBtn?.addEventListener('click', () => toggleMenu(true));
+  closeMenuBtn?.addEventListener('click', () => toggleMenu(false));
+</script>
+
+<style>
+  /* Hide scrollbar for mobile menu if needed */
+  #mobile-menu {
+    -webkit-overflow-scrolling: touch;
+  }
+</style>
