@@ -46,7 +46,6 @@ const navItems = [
     items: [
       { label: t('navbar.community.blog'), href: '/blog' },
       { label: t('navbar.community.developer'), href: 'https://higress.cn/docs/developers/developers_dev' },
-      { label: t('navbar.community.github'), href: 'https://github.com/alibaba/higress' },
     ]
   }
 ];
@@ -126,10 +125,10 @@ const navItems = [
     const handleScroll = () => {
       if (window.scrollY > 20) {
         nav.classList.remove('bg-transparent');
-        nav.classList.add('bg-white/90', 'backdrop-blur-sm', 'shadow-sm');
+        nav.classList.add('bg-white/20', 'backdrop-blur-sm', 'shadow-sm');
       } else {
         nav.classList.add('bg-transparent');
-        nav.classList.remove('bg-white/90', 'backdrop-blur-sm', 'shadow-sm');
+        nav.classList.remove('bg-white/20', 'backdrop-blur-sm', 'shadow-sm');
       }
     };
 
