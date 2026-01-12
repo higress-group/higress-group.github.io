@@ -1,5 +1,7 @@
+
 ---
 import Navbar from '../components/Navbar.astro';
+import PageFooter from '../container/page-footer.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -20,5 +22,6 @@ const { title } = Astro.props;
     <main>
       <slot /> <!-- your content is injected here -->
     </main>
+    <PageFooter />
   </body>
 </html>

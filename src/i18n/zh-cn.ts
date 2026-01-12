@@ -1,6 +1,6 @@
 export default {
   "page.header.gateway": "云原生 API 网关",
-  "page.header.ai": "AI 网关",
+  "page.header.ai.gateway": "AI 网关",
   "page.header.market": "HiMarket",
   "navbar.product": "产品",
   "navbar.product.features": "功能特性",

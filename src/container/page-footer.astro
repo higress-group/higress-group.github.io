@@ -1,0 +1,51 @@
+---
+import Button from "../components/button/Button.astro";
+---
+
+<footer class="flex flex-col w-full px-10">
+  <div class="w-full flex h-96 bg-[#EBECEF] p-10">
+    <div class="flex-4 flex flex-col gap-6">
+      <div class="text-[28px] text-black font-light">联系我们</div>
+      <div class="text-[18px] text-[#A3A6B3]">可以通过以下方式获取我们最新动态渠道</div>
+      <div class="flex gap-6">
+        <Button width="155px" mode="normal">
+          钉钉群
+        </Button>
+        <Button width="155px" mode="normal">
+          微信
+        </Button>
+        <Button width="155px" mode="normal">
+          Higress 公众号
+        </Button>
+        <Button width="155px" mode="normal">
+          云原生公众号
+        </Button>
+      </div>
+    </div>
+    <div class="flex-2">
+      <div class="flex justify-between">
+        <div class="flex flex-col">
+          <div class="text-xs text-[#A3A6B3] pb-12">菜单</div>
+          <ul class="flex flex-col gap-3">
+            <li>主页</li>
+            <li>文档</li>
+            <li>AI 实验室</li>
+            <li>社区</li>
+            <li>企业版</li>
+          </ul>
+        </div>
+        <div class="flex flex-col mr-36">
+          <div class="text-xs text-[#A3A6B3] pb-12">资讯</div>
+          <ul class="flex flex-col gap-3">
+            <li>最新动态</li>
+            <li>企业实践</li>
+            <li>联系我们</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="h-px w-full"></div>
+  <div>
+  </div>
+</footer>

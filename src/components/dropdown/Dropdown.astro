@@ -31,6 +31,8 @@ const { label, items = [], class: className = "" } = Astro.props;
       {items.map((item) => (
         <a
           href={item.href}
+          target={item.href.startsWith('http') ? '_blank' : undefined}
+          rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
           class="dropdown-item block px-4 py-2 text-sm mx-1 rounded-md"
           role="menuitem"
           tabindex="-1"

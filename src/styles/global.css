@@ -4,14 +4,24 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 
-a, body {
+* {
+  box-sizing: border-box;
+}
+
+a, body, footer, ul, li {
   text-decoration: none;
-  /*padding: 0;*/
+  margin: 0;
+  list-style-type: none;
+}
+
+ul {
+  padding: 0;
   margin: 0;
 }
 
 body {
   background-color: #F4F4F6;
+  box-sizing: border-box;
 }
 
 /* Force Light mode colors for everything. */
