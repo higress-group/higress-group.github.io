@@ -1,6 +1,7 @@
 ---
-import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
+// import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
 import Switcher from '../switcher/Switcher.astro';
+import MobileMenuToggle from './MobileMenuToggle.astro';
 import { sidebarCategory, sidebarCategoryDefaultLink } from "../../utils/sign";
 import { useTranslations } from "../../i18n/utils";
 
@@ -78,6 +79,11 @@ const isDevelopers = pathname.includes(sidebarCategory.developer)
 			height: var(--sl-nav-height);
 			/*padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);*/
 			/*padding-inline-end: var(--sl-nav-pad-x);*/
+			transition: z-index 0s;
+		}
+
+		:global([data-main-mobile-menu-open]) .header {
+			z-index: 30;
 		}
 
 		:global([data-has-sidebar]) .header {

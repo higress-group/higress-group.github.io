@@ -1,0 +1,23 @@
+---
+import type { GetStaticPathsOptions } from "astro";
+import { getCollection } from "astro:content";
+import BlogLayout from "../../../../container/blog/BlogLayout.astro";
+
+const { page } = Astro.props;
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+    const posts = await getCollection("blog");
+
+    const sortedPosts = posts.sort(
+        (a, b) =>
+            new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+    );
+
+    const articlePosts = sortedPosts.filter((post) => {
+        return post.data.category === "article";
+    });
+    return paginate(articlePosts, { pageSize: 9 });
+}
+---
+
+<BlogLayout page={page} currentCategory="article" />

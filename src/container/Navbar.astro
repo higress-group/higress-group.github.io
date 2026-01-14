@@ -20,20 +20,30 @@ const isProducts = /himarket|ai-gateway|api-gateway|blog/.test(currentPath);
 // Set default to transparent for all pages. Scroll effect only applies to Home.
 const navClass = "bg-transparent";
 
+// Helper function to add locale prefix to internal links
+const localizeUrl = (url: string) => {
+  // Don't modify external URLs (starting with http:// or https://)
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  // Add /en prefix for English locale
+  return isEnglish ? `/en${url}` : url;
+};
+
 const navItems = [
   {
     type: 'dropdown',
     label: t('navbar.product'),
     items: [
-      { label: t('page.header.gateway'), href: '/api-gateway' },
-      { label: t('page.header.ai.gateway'), href: '/ai-gateway' },
-      { label: 'HiMarket', href: '/himarket' },
+      { label: t('page.header.gateway'), href: localizeUrl('/api-gateway') },
+      { label: t('page.header.ai.gateway'), href: localizeUrl('/ai-gateway') },
+      { label: 'HiMarket', href: localizeUrl('/himarket') },
     ]
   },
   {
     type: 'link',
     label: t('navbar.docs'),
-    href: '/docs/latest/overview/what-is-higress',
+    href: localizeUrl('/docs/latest/overview/what-is-higress'),
   },
   {
     type: 'link',
@@ -45,8 +55,8 @@ const navItems = [
     type: 'dropdown',
     label: t('navbar.community'),
     items: [
-      { label: t('navbar.community.blog'), href: '/blog' },
-      { label: t('navbar.community.developer'), href: '/docs/developers/developers_dev' },
+      { label: t('navbar.community.blog'), href: localizeUrl('/blog') },
+      { label: t('navbar.community.developer'), href: localizeUrl('/docs/developers/developers_dev') },
     ]
   }
 ];

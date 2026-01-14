@@ -22,7 +22,7 @@ const { label, items = [], class: className = "" } = Astro.props;
   </button>
 
   <div
-    class="dropdown-menu absolute z-50 mt-2 w-40 origin-top-right rounded-md shadow-lg focus:outline-none opacity-0 scale-95 pointer-events-none transition-all duration-200 ease-out"
+    class="dropdown-menu absolute z-50 mt-2 min-w-40 max-w-xs origin-top-right rounded-md shadow-lg focus:outline-none opacity-0 scale-95 pointer-events-none transition-all duration-200 ease-out"
     role="menu"
     aria-orientation="vertical"
     tabindex="-1"
@@ -85,7 +85,8 @@ const { label, items = [], class: className = "" } = Astro.props;
   .dropdown-item {
     color: var(--sl-dropdown-text);
     text-decoration: none;
-    white-space: nowrap;
+    white-space: normal;
+    word-wrap: break-word;
     transition: background-color 0.15s, color 0.15s;
   }
 
