@@ -1,0 +1,131 @@
+---
+import ProductHeader from "./Header.astro";
+import Button from "../../components/button/Button.astro";
+import Section from "../common/section.astro";
+import Layout from "./Layout.astro";
+
+const products = [
+  {
+    label: "多模型统一接入",
+    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
+    link: "",
+    img: "/images/api/api.png",
+  },
+  {
+    label: "智能协议转换",
+    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
+    link: "",
+    img: "/images/api/protect.png",
+  },
+  {
+    label: "AI 安全护栏",
+    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
+    link: "",
+    img: "/images/api/flow.png",
+  },
+  {
+    label: "Token 流量管理",
+    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
+    link: "",
+    img: "/images/api/accelerate.png",
+  },
+]
+---
+
+<ProductHeader title="AI 网关" />
+<Layout>
+  <Section
+    title="产品简介"
+    desc="专为 AI 场景设计，统一代理大模型 API 与 MCP Server，支持模型、工具（MCP）及 Agent 的集中接入与管理"
+  >
+    <div class="flex gap-3" slot="buttonGroup">
+      <Button class="w-59.5">
+        <span class="mr-3">Github</span>
+        <svg class="fill-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="8" height="8" viewBox="0 0 12 12">
+          <g transform="matrix(-1,0,0,1,24,0)">
+            <path d="M13.9085488,3.2445331L13.9085488,10.49702Q13.9085488,10.902587,13.633718,11.177418Q13.358887,11.177418,12.954274,11.151293Q12.54870754,11.451293,12.27483088,11.176462Q12.00095420511,10.90163,12,10.49702L12,0.95427454Q12,0.54870796,12.27483088,0.27483124Q12.54966176,0.0009545465,12.954274,0L22.497017,0Q22.902583999999997,0,23.177414,0.27483088Q23.452244,0.54966176,23.451292000000002,0.95427454Q23.451292000000002,1.3598411,23.17646,1.6346719Q22.901628000000002,1.909503,22.497017,1.9085487L15.2445326,1.9085487L23.737576,10.401592Q24,10.664019,24,11.069584Q24,11.475149,23.737576,11.737576Q23.475149000000002,12,23.069584,12Q22.664019,12,22.401592,11.737576L13.9085488,3.2445331Z" fill-opacity="1"/>
+          </g>
+        </svg>
+      </Button>
+      <Button class="w-59.5" mode="normal">在线体验</Button>
+    </div>
+    <img slot="content" class="max-w-full" src="/images/ai/ai-intro-cn.png" />
+  </Section>
+  <Section
+    title="产品优势"
+    desc="提供多模型统一路由与协议转换、语义缓存、Token 级限流、内容安全防护（如提示词攻击检测、敏感内容识别）、多维度鉴权与可观测性，并支持热插拔插件和智能工具路由"
+  >
+    <div slot="content" class="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+      {
+        products.map(s => {
+          return (
+          <div class="card flex flex-col gap-3">
+            <div class="card-header rounded-lg">
+              <div class="flex justify-center items-center w-full h-full">
+                <img src={s.img}>
+              </div>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="text-black text-lg font-normal">{s.label}</div>
+              <div class="text-black text-sm leading-9">
+                {s.desc}
+              </div>
+              <a href={s.link} target="_blank" class="detail-link text-primary text-xs inline-flex items-center gap-1">
+                <span>在线体验</span>
+                <svg class="detail-arrow fill-primary" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="8" height="8" viewBox="0 0 12 12">
+                  <g transform="matrix(-1,0,0,1,24,0)">
+                    <path d="M13.9085488,3.2445331L13.9085488,10.49702Q13.9085488,10.902587,13.633718,11.177418Q13.358887,11.177418,12.954274,11.151293Q12.54870754,11.451293,12.27483088,11.176462Q12.00095420511,10.90163,12,10.49702L12,0.95427454Q12,0.54870796,12.27483088,0.27483124Q12.54966176,0.0009545465,12.954274,0L22.497017,0Q22.902583999999997,0,23.177414,0.27483088Q23.452244,0.54966176,23.451292000000002,0.95427454Q23.451292000000002,1.3598411,23.17646,1.6346719Q22.901628000000002,1.909503,22.497017,1.9085487L15.2445326,1.9085487L23.737576,10.401592Q24,10.664019,24,11.069584Q24,11.475149,23.737576,11.737576Q23.475149000000002,12,23.069584,12Q22.664019,12,22.401592,11.737576L13.9085488,3.2445331Z" fill-opacity="1"/>
+                  </g>
+                </svg>
+              </a>
+            </div>
+          </div>
+          )
+        })
+      }
+    </div>
+  </Section>
+</Layout>
+<style>
+.card {
+  .card-header {
+    background-image: url("/images/main/sense-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 200px;
+  }
+}
+
+.detail-link {
+  position: relative;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.detail-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.detail-link:hover::after {
+  width: 100%;
+}
+
+.detail-link:hover {
+  opacity: 0.8;
+}
+
+.detail-arrow {
+  transition: transform 0.3s ease;
+}
+
+.detail-link:hover .detail-arrow {
+  transform: translateX(4px);
+}
+</style>

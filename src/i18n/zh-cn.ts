@@ -1,7 +1,7 @@
 export default {
   "page.header.gateway": "云原生 API 网关",
   "page.header.ai.gateway": "AI 网关",
-  "page.header.market": "HiMarket",
+  "page.header.himarket": "HiMarket",
   "navbar.product": "产品",
   "navbar.product.features": "功能特性",
   "navbar.product.benefits": "核心优势",

@@ -35,50 +35,6 @@
     "link": "ai/mcp-server"
   },
   {
-    "label": "HiMarket",
-    "translations": {
-      "en": "HiMarket"
-    },
-    "collapsed": false,
-    "items": [
-      {
-        "label": "HiMarket 介绍",
-        "translations": {
-          "en": "HiMarket Introduction"
-        },
-        "link": "ai/himarket/himarket-introduction"
-      },
-      {
-        "label": "HiMarket 部署",
-        "translations": {
-          "en": "HiMarket Deployment"
-        },
-        "link": "ai/himarket/himarket-deployment"
-      },
-      {
-        "label": "HiMarket 使用",
-        "translations": {
-          "en": "HiMarket Usage"
-        },
-        "link": "ai/himarket/himarket-usage"
-      },
-      {
-        "label": "HiMarket 统计",
-        "translations": {
-          "en": "HiMarket Statistics"
-        },
-        "link": "ai/himarket/himarket-statistics"
-      },
-      {
-        "label": "HiMarket AgentScope Agent",
-        "translations": {
-          "en": "HiMarket AgentScope Agent"
-        },
-        "link": "ai/himarket/himarket-agentscope-agent"
-      }
-    ]
-  },
-  {
     "label": "场景指南",
     "translations": {
       "en": "Scene Guide"

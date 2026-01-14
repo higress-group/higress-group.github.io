@@ -1,0 +1,26 @@
+---
+interface Props {
+  title: string;
+}
+---
+<div class="product-header relative h-82.5">
+  <div class="absolute bottom-14 px-10">
+    <div class="flex gap-4 mb-10 text-black">
+      <span>产品</span>
+      <span class="light">/</span>
+      <span class="light">{Astro.props.title}</span>
+    </div>
+    <div class="text-5xl text-black font-medium">{Astro.props.title}</div>
+  </div>
+</div>
+<style>
+.product-header {
+  background: (282deg, #F1F3FF 15%, #DAE5FF 96%);
+  background-image: url("/images/doc-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  .light {
+    color: oklch(from var(--color-black) 64% c h);
+  }
+}
+</style>

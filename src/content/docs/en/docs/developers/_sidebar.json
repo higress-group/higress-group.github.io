@@ -1,0 +1,38 @@
+[
+  {
+      "label": "开发者列表",
+      "translations": {
+        "en": "Overview"
+      },
+      "items": [
+        {
+          "label": "开发者列表",
+          "translations": {
+            "en": "Overview"
+          },
+          "link": "docs/developers/developers_dev/"
+        }
+      ]
+
+  },
+  {
+      "label": "贡献者向导",
+      "translations": {
+        "en": "Developer Guide"
+      },
+      "collapsed": false,
+      "autogenerate": {
+        "directory": "contributor-guide"
+      }
+  },
+  {
+    "label": "提交者向导",
+    "translations": {
+      "en": "Developer Guide"
+    },
+    "collapsed": false,
+    "autogenerate": {
+      "directory": "committer-guide"
+    }
+}
+]

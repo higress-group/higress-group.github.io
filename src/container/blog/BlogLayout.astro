@@ -1,0 +1,94 @@
+---
+import SiteLayout from "../../layout/siteLayout.astro";
+import BlogHeader from "./BlogHeader.astro";
+import BlogCard from "./BlogCard.astro";
+import Button from "../../components/button/Button.astro";
+
+interface Props {
+  page: any;
+  currentCategory?: string;
+}
+
+const { page, currentCategory } = Astro.props;
+---
+
+<SiteLayout title={"Higress - 云原生网关"}>
+  <div class="blog-container py-16 md:py-40">
+    <BlogHeader currentCategory={currentCategory} />
+
+    <div class="px-4 md:px-10 pt-6 md:pt-10 mt-10 md:mt-20 backdrop-blur-sm grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+      {
+        page.data.map((blog: any) => (
+          <BlogCard
+            title={blog.data.title}
+            body={blog.body}
+            description={blog.data.description}
+            author={blog.data.author}
+            authors={blog.data.authors}
+            date={blog.data.date}
+            slug={blog.slug}
+          />
+        ))
+      }
+    </div>
+
+    <div class="flex justify-center items-center gap-4 mt-16">
+      {page.url.prev ? (
+        <a href={page.url.prev}>
+          <Button mode="light">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 18L9 12L15 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </Button>
+        </a>
+      ) : (
+        <div class="opacity-50 pointer-events-none">
+           <Button mode="light">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 18L9 12L15 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+           </Button>
+        </div>
+      )}
+      
+      <span class="text-gray-600 font-medium">
+        Page {page.currentPage} of {page.lastPage}
+      </span>
+
+      {page.url.next ? (
+        <a href={page.url.next}>
+          <Button mode="light">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18L15 12L9 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </Button>
+        </a>
+      ) : (
+        <div class="opacity-50 pointer-events-none">
+           <Button mode="light">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18L15 12L9 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+           </Button>
+        </div>
+      )}
+    </div>
+  </div>
+</SiteLayout>
+
+<style>
+.blog-container {
+  /*background-image: url("/images/blog/blog-bg.png");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: top;
+  background-size: 70%;*/
+}
+
+@media (max-width: 768px) {
+  .blog-container {
+    background-size: 100%;
+    background-position-x: center;
+  }
+}
+</style>

@@ -35,7 +35,7 @@ authors: "CH3CHO"
 
 **<font style="color:rgba(0, 0, 0, 0.9);">详尽 API 参考：</font>**<font style="color:rgba(0, 0, 0, 0.9);">详尽的 API 文档，涵盖从基础配置获取到高级服务管理的所有操作，助力您高效开发。</font>
 
-**<font style="color:rgb(46, 75, 227);">二、快速开始</font>**
+### **<font style="color:rgb(46, 75, 227);">二、快速开始</font>**
 
 **<font style="color:rgb(46, 75, 227);">Flask 篇 —— 简洁而优雅的配置之旅</font>**
 
@@ -156,5 +156,3 @@ config_manager = NacosConfigManager()
 **<font style="color:rgba(0, 0, 0, 0.9);">GitHub 仓库：</font>**
 
 <font style="color:rgba(0, 0, 0, 0.9);">访问 nacos-sdk-python，查看文档、报告问题或贡献代码，共同构建更好的 Nacos Python 社区：</font>_<u><font style="color:rgb(0, 122, 170);">https://github.com/nacos-group/nacos-sdk-python</font></u>_
-
-

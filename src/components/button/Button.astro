@@ -1,6 +1,6 @@
 ---
 interface Props {
-  mode?: 'primary' | 'normal' | 'black';
+  mode?: 'primary' | 'normal' | 'black' | 'light' | 'gray';
   width?: string;
   class?: string;
   type?: "button" | "submit" | "reset";
@@ -17,8 +17,8 @@ const {
 const widthStyle = width ? `width: ${width};` : "";
 ---
 
-<higress-button class:list={[className]} data-mode={mode}>
-  <button class={`btn ${contentAlign}`} type={type} style={widthStyle} {...rest}>
+<higress-button data-mode={mode}>
+  <button class={`btn ${contentAlign} ${className}`} type={type} style={widthStyle} {...rest}>
     <slot />
   </button>
 </higress-button>
@@ -99,6 +99,40 @@ const widthStyle = width ? `width: ${width};` : "";
   higress-button[data-mode="black"] .btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Light Mode */
+  higress-button[data-mode="light"] .btn {
+    background: var(--color-blue-02);
+    color: var(--color-black);
+  }
+
+  higress-button[data-mode="light"] .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  higress-button[data-mode="light"] .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Gray Mode */
+  higress-button[data-mode="gray"] .btn {
+    background: var(--color-gray-01);
+    color: var(--color-black);
+  }
+
+  higress-button[data-mode="gray"] .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  higress-button[data-mode="gray"] .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
 </style>
 

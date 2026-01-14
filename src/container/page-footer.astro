@@ -1,5 +1,6 @@
 ---
 import Button from "../components/button/Button.astro";
+import Popover from "../components/popover/Popover.astro";
 
 const currentYear = new Date().getFullYear();
 const isEnglish = Astro.currentLocale === "en";
@@ -60,26 +61,43 @@ const links = [
       <div class="text-[28px] text-black font-light">联系我们</div>
       <div class="text-[18px] text-[#A3A6B3]">可以通过以下方式获取我们最新动态渠道</div>
       <div class="flex flex-wrap gap-4 lg:gap-6">
-        <Button width="155px" mode="normal">
-          <span class="text-xs">
-            钉钉群
-          </span>
-        </Button>
-        <Button width="155px" mode="normal">
-          <span class="text-xs">
-            微信
-          </span>
-        </Button>
-        <Button width="155px" mode="normal">
-          <span class="text-xs">
-            Higress 公众号
-          </span>
-        </Button>
-        <Button width="155px" mode="normal">
-          <span class="text-xs">
-            云原生公众号
-          </span>
-        </Button>
+        <Popover placement="bottom">
+          <Button width="155px" mode="normal">
+            <span class="text-xs">
+              钉钉群
+            </span>
+          </Button>
+          <img slot="content" src="/images/dingding.avif" alt="DingDing QR" class="w-32" />
+        </Popover>
+        <Popover placement="bottom">
+          <Button width="155px" mode="normal">
+            <span class="text-xs">
+              微信群
+            </span>
+          </Button>
+          <div class="flex flex-col gap-2 max-w-32 justify-center" slot="content">
+            <img slot="content" src="/images/wx.avif" alt="WeChat QR" class="w-32" />
+            <span class="text-[10px] text-center text-black">
+              如过期请加微信：nomadao，注明 higress
+            </span>
+          </div>
+        </Popover>
+        <Popover placement="bottom">
+          <Button width="155px" mode="normal">
+            <span class="text-xs">
+              Higress 公众号
+            </span>
+          </Button>
+          <img slot="content" src="/images/higress.jpg" alt="WeChat QR" class="w-32" />
+        </Popover>
+        <Popover placement="bottom">
+          <Button width="155px" mode="normal">
+            <span class="text-xs">
+              云原生公众号
+            </span>
+          </Button>
+          <img slot="content" src="/images/ali-cloud.jpg" alt="WeChat QR" class="w-32" />
+        </Popover>
       </div>
     </div>
     <div class="lg:w-1/3 w-full">

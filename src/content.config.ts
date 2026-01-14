@@ -11,6 +11,7 @@ const blog = defineCollection({
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
 		author: z.string().optional(),
+		authors: z.string().optional(),
 		category: z.string().optional()
 	}),
 });
@@ -64,5 +65,5 @@ export const collections = {
 	blog,
 	download,
 	faq,
-	ai
+  ai,
 };

@@ -1,0 +1,46 @@
+[
+  {
+    "label": "HiMarket",
+    "translations": {
+      "en": "HiMarket"
+    },
+    "collapsed": false,
+    "items": [
+      {
+        "label": "HiMarket 介绍",
+        "translations": {
+          "en": "HiMarket Introduction"
+        },
+        "link": "docs/himarket-introduction"
+      },
+      {
+        "label": "HiMarket 部署",
+        "translations": {
+          "en": "HiMarket Deployment"
+        },
+        "link": "docs/himarket-deployment"
+      },
+      {
+        "label": "HiMarket 使用",
+        "translations": {
+          "en": "HiMarket Usage"
+        },
+        "link": "docs/himarket-usage"
+      },
+      {
+        "label": "HiMarket 统计",
+        "translations": {
+          "en": "HiMarket Statistics"
+        },
+        "link": "docs/himarket-statistics"
+      },
+      {
+        "label": "HiMarket AgentScope Agent",
+        "translations": {
+          "en": "HiMarket AgentScope Agent"
+        },
+        "link": "docs/himarket-agentscope-agent"
+      }
+    ]
+  }
+]

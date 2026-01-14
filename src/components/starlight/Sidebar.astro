@@ -10,6 +10,8 @@ const sidebar = Astro.locals.starlightRoute.sidebar || propSidebar || [];
 const pathname = Astro.url.pathname;
 const isLatestDocs = pathname.includes(sidebarCategory.latest);
 const isAi = pathname.includes(sidebarCategory.ai);
+const isHimarket = pathname.includes(sidebarCategory.himarket)
+const isDevelopers = pathname.includes(sidebarCategory.developer)
 
 // Filter sidebar groups based on context
 const filteredSidebar = sidebar.filter((entry) => {
@@ -17,6 +19,10 @@ const filteredSidebar = sidebar.filter((entry) => {
     return entry.label.includes(sidebarCategory.latest);
   } else if (isAi) {
     return entry.label.includes(sidebarCategory.ai);
+  } else if (isHimarket) {
+    return entry.label.includes(sidebarCategory.himarket);
+  } else if (isDevelopers) {
+    return entry.label.includes(sidebarCategory.developer);
   } else {
     false;
   }

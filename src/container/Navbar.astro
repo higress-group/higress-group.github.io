@@ -16,6 +16,7 @@ const homeUrl = isEnglish ? '/en' : '/';
 
 // Determine if we are on the home page
 const isHome = currentPath === '/' || currentPath === '/en' || currentPath === '/en/';
+const isProducts = /himarket|ai-gateway|api-gateway|blog/.test(currentPath);
 // Set default to transparent for all pages. Scroll effect only applies to Home.
 const navClass = "bg-transparent";
 
@@ -24,7 +25,7 @@ const navItems = [
     type: 'dropdown',
     label: t('navbar.product'),
     items: [
-      { label: t('page.header.gateway'), href: '/api' },
+      { label: t('page.header.gateway'), href: '/api-gateway' },
       { label: t('page.header.ai.gateway'), href: '/ai-gateway' },
       { label: 'HiMarket', href: '/himarket' },
     ]
@@ -45,13 +46,13 @@ const navItems = [
     label: t('navbar.community'),
     items: [
       { label: t('navbar.community.blog'), href: '/blog' },
-      { label: t('navbar.community.developer'), href: 'https://higress.cn/docs/developers/developers_dev' },
+      { label: t('navbar.community.developer'), href: '/docs/developers/developers_dev' },
     ]
   }
 ];
 ---
 
-<nav id="main-nav" class:list={["fixed top-0 left-0 right-0 z-50 transition-all duration-300", navClass]} data-is-home={String(isHome)}>
+<nav id="main-nav" class:list={["fixed top-0 left-0 right-0 z-50 transition-all duration-300", navClass]} data-is-home={String(isHome || isProducts)}>
   <div class="mx-auto px-4 lg:px-10">
     <div class="flex h-16 items-center justify-between">
       <!-- Left: Logo -->
@@ -121,7 +122,7 @@ const navItems = [
   const isHome = nav?.dataset.isHome === 'true';
 
   // Scroll effect logic
-  if (isHome && nav) {
+  if ((isHome) && nav) {
     const handleScroll = () => {
       if (window.scrollY > 20) {
         nav.classList.remove('bg-transparent');

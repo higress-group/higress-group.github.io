@@ -14,7 +14,7 @@ import Button from '../button/Button.astro';
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `mode` | `'primary' \| 'normal'` | `'primary'` | Visual style of the button. `primary` uses the brand gradient; `normal` is white with black text. |
+| `mode` | `'primary' \| 'normal' \| 'black' \| 'light'` | `'primary'` | Visual style of the button. `primary` uses the brand gradient; `normal` is white with black text; `black` uses the brand black color; `light` uses a light blue background. |
 | `width` | `string` | `undefined` | Custom width for the button (e.g., `'200px'`, `'100%'`). |
 | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | The HTML `type` attribute for the button element. |
 | `class` | `string` | `''` | Additional CSS classes to apply to the wrapper. |
@@ -30,6 +30,16 @@ import Button from '../button/Button.astro';
 **Normal Button**
 ```astro
 <Button mode="normal">Learn More</Button>
+```
+
+**Black Button**
+```astro
+<Button mode="black">Contact Us</Button>
+```
+
+**Light Button**
+```astro
+<Button mode="light">Documentation</Button>
 ```
 
 **Full Width Button**
@@ -56,6 +66,8 @@ The component is built using a lightweight Web Component wrapper `<higress-butto
 - **Colors**:
     - Primary text: Fixed `#ffffff` for contrast against the gradient.
     - Normal background: Fixed `#ffffff` with `#000000` text.
+    - Black background: Uses `--color-black` with `#ffffff` text.
+    - Light background: Uses `--color-blue-02` with `--color-black` text.
     - Transitions: Includes smooth transitions (`0.3s ease`) for `transform`, `box-shadow`, and `opacity`.
 
 ### Accessibility

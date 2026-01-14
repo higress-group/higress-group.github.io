@@ -36,24 +36,56 @@ try {
   <!-- 顶部操作栏 -->
   <nav aria-label="Page actions" class="page-actions-nav">
     <!-- Back 按钮 -->
-    <Button contentAlign='between' width='90px' mode="normal" id="back-btn">
+    <Button contentAlign='between' width='90px' mode="gray" id="back-btn">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="19" y1="12" x2="5" y2="12"></line>
         <polyline points="12 19 5 12 12 5"></polyline>
       </svg>
       <span class="button-text">Back</span>
     </Button>
-    <Button
-      contentAlign='between'
-      mode="normal"
-      id="copy-markdown-btn"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-      </svg>
-      <span class="button-text ml-3">复制页面</span>
-    </Button>
+
+    <div class="relative">
+      <!-- 组合按钮：外观是一个按钮，内部分两个点击区域 -->
+      <div class="combined-button flex items-stretch border rounded-full overflow-hidden bg-white">
+        <!-- 左侧：复制区域 -->
+        <button
+          id="copy-main-btn"
+          class="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors flex-1"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span class="button-text ml-3">复制页面</span>
+        </button>
+
+        <!-- 分隔线 -->
+        <div class="w-px"></div>
+
+        <!-- 右侧：菜单触发区域 -->
+        <button
+          id="action-menu-btn"
+          class="flex items-center justify-center px-3 py-2 hover:bg-gray-50 transition-colors"
+        >
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Dropdown Menu -->
+      <div id="action-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50 hidden border border-gray-100">
+        <div class="p-2">
+          <button id="view-markdown-item" class="w-full group rounded-lg bg-white text-left px-4 py-2 text-sm text-black hover:bg-indigo-20 hover:text-primary flex items-center">
+             <svg class="mr-2 h-4 w-4 text-black group-hover:text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            查看 Markdown
+          </button>
+        </div>
+      </div>
+    </div>
   </nav>
 
   <!-- 原始的 PageTitle 组件 -->
@@ -76,36 +108,52 @@ try {
     });
   }
 
-  // 复制 Markdown 功能
-  const copyButton = document.getElementById('copy-markdown-btn');
+  // 复制功能 - 统一的复制逻辑
   const markdownStorage = document.getElementById('markdown-content-storage');
 
-  if (copyButton && markdownStorage) {
-    copyButton.addEventListener('click', async () => {
-      try {
-        const content = markdownStorage.textContent;
+  const copyMarkdown = async (button: HTMLElement) => {
+    try {
+      const content = markdownStorage?.textContent;
+      if (!content) throw new Error('No content');
 
-        if (!content) {
-          throw new Error('Markdown content not found');
-        }
+      await navigator.clipboard.writeText(content);
 
-        await navigator.clipboard.writeText(content);
+      // 显示复制成功提示
+      const originalHTML = button.innerHTML;
+      button.innerHTML = '<span class="text-green-600 font-bold">已复制!</span>';
+      setTimeout(() => {
+        button.innerHTML = originalHTML;
+      }, 1500);
+    } catch (err) {
+      console.error('Copy failed', err);
+      alert('复制失败');
+    }
+  };
 
-        // 更新按钮状态
-        const buttonText = copyButton.querySelector('.button-text');
-        const originalText = buttonText?.textContent;
-        if (buttonText) {
-          buttonText.textContent = '已复制';
-          copyButton.classList.add('copied');
+  // 主复制按钮功能
+  const copyMainBtn = document.getElementById('copy-main-btn');
+  if (copyMainBtn) {
+    copyMainBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      copyMarkdown(copyMainBtn);
+    });
+  }
 
-          setTimeout(() => {
-            buttonText.textContent = originalText || "";
-            copyButton.classList.remove('copied');
-          }, 2000);
-        }
-      } catch (err) {
-        console.error('复制失败:', err);
-        alert('复制失败，请重试');
+  // 菜单交互逻辑
+  const menuBtn = document.getElementById('action-menu-btn');
+  const menu = document.getElementById('action-menu');
+
+  // 切换菜单
+  if (menuBtn && menu) {
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu.classList.toggle('hidden');
+    });
+
+    // 点击外部关闭
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target as Node) && !menuBtn.contains(e.target as Node)) {
+        menu.classList.add('hidden');
       }
     });
   }
@@ -123,6 +171,19 @@ try {
     margin-bottom: 1.5rem;
     border-radius: 0.5rem;
     font-size: 0.875rem;
+  }
+
+  .combined-button {
+    border-color: var(--color-gray-02);
+  }
+
+  .combined-button .w-px {
+    background-color: var(--color-gray-02);
+  }
+
+  .combined-button button {
+    color: var(--color-black);
+    background-color: #fff;
   }
 
   @media (max-width: 768px) {

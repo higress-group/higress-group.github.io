@@ -1,0 +1,464 @@
+---
+interface Props {
+  items: {
+    author: string;
+    title: string;
+    desc: string;
+    link: string;
+    bgColor: string;
+    color: string;
+  }[];
+  autoPlayInterval?: number;
+}
+
+const { items, autoPlayInterval = 3000 } = Astro.props;
+---
+
+<div class="carousel-wrapper relative w-full overflow-hidden py-10" data-interval={autoPlayInterval}>
+  <div class="carousel-container">
+    <div class="carousel-track">
+      {items.map((item) => (
+        <div class="carousel-card">
+          <a
+            href={item.link}
+            target="_blank"
+            class="card-content group"
+            style={{ background: item.bgColor }}
+          >
+            <div class="card-inner" style={{ color: item.color }}>
+              <div class="card-content-wrapper">
+                <p class="card-desc m-0 font-light text-lg leading-8">{item.desc}</p>
+              </div>
+              <div>
+                <div class="card-author">{item.author}</div>
+                <h3 class="card-title">{item.title}</h3>
+              </div>
+              <!-- <div class="card-action">
+                Read More
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </div> -->
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Gradient overlays -->
+  <div class="gradient-left"></div>
+  <div class="gradient-right"></div>
+</div>
+
+<style>
+  .carousel-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .carousel-container {
+    overflow: hidden;
+    width: 100%;
+    /* Fixed height to prevent layout shift when card heights change */
+    /* Max card height is 480px + padding 64px (2rem * 2) = 544px */
+    height: 560px;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 24px;
+    will-change: transform;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .carousel-track.no-transition {
+    transition: none !important;
+  }
+
+  .carousel-wrapper.no-transition .carousel-card {
+    transition: none !important;
+  }
+
+  .carousel-wrapper.no-transition .card-inner {
+    transition: none !important;
+  }
+
+  .carousel-card {
+    /* Show 4 cards: 0.5 + 1 + 1 + 0.5 = 3 full cards width in viewport */
+    /* Card width = (100vw - gaps) / 3 */
+    /* With 2 gaps in view: (100% - 48px) / 3 */
+    flex: 0 0 calc((100% - 48px) / 3);
+    min-width: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-content {
+    display: block;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .card-content:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .card-inner {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  /* Staircase effect - cards get progressively taller, but last one gets shorter */
+  /* Default state for cards outside viewport */
+  .carousel-card {
+    opacity: 0.6;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .carousel-card .card-inner {
+    height: 200px;
+  }
+
+  /* Card 1: Left partial (shortest) */
+  .carousel-card.wave-0 {
+    opacity: 0.8;
+  }
+
+  .carousel-card.wave-0 .card-inner {
+    height: 300px !important;
+  }
+
+  /* Card 2: Mid-left full (medium) */
+  .carousel-card.wave-1 {
+    opacity: 0.9;
+  }
+
+  .carousel-card.wave-1 .card-inner {
+    height: 380px !important;
+  }
+
+  /* Card 3: Mid-right full (tallest) */
+  .carousel-card.wave-2 {
+    opacity: 1;
+    z-index: 5;
+  }
+
+  .carousel-card.wave-2 .card-inner {
+    height: 480px !important;
+  }
+
+  /* Card 4: Right partial (short again) */
+  .carousel-card.wave-3 {
+    opacity: 0.8;
+  }
+
+  .carousel-card.wave-3 .card-inner {
+    height: 340px !important;
+  }
+
+  .card-author {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+  }
+
+  .card-title {
+    font-size: 0.875rem;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-desc {
+    opacity: 0.9;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-action {
+    margin-top: auto;
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s ease;
+  }
+
+  .group:hover .card-action {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .gradient-left,
+  .gradient-right {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 6rem;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .gradient-left {
+    left: 0;
+    background: linear-gradient(to right, #F4F6F9, transparent);
+  }
+
+  .gradient-right {
+    right: 0;
+    background: linear-gradient(to left, #F4F6F9, transparent);
+  }
+
+  /* Mobile */
+  @media (max-width: 1024px) {
+    .carousel-container {
+      height: auto;
+    }
+
+    .carousel-track {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 0 1rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-card {
+      flex: 0 0 85%;
+      scroll-snap-align: center;
+      opacity: 1 !important;
+    }
+
+    .carousel-card .card-inner {
+      height: 320px !important;
+    }
+
+    .gradient-left,
+    .gradient-right {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  class InfiniteCarousel {
+    wrapper: HTMLElement;
+    container: HTMLElement;
+    track: HTMLElement;
+    cards: HTMLElement[];
+    originalCount: number;
+    cardWidth: number = 0;
+    gap: number = 24;
+    currentIndex: number = 0;
+    isTransitioning: boolean = false;
+    autoPlayTimer: number | null = null;
+    autoPlayInterval: number;
+
+    constructor(wrapper: HTMLElement) {
+      this.wrapper = wrapper;
+      this.container = wrapper.querySelector('.carousel-container') as HTMLElement;
+      this.track = wrapper.querySelector('.carousel-track') as HTMLElement;
+
+      // Get original cards
+      const originalCards = Array.from(this.track.querySelectorAll('.carousel-card')) as HTMLElement[];
+      this.originalCount = originalCards.length;
+      this.cards = [];
+
+      this.autoPlayInterval = Number(wrapper.dataset.interval) || 3000;
+
+      this.init();
+    }
+
+    init() {
+      // Clone cards for infinite effect (clone enough for smooth loop)
+      const clonesBefore = 3;
+      const clonesAfter = 3;
+
+      // Clone cards and prepend
+      for (let i = this.originalCount - 1; i >= this.originalCount - clonesBefore; i--) {
+        const clone = this.track.children[i].cloneNode(true) as HTMLElement;
+        clone.setAttribute('data-clone', 'before');
+        this.track.insertBefore(clone, this.track.firstChild);
+      }
+
+      // Clone cards and append
+      for (let i = 0; i < clonesAfter; i++) {
+        const clone = this.track.children[clonesBefore + i].cloneNode(true) as HTMLElement;
+        clone.setAttribute('data-clone', 'after');
+        this.track.appendChild(clone);
+      }
+
+      // Update cards array
+      this.cards = Array.from(this.track.querySelectorAll('.carousel-card')) as HTMLElement[];
+
+      // Set initial position (start at first real card)
+      this.currentIndex = clonesBefore;
+
+      // Wait for next frame to ensure layout is calculated
+      requestAnimationFrame(() => {
+        this.updateDimensions();
+        this.setPosition(false);
+
+        // Event listeners
+        window.addEventListener('resize', () => this.handleResize());
+        this.track.addEventListener('transitionend', (e) => this.handleTransitionEnd(e));
+
+        this.wrapper.addEventListener('mouseenter', () => this.stopAutoPlay());
+        this.wrapper.addEventListener('mouseleave', () => this.startAutoPlay());
+
+        this.startAutoPlay();
+      });
+    }
+
+    updateDimensions() {
+      if (window.innerWidth <= 1024) return;
+
+      if (this.cards.length > 0) {
+        const rect = this.cards[0].getBoundingClientRect();
+        this.cardWidth = rect.width;
+      }
+    }
+
+    setPosition(animated: boolean = true) {
+      if (window.innerWidth <= 1024) return;
+
+      if (!animated) {
+        this.wrapper.classList.add('no-transition');
+        this.track.classList.add('no-transition');
+      } else {
+        this.wrapper.classList.remove('no-transition');
+        this.track.classList.remove('no-transition');
+      }
+
+      // Calculate offset to show 4 cards (0.5 + 1 + 1 + 0.5)
+      // Position so currentIndex card is the second visible card (after the 0.5 partial)
+      const offset = -(this.currentIndex * (this.cardWidth + this.gap) - (this.cardWidth + this.gap) / 2);
+
+      this.track.style.transform = `translateX(${offset}px)`;
+
+      // Update wave heights for visible cards
+      this.updateWaveStates();
+
+      if (!animated) {
+        // Force reflow
+        this.track.offsetHeight;
+        requestAnimationFrame(() => {
+          this.wrapper.classList.remove('no-transition');
+          this.track.classList.remove('no-transition');
+        });
+      }
+    }
+
+    updateWaveStates() {
+      if (window.innerWidth <= 1024) return;
+
+      // Remove all wave classes
+      this.cards.forEach(card => {
+        card.classList.remove('wave-0', 'wave-1', 'wave-2', 'wave-3');
+      });
+
+      // Apply wave classes to the 4 visible cards
+      // Visible cards are at indices: currentIndex-1, currentIndex, currentIndex+1, currentIndex+2
+      const visibleIndices = [
+        this.currentIndex - 1, // Left partial (shortest)
+        this.currentIndex,      // Mid-left full (medium)
+        this.currentIndex + 1,  // Mid-right full (tallest)
+        this.currentIndex + 2   // Right partial (short again)
+      ];
+
+      visibleIndices.forEach((index, position) => {
+        if (index >= 0 && index < this.cards.length) {
+          this.cards[index].classList.add(`wave-${position}`);
+        }
+      });
+    }
+
+    handleTransitionEnd(e: TransitionEvent) {
+      if (e.target !== this.track) return;
+      if (e.propertyName !== 'transform') return;
+
+      this.isTransitioning = false;
+
+      // Check if we need to loop
+      const totalCards = this.cards.length;
+      const clonesBefore = 3;
+      const realStart = clonesBefore;
+      const realEnd = clonesBefore + this.originalCount;
+
+      if (this.currentIndex >= realEnd) {
+        // We're in the after-clones, jump back
+        this.currentIndex = realStart + (this.currentIndex - realEnd);
+        this.setPosition(false);
+      } else if (this.currentIndex < realStart) {
+        // We're in the before-clones, jump forward
+        this.currentIndex = realEnd - (realStart - this.currentIndex);
+        this.setPosition(false);
+      }
+    }
+
+    next() {
+      if (this.isTransitioning) return;
+      if (window.innerWidth <= 1024) return;
+
+      this.isTransitioning = true;
+      this.currentIndex++;
+      this.setPosition(true);
+    }
+
+    prev() {
+      if (this.isTransitioning) return;
+      if (window.innerWidth <= 1024) return;
+
+      this.isTransitioning = true;
+      this.currentIndex--;
+      this.setPosition(true);
+    }
+
+    startAutoPlay() {
+      if (this.autoPlayTimer) return;
+      this.autoPlayTimer = window.setInterval(() => this.next(), this.autoPlayInterval);
+    }
+
+    stopAutoPlay() {
+      if (this.autoPlayTimer) {
+        clearInterval(this.autoPlayTimer);
+        this.autoPlayTimer = null;
+      }
+    }
+
+    handleResize() {
+      this.updateDimensions();
+      this.setPosition(false);
+    }
+  }
+
+  // Initialize all carousels
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrappers = document.querySelectorAll('.carousel-wrapper');
+    wrappers.forEach(wrapper => {
+      new InfiniteCarousel(wrapper as HTMLElement);
+    });
+  });
+</script>

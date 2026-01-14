@@ -1,0 +1,117 @@
+---
+import Button from "../../components/button/Button.astro";
+---
+<!-- 左侧悬浮菜单 -->
+<!-- <nav id="product-nav" class="fixed left-8 top-1/3 -translate-y-1/2 z-50 opacity-0 transition-all duration-500 ease-in-out pointer-events-none">
+  <div class="flex flex-col gap-2 bg-white rounded-2xl shadow-lg p-2 border border-gray-100">
+    <a
+      href="/api-gateway"
+      class="product-nav-item px-6 py-3 rounded-lg text-sm transition-all duration-300 whitespace-nowrap hover:bg-indigo-20 text-black hover:text-primary"
+      data-path="/api-gateway"
+    >
+      云原生 API 网关
+    </a>
+    <a
+      href="/ai-gateway"
+      class="product-nav-item px-6 py-3 rounded-lg text-sm transition-all duration-300 whitespace-nowrap hover:bg-indigo-20 text-black hover:text-primary"
+      data-path="/ai-gateway"
+    >
+      AI 网关
+    </a>
+    <a
+      href="/himarket"
+      class="product-nav-item px-6 py-3 rounded-lg text-sm transition-all duration-300 whitespace-nowrap hover:bg-indigo-20 text-black hover:text-primary"
+      data-path="/himarket"
+    >
+      HiMarket
+    </a>
+  </div>
+</nav> -->
+
+<div class="flex flex-col gap-39 p-10">
+  <slot />
+  <div
+    class="flex flex-col p-10 items-center gap-10 rounded-xl"
+    style="background: var(--higress-primary-gradient)"
+  >
+    <div class="text-white text-4xl">了解企业版</div>
+    <div class="text-white font-light text-base">
+      想获得深度整合的 API 管理、流量网关与微服务网关一体化能力？企业版提供更强大的统一治理与安全扩展，欢迎了解。
+    </div>
+    <Button class='w-39' mode="normal">
+      <a class="text-black" target="_blank" href="https://www.aliyun.com/product/api-gateway">
+        了解企业版
+      </a>
+    </Button>
+  </div>
+</div>
+
+<script>
+  // 初始化产品导航菜单
+  function initProductNav() {
+    const nav = document.getElementById('product-nav');
+    const navItems = document.querySelectorAll('.product-nav-item');
+    const currentPath = window.location.pathname;
+
+    // 高亮当前页面对应的菜单项
+    navItems.forEach(item => {
+      const itemPath = item.getAttribute('data-path');
+      if (currentPath === itemPath || currentPath === itemPath + '/') {
+        item.classList.add('bg-indigo-20', 'text-primary');
+        item.classList.remove('hover:bg-indigo-20', 'hover:text-primary');
+      } else {
+        item.classList.remove('bg-indigo-20', 'text-primary');
+      }
+    });
+
+    // 滚动监听
+    const scrollThreshold = 300; // 滚动300px后显示菜单
+
+    function handleScroll() {
+      if (!nav) return;
+      const currentScroll = window.scrollY;
+
+      if (currentScroll > scrollThreshold) {
+        // 显示菜单
+        nav.classList.remove('opacity-0', 'pointer-events-none');
+        nav.classList.add('opacity-100', 'pointer-events-auto');
+      } else {
+        // 隐藏菜单
+        nav.classList.remove('opacity-100', 'pointer-events-auto');
+        nav.classList.add('opacity-0', 'pointer-events-none');
+      }
+
+    }
+
+    // 监听滚动事件（使用节流优化性能）
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // 初始检查滚动位置
+    handleScroll();
+  }
+
+  // 页面加载完成后初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProductNav);
+  } else {
+    // initProductNav();
+  }
+</script>
+
+<style>
+  /* 确保导航菜单在移动端隐藏 */
+  @media (max-width: 768px) {
+    #product-nav {
+      display: none;
+    }
+  }
+</style>

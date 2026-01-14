@@ -1,0 +1,82 @@
+---
+import CardCarousel from "../components/card-carousel/CardCarousel.astro";
+import Button from "../components/button/Button.astro";
+
+interface CaseCard {
+  author: string;
+  title: string;
+  desc: string;
+  link: string;
+  bgColor: string;
+  color: string;
+}
+
+const cases: CaseCard[] = [
+  {
+    author: "携程旅游",
+    title: "携程旅游的 AI 网关落地实践",
+    desc: "面对大规模应用 AI 技术时出现的多模型接入、缺乏统一流量治理等问题，携程选择基于 Higress 构建 AI 网关。该方案具有技术沉淀深厚、扩展性强等优势，通过统一管理大模型服务和 MCP 服务接入，实现了认证鉴权、流量控制、模型映射等功能。目前系统稳定运行，支持多场景，未来将优化存量化 HTTP API 向 MCP 服务的转化能力。",
+    link: "https://higress.ai/blog/ctrip-s-practical-implementation-of-ai-gateway",
+    bgColor:
+      "linear-gradient(47deg, rgb(62, 92, 244) 0%, rgb(62, 92, 244) 100%) rgb(62, 92, 244)",
+    color: "#fff",
+  },
+  {
+    author: "君润人力",
+    title: "这家公司使用 MCP，已向企业交付 1000 名数字员工",
+    desc: "从 2023 年至今，君润人力开始在 AI 领域进行持续探索，其中，如何构建能够交付不同岗位工作结果的数字员工（智能体）是探索的重点，截止目前君润已经有超过 1000 名数字员工 7X24 小时工作，累计节约人力成本超过上千万，而这些 higress 提供了极大的助力。",
+    link: "https://higress.ai/blog/higress-mcp-practices",
+    bgColor:
+      "linear-gradient(47deg, rgb(75, 79, 92) 0%, rgb(75, 79, 92) 100%) rgb(75, 79, 92)",
+    color: "#fff",
+  },
+  {
+    author: "阿里巴巴",
+    title: "阿里巴巴 MCP 分布式落地实践：快速转换 HSF（Dubbo）到 MCP server",
+    desc: "在MCP服务托管方案中，Higress 负责接收 MCP 请求并完成协议卸载，提供统一的身份认证、流量调度、参数映射与安全审计等能力，使开发者能在不深入了解 MCP 协议细节的情况下，快速将现有服务暴露为 MCP Server。",
+    link: "https://higress.ai/blog/alibaba-mcp-distributed-implementation-practice",
+    bgColor:
+      "linear-gradient(47deg, rgb(62, 92, 244) 0%, rgb(62, 92, 244) 100%) rgb(62, 92, 244)",
+    color: "#fff",
+  },
+  {
+    author: "SOFA 社区",
+    title: "SOFA AI网关落地实践",
+    desc: "SOFA AI 网关是基于开源 Higress 内核构建的智能化网关解决方案，针对 AI 业务场景深度优化。聚焦安全防护、流量管控、语义缓存、构建金融MCP市场等核心功能。该网关通过智能路由、统一接入等特性，有效解决了 AI 场景下的高延迟、资源消耗大等挑战，显著降低了模型接入复杂度，提升了智能体研发效率。",
+    link: "https://higress.ai/blog/ctrip-s-practical-implementation-of-ai-gateway",
+    bgColor:
+      "linear-gradient(47deg, rgb(220, 222, 228) 0%, rgb(220, 222, 228) 100%) rgb(220, 222, 228)",
+    color: "#121316",
+  },
+  {
+    author: "政采云",
+    title: "网关技术债怎么还？分层、插件、统一，三件套",
+    desc: "Higress在开源的 wasm client 上做了封装，更方便开发者做插件的开发，比如做了插件生效的范围控制，并且社区已有很多插件能力可以直接使用。Higress在多数据源这块集成了多种主流注册中心，这些能力可以直接复用，不用重复建设。",
+    link: "https://higress.ai/blog/how-to-pay-off-the-technical-debt-of-gateway",
+    bgColor:
+      "linear-gradient(47deg, rgb(75, 79, 92) 0%, rgb(75, 79, 92) 100%) rgb(75, 79, 92)",
+    color: "#fff",
+  },
+  {
+    author: "今日投资",
+    title: "20年金融投资数据沉淀，正式开放 MCP 能力",
+    desc: "Higress MCP 市场提供了完善的解决方案，通过它可以快捷地将今日投资丰富的金融数据 API 转化为 MCP 工具，用户可以通过 MCP 的方式非常轻松地调用专业金融数据，自由快速地构建自己的金融大模型应用。由此，今⽇投资推出了今日投资⾦融数据 MCP 服务，提供一站式的金融数据 MCP。",
+    link: "https://higress.ai/blog/higress-mcp-market-empowers-investoday",
+    bgColor:
+      "linear-gradient(47deg, rgb(220, 222, 228) 0%, rgb(220, 222, 228) 100%) rgb(220, 222, 228)",
+    color: "#121316",
+  },
+];
+---
+
+<section class="px-10">
+  <div class="mb-10 flex flex-col gap-4 items-center justify-center">
+      <div class="text-[2.5rem]">AI 应用场景下的最佳实践<br />服务于多领域企业级用户</div>
+      <Button mode="normal" width="10rem" >
+        <a>了解更多</a>
+      </Button>
+    </div>
+  <div class="mx-auto">
+    <CardCarousel items={cases} />
+  </div>
+</section>

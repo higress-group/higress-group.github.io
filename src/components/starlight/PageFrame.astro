@@ -1,7 +1,7 @@
 ---
 import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
 import Switcher from '../switcher/Switcher.astro';
-import { sidebarCategoryDefaultLink } from "../../utils/sign";
+import { sidebarCategory, sidebarCategoryDefaultLink } from "../../utils/sign";
 import { useTranslations } from "../../i18n/utils";
 
 const { hasSidebar } = Astro.locals.starlightRoute;
@@ -11,7 +11,7 @@ const t = useTranslations(locale);
 const options = [
   { label: t('page.header.gateway'), value: 'gateway' },
   { label: t('page.header.ai.gateway'), value: 'ai' },
-  { label: t('page.header.market'), value: 'market' }
+  { label: t('page.header.himarket'), value: 'himarket' }
 ];
 
 // Determine current value based on URL
@@ -19,16 +19,17 @@ const pathname = Astro.url.pathname;
 let currentValue = 'gateway';
 if (pathname.includes('/ai/')) {
   currentValue = 'ai';
-} else if (pathname.includes('/plugins') || pathname.includes('/market')) {
-  currentValue = 'market';
+} else if (pathname.includes('/himarket')) {
+  currentValue = 'himarket';
 }
+
+const isDevelopers = pathname.includes(sidebarCategory.developer)
 ---
 
-<div class="page sl-flex" style="--offset-top: 160px">
+<div class="page sl-flex" style="--offset-top: 64px">
 	<header class="header">
   	<slot name="header" />
-    <div class="mx-auto px-10 fixed top-0 left-0 w-full h-40 header-docs-section flex items-end justify-start pb-4">
-       <Switcher id="doc-switcher" value={currentValue} options={options} theme="light" />
+    <div class="mx-auto px-10 fixed top-0 left-0 w-full h-16 header-docs-section flex items-end justify-start pb-4">
     </div>
 	</header>
 	{
@@ -36,7 +37,14 @@ if (pathname.includes('/ai/')) {
 			<nav class="sidebar print:hidden" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
 				<MobileMenuToggle />
 				<div id="starlight__sidebar" class="sidebar-pane">
-					<div class="p-8 sidebar-content sl-flex">
+				  {
+						!isDevelopers && (
+  						<div class="flex justify-center p-4 border-b border-gray-02">
+       					<Switcher id="doc-switcher" value={currentValue} options={options} theme="primary" />
+     					</div>
+						)
+					}
+					<div class="p-4 sidebar-content sl-flex">
 						<slot name="sidebar" />
 					</div>
 				</div>
@@ -58,6 +66,7 @@ if (pathname.includes('/ai/')) {
 		.page {
 			flex-direction: column;
 			min-height: 100vh;
+			background-color: #fff;
 		}
 
 		.header {
@@ -135,8 +144,8 @@ if (pathname.includes('/ai/')) {
 
     if (value === 'ai') {
       url = sidebarCategoryDefaultLink.ai;
-    } else if (value === 'market') {
-      url = '/plugins'; // Placeholder for HiMarket
+    } else if (value === 'himarket') {
+      url = sidebarCategoryDefaultLink.himarket; // Placeholder for HiMarket
     }
 
     // Handle Locale
@@ -153,7 +162,6 @@ if (pathname.includes('/ai/')) {
          // Should not happen with default links but good safety
          url = url.replace('/en/', '/');
     }
-
     window.location.href = url;
   });
 </script>

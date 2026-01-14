@@ -1,6 +1,6 @@
 export default {
   "page.header.gateway": "Cloud Native API Gateway",
-  "page.header.ai.gatewaty": "AI Gateway",
+  "page.header.ai.gateway": "AI Gateway",
   "page.header.market": "HiMarket",
   "navbar.product": "Product",
   "navbar.product.features": "Features",

@@ -1,0 +1,42 @@
+---
+import Button from "../../components/button/Button.astro";
+import { BLOG_CATEGORY } from "../../constant";
+
+interface Props {
+  currentCategory?: string;
+}
+
+const { currentCategory = "all" } = Astro.props;
+---
+
+<div class="px-4 md:px-10 flex flex-col gap-6 md:gap-10">
+  <div class="flex gap-2 md:gap-3 text-sm md:text-base">
+    <span>社区</span>
+    <span class="text-gray-08">/</span>
+    <span class="text-gray-08">博客</span>
+  </div>
+  <div class="text-black text-3xl md:text-5xl font-medium">博客</div>
+  <div class="flex gap-2 md:gap-3 flex-wrap">
+    {
+      BLOG_CATEGORY.map(category => {
+        const isActive = category.type === currentCategory;
+        if (category.type === "all") {
+          return (
+            <a href="/blog">
+              <Button class="px-4 md:px-6 whitespace-nowrap text-sm md:text-base" mode={isActive ? "black" : "light"}>
+                  All
+              </Button>
+            </a>
+          )
+        }
+        return (
+          <a href={`/blog/${category.type}`}>
+            <Button class="px-4 md:px-6 whitespace-nowrap text-sm md:text-base" mode={isActive ? "black" : "light"}>
+                {category.title}
+            </Button>
+          </a>
+        )
+      })
+    }
+  </div>
+</div>

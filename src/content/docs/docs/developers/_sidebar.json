@@ -10,10 +10,10 @@
           "translations": {
             "en": "Overview"
           },
-          "link": "docs/developers/developers_dev/"
+          "link": "docs/developers_dev"
         }
       ]
-     
+
   },
   {
       "label": "贡献者向导",

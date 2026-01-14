@@ -7,6 +7,8 @@ import { sidebarCategory } from "./src/utils/sign";
 // 加载所有 sidebar 配置
 const zhDocsSidebar = loadSidebarConfig("root", "docs");
 const zhAiSidebar = loadSidebarConfig("root", "ai");
+const zhHimarketSidebar = loadSidebarConfig("root", "himarket");
+const zhDeveloperSidebar = loadSidebarConfig("root", "developer");
 
 // https://astro.build/config
 export default defineConfig({
@@ -37,6 +39,14 @@ export default defineConfig({
         {
           label: sidebarCategory.ai,
           items: zhAiSidebar,
+        },
+        {
+          label: sidebarCategory.himarket,
+          items: zhHimarketSidebar,
+        },
+        {
+          label: sidebarCategory.developer,
+          items: zhDeveloperSidebar,
         },
       ],
       head: [],

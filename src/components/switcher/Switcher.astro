@@ -17,7 +17,7 @@ interface Props {
     value: string;
   }[];
   class?: string;
-  theme?: 'default' | 'light';
+  theme?: 'default' | 'light' | 'primary';
 }
 
 const { id, value, options, class: className = "", theme = 'light' } = Astro.props;
@@ -61,6 +61,18 @@ if (options.length < 2) {
 
     --switch-slider-bg: var(--sl-color-bg-hover-light, #EFF1FF);
     --switch-slider-bg-light: #fff;
+    --switch-slider-bg-dark: var(--sl-color-gray-5); /* Fallback for dark mode if needed, or keep uniform */
+  }
+
+  /* Theme: Light Variation */
+  starlight-switcher[data-component-theme='primary'] {
+    --switch-bg: #fff;
+    --switch-border: var(--color-gray-02);
+    --switch-text-active: var(--color-primary);
+    --switch-text-inactive: var(--color-gray-08);
+
+    --switch-slider-bg: var(--sl-color-bg-hover-light, #EFF1FF);
+    --switch-slider-bg-light: var(--sl-color-bg-hover-light);
     --switch-slider-bg-dark: var(--sl-color-gray-5); /* Fallback for dark mode if needed, or keep uniform */
   }
 
