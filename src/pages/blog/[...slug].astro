@@ -39,7 +39,7 @@ const author = post.data.author || post.data.authors;
 
 <SiteLayout title={baseLayout_title}>
   <div class="blog-detail-container pt-16">
-    <div class="p-10">
+    <div class="p-4 md:p-10">
       <div class="flex gap-8 relative">
         <!-- 左侧目录导航 -->
         <aside class="hidden sticky top-16 pt-22 self-start md:flex w-64 shrink-0 max-h-screen overflow-y-auto">
@@ -80,17 +80,17 @@ const author = post.data.author || post.data.authors;
             </Button>
           </a>
           <!-- 文章头部信息 -->
-          <article class="prose prose-lg max-w-none mt-10">
+          <article class="prose overflow-auto prose-lg max-w-none mt-10">
             <header class="mb-8 pb-8">
               <div class="flex items-center gap-5">
-                <div class="rounded-xl overflow-hidden w-20 h-20">
-                  <img class="w-full h-full" src="/images/blog/blog-card-bg.png" />
+                <div class="rounded-xl overflow-hidden w-20 h-20 shrink-0">
+                  <img class="w-full h-full object-cover" src="/images/blog/blog-card-bg.png" />
                 </div>
-                <div class="flex flex-col justify-between h-20">
-                  <h1 class="text-4xl font-medium leading-none m-0 p-0 text-black">
+                <div class="flex flex-col justify-center md:justify-between min-h-20 gap-2 md:gap-0">
+                  <h1 class="text-2xl md:text-4xl font-medium leading-tight md:leading-none m-0 p-0 text-black">
                     {post.data.title}
                   </h1>
-                  <div class="flex flex-wrap items-center gap-4 text-xs text-gray-07">
+                  <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-07">
                     {author && (
                       <div class="flex items-center gap-2">
                         <span>{author}</span>
@@ -112,7 +112,7 @@ const author = post.data.author || post.data.authors;
                   </div>
                 </div>
               </div>
-              <div class="mt-10 text-black text-sm font-light">
+              <div class="mt-6 md:mt-10 text-black text-sm font-light">
                 {post.data.description}
               </div>
               <!-- <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">

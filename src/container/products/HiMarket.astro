@@ -38,14 +38,14 @@ const products = [
 ]
 ---
 
-<ProductHeader title="AI 网关" />
+<ProductHeader title="HiMarket" />
 <Layout>
   <Section
     title="产品简介"
-    desc="助力企业构建 Agent、Model、MCP 市场，通过统一的 AI 能力管理平台，解决 AI 资源分散、权限管控复杂、成本分摊困难等挑战，平台提供 HiChat AI 创新中心作为全员 AI 使用入口，打破团队间的能力孤岛，降低接入成本，释放 AI 创新潜能。"
+    desc="助力企业构建 Agent、Model、MCP 市场，通过统一的 AI 能力 management 平台，解决 AI 资源分散、权限管控复杂、成本分摊困难等挑战，平台提供 HiChat AI 创新中心作为全员 AI 使用入口，打破团队间的能力孤岛，降低接入成本，释放 AI 创新潜能。"
   >
-    <div class="flex gap-3" slot="buttonGroup">
-      <Button class="w-59.5">
+    <div class="flex flex-row gap-3 w-full md:w-auto" slot="buttonGroup">
+      <Button classes={{parent: "flex-1"}} class="w-full md:w-59.5">
         <span class="mr-3">Github</span>
         <svg class="fill-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="8" height="8" viewBox="0 0 12 12">
           <g transform="matrix(-1,0,0,1,24,0)">
@@ -53,7 +53,7 @@ const products = [
           </g>
         </svg>
       </Button>
-      <Button class="w-59.5" mode="normal">在线体验</Button>
+      <Button classes={{parent: "flex-1"}} class="w-full md:w-59.5" mode="normal">在线体验</Button>
     </div>
     <img slot="content" class="max-w-full" src="/images/himarket/intro-cn.png" />
   </Section>
@@ -61,7 +61,7 @@ const products = [
     title="核心功能"
     desc="HiMarket 为企业带来开箱即用、快速集成的 AI 能力。"
   >
-    <div slot="content" class="max-w-4/5 grid grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+    <div slot="content" class="w-full lg:max-w-4/5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
       {
         products.map(s => {
           return (
@@ -72,7 +72,7 @@ const products = [
               </div>
             </div>
             <div class="flex flex-col gap-3">
-              <div class="text-black text-lg font-normal">{s.label}</div>
+              <div class="text-center md:text-left text-black text-lg font-normal">{s.label}</div>
               <div class="text-black text-sm leading-9">
                 {s.desc}
               </div>

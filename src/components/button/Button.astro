@@ -3,6 +3,9 @@ interface Props {
   mode?: 'primary' | 'normal' | 'black' | 'light' | 'gray';
   width?: string;
   class?: string;
+  classes?: {
+    parent?: string;
+  };
   type?: "button" | "submit" | "reset";
   contentAlign?: "between" | "center"
   [key: string]: any;
@@ -11,13 +14,13 @@ interface Props {
 const {
   mode = 'primary', width,
   class: className = "", type = "button",
-  contentAlign = "center", ...rest
+  contentAlign = "center", classes, ...rest
 } = Astro.props;
 
 const widthStyle = width ? `width: ${width};` : "";
 ---
 
-<higress-button data-mode={mode}>
+<higress-button class={classes?.parent || ""} data-mode={mode}>
   <button class={`btn ${contentAlign} ${className}`} type={type} style={widthStyle} {...rest}>
     <slot />
   </button>
