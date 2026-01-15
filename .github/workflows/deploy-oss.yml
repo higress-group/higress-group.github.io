@@ -3,7 +3,7 @@ name: higress.io deploy on oss
 on:
   push:
     branches:
-      - main
+      - ai
   workflow_dispatch: ~
   #This schedule only takes effect in the default branch
 jobs:
