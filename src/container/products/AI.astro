@@ -3,6 +3,7 @@ import ProductHeader from "./Header.astro";
 import Button from "../../components/button/Button.astro";
 import Section from "../common/section.astro";
 import Layout from "./Layout.astro";
+import { LINKS } from "@/constant";
 
 const products = [
   {
@@ -39,7 +40,7 @@ const products = [
     desc="专为 AI 场景设计，统一代理大模型 API 与 MCP Server，支持模型、工具（MCP）及 Agent 的集中接入与管理"
   >
     <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto" slot="buttonGroup">
-      <a href="https://github.com/alibaba/higress" target="https://github.com/alibaba/higress">
+      <a href={LINKS.higressGithub} target="_blank">
         <Button class="w-full md:w-59.5">
           <span class="mr-3">Github</span>
           <svg class="fill-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="8" height="8" viewBox="0 0 12 12">

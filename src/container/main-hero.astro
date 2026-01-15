@@ -1,5 +1,9 @@
 ---
 import Button from "../components/button/Button.astro";
+import { LINKS } from "@/constant";
+import { localizeUrl } from "@/i18n/utils";
+
+const locale = Astro.currentLocale || 'root';
 
 const newsItems = [
   {
@@ -49,8 +53,12 @@ const newsItems = [
         Higress.ai 提供免费开源及云上商业化版本，针对 DeepSeek 进行功能增强
       </p>
       <div class="flex flex-row gap-4 mb-20">
-        <Button mode="primary" width="160px">开源体验</Button>
-        <Button mode="normal" width="160px">了解 AI 网关</Button>
+        <a href={LINKS.higressConsole} target="_blank">
+          <Button mode="primary" width="160px">开源体验</Button>
+        </a>
+        <a href={localizeUrl('/ai/quick-start', locale)} target="_blank">
+          <Button mode="normal" width="160px">了解 AI 网关</Button>
+        </a>
       </div>
     </div>
 

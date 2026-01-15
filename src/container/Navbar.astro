@@ -3,9 +3,10 @@
 import SearchButton from '../components/SearchButton.astro';
 import LanguageSelect from '../components/LanguageSelect.astro';
 import Dropdown from '../components/dropdown/Dropdown.astro';
-import { useTranslations } from "../i18n/utils";
+import { useTranslations, localizeUrl } from "../i18n/utils";
 import Button from '../components/button/Button.astro';
 import MobileNavbar from './mobile/MobileNavbar.astro';
+import { LINKS } from '@/constant';
 
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
@@ -20,43 +21,33 @@ const isProducts = /himarket|ai-gateway|api-gateway|blog/.test(currentPath);
 // Set default to transparent for all pages. Scroll effect only applies to Home.
 const navClass = "bg-transparent";
 
-// Helper function to add locale prefix to internal links
-const localizeUrl = (url: string) => {
-  // Don't modify external URLs (starting with http:// or https://)
-  if (url.startsWith('http://') || url.startsWith('https://')) {
-    return url;
-  }
-  // Add /en prefix for English locale
-  return isEnglish ? `/en${url}` : url;
-};
-
 const navItems = [
   {
     type: 'dropdown',
     label: t('navbar.product'),
     items: [
-      { label: t('page.header.gateway'), href: localizeUrl('/api-gateway') },
-      { label: t('page.header.ai.gateway'), href: localizeUrl('/ai-gateway') },
-      { label: 'HiMarket', href: localizeUrl('/himarket') },
+      { label: t('page.header.gateway'), href: localizeUrl('/api-gateway', locale) },
+      { label: t('page.header.ai.gateway'), href: localizeUrl('/ai-gateway', locale) },
+      { label: 'HiMarket', href: localizeUrl('/himarket', locale) },
     ]
   },
   {
     type: 'link',
     label: t('navbar.docs'),
-    href: localizeUrl('/docs/latest/overview/what-is-higress'),
+    href: localizeUrl('/docs/latest/overview/what-is-higress', locale),
   },
   {
     type: 'link',
     label: t('navbar.enterprise'),
-    href: "https://www.aliyun.com/product/api-gateway",
+    href: LINKS.enterprise,
     target: "blank",
   },
   {
     type: 'dropdown',
     label: t('navbar.community'),
     items: [
-      { label: t('navbar.community.blog'), href: localizeUrl('/blog') },
-      { label: t('navbar.community.developer'), href: localizeUrl('/docs/developers/developers_dev') },
+      { label: t('navbar.community.blog'), href: localizeUrl('/blog', locale) },
+      { label: t('navbar.community.developer'), href: localizeUrl('/docs/developers/developers_dev', locale) },
     ]
   }
 ];
@@ -101,7 +92,7 @@ const navItems = [
           <Button mode="black" width='120px'>
             <a
               class="text-white"
-              href="https://github.com/alibaba/higress"
+              href={LINKS.higressGithub}
               target="_blank"
             >
               GITHUB
