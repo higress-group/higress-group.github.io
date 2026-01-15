@@ -3,6 +3,9 @@ import type { GetStaticPathsOptions } from "astro";
 import { getCollection } from "astro:content";
 import { BLOG_CATEGORY } from "../../../constant";
 import BlogLayout from "../../../container/blog/BlogLayout.astro";
+import { useTranslations } from "../../../i18n/utils";
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 
 const { page } = Astro.props;
 
@@ -20,4 +23,4 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 }
 ---
 
-<BlogLayout page={page} currentCategory="all" />
+<BlogLayout title={t("blog.all.articles")} page={page} currentCategory="all" />

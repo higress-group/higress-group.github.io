@@ -1,7 +1,12 @@
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
+    "baseUrl": ".",
     "strictNullChecks": true,
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@starlight/*": ["node_modules/@astrojs/starlight/*"],
+    }
   }
 }

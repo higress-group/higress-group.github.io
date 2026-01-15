@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node runtime.js && node script/gitHubData.js && node script/updateIntranetImg.js && astro build",
+    "build": "astro build",
     "check": "astro build",
     "preview": "astro preview",
     "astro": "astro"

@@ -2,21 +2,50 @@
 ---
 import Navbar from '../container/Navbar.astro';
 import PageFooter from '../container/page-footer.astro';
+import { useTranslations } from "@/i18n/utils";
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 import '../styles/global.css';
 
 interface Props {
   title: string;
+  channel?: string;
+  description?: string;
+  lang?: string;
+  keywords?:(string | number)[] | string;
+  align?: "home" | "docs";
 }
-const { title } = Astro.props;
+
+const { title, description, keywords, align = "home", channel = "" } = Astro.props;
+const headEntry = {
+  data: {
+    description: description,
+    keywords: keywords || t("commmon.base.layout.keywords"),
+    title: `${title}${channel? "_":""}${channel}`,
+    head: [],
+  },
+};
+
 ---
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html  data-theme="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{title}</title>
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow" />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta property="og:image" content="https://img.alicdn.com/imgextra/i1/O1CN01Q9UWyF23bY1R0U0KE_!!6000000007274-2-tps-2560-1440.png" />
+    <link
+      data-rh="true"
+      rel="icon"
+      href="https://img.alicdn.com/imgextra/i4/O1CN01AViQMJ1J2lY4OPRgv_!!6000000000971-2-tps-376-375.png"
+    />
+
   </head>
   <body>
+
     <Navbar />
     <!-- <main  class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8"> -->
     <main>
@@ -24,4 +53,5 @@ const { title } = Astro.props;
     </main>
     <PageFooter />
   </body>
+
 </html>

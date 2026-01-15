@@ -49,10 +49,26 @@ export default defineConfig({
           items: zhDeveloperSidebar,
         },
       ],
-      head: [],
+      head: [
+        {
+          tag: "script",
+          attrs: {
+            src: "https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR",
+            async: true,
+          }
+        },
+        {
+          tag: "script",
+          attrs: {
+            src: "/scripts.js"
+          }
+        }
+      ],
       components: {
         PageTitle: "./src/components/starlight/PageTitle.astro",
+        // Head: "./src/components/starlight/Head.astro",
         Header: "./src/components/starlight/Header.astro",
+        Footer: "./src/components/starlight/Footer.astro",
         Sidebar: "./src/components/starlight/Sidebar.astro",
         PageFrame: "./src/components/starlight/PageFrame.astro",
         TwoColumnContent: "./src/components/starlight/TwoColumnContent.astro",

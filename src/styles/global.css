@@ -8,14 +8,8 @@
   box-sizing: border-box;
 }
 
-a, body, footer, ul, li {
+a, body, footer {
   text-decoration: none;
-  margin: 0;
-  list-style-type: none;
-}
-
-ul {
-  padding: 0;
   margin: 0;
 }
 

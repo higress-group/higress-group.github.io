@@ -5,18 +5,22 @@ import BlogCard from "./BlogCard.astro";
 import Button from "../../components/button/Button.astro";
 
 interface Props {
+  title: string;
   page: any;
   currentCategory?: string;
 }
 
-const { page, currentCategory } = Astro.props;
+const { page, title, currentCategory } = Astro.props;
 ---
 
-<SiteLayout title={"Higress - 云原生网关"}>
-  <div class="blog-container py-16 md:py-40">
+<SiteLayout title={title}>
+  <div class="blog-container relative py-16 md:py-40">
+    <div class="absolute top-8 md:top-0 left-0 w-full -z-10">
+      <img class="max-w-full" src="/images/blog/blog-bg.png" />
+    </div>
     <BlogHeader currentCategory={currentCategory} />
 
-    <div class="px-4 md:px-10 pt-6 md:pt-10 mt-10 md:mt-20 backdrop-blur-sm grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+    <div class="px-4 md:px-10 pt-6 md:pt-10 mt-10 md:mt-20 backdrop-blur-[1px] grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
       {
         page.data.map((blog: any) => (
           <BlogCard
@@ -50,7 +54,7 @@ const { page, currentCategory } = Astro.props;
            </Button>
         </div>
       )}
-      
+
       <span class="text-gray-600 font-medium">
         Page {page.currentPage} of {page.lastPage}
       </span>

@@ -157,6 +157,41 @@ try {
       }
     });
   }
+
+  // 查看 Markdown 功能 - 直接跳转到源文件
+  const viewMarkdownBtn = document.getElementById('view-markdown-item');
+
+  // 获取当前页面的 Markdown 文件路径
+  const getMarkdownFilePath = () => {
+    const currentPath = window.location.pathname;
+
+    // 移除开头的斜杠
+    let path = currentPath.replace(/^\//, '');
+
+    // 检查是否是英文路径
+    const isEnglish = path.startsWith('en/');
+
+    // 移除 en/ 前缀（如果存在）来获取实际的文档路径
+    const docPath = isEnglish ? path.replace(/^en\//, '') : path;
+
+    // 构建文件路径
+    // 如果是英文: /overview/docs/en/{docPath}.md
+    // 如果是中文: /overview/docs/{docPath}.md
+    const filePath = isEnglish
+      ? `/overview/en/${docPath}.md`
+      : `/overview/${docPath}.md`;
+
+    return filePath;
+  };
+
+  // 点击按钮跳转到源文件
+  if (viewMarkdownBtn) {
+    viewMarkdownBtn.addEventListener('click', () => {
+      const filePath = getMarkdownFilePath();
+      // 在新标签页打开源文件
+      window.open(filePath, '_blank');
+    });
+  }
 </script>
 
 <style>

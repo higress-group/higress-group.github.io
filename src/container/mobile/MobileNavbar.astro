@@ -39,10 +39,10 @@ const { navItems, homeUrl } = Astro.props;
 
   <!-- Mobile Menu Content -->
   <div class="p-4 flex flex-col gap-6">
-    <ul class="flex flex-col gap-4">
+    <ul class="flex flex-col gap-4 p-0 m-0">
       {navItems.map((item) => (
         item.type === 'dropdown' ? (
-          <li>
+          <li class="list-none">
             <details class="group">
               <summary class="flex items-center justify-between font-medium text-gray-900 cursor-pointer list-none py-2">
                 {item.label}
@@ -50,9 +50,9 @@ const { navItems, homeUrl } = Astro.props;
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </summary>
-              <ul class="mt-2 ml-4 flex flex-col gap-3 pl-4 py-2">
+              <ul class="mt-2 ml-4 flex flex-col gap-3 pl-4 py-2 p-0 m-0">
                 {item.items?.map((sub) => (
-                  <li>
+                  <li class="list-none">
                     <a
                       href={sub.href}
                       class="text-sm text-gray-600 hover:text-primary block py-1"
@@ -65,7 +65,7 @@ const { navItems, homeUrl } = Astro.props;
             </details>
           </li>
         ) : (
-          <li>
+          <li class="list-none">
             <a
               href={item.href}
               target={item.target}

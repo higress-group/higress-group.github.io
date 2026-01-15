@@ -1,0 +1,125 @@
+---
+const { dir, pagination } = Astro.locals.starlightRoute;
+const { prev, next } = pagination;
+const isRtl = dir === 'rtl';
+---
+
+<div class="pagination-links print:hidden" dir={dir}>
+	{
+		prev && (
+			<a href={prev.href} rel="prev">
+				<span>
+					{Astro.locals.t('page.previousLink')}
+					<span class="link-title">{prev.label}</span>
+				</span>
+			</a>
+		)
+	}
+	{
+		next && (
+			<a href={next.href} rel="next">
+				<span>
+					{Astro.locals.t('page.nextLink')}
+					<span class="link-title">{next.label}</span>
+				</span>
+			</a>
+		)
+	}
+</div>
+
+<style>
+	@layer starlight.core {
+		.pagination-links {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+			gap: 1rem;
+			margin-top: 3rem;
+		}
+
+		a {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			gap: 0.75rem;
+			width: 100%;
+			flex-basis: calc(50% - 0.5rem);
+			flex-grow: 1;
+			background: #ffffff;
+			/*border: 1px solid var(--color-gray-02);*/
+			border-radius: 0.75rem;
+			padding: 1.25rem 1.5rem;
+			text-decoration: none;
+			color: var(--color-black);
+			transition: all 0.2s ease;
+			overflow-wrap: anywhere;
+		}
+
+		[rel='next'] {
+			justify-content: end;
+			text-align: end;
+			flex-direction: row-reverse;
+		}
+
+		a:hover {
+			background: var(--color-indigo-20);
+			border-color: var(--sl-color-accent);
+			box-shadow: 0 2px 8px rgba(62, 92, 244, 0.1);
+		}
+
+		a span {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
+		}
+
+		.link-title {
+			color: var(--color-strong);
+			font-size: 1rem;
+			font-weight: 500;
+			line-height: 1.4;
+		}
+
+		a:hover .link-title {
+			color: var(--sl-color-accent);
+		}
+
+		/* 箭头图标 */
+		a::before {
+			content: '';
+			display: block;
+			width: 24px;
+			height: 24px;
+			flex-shrink: 0;
+			background-color: var(--color-gray-02);
+			border-radius: 50%;
+			transition: all 0.2s ease;
+		}
+
+		[rel='prev']::before {
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%232E3038' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: 16px;
+		}
+
+		[rel='next']::before {
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%232E3038' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: 16px;
+		}
+
+		a:hover::before {
+			background-color: var(--sl-color-accent);
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
+		}
+
+		[rel='next']:hover::before {
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
+		}
+
+		svg {
+			flex-shrink: 0;
+		}
+	}
+</style>
