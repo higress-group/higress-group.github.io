@@ -1,7 +1,19 @@
 ---
 import SiteLayout from "../../layout/siteLayout.astro";
 import MainHeroSection from "../../container/main-hero.astro";
+import GatewaySolution from "@/container/gateway-solution.astro";
+import Sense from "@/container/sense.astro";
+import Customers from "@/container/customers.astro";
+import { useTranslations } from "@/i18n/utils";
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
+
 ---
-<SiteLayout title={"Higress - 云原生网关"}>
+<SiteLayout title={t("home.title")}>
   <MainHeroSection />
+  <div class="flex flex-col gap-10 md:gap-20 lg:gap-30">
+    <GatewaySolution />
+    <Sense />
+    <Customers />
+  </div>
 </SiteLayout>

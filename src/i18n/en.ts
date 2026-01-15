@@ -481,4 +481,61 @@ export default {
 
 	// Common
 	'functional.compare.self.build': 'Self-build',
+
+	// Home Hero Section
+	'home.hero.title': 'Rapid AI Gateway Integration',
+	'home.hero.description.line1': 'Production-grade AI Gateway for Agent development and LLM API management',
+	'home.hero.description.line2': 'Higress.ai offers free open-source and commercial cloud versions, enhanced for DeepSeek',
+	'home.hero.button.experience': 'Try Open Source',
+	'home.hero.button.learn': 'Learn AI Gateway',
+	'home.hero.news.label': 'News',
+
+	// Home News
+	'home.news.1.title': 'Higress x DeepSeek',
+	'home.news.1.content': 'Higress fully supports DeepSeek with enhanced Token flow control and caching, significantly reducing API costs.',
+	'home.news.2.title': 'Higress 2.0 Released',
+	'home.news.2.content': 'Next-gen cloud-native AI Gateway with Wasm plugin marketplace and powerful LLM routing strategies.',
+	'home.news.3.title': 'Community Bi-weekly Preview',
+	'home.news.3.content': 'This Friday at 8 PM, core maintainers will share best practices for AI Agent integration.',
+	'home.news.4.title': 'Cloud Native Gateway Whitepaper',
+	'home.news.4.content': 'Co-published with enterprises, exploring API Gateway architecture evolution in the AI era.',
+
+	// Gateway Solution
+	'home.gateway.solution.title': 'Gateway Solutions',
+	'home.gateway.solution.description': 'Unified proxy for models, tools, and Agents through AI Gateway, API Gateway, and HiMarket, empowering enterprises to build AI platforms and accelerate AI adoption.',
+
+	// Customers
+    'home.customers.title': 'Best Practices for AI Application Scenarios\nServing Enterprise Users in Multiple Fields',
+    'home.customers.learn_more': 'Learn More',
+    'home.customers.case.ctrip.author': 'Ctrip',
+    'home.customers.case.ctrip.title': 'Ctrip\'s Practical Implementation of AI Gateway',
+    'home.customers.case.ctrip.desc': 'Facing problems such as multi-model access and lack of unified traffic governance when applying AI technology on a large scale, Ctrip chose to build an AI gateway based on Higress. This solution has the advantages of deep technical accumulation and strong scalability. By uniformly managing large model services and MCP service access, it realizes functions such as authentication, traffic control, and model mapping. The system is currently running stably and supports multiple scenarios. In the future, the ability to convert existing HTTP APIs to MCP services will be optimized.',
+    'home.customers.case.junrun.author': 'Junrun HR',
+    'home.customers.case.junrun.title': 'Using MCP, this company has delivered 1,000 digital employees to enterprises',
+    'home.customers.case.junrun.desc': 'From 2023 to the present, Junrun HR has begun continuous exploration in the AI ​​field. Among them, how to build digital employees (agents) that can deliver work results for different positions is the focus of exploration. As of now, Junrun has more than 1,000 digital employees working 24/7, saving tens of millions of labor costs cumulatively, and Higress has provided great assistance in this regard.',
+    'home.customers.case.alibaba.author': 'Alibaba',
+    'home.customers.case.alibaba.title': 'Alibaba MCP Distributed Implementation Practice: Quickly Convert HSF (Dubbo) to MCP Server',
+    'home.customers.case.alibaba.desc': 'In the MCP service hosting solution, Higress is responsible for receiving MCP requests and completing protocol offloading, providing unified identity authentication, traffic scheduling, parameter mapping, and security audit capabilities, enabling developers to quickly expose existing services as MCP Servers without in-depth understanding of MCP protocol details.',
+    'home.customers.case.sofa.author': 'SOFA Community',
+    'home.customers.case.sofa.title': 'SOFA AI Gateway Implementation Practice',
+    'home.customers.case.sofa.desc': 'SOFA AI Gateway is an intelligent gateway solution built on the open-source Higress kernel, deeply optimized for AI business scenarios. It focuses on core functions such as security protection, traffic control, semantic caching, and building financial MCP markets. Through features such as intelligent routing and unified access, this gateway effectively solves challenges such as high latency and high resource consumption in AI scenarios, significantly reducing the complexity of model access and improving the R&D efficiency of agents.',
+    'home.customers.case.zc.author': 'Zc',
+    'home.customers.case.zc.title': 'How to pay off gateway technical debt? Layering, plugins, unification, the three-piece set',
+    'home.customers.case.zc.desc': 'Higress has encapsulated the open-source wasm client, making it easier for developers to develop plugins, such as controlling the scope of plugin effectiveness, and there are already many plugin capabilities in the community that can be used directly. Higress integrates a variety of mainstream registration centers in terms of multi-data sources. These capabilities can be reused directly without repeated construction.',
+    'home.customers.case.investoday.author': 'Investoday',
+    'home.customers.case.investoday.title': '20 years of financial investment data accumulation, officially opening MCP capabilities',
+    'home.customers.case.investoday.desc': 'The Higress MCP market provides a complete solution, through which Investoday\'s rich financial data APIs can be quickly converted into MCP tools. Users can easily call professional financial data through MCP and freely and quickly build their own financial large model applications. As a result, Investoday launched the Investoday Financial Data MCP service, providing one-stop financial data MCP.',
+
+    // Sense
+    'home.sense.title': 'Scenario Experience',
+    'home.sense.description': 'Provides two channels: open source version and commercial product, one-click experience of AI application scenarios.',
+    'home.sense.detail.link': 'Learn Details',
+    'home.sense.item.multi_model.label': 'Multi-model Proxy',
+    'home.sense.item.multi_model.desc': 'The AI ​​gateway can forward requests from external calls to different large models to the corresponding internal large models through a unified call method, making backend model scheduling more flexible; Higress.ai supports unified protocol conversion for 100+ common models and supports model-level Fallback.',
+    'home.sense.item.app_protection.label': 'Application Protection',
+    'home.sense.item.app_protection.desc': 'The AI ​​gateway can protect data security when interacting with large models. On the one hand, it protects the privacy of data input to external models, and on the other hand, it filters content for data output to users.',
+    'home.sense.item.ai_cache.label': 'AI Cache',
+    'home.sense.item.ai_cache.desc': 'The AI ​​gateway supports precise caching and semantic caching of inference result contexts, saving Tokens and reducing latency for common similar/repeated questions, thereby improving the calling experience.',
+    'home.sense.item.token_management.label': 'Token Management',
+    'home.sense.item.token_management.desc': 'The AI ​​gateway can track the number of Tokens used by large models and limit them when consumers use excess, thereby better managing the user quota for calling AI applications and providing data support for Token usage analysis.',
 };

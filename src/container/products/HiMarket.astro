@@ -5,36 +5,33 @@ import Section from "../common/section.astro";
 import Layout from "./Layout.astro";
 import { LINKS } from "@/constant";
 
+const locale = Astro.currentLocale || 'root';
+const isEn = locale === "en";
+
 const products = [
   {
-    label: "模型市场",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
-    link: "",
-    img: "/images/himarket/market.png",
-  },
-  {
-    label: "MCP 市场",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
-    link: "",
-    img: "/images/himarket/market.png",
-  },
-  {
-    label: "智能体市场",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
-    link: "",
-    img: "/images/himarket/market.png",
-  },
-  {
-    label: "API 市场",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
-    link: "",
-    img: "/images/himarket/market.png",
+    label: "AI 市场",
+    desc: "支持构建涵盖 Agent、MCP Server、Model 的完整 AI 市场，让企业的各类 AI 资源不再分散，而是以标准化方式汇聚在一个平台上，形成 AI 能力的统一供给与管理。",
+    link: LINKS.himarketConsole,
+    img: "https://img.alicdn.com/imgextra/i2/O1CN01H62z3z1oVOXevp4zZ_!!6000000005230-55-tps-312-204.svg",
   },
   {
     label: "HiChat",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
-    link: "",
-    img: "/images/himarket/hichat.png",
+    desc: "HiChat 以对话替代搜索，覆盖市场/产品调研与运营内容生成，并作为企业全员统一的 AI 使用入口，集中完成多模型选型使用与安全合规管控。平台支持一次输入多模型对比、会话历史沉淀复用，并通过 Higress AI 网关统一开启联网搜索与关联/转换 MCP 工具，实现快速验证与扩展能力。",
+    link: LINKS.himarketConsole,
+    img: "https://img.alicdn.com/imgextra/i4/O1CN01VixIjB1VJ3AKQVKA4_!!6000000002631-55-tps-312-204.svg",
+  },
+  {
+    label: "企业级能力",
+    desc: "提供企业级管理闭环，管理员可对各 API 产品配置鉴权与可见性，并结合流量控制、IP 白名单等能力保障安全稳定。平台还支持全局观测分析、按 Token/调用次数计量计费，以及多版本并行的灰度发布与快速回滚，支撑高效运营与稳定迭代。",
+    link: LINKS.himarketConsole,
+    img: "https://img.alicdn.com/imgextra/i3/O1CN01pVExX328Xx4Iup8cj_!!6000000007943-55-tps-312-204.svg",
+  },
+  {
+    label: "扩展能力",
+    desc: "HiMarket 提供灵活定制以快速对接企业现有系统。门户支持自定义域名与品牌样式，并可按需配置首页模块与产品分类等。身份认证兼容账号密码与企业 OIDC/SSO/IDaaS 集成，同时关键流程（注册、凭证申请、订阅）支持自动或人工审批配置。",
+    link: LINKS.himarketConsole,
+    img: isEn ? "https://img.alicdn.com/imgextra/i1/O1CN01risH211CGmVOSmSLM_!!6000000000054-55-tps-268-214.svg" : "https://img.alicdn.com/imgextra/i2/O1CN018wcXBp27hjuucntK8_!!6000000007829-55-tps-268-214.svg",
   },
 ]
 ---
@@ -66,7 +63,7 @@ const products = [
     title="核心功能"
     desc="HiMarket 为企业带来开箱即用、快速集成的 AI 能力。"
   >
-    <div slot="content" class="w-full lg:max-w-4/5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+    <div slot="content" class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
       {
         products.map(s => {
           return (

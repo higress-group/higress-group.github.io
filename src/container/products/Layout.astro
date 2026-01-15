@@ -1,4 +1,5 @@
 ---
+import { LINKS } from "@/constant";
 import Button from "../../components/button/Button.astro";
 ---
 <!-- 左侧悬浮菜单 -->
@@ -39,7 +40,7 @@ import Button from "../../components/button/Button.astro";
       想获得深度整合的 API 管理、流量网关与微服务网关一体化能力？企业版提供更强大的统一治理与安全扩展，欢迎了解。
     </div>
     <Button class='w-39' mode="normal">
-      <a class="text-black" target="_blank" href="https://www.aliyun.com/product/api-gateway">
+      <a class="text-black" target="_blank" href={LINKS.enterprise}>
         了解企业版
       </a>
     </Button>

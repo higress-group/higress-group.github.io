@@ -5,30 +5,33 @@ import Section from "../common/section.astro";
 import Layout from "./Layout.astro";
 import { LINKS } from "@/constant";
 
+const locale = Astro.currentLocale || 'root';
+const isEn = locale === "en";
+
 const products = [
   {
     label: "多模型统一接入",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
+    desc: "对 OpenAI 兼容接口及主流大模型服务提供统一网关入口，屏蔽不同厂商鉴权、接口差异，便于快速切换与多活部署。同时支持模型负载均衡及FallBack，提升模型服务的可靠性。",
     link: "",
-    img: "/images/api/api.png",
+    img: isEn ? "https://img.alicdn.com/imgextra/i2/O1CN017XfQ8o1GnXIHX9JMr_!!6000000000667-55-tps-200-122.svg" : "https://img.alicdn.com/imgextra/i3/O1CN01KYQYvl1TVkvIqnXck_!!6000000002388-55-tps-200-122.svg",
   },
   {
-    label: "智能协议转换",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
+    label: "MCP 统一管理",
+    desc: "支持HTTP到MCP的协议转换，以及支持原生MCP服务的代理，把分散的工具能力收敛为统一入口，降低多团队、多环境的接入与维护成本。",
     link: "",
-    img: "/images/api/protect.png",
-  },
-  {
-    label: "AI 安全护栏",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
-    link: "",
-    img: "/images/api/flow.png",
+    img: "https://img.alicdn.com/imgextra/i2/O1CN01sIsWY91nzKojOShZk_!!6000000005160-55-tps-280-181.svg"
   },
   {
     label: "Token 流量管理",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
+    desc: "除传统 QPS 限流外，提供基于 Token 消耗的配额管理与限流能力，结合 API Key 池轮询与消费者鉴权机制，可有效防止模型过载，管控客户端调用额度。",
     link: "",
-    img: "/images/api/accelerate.png",
+    img: isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01aU0Wqp1qm08Mzdb3W_!!6000000005537-55-tps-256-155.svg" : "https://img.alicdn.com/imgextra/i3/O1CN01BOjI971Uh2IFz9NiT_!!6000000002548-55-tps-256-155.svg",
+  },
+  {
+    label: "扩展性",
+    desc: "通过插件快速接入 RAG、向量库、日志观测、缓存等 AI 生态组件，实现能力按需组合；同时支持自定义插件开发，满足复杂业务自定义逻辑场景。",
+    link: "",
+    img: isEn ? "https://img.alicdn.com/imgextra/i2/O1CN016ePFQY20VBkjw8uqS_!!6000000006854-55-tps-246-120.svg" : "https://img.alicdn.com/imgextra/i2/O1CN01S5ZrXp1kEDDh9LZno_!!6000000004651-55-tps-246-120.svg",
   },
 ]
 ---

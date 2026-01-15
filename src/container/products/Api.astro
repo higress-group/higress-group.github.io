@@ -5,30 +5,33 @@ import Section from "../common/section.astro";
 import Layout from "./Layout.astro";
 import { LINKS } from "@/constant";
 
+const locale = Astro.currentLocale || 'root';
+const isEn = locale === "en";
+
 const products = [
   {
     label: "API 管理",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
+    desc: "支持基于路由、Ingress 及 Gateway API 的标准化配置，极大简化了 API 的发布、管理和可观测建设。兼容常用的 Nginx Ingress 注解，使得从 Nginx Ingress 迁移成本极低。同时提供丰富的重写、灰度等能力，降低网关侧配置复杂度。 安全防护",
     link: "",
-    img: "/images/api/api.png",
-  },
-  {
-    label: "安全防护",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
-    link: "",
-    img: "/images/api/protect.png",
+    img: isEn ? "https://img.alicdn.com/imgextra/i1/O1CN01BBNcFo21IeWnD6beT_!!6000000006962-55-tps-260-204.svg" : "https://img.alicdn.com/imgextra/i3/O1CN01qPFOJU1J5W4fBBZeH_!!6000000000977-55-tps-260-204.svg",
   },
   {
     label: "流量控制",
-    desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
+    desc: "提供限流、熔断、超时、重试等治理能力，可在入口处对突发流量进行削峰并提升后端稳定性；支持基于路由/Header/参数等维度的精细化流量策略，适配多租户与分场景控制。",
     link: "",
-    img: "/images/api/flow.png",
+    img: "https://img.alicdn.com/imgextra/i2/O1CN01Jd4Bpi1dNBfepB03u_!!6000000003723-55-tps-222-160.svg",
   },
   {
-    label: "硬件加速",
+    label: "安全防护",
+    desc: "支持认证鉴权（如 JWT/OIDC 等）与策略插件化扩展，可在网关层统一实现访问控制；结合 WAF/黑白名单等能力可快速补齐常见 Web 攻击与恶意请求防护。",
+    link: "",
+    img: isEn ? "https://img.alicdn.com/imgextra/i2/O1CN01DOSJRC1IIy5ixJDVV_!!6000000000871-55-tps-266-208.svg" : "https://img.alicdn.com/imgextra/i2/O1CN01OTSvMn1sSQR9a8Aio_!!6000000005765-55-tps-266-208.svg",
+  },
+  {
+    label: "扩展性",
     desc: "此处添加产品优势描述，此处添加产品优势描述，此处添加产品优势描述。此处添加产品优势描述，此处添加产品优势描述。",
     link: "",
-    img: "/images/api/accelerate.png",
+    img: "https://img.alicdn.com/imgextra/i4/O1CN01iydKQ11RKe5FGF1DD_!!6000000002093-55-tps-218-218.svg",
   },
 ]
 ---

@@ -489,4 +489,60 @@ export default {
 	// 通用
 	'functional.compare.self.build': '自行构建',
 
+	// 首页 Hero 区域
+	'home.hero.title': 'AI 网关快速集成',
+	'home.hero.description.line1': '易用的生产级AI网关，为 Agent 开发、LLM API 管理提供可靠工具',
+	'home.hero.description.line2': 'Higress.ai 提供免费开源及云上商业化版本，针对 DeepSeek 进行功能增强',
+	'home.hero.button.experience': '开源体验',
+	'home.hero.button.learn': '了解 AI 网关',
+	'home.hero.news.label': 'News',
+
+	// 首页新闻
+	'home.news.1.title': 'Higress x DeepSeek',
+	'home.news.1.content': 'Higress 全面适配 DeepSeek，提供更优的 Token 流控与缓存能力，大幅降低 API 调用成本。',
+	'home.news.2.title': 'Higress 2.0 发布',
+	'home.news.2.content': '下一代云原生 AI 网关，引入 Wasm 插件市场与更强大的 LLM 路由策略。',
+	'home.news.3.title': '社区双周会预告',
+	'home.news.3.content': '本周五晚 8 点，核心维护者将分享 AI Agent 接入的最佳实践与案例解析。',
+	'home.news.4.title': '云原生网关白皮书',
+	'home.news.4.content': '联合多家企业发布，深度解读 AI 时代下 API 网关的架构演进与技术趋势。',
+
+	// 网关解决方案
+	'home.gateway.solution.title': '网关解决方案',
+	'home.gateway.solution.description': '通过 AI 网关、API 网关及Himarket，解决模型、工具及Agent统一代理问题，并助力企业构建AI中台，加速AI落地。',
+
+	// Customers
+    'home.customers.title': 'AI 应用场景下的最佳实践\n服务于多领域企业级用户',
+    'home.customers.learn_more': '了解更多',
+    'home.customers.case.ctrip.author': '携程旅游',
+    'home.customers.case.ctrip.title': '携程旅游的 AI 网关落地实践',
+    'home.customers.case.ctrip.desc': '面对大规模应用 AI 技术时出现的多模型接入、缺乏统一流量治理等问题，携程选择基于 Higress 构建 AI 网关。该方案具有技术沉淀深厚、扩展性强等优势，通过统一管理大模型服务和 MCP 服务接入，实现了认证鉴权、流量控制、模型映射等功能。目前系统稳定运行，支持多场景，未来将优化存量化 HTTP API 向 MCP 服务的转化能力。',
+    'home.customers.case.junrun.author': '君润人力',
+    'home.customers.case.junrun.title': '这家公司使用 MCP，已向企业交付 1000 名数字员工',
+    'home.customers.case.junrun.desc': '从 2023 年至今，君润人力开始在 AI 领域进行持续探索，其中，如何构建能够交付不同岗位工作结果的数字员工（智能体）是探索的重点，截止目前君润已经有超过 1000 名数字员工 7X24 小时工作，累计节约人力成本超过上千万，而这些 higress 提供了极大的助力。',
+    'home.customers.case.alibaba.author': '阿里巴巴',
+    'home.customers.case.alibaba.title': '阿里巴巴 MCP 分布式落地实践：快速转换 HSF（Dubbo）到 MCP server',
+    'home.customers.case.alibaba.desc': '在MCP服务托管方案中，Higress 负责接收 MCP 请求并完成协议卸载，提供统一的身份认证、流量调度、参数映射与安全审计等能力，使开发者能在不深入了解 MCP 协议细节的情况下，快速将现有服务暴露为 MCP Server。',
+    'home.customers.case.sofa.author': 'SOFA 社区',
+    'home.customers.case.sofa.title': 'SOFA AI网关落地实践',
+    'home.customers.case.sofa.desc': 'SOFA AI 网关是基于开源 Higress 内核构建的智能化网关解决方案，针对 AI 业务场景深度优化。聚焦安全防护、流量管控、语义缓存、构建金融MCP市场等核心功能。该网关通过智能路由、统一接入等特性，有效解决了 AI 场景下的高延迟、资源消耗大等挑战，显著降低了模型接入复杂度，提升了智能体研发效率。',
+    'home.customers.case.zc.author': '政采云',
+    'home.customers.case.zc.title': '网关技术债怎么还？分层、插件、统一，三件套',
+    'home.customers.case.zc.desc': 'Higress在开源的 wasm client 上做了封装，更方便开发者做插件的开发，比如做了插件生效的范围控制，并且社区已有很多插件能力可以直接使用。Higress在多数据源这块集成了多种主流注册中心，这些能力可以直接复用，不用重复建设。',
+    'home.customers.case.investoday.author': '今日投资',
+    'home.customers.case.investoday.title': '20年金融投资数据沉淀，正式开放 MCP 能力',
+    'home.customers.case.investoday.desc': 'Higress MCP 市场提供了完善的解决方案，通过它可以快捷地将今日投资丰富的金融数据 API 转化为 MCP 工具，用户可以通过 MCP 的方式非常轻松地调用专业金融数据，自由快速地构建自己的金融大模型应用。由此，今⽇投资推出了今日投资⾦融数据 MCP 服务，提供一站式的金融数据 MCP。',
+
+    // Sense
+    'home.sense.title': '场景体验',
+    'home.sense.description': '提供开源版本和商业化产品的两种渠道，一键体验AI应用场景。',
+    'home.sense.detail.link': '了解详情',
+    'home.sense.item.multi_model.label': '多模型代理',
+    'home.sense.item.multi_model.desc': 'AI 网关能够将外部调用不同大模型的请求，通过统一的调用方式转发到内部对应的大模型上，使得后端模型调度更加灵活；Higress.a i支持常用的 100+ 个模型的统一协议转换，并支持模型级 Fallback。',
+    'home.sense.item.app_protection.label': '应用防护',
+    'home.sense.item.app_protection.desc': 'AI 网关能够保护和大模型交互时的数据安全，一方面对于输入到外部模型的数据进行隐私保护，另一方面对于输出给用户的数据进行内容过滤。',
+    'home.sense.item.ai_cache.label': 'AI 缓存',
+    'home.sense.item.ai_cache.desc': 'AI 网关支持精确缓存及语义缓存推理的结果上下文，对于常见的相似/重复的问题节省 Token 并减小时延，从而提升调用体验。',
+    'home.sense.item.token_management.label': 'Token 管控',
+    'home.sense.item.token_management.desc': 'AI 网关能够对大模型使用的 Token 数量进行追踪，在消费者使用超额时进行限制，从而更好管理调用 AI 应用的用户额度，为 Token 使用分析提供数据支持。',
 };

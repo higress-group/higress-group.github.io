@@ -1,10 +1,13 @@
 ---
+import { useTranslations } from "@/i18n/utils";
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 ---
 <section class="w-full py-14 px-4 md:px-6 lg:px-10">
   <div class="mx-auto flex flex-col gap-10">
     <div class="flex flex-col items-center justify-center">
-      <div class="text-[1.5rem] md:text-[2.5rem]">网关解决方案</div>
-      <p class="text-gray-400">此处网关解决方案大图待定，此处网关解决方案大图待定。此处网关解决方案大图待定，此处网关解决方案大图待定。</p>
+      <div class="text-[1.5rem] md:text-[2.5rem]">{t('home.gateway.solution.title')}</div>
+      <p class="text-gray-400">{t('home.gateway.solution.description')}</p>
     </div>
 
     <img  src="https://img.alicdn.com/imgextra/i3/O1CN01lVcih51hs6sFc8mhf_!!6000000004332-55-tps-1292-760.svg" />
