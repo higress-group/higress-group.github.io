@@ -70,5 +70,7 @@ export default defineConfig({
 		'/ai/': '/ai/quick-start/',
 		'/en/ai/': '/en/ai/quick-start',
     '/docs/': '/docs/latest/overview/what-is-higress/',
+    '/docs/latest/dev/CustomResourceDefinition/': '/docs/latest/dev/customresourcedefinition/',
+		'/en-us/docs/latest/dev/CustomResourceDefinition/': '/en/docs/latest/dev/customresourcedefinition/',
   }
 });

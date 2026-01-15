@@ -60,8 +60,8 @@
 	@layer starlight.core {
 		button {
 			position: fixed;
-			top: 46px;
-			left: 19px;
+			top: 16px;
+			right: 19px;
 			outline: none;
 			/*inset-inline-end: var(--sl-nav-pad-x);*/
 			z-index: 20;
@@ -70,9 +70,9 @@
 			width: var(--sl-menu-button-size);
 			height: var(--sl-menu-button-size);
 			padding: 0.5rem;
-			background-color: var(--sl-color-white);
+			background-color: var(--color-indigo-20);
 			color: var(--sl-color-black);
-			box-shadow: var(--sl-shadow-md);
+			/*box-shadow: var(--sl-shadow-md);*/
 			cursor: pointer;
 			transition: background-color 0.2s ease, box-shadow 0.2s ease;
 			display: flex;
@@ -83,7 +83,7 @@
 		}
 
 		button:active {
-			box-shadow: var(--sl-shadow-md);
+			/*box-shadow: var(--sl-shadow-md);*/
 			transform: scale(0.98);
 		}
 
@@ -97,8 +97,8 @@
 		}
 
 		[aria-expanded='true'] button {
-			background-color: var(--sl-color-gray-2);
-			box-shadow: var(--sl-shadow-md);
+			background-color: var(--color-indigo-20);
+			/*box-shadow: var(--sl-shadow-md);*/
 		}
 
 		[aria-expanded='true'] button .open-menu {
@@ -110,12 +110,12 @@
 		}
 
 		:global([data-theme='light']) button {
-			background-color: var(--sl-color-black);
+			background-color: var(--color-indigo-20);
 			color: var(--sl-color-white);
 		}
 
 		:global([data-theme='light']) [aria-expanded='true'] button {
-			background-color: var(--sl-color-gray-5);
+			/*background-color: var(--sl-color-gray-5);*/
 		}
 
 		button svg {
