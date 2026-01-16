@@ -2,7 +2,7 @@
 title: "这家公司使用 MCP，已向企业交付 1000 名数字员工"
 description: "这家公司使用 MCP，已向企业交付 1000 名数字员工"
 date: "2025-07-01"
-category: "case"
+category: "article"
 keywords: ["Higress"]
 authors: "CH3CHO"
 ---
@@ -14,7 +14,7 @@ authors: "CH3CHO"
 ### <font style="color:rgb(0, 0, 0);">数智化布局</font>
 <font style="color:rgb(17, 17, 17);">君润人力在 2019 年-2022 年构建了一站式数字化解决方案，覆盖招聘、社保、薪酬、风控、电子签、结算支付等全流程场景。所有系统自主研发，确保技术可控性与安全可靠性，目前已支撑超 30 个核心业务系统。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1751340434444-5485370f-d74f-4989-86a9-6c34b17e82de.png)
+![](https://img.alicdn.com/imgextra/i1/O1CN01I9RPlH1MUCGT9ib3c_!!6000000001437-2-tps-1184-567.png)
 
 <font style="color:rgb(17, 17, 17);">随着人口红利的逐渐消退，企业也将面临人力成本上升的挑战，通过人机协作的模式，将大量重复性的事务型工作自动化、智能化，是未来的发展趋势。从 2023 年至今，君润人力开始在 AI 领域进行持续探索，其中，如何构建能够交付不同岗位工作结果的数字员工（智能体）是探索的重点。目前君润已经有超过 1000 名数字员工在 7X24 小时工作，累计节约人力成本超过上千万。</font>
 
@@ -53,7 +53,7 @@ authors: "CH3CHO"
 
 <font style="color:rgb(17, 17, 17);">6. 站在巨人肩膀上开发，搭建符合君润技术架构的 Agent 智能体全生命周期管理平台。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1751340434407-af7070f4-198e-4535-b5a5-abbb83c9830c.png)
+![](https://img.alicdn.com/imgextra/i2/O1CN0148rOZi1eKGlOKX71r_!!6000000003852-2-tps-1390-772.png)
 
 + <font style="color:rgb(17, 17, 17);">复用/增强：</font>
 
@@ -61,14 +61,14 @@ authors: "CH3CHO"
 
 <font style="color:rgb(17, 17, 17);">2. 使用阿里百炼的应用观测和 Higress 上 AI 插件（AI 内容安全、AI Token 限流、AI 统计、日志等）对君润数字灵工应用可用性进行保障和迭代。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1751340434435-665a54e3-0ea3-47c9-8070-521c7af83c67.png)
+![](https://img.alicdn.com/imgextra/i4/O1CN01L1eeYV1O6V0FtTE16_!!6000000001656-2-tps-1061-410.png)
 
 #### <font style="color:rgb(0, 0, 0);">落地案例</font>
 <font style="color:rgb(17, 17, 17);">MCP工具（社保计算器） MCP Marketplace:</font>
 
 [<font style="color:rgb(0, 102, 204);">https://mcp.higress.ai/server/server10001</font>](https://mcp.higress.ai/server/server10001)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1751340434471-f339e644-8994-40ae-9ed7-c7a57746642b.png)
+![](https://img.alicdn.com/imgextra/i2/O1CN016hqejv1g19SjefHGj_!!6000000004081-2-tps-896-807.png)
 
 #### <font style="color:rgb(0, 0, 0);">Q2. 君润如何基于 AI + 人服赛道快速创新？</font>
 + <font style="color:rgb(17, 17, 17);">创新模式：</font>
@@ -81,13 +81,13 @@ authors: "CH3CHO"
 
 <font style="color:rgb(17, 17, 17);">按需雇佣：企业即时启用无需训练配置。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1751340434496-e8cc9573-0f3a-4520-b5d9-24aec0af1e5c.png)
+![](https://img.alicdn.com/imgextra/i1/O1CN01TRLUO21ZfGqW4NdzI_!!6000000003221-2-tps-1081-613.png)
 
 <font style="color:rgb(17, 17, 17);">从产品维度统一归整到君润数字灵工平台,打造人服数字灵工市场。</font>
 
 [<font style="color:rgb(0, 102, 204);">https://agent.junrunrenli.com?src=higresswx:</font>](https://agent.junrunrenli.com/?src=higresswx:)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1751340435899-a16ffe03-48fa-4810-88a4-976321674e29.png)
+![](https://img.alicdn.com/imgextra/i2/O1CN01G31DUT1pZLZkoXDBc_!!6000000005374-2-tps-1386-1055.png)
 
 ## <font style="color:rgb(0, 0, 0);">为什么选择 Higress MCP 网关</font>
 ### <font style="color:rgb(0, 0, 0);">技术选型</font>
@@ -99,7 +99,7 @@ authors: "CH3CHO"
 #### <font style="color:rgb(0, 0, 0);">痛点 1：API 如何快速转换为 MCP 服务并且提供给 Agent 使用？</font>
 <font style="color:rgb(17, 17, 17);">使用Higress “MCP server”插件按需一键转换，我们参考 </font>[<font style="color:rgb(0, 102, 204);">https://higress.cn/ai/mcp-server/</font>](https://higress.cn/ai/mcp-server/)<font style="color:rgb(17, 17, 17);"> 文档所言，对“path”、“header”、“query”、“body”参数进行转换。后端 API 无需任何修改只需要在“MCP server”进行配置，无感就能发布 MCP 服务。</font>
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1751340436384-9db2cc22-5231-466d-9135-66d95474a443.png)
+![](https://img.alicdn.com/imgextra/i4/O1CN01yv8Bfg1Riv4jY6DoT_!!6000000002146-2-tps-1824-792.png)
 
 #### <font style="color:rgb(0, 0, 0);">痛点 2：MCP 的服务面向 Agent 如何授权？</font>
 <font style="color:rgb(17, 17, 17);">我们有部分 Agent 是在外部的“阿里百炼”开发平台上进行研发，Agent 使用 MCP 服务，需要进行授权。 我们采用 Higress 开源提供的“Key 认证”+“MCP 服务”插件进行组合。完美解决 Agent 与 MCP 授权。Agent 与用户权限，我们基于自研的数字灵工平台进行统一权限管控。</font>
@@ -108,14 +108,14 @@ authors: "CH3CHO"
 <font style="color:rgb(17, 17, 17);">我们内部大量 API 服务是部署在 k8s 内网服务，外部无法直接访问，我们调整系统架构进行改造，私有化部署了 Higress 到 k8s 集群，Higress 与内部 api 服务，通过 k8s dns service name 进行解析通信，对外只暴露 Higress MCP 服务。对域名和访问路径进行全局规划。</font>
 
 ### <font style="color:rgb(0, 0, 0);">君润技术架构图</font>
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1751340436391-e8d01776-c548-46bf-8be6-b0cbda3a9a05.png)
+![](https://img.alicdn.com/imgextra/i4/O1CN01OMI9Zu1I16dxDu7uT_!!6000000000832-2-tps-2675-1750.png)
 
 ### <font style="color:rgb(0, 0, 0);">Agent 应用架构图</font>
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/169256735/1751340436651-cc06bfee-467a-4b20-ae89-32263dee82ce.png)
+![](https://img.alicdn.com/imgextra/i2/O1CN01Zm9qLi1KQPlK99udF_!!6000000001158-2-tps-1259-660.png)
 
 ## <font style="color:rgb(0, 0, 0);">对 Higress 的展望</font>
 <font style="color:rgb(17, 17, 17);">加强用户易用性，希望能进一步完善 Higress 开源的文档，建议每个插件添加对应版本的使用文档链接地址。降低插件使用成本、提升开发及运维效率。</font>
 
-<font style="color:rgb(17, 17, 17);">小编按：Higress 企业版阿里云 API 网关提供开箱即用的能力，性能更强、稳定性更好，欢迎免费试用（点击</font>[<font style="color:rgb(0, 102, 204);">此处</font>](https://free.aliyun.com/?spm=higress-website.topbar.0.0.0&scm=20140722.M_10776204._.V_1&searchKey=%E7%BD%91%E5%85%B3)<font style="color:rgb(17, 17, 17);">）。</font>
+<font style="color:rgb(17, 17, 17);">小编按：Higress 企业版阿里云 API 网关提供开箱即用的能力，性能更强、稳定性更好，欢迎免费试用（点击</font>[<font style="color:rgb(0, 102, 204);">此处</font>](https://free.aliyun.com/?spm=5176.56205.nav-v2-dropdown-menu-4.d_main_0_4.26a64dfeuGSPuy&scm=20140722.M_10776204._.V_1&searchKey=%E7%BD%91%E5%85%B3)<font style="color:rgb(17, 17, 17);">）。</font>
 
 
