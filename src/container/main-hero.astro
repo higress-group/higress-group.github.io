@@ -9,19 +9,23 @@ const t = useTranslations(locale);
 const newsItems = [
   {
     title: t('home.news.1.title'),
-    content: t('home.news.1.content')
+    content: t('home.news.1.content'),
+    href: localizeUrl("/blog/higress-gvr7dx_awbbpb_ra13rhoba09uz5ys", locale),
   },
   {
     title: t('home.news.2.title'),
-    content: t('home.news.2.content')
+    content: t('home.news.2.content'),
+    href: localizeUrl("/blog/higress-gvr7dx_awbbpb_dlf3hnl3rs3sdt73", locale),
   },
   {
     title: t('home.news.3.title'),
-    content: t('home.news.3.content')
+    content: t('home.news.3.content'),
+    href: localizeUrl("/blog/higress-gvr7dx_awbbpb_ortukqsuia6ahf2v", locale),
   },
   {
     title: t('home.news.4.title'),
-    content: t('home.news.4.content')
+    content: t('home.news.4.content'),
+    href: localizeUrl("/blog/higress-gvr7dx_awbbpb_qsp4dkv4iigo6u70", locale),
   }
 ];
 ---
@@ -68,19 +72,21 @@ const newsItems = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {newsItems.map((item) => (
         <div role="button" class="news-card group relative flex flex-col justify-between gap-4 cursor-pointer p-6 rounded-2xl backdrop-blur-sm transition-transform hover:-translate-y-1">
-          <div class="absolute top-4 right-4 p-3 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="10" height="10" viewBox="0 0 12 12">
-              <g transform="matrix(-1,0,0,1,24,0)">
-                <path d="M13.9085488,3.2445331L13.9085488,10.49702Q13.9085488,10.902587,13.633718,11.177418Q13.358887,11.177418,12.954274,11.151293Q12.54870754,11.451293,12.27483088,11.176462Q12.00095420511,10.90163,12,10.49702L12,0.95427454Q12,0.54870796,12.27483088,0.27483124Q12.54966176,0.0009545465,12.954274,0L22.497017,0Q22.902583999999997,0,23.177414,0.27483088Q23.452244,0.54966176,23.451292000000002,0.95427454Q23.451292000000002,1.3598411,23.17646,1.6346719Q22.901628000000002,1.909503,22.497017,1.9085487L15.2445326,1.9085487L23.737576,10.401592Q24,10.664019,24,11.069584Q24,11.475149,23.737576,11.737576Q23.475149000000002,12,23.069584,12Q22.664019,12,22.401592,11.737576L13.9085488,3.2445331Z" fill="#818598" fill-opacity="1"/>
-              </g>
-            </svg>
-          </div>
-          <div class="text-lg text-gray-4 dark:text-white mb-2 line-clamp-1">
-            {item.title}
-          </div>
-          <p class="text-sm m-0 text-gray-4 dark:text-gray-200 line-clamp-2 leading-relaxed">
-            {item.content}
-          </p>
+          <a href={item.href}>
+            <div class="absolute top-4 right-4 p-3 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="10" height="10" viewBox="0 0 12 12">
+                <g transform="matrix(-1,0,0,1,24,0)">
+                  <path d="M13.9085488,3.2445331L13.9085488,10.49702Q13.9085488,10.902587,13.633718,11.177418Q13.358887,11.177418,12.954274,11.151293Q12.54870754,11.451293,12.27483088,11.176462Q12.00095420511,10.90163,12,10.49702L12,0.95427454Q12,0.54870796,12.27483088,0.27483124Q12.54966176,0.0009545465,12.954274,0L22.497017,0Q22.902583999999997,0,23.177414,0.27483088Q23.452244,0.54966176,23.451292000000002,0.95427454Q23.451292000000002,1.3598411,23.17646,1.6346719Q22.901628000000002,1.909503,22.497017,1.9085487L15.2445326,1.9085487L23.737576,10.401592Q24,10.664019,24,11.069584Q24,11.475149,23.737576,11.737576Q23.475149000000002,12,23.069584,12Q22.664019,12,22.401592,11.737576L13.9085488,3.2445331Z" fill="#818598" fill-opacity="1"/>
+                </g>
+              </svg>
+            </div>
+            <div class="text-lg text-gray-4 dark:text-white mb-2 line-clamp-1">
+              {item.title}
+            </div>
+            <p class="text-sm m-0 text-gray-4 dark:text-gray-200 line-clamp-2 leading-relaxed">
+              {item.content}
+            </p>
+          </a>
         </div>
       ))}
     </div>

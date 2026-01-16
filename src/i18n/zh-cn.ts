@@ -498,14 +498,14 @@ export default {
 	'home.hero.news.label': 'News',
 
 	// 首页新闻
-	'home.news.1.title': 'Higress x DeepSeek',
-	'home.news.1.content': 'Higress 全面适配 DeepSeek，提供更优的 Token 流控与缓存能力，大幅降低 API 调用成本。',
-	'home.news.2.title': 'Higress 2.0 发布',
-	'home.news.2.content': '下一代云原生 AI 网关，引入 Wasm 插件市场与更强大的 LLM 路由策略。',
-	'home.news.3.title': '社区双周会预告',
-	'home.news.3.content': '本周五晚 8 点，核心维护者将分享 AI Agent 接入的最佳实践与案例解析。',
-	'home.news.4.title': '云原生网关白皮书',
-	'home.news.4.content': '联合多家企业发布，深度解读 AI 时代下 API 网关的架构演进与技术趋势。',
+	'home.news.1.title': '奖金 20 万',
+	'home.news.1.content': '恭喜以下选手！Higress AI 网关开发挑战赛获奖名单公布',
+	'home.news.2.title': '自制漫画',
+	'home.news.2.content': 'AI 网关这一年，成了 AI 进化的缩影',
+	'home.news.3.title': '一种更简单的方式',
+	'home.news.3.content': ' 应对 Nginx Ingress 退役，是时候理清这些易混淆的概念了',
+	'home.news.4.title': '与白皮书比对',
+	'home.news.4.content': '2025 智能体工程现状',
 
 	// 网关解决方案
 	'home.gateway.solution.title': '网关解决方案',

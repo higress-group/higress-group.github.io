@@ -491,14 +491,14 @@ export default {
 	'home.hero.news.label': 'News',
 
 	// Home News
-	'home.news.1.title': 'Higress x DeepSeek',
-	'home.news.1.content': 'Higress fully supports DeepSeek with enhanced Token flow control and caching, significantly reducing API costs.',
-	'home.news.2.title': 'Higress 2.0 Released',
-	'home.news.2.content': 'Next-gen cloud-native AI Gateway with Wasm plugin marketplace and powerful LLM routing strategies.',
-	'home.news.3.title': 'Community Bi-weekly Preview',
-	'home.news.3.content': 'This Friday at 8 PM, core maintainers will share best practices for AI Agent integration.',
-	'home.news.4.title': 'Cloud Native Gateway Whitepaper',
-	'home.news.4.content': 'Co-published with enterprises, exploring API Gateway architecture evolution in the AI era.',
+	'home.news.1.title': '200,000 RMB Prize Pool',
+	'home.news.1.content': 'Congratulations to the winners! The award list for the Higress AI Gateway Development Challenge has been announced.',
+	'home.news.2.title': 'Original Comic',
+	'home.news.2.content': 'This year of AI Gateway has become a microcosm of AI evolution.',
+	'home.news.3.title': 'A Simpler Way',
+	'home.news.3.content': 'With Nginx Ingress retiring, it\'s time to clarify these easily confused concepts.',
+	'home.news.4.title': 'Whitepaper Comparison',
+	'home.news.4.content': 'The State of AI Agent Engineering in 2025.',
 
 	// Gateway Solution
 	'home.gateway.solution.title': 'Gateway Solutions',
