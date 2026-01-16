@@ -1,6 +1,6 @@
 ---
 interface Props {
-  mode?: 'primary' | 'normal' | 'black' | 'light' | 'gray';
+  mode?: 'primary' | 'normal' | 'black' | 'light' | 'gray' | 'outline';
   width?: string;
   class?: string;
   classes?: {
@@ -136,6 +136,25 @@ const widthStyle = width ? `width: ${width};` : "";
   higress-button[data-mode="gray"] .btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Outline Mode */
+  higress-button[data-mode="outline"] .btn {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+  }
+
+  higress-button[data-mode="outline"] .btn:hover {
+    background: var(--higress-primary-gradient);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(62, 92, 244, 0.4);
+  }
+
+  higress-button[data-mode="outline"] .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(62, 92, 244, 0.4);
   }
 </style>
 
