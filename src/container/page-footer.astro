@@ -11,6 +11,10 @@ const isEn = Astro.currentLocale === "en";
 
 const links = [
   {
+    label: "AgentScope",
+    link: "https://agentscope.io/",
+  },
+  {
     label: "Nacos",
     link: "https://nacos.io",
   },
@@ -21,10 +25,6 @@ const links = [
   {
     label: "SpringAIAlibaba",
     link: "https://java2ai.com",
-  },
-  {
-    label: "Arthas",
-    link: "https://arthas.aliyun.com/",
   },
   {
     label: "Dubbo",
@@ -79,7 +79,7 @@ const enContact = [
 ---
 
 <footer class="page-footer flex flex-col gap-10 w-full px-4 lg:px-10 pb-10">
-  <div class="w-full flex flex-col lg:flex-row h-auto lg:h-96 bg-[#EBECEF] p-6 lg:p-10 rounded-2xl gap-8 lg:gap-0">
+  <div class="w-full flex flex-col lg:flex-row h-auto lg:h-66 bg-[#EBECEF] p-6 lg:p-10 rounded-2xl gap-8 lg:gap-0">
     <div class="flex-1 flex flex-col gap-6">
       <div class="text-[28px] text-black font-light">{t('page.footer.contact_us')}</div>
       <div class="text-[18px] text-[#A3A6B3]">{t('page.footer.contact_desc')}</div>
@@ -170,7 +170,7 @@ const enContact = [
       <div class="flex">
         <div class="flex flex-col">
           <div class="text-xs text-[#A3A6B3] pb-6 lg:pb-12">{t('page.footer.menu')}</div>
-          <ul class="flex flex-col gap-3 m-0 p-0 list-none">
+          <ul class="flex gap-3 m-0 p-0 list-none">
             <li><a class="text-gray-10 hover:text-primary transition-colors" href={localizeUrl('/', locale)}>{t('page.footer.menu.home')}</a></li>
             <li><a class="text-gray-10 hover:text-primary transition-colors" href={localizeUrl('/docs/latest/overview/what-is-higress', locale)}>{t('page.footer.menu.docs')}</a></li>
             <li><a class="text-gray-10 hover:text-primary transition-colors" href={localizeUrl('/blog', locale)}>{t('page.footer.menu.community')}</a></li>
