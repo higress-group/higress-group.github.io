@@ -1,12 +1,17 @@
 ---
+import { useTranslations } from "@/i18n/utils";
+
 interface Props {
   title: string;
 }
+
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 ---
 <div class="product-header relative h-82.5">
   <div class="absolute bottom-14 px-10">
     <div class="flex gap-4 mb-10 text-black">
-      <span>产品</span>
+      <span>{t('navbar.product')}</span>
       <span class="light">/</span>
       <span class="light">{Astro.props.title}</span>
     </div>

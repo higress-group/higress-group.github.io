@@ -5,42 +5,48 @@ import Section from "../common/section.astro";
 import Layout from "./Layout.astro";
 import { LINKS } from "@/constant";
 
+import { useTranslations } from "@/i18n/utils";
+
 const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 const isEn = locale === "en";
 
 const products = [
   {
-    label: "AI 市场",
-    desc: "支持构建涵盖 Agent、MCP Server、Model 的完整 AI 市场，让企业的各类 AI 资源不再分散，而是以标准化方式汇聚在一个平台上，形成 AI 能力的统一供给与管理。",
+    label: t('himarket.product.ai_market'),
+    desc: t('himarket.product.ai_market.desc'),
     link: LINKS.himarketConsole,
     img: "https://img.alicdn.com/imgextra/i2/O1CN01H62z3z1oVOXevp4zZ_!!6000000005230-55-tps-312-204.svg",
   },
   {
-    label: "HiChat",
-    desc: "HiChat 以对话替代搜索，覆盖市场/产品调研与运营内容生成，并作为企业全员统一的 AI 使用入口，集中完成多模型选型使用与安全合规管控。平台支持一次输入多模型对比、会话历史沉淀复用，并通过 Higress AI 网关统一开启联网搜索与关联/转换 MCP 工具，实现快速验证与扩展能力。",
+    label: t('himarket.product.hichat'),
+    desc: t('himarket.product.hichat.desc'),
     link: LINKS.himarketConsole,
     img: "https://img.alicdn.com/imgextra/i4/O1CN01VixIjB1VJ3AKQVKA4_!!6000000002631-55-tps-312-204.svg",
   },
   {
-    label: "企业级能力",
-    desc: "提供企业级管理闭环，管理员可对各 API 产品配置鉴权与可见性，并结合流量控制、IP 白名单等能力保障安全稳定。平台还支持全局观测分析、按 Token/调用次数计量计费，以及多版本并行的灰度发布与快速回滚，支撑高效运营与稳定迭代。",
+    label: t('himarket.product.enterprise_capability'),
+    desc: t('himarket.product.enterprise_capability.desc'),
     link: LINKS.himarketConsole,
     img: "https://img.alicdn.com/imgextra/i3/O1CN01pVExX328Xx4Iup8cj_!!6000000007943-55-tps-312-204.svg",
   },
   {
-    label: "扩展能力",
-    desc: "HiMarket 提供灵活定制以快速对接企业现有系统。门户支持自定义域名与品牌样式，并可按需配置首页模块与产品分类等。身份认证兼容账号密码与企业 OIDC/SSO/IDaaS 集成，同时关键流程（注册、凭证申请、订阅）支持自动或人工审批配置。",
+    label: t('himarket.product.extension_capability'),
+    desc: t('himarket.product.extension_capability.desc'),
     link: LINKS.himarketConsole,
     img: isEn ? "https://img.alicdn.com/imgextra/i1/O1CN01risH211CGmVOSmSLM_!!6000000000054-55-tps-268-214.svg" : "https://img.alicdn.com/imgextra/i2/O1CN018wcXBp27hjuucntK8_!!6000000007829-55-tps-268-214.svg",
   },
-]
+];
+
+const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i4/O1CN01k1kgpT1N8V7PEGqZG_!!6000000001525-55-tps-1360-744.svg" : "https://img.alicdn.com/imgextra/i4/O1CN01HpkiiO1spmdXNna5f_!!6000000005816-55-tps-1360-744.svg";
+
 ---
 
-<ProductHeader title="HiMarket" />
+<ProductHeader title={t('page.header.himarket')} />
 <Layout>
   <Section
-    title="产品简介"
-    desc="助力企业构建 Agent、Model、MCP 市场，通过统一的 AI 能力 management 平台，解决 AI 资源分散、权限管控复杂、成本分摊困难等挑战，平台提供 HiChat AI 创新中心作为全员 AI 使用入口，打破团队间的能力孤岛，降低接入成本，释放 AI 创新潜能。"
+    title={t('api.product.intro.title')}
+    desc={t('himarket.product.intro.desc')}
   >
     <div class="flex flex-row gap-3 w-full md:w-auto" slot="buttonGroup">
       <a href={LINKS.himarketGithub} target="_blank">
@@ -54,14 +60,14 @@ const products = [
         </Button>
       </a>
       <a href={LINKS.himarketConsole} target="_blank">
-        <Button classes={{parent: "flex-1"}} class="w-full md:w-59.5" mode="normal">在线体验</Button>
+        <Button classes={{parent: "flex-1"}} class="w-full md:w-59.5" mode="normal">{t('api.product.button.experience')}</Button>
       </a>
     </div>
-    <img slot="content" class="max-w-full" src="/images/himarket/intro-cn.png" />
+    <img slot="content" class="max-w-full" src={imgSrc} />
   </Section>
   <Section
-    title="核心功能"
-    desc="HiMarket 为企业带来开箱即用、快速集成的 AI 能力。"
+    title={t('himarket.product.core_features.title')}
+    desc={t('himarket.product.core_features.desc')}
   >
     <div slot="content" class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
       {
@@ -79,7 +85,7 @@ const products = [
                 {s.desc}
               </div>
               <a href={s.link} target="_blank" class="detail-link text-primary text-xs inline-flex items-center gap-1">
-                <span>在线体验</span>
+                <span>{t('api.product.button.experience')}</span>
                 <svg class="detail-arrow fill-primary" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="8" height="8" viewBox="0 0 12 12">
                   <g transform="matrix(-1,0,0,1,24,0)">
                     <path d="M13.9085488,3.2445331L13.9085488,10.49702Q13.9085488,10.902587,13.633718,11.177418Q13.358887,11.177418,12.954274,11.151293Q12.54870754,11.451293,12.27483088,11.176462Q12.00095420511,10.90163,12,10.49702L12,0.95427454Q12,0.54870796,12.27483088,0.27483124Q12.54966176,0.0009545465,12.954274,0L22.497017,0Q22.902583999999997,0,23.177414,0.27483088Q23.452244,0.54966176,23.451292000000002,0.95427454Q23.451292000000002,1.3598411,23.17646,1.6346719Q22.901628000000002,1.909503,22.497017,1.9085487L15.2445326,1.9085487L23.737576,10.401592Q24,10.664019,24,11.069584Q24,11.475149,23.737576,11.737576Q23.475149000000002,12,23.069584,12Q22.664019,12,22.401592,11.737576L13.9085488,3.2445331Z" fill-opacity="1"/>

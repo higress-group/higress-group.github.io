@@ -5,42 +5,47 @@ import Section from "../common/section.astro";
 import Layout from "./Layout.astro";
 import { LINKS } from "@/constant";
 
+import { useTranslations } from "@/i18n/utils";
+
 const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 const isEn = locale === "en";
 
 const products = [
   {
-    label: "多模型统一接入",
-    desc: "对 OpenAI 兼容接口及主流大模型服务提供统一网关入口，屏蔽不同厂商鉴权、接口差异，便于快速切换与多活部署。同时支持模型负载均衡及FallBack，提升模型服务的可靠性。",
+    label: t('ai.product.multi_model'),
+    desc: t('ai.product.multi_model.desc'),
     link: "",
     img: isEn ? "https://img.alicdn.com/imgextra/i2/O1CN017XfQ8o1GnXIHX9JMr_!!6000000000667-55-tps-200-122.svg" : "https://img.alicdn.com/imgextra/i3/O1CN01KYQYvl1TVkvIqnXck_!!6000000002388-55-tps-200-122.svg",
   },
   {
-    label: "MCP 统一管理",
-    desc: "支持HTTP到MCP的协议转换，以及支持原生MCP服务的代理，把分散的工具能力收敛为统一入口，降低多团队、多环境的接入与维护成本。",
+    label: t('ai.product.mcp_management'),
+    desc: t('ai.product.mcp_management.desc'),
     link: "",
     img: "https://img.alicdn.com/imgextra/i2/O1CN01sIsWY91nzKojOShZk_!!6000000005160-55-tps-280-181.svg"
   },
   {
-    label: "Token 流量管理",
-    desc: "除传统 QPS 限流外，提供基于 Token 消耗的配额管理与限流能力，结合 API Key 池轮询与消费者鉴权机制，可有效防止模型过载，管控客户端调用额度。",
+    label: t('ai.product.token_management'),
+    desc: t('ai.product.token_management.desc'),
     link: "",
     img: isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01aU0Wqp1qm08Mzdb3W_!!6000000005537-55-tps-256-155.svg" : "https://img.alicdn.com/imgextra/i3/O1CN01BOjI971Uh2IFz9NiT_!!6000000002548-55-tps-256-155.svg",
   },
   {
-    label: "扩展性",
-    desc: "通过插件快速接入 RAG、向量库、日志观测、缓存等 AI 生态组件，实现能力按需组合；同时支持自定义插件开发，满足复杂业务自定义逻辑场景。",
+    label: t('ai.product.scalability'),
+    desc: t('ai.product.scalability.desc'),
     link: "",
     img: isEn ? "https://img.alicdn.com/imgextra/i2/O1CN016ePFQY20VBkjw8uqS_!!6000000006854-55-tps-246-120.svg" : "https://img.alicdn.com/imgextra/i2/O1CN01S5ZrXp1kEDDh9LZno_!!6000000004651-55-tps-246-120.svg",
   },
-]
+];
+
+const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKIB_!!6000000000886-55-tps-1360-776.svg" : "https://img.alicdn.com/imgextra/i4/O1CN01bLiBYH28SuiBVSqC4_!!6000000007932-55-tps-1360-776.svg";
 ---
 
-<ProductHeader title="AI 网关" />
+<ProductHeader title={t('page.header.ai.gateway')} />
 <Layout>
   <Section
-    title="产品简介"
-    desc="专为 AI 场景设计，统一代理大模型 API 与 MCP Server，支持模型、工具（MCP）及 Agent 的集中接入与管理"
+    title={t('api.product.intro.title')}
+    desc={t('ai.product.intro.desc')}
   >
     <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto" slot="buttonGroup">
       <a href={LINKS.higressGithub} target="_blank">
@@ -53,17 +58,17 @@ const products = [
           </svg>
         </Button>
       </a>
-      <a href="https://demo.higress.io" target="_blank">
+      <a href={LINKS.higressConsole} target="_blank">
         <Button class="w-full md:w-59.5" mode="normal">
-          在线体验
+          {t('api.product.button.experience')}
         </Button>
       </a>
     </div>
-    <img slot="content" class="max-w-full" src="/images/ai/ai-intro-cn.png" />
+    <img slot="content" class="max-w-full" src={imgSrc} />
   </Section>
   <Section
-    title="产品优势"
-    desc="提供多模型统一路由与协议转换、语义缓存、Token 级限流、内容安全防护（如提示词攻击检测、敏感内容识别）、多维度鉴权与可观测性，并支持热插拔插件和智能工具路由"
+    title={t('api.product.advantage.title')}
+    desc={t('ai.product.advantage.desc')}
   >
     <div slot="content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 w-full">
       {

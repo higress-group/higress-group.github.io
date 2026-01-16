@@ -1,9 +1,13 @@
 ---
 import Button from "../components/button/Button.astro";
 import Popover from "../components/popover/Popover.astro";
+import { useTranslations, localizeUrl } from "@/i18n/utils";
+import { LINKS } from "@/constant";
 
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 const currentYear = new Date().getFullYear();
-const isEnglish = Astro.currentLocale === "en";
+const isEn = Astro.currentLocale === "en";
 
 const links = [
   {
@@ -47,87 +51,130 @@ const links = [
     link: "https://serverless-devs.com",
   },
 ].filter(item => {
-  if (isEnglish && item.label === "可观测中文") {
+  if (isEn && item.label === "可观测中文") {
     return false;
   }
   return true;
 });
+
+const enContact = [
+  {
+    img: "https://framerusercontent.com/images/4MsPMEs5GoNECRnIkIyQIXnGWRM.png?width=225&height=225",
+    href: "https://x.com/higress_ai"
+  },
+  {
+    img: "https://framerusercontent.com/images/wTsNaOVgs8ZpDio0vvEACSiIc.png?width=512&height=512",
+    href: "https://medium.com/@higress_ai"
+  },
+  {
+    img: "https://framerusercontent.com/images/RgGsfr6I6viQm5JHlKWDktIsBS0.png?width=512&height=512",
+    href: "https://github.com/alibaba/higress"
+  },
+  {
+    img: "https://framerusercontent.com/images/f0MNuXwWTMKrKn1ywc4pmu2UIM.jpg?width=980&height=980",
+    href: "https://discord.gg/tSbww9VDaM"
+  }
+]
 
 ---
 
 <footer class="page-footer flex flex-col gap-10 w-full px-4 lg:px-10 pb-10">
   <div class="w-full flex flex-col lg:flex-row h-auto lg:h-96 bg-[#EBECEF] p-6 lg:p-10 rounded-2xl gap-8 lg:gap-0">
     <div class="flex-1 flex flex-col gap-6">
-      <div class="text-[28px] text-black font-light">联系我们</div>
-      <div class="text-[18px] text-[#A3A6B3]">可以通过以下方式获取我们最新动态渠道</div>
-      <div class="hidden lg:flex flex-wrap gap-4 lg:gap-6">
-        <Popover placement="bottom">
-          <Button width="155px" mode="normal">
-            <span class="text-xs">
-              钉钉群
-            </span>
-          </Button>
-          <img slot="content" src="/images/dingding.avif" alt="DingDing QR" class="w-32" />
-        </Popover>
-        <Popover placement="bottom">
-          <Button width="155px" mode="normal">
-            <span class="text-xs">
-              微信群
-            </span>
-          </Button>
-          <div class="flex flex-col gap-2 max-w-32 justify-center" slot="content">
-            <img slot="content" src="/images/wx.avif" alt="WeChat QR" class="w-32" />
-            <span class="text-[10px] text-center text-black">
-              如过期请加微信：nomadao，注明 higress
-            </span>
+      <div class="text-[28px] text-black font-light">{t('page.footer.contact_us')}</div>
+      <div class="text-[18px] text-[#A3A6B3]">{t('page.footer.contact_desc')}</div>
+      {
+        !isEn && (
+        <div class="hidden lg:flex flex-wrap gap-4 lg:gap-6">
+          <Popover placement="bottom">
+            <Button width="155px" mode="normal">
+              <span class="text-xs">
+                {t('page.footer.dingtalk_group')}
+              </span>
+            </Button>
+            <img slot="content" src="/images/dingding.avif" alt="DingDing QR" class="w-32" />
+          </Popover>
+          <Popover placement="bottom">
+            <Button width="155px" mode="normal">
+              <span class="text-xs">
+                {t('page.footer.wechat_group')}
+              </span>
+            </Button>
+            <div class="flex flex-col gap-2 max-w-32 justify-center" slot="content">
+              <img slot="content" src="/images/wx.avif" alt="WeChat QR" class="w-32" />
+              <span class="text-[10px] text-center text-black">
+                {t('page.footer.wechat_expired')}
+              </span>
+            </div>
+          </Popover>
+          <Popover placement="bottom">
+            <Button width="155px" mode="normal">
+              <span class="text-xs">
+                {t('page.footer.higress_account')}
+              </span>
+            </Button>
+            <img slot="content" src="/images/higress.jpg" alt="WeChat QR" class="w-32" />
+          </Popover>
+          <Popover placement="bottom">
+            <Button width="155px" mode="normal">
+              <span class="text-xs">
+                {t('page.footer.cloud_native_account')}
+              </span>
+            </Button>
+            <img slot="content" src="/images/ali-cloud.jpg" alt="WeChat QR" class="w-32" />
+          </Popover>
+        </div>
+        )
+      }
+      {
+        !isEn ? (
+          <div class="flex lg:hidden flex-wrap gap-4">
+            <div class="flex flex-col gap-2">
+              <span class="text-xs">{t('page.footer.dingtalk_group')}</span>
+              <img src="/images/dingding.avif" alt="DingDing QR" class="w-32" />
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="text-xs">{t('page.footer.wechat_group')}</span>
+              <img src="/images/wx.avif" alt="WeChat QR" class="w-32" />
+              <span class="text-[10px] text-black max-w-32">{t('page.footer.wechat_expired')}</span>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="text-xs">{t('page.footer.higress_account')}</span>
+              <img src="/images/higress.jpg" alt="Higress Pub QR" class="w-32" />
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="text-xs">{t('page.footer.cloud_native_account')}</span>
+              <img src="/images/ali-cloud.jpg" alt="Cloud Native Pub QR" class="w-32" />
+            </div>
           </div>
-        </Popover>
-        <Popover placement="bottom">
-          <Button width="155px" mode="normal">
-            <span class="text-xs">
-              Higress 公众号
-            </span>
-          </Button>
-          <img slot="content" src="/images/higress.jpg" alt="WeChat QR" class="w-32" />
-        </Popover>
-        <Popover placement="bottom">
-          <Button width="155px" mode="normal">
-            <span class="text-xs">
-              云原生公众号
-            </span>
-          </Button>
-          <img slot="content" src="/images/ali-cloud.jpg" alt="WeChat QR" class="w-32" />
-        </Popover>
-      </div>
-      <div class="flex lg:hidden flex-wrap gap-4">
-        <div class="flex flex-col gap-2">
-          <span class="text-xs">钉钉群</span>
-          <img src="/images/dingding.avif" alt="DingDing QR" class="w-32" />
-        </div>
-        <div class="flex flex-col gap-2">
-          <span class="text-xs">微信群</span>
-          <img src="/images/wx.avif" alt="WeChat QR" class="w-32" />
-          <span class="text-[10px] text-black max-w-32">如过期请加微信：nomadao，注明 higress</span>
-        </div>
-        <div class="flex flex-col gap-2">
-          <span class="text-xs">Higress 公众号</span>
-          <img src="/images/higress.jpg" alt="Higress Pub QR" class="w-32" />
-        </div>
-        <div class="flex flex-col gap-2">
-           <span class="text-xs">云原生公众号</span>
-           <img src="/images/ali-cloud.jpg" alt="Cloud Native Pub QR" class="w-32" />
-        </div>
-      </div>
+        ) : (
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {
+              enContact.map(info => {
+                return (
+                  <a href={info.href} target="_blank">
+                    <Button mode="normal">
+                      <div class="w-12 h-12 rounded-2xl overflow-hidden">
+                        <img class="max-w-full" src={info.img} />
+                      </div>
+                    </Button>
+                  </a>
+                )
+              })
+            }
+          </div>
+        )
+      }
     </div>
     <div class="lg:w-1/3 w-full">
       <div class="flex">
         <div class="flex flex-col">
-          <div class="text-xs text-[#A3A6B3] pb-6 lg:pb-12">菜单</div>
+          <div class="text-xs text-[#A3A6B3] pb-6 lg:pb-12">{t('page.footer.menu')}</div>
           <ul class="flex flex-col gap-3 m-0 p-0 list-none">
-            <li>主页</li>
-            <li>文档</li>
-            <li>社区</li>
-            <li>企业版</li>
+            <li><a class="text-gray-10 hover:text-primary transition-colors" href={localizeUrl('/', locale)}>{t('page.footer.menu.home')}</a></li>
+            <li><a class="text-gray-10 hover:text-primary transition-colors" href={localizeUrl('/docs/latest/overview/what-is-higress', locale)}>{t('page.footer.menu.docs')}</a></li>
+            <li><a class="text-gray-10 hover:text-primary transition-colors" href={localizeUrl('/blog', locale)}>{t('page.footer.menu.community')}</a></li>
+            <li><a class="text-gray-10 hover:text-primary transition-colors" href={LINKS.enterprise} target="_blank">{t('page.footer.menu.enterprise')}</a></li>
           </ul>
         </div>
       </div>
@@ -136,7 +183,7 @@ const links = [
   <div class="h-px bg-gray-200 w-full"></div>
   <div class="flex flex-col gap-4">
     <div class="flex flex-col lg:flex-row gap-2 justify-center items-center">
-      <div class="text-xs text-[#A3A6B3] whitespace-nowrap">友情链接：</div>
+      <div class="text-xs text-[#A3A6B3] whitespace-nowrap">{t('page.footer.friendly_links')}</div>
       <div class="flex flex-wrap justify-center gap-y-2">
         {links.map((item) => (
           <a href={item.link} target="_blank" class="footer-link text-xs text-[#A3A6B3] hover:text-primary transition-colors px-3">
@@ -157,9 +204,6 @@ const links = [
 
 <style>
 .page-footer {
-  li {
-    color: oklch(from var(--color-black) 50% c h);
-  }
 
   .footer-link {
     position: relative;

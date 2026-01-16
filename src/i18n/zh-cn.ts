@@ -545,4 +545,75 @@ export default {
     'home.sense.item.ai_cache.desc': 'AI 网关支持精确缓存及语义缓存推理的结果上下文，对于常见的相似/重复的问题节省 Token 并减小时延，从而提升调用体验。',
     'home.sense.item.token_management.label': 'Token 管控',
     'home.sense.item.token_management.desc': 'AI 网关能够对大模型使用的 Token 数量进行追踪，在消费者使用超额时进行限制，从而更好管理调用 AI 应用的用户额度，为 Token 使用分析提供数据支持。',
+
+    // API Product Page
+    'api.product.intro.title': '产品简介',
+    'api.product.intro.desc': '将流量网关、微服务网关和安全网关三合一，提供统一的服务暴露、流量管控、API 全生命周期管理能力',
+    'api.product.button.experience': '在线体验',
+    'api.product.advantage.title': '产品优势',
+    'api.product.advantage.desc': '架构统一、扩展性强，支持丰富的插件与热更新；具备多重安全防御机制（如 mTLS 双向认证、WAF 集成、自定义安全插件），并深度融合 API 管理与微服务治理能力',
+
+    'api.product.api_management': 'API 管理',
+    'api.product.api_management.desc': '支持基于路由、Ingress 及 Gateway API 的标准化配置，极大简化了 API 的发布、管理和可观测建设。兼容常用的 Nginx Ingress 注解，使得从 Nginx Ingress 迁移成本极低。同时提供丰富的重写、灰度等能力，降低网关侧配置复杂度。',
+
+    'api.product.traffic_control': '流量控制',
+    'api.product.traffic_control.desc': '提供限流、熔断、超时、重试等治理能力，可在入口处对突发流量进行削峰并提升后端稳定性；支持基于路由/Header/参数等维度的精细化流量策略，适配多租户与分场景控制。',
+
+    'api.product.security': '安全防护',
+    'api.product.security.desc': '支持认证鉴权（如 JWT/OIDC 等）与策略插件化扩展，可在网关层统一实现访问控制；结合 WAF/黑白名单等能力可快速补齐常见 Web 攻击与恶意请求防护。',
+
+    'api.product.scalability': '扩展性',
+    'api.product.scalability.desc': '主打 WebAssembly（Wasm）插件生态，支持 Go、Rust、JavaScript 等多语言开发，插件可热更新且通过沙箱隔离保障内存安全，满足超 90% 的业务场景需求。',
+
+    // AI Product Page
+    'ai.product.intro.desc': '专为 AI 场景设计，统一代理大模型 API 与 MCP Server，支持模型、工具（MCP）及 Agent 的集中接入与管理',
+    'ai.product.advantage.desc': '提供多模型统一路由与协议转换、语义缓存、Token 级限流、内容安全防护（如提示词攻击检测、敏感内容识别）、多维度鉴权与可观测性，并支持热插拔插件和智能工具路由',
+
+    'ai.product.multi_model': '多模型统一接入',
+    'ai.product.multi_model.desc': '对 OpenAI 兼容接口及主流大模型服务提供统一网关入口，屏蔽不同厂商鉴权、接口差异，便于快速切换与多活部署。同时支持模型负载均衡及FallBack，提升模型服务的可靠性。',
+
+    'ai.product.mcp_management': 'MCP 统一管理',
+    'ai.product.mcp_management.desc': '支持HTTP到MCP的协议转换，以及支持原生MCP服务的代理，把分散的工具能力收敛为统一入口，降低多团队、多环境的接入与维护成本。',
+
+    'ai.product.token_management': 'Token 流量管理',
+    'ai.product.token_management.desc': '除传统 QPS 限流外，提供基于 Token 消耗的配额管理与限流能力，结合 API Key 池轮询与消费者鉴权机制，可有效防止模型过载，管控客户端调用额度。',
+
+    'ai.product.scalability': '扩展性',
+    'ai.product.scalability.desc': '通过插件快速接入 RAG、向量库、日志观测、缓存等 AI 生态组件，实现能力按需组合；同时支持自定义插件开发，满足复杂业务自定义逻辑场景。',
+
+    // HiMarket Product Page
+    'himarket.product.intro.desc': '助力企业构建 Agent、Model、MCP 市场，通过统一的 AI 能力 management 平台，解决 AI 资源分散、权限管控复杂、成本分摊困难等挑战，平台提供 HiChat AI 创新中心作为全员 AI 使用入口，打破团队间的能力孤岛，降低接入成本，释放 AI 创新潜能。',
+    'himarket.product.core_features.title': '核心功能',
+    'himarket.product.core_features.desc': 'HiMarket 为企业带来开箱即用、快速集成的 AI 能力。',
+
+    'himarket.product.ai_market': 'AI 市场',
+    'himarket.product.ai_market.desc': '支持构建涵盖 Agent、MCP Server、Model 的完整 AI 市场，让企业的各类 AI 资源不再分散，而是以标准化方式汇聚在一个平台上，形成 AI 能力的统一供给与管理。',
+
+    'himarket.product.hichat': 'HiChat',
+    'himarket.product.hichat.desc': 'HiChat 以对话替代搜索，覆盖市场/产品调研与运营内容生成，并作为企业全员统一的 AI 使用入口，集中完成多模型选型使用与安全合规管控。平台支持一次输入多模型对比、会话历史沉淀复用，并通过 Higress AI 网关统一开启联网搜索与关联/转换 MCP 工具，实现快速验证与扩展能力。',
+
+    'himarket.product.enterprise_capability': '企业级能力',
+    'himarket.product.enterprise_capability.desc': '提供企业级管理闭环，管理员可对各 API 产品配置鉴权与可见性，并结合流量控制、IP 白名单等能力保障安全稳定。平台还支持全局观测分析、按 Token/调用次数计量计费，以及多版本并行的灰度发布与快速回滚，支撑高效运营与稳定迭代。',
+
+    'himarket.product.extension_capability': '扩展能力',
+    'himarket.product.extension_capability.desc': 'HiMarket 提供灵活定制以快速对接企业现有系统。门户支持自定义域名与品牌样式，并可按需配置首页模块与产品分类等。身份认证兼容账号密码与企业 OIDC/SSO/IDaaS 集成，同时关键流程（注册、凭证申请、订阅）支持自动或人工审批配置。',
+
+    // Product Layout
+    'product.layout.enterprise.title': '了解企业版',
+    'product.layout.enterprise.desc': '想获得深度整合的 API 管理、流量网关与微服务网关一体化能力？企业版提供更强大的统一治理与安全扩展，欢迎了解。',
+
+    // Page Footer
+    'page.footer.contact_us': '联系我们',
+    'page.footer.contact_desc': '可以通过以下方式获取我们最新动态渠道',
+    'page.footer.dingtalk_group': '钉钉群',
+    'page.footer.wechat_group': '微信群',
+    'page.footer.wechat_expired': '如过期请加微信：nomadao，注明 higress',
+    'page.footer.higress_account': 'Higress 公众号',
+    'page.footer.cloud_native_account': '云原生公众号',
+    'page.footer.menu': '菜单',
+    'page.footer.menu.home': '主页',
+    'page.footer.menu.docs': '文档',
+    'page.footer.menu.community': '社区',
+    'page.footer.menu.enterprise': '企业版',
+    'page.footer.friendly_links': '友情链接：',
 };

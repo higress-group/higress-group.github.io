@@ -2,6 +2,7 @@
 import { useTranslations } from "@/i18n/utils";
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
+const imgSrc = locale === "en" ? "https://img.alicdn.com/imgextra/i2/O1CN01NM0nGa1J1quDWM4lA_!!6000000000969-55-tps-1292-760.svg" : "https://img.alicdn.com/imgextra/i3/O1CN01lVcih51hs6sFc8mhf_!!6000000004332-55-tps-1292-760.svg"
 ---
 <section class="w-full py-14 px-4 md:px-6 lg:px-10">
   <div class="mx-auto flex flex-col gap-10">
@@ -10,6 +11,6 @@ const t = useTranslations(locale);
       <p class="text-gray-400">{t('home.gateway.solution.description')}</p>
     </div>
 
-    <img  src="https://img.alicdn.com/imgextra/i3/O1CN01lVcih51hs6sFc8mhf_!!6000000004332-55-tps-1292-760.svg" />
+    <img  src={imgSrc} />
   </div>
 </section>

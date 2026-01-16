@@ -538,4 +538,75 @@ export default {
     'home.sense.item.ai_cache.desc': 'The AI ​​gateway supports precise caching and semantic caching of inference result contexts, saving Tokens and reducing latency for common similar/repeated questions, thereby improving the calling experience.',
     'home.sense.item.token_management.label': 'Token Management',
     'home.sense.item.token_management.desc': 'The AI ​​gateway can track the number of Tokens used by large models and limit them when consumers use excess, thereby better managing the user quota for calling AI applications and providing data support for Token usage analysis.',
+
+    // API Product Page
+    'api.product.intro.title': 'Product Introduction',
+    'api.product.intro.desc': 'Integrates traffic gateway, microservice gateway, and security gateway into one, providing unified service exposure, traffic control, and full API lifecycle management capabilities.',
+    'api.product.button.experience': 'Online Experience',
+    'api.product.advantage.title': 'Product Advantages',
+    'api.product.advantage.desc': 'Unified architecture, strong scalability, supports rich plugins and hot updates; features multiple security defense mechanisms (such as mTLS, WAF integration, custom security plugins), and deeply integrates API management and microservice governance capabilities.',
+
+    'api.product.api_management': 'API Management',
+    'api.product.api_management.desc': 'Supports standardized configuration based on Routes, Ingress, and Gateway API, greatly simplifying API publishing, management, and observability. Compatible with common Nginx Ingress annotations for low-cost migration. Also provides rich rewriting and canary release capabilities, reducing gateway-side configuration complexity.',
+
+    'api.product.traffic_control': 'Traffic Control',
+    'api.product.traffic_control.desc': 'Provides governance capabilities such as rate limiting, circuit breaking, timeout, and retry to handle traffic peaks and improve backend stability. Supports fine-grained traffic strategies based on Route/Header/Parameter dimensions, adapting to multi-tenant and scenario-based control.',
+
+    'api.product.security': 'Security',
+    'api.product.security.desc': 'Supports authentication and authorization (e.g., JWT/OIDC) and plugin-based policy extension for unified access control at the gateway layer. Combined with WAF/allowlist/blocklist capabilities, it quickly provides protection against common Web attacks and malicious requests.',
+
+    'api.product.scalability': 'Scalability',
+    'api.product.scalability.desc': 'Focusing on the WebAssembly (Wasm) plugin ecosystem, it supports multi-language development such as Go, Rust, and JavaScript. Plugins can be hot-updated and memory safety is ensured through sandbox isolation, meeting more than 90% of business scenario requirements.',
+
+    // AI Product Page
+    'ai.product.intro.desc': 'Designed for AI scenarios, unified proxy for LLM APIs and MCP Servers, supporting centralized access and management of models, tools (MCP), and Agents.',
+    'ai.product.advantage.desc': 'Provides multi-model unified routing and protocol conversion, semantic caching, Token-level rate limiting, content security protection (such as prompt injection detection, sensitive content recognition), multi-dimensional authentication and observability, and supports hot-pluggable plugins and intelligent tool routing.',
+
+    'ai.product.multi_model': 'Unified Multi-Model Access',
+    'ai.product.multi_model.desc': 'Provides a unified gateway entry for OpenAI-compatible interfaces and mainstream LLM services, shielding authentication and interface differences across vendors, facilitating rapid switching and multi-active deployment. Also supports model load balancing and Fallback to improve model service reliability.',
+
+    'ai.product.mcp_management': 'Unified MCP Management',
+    'ai.product.mcp_management.desc': 'Supports HTTP-to-MCP protocol conversion and proxying of native MCP services, converging scattered tool capabilities into a unified entry point, reducing access and maintenance costs across multiple teams and environments.',
+
+    'ai.product.token_management': 'Token Traffic Management',
+    'ai.product.token_management.desc': 'In addition to traditional QPS rate limiting, provides quota management and rate limiting capabilities based on Token consumption. Combined with API Key pool rotation and consumer authentication mechanisms, it effectively prevents model overload and controls client call quotas.',
+
+    'ai.product.scalability': 'Scalability',
+    'ai.product.scalability.desc': 'Quickly integrate AI ecosystem components such as RAG, vector databases, log observability, and caching via plugins for on-demand capability combination; also supports custom plugin development to meet complex business logic scenarios.',
+
+    // HiMarket Product Page
+    'himarket.product.intro.desc': 'Empower enterprises to build Agent, Model, and MCP markets. Through a unified AI capability management platform, it solves challenges such as dispersed AI resources, complex permission control, and difficult cost allocation. The platform provides HiChat AI Innovation Center as a unified AI entry for all staff, breaking down capability silos between teams, reducing access costs, and unleashing AI innovation potential.',
+    'himarket.product.core_features.title': 'Core Features',
+    'himarket.product.core_features.desc': 'HiMarket brings out-of-the-box, rapidly integrated AI capabilities to enterprises.',
+
+    'himarket.product.ai_market': 'AI Marketplace',
+    'himarket.product.ai_market.desc': 'Supports building a complete AI marketplace covering Agents, MCP Servers, and Models. It gathers various AI resources of the enterprise in a standardized way on a single platform, forming a unified supply and management of AI capabilities, rather than being scattered.',
+
+    'himarket.product.hichat': 'HiChat',
+    'himarket.product.hichat.desc': 'HiChat replaces search with conversation, covering market/product research and operational content generation. It serves as a unified AI entry point for all enterprise staff, centralizing multi-model selection and usage with security compliance control. The platform supports single-input multi-model comparison, session history retention and reuse, and enables unified web search and MCP tool association/conversion through Higress AI Gateway for rapid validation and capability extension.',
+
+    'himarket.product.enterprise_capability': 'Enterprise Capabilities',
+    'himarket.product.enterprise_capability.desc': 'Provides a closed-loop enterprise management system. Administrators can configure authentication and visibility for each API product, ensuring security and stability with capabilities like traffic control and IP allowlists. The platform also supports global observability analysis, metering and billing by Token/call count, as well as multi-version parallel canary releases and rapid rollbacks to support efficient operations and stable iteration.',
+
+    'himarket.product.extension_capability': 'Extensibility',
+    'himarket.product.extension_capability.desc': 'HiMarket offers flexible customization to quickly integrate with existing enterprise systems. The portal supports custom domains and branding styles, and homepage modules and product categories can be configured on demand. Identity authentication is compatible with username/password and enterprise OIDC/SSO/IDaaS integration, while key processes (registration, credential application, subscription) support automatic or manual approval configurations.',
+
+    // Product Layout
+    'product.layout.enterprise.title': 'Learn about Enterprise Edition',
+    'product.layout.enterprise.desc': 'Looking for deeply integrated API management, traffic gateway, and microservice gateway capabilities? The Enterprise Edition offers more powerful unified governance and security extensions. Learn more.',
+
+    // Page Footer
+    'page.footer.contact_us': 'Contact Us',
+    'page.footer.contact_desc': 'Get our latest updates via:',
+    'page.footer.dingtalk_group': 'DingTalk Group',
+    'page.footer.wechat_group': 'WeChat Group',
+    'page.footer.wechat_expired': 'If expired, add WeChat: nomadao, note higress',
+    'page.footer.higress_account': 'Higress Official Account',
+    'page.footer.cloud_native_account': 'Cloud Native Official Account',
+    'page.footer.menu': 'Menu',
+    'page.footer.menu.home': 'Home',
+    'page.footer.menu.docs': 'Docs',
+    'page.footer.menu.community': 'Community',
+    'page.footer.menu.enterprise': 'Enterprise',
+    'page.footer.friendly_links': 'Friendly Links:',
 };

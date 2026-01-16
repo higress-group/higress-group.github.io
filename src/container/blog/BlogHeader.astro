@@ -1,38 +1,54 @@
 ---
 import Button from "../../components/button/Button.astro";
 import { BLOG_CATEGORY } from "../../constant";
+import { useTranslations, localizeUrl } from "@/i18n/utils";
 
 interface Props {
   currentCategory?: string;
 }
 
 const { currentCategory = "all" } = Astro.props;
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
+
+const categoryTitleMap: Record<string, string> = {
+  all: 'blog.all.articles',
+  article: 'blog.article.technical',
+  ecosystem: 'blog.article.ecosystem.articles',
+  case: 'blog.article.case.best.practices',
+  event: 'blog.article.event.articles',
+};
 ---
 
 <div class="px-4 md:px-10 flex flex-col gap-6 md:gap-10">
   <div class="flex gap-2 md:gap-3 text-sm md:text-base">
-    <span>社区</span>
+    <span>{t('navbar.community')}</span>
     <span class="text-gray-08">/</span>
-    <span class="text-gray-08">博客</span>
+    <span class="text-gray-08">{t('navbar.community.blog')}</span>
   </div>
-  <div class="text-black text-3xl md:text-5xl font-medium">博客</div>
+  <div class="text-black text-3xl md:text-5xl font-medium">{t('navbar.community.blog')}</div>
   <div class="flex gap-2 md:gap-3 flex-wrap">
     {
       BLOG_CATEGORY.map(category => {
         const isActive = category.type === currentCategory;
+        // @ts-ignore
+        const titleKey = categoryTitleMap[category.type] || category.title;
+        // @ts-ignore
+        const title = titleKey.startsWith('blog.') ? t(titleKey) : titleKey;
+
         if (category.type === "all") {
           return (
-            <a href="/blog">
+            <a href={localizeUrl("/blog", locale)}>
               <Button class="px-4 md:px-6 whitespace-nowrap text-sm md:text-base" mode={isActive ? "black" : "light"}>
-                  All
+                  {title}
               </Button>
             </a>
           )
         }
         return (
-          <a href={`/blog/${category.type}`}>
+          <a href={localizeUrl(`/blog/${category.type}`, locale)}>
             <Button class="px-4 md:px-6 whitespace-nowrap text-sm md:text-base" mode={isActive ? "black" : "light"}>
-                {category.title}
+                {title}
             </Button>
           </a>
         )

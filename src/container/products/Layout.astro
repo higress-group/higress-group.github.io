@@ -1,6 +1,10 @@
 ---
 import { LINKS } from "@/constant";
 import Button from "../../components/button/Button.astro";
+import { useTranslations } from "@/i18n/utils";
+
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 ---
 <!-- 左侧悬浮菜单 -->
 <!-- <nav id="product-nav" class="fixed left-8 top-1/3 -translate-y-1/2 z-50 opacity-0 transition-all duration-500 ease-in-out pointer-events-none">
@@ -35,13 +39,13 @@ import Button from "../../components/button/Button.astro";
     class="flex flex-col p-10 items-center gap-10 rounded-xl"
     style="background: var(--higress-primary-gradient)"
   >
-    <div class="text-white text-4xl">了解企业版</div>
+    <div class="text-white text-4xl">{t('product.layout.enterprise.title')}</div>
     <div class="text-white font-light text-base">
-      想获得深度整合的 API 管理、流量网关与微服务网关一体化能力？企业版提供更强大的统一治理与安全扩展，欢迎了解。
+      {t('product.layout.enterprise.desc')}
     </div>
     <Button class='w-39' mode="normal">
       <a class="text-black" target="_blank" href={LINKS.enterprise}>
-        了解企业版
+        {t('product.layout.enterprise.title')}
       </a>
     </Button>
   </div>
