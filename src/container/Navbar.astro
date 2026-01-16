@@ -1,6 +1,6 @@
 ---
 // Navbar component with left-center-right layout
-import SearchButton from '../components/SearchButton.astro';
+import Search from '../components/starlight/Search.astro';
 import LanguageSelect from '../components/LanguageSelect.astro';
 import Dropdown from '../components/dropdown/Dropdown.astro';
 import { useTranslations, localizeUrl } from "../i18n/utils";
@@ -86,7 +86,7 @@ const navItems = [
         <!-- Language Select -->
         <LanguageSelect />
         <!-- Search -->
-        <SearchButton />
+        <Search />
 
         <div class="hidden lg:block">
           <a

@@ -72,6 +72,7 @@ export default defineConfig({
         Sidebar: "./src/components/starlight/Sidebar.astro",
         PageFrame: "./src/components/starlight/PageFrame.astro",
         TwoColumnContent: "./src/components/starlight/TwoColumnContent.astro",
+        Search: "./src/components/starlight/Search.astro"
       },
     }),
   ],
