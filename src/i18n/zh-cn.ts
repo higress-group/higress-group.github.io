@@ -616,4 +616,10 @@ export default {
     'page.footer.menu.community': '社区',
     'page.footer.menu.enterprise': '企业版',
     'page.footer.friendly_links': '友情链接：',
+
+    // Blog Post Page
+    'blog.post.toc': '目录',
+    'blog.post.no_toc': '暂无目录',
+    'blog.post.back': '返回',
+    'blog.post.category': '分类',
 };

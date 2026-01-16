@@ -5,6 +5,7 @@ import { SITE } from "../../utils/config";
 import { BLOG_CATEGORY } from "../../constant";
 import SiteLayout from "../../layout/siteLayout.astro";
 import Button from "../../components/button/Button.astro";
+import { localizeUrl, useTranslations } from "@/i18n/utils";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -17,10 +18,12 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 
 const category = post.data.category;
 const categoryConfig = BLOG_CATEGORY.find((c) => c.type === category);
-const backUrl = categoryConfig?.href || "/blog/";
+const backUrl = localizeUrl(categoryConfig?.href || "/blog/", locale);
 
 const { Content, headings } = await post.render();
 
@@ -44,7 +47,7 @@ const author = post.data.author || post.data.authors;
         <!-- 左侧目录导航 -->
         <aside class="hidden sticky top-16 pt-22 self-start md:flex w-64 shrink-0 max-h-screen overflow-y-auto">
           <div class="top-24">
-            <h2 class="text-lg font-semibold mb-4 text-gray-900">目录</h2>
+            <h2 class="text-lg font-semibold mb-4 text-gray-900">{t('blog.post.toc')}</h2>
             <nav class="space-y-1">
               {displayHeadings.length > 0 ? (
                 <ul class="space-y-1">
@@ -60,7 +63,7 @@ const author = post.data.author || post.data.authors;
                   ))}
                 </ul>
               ) : (
-                <p class="text-sm text-gray-500">暂无目录</p>
+                <p class="text-sm text-gray-500">{t('blog.post.no_toc')}</p>
               )}
             </nav>
           </div>
@@ -75,7 +78,7 @@ const author = post.data.author || post.data.authors;
                 <polyline points="12 19 5 12 12 5"></polyline>
               </svg>
               <span class="ml-2">
-                Back
+                {t('blog.post.back')}
               </span>
             </Button>
           </a>
@@ -95,15 +98,17 @@ const author = post.data.author || post.data.authors;
                       <div class="flex items-center gap-2">
                         <span>{author}</span>
                       </div>
+                      <div class="h-3 w-px bg-gray-07"></div>
                     )}
                     {post.data.date && (
                       <div class="flex items-center gap-2">
                         <span>{post.data.date}</span>
                       </div>
+                      <div class="h-3 w-px bg-gray-07"></div>
                     )}
                     {post.data.category && (
                       <div class="flex items-center gap-2">
-                        <span>分类:</span>
+                        <span>{t('blog.post.category')}:</span>
                         <span class="px-2 py-1 bg-gray-100 rounded text-xs font-medium">
                           {post.data.category}
                         </span>

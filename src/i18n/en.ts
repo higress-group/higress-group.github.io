@@ -609,4 +609,10 @@ export default {
     'page.footer.menu.community': 'Community',
     'page.footer.menu.enterprise': 'Enterprise',
     'page.footer.friendly_links': 'Friendly Links:',
+
+    // Blog Post Page
+    'blog.post.toc': 'Table of Contents',
+    'blog.post.no_toc': 'No Table of Contents',
+    'blog.post.back': 'Back',
+    'blog.post.category': 'Category',
 };
