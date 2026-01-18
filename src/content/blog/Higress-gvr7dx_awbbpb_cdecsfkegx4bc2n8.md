@@ -1,7 +1,7 @@
 ---
 title: "网关技术债怎么还？分层、插件、统一，三件套"
 description: "网关技术债怎么还？分层、插件、统一，三件套"
-date: "2026-01-16"
+date: "2025-01-07"
 category: "article"
 keywords: ["Higress"]
 authors: "CH3CHO"
