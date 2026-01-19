@@ -46,5 +46,6 @@ jobs:
           ACCESS_KEYID: ${{ secrets.ACCESS_KEYID }}
           ACCESS_KEYSECRET: ${{ secrets.ACCESS_KEYSECRET }}
         run: |
+          export PATH="$PWD:$PATH"
           chmod +x .github/workflows/deploy-oss.sh
           ./.github/workflows/deploy-oss.sh
