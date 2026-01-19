@@ -40,23 +40,22 @@ Before you begin, you need to prepare the following resources in the Alibaba Clo
 2.  Create a Project (e.g., `apigateway-csb-cop`).
 3.  Create a Logstore within the Project (e.g., `apig-access-log`).
 
-#### 1.2 Configure Log Collection
+#### 1.2 Configure Log Collection (Taking Docker as an example)
 
 Collect the gateway's access logs into the Logstore created above. It is recommended to use Higress version 2.1.9 or later, as its `accesslogformat` has been optimized for the HiMarket observability dashboard.
 
-The log format should include the following key fields:
+Confirm that Higress is deployed successfully using all-in-one deployment.
 
-**Basic Fields:**
+![docker ps](https://image.cnkirito.cn/image-20260119103948203.png)
 
-- `__time__`: Timestamp
-- `response_code`: Response status code
-- `duration`: Request duration
-- `method`: Request method
-- `consumer`: Caller identifier
-- `route_name`: Route name
-- `upstream_cluster`: Upstream service
+Confirm that logs are outputting correctly. Higress deployed via Docker outputs logs to `/var/log/higress/gateway.log`. You can view the log output directly on the host using `docker exec higress tail -n 10 /var/log/higress/gateway.log`.
 
-**AI-related Fields (in the JSON-formatted `ai_log` field):**
+![](https://image.cnkirito.cn/image-20260119105302742.png)
+
+In a normal AI request, the `ai_log` field should contain a JSON object.
+
+AI-related fields (JSON formatted `ai_log` field):
+
 - `model`: Model name
 - `api`: API name
 - `input_token`: Number of input tokens
@@ -67,13 +66,34 @@ The log format should include the following key fields:
 - `token_ratelimit_status`: Rate limit status
 - `mcp_tool_name`: MCP tool name
 
+After confirming that the log output is normal, you can refer to the SLS official documentation to configure Docker or K8s collection. For Higress deployed via Docker, refer to this document: https://help.aliyun.com/zh/sls/collect-docker-container-text-logs. The most critical steps are installing LoongCollector and Logtail, and configuring the collection for the `/var/log/higress/gateway.log` file. Since there are many logs and they need to support subsequent observability queries, you also need to configure the relevant SLS processing plugins.
+
+![Plugin configuration](https://image.cnkirito.cn/image-20260119110357227.png)
+
+![](https://image.cnkirito.cn/image-20260119110436918.png)
+
+![](https://image.cnkirito.cn/image-20260119110501783.png)
+
+If the collection is successful, you should see detailed logs in the logstore, as shown below:
+
+![sls log](https://image.cnkirito.cn/image-20260119110122535.png)
+
 #### 1.3 Configure Indexes
 
-HiMarket provides an automatic index update interface. It will automatically configure indexes upon startup (the AK/SK needs to have index creation permissions).
+The current version of HiMarket does not provide an automatic index update interface. You need to create indexes in the SLS console manually.
 
 - **Text Fields**: `method`, `consumer`, `route_name`, `upstream_cluster`, etc.
 - **Numeric Fields**: `duration`, `bytes_received`, `bytes_sent`, `response_code`, etc.
 - **JSON Field**: `ai_log` (Enable JSON indexing, including the AI-related fields listed above).
+
+It is recommended to automatically build indexes based on the logs obtained in the SLS Query and Analysis properties after you have some raw data:
+
+![](https://image.cnkirito.cn/image-20260119110750641.png)
+
+Key steps:
+
+- Configure the `ai_log` type as `json`.
+- Enable statistics for all fields, including the attribute fields of `ai_log`, otherwise it will affect subsequent observability.
 
 #### 1.4 Obtain Authentication Credentials
 
@@ -286,6 +306,7 @@ Example `ai-statistics` plugin configuration:
         value: x-envoy-mcp-tool-name
         value_source: request_header
         trace_span_key: mcp.tool.name
+        apply_to_span: true
       - apply_to_log: true
         apply_to_span: true
         attribute_key: tool.parameters
