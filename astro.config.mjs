@@ -90,6 +90,13 @@ export default defineConfig({
       ],
       head: [
         {
+          tag: "link",
+          attrs: {
+            rel: "icon",
+            href:"https://img.alicdn.com/imgextra/i4/O1CN01AViQMJ1J2lY4OPRgv_!!6000000000971-2-tps-376-375.png"
+          }
+        },
+        {
           tag: "script",
           attrs: {
             src: "https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR",

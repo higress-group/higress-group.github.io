@@ -92,7 +92,7 @@ const enContact = [
                 {t('page.footer.dingtalk_group')}
               </span>
             </Button>
-            <img slot="content" src="/images/dingding.avif" alt="DingDing QR" class="w-32" />
+            <img slot="content" src="/images/dingding.avif" alt="DingDing QR" class="w-32" loading="lazy" decoding="async" />
           </Popover>
           <Popover placement="bottom">
             <Button width="155px" mode="normal">
@@ -101,7 +101,7 @@ const enContact = [
               </span>
             </Button>
             <div class="flex flex-col gap-2 max-w-32 justify-center" slot="content">
-              <img slot="content" src="/images/wx.avif" alt="WeChat QR" class="w-32" />
+              <img slot="content" src="/images/wx.avif" alt="WeChat QR" class="w-32" loading="lazy" decoding="async" />
               <span class="text-[10px] text-center text-black">
                 {t('page.footer.wechat_expired')}
               </span>
@@ -113,7 +113,7 @@ const enContact = [
                 {t('page.footer.higress_account')}
               </span>
             </Button>
-            <img slot="content" src="/images/higress.jpg" alt="WeChat QR" class="w-32" />
+            <img slot="content" src="/images/higress.jpg" alt="WeChat QR" class="w-32" loading="lazy" decoding="async" />
           </Popover>
           <Popover placement="bottom">
             <Button width="155px" mode="normal">
@@ -121,7 +121,7 @@ const enContact = [
                 {t('page.footer.cloud_native_account')}
               </span>
             </Button>
-            <img slot="content" src="/images/ali-cloud.jpg" alt="WeChat QR" class="w-32" />
+            <img slot="content" src="/images/ali-cloud.jpg" alt="WeChat QR" class="w-32" loading="lazy" decoding="async" />
           </Popover>
         </div>
         )
@@ -131,20 +131,20 @@ const enContact = [
           <div class="flex lg:hidden flex-wrap gap-4">
             <div class="flex flex-col gap-2">
               <span class="text-xs">{t('page.footer.dingtalk_group')}</span>
-              <img src="/images/dingding.avif" alt="DingDing QR" class="w-32" />
+              <img src="/images/dingding.avif" alt="DingDing QR" class="w-32" loading="lazy" decoding="async" />
             </div>
             <div class="flex flex-col gap-2">
               <span class="text-xs">{t('page.footer.wechat_group')}</span>
-              <img src="/images/wx.avif" alt="WeChat QR" class="w-32" />
+              <img src="/images/wx.avif" alt="WeChat QR" class="w-32" loading="lazy" decoding="async" />
               <span class="text-[10px] text-black max-w-32">{t('page.footer.wechat_expired')}</span>
             </div>
             <div class="flex flex-col gap-2">
               <span class="text-xs">{t('page.footer.higress_account')}</span>
-              <img src="/images/higress.jpg" alt="Higress Pub QR" class="w-32" />
+              <img src="/images/higress.jpg" alt="Higress Pub QR" class="w-32" loading="lazy" decoding="async" />
             </div>
             <div class="flex flex-col gap-2">
               <span class="text-xs">{t('page.footer.cloud_native_account')}</span>
-              <img src="/images/ali-cloud.jpg" alt="Cloud Native Pub QR" class="w-32" />
+              <img src="/images/ali-cloud.jpg" alt="Cloud Native Pub QR" class="w-32" loading="lazy" decoding="async" />
             </div>
           </div>
         ) : (
@@ -155,7 +155,7 @@ const enContact = [
                   <a href={info.href} target="_blank">
                     <Button class="w-24" mode="normal">
                       <div class="w-8 h-8 rounded-2xl overflow-hidden">
-                        <img class="max-w-full" src={info.img} />
+                        <img class="max-w-full" src={info.img} loading="lazy" decoding="async" />
                       </div>
                     </Button>
                   </a>
