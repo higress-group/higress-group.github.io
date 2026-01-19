@@ -183,16 +183,16 @@ const enContact = [
   <div class="h-px bg-gray-200 w-full"></div>
   <div class="flex flex-col gap-4">
     <div class="flex flex-col lg:flex-row gap-2 justify-center items-center">
-      <div class="text-xs text-[#A3A6B3] whitespace-nowrap">{t('page.footer.friendly_links')}</div>
+      <div class="text-xs text-gray-06 whitespace-nowrap">{t('page.footer.friendly_links')}</div>
       <div class="flex flex-wrap justify-center gap-y-2">
         {links.map((item) => (
-          <a href={item.link} target="_blank" class="footer-link text-xs text-[#A3A6B3] hover:text-primary transition-colors px-3">
+          <a href={item.link} target="_blank" class="footer-link text-xs text-gray-06 hover:text-primary transition-colors px-3">
             {item.label}
           </a>
         ))}
       </div>
     </div>
-    <div class="text-xs text-gray-400 text-center flex flex-col gap-1">
+    <div class="text-xs text-gray-06 text-center flex flex-col gap-1">
       <div>© Higress Authors {currentYear} | Documentation Distributed under CC-BY-4.0</div>
       <div>
         Copyright © 2022-{currentYear}, Alibaba. All rights reserved. Alibaba has registered trademarks and uses trademarks.
