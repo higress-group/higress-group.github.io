@@ -22,22 +22,25 @@ description: Higress 维护者名单
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | 阿里云        |
 | 严研 | [JavaerJohn](https://github.com/JavaerJohn) | 阿里云        |
 | 徐靖峰 | [lexburner](https://github.com/lexburner) | 阿里云        |
-| 泮圣伟 | [panxiaojun233](https://github.com/panxiaojun233) | 阿里云        |
-| 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
-| 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
-| 刘帅 | [EricaLiu](https://github.com/Erica177) | 阿里云        |
-| 戴靖泽 | [Jing-ze](https://github.com/Jing-ze) | 阿里云        |
+
 
 ## Higress Approvers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
+| 刘宏宇 | [aias00](https://github.com/aias00) | 联通数智        |
+| 邢国富 | [erasernoob](https://github.com/erasernoob) | 西南石油大学   |
+| 刘帅 | [EricaLiu](https://github.com/Erica177) | 阿里云        |
+| 戴靖泽 | [Jing-ze](https://github.com/Jing-ze) | 阿里云        |
+| 泮圣伟 | [panxiaojun233](https://github.com/panxiaojun233) | 阿里云        |
+| 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
 | 范扬 | [SpecialYang](https://github.com/SpecialYang) | 字节跳动        |
 | 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
+| 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
 
 ## Higress Reviewers
 | 姓名  | github                        | 公司组织             |
 |-----|-------------------------------| --------------- |
-| 邢国富 | [erasernoob](https://github.com/erasernoob) | 西南石油   |
+| 刘毅杰 | [007gzs](https://github.com/007gzs)                   | 棱镜七彩 |
 | 凌轶群 | [Lynskylate](https://github.com/Lynskylate) | eBay  |
 | 赵炳堃 | [sjtuzbk](https://github.com/sjtuzbk) | 阿里云        |
 | 韦鑫 | [WeixinX](https://github.com/weixinx) | 爱橙科技   |
@@ -45,7 +48,6 @@ description: Higress 维护者名单
 ## Higress Members
 | 姓名  | github                                                | 公司组织 |
 |-----|-------------------------------------------------------|---|
-| 刘毅杰 | [007gzs](https://github.com/007gzs)                   | 棱镜七彩 |
 | 张正好 | [alexzzh](https://github.com/alexzzh)                 | 格尔软件 |
 | 李强林 | [Charlie17Li](https://github.com/Charlie17Li)         | 浙大 |
 | 冯晓强 | [Fengxq2014](https://github.com/Fengxq2014)           | 多飞科技 |

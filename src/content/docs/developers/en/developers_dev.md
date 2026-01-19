@@ -27,17 +27,20 @@ This page shows the Higress development team. Please add your information to the
 ## Higress Approvers
 | Name | GitHub | Organization |
 |-----|-------------------------------| --------------- |
-| Yang Fan | [SpecialYang](https://github.com/SpecialYang) | ByteDance |
+| Hongyu Liu | [aias00](https://github.com/aias00) | chinaunicom        |
+| Guofu Xing | [erasernoob](https://github.com/erasernoob) | SouthWest Petroleum University   |
+| Shuai Liu | [EricaLiu](https://github.com/Erica177) | Alibaba Cloud |
 | Xunzhuo Liu | [Xunzhuo](https://github.com/Xunzhuo) | Tencent |
 | Shengwei Pan | [panxiaojun233](https://github.com/panxiaojun233) | Alibaba Cloud |
 | Xiaorui Liu | [rinfx](https://github.com/rinfx) | Alibaba Cloud |
 | Min Ji | [slievrly](https://github.com/slievrly) | Alibaba Cloud |
-| Shuai Liu | [EricaLiu](https://github.com/Erica177) | Alibaba Cloud |
 | Jingze Dai | [Jing-ze](https://github.com/Jing-ze) | Alibaba Cloud |
 
 ## Higress Reviewers
 | Name | GitHub | Organization |
 |-----|-------------------------------| --------------- |
+| Yijie Liu | [007gzs](https://github.com/007gzs) | Prism Seven Colors |
+| Yang Fan | [SpecialYang](https://github.com/SpecialYang) | ByteDance |
 | Yiqun Ling | [Lynskylate](https://github.com/Lynskylate) | eBay |
 | Bingkun Zhao | [sjtuzbk](https://github.com/sjtuzbk) | Alibaba Cloud |
 | Xin Wei | [WeixinX](https://github.com/weixinx) | Aicheng Technology |
@@ -45,7 +48,6 @@ This page shows the Higress development team. Please add your information to the
 ## Higress Members
 | Name | GitHub | Organization |
 |--|-------------------------------| --------------- |
-| Yijie Liu | [007gzs](https://github.com/007gzs) | Prism Seven Colors |
 | Zhenghao Zhang | [alexzzh](https://github.com/alexzzh) | Koal Software |
 | Qianglin Li | [Charlie17Li](https://github.com/Charlie17Li) | Zhejiang University |
 | Xiaoqiang Feng | [Fengxq2014](https://github.com/Fengxq2014) | Duofei Technology |

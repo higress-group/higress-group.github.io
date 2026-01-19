@@ -22,6 +22,8 @@ AI网关能够将外部调用不同大模型的请求，通过统一的调用方
 curl -sS https://higress.cn/ai-gateway/install.sh | bash
 ```
 
+> 注意：AI 网关的启动过程需要访问公网资源。请确保其运行环境具备外网访问条件。
+
 按照指引可以分别录入 Aliyun Dashscope或其他API-KEY；也可以键入回车后跳过，之后在控制台中修改。
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)

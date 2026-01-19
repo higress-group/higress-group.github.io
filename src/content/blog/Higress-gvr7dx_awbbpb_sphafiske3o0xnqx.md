@@ -69,7 +69,7 @@ AI Agent 的相关逻辑都在 ai_agent.py 这个文件中。AI 网关使用 Hig
 
 `curl -sS  https://higress.cn/ai-gateway/install.sh | bash` 
 
-
+> 注意：AI 网关的启动过程需要访问公网资源。请确保其运行环境具备外网访问条件。
 
 按照指引可以分别录入 OpenAI（或者 Azure OpenAI），以及 DeepSeek 的 API Key
 
