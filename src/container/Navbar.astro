@@ -51,6 +51,39 @@ const navItems = [
     ]
   }
 ];
+
+// Helper to check if a link is active
+const checkIsActive = (href: string | undefined) => {
+  if (!href || href.startsWith('http')) return false;
+
+  const normalize = (p: string) => p.endsWith('/') ? p.slice(0, -1) : p;
+  const path = normalize(currentPath);
+  const target = normalize(href);
+
+  // Docs
+  if (target.includes('/docs/latest')) {
+     return path.includes('/docs') && !path.includes('/docs/developers');
+  }
+  
+  // Blog
+  if (target.includes('/blog')) {
+    return path.includes('/blog');
+  }
+
+  // Developers
+  if (target.includes('/docs/developers')) {
+    return path.includes('/docs/developers');
+  }
+
+  return path === target || path.startsWith(target + '/');
+};
+
+const isItemActive = (item: any) => {
+  if (item.type === 'dropdown') {
+    return item.items?.some((sub: any) => checkIsActive(sub.href));
+  }
+  return checkIsActive(item.href);
+};
 ---
 
 <nav id="main-nav" class:list={["fixed top-0 left-0 right-0 z-50 transition-all duration-300", navClass]} data-is-home={String(isHome || isProducts)}>
@@ -65,21 +98,26 @@ const navItems = [
 
       <!-- Center: Navigation Links (Desktop) -->
       <div class="nav-links hidden lg:flex items-center">
-        {navItems.map((item, index) => (
+        {navItems.map((item) => {
+          const isActive = isItemActive(item);
+          return (
           <div class="nav-link">
             {item.type === 'dropdown' ? (
-              <Dropdown label={item.label} items={item.items} />
+              <Dropdown label={item.label} items={item.items} isActive={isActive} />
             ) : (
               <a
                 href={item.href}
                 target={item.target}
-                class="text-sm text-strong hover:text-primary no-underline transition-colors px-2"
+                class:list={[
+                  "text-sm hover:text-primary no-underline transition-colors px-2",
+                  isActive ? "text-primary" : "text-strong"
+                ]}
               >
                 {item.label}
               </a>
             )}
           </div>
-        ))}
+        )})}
       </div>
       <!-- Right: Search, Theme & Language Toggle -->
       <div class="flex flex-1 items-center justify-end gap-4">

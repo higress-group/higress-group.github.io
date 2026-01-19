@@ -3,15 +3,19 @@ interface Props {
   label: string;
   items?: { label: string; href: string }[];
   class?: string;
+  isActive?: boolean;
 }
 
-const { label, items = [], class: className = "" } = Astro.props;
+const { label, items = [], class: className = "", isActive = false } = Astro.props;
 ---
 
 <starlight-dropdown class:list={["relative inline-block text-left", className]}>
   <button
     type="button"
-    class="dropdown-button inline-flex items-center justify-center w-full gap-x-1.5 text-sm transition-colors px-2 py-1"
+    class:list={[
+      "dropdown-button inline-flex items-center justify-center w-full gap-x-1.5 text-sm transition-colors px-2 py-1",
+      isActive ? "active" : ""
+    ]}
     aria-expanded="false"
     aria-haspopup="true"
   >
@@ -61,7 +65,8 @@ const { label, items = [], class: className = "" } = Astro.props;
     cursor: pointer;
   }
 
-  .dropdown-button:hover {
+  .dropdown-button:hover,
+  .dropdown-button.active {
     color: var(--sl-dropdown-hover-text);
   }
 
