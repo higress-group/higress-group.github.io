@@ -1,7 +1,7 @@
 ---
 interface Props {
   label: string;
-  items?: { label: string; href: string }[];
+  items?: { label: string; href: string; active?: boolean }[];
   class?: string;
   isActive?: boolean;
 }
@@ -37,7 +37,10 @@ const { label, items = [], class: className = "", isActive = false } = Astro.pro
           href={item.href}
           target={item.href.startsWith('http') ? '_blank' : undefined}
           rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-          class="dropdown-item block px-4 py-2 text-sm mx-1 rounded-md"
+          class:list={[
+            "dropdown-item block px-4 py-2 text-sm mx-1 rounded-md",
+            item.active ? "active" : ""
+          ]}
           role="menuitem"
           tabindex="-1"
         >
@@ -95,7 +98,8 @@ const { label, items = [], class: className = "", isActive = false } = Astro.pro
     transition: background-color 0.15s, color 0.15s;
   }
 
-  .dropdown-item:hover {
+  .dropdown-item:hover,
+  .dropdown-item.active {
     background-color: var(--sl-dropdown-hover-bg);
     color: var(--sl-dropdown-hover-text);
   }

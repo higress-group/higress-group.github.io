@@ -34,7 +34,7 @@ try {
   <div id="markdown-content-storage" style="display: none;">{markdownContent}</div>
 
   <!-- 顶部操作栏 -->
-  <nav aria-label="Page actions" class="page-actions-nav">
+  <nav aria-label="Page actions" class="page-actions-nav relative">
     <!-- Back 按钮 -->
     <Button contentAlign='center' width='auto' class="sm:w-22.5 justify-center! sm:justify-between!" mode="gray" id="back-btn">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -44,7 +44,7 @@ try {
       <span class="button-text hidden sm:inline ml-2 sm:ml-0">Back</span>
     </Button>
 
-    <div class="relative">
+    <div class="absolute right-0 top-17">
       <!-- 组合按钮：外观是一个按钮，内部分两个点击区域 -->
       <div class="combined-button flex items-stretch border rounded-full overflow-hidden bg-white">
         <!-- 左侧：复制区域 -->
@@ -75,7 +75,14 @@ try {
 
       <!-- Dropdown Menu -->
       <div id="action-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50 hidden border border-gray-100">
-        <div class="p-2">
+        <div class="p-2 space-y-1">
+          <button id="copy-menu-item" class="w-full group rounded-lg bg-white text-left px-4 py-2 text-sm text-black hover:bg-indigo-20 hover:text-primary flex items-center">
+            <svg class="mr-2 h-4 w-4 text-black group-hover:text-primary" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            复制页面
+          </button>
           <button id="view-markdown-item" class="w-full group rounded-lg bg-white text-left px-4 py-2 text-sm text-black hover:bg-indigo-20 hover:text-primary flex items-center">
              <svg class="mr-2 h-4 w-4 text-black group-hover:text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -143,6 +150,19 @@ try {
   const menuBtn = document.getElementById('action-menu-btn');
   const menu = document.getElementById('action-menu');
 
+  // 菜单中的复制按钮功能
+  const copyMenuBtn = document.getElementById('copy-menu-item');
+  if (copyMenuBtn && menu) {
+    copyMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      copyMarkdown(copyMenuBtn);
+      // 复制后延迟关闭菜单，让用户看到“已复制”状态
+      setTimeout(() => {
+        menu.classList.add('hidden');
+      }, 500);
+    });
+  }
+
   // 切换菜单
   if (menuBtn && menu) {
     menuBtn.addEventListener('click', (e) => {
@@ -167,6 +187,9 @@ try {
 
     // 移除开头的斜杠
     let path = currentPath.replace(/^\//, '');
+    
+    // 移除末尾的斜杠
+    path = path.replace(/\/$/, '');
 
     // 检查是否是英文路径
     const isEnglish = path.startsWith('en/');
@@ -175,8 +198,8 @@ try {
     const docPath = isEnglish ? path.replace(/^en\//, '') : path;
 
     // 构建文件路径
-    // 如果是英文: /overview/docs/en/{docPath}.md
-    // 如果是中文: /overview/docs/{docPath}.md
+    // 如果是英文: /overview/en/{docPath}.md
+    // 如果是中文: /overview/{docPath}.md
     const filePath = isEnglish
       ? `/overview/en/${docPath}.md`
       : `/overview/${docPath}.md`;

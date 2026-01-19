@@ -16,6 +16,8 @@ a, body, footer {
 body {
   background-color: #F4F4F6;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
 }
 
 /* Force Light mode colors for everything. */

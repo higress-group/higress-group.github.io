@@ -100,10 +100,18 @@ const isItemActive = (item: any) => {
       <div class="nav-links hidden lg:flex items-center">
         {navItems.map((item) => {
           const isActive = isItemActive(item);
+          // Calculate active state for dropdown items if they exist
+          const dropdownItems = item.type === 'dropdown' && item.items 
+            ? item.items.map(sub => ({
+                ...sub,
+                active: checkIsActive(sub.href)
+              }))
+            : undefined;
+
           return (
           <div class="nav-link">
             {item.type === 'dropdown' ? (
-              <Dropdown label={item.label} items={item.items} isActive={isActive} />
+              <Dropdown label={item.label} items={dropdownItems} isActive={isActive} />
             ) : (
               <a
                 href={item.href}
