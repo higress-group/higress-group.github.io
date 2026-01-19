@@ -76,8 +76,14 @@ const newsItems = [
     <div class="mb-3 text-[#6E7587] dark:text-white">{t('home.hero.news.label')}</div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {newsItems.map((item) => (
-        <div role="button" class="news-card group relative flex flex-col justify-between gap-4 cursor-pointer p-6 rounded-2xl backdrop-blur-sm transition-transform hover:-translate-y-1">
-          <a href={item.href}>
+        <div 
+          role="button" 
+          tabindex="0"
+          aria-label={item.title}
+          class="news-card group relative flex flex-col justify-between gap-4 cursor-pointer p-6 rounded-2xl backdrop-blur-sm transition-transform hover:-translate-y-1"
+          onkeydown="if(event.key === 'Enter' || event.key === ' ') this.querySelector('a').click()"
+        >
+          <a href={item.href} tabindex="-1">
             <div class="absolute top-4 right-4 p-3 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="10" height="10" viewBox="0 0 12 12">
                 <g transform="matrix(-1,0,0,1,24,0)">

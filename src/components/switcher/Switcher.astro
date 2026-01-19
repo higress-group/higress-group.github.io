@@ -28,7 +28,7 @@ if (options.length < 2) {
 ---
 
 <starlight-switcher data-value={value} data-component-theme={theme} data-options={JSON.stringify(options)} class={className} id={id}>
-  <div class="switch-container" role="switch">
+  <div class="switch-container" role="switch" aria-checked={value === options[1].value ? "true" : "false"} tabindex="0">
     <div class="switch-track">
       <div class="switch-slider no-transition"></div>
       {options.map(option => (
@@ -167,6 +167,16 @@ class StarlightSwitcher extends HTMLElement {
     // Initial visual update (no animation)
     this.updateVisuals(true);
 
+    const container = this.querySelector('.switch-container') as HTMLElement;
+    if (container) {
+      container.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.toggle();
+        }
+      });
+    }
+
     this.querySelectorAll('.switch-option').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -181,12 +191,33 @@ class StarlightSwitcher extends HTMLElement {
     window.addEventListener('resize', () => this.updateVisuals(false));
   }
 
+  toggle() {
+    const options = JSON.parse(this.dataset.options || '[]');
+    if (options.length < 2) return;
+    
+    const currentIndex = options.findIndex((o: any) => o.value === this.dataset.value);
+    const nextIndex = (currentIndex + 1) % options.length;
+    this.select(options[nextIndex].value);
+  }
+
   updateVisuals(isInit = false) {
     const currentValue = this.dataset.value;
     const slider = this.querySelector('.switch-slider') as HTMLElement;
     const btns = this.querySelectorAll('.switch-option');
+    const container = this.querySelector('.switch-container');
+    const options = JSON.parse(this.dataset.options || '[]');
 
     if (!slider) return;
+
+    // Update aria-checked
+    // Assuming the second option is "on" or "checked" state if there are only 2 options.
+    // For a multi-state switch, role="switch" might be semantically ambiguous, 
+    // but typically it's boolean. If options > 2, role="radiogroup" might be better.
+    // Given the previous code used role="switch", I'll stick to updating aria-checked 
+    // based on whether it's the second option (index 1).
+    if (container && options.length === 2) {
+       container.setAttribute('aria-checked', (currentValue === options[1].value).toString());
+    }
 
     let activeBtn: HTMLElement | null = null;
 
