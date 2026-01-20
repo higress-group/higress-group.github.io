@@ -622,4 +622,11 @@ export default {
     'blog.post.no_toc': '暂无目录',
     'blog.post.back': '返回',
     'blog.post.category': '分类',
+
+    // PageTitle component
+    'page.title.back': '返回',
+    'page.title.copy_page': '复制页面',
+    'page.title.copied': '已复制!',
+    'page.title.copy_failed': '复制失败',
+    'page.title.view_markdown': '查看 Markdown',
 };

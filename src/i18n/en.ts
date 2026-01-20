@@ -615,4 +615,11 @@ export default {
     'blog.post.no_toc': 'No Table of Contents',
     'blog.post.back': 'Back',
     'blog.post.category': 'Category',
+
+    // PageTitle component
+    'page.title.back': 'Back',
+    'page.title.copy_page': 'Copy Page',
+    'page.title.copied': 'Copied!',
+    'page.title.copy_failed': 'Copy failed',
+    'page.title.view_markdown': 'View Markdown',
 };

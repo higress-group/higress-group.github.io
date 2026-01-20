@@ -3,10 +3,12 @@ import Default from '@astrojs/starlight/components/PageTitle.astro';
 import fs from 'fs/promises';
 import path from 'path';
 import Button from '../button/Button.astro';
+import { useTranslations } from '../../i18n/utils';
 
 // 获取当前页面的路径信息
 const currentPath = Astro.url.pathname;
 
+const t = useTranslations(Astro.currentLocale);
 // 在构建时读取 markdown 原始内容
 let markdownContent = '';
 try {
@@ -41,7 +43,7 @@ try {
         <line x1="19" y1="12" x2="5" y2="12"></line>
         <polyline points="12 19 5 12 12 5"></polyline>
       </svg>
-      <span class="button-text hidden sm:inline ml-2 sm:ml-0">Back</span>
+      <span class="button-text hidden sm:inline ml-2 sm:ml-0">{t('page.title.back')}</span>
     </Button>
 
     <div class="absolute right-0 top-17">
@@ -56,7 +58,7 @@ try {
             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
           </svg>
-          <span class="button-text ml-2 sm:ml-3 text-xs sm:text-sm whitespace-nowrap">复制页面</span>
+          <span class="button-text ml-2 sm:ml-3 text-xs sm:text-sm whitespace-nowrap">{t('page.title.copy_page')}</span>
         </button>
 
         <!-- 分隔线 -->
@@ -78,17 +80,16 @@ try {
         <div class="p-2 space-y-1">
           <button id="copy-menu-item" class="w-full group rounded-lg bg-white text-left px-4 py-2 text-sm text-black hover:bg-indigo-20 hover:text-primary flex items-center">
             <svg class="mr-2 h-4 w-4 text-black group-hover:text-primary" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-            复制页面
-          </button>
-          <button id="view-markdown-item" class="w-full group rounded-lg bg-white text-left px-4 py-2 text-sm text-black hover:bg-indigo-20 hover:text-primary flex items-center">
-             <svg class="mr-2 h-4 w-4 text-black group-hover:text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        {t('page.title.copy_page')}
+                      </button>
+                      <button id="view-markdown-item" class="w-full group rounded-lg bg-white text-left px-4 py-2 text-sm text-black hover:bg-indigo-20 hover:text-primary flex items-center">             <svg class="mr-2 h-4 w-4 text-black group-hover:text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
             </svg>
-            查看 Markdown
+            {t('page.title.view_markdown')}
           </button>
         </div>
       </div>
@@ -98,6 +99,12 @@ try {
   <!-- 原始的 PageTitle 组件 -->
   <Default {...Astro.props} />
 </div>
+
+<div id="i18n-data" 
+  data-copied={t('page.title.copied')} 
+  data-copy-failed={t('page.title.copy_failed')}
+  style="display: none;"
+></div>
 
 <script>
   // Back 按钮功能
@@ -117,6 +124,9 @@ try {
 
   // 复制功能 - 统一的复制逻辑
   const markdownStorage = document.getElementById('markdown-content-storage');
+  const i18nData = document.getElementById('i18n-data') as HTMLElement;
+  const copiedText = i18nData?.dataset.copied || 'Copied!';
+  const copyFailedText = i18nData?.dataset.copyFailed || 'Copy failed';
 
   const copyMarkdown = async (button: HTMLElement) => {
     try {
@@ -127,13 +137,13 @@ try {
 
       // 显示复制成功提示
       const originalHTML = button.innerHTML;
-      button.innerHTML = '<span class="text-green-600 font-bold">已复制!</span>';
+      button.innerHTML = `<span class="text-green-600 font-bold">${copiedText}</span>`;
       setTimeout(() => {
         button.innerHTML = originalHTML;
       }, 1500);
     } catch (err) {
       console.error('Copy failed', err);
-      alert('复制失败');
+      alert(copyFailedText);
     }
   };
 
