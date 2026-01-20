@@ -1,7 +1,7 @@
 import zhSidebarConfig from "../content/docs/docs/latest/_sidebar.json";
 import enSidebarConfig from "../content/docs/en/docs/latest/_sidebar.json";
-import zhAiSidebarConfig from "../content/docs/ai/_sidebar.json";
-import enAiSidebarConfig from "../content/docs/en/ai/_sidebar.json";
+import zhAiSidebarConfig from "../content/docs/docs/ai/_sidebar.json";
+import enAiSidebarConfig from "../content/docs/en/docs/ai/_sidebar.json";
 import zhHimarketSidebarConfig from "../content/docs/docs/himarket/_sidebar.json";
 import zhDeveloperSidebarConfig from "../content/docs/docs/developers/_sidebar.json";
 import enDeveloperSidebarConfig from "../content/docs/en/docs/developers/_sidebar.json";
@@ -64,18 +64,12 @@ function transformSidebarItem(
   // 处理链接 - 需要转换路径格式
   if (item.link) {
     if (type === "ai") {
-      // AI 文档路径
-      // 原格式: "ai/quick-start"
-      // 中文文件位置: src/content/ai/quick-start.md
-      // 英文文件位置: src/content/ai/en/quick-start.md
-      // Starlight 期望的链接格式（相对于 content，需要尾部斜杠）:
-      // - root locale: "ai/quick-start/"
-      // - en locale: "en/ai/quick-start/"
+      const cleanLink = item.link.replace(/^docs\//, "");
       if (locale === "en") {
-        transformed.link = `en/${item.link}/`;
+        transformed.link = `en/docs/ai/${cleanLink}`;
       } else {
         // root locale (中文)
-        transformed.link = `${item.link}/`;
+        transformed.link = `docs/ai/${cleanLink}/`;
       }
     } else if (type === "himarket") {
       // HiMarket 文档路径
@@ -124,11 +118,11 @@ function transformSidebarItem(
       // AI 文档自动生成
       if (locale === "en") {
         transformed.autogenerate = {
-          directory: `en/${item.autogenerate.directory}`,
+          directory: `en/docs/ai/${item.autogenerate.directory}`,
         };
       } else {
         transformed.autogenerate = {
-          directory: item.autogenerate.directory,
+          directory: `docs/ai/${item.autogenerate.directory}`,
         };
       }
     } else if (type === "himarket") {

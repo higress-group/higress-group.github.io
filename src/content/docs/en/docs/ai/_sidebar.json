@@ -4,21 +4,21 @@
     "translations": {
       "en": "Quick Start"
     },
-    "link": "ai/quick-start"
+    "link": "docs/quick-start"
   },
   {
     "label": "MCP Quick Start",
     "translations": {
       "en": "MCP Quick Start"
     },
-    "link": "ai/mcp-quick-start"
+    "link": "docs/mcp-quick-start"
   },
   {
     "label": "MCP Server",
     "translations": {
       "en": "MCP Server"
     },
-    "link": "ai/mcp-server"
+    "link": "docs/mcp-server"
   },
   {
     "label": "HiMarket",
@@ -32,35 +32,35 @@
         "translations": {
           "en": "HiMarket Introduction"
         },
-        "link": "ai/himarket/himarket-introduction"
+        "link": "docs/himarket/himarket-introduction"
       },
       {
         "label": "HiMarket Deployment",
         "translations": {
           "en": "HiMarket Deployment"
         },
-        "link": "ai/himarket/himarket-deployment"
+        "link": "docs/himarket/himarket-deployment"
       },
       {
         "label": "HiMarket Usage",
         "translations": {
           "en": "HiMarket Usage"
         },
-        "link": "ai/himarket/himarket-usage"
+        "link": "docs/himarket/himarket-usage"
       },
       {
         "label": "HiMarket Statistics",
         "translations": {
           "en": "HiMarket Statistics"
         },
-        "link": "ai/himarket/himarket-statistics"
+        "link": "docs/himarket/himarket-statistics"
       },
       {
         "label": "HiMarket AgentScope Agent",
         "translations": {
           "en": "HiMarket AgentScope Agent"
         },
-        "link": "ai/himarket/himarket-agentscope-agent"
+        "link": "docs/himarket/himarket-agentscope-agent"
       }
     ]
   },
@@ -76,28 +76,28 @@
         "translations": {
           "en": "Multi-Proxy"
         },
-        "link": "ai/scene-guide/multi-proxy"
+        "link": "docs/scene-guide/multi-proxy"
       },
       {
         "label": "Semantic Cache",
         "translations": {
           "en": "Semantic Cache"
         },
-        "link": "ai/scene-guide/semantic-cache"
+        "link": "docs/scene-guide/semantic-cache"
       },
       {
         "label": "Application Safety",
         "translations": {
           "en": "Application Safety"
         },
-        "link": "ai/scene-guide/application-safety"
+        "link": "docs/scene-guide/application-safety"
       },
       {
         "label": "Token Management",
         "translations": {
           "en": "Token Management"
         },
-        "link": "ai/scene-guide/token-management"
+        "link": "docs/scene-guide/token-management"
       }
     ]
   }

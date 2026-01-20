@@ -8,7 +8,7 @@ export const sidebarCategory = {
 
 export const sidebarCategoryDefaultLink = {
   latest: "/docs/latest/overview/what-is-higress",
-  ai: "/ai/quick-start",
+  ai: "/docs/ai/quick-start",
   himarket: "/docs/himarket/himarket-introduction",
   developer: "/docs/developers/developers_dev",
 }

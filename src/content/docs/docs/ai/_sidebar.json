@@ -1,45 +1,51 @@
 [
   {
-    "label": "快速开始",
+    "label": "一键部署 Higress AI 网关",
     "translations": {
       "en": "Quick Start"
     },
-    "link": "ai/quick-start"
+    "link": "docs/quick-start"
+  },
+  {
+    "label": "MCP 插件配置",
+    "translations": {
+      "en": "MCP Server"
+    },
+    "link": "docs/mcp-server"
   },
   {
     "label": "MCP 快速开始",
     "translations": {
       "en": "MCP Quick Start"
     },
-    "link": "ai/mcp-quick-start"
+    "link": "docs/mcp-quick-start"
   },
   {
     "label": "MCP 快速开始 (Docker)",
     "translations": {
       "en": "MCP Quick Start (Docker)"
     },
-    "link": "ai/mcp-quick-start_docker"
+    "link": "docs/mcp-quick-start_docker"
   },
   {
-    "label": "MCP with SSE",
+    "label": "MCP Server 快速开始（对接现存 SSE Server）",
     "translations": {
       "en": "MCP with SSE"
     },
-    "link": "ai/mcp-with-sse"
+    "link": "docs/mcp-with-sse"
   },
   {
     "label": "MCP Server",
     "translations": {
       "en": "MCP Server"
     },
-    "link": "ai/mcp-server"
+    "link": "docs/mcp-server"
   },
   {
     "label": "场景指南",
     "translations": {
       "en": "Scene Guide"
     },
-    "type": "asd",
     "collapsed": false,
     "items": [
       {
@@ -47,28 +53,28 @@
         "translations": {
           "en": "Multi-Proxy"
         },
-        "link": "ai/scene-guide/multi-proxy"
+        "link": "docs/scene-guide/multi-proxy"
       },
       {
         "label": "语义缓存",
         "translations": {
           "en": "Semantic Cache"
         },
-        "link": "ai/scene-guide/semantic-cache"
+        "link": "docs/scene-guide/semantic-cache"
       },
       {
         "label": "应用安全",
         "translations": {
           "en": "Application Safety"
         },
-        "link": "ai/scene-guide/application-safety"
+        "link": "docs/scene-guide/application-safety"
       },
       {
         "label": "Token 管理",
         "translations": {
           "en": "Token Management"
         },
-        "link": "ai/scene-guide/token-management"
+        "link": "docs/scene-guide/token-management"
       }
     ]
   }

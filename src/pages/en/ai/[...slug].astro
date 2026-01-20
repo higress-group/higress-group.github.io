@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs');
+  // Find all docs under en/docs/ai/
+  const aiDocs = docs.filter(doc => doc.slug.startsWith('en/docs/ai/'));
+
+  return aiDocs.map(doc => {
+    // extract the part after en/docs/ai/ to be the slug for this route
+    const slug = doc.slug.replace(/^en\/docs\/ai\//, '');
+    return {
+      params: { slug },
+      props: { destination: `/en/docs/ai/${slug}/` },
+    };
+  });
+}
+
+const { destination } = Astro.props;
+return Astro.redirect(destination);
+---
+<meta http-equiv="refresh" content={`0;url=${destination}`} />

@@ -37,8 +37,6 @@ const newsItems = [
       src="https://framerusercontent.com/images/E72tZ6DajfVmRcxxxJBo4gnDY.png?width=2880&height=1640"
       alt="Hero Background"
       class="h-full w-full object-cover object-top"
-      width="2880"
-      height="1640"
       fetchpriority="high"
       decoding="async"
       loading="eager"
@@ -76,8 +74,8 @@ const newsItems = [
     <div class="mb-3 text-[#6E7587] dark:text-white">{t('home.hero.news.label')}</div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {newsItems.map((item) => (
-        <div 
-          role="button" 
+        <div
+          role="button"
           tabindex="0"
           aria-label={item.title}
           class="news-card group relative flex flex-col justify-between gap-4 cursor-pointer p-6 rounded-2xl backdrop-blur-sm transition-transform hover:-translate-y-1"
