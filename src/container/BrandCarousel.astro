@@ -1,0 +1,90 @@
+---
+const brandLogos = [
+  {
+    name: '携程',
+    src: 'https://framerusercontent.com/images/VEMq4sDq4kC9IIjB34gGYUz9X7E.png?width=750&height=571',
+    width: 750,
+    height: 571
+  },
+  {
+    name: '快手',
+    src: 'https://framerusercontent.com/images/bNEFtnCXft1O4ZsQzI2ys5x1o4.jpg?width=830&height=321',
+    width: 830,
+    height: 321
+  },
+  {
+    name: '大疆创新',
+    src: 'https://framerusercontent.com/images/9cyxgQ0mxjEMe4PWwUfxoRXTAC8.jpg?width=500&height=500',
+    width: 500,
+    height: 500
+  },
+  {
+    name: '唯品会',
+    src: 'https://framerusercontent.com/images/CYdF6gd9S9NaiKfQ0aqnrBxKZk.jpg?width=600&height=400',
+    width: 600,
+    height: 400
+  },
+  {
+    name: 'BOSS 直聘',
+    src: 'https://framerusercontent.com/images/mV9h81olScFKiUq1ELOlcSJfEA0.png?width=189&height=189',
+    width: 189,
+    height: 189
+  },
+  {
+    name: '蚂蚁集团',
+    src: 'https://framerusercontent.com/images/DziFLNpqjkZyqcdANtCcZXT4NLE.jpg?width=740&height=130',
+    width: 740,
+    height: 130
+  }
+];
+
+// 创建3份副本确保无限循环无缝衔接
+const allLogos = [...brandLogos, ...brandLogos, ...brandLogos];
+---
+
+<section class="brand-carousel-section py-10 overflow-hidden">
+  <div class="max-w-full mx-auto overflow-hidden container">
+    <div class="relative">
+      <!-- Gradient overlays -->
+      <div class="absolute left-0 top-0 bottom-0 w-24 bg-linear-to-r from-white to-transparent z-10"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-24 bg-linear-to-l from-white to-transparent z-10"></div>
+
+      <!-- Scrolling Container -->
+      <div class="brand-carousel-track flex items-center gap-6">
+        {allLogos.map((logo, index) => (
+          <div
+            class="brand-logo-item cursor-pointer flex justify-center items-center p-2 bg-white rounded-md shrink-0 grayscale hover:grayscale-0 transition-all duration-300 opacity-50 hover:opacity-100"
+          >
+            <img
+              src={logo.src}
+              alt={logo.name}
+              class="h-10 md:h-12 w-auto object-contain"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .brand-carousel-track {
+    animation: scroll 10s linear infinite;
+    width: max-content;
+  }
+
+  .brand-carousel-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      /* 移动到第一组的末尾，正好是第二组的开始位置 */
+      transform: translateX(calc(-100% / 3));
+    }
+  }
+</style>

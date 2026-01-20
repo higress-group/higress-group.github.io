@@ -4,6 +4,7 @@ import MainHeroSection from "../container/main-hero.astro";
 import GatewaySolution from "../container/gateway-solution.astro";
 import Customers from "../container/customers.astro";
 import Sense from "../container/sense.astro";
+import BrandCarousel from "../container/BrandCarousel.astro";
 import { useTranslations } from "@/i18n/utils";
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
@@ -14,5 +15,6 @@ const t = useTranslations(locale);
       <GatewaySolution />
       <Sense />
       <Customers />
+      <BrandCarousel />
     </div>
 </SiteLayout>

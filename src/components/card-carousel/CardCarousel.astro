@@ -14,7 +14,7 @@ interface Props {
 const { items, autoPlayInterval = 3000 } = Astro.props;
 ---
 
-<div class="carousel-wrapper relative w-full overflow-hidden py-10" data-interval={autoPlayInterval}>
+<div class="carousel-wrapper relative w-full overflow-hidden pt-10" data-interval={autoPlayInterval}>
   <div class="carousel-container">
     <div class="carousel-track">
       {items.map((item) => (
@@ -62,7 +62,7 @@ const { items, autoPlayInterval = 3000 } = Astro.props;
     width: 100%;
     /* Fixed height to prevent layout shift when card heights change */
     /* Max card height is 480px + padding 64px (2rem * 2) = 544px */
-    height: 560px;
+    height: 500px;
   }
 
   .carousel-track {
