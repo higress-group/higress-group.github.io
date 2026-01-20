@@ -42,4 +42,10 @@ jobs:
           ./aliyun version
 
       - name: Sync to OSS
-        run: ./aliyun oss cp ./dist oss://higress-ai/ --meta Cache-Control:"max-age=3600" -r -f -e oss-cn-hongkong.aliyuncs.com --access-key-id ${{ secrets.ACCESS_KEYID }} --access-key-secret ${{ secrets.ACCESS_KEYSECRET }} --region cn-hongkong
+        env:
+          ACCESS_KEYID: ${{ secrets.ACCESS_KEYID }}
+          ACCESS_KEYSECRET: ${{ secrets.ACCESS_KEYSECRET }}
+        run: |
+          export PATH="$PWD:$PATH"
+          chmod +x .github/workflows/deploy-oss.sh
+          ./.github/workflows/deploy-oss.sh
