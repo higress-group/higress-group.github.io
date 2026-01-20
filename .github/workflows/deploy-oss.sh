@@ -32,7 +32,8 @@ COMMON_ARGS=(
 # 为 .md 文件设置特殊的 meta 信息，包含 Cache-Control 和 Content-Type
 echo "Uploading .md files with special meta..."
 aliyun oss cp "$SOURCE_DIR" "$BUCKET_URI" \
-  --meta "Cache-Control:max-age=3600,Content-Type:text/markdown; charset=utf-8" \
+  --meta "Cache-Control:max-age=3600" \
+  --meta "Content-Type:text/markdown; charset=utf-8" \
   --include "*.md" \
   "${COMMON_ARGS[@]}"
 
