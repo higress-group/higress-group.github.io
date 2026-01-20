@@ -76,9 +76,11 @@ const cases: CaseCard[] = [
 <section class="px-4 md:px-6 lg:px-10">
   <div class="mb-10 flex flex-col gap-4 items-center justify-center">
       <div class="text-[1.5rem] md:text-[2.5rem] whitespace-pre-line text-center">{t('home.customers.title')}</div>
-      <Button mode="normal" width="10rem" >
-        <a>{t('home.customers.learn_more')}</a>
-      </Button>
+      <a href={localizeUrl("blog/case", locale)}>
+        <Button mode="normal" width="10rem" >
+          {t('home.customers.learn_more')}
+        </Button>
+      </a>
     </div>
   <div class="mx-auto">
     <CardCarousel items={cases} />
