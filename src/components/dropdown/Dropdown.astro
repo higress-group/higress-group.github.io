@@ -31,7 +31,7 @@ const { label, items = [], class: className = "", isActive = false } = Astro.pro
     aria-orientation="vertical"
     tabindex="-1"
   >
-    <div class="p-2" role="none">
+    <div class="p-2 flex flex-col gap-1" role="none">
       {items.map((item) => (
         <a
           href={item.href}
