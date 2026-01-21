@@ -1,29 +1,37 @@
 ---
 import SiteLayout from "../../../layout/siteLayout.astro";
-import { GLOSSARY_TERMS, GLOSSARY_CATEGORIES, getTermById, getRelatedTerms } from "../../../utils/glossaryData";
+import { getGlossaryTerms, getGlossaryCategories, getTermById, getRelatedTerms } from "../../../utils/glossaryData";
+
+const locale = Astro.currentLocale || 'en';
+const GLOSSARY_TERMS = getGlossaryTerms(locale);
+const GLOSSARY_CATEGORIES = getGlossaryCategories(locale);
 
 export function getStaticPaths() {
-  return GLOSSARY_TERMS.map(term => ({
-    params: { term: term.id },
-    props: { term }
-  }));
+  // 为所有语言环境生成路径
+  const locales = ['root', 'en'];
+  const paths: Array<{ params: { term: string }, props: { term: any, locale: string } }> = [];
+  
+  locales.forEach(loc => {
+    const terms = getGlossaryTerms(loc);
+    terms.forEach(term => {
+      paths.push({
+        params: { term: term.id },
+        props: { term, locale: loc }
+      });
+    });
+  });
+  
+  return paths;
 }
 
-const { term } = Astro.props;
+const { term, locale: termLocale } = Astro.props;
+const currentLocale = termLocale || locale;
 const category = GLOSSARY_CATEGORIES.find(c => c.id === term.category);
-const relatedTerms = getRelatedTerms(term.id);
+const relatedTerms = getRelatedTerms(term.id, currentLocale);
 
-// English category names mapping
-const categoryNames: Record<string, string> = {
-  'ai': 'AI / LLM',
-  'gateway': 'Gateway',
-  'cloud-native': 'Cloud Native',
-  'security': 'Security'
-};
-
-const title = `What is ${term.termEn}? - Higress Technical Glossary`;
-const description = `Learn about ${term.termEn} (${term.term}): definition, examples, and how it's used in Higress AI Gateway. ${term.definition.slice(0, 100)}...`;
-const keywords = `${term.termEn},${term.term},what is ${term.termEn},${term.termEn} definition,Higress,AI Gateway`;
+const title = `What is ${term.term}? - Higress Technical Glossary`;
+const description = `Learn about ${term.term} (${term.termEn}): definition, examples, and how it's used in Higress AI Gateway. ${term.definition.slice(0, 100)}...`;
+const keywords = `${term.term},${term.termEn},what is ${term.term},${term.term} definition,Higress,AI Gateway`;
 ---
 
 <SiteLayout title={title} description={description} keywords={keywords}>
@@ -40,7 +48,7 @@ const keywords = `${term.termEn},${term.term},what is ${term.termEn},${term.term
           <svg class="h-4 w-4 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
-          <span class="text-gray-900 font-medium">{term.termEn}</span>
+          <span class="text-gray-900 font-medium">{term.term}</span>
         </nav>
       </div>
     </div>
@@ -56,15 +64,15 @@ const keywords = `${term.termEn},${term.term},what is ${term.termEn},${term.term
               class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition"
             >
               <span class="mr-1">{category.icon}</span>
-              {categoryNames[category.id] || category.nameEn}
+              {category.name}
             </a>
           )}
         </div>
         <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
-          {term.termEn}
+          {term.term}
         </h1>
         <p class="text-xl text-gray-500">
-          {term.term}
+          {term.termEn}
         </p>
       </header>
 
@@ -154,9 +162,9 @@ const keywords = `${term.termEn},${term.term},what is ${term.termEn},${term.term
                 <div class="flex items-center justify-between">
                   <div>
                     <h3 class="font-bold text-gray-900 group-hover:text-primary transition">
-                      {related.termEn}
+                      {related.term}
                     </h3>
-                    <p class="text-sm text-gray-500">{related.term}</p>
+                    <p class="text-sm text-gray-500">{related.termEn}</p>
                   </div>
                   <svg class="h-5 w-5 text-gray-400 group-hover:text-primary group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -177,7 +185,7 @@ const keywords = `${term.termEn},${term.term},what is ${term.termEn},${term.term
         <div class="space-y-4">
           <details class="bg-white rounded-xl border border-gray-200 overflow-hidden group">
             <summary class="px-6 py-4 cursor-pointer flex items-center justify-between hover:bg-gray-50 transition">
-              <span class="font-medium text-gray-900">What is {term.termEn}?</span>
+              <span class="font-medium text-gray-900">What is {term.term}?</span>
               <svg class="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
@@ -189,7 +197,7 @@ const keywords = `${term.termEn},${term.term},what is ${term.termEn},${term.term
 
           <details class="bg-white rounded-xl border border-gray-200 overflow-hidden group">
             <summary class="px-6 py-4 cursor-pointer flex items-center justify-between hover:bg-gray-50 transition">
-              <span class="font-medium text-gray-900">How does Higress support {term.termEn}?</span>
+              <span class="font-medium text-gray-900">How does Higress support {term.term}?</span>
               <svg class="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
@@ -232,7 +240,7 @@ const keywords = `${term.termEn},${term.term},what is ${term.termEn},${term.term
 <script type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
-  "name": term.termEn,
+  "name": term.term,
   "description": term.definition,
   "inDefinedTermSet": {
     "@type": "DefinedTermSet",
@@ -247,7 +255,7 @@ const keywords = `${term.termEn},${term.term},what is ${term.termEn},${term.term
   "mainEntity": [
     {
       "@type": "Question",
-      "name": `What is ${term.termEn}?`,
+      "name": `What is ${term.term}?`,
       "acceptedAnswer": {
         "@type": "Answer",
         "text": term.definition
@@ -255,7 +263,7 @@ const keywords = `${term.termEn},${term.term},what is ${term.termEn},${term.term
     },
     {
       "@type": "Question",
-      "name": `How does Higress support ${term.termEn}?`,
+      "name": `How does Higress support ${term.term}?`,
       "acceptedAnswer": {
         "@type": "Answer",
         "text": term.higressRelation
@@ -283,8 +291,8 @@ const keywords = `${term.termEn},${term.term},what is ${term.termEn},${term.term
     {
       "@type": "ListItem",
       "position": 3,
-      "name": term.termEn,
-      "item": `https://higress.ai/en/glossary/${term.slug}/`
+      "name": term.term,
+      "item": `https://higress.ai/en/glossary/${term.id}/`
     }
   ]
 })} />

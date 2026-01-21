@@ -17,7 +17,7 @@ const homeUrl = isEnglish ? '/en' : '/';
 
 // Determine if we are on the home page
 const isHome = currentPath === '/' || currentPath === '/en' || currentPath === '/en/';
-const isProducts = /himarket|ai-gateway|api-gateway|blog/.test(currentPath);
+const isProducts = /himarket|ai-gateway|api-gateway|blog|glossary/.test(currentPath);
 // Set default to transparent for all pages. Scroll effect only applies to Home.
 const navClass = "bg-transparent";
 

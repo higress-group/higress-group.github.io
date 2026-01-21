@@ -1,6 +1,10 @@
 ---
 import SiteLayout from "../../layout/siteLayout.astro";
-import { GLOSSARY_TERMS, GLOSSARY_CATEGORIES, getTermsByCategory } from "../../utils/glossaryData";
+import { getGlossaryTerms, getGlossaryCategories, getTermsByCategory } from "../../utils/glossaryData";
+
+const locale = Astro.currentLocale || 'root';
+const GLOSSARY_TERMS = getGlossaryTerms(locale);
+const GLOSSARY_CATEGORIES = getGlossaryCategories(locale);
 
 const title = "Higress 技术词汇表 - AI 网关与云原生术语大全";
 const description = "全面的 AI 网关、API 网关、云原生技术词汇表。了解 Token、LLM、MCP、Kubernetes、Ingress 等核心概念的定义和在 Higress 中的应用。";
@@ -18,29 +22,52 @@ const keywords = "技术词汇表,AI术语,网关术语,云原生术语,Token,LL
         <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
           深入理解 AI 网关、API 网关和云原生领域的核心概念。每个术语都包含清晰的定义、实际示例以及在 Higress 中的应用场景。
         </p>
-        <div class="mt-8 flex justify-center gap-4 flex-wrap">
-          <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm">
-            共 <strong class="text-primary">{GLOSSARY_TERMS.length}</strong> 个术语
-          </span>
-          <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm">
-            覆盖 <strong class="text-primary">{GLOSSARY_CATEGORIES.length}</strong> 大领域
-          </span>
+
+        <!-- Search Bar -->
+        <div class="mt-10 max-w-2xl mx-auto relative group">
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center justify-center pointer-events-none z-10 w-14">
+              <svg class="h-5 w-5 text-primary transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <input
+              type="text"
+              id="glossary-search"
+              placeholder="搜索术语 (例如: Token, Wasm, 限流...)"
+              class="block w-full pl-14 pr-4 py-4 border-2 border-primary rounded-2xl leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-primary transition-all text-lg shadow-sm group-hover:shadow-md"
+            />
+          </div>
+          <div class="mt-4 flex justify-center gap-4 flex-wrap">
+            <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm border border-gray-100">
+              共 <strong class="text-primary">{GLOSSARY_TERMS.length}</strong> 个术语
+            </span>
+            <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm border border-gray-100">
+              覆盖 <strong class="text-primary">{GLOSSARY_CATEGORIES.length}</strong> 大领域
+            </span>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Category Navigation -->
-    <div class="sticky top-16 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200 py-4">
+    <div class="sticky top-16 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200 py-4 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+        <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide items-center">
+          <button
+            data-category-filter="all"
+            class="category-btn flex-shrink-0 px-5 py-2 rounded-full bg-primary text-white text-sm font-medium transition-all shadow-sm"
+          >
+            全部
+          </button>
           {GLOSSARY_CATEGORIES.map(category => (
-            <a
-              href={`#${category.id}`}
-              class="flex-shrink-0 px-4 py-2 rounded-full bg-gray-100 hover:bg-primary/10 hover:text-primary text-gray-700 text-sm font-medium transition-colors"
+            <button
+              data-category-filter={category.id}
+              class="category-btn flex-shrink-0 px-5 py-2 rounded-full bg-gray-100 hover:bg-primary/10 hover:text-primary text-gray-700 text-sm font-medium transition-all"
             >
-              <span class="mr-1">{category.icon}</span>
+              <span class="mr-1.5">{category.icon}</span>
               {category.name}
-            </a>
+            </button>
           ))}
         </div>
       </div>
@@ -48,10 +75,20 @@ const keywords = "技术词汇表,AI术语,网关术语,云原生术语,Token,LL
 
     <!-- Terms by Category -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div id="no-results" class="hidden text-center py-20">
+        <div class="text-6xl mb-4">🔍</div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">未找到匹配术语</h3>
+        <p class="text-gray-500">换个关键词试试？或者在上方选择其他分类</p>
+      </div>
+
       {GLOSSARY_CATEGORIES.map(category => {
-        const terms = getTermsByCategory(category.id);
+        const terms = getTermsByCategory(category.id, locale);
         return (
-          <section id={category.id} class="mb-20 scroll-mt-36">
+          <section
+            id={category.id}
+            data-category-section={category.id}
+            class="mb-20 scroll-mt-36 transition-opacity duration-300"
+          >
             <div class="flex items-center gap-4 mb-8">
               <span class="text-4xl">{category.icon}</span>
               <div>
@@ -64,7 +101,11 @@ const keywords = "技术词汇表,AI术语,网关术语,云原生术语,Token,LL
               {terms.map(term => (
                 <a
                   href={`/glossary/${term.id}/`}
-                  class="group bg-white rounded-xl border border-gray-200 p-6 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                  data-term-card
+                  data-term-title={term.term.toLowerCase()}
+                  data-term-en={term.termEn.toLowerCase()}
+                  data-term-definition={term.definition.toLowerCase()}
+                  class="group bg-white rounded-xl border border-gray-200 p-6 hover:border-primary/30 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
                 >
                   <div class="flex items-start justify-between mb-3">
                     <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
@@ -74,15 +115,15 @@ const keywords = "技术词汇表,AI术语,网关术语,云原生术语,Token,LL
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
-                  <p class="text-sm text-gray-500 mb-3">{term.termEn}</p>
-                  <p class="text-gray-600 text-sm line-clamp-3">
+                  <p class="text-sm text-gray-400 mb-3 font-medium uppercase tracking-wider">{term.termEn}</p>
+                  <p class="text-gray-600 text-sm line-clamp-3 leading-relaxed">
                     {term.definition}
                   </p>
                   {term.relatedTerms && term.relatedTerms.length > 0 && (
-                    <div class="mt-4 flex flex-wrap gap-2">
+                    <div class="mt-4 pt-4 border-t border-gray-50 flex flex-wrap gap-2">
                       {term.relatedTerms.slice(0, 3).map(relatedId => (
-                        <span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md">
-                          {relatedId}
+                        <span class="px-2 py-1 bg-gray-50 text-gray-400 text-xs rounded-md group-hover:bg-primary/5 group-hover:text-primary/70 transition-colors">
+                          #{relatedId}
                         </span>
                       ))}
                     </div>
@@ -107,14 +148,14 @@ const keywords = "技术词汇表,AI术语,网关术语,云原生术语,Token,LL
         <div class="flex justify-center gap-4 flex-wrap">
           <a
             href="/docs/overview/what-is-higress/"
-            class="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition"
+            class="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition shadow-md hover:shadow-lg"
           >
             查看文档
           </a>
           <a
             href="https://github.com/alibaba/higress"
             target="_blank"
-            class="px-8 py-3 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:border-primary hover:text-primary transition"
+            class="px-8 py-3 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:border-primary hover:text-primary transition shadow-sm hover:shadow-md"
           >
             GitHub
           </a>
@@ -123,6 +164,80 @@ const keywords = "技术词汇表,AI术语,网关术语,云原生术语,Token,LL
     </div>
   </div>
 </SiteLayout>
+
+<script>
+  const searchInput = document.getElementById('glossary-search') as HTMLInputElement;
+  const categoryBtns = document.querySelectorAll('.category-btn');
+  const sections = document.querySelectorAll('[data-category-section]');
+  const cards = document.querySelectorAll('[data-term-card]');
+  const noResults = document.getElementById('no-results');
+
+  let currentCategory = 'all';
+  let currentSearch = '';
+
+  function filterTerms() {
+    let hasVisibleTerms = false;
+
+    sections.forEach(section => {
+      const categoryId = section.getAttribute('data-category-section');
+      const sectionCards = section.querySelectorAll('[data-term-card]');
+      let visibleInContent = false;
+
+      sectionCards.forEach(card => {
+        const title = card.getAttribute('data-term-title') || '';
+        const en = card.getAttribute('data-term-en') || '';
+        const definition = card.getAttribute('data-term-definition') || '';
+
+        const matchesSearch = !currentSearch ||
+          title.includes(currentSearch) ||
+          en.includes(currentSearch) ||
+          definition.includes(currentSearch);
+
+        const matchesCategory = currentCategory === 'all' || categoryId === currentCategory;
+
+        if (matchesSearch && matchesCategory) {
+          (card as HTMLElement).style.display = 'block';
+          visibleInContent = true;
+          hasVisibleTerms = true;
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+
+      if (visibleInContent) {
+        (section as HTMLElement).style.display = 'block';
+      } else {
+        (section as HTMLElement).style.display = 'none';
+      }
+    });
+
+    if (noResults) {
+      noResults.classList.toggle('hidden', hasVisibleTerms);
+    }
+  }
+
+  searchInput?.addEventListener('input', (e) => {
+    currentSearch = (e.target as HTMLInputElement).value.toLowerCase();
+    filterTerms();
+  });
+
+  categoryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const categoryId = btn.getAttribute('data-category-filter') || 'all';
+
+      // Update UI
+      categoryBtns.forEach(b => {
+        b.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+        b.classList.add('bg-gray-100', 'text-gray-700');
+      });
+      btn.classList.add('bg-primary', 'text-white', 'shadow-sm');
+      btn.classList.remove('bg-gray-100', 'text-gray-700');
+
+      currentCategory = categoryId;
+      filterTerms();
+    });
+  });
+</script>
 
 <style>
   .scrollbar-hide::-webkit-scrollbar {

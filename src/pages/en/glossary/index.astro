@@ -1,18 +1,14 @@
 ---
 import SiteLayout from "../../../layout/siteLayout.astro";
-import { GLOSSARY_TERMS, GLOSSARY_CATEGORIES, getTermsByCategory } from "../../../utils/glossaryData";
+import { getGlossaryTerms, getGlossaryCategories, getTermsByCategory } from "../../../utils/glossaryData";
+
+const locale = Astro.currentLocale || 'en';
+const GLOSSARY_TERMS = getGlossaryTerms(locale);
+const GLOSSARY_CATEGORIES = getGlossaryCategories(locale);
 
 const title = "Higress Technical Glossary - AI Gateway & Cloud Native Terms";
 const description = "Comprehensive glossary for AI Gateway, API Gateway, and cloud-native technologies. Learn the definitions and Higress applications of Token, LLM, MCP, Kubernetes, Ingress, and more.";
 const keywords = "technical glossary,AI terms,gateway terms,cloud native terms,Token,LLM,MCP,API Gateway,Kubernetes,Higress";
-
-// English category names mapping
-const categoryNames: Record<string, { name: string; description: string }> = {
-  'ai': { name: 'AI / LLM', description: 'Core concepts in artificial intelligence and large language models' },
-  'gateway': { name: 'Gateway', description: 'API gateway and traffic management terminology' },
-  'cloud-native': { name: 'Cloud Native', description: 'Kubernetes, containers, and microservices concepts' },
-  'security': { name: 'Security', description: 'Authentication, authorization, and security protection terms' }
-};
 ---
 
 <SiteLayout title={title} description={description} keywords={keywords}>
@@ -41,13 +37,19 @@ const categoryNames: Record<string, { name: string; description: string }> = {
     <div class="sticky top-16 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200 py-4">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+          <a
+            href="#all"
+            class="flex-shrink-0 px-4 py-2 rounded-full bg-primary text-white text-sm font-medium transition-colors"
+          >
+            All
+          </a>
           {GLOSSARY_CATEGORIES.map(category => (
             <a
               href={`#${category.id}`}
               class="flex-shrink-0 px-4 py-2 rounded-full bg-gray-100 hover:bg-primary/10 hover:text-primary text-gray-700 text-sm font-medium transition-colors"
             >
               <span class="mr-1">{category.icon}</span>
-              {categoryNames[category.id]?.name || category.nameEn}
+              {category.name}
             </a>
           ))}
         </div>
@@ -57,15 +59,14 @@ const categoryNames: Record<string, { name: string; description: string }> = {
     <!-- Terms by Category -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       {GLOSSARY_CATEGORIES.map(category => {
-        const terms = getTermsByCategory(category.id);
-        const catInfo = categoryNames[category.id];
+        const terms = getTermsByCategory(category.id, locale);
         return (
           <section id={category.id} class="mb-20 scroll-mt-36">
             <div class="flex items-center gap-4 mb-8">
               <span class="text-4xl">{category.icon}</span>
               <div>
-                <h2 class="text-3xl font-bold text-gray-900">{catInfo?.name || category.nameEn}</h2>
-                <p class="text-gray-600 mt-1">{catInfo?.description || category.description}</p>
+                <h2 class="text-3xl font-bold text-gray-900">{category.name}</h2>
+                <p class="text-gray-600 mt-1">{category.description}</p>
               </div>
             </div>
 
@@ -77,13 +78,13 @@ const categoryNames: Record<string, { name: string; description: string }> = {
                 >
                   <div class="flex items-start justify-between mb-3">
                     <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
-                      {term.termEn}
+                      {term.term}
                     </h3>
                     <svg class="h-5 w-5 text-gray-400 group-hover:text-primary group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
-                  <p class="text-sm text-gray-500 mb-3">{term.term}</p>
+                  <p class="text-sm text-gray-500 mb-3">{term.termEn}</p>
                   <p class="text-gray-600 text-sm line-clamp-3">
                     {term.definition}
                   </p>

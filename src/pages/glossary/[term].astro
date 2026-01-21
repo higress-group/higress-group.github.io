@@ -1,17 +1,33 @@
 ---
 import SiteLayout from "../../layout/siteLayout.astro";
-import { GLOSSARY_TERMS, GLOSSARY_CATEGORIES, getTermById, getRelatedTerms } from "../../utils/glossaryData";
+import { getGlossaryTerms, getGlossaryCategories, getTermById, getRelatedTerms } from "../../utils/glossaryData";
+
+const locale = Astro.currentLocale || 'root';
+const GLOSSARY_TERMS = getGlossaryTerms(locale);
+const GLOSSARY_CATEGORIES = getGlossaryCategories(locale);
 
 export function getStaticPaths() {
-  return GLOSSARY_TERMS.map(term => ({
-    params: { term: term.id },
-    props: { term }
-  }));
+  // 为所有语言环境生成路径
+  const locales = ['root', 'en'];
+  const paths: Array<{ params: { term: string }, props: { term: any, locale: string } }> = [];
+  
+  locales.forEach(loc => {
+    const terms = getGlossaryTerms(loc);
+    terms.forEach(term => {
+      paths.push({
+        params: { term: term.id },
+        props: { term, locale: loc }
+      });
+    });
+  });
+  
+  return paths;
 }
 
-const { term } = Astro.props;
+const { term, locale: termLocale } = Astro.props;
+const currentLocale = termLocale || locale;
 const category = GLOSSARY_CATEGORIES.find(c => c.id === term.category);
-const relatedTerms = getRelatedTerms(term.id);
+const relatedTerms = getRelatedTerms(term.id, currentLocale);
 
 const title = `${term.term} 是什么？- Higress 技术词汇表`;
 const description = `${term.term}（${term.termEn}）的定义、示例和在 Higress AI 网关中的应用。${term.definition.slice(0, 100)}...`;
@@ -276,7 +292,7 @@ const keywords = `${term.term},${term.termEn},${term.term}是什么,${term.term}
       "@type": "ListItem",
       "position": 3,
       "name": term.term,
-      "item": `https://higress.ai/glossary/${term.slug}/`
+      "item": `https://higress.ai/glossary/${term.id}/`
     }
   ]
 })} />
