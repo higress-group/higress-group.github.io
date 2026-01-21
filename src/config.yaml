@@ -24,13 +24,13 @@ analytics:
 metadata:
   title:
     default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    template: '%s — Higress'
+  description: "Higress - AI Native API 网关，为 AI 应用提供统一的流量管理、安全防护和服务治理能力"
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: Higress
     images:
       - url: '~/assets/images/default.png'
         width: 1200

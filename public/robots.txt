@@ -1,4 +1,3 @@
 User-Agent: *
 Allow: /
-Disallow: /en/blog/
 Sitemap: https://higress.ai/sitemap-index.xml

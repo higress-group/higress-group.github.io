@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import tailwindcss from "@tailwindcss/vite";
+import sitemap from "@astrojs/sitemap";
 import { loadSidebarConfig } from "./src/utils/sidebarLoader";
 import { sidebarCategory } from "./src/utils/sign";
 import fs from 'node:fs/promises';
@@ -50,10 +51,20 @@ const copyMarkdownIntegration = () => ({
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://higress.ai",
   devToolbar: {
     enabled: false,
   },
   integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'zh-CN',
+        locales: {
+          'zh-CN': 'zh-CN',
+          'en': 'en',
+        },
+      },
+    }),
     copyMarkdownIntegration(),
     starlight({
       title: "Higress",

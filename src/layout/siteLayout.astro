@@ -17,9 +17,30 @@ interface Props {
 }
 
 const { title, description, keywords, align = "home", channel = "" } = Astro.props;
+
+// SEO: 构建规范 URL
+const siteUrl = "https://higress.ai";
+const currentPath = Astro.url.pathname;
+const canonicalUrl = new URL(currentPath, siteUrl).href;
+
+// SEO: 构建 hreflang 替代链接
+const isEnglish = currentPath.startsWith('/en/');
+const zhPath = isEnglish ? currentPath.replace(/^\/en/, '') || '/' : currentPath;
+const enPath = isEnglish ? currentPath : `/en${currentPath === '/' ? '' : currentPath}`;
+const zhUrl = new URL(zhPath, siteUrl).href;
+const enUrl = new URL(enPath, siteUrl).href;
+
+// SEO: 语言设置
+const currentLang = isEnglish ? 'en' : 'zh-CN';
+const ogLocale = isEnglish ? 'en_US' : 'zh_CN';
+
+// SEO: 默认描述
+const defaultDescription = t("home.description");
+const metaDescription = description || defaultDescription;
+
 const headEntry = {
   data: {
-    description: description,
+    description: metaDescription,
     keywords: keywords || t("commmon.base.layout.keywords"),
     title: `${title}${channel? "_":""}${channel}`,
     head: [],
@@ -28,16 +49,41 @@ const headEntry = {
 
 ---
 <!DOCTYPE html>
-<html  data-theme="light" lang={Astro.props.lang || "zh-CN"}>
+<html data-theme="light" lang={Astro.props.lang || currentLang}>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{title}</title>
-    <meta name="description" content={description || t("commmon.base.layout.keywords")} />
+    <meta name="description" content={metaDescription} />
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="index, follow" />
     <meta name="applicable-device" content="pc,mobile" />
+    
+    <!-- SEO: Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- SEO: Hreflang for multilingual -->
+    <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={zhUrl} />
+    
+    <!-- SEO: Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:site_name" content="Higress" />
     <meta property="og:image" content="https://img.alicdn.com/imgextra/i1/O1CN01Q9UWyF23bY1R0U0KE_!!6000000007274-2-tps-2560-1440.png" />
+    <meta property="og:image:width" content="2560" />
+    <meta property="og:image:height" content="1440" />
+    
+    <!-- SEO: Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content="https://img.alicdn.com/imgextra/i1/O1CN01Q9UWyF23bY1R0U0KE_!!6000000007274-2-tps-2560-1440.png" />
+    
     <link rel="preconnect" href="https://img.alicdn.com" />
     <link rel="preconnect" href="https://framerusercontent.com" />
     <link
