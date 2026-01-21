@@ -15,7 +15,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 直接配置即可，但需要确保目标 URL 可以被 Gateway 容器访问到。可以尝试在容器内 curl 验证。
 
-![http](/img/docs/ops/how-tos/load-wasm-with-http/http.png)
+![http](https://img.alicdn.com/imgextra/i3/O1CN01ZGJ5r625dV1Ggd0h7_!!6000000007549-2-tps-947-525.png)
 
 ## HTTPS 协议
 

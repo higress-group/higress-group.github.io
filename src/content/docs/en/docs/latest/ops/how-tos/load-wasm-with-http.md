@@ -15,7 +15,7 @@ For convenience, it is recommended that the target URL points directly to the Wa
 
 Simply configure the URL directly. However, ensure that the target URL is accessible from within the Gateway container. You can verify this by using the `curl` command inside the container.
 
-![http](/img/docs/ops/how-tos/load-wasm-with-http/http.png)
+![http](https://img.alicdn.com/imgextra/i3/O1CN01ZGJ5r625dV1Ggd0h7_!!6000000007549-2-tps-947-525.png)
 
 ## HTTPS Protocol
 
