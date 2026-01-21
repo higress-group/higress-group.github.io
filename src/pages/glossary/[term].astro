@@ -256,6 +256,31 @@ const keywords = `${term.term},${term.termEn},${term.term}是什么,${term.term}
   ]
 })} />
 
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://higress.ai/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "术语表",
+      "item": "https://higress.ai/glossary/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": term.term,
+      "item": `https://higress.ai/glossary/${term.slug}/`
+    }
+  ]
+})} />
+
 <script>
   document.querySelectorAll('.copy-btn').forEach(btn => {
     btn.addEventListener('click', async () => {

@@ -6,3 +6,43 @@ import AI from "../../container/products/AI.astro";
 <SiteLayout title={"Higress - AI 网关"}>
   <AI />
 </SiteLayout>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Higress AI Gateway",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "description": "Higress AI Gateway supports multiple AI model integrations, provides unified OpenAI protocol calls, and offers AI traffic routing, load balancing, caching, and token rate limiting capabilities",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Higress",
+    "url": "https://higress.ai/en"
+  },
+  "url": "https://higress.ai/en/ai-gateway"
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://higress.ai/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "AI Gateway",
+      "item": "https://higress.ai/en/ai-gateway"
+    }
+  ]
+})} />

@@ -6,3 +6,43 @@ import Api from "../../container/products/Api.astro";
 <SiteLayout title={"Higress - 云原生 API 网关"}>
   <Api />
 </SiteLayout>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Higress API Gateway",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "description": "Higress API Gateway provides all-in-one capabilities of traffic gateway + microservice gateway + security gateway, supporting Kubernetes Ingress, microservice routing, and security protection",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Higress",
+    "url": "https://higress.ai/en"
+  },
+  "url": "https://higress.ai/en/api-gateway"
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://higress.ai/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "API Gateway",
+      "item": "https://higress.ai/en/api-gateway"
+    }
+  ]
+})} />

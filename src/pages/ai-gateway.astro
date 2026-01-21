@@ -5,3 +5,43 @@ import AI from "../container/products/AI.astro";
 <SiteLayout title={"Higress - AI 网关"}>
   <AI />
 </SiteLayout>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Higress AI 网关",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "description": "Higress AI 网关支持多种 AI 模型接入，提供统一的 OpenAI 协议调用方式，支持 AI 流量路由、负载均衡、缓存、Token 限流等能力",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Higress",
+    "url": "https://higress.ai"
+  },
+  "url": "https://higress.ai/ai-gateway"
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://higress.ai/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "AI 网关",
+      "item": "https://higress.ai/ai-gateway"
+    }
+  ]
+})} />

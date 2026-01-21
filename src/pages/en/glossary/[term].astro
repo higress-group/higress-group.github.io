@@ -264,6 +264,31 @@ const keywords = `${term.termEn},${term.term},what is ${term.termEn},${term.term
   ]
 })} />
 
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://higress.ai/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Glossary",
+      "item": "https://higress.ai/en/glossary/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": term.termEn,
+      "item": `https://higress.ai/en/glossary/${term.slug}/`
+    }
+  ]
+})} />
+
 <script>
   document.querySelectorAll('.copy-btn').forEach(btn => {
     btn.addEventListener('click', async () => {

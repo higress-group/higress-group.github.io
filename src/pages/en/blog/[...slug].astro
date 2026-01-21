@@ -134,6 +134,61 @@ const author = post.data.author || post.data.authors;
   </div>
 </SiteLayout>
 
+<!-- Structured Data for SEO -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "description": description,
+  "image": post.data.image || "https://img.alicdn.com/imgextra/i1/O1CN01RkqfpB25G8opRrGqF_!!6000000007498-2-tps-700-648.png",
+  "datePublished": post.data.date ? new Date(post.data.date).toISOString() : undefined,
+  "dateModified": post.data.date ? new Date(post.data.date).toISOString() : undefined,
+  "author": {
+    "@type": "Person",
+    "name": author || "Higress Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Higress",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://img.alicdn.com/imgextra/i1/O1CN01RkqfpB25G8opRrGqF_!!6000000007498-2-tps-700-648.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://higress.ai/en/blog/${post.slug}/`
+  },
+  "keywords": keywords.join(", "),
+  "articleSection": post.data.category,
+  "inLanguage": "en-US"
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://higress.ai/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://higress.ai/en/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": post.data.title,
+      "item": `https://higress.ai/en/blog/${post.slug}/`
+    }
+  ]
+})} />
+
 <style>
   .blog-detail-container {
     min-height: 100vh;

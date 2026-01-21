@@ -18,3 +18,37 @@ const t = useTranslations(locale);
       <BrandCarousel />
     </div>
 </SiteLayout>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Higress",
+  "url": "https://higress.ai",
+  "logo": "https://img.alicdn.com/imgextra/i1/O1CN01RkqfpB25G8opRrGqF_!!6000000007498-2-tps-700-648.png",
+  "description": "开源云原生 API 网关，提供流量网关 + 微服务网关 + 安全网关三合一的产品能力",
+  "sameAs": [
+    "https://github.com/alibaba/higress"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "technical support",
+    "url": "https://higress.ai"
+  }
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Higress",
+  "url": "https://higress.ai",
+  "description": "开源云原生 API 网关",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://higress.ai/search?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+})} />
