@@ -679,6 +679,21 @@ export default {
     'glossary.copy_code': 'Copy Code',
     'glossary.copied': 'Copied!',
 
+    // Role Selector (Onboarding)
+    'home.role.selector.title': 'Who are you?',
+    'home.role.selector.developer': 'Developer',
+    'home.role.selector.developer.desc': 'Quick Start',
+    'home.role.selector.decision_maker': 'Decision Maker',
+    'home.role.selector.decision_maker.desc': 'Learn Solutions',
+
+    // Scroll Progress
+    'scroll.back_to_top': 'Back to Top',
+
+    // Scene Preview
+    'home.sense.read_time': 'Read time',
+    'home.sense.minutes': 'min',
+    'home.sense.try_now': 'Try Now',
+
     // Glossary Categories
     'glossary.category.ai': 'AI / LLM',
     'glossary.category.ai.description': 'Core concepts in artificial intelligence and large language models',

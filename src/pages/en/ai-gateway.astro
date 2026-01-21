@@ -2,8 +2,14 @@
 ---
 import SiteLayout from "../../layout/siteLayout.astro";
 import AI from "../../container/products/AI.astro";
+import { useTranslations } from "@/i18n/utils";
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 ---
-<SiteLayout title={"Higress - AI 网关"}>
+<SiteLayout 
+  title={t("page.header.ai.gateway")} 
+  description={t("ai.product.intro.desc")}
+>
   <AI />
 </SiteLayout>
 

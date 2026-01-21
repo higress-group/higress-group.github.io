@@ -10,44 +10,64 @@ const sense = [
     link: localizeUrl("/ai/scene-guide/multi-proxy", locale),
     desc: t('home.sense.item.multi_model.desc'),
     img: "https://img.alicdn.com/imgextra/i1/O1CN01Uxoq401e7RfpOjX2N_!!6000000003824-55-tps-132-132.svg",
+    readTime: 5,
   },
   {
     label: t('home.sense.item.app_protection.label'),
     link: localizeUrl("/ai/scene-guide/application-safety", locale),
     desc: t('home.sense.item.app_protection.desc'),
     img: locale === "en" ? "https://img.alicdn.com/imgextra/i1/O1CN01xk7hmV1WDNsoWi4BT_!!6000000002754-55-tps-250-157.svg" : "https://img.alicdn.com/imgextra/i2/O1CN01vmks7I1EDEfejjhPw_!!6000000000317-55-tps-250-157.svg",
+    readTime: 8,
   },
   {
     label: t('home.sense.item.ai_cache.label'),
     link: localizeUrl("/ai/scene-guide/semantic-cache", locale),
     desc: t('home.sense.item.ai_cache.desc'),
     img: locale === "en" ? "https://img.alicdn.com/imgextra/i4/O1CN014UPFgI1hCQphZLXiB_!!6000000004241-55-tps-206-164.svg" : "https://img.alicdn.com/imgextra/i3/O1CN01j6yIWV26MqEGBpY5F_!!6000000007648-55-tps-206-164.svg",
+    readTime: 6,
   },
   {
     label: t('home.sense.item.token_management.label'),
     link: localizeUrl("/ai/scene-guide/token-management", locale),
     desc: t('home.sense.item.token_management.desc'),
     img: locale === "en" ? "https://img.alicdn.com/imgextra/i3/O1CN01aU0Wqp1qm08Mzdb3W_!!6000000005537-55-tps-256-155.svg" : "https://img.alicdn.com/imgextra/i3/O1CN01BOjI971Uh2IFz9NiT_!!6000000002548-55-tps-256-155.svg",
+    readTime: 7,
   },
 ]
 ---
 <section class="px-4 md:px-6 lg:px-10">
   <div class="mb-10 flex flex-col items-center justify-center">
-    <div class="text-[1.5rem] md:text-[2.5rem]">{t('home.sense.title')}</div>
+    <h2 class="text-[1.5rem] md:text-[2.5rem]">{t('home.sense.title')}</h2>
     <p class="text-gray-11 mb-0">{t('home.sense.description')}</p>
   </div>
   <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
     {
       sense.map(s => {
         return (
-        <div class="card flex flex-col gap-3">
-          <div class="card-header rounded-lg">
+        <div class="card flex flex-col gap-3 group/card">
+          <div class="card-header rounded-lg relative overflow-hidden">
             <div class="flex justify-center items-center w-full h-full">
               <img src={s.img} loading="lazy" decoding="async" alt={s.label}>
             </div>
+            <!-- Hover Preview Overlay -->
+            <div class="preview-overlay">
+              <div class="preview-content">
+                <div class="preview-meta">
+                  <span class="preview-time">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    {t('home.sense.read_time')}: {s.readTime} {t('home.sense.minutes')}
+                  </span>
+                </div>
+                <p class="preview-desc">{s.desc}</p>
+                <a href={s.link} target="_blank" class="preview-btn">
+                  {t('home.sense.try_now')}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
           </div>
           <div class="flex flex-col gap-3">
-            <div class="text-black text-lg">{s.label}</div>
+            <div class="text-black dark:text-white text-lg">{s.label}</div>
             <a href={s.link} target="_blank" class="detail-link text-primary text-xs inline-flex items-center gap-1">
               <span>{t('home.sense.detail.link')}</span>
               <svg class="detail-arrow fill-primary" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="8" height="8" viewBox="0 0 12 12">
@@ -56,7 +76,7 @@ const sense = [
                 </g>
               </svg>
             </a>
-            <div class="text-black text-sm leading-9">
+            <div class="text-black dark:text-gray-300 text-sm leading-9 line-clamp-3">
               {s.desc}
             </div>
           </div>
@@ -75,6 +95,81 @@ const sense = [
     background-size: cover;
     height: 200px;
   }
+}
+
+/* Preview Overlay Styles */
+.preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(62, 92, 244, 0.95) 0%, rgba(109, 91, 255, 0.95) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.group\/card:hover .preview-overlay {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.preview-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: white;
+  text-align: center;
+}
+
+.preview-meta {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.preview-time {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.preview-desc {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  opacity: 0.95;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
+.preview-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: white;
+  color: #3E5CF4;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-top: 0.25rem;
+}
+
+.preview-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .detail-link {

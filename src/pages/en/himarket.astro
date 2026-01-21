@@ -2,7 +2,13 @@
 ---
 import SiteLayout from "../../layout/siteLayout.astro";
 import HiMarket from "../../container/products/HiMarket.astro";
+import { useTranslations } from "@/i18n/utils";
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 ---
-<SiteLayout title={"Higress - HiMarket"}>
+<SiteLayout 
+  title={"HiMarket"} 
+  description={t("himarket.product.intro.desc")}
+>
   <HiMarket />
 </SiteLayout>

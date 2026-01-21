@@ -1,5 +1,6 @@
 ---
 import Button from "../components/button/Button.astro";
+import RoleSelector from "../components/role-selector/RoleSelector.astro";
 import { LINKS } from "@/constant";
 import { localizeUrl, useTranslations } from "@/i18n/utils";
 
@@ -34,8 +35,8 @@ const newsItems = [
   <!-- Background Image -->
   <div class="absolute inset-0 -z-10">
     <img
-      src="https://framerusercontent.com/images/E72tZ6DajfVmRcxxxJBo4gnDY.png?width=2880&height=1640"
-      alt="Hero Background"
+      src="https://img.alicdn.com/imgextra/i1/O1CN01GIUu8a1vfej8tGXKD_!!6000000006200-2-tps-2880-1640.png"
+      alt="Higress AI Gateway Background"
       class="h-full w-full object-cover object-top"
       fetchpriority="high"
       decoding="async"
@@ -56,11 +57,12 @@ const newsItems = [
           </span>
         </span>
       </h1>
+      <h2 class="sr-only">Production-grade AI Gateway</h2>
       <p class="text-left font-light text-lg lg:text-xl text-black dark:text-gray-300 mb-10 max-w-3xl leading-relaxed">
         {t('home.hero.description.line1')} <br class="hidden md:block" />
         {t('home.hero.description.line2')}
       </p>
-      <div class="flex flex-row gap-4 mb-20">
+      <div class="flex flex-row gap-4 mb-10">
         <Button
           class="relative" mode="primary" width="160px"
           href={LINKS.higressConsole} target="_blank"
@@ -74,6 +76,9 @@ const newsItems = [
           {t('home.hero.button.learn')}
         </Button>
       </div>
+
+      <!-- Role Selector for Onboarding Segmentation -->
+      <RoleSelector class="mb-16" />
     </div>
 
     <!-- Bottom Section (News) -->

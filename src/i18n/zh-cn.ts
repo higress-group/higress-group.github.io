@@ -686,6 +686,21 @@ export default {
     'glossary.copy_code': '复制代码',
     'glossary.copied': '已复制!',
 
+    // Role Selector (Onboarding)
+    'home.role.selector.title': '您是?',
+    'home.role.selector.developer': '开发者',
+    'home.role.selector.developer.desc': '想快速体验',
+    'home.role.selector.decision_maker': '决策者',
+    'home.role.selector.decision_maker.desc': '想了解方案',
+
+    // Scroll Progress
+    'scroll.back_to_top': '返回顶部',
+
+    // Scene Preview
+    'home.sense.read_time': '阅读时长',
+    'home.sense.minutes': '分钟',
+    'home.sense.try_now': '立即体验',
+
     // Glossary Categories
     'glossary.category.ai': 'AI / 大模型',
     'glossary.category.ai.description': '人工智能和大语言模型相关的核心概念',
