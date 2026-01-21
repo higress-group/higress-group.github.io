@@ -96,7 +96,7 @@ HIGRESS_ADMIN_WASM_PLUGIN_CUSTOM_IMAGE_URL_PATTERN=oci://hub.example.com/wasm-pl
 
 以上配置不会影响已经保存的插件配置。如果需要修改这些插件配置中的镜像地址，可以在 Higress Console 的插件配置页面进行针对性修改。
 
-![Edit a built-in plugin](/img/docs/ops/how-tos/builtin-plugin-url/edit-builtin-plugin-zh.png)
+![Edit a built-in plugin](https://img.alicdn.com/imgextra/i3/O1CN01LoGtz41RrACmUI1Mj_!!6000000002164-2-tps-427-223.png)
 
 ## 对接 Nacos 3.x 所生成的 MCP Server 插件地址配置
 
