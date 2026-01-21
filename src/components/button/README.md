@@ -14,17 +14,24 @@ import Button from '../button/Button.astro';
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `mode` | `'primary' \| 'normal' \| 'black' \| 'light'` | `'primary'` | Visual style of the button. `primary` uses the brand gradient; `normal` is white with black text; `black` uses the brand black color; `light` uses a light blue background. |
+| `mode` | `'primary' \| 'normal' \| 'black' \| 'light' \| 'gray' \| 'outline'` | `'primary'` | Visual style of the button. `primary` uses the brand gradient; `normal` is white with black text; `black` uses the brand black color; `light` uses a light blue background; `gray` uses a gray background; `outline` has a transparent background with a primary color border. |
 | `width` | `string` | `undefined` | Custom width for the button (e.g., `'200px'`, `'100%'`). |
-| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | The HTML `type` attribute for the button element. |
+| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | The HTML `type` attribute for the button element (ignored if `href` is present). |
+| `href` | `string` | `undefined` | If provided, the component renders as an `<a>` tag acting as a link. |
+| `target` | `string` | `undefined` | The HTML `target` attribute for the link (only used if `href` is present). |
 | `class` | `string` | `''` | Additional CSS classes to apply to the wrapper. |
-| `...` | `any` | - | Any other attributes (e.g., `onclick`, `disabled`) are passed to the inner `<button>` element. |
+| `...` | `any` | - | Any other attributes (e.g., `onclick`, `disabled`) are passed to the inner element. |
 
 ### Examples
 
 **Primary Button (Default)**
 ```astro
 <Button>Get Started</Button>
+```
+
+**Link Button**
+```astro
+<Button href="https://example.com" target="_blank">Visit Website</Button>
 ```
 
 **Normal Button**
@@ -59,7 +66,8 @@ The component is built using a lightweight Web Component wrapper `<higress-butto
 
 ### Key Logic
 - **Mode Handling**: The `mode` prop is reflected as a `data-mode` attribute on the custom element wrapper. CSS selectors target `higress-button[data-mode="..."]` to apply specific color schemes.
-- **Sizing**: The `width` prop maps directly to an inline `style="width: ..."` on the inner button element to allow precise control without overriding classes.
+- **Sizing**: The `width` prop maps directly to an inline `style="width: ..."` on the inner button/link element to allow precise control without overriding classes.
+- **Tag Selection**: If the `href` prop is provided, the component renders an `<a>` tag; otherwise, it renders a `<button>` tag.
 
 ### Theming
 - **Primary Gradient**: Uses the global CSS variable `--higress-primary-gradient` defined in `src/styles/global.css`.
@@ -68,9 +76,12 @@ The component is built using a lightweight Web Component wrapper `<higress-butto
     - Normal background: Fixed `#ffffff` with `#000000` text.
     - Black background: Uses `--color-black` with `#ffffff` text.
     - Light background: Uses `--color-blue-02` with `--color-black` text.
+    - Gray background: Uses `--color-gray-01` with `--color-black` text.
+    - Outline: Transparent background with `--color-primary` border and text.
     - Transitions: Includes smooth transitions (`0.3s ease`) for `transform`, `box-shadow`, and `opacity`.
 
 ### Accessibility
-- The component renders a semantic native `<button>` element inside the wrapper.
-- All standard accessibility attributes (like `aria-label`, `disabled`) passed to the component are forwarded to the inner `<button>`.
+- The component renders a semantic native `<button>` element by default, or an `<a>` element with `role="button"` if `href` is provided.
+- All standard accessibility attributes (like `aria-label`, `disabled`) passed to the component are forwarded to the inner element.
+- Touch targets are expanded to at least 48x48px using a pseudo-element to meet WCAG guidelines without affecting the visual layout.
 - Focus states rely on the browser's default behavior unless explicitly overridden (currently uses `outline: none` but relies on visual feedback like `transform` and `box-shadow` for active states; *Note: ensuring a visible focus ring for keyboard navigation is recommended for future improvements*).
