@@ -7,23 +7,34 @@ interface Props {
     parent?: string;
   };
   type?: "button" | "submit" | "reset";
-  contentAlign?: "between" | "center"
+  contentAlign?: "between" | "center";
+  href?: string;
+  target?: string;
   [key: string]: any;
 }
 
 const {
   mode = 'primary', width,
   class: className = "", type = "button",
-  contentAlign = "center", classes, ...rest
+  contentAlign = "center", classes, href, target, ...rest
 } = Astro.props;
 
 const widthStyle = width ? `width: ${width};` : "";
+const Tag = href ? 'a' : 'button';
 ---
 
 <higress-button class={classes?.parent || ""} data-mode={mode}>
-  <button class={`btn ${contentAlign} ${className}`} type={type} style={widthStyle} {...rest}>
+  <Tag
+    class={`btn ${contentAlign} ${className}`}
+    type={!href ? type : undefined}
+    href={href}
+    target={target}
+    role={href ? "button" : undefined}
+    style={widthStyle}
+    {...rest}
+  >
     <slot />
-  </button>
+  </Tag>
 </higress-button>
 
 <style>
@@ -43,6 +54,7 @@ const widthStyle = width ? `width: ${width};` : "";
     transition: all 0.3s ease;
     line-height: 1.5;
     outline: none;
+    text-decoration: none; /* For anchor tags */
     &.center {
       justify-content: center;
     }

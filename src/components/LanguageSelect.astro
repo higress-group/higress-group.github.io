@@ -21,29 +21,55 @@ const options = [
     align-items: center;
   }
 
-  .language-select-wrapper :global(.switch-option) {
-    position: relative;
+  /*
+    The following styles make the .switch-slider element 48px tall to pass
+    accessibility checks, while using a pseudo-element to maintain the original
+    visual appearance of the slider.
+  */
+
+  /* Ensure the track maintains its visual height and allows the larger slider to overflow. */
+  .language-select-wrapper :global(.switch-track) {
+    height: 38px;
+    overflow: visible;
   }
 
-  .language-select-wrapper :global(.switch-option::before) {
+  /* Make the slider element 48px tall and transparent, centering it vertically. */
+  .language-select-wrapper :global(.switch-slider) {
+    height: 48px;
+    top: -6px; /* (38px track - 48px slider) / 2 */
+    bottom: auto;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* Use a pseudo-element for the visual part of the slider. */
+  .language-select-wrapper :global(.switch-slider::before) {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 48px;
-    min-width: 48px;
-    transform: translate(-50%, -50%);
+    /* Center the visual part within the 48px tall parent slider */
+    top: 9px; /* (48px - 30px) / 2 */
+    left: 0;
+    right: 0;
+    height: 30px; /* Original visual height */
+    background-color: var(--switch-slider-bg);
+    border-radius: 9999px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Re-apply theme overrides from the original component to the pseudo-element. */
+  .language-select-wrapper :global([data-theme='light'] .switch-slider::before) {
+    background-color: var(--switch-slider-bg-light);
+    border: none;
   }
 </style>
 
 <script>
   const switcher = document.getElementById('lang-switcher');
-  
+
   switcher?.addEventListener('change', (e: any) => {
     const targetIsEnglish = e.detail.value === 'en';
     const currentPath = window.location.pathname;
-    
+
     let newPath = currentPath;
 
     // Check if currently English based on path prefix

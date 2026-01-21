@@ -61,12 +61,18 @@ const newsItems = [
         {t('home.hero.description.line2')}
       </p>
       <div class="flex flex-row gap-4 mb-20">
-        <a href={LINKS.higressConsole} target="_blank">
-          <Button mode="primary" width="160px">{t('home.hero.button.experience')}</Button>
-        </a>
-        <a href={localizeUrl('/ai/quick-start', locale)} target="_blank">
-          <Button mode="normal" width="160px">{t('home.hero.button.learn')}</Button>
-        </a>
+        <Button
+          class="relative" mode="primary" width="160px"
+          href={LINKS.higressConsole} target="_blank"
+        >
+            {t('home.hero.button.experience')}
+        </Button>
+        <Button
+          href={localizeUrl('/ai/quick-start', locale)}
+          mode="normal" width="160px"
+         >
+          {t('home.hero.button.learn')}
+        </Button>
       </div>
     </div>
 
