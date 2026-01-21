@@ -15,6 +15,28 @@ const options = [
   <Switcher value={lang} options={options} id="lang-switcher" />
 </div>
 
+<style>
+  .language-select-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .language-select-wrapper :global(.switch-option) {
+    position: relative;
+  }
+
+  .language-select-wrapper :global(.switch-option::before) {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 48px;
+    min-width: 48px;
+    transform: translate(-50%, -50%);
+  }
+</style>
+
 <script>
   const switcher = document.getElementById('lang-switcher');
   
