@@ -43,10 +43,8 @@ const t = useTranslations(locale);
     <div class="text-white font-light text-base">
       {t('product.layout.enterprise.desc')}
     </div>
-    <Button class='w-39' mode="normal">
-      <a class="text-black" target="_blank" href={LINKS.enterprise}>
-        {t('product.layout.enterprise.title')}
-      </a>
+    <Button target="_blank" href={LINKS.enterprise} class='w-39' mode="normal">
+      {t('product.layout.enterprise.title')}
     </Button>
   </div>
 </div>

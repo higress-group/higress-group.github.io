@@ -38,19 +38,15 @@ const categoryTitleMap: Record<string, string> = {
 
         if (category.type === "all") {
           return (
-            <a href={localizeUrl("/blog", locale)}>
-              <Button class="px-4 md:px-6 whitespace-nowrap text-sm md:text-base" mode={isActive ? "black" : "light"}>
-                  {title}
-              </Button>
-            </a>
+            <Button href={localizeUrl("/blog", locale)} class="px-4 md:px-6 whitespace-nowrap text-sm md:text-base" mode={isActive ? "black" : "light"}>
+                {title}
+            </Button>
           )
         }
         return (
-          <a href={localizeUrl(`/blog/${category.type}`, locale)}>
-            <Button class="px-4 md:px-6 whitespace-nowrap text-sm md:text-base" mode={isActive ? "black" : "light"}>
-                {title}
-            </Button>
-          </a>
+          <Button href={localizeUrl(`/blog/${category.type}`, locale)} class="px-4 md:px-6 whitespace-nowrap text-sm md:text-base" mode={isActive ? "black" : "light"}>
+              {title}
+          </Button>
         )
       })
     }

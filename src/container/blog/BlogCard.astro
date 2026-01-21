@@ -17,10 +17,10 @@ const { title, body, description, author, authors, date, slug } = Astro.props;
 <a href={`/blog/${slug}`} class="flex gap-3 md:gap-6 cursor-pointer hover:opacity-80 transition-opacity">
   <div class="flex-3 md:flex-3 flex flex-col gap-2 md:gap-3 justify-between">
     <div class="text-base md:text-xl font-medium line-clamp-2 text-black">{title}</div>
-    <div class="line-clamp-2 md:line-clamp-3 text-gray-14/50 text-xs md:text-base">
+    <div class="line-clamp-2 md:line-clamp-3 text-gray-11 text-xs md:text-base">
       {getExcerpt(body, 300, description)}
     </div>
-    <div class="flex gap-2 md:gap-4 text-gray-14/50 text-xs">
+    <div class="flex gap-2 md:gap-4 text-gray-11 text-xs">
       <span class="truncate max-w-20 md:max-w-none">{author || authors || "-"}</span>
       <span>|</span>
       <span class="whitespace-nowrap">{date}</span>
