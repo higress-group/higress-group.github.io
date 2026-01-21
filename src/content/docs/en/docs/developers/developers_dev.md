@@ -123,4 +123,3 @@ A Maintainer is an individual who has made significant contributions to the evol
 **Application Method:**
 
 Nominated by 2 Maintainers
-
