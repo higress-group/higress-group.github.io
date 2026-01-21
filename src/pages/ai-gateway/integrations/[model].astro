@@ -1,0 +1,88 @@
+---
+import SiteLayout from "../../../layout/siteLayout.astro";
+import { AI_MODELS } from "../../../utils/pSEOData";
+import Section from "../../../container/common/section.astro";
+
+export async function getStaticPaths() {
+  return AI_MODELS.map((model) => ({
+    params: { model: model.id },
+    props: { model },
+  }));
+}
+
+const { model } = Astro.props;
+const title = `Higress AI 网关集成 ${model.name} 指南 - 快速接入与优化`;
+const description = `了解如何在 Higress AI 网关中轻松配置和优化 ${model.name}。包含详细的 YAML 配置示例、模型映射、安全防护及性能优化建议。`;
+---
+
+<SiteLayout title={title} description={description} keywords={`Higress, AI网关, ${model.name}, 集成, 配置, API网关`}>
+  <div class="bg-white py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="mb-12">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-4">
+          如何在 Higress AI 网关中集成 {model.name}
+        </h1>
+        <p class="text-xl text-gray-600">
+          {model.description}
+        </p>
+      </div>
+
+      <!-- Features -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">核心优势</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {model.features.map(feature => (
+            <div class="flex items-start">
+              <svg class="h-6 w-6 text-primary mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-700">{feature}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Config Example -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">快速配置示例</h2>
+        <div class="bg-gray-900 rounded-lg overflow-hidden p-6">
+          <pre class="text-sm text-gray-300 font-mono overflow-x-auto"><code>{model.configExample}</code></pre>
+        </div>
+        <p class="mt-4 text-gray-600 italic">
+          注：请将 <code>YOUR_API_TOKEN</code> 替换为您在 {model.name} 平台申请的实际令牌。
+        </p>
+      </div>
+
+      <!-- Advanced Section -->
+      <div class="mb-12 prose max-w-none">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">为什么选择 Higress 管理 {model.name}？</h2>
+        <p class="text-gray-700 leading-relaxed">
+          通过 Higress AI 网关接入 {model.name}，您不仅仅获得了简单的协议转发，更获得了企业级的治理能力：
+        </p>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700 mt-4">
+          <li><strong>统一协议适配：</strong> 使用标准的 OpenAI 协议调用 {model.name}，无需关心底层差异。</li>
+          <li><strong>智能重试与熔断：</strong> 当模型服务不稳定时，Higress 自动处理重试，确保业务连续性。</li>
+          <li><strong>安全审计与限流：</strong> 保护您的 API Key 不被滥用，并基于 Token 消耗进行精准限流。</li>
+          <li><strong>语义缓存：</strong> 显著降低重复问题的响应时间，节省推理成本。</li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-16 bg-primary/5 rounded-2xl p-8 text-center border border-primary/10">
+        <h3 class="text-xl font-bold text-gray-900 mb-4">准备好开始了吗？</h3>
+        <p class="text-gray-600 mb-8">
+          点击下方按钮，查看 Higress 的详细文档，或者直接在控制台中体验。
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="https://higress.io/docs/latest/plugins/ai/api-provider/ai-proxy/" target="_blank" class="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition">
+            查看详细文档
+          </a>
+          <a href="https://github.com/alibaba/higress" target="_blank" class="px-8 py-3 bg-white text-gray-900 border border-gray-300 font-medium rounded-lg hover:bg-gray-50 transition">
+            Star on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</SiteLayout>
