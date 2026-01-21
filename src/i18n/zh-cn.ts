@@ -327,6 +327,8 @@ export default {
 	'blog.article.ecosystem.articles':'生态文章',
 	'blog.article.event.articles':'社区活动',
 	'blog.article.release.time':'发布时间',
+	'blog.pagination.page': '第',
+	'blog.pagination.of': '页 / 共',
 	'page.blog.card.website':'Spring Cloud Alibaba 博客',
 	'page.blog.news.all':'全部新闻',
 	'page.blog.news.personnel.promotion':'人员晋升',

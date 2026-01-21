@@ -3,6 +3,7 @@ import SiteLayout from "../../layout/siteLayout.astro";
 import BlogHeader from "./BlogHeader.astro";
 import BlogCard from "./BlogCard.astro";
 import Button from "../../components/button/Button.astro";
+import { useTranslations } from "../../i18n/utils";
 
 interface Props {
   title: string;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const { page, title, currentCategory } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <SiteLayout title={title}>
@@ -38,14 +40,14 @@ const { page, title, currentCategory } = Astro.props;
 
     <div class="flex justify-center items-center gap-4 mt-16">
       {page.url.prev ? (
-        <Button href={page.url.prev} mode="light">
+        <Button href={page.url.prev} mode="light" aria-label={t("commmon.base.page.previousLink")}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 18L9 12L15 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </Button>
       ) : (
         <div class="opacity-50 pointer-events-none">
-           <Button mode="light">
+           <Button mode="light" aria-label={t("commmon.base.page.previousLink")}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 18L9 12L15 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -54,18 +56,18 @@ const { page, title, currentCategory } = Astro.props;
       )}
 
       <span class="text-gray-600 font-medium">
-        Page {page.currentPage} of {page.lastPage}
+        {t('blog.pagination.page')} {page.currentPage} {t('blog.pagination.of')} {page.lastPage} {Astro.currentLocale === 'en' ? '' : '页'}
       </span>
 
       {page.url.next ? (
-        <Button href={page.url.next} mode="light">
+        <Button href={page.url.next} mode="light" aria-label={t("commmon.base.page.nextLink")}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 18L15 12L9 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </Button>
       ) : (
         <div class="opacity-50 pointer-events-none">
-           <Button mode="light">
+           <Button mode="light" aria-label={t("commmon.base.page.nextLink")}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9 18L15 12L9 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
