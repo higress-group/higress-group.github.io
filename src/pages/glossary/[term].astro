@@ -1,0 +1,273 @@
+---
+import SiteLayout from "../../layout/siteLayout.astro";
+import { GLOSSARY_TERMS, GLOSSARY_CATEGORIES, getTermById, getRelatedTerms } from "../../utils/glossaryData";
+
+export function getStaticPaths() {
+  return GLOSSARY_TERMS.map(term => ({
+    params: { term: term.id },
+    props: { term }
+  }));
+}
+
+const { term } = Astro.props;
+const category = GLOSSARY_CATEGORIES.find(c => c.id === term.category);
+const relatedTerms = getRelatedTerms(term.id);
+
+const title = `${term.term} 是什么？- Higress 技术词汇表`;
+const description = `${term.term}（${term.termEn}）的定义、示例和在 Higress AI 网关中的应用。${term.definition.slice(0, 100)}...`;
+const keywords = `${term.term},${term.termEn},${term.term}是什么,${term.term}定义,Higress,AI网关`;
+---
+
+<SiteLayout title={title} description={description} keywords={keywords}>
+  <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b border-gray-200">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <nav class="flex items-center text-sm text-gray-500">
+          <a href="/" class="hover:text-primary transition">首页</a>
+          <svg class="h-4 w-4 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          <a href="/glossary/" class="hover:text-primary transition">技术词汇表</a>
+          <svg class="h-4 w-4 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          <span class="text-gray-900 font-medium">{term.term}</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <!-- Header -->
+      <header class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          {category && (
+            <a
+              href={`/glossary/#${category.id}`}
+              class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition"
+            >
+              <span class="mr-1">{category.icon}</span>
+              {category.name}
+            </a>
+          )}
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+          {term.term}
+        </h1>
+        <p class="text-xl text-gray-500">
+          {term.termEn}
+        </p>
+      </header>
+
+      <!-- Definition Section -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center mr-3 text-lg">📖</span>
+          定义
+        </h2>
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+          <p class="text-lg text-gray-700 leading-relaxed">
+            {term.definition}
+          </p>
+        </div>
+      </section>
+
+      <!-- Higress Relation Section -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="w-8 h-8 rounded-lg bg-green-100 text-green-600 flex items-center justify-center mr-3 text-lg">🔗</span>
+          在 Higress 中的应用
+        </h2>
+        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200 p-6">
+          <p class="text-lg text-gray-700 leading-relaxed">
+            {term.higressRelation}
+          </p>
+        </div>
+      </section>
+
+      <!-- Examples Section -->
+      {term.examples && term.examples.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+            <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center mr-3 text-lg">💡</span>
+            示例
+          </h2>
+          <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <ul class="space-y-4">
+              {term.examples.map((example, index) => (
+                <li class="flex items-start">
+                  <span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 text-sm font-medium flex items-center justify-center mr-3 mt-0.5">
+                    {index + 1}
+                  </span>
+                  <span class="text-gray-700">{example}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      <!-- Config Example Section -->
+      {term.configExample && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+            <span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center mr-3 text-lg">⚙️</span>
+            配置示例
+          </h2>
+          <div class="bg-gray-900 rounded-xl overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-2 bg-gray-800">
+              <span class="text-gray-400 text-sm">YAML</span>
+              <button
+                class="copy-btn text-gray-400 hover:text-white text-sm transition"
+                data-code={term.configExample}
+              >
+                复制代码
+              </button>
+            </div>
+            <pre class="p-4 overflow-x-auto"><code class="text-gray-300 text-sm">{term.configExample}</code></pre>
+          </div>
+        </section>
+      )}
+
+      <!-- Related Terms Section -->
+      {relatedTerms.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+            <span class="w-8 h-8 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center mr-3 text-lg">🔄</span>
+            相关术语
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {relatedTerms.map(related => (
+              <a
+                href={`/glossary/${related.id}/`}
+                class="group bg-white rounded-xl border border-gray-200 p-4 hover:border-primary/30 hover:shadow-md transition-all"
+              >
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="font-bold text-gray-900 group-hover:text-primary transition">
+                      {related.term}
+                    </h3>
+                    <p class="text-sm text-gray-500">{related.termEn}</p>
+                  </div>
+                  <svg class="h-5 w-5 text-gray-400 group-hover:text-primary group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- FAQ Schema for SEO -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="w-8 h-8 rounded-lg bg-yellow-100 text-yellow-600 flex items-center justify-center mr-3 text-lg">❓</span>
+          常见问题
+        </h2>
+        <div class="space-y-4">
+          <details class="bg-white rounded-xl border border-gray-200 overflow-hidden group">
+            <summary class="px-6 py-4 cursor-pointer flex items-center justify-between hover:bg-gray-50 transition">
+              <span class="font-medium text-gray-900">{term.term} 是什么？</span>
+              <svg class="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-4 text-gray-600">
+              {term.definition}
+            </div>
+          </details>
+
+          <details class="bg-white rounded-xl border border-gray-200 overflow-hidden group">
+            <summary class="px-6 py-4 cursor-pointer flex items-center justify-between hover:bg-gray-50 transition">
+              <span class="font-medium text-gray-900">Higress 如何支持 {term.term}？</span>
+              <svg class="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-4 text-gray-600">
+              {term.higressRelation}
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-2xl p-8 text-center">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">
+          深入了解 Higress
+        </h2>
+        <p class="text-gray-600 mb-6">
+          探索更多 Higress 的功能和最佳实践
+        </p>
+        <div class="flex justify-center gap-4 flex-wrap">
+          <a
+            href="/docs/overview/what-is-higress/"
+            class="px-6 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition"
+          >
+            查看文档
+          </a>
+          <a
+            href="/glossary/"
+            class="px-6 py-2.5 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:border-primary hover:text-primary transition"
+          >
+            浏览更多术语
+          </a>
+        </div>
+      </section>
+    </article>
+  </div>
+</SiteLayout>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "name": term.term,
+  "description": term.definition,
+  "inDefinedTermSet": {
+    "@type": "DefinedTermSet",
+    "name": "Higress 技术词汇表",
+    "url": "https://higress.ai/glossary/"
+  }
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `${term.term} 是什么？`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": term.definition
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Higress 如何支持 ${term.term}？`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": term.higressRelation
+      }
+    }
+  ]
+})} />
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const code = btn.getAttribute('data-code');
+      if (code) {
+        await navigator.clipboard.writeText(code);
+        const originalText = btn.textContent;
+        btn.textContent = '已复制!';
+        setTimeout(() => {
+          btn.textContent = originalText;
+        }, 2000);
+      }
+    });
+  });
+</script>

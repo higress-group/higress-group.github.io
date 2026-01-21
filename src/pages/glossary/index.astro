@@ -1,0 +1,138 @@
+---
+import SiteLayout from "../../layout/siteLayout.astro";
+import { GLOSSARY_TERMS, GLOSSARY_CATEGORIES, getTermsByCategory } from "../../utils/glossaryData";
+
+const title = "Higress 技术词汇表 - AI 网关与云原生术语大全";
+const description = "全面的 AI 网关、API 网关、云原生技术词汇表。了解 Token、LLM、MCP、Kubernetes、Ingress 等核心概念的定义和在 Higress 中的应用。";
+const keywords = "技术词汇表,AI术语,网关术语,云原生术语,Token,LLM,MCP,API Gateway,Kubernetes,Higress";
+---
+
+<SiteLayout title={title} description={description} keywords={keywords}>
+  <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
+          <span class="mr-2">📚</span> 技术词汇表
+        </div>
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl lg:text-6xl">
+          Higress 技术词汇表
+        </h1>
+        <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+          深入理解 AI 网关、API 网关和云原生领域的核心概念。每个术语都包含清晰的定义、实际示例以及在 Higress 中的应用场景。
+        </p>
+        <div class="mt-8 flex justify-center gap-4 flex-wrap">
+          <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm">
+            共 <strong class="text-primary">{GLOSSARY_TERMS.length}</strong> 个术语
+          </span>
+          <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm">
+            覆盖 <strong class="text-primary">{GLOSSARY_CATEGORIES.length}</strong> 大领域
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Navigation -->
+    <div class="sticky top-16 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200 py-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+          {GLOSSARY_CATEGORIES.map(category => (
+            <a
+              href={`#${category.id}`}
+              class="flex-shrink-0 px-4 py-2 rounded-full bg-gray-100 hover:bg-primary/10 hover:text-primary text-gray-700 text-sm font-medium transition-colors"
+            >
+              <span class="mr-1">{category.icon}</span>
+              {category.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Terms by Category -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      {GLOSSARY_CATEGORIES.map(category => {
+        const terms = getTermsByCategory(category.id);
+        return (
+          <section id={category.id} class="mb-20 scroll-mt-36">
+            <div class="flex items-center gap-4 mb-8">
+              <span class="text-4xl">{category.icon}</span>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900">{category.name}</h2>
+                <p class="text-gray-600 mt-1">{category.description}</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {terms.map(term => (
+                <a
+                  href={`/glossary/${term.id}/`}
+                  class="group bg-white rounded-xl border border-gray-200 p-6 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                >
+                  <div class="flex items-start justify-between mb-3">
+                    <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
+                      {term.term}
+                    </h3>
+                    <svg class="h-5 w-5 text-gray-400 group-hover:text-primary group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                  <p class="text-sm text-gray-500 mb-3">{term.termEn}</p>
+                  <p class="text-gray-600 text-sm line-clamp-3">
+                    {term.definition}
+                  </p>
+                  {term.relatedTerms && term.relatedTerms.length > 0 && (
+                    <div class="mt-4 flex flex-wrap gap-2">
+                      {term.relatedTerms.slice(0, 3).map(relatedId => (
+                        <span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md">
+                          {relatedId}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </a>
+              ))}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+
+    <!-- CTA Section -->
+    <div class="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+          开始使用 Higress
+        </h2>
+        <p class="text-lg text-gray-600 mb-8">
+          了解了这些核心概念后，立即体验 Higress 的强大功能
+        </p>
+        <div class="flex justify-center gap-4 flex-wrap">
+          <a
+            href="/docs/overview/what-is-higress/"
+            class="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition"
+          >
+            查看文档
+          </a>
+          <a
+            href="https://github.com/alibaba/higress"
+            target="_blank"
+            class="px-8 py-3 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:border-primary hover:text-primary transition"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</SiteLayout>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

@@ -2,6 +2,10 @@
 import SiteLayout from "../../../layout/siteLayout.astro";
 import { AI_MODELS } from "../../../utils/pSEOData";
 import Section from "../../../container/common/section.astro";
+import { useTranslations } from "@/i18n/utils";
+
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
 
 const title = "Higress AI 网关模型集成目录 - 统一管理您的 LLM 服务";
 const description = "探索 Higress AI 网关支持的所有大模型集成，包括 DeepSeek, Qwen, OpenAI, Claude 等。统一协议、多模型灰度、智能路由，为您的 AI 应用保驾护航。";
@@ -11,10 +15,10 @@ const description = "探索 Higress AI 网关支持的所有大模型集成，�
   <div class="bg-gray-50 py-24 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto text-center mb-16">
       <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
-        AI 模型集成目录
+        {t('ai.integrations.title')}
       </h1>
       <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-        Higress 提供了开箱即用的多模型集成能力。通过统一的 OpenAI 协议，您可以轻松管理、路由和保护各种主流 LLM 服务。
+        {t('ai.integrations.description')}
       </p>
     </div>
 
@@ -44,17 +48,17 @@ const description = "探索 Higress AI 网关支持的所有大模型集成，�
     <!-- Integration CTA -->
     <div class="max-w-3xl mx-auto mt-24 text-center">
       <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
-        <span class="mr-2">💡</span> 没找到您需要的模型？
+        <span class="mr-2">💡</span> {t('ai.integrations.cta.title')}
       </div>
       <h2 class="text-3xl font-bold text-gray-900 mb-6">
-        轻松扩展，接入任何 AI 服务
+        {t('ai.integrations.cta.heading')}
       </h2>
       <p class="text-lg text-gray-600 mb-10">
-        Higress 支持基于 Wasm 的插件扩展。您可以参考我们的开发指南，快速为您的私有模型或新兴 AI 服务编写适配插件。
+        {t('ai.integrations.cta.description')}
       </p>
       <div class="flex justify-center gap-4">
         <a href="https://github.com/alibaba/higress/issues/940" target="_blank" class="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition">
-          参与社区贡献
+          {t('ai.integrations.cta.button')}
         </a>
       </div>
     </div>
