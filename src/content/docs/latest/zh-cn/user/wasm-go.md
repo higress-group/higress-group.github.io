@@ -199,7 +199,7 @@ GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o main.wasm ./
 
 但注意返回这个状态时，要求必须有 body，如果没有 body，请求/响应将被一直阻塞。
 
-判断是否存在请求 body 可以使用 [HasRequestBody()](https://github.com/alibaba/higress/blob/main/plugins/wasm-go/pkg/wrapper/request_wrapper.go#L86) 
+判断是否存在请求 body 可以使用 [HasRequestBody()或HasResponseBody()](https://github.com/higress-group/wasm-go/blob/1c84f010156d39eb667a49b6de5f2b1b313442dc/pkg/iface/context.go#L101-L108) 
 
 3. HeaderContinueAndEndStream:
 
