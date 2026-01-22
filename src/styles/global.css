@@ -20,6 +20,12 @@ body {
   font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
 }
 
+site-search {
+  dialog {
+    margin: 4rem auto auto;
+  }
+}
+
 /* Force Light mode colors for everything. */
 :root,
 :root[data-theme="light"],
