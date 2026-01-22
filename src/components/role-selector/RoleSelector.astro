@@ -1,7 +1,8 @@
 ---
 /**
- * RoleSelector - Onboarding role segmentation component
- * Helps users choose their path based on their role (Developer vs Decision Maker)
+ * RoleSelector - Intent-based onboarding component
+ * Helps users choose their path based on what they want to do (Try vs Learn)
+ * Optimized for reducing Time-to-Value and providing clear guidance
  */
 import { useTranslations, localizeUrl } from "@/i18n/utils";
 
@@ -14,22 +15,34 @@ interface Props {
 
 const { class: className } = Astro.props;
 
-const roles = [
+const intents = [
   {
-    id: 'developer',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
-    label: t('home.role.selector.developer'),
-    desc: t('home.role.selector.developer.desc'),
-    time: t('home.role.selector.developer.time'),
+    id: 'try_now',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+    label: t('home.role.selector.try_now'),
+    desc: t('home.role.selector.try_now.desc'),
+    time: t('home.role.selector.try_now.time'),
     href: localizeUrl('/ai/quick-start', locale),
+    features: [
+      t('home.role.selector.try_now.feature1'),
+      t('home.role.selector.try_now.feature2'),
+      t('home.role.selector.try_now.feature3'),
+    ],
+    recommended: true,
   },
   {
-    id: 'decision_maker',
+    id: 'learn_more',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
-    label: t('home.role.selector.decision_maker'),
-    desc: t('home.role.selector.decision_maker.desc'),
-    time: t('home.role.selector.decision_maker.time'),
+    label: t('home.role.selector.learn_more'),
+    desc: t('home.role.selector.learn_more.desc'),
+    time: t('home.role.selector.learn_more.time'),
     href: localizeUrl('/ai-gateway', locale),
+    features: [
+      t('home.role.selector.learn_more.feature1'),
+      t('home.role.selector.learn_more.feature2'),
+      t('home.role.selector.learn_more.feature3'),
+    ],
+    recommended: false,
   }
 ];
 ---
@@ -40,18 +53,34 @@ const roles = [
     <span>{t('home.role.selector.title')}</span>
   </div>
   <div class="role-selector-options">
-    {roles.map((role) => (
-      <a href={role.href} class="role-option group" data-role={role.id}>
-        <div class="role-icon" set:html={role.icon} />
-        <div class="role-content">
-          <div class="role-label-row">
-            <span class="role-label">{role.label}</span>
-            <span class="role-time-badge">{role.time}</span>
+    {intents.map((intent) => (
+      <a href={intent.href} class:list={["role-option", "group", { "recommended": intent.recommended }]} data-intent={intent.id}>
+        {intent.recommended && (
+          <span class="recommended-badge">{t('home.role.selector.recommended')}</span>
+        )}
+        <div class="role-header">
+          <div class="role-icon" set:html={intent.icon} />
+          <div class="role-header-content">
+            <div class="role-label-row">
+              <span class="role-label">{intent.label}</span>
+              <span class="role-time-badge">{intent.time}</span>
+            </div>
+            <div class="role-desc">{intent.desc}</div>
           </div>
-          <div class="role-desc">{role.desc}</div>
         </div>
-        <div class="role-arrow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <ul class="role-features">
+          {intent.features.map((feature) => (
+            <li class="role-feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="role-cta">
+          <span class="role-cta-text">{intent.recommended ? t('home.role.selector.cta.start') : t('home.role.selector.cta.explore')}</span>
+          <svg class="role-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14"/>
             <path d="m12 5 7 7-7 7"/>
           </svg>
@@ -106,55 +135,84 @@ const roles = [
   }
 
   .role-option {
+    position: relative;
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1.25rem;
-    background: rgba(255, 255, 255, 0.6);
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(62, 92, 244, 0.15);
-    border-radius: 12px;
+    border-radius: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
     color: inherit;
-    min-width: 180px;
+    min-width: 280px;
+    max-width: 320px;
+  }
+
+  .role-option.recommended {
+    border-color: rgba(62, 92, 244, 0.4);
+    background: linear-gradient(135deg, rgba(62, 92, 244, 0.05) 0%, rgba(109, 91, 255, 0.08) 100%);
   }
 
   :global(.dark) .role-option {
-    background: rgba(30, 30, 40, 0.6);
+    background: rgba(30, 30, 40, 0.7);
     border-color: rgba(109, 91, 255, 0.3);
   }
 
+  :global(.dark) .role-option.recommended {
+    background: linear-gradient(135deg, rgba(62, 92, 244, 0.1) 0%, rgba(109, 91, 255, 0.15) 100%);
+    border-color: rgba(109, 91, 255, 0.5);
+  }
+
   .role-option:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(62, 92, 244, 0.15);
-    border-color: rgba(62, 92, 244, 0.4);
-    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(62, 92, 244, 0.18);
+    border-color: rgba(62, 92, 244, 0.5);
   }
 
   :global(.dark) .role-option:hover {
-    background: rgba(40, 40, 55, 0.9);
-    border-color: rgba(109, 91, 255, 0.5);
-    box-shadow: 0 8px 24px rgba(109, 91, 255, 0.2);
+    box-shadow: 0 12px 32px rgba(109, 91, 255, 0.25);
+    border-color: rgba(109, 91, 255, 0.6);
+  }
+
+  .recommended-badge {
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+    border-radius: 9999px;
+    box-shadow: 0 2px 8px rgba(62, 92, 244, 0.3);
+  }
+
+  .role-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
 
   .role-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
-    border-radius: 10px;
+    border-radius: 12px;
     color: white;
     flex-shrink: 0;
   }
 
-  .role-content {
+  .role-header-content {
     display: flex;
     flex-direction: column;
-    gap: 0.125rem;
+    gap: 0.25rem;
     flex: 1;
   }
 
@@ -165,9 +223,13 @@ const roles = [
   }
 
   .role-label {
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--color-gray-900);
+  }
+
+  :global(.dark) .role-label {
+    color: var(--color-gray-100);
   }
 
   .role-time-badge {
@@ -187,37 +249,103 @@ const roles = [
     background: rgba(109, 91, 255, 0.2);
   }
 
-  :global(.dark) .role-label {
-    color: var(--color-gray-100);
-  }
-
   .role-desc {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     color: var(--color-gray-500);
+    line-height: 1.4;
   }
 
   :global(.dark) .role-desc {
     color: var(--color-gray-400);
   }
 
-  .role-arrow {
+  .role-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    align-items: center;
-    margin-left: auto;
-    color: var(--color-gray-400);
-    transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateX(-8px);
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
-  .role-option:hover .role-arrow {
-    opacity: 1;
-    transform: translateX(0);
+  .role-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--color-gray-600);
+  }
+
+  :global(.dark) .role-feature-item {
+    color: var(--color-gray-400);
+  }
+
+  .check-icon {
+    width: 14px;
+    height: 14px;
+    color: #10b981;
+    flex-shrink: 0;
+  }
+
+  .role-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background: rgba(62, 92, 244, 0.08);
+    border-radius: 8px;
+    margin-top: auto;
+    transition: all 0.3s ease;
+  }
+
+  .role-option.recommended .role-cta {
+    background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+  }
+
+  .role-option.recommended .role-cta .role-cta-text,
+  .role-option.recommended .role-cta .role-arrow {
+    color: white;
+  }
+
+  :global(.dark) .role-cta {
+    background: rgba(109, 91, 255, 0.15);
+  }
+
+  .role-option:hover .role-cta {
+    background: rgba(62, 92, 244, 0.15);
+  }
+
+  .role-option.recommended:hover .role-cta {
+    background: linear-gradient(135deg, #3E5CF4 0%, #5a4de8 100%);
+    box-shadow: 0 4px 12px rgba(62, 92, 244, 0.3);
+  }
+
+  :global(.dark) .role-option:hover .role-cta {
+    background: rgba(109, 91, 255, 0.25);
+  }
+
+  .role-cta-text {
+    font-size: 0.8125rem;
+    font-weight: 600;
     color: #3E5CF4;
   }
 
-  :global(.dark) .role-option:hover .role-arrow {
-    color: #6D5BFF;
+  :global(.dark) .role-cta-text {
+    color: #a5b4fc;
+  }
+
+  .role-arrow {
+    color: #3E5CF4;
+    transition: transform 0.3s ease;
+  }
+
+  :global(.dark) .role-arrow {
+    color: #a5b4fc;
+  }
+
+  .role-option:hover .role-arrow {
+    transform: translateX(4px);
   }
 
   @media (max-width: 640px) {
@@ -228,6 +356,7 @@ const roles = [
 
     .role-option {
       width: 100%;
+      max-width: unset;
       min-width: unset;
     }
   }

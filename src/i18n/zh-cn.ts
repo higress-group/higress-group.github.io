@@ -710,14 +710,28 @@ export default {
     'glossary.copy_code': '复制代码',
     'glossary.copied': '已复制!',
 
-    // Role Selector (Onboarding)
-    'home.role.selector.title': '您是?',
-    'home.role.selector.developer': '开发者',
-    'home.role.selector.developer.desc': 'Docker 一键部署，接入 100+ 大模型',
-    'home.role.selector.developer.time': '5 分钟',
-    'home.role.selector.decision_maker': '决策者',
-    'home.role.selector.decision_maker.desc': '了解 AI 网关如何降本增效',
-    'home.role.selector.decision_maker.time': '3 分钟',
+    // Role Selector (Intent-based Onboarding)
+    'home.role.selector.title': '您想做什么？',
+    'home.role.selector.recommended': '推荐',
+    'home.role.selector.cta.start': '立即开始',
+    'home.role.selector.cta.explore': '了解详情',
+    
+    // Try Now Option
+    'home.role.selector.try_now': '立即体验',
+    'home.role.selector.try_now.desc': '5 分钟内部署并调用 AI 模型',
+    'home.role.selector.try_now.time': '5 分钟',
+    'home.role.selector.try_now.feature1': '无需注册，本地 Docker 一键启动',
+    'home.role.selector.try_now.feature2': '支持 100+ 主流大模型',
+    'home.role.selector.try_now.feature3': '配套完整文档与示例代码',
+    
+    // Learn More Option
+    'home.role.selector.learn_more': '了解产品',
+    'home.role.selector.learn_more.desc': '看看 Higress 能为您解决什么问题',
+    'home.role.selector.learn_more.time': '3 分钟',
+    'home.role.selector.learn_more.feature1': '核心功能与产品优势',
+    'home.role.selector.learn_more.feature2': '企业案例与最佳实践',
+    'home.role.selector.learn_more.feature3': '版本对比与定价信息',
+    
     'home.role.selector.or_try_demo': '或直接体验在线 Demo',
 
     // Scroll Progress

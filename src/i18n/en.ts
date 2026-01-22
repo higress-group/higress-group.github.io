@@ -703,14 +703,28 @@ export default {
     'glossary.copy_code': 'Copy Code',
     'glossary.copied': 'Copied!',
 
-    // Role Selector (Onboarding)
-    'home.role.selector.title': 'Who are you?',
-    'home.role.selector.developer': 'Developer',
-    'home.role.selector.developer.desc': 'One-click Docker deploy, 100+ LLM support',
-    'home.role.selector.developer.time': '5 min',
-    'home.role.selector.decision_maker': 'Decision Maker',
-    'home.role.selector.decision_maker.desc': 'Learn how AI Gateway saves cost',
-    'home.role.selector.decision_maker.time': '3 min',
+    // Role Selector (Intent-based Onboarding)
+    'home.role.selector.title': 'What do you want to do?',
+    'home.role.selector.recommended': 'Recommended',
+    'home.role.selector.cta.start': 'Get Started',
+    'home.role.selector.cta.explore': 'Learn More',
+    
+    // Try Now Option
+    'home.role.selector.try_now': 'Try It Now',
+    'home.role.selector.try_now.desc': 'Deploy and call AI models in 5 minutes',
+    'home.role.selector.try_now.time': '5 min',
+    'home.role.selector.try_now.feature1': 'No signup, one-click Docker deploy',
+    'home.role.selector.try_now.feature2': 'Support for 100+ LLM models',
+    'home.role.selector.try_now.feature3': 'Complete docs & sample code',
+    
+    // Learn More Option
+    'home.role.selector.learn_more': 'Learn About',
+    'home.role.selector.learn_more.desc': 'See how Higress can solve your challenges',
+    'home.role.selector.learn_more.time': '3 min',
+    'home.role.selector.learn_more.feature1': 'Core features & advantages',
+    'home.role.selector.learn_more.feature2': 'Enterprise cases & best practices',
+    'home.role.selector.learn_more.feature3': 'Version comparison & pricing',
+    
     'home.role.selector.or_try_demo': 'Or try the online Demo',
 
     // Scroll Progress
