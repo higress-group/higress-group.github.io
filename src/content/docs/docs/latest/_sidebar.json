@@ -88,7 +88,7 @@
           "en": "LLM API Provide"
         },
         "autogenerate": {
-          "directory": "zh-cn/latest/plugins/ai/api-provider"
+          "directory": "plugins/ai/api-provider"
         }
       },
       {

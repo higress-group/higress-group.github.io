@@ -3,6 +3,8 @@ import SiteLayout from "../../../layout/siteLayout.astro";
 import { AI_MODELS } from "../../../utils/pSEOData";
 import Section from "../../../container/common/section.astro";
 import { useTranslations } from "@/i18n/utils";
+import Button from "@/components/button/Button.astro";
+import { LINKS } from "@/constant";
 
 export async function getStaticPaths() {
   return AI_MODELS.map((model) => ({
@@ -72,18 +74,18 @@ const description = `了解如何在 Higress AI 网关中轻松配置和优化 $
       </div>
 
       <!-- CTA -->
-      <div class="mt-16 bg-primary/5 rounded-2xl p-8 text-center border border-primary/10">
+      <div class="mt-16 bg-indigo-20 rounded-2xl p-8 text-center border border-primary/10">
         <h3 class="text-xl font-bold text-gray-900 mb-4">{t('ai.integrations.model.cta.ready')}</h3>
         <p class="text-gray-600 mb-8">
           {t('ai.integrations.model.cta.description')}
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="https://higress.io/docs/latest/plugins/ai/api-provider/ai-proxy/" target="_blank" class="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition">
+          <Button mode="primary" href="/docs/latest/plugins/ai/api-provider/ai-proxy/">
             {t('ai.integrations.model.cta.view_docs')}
-          </a>
-          <a href="https://github.com/alibaba/higress" target="_blank" class="px-8 py-3 bg-white text-gray-900 border border-gray-300 font-medium rounded-lg hover:bg-gray-50 transition">
+          </Button>
+          <Button mode="normal" target="_blank" href={LINKS.higressGithub}>
             {t('ai.integrations.model.cta.star_github')}
-          </a>
+          </Button>
         </div>
       </div>
     </div>
@@ -122,7 +124,7 @@ const description = `了解如何在 Higress AI 网关中轻松配置和优化 $
       "text": `在 Higress 配置中添加 ${model.name} provider 配置`
     },
     {
-      "@type": "HowToStep", 
+      "@type": "HowToStep",
       "name": "设置 API Token",
       "text": `将您的 ${model.name} API Token 添加到配置中`
     },
