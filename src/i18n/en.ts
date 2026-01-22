@@ -563,6 +563,10 @@ export default {
 
     // AI Product Page
     'ai.product.intro.desc': 'Designed for AI scenarios, unified proxy for LLM APIs and MCP Servers, supporting centralized access and management of models, tools (MCP), and Agents.',
+    'ai.product.hero.cta.primary': '5-min Quick Deploy',
+    'ai.product.hero.cta.secondary': 'Try Online Demo',
+    'ai.product.hero.github.star': 'Star on GitHub',
+    'ai.product.hero.models_count': 'Supports 100+ LLM models',
     'ai.product.advantage.desc': 'Provides multi-model unified routing and protocol conversion, semantic caching, Token-level rate limiting, content security protection (such as prompt injection detection, sensitive content recognition), multi-dimensional authentication and observability, and supports hot-pluggable plugins and intelligent tool routing.',
 
     'ai.product.multi_model': 'Unified Multi-Model Access',

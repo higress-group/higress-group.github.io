@@ -570,6 +570,10 @@ export default {
 
     // AI Product Page
     'ai.product.intro.desc': '专为 AI 场景设计，统一代理大模型 API 与 MCP Server，支持模型、工具（MCP）及 Agent 的集中接入与管理',
+    'ai.product.hero.cta.primary': '5 分钟快速部署',
+    'ai.product.hero.cta.secondary': '体验在线 Demo',
+    'ai.product.hero.github.star': 'Star on GitHub',
+    'ai.product.hero.models_count': '已支持 100+ 主流大模型',
     'ai.product.advantage.desc': '提供多模型统一路由与协议转换、语义缓存、Token 级限流、内容安全防护（如提示词攻击检测、敏感内容识别）、多维度鉴权与可观测性，并支持热插拔插件和智能工具路由',
 
     'ai.product.multi_model': '多模型统一接入',
