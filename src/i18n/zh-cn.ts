@@ -766,6 +766,15 @@ export default {
     // Plugins Directory Page
     'plugins.title': 'Higress 插件市场',
     'plugins.description': '丰富的官方插件库，覆盖 AI、流量管理、安全防护等常见功能，满足 90% 以上的业务场景需求',
+    'plugins.hero.title': 'Higress 插件市场',
+    'plugins.hero.description': '探索 Higress 官方插件库，涵盖 AI、认证鉴权、安全防护、流量管理等多种插件，满足 90% 以上的业务场景需求。',
+    'plugins.search.placeholder': '搜索插件名称或描述...',
+    'plugins.stats.total': '共',
+    'plugins.stats.plugins': '款插件',
+    'plugins.stats.covered': '覆盖',
+    'plugins.stats.categories': '个分类',
+    'plugins.no_results.title': '未找到匹配的插件',
+    'plugins.no_results.description': '尝试调整搜索关键词或选择其他分类',
     'plugins.category.all': '全部插件',
     'plugins.category.ai': 'AI 插件',
     'plugins.category.authentication': '认证鉴权',
@@ -778,4 +787,6 @@ export default {
     'plugins.cta.description': 'Higress 支持使用多种语言开发自定义 Wasm 插件，轻松扩展网关能力',
     'plugins.cta.custom_plugin': '开发自定义插件',
     'plugins.cta.contribute': '贡献插件到社区',
+    'plugins.cta.docs': '查看文档',
+    'plugins.cta.github': 'GitHub',
 };

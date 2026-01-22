@@ -96,12 +96,12 @@ export interface Plugin {
   docPath: string;
 }
 
-export const PLUGIN_CATEGORIES: { id: PluginCategory; labelZh: string; labelEn: string }[] = [
-  { id: 'ai', labelZh: 'AI 插件', labelEn: 'AI Plugins' },
-  { id: 'authentication', labelZh: '认证鉴权', labelEn: 'Authentication' },
-  { id: 'security', labelZh: '安全防护', labelEn: 'Security' },
-  { id: 'traffic', labelZh: '流量管理', labelEn: 'Traffic Management' },
-  { id: 'transformation', labelZh: '请求转换', labelEn: 'Transformation' },
+export const PLUGIN_CATEGORIES: { id: PluginCategory; labelZh: string; labelEn: string; descriptionZh: string; descriptionEn: string }[] = [
+  { id: 'ai', labelZh: 'AI 插件', labelEn: 'AI Plugins', descriptionZh: '为 AI 应用提供模型代理、缓存、限流、安全防护等能力', descriptionEn: 'Provide model proxy, caching, rate limiting, and security for AI applications' },
+  { id: 'authentication', labelZh: '认证鉴权', labelEn: 'Authentication', descriptionZh: '多种认证方式，保护 API 访问安全', descriptionEn: 'Multiple authentication methods to secure API access' },
+  { id: 'security', labelZh: '安全防护', labelEn: 'Security', descriptionZh: 'WAF 防护、IP 限制、Bot 拦截等安全能力', descriptionEn: 'WAF protection, IP restriction, Bot detection and more' },
+  { id: 'traffic', labelZh: '流量管理', labelEn: 'Traffic Management', descriptionZh: '限流、流量染色、请求校验等流量治理能力', descriptionEn: 'Rate limiting, traffic tagging, request validation and more' },
+  { id: 'transformation', labelZh: '请求转换', labelEn: 'Transformation', descriptionZh: '灵活转换请求和响应内容', descriptionEn: 'Flexibly transform request and response content' },
 ];
 
 export const PLUGINS: Plugin[] = [

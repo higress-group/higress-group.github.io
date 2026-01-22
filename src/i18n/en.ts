@@ -759,6 +759,15 @@ export default {
     // Plugins Directory Page
     'plugins.title': 'Higress Plugin Marketplace',
     'plugins.description': 'Rich official plugin library covering AI, traffic management, security and more, meeting over 90% of business scenarios',
+    'plugins.hero.title': 'Higress Plugin Marketplace',
+    'plugins.hero.description': 'Explore Higress official plugin library with AI, authentication, security, traffic management plugins, meeting over 90% of business scenarios.',
+    'plugins.search.placeholder': 'Search plugin name or description...',
+    'plugins.stats.total': 'Total',
+    'plugins.stats.plugins': 'plugins',
+    'plugins.stats.covered': 'Covering',
+    'plugins.stats.categories': 'categories',
+    'plugins.no_results.title': 'No matching plugins found',
+    'plugins.no_results.description': 'Try adjusting your search keywords or selecting a different category',
     'plugins.category.all': 'All Plugins',
     'plugins.category.ai': 'AI Plugins',
     'plugins.category.authentication': 'Authentication',
@@ -771,4 +780,6 @@ export default {
     'plugins.cta.description': 'Higress supports developing custom Wasm plugins in multiple languages to easily extend gateway capabilities',
     'plugins.cta.custom_plugin': 'Develop Custom Plugin',
     'plugins.cta.contribute': 'Contribute to Community',
+    'plugins.cta.docs': 'View Documentation',
+    'plugins.cta.github': 'GitHub',
 };

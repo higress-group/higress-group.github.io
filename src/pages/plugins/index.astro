@@ -2,7 +2,6 @@
 import SiteLayout from "../../layout/siteLayout.astro";
 import { PLUGINS, PLUGIN_CATEGORIES, type PluginCategory } from "../../utils/pSEOData";
 import { useTranslations } from "@/i18n/utils";
-import Button from "@/components/button/Button.astro";
 import { LINKS } from "@/constant";
 
 const locale = 'root';
@@ -30,148 +29,222 @@ const categoryIcons: Record<PluginCategory, string> = {
   traffic: '🚦',
   transformation: '🔄',
 };
-
-// 分类颜色映射 - 统一简洁边框样式
-const categoryColors: Record<PluginCategory, string> = {
-  ai: 'bg-white text-primary border-primary/40',
-  authentication: 'bg-white text-primary border-primary/40',
-  security: 'bg-white text-primary border-primary/40',
-  traffic: 'bg-white text-primary border-primary/40',
-  transformation: 'bg-white text-primary border-primary/40',
-};
 ---
 
 <SiteLayout title={title} description={description} keywords="Higress插件,API网关插件,Wasm插件,AI插件,认证鉴权,限流,WAF">
-  <div class="bg-gray-50 py-24 px-4 sm:px-6 lg:px-8">
+  <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
     <!-- Hero Section -->
-    <div class="max-w-7xl mx-auto text-center mb-16">
-      <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
-        {t('plugins.title')}
-      </h1>
-      <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-        {t('plugins.description')}
-      </p>
-    </div>
+    <div class="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl lg:text-6xl">
+          {t('plugins.hero.title')}
+        </h1>
+        <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+          {t('plugins.hero.description')}
+        </p>
 
-    <!-- Category Filter Tabs -->
-    <div class="max-w-7xl mx-auto mb-12">
-      <div class="flex flex-wrap justify-center gap-3" id="category-tabs">
-        <button 
-          data-category="all" 
-          class="category-tab px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-200 bg-primary text-white shadow-md"
-        >
-          {t('plugins.category.all')}
-        </button>
-        {PLUGIN_CATEGORIES.map(cat => (
-          <button 
-            data-category={cat.id}
-            class="category-tab px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-200 bg-white text-gray-600 border border-gray-200 hover:border-primary/50 hover:text-primary"
-          >
-            <span class="mr-1">{categoryIcons[cat.id]}</span>
-            {isZh ? cat.labelZh : cat.labelEn}
-          </button>
-        ))}
+        <!-- Search Bar -->
+        <div class="mt-10 max-w-2xl mx-auto relative group">
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center justify-center pointer-events-none z-10 w-14">
+              <svg class="h-5 w-5 text-primary transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <input
+              type="text"
+              id="plugin-search"
+              placeholder={t('plugins.search.placeholder')}
+              class="block w-full pl-14 pr-4 py-4 border-2 border-primary rounded-2xl leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-primary transition-all text-lg shadow-sm group-hover:shadow-md"
+            />
+          </div>
+          <div class="mt-4 flex justify-center gap-4 flex-wrap">
+            <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm border border-gray-100">
+              {t('plugins.stats.total')} <strong class="text-primary">{PLUGINS.length}</strong> {t('plugins.stats.plugins')}
+            </span>
+            <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm border border-gray-100">
+              {t('plugins.stats.covered')} <strong class="text-primary">{PLUGIN_CATEGORIES.length}</strong> {t('plugins.stats.categories')}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Plugins Grid -->
-    <div class="max-w-7xl mx-auto">
-      {pluginsByCategory.map(cat => (
-        <div class="category-section mb-16" data-category-section={cat.id}>
-          <div class="flex items-center gap-3 mb-8">
-            <span class="text-3xl">{categoryIcons[cat.id]}</span>
-            <h2 class="text-2xl font-bold text-gray-900">
+    <!-- Category Navigation -->
+    <div class="sticky top-16 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200 py-4 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide items-center">
+          <button
+            data-category-filter="all"
+            class="category-btn flex-shrink-0 px-5 py-2 rounded-full bg-primary text-white text-sm font-medium transition-all shadow-sm"
+          >
+            {t('plugins.category.all')}
+          </button>
+          {PLUGIN_CATEGORIES.map(cat => (
+            <button
+              data-category-filter={cat.id}
+              class="category-btn flex-shrink-0 px-5 py-2 rounded-full bg-gray-100 hover:bg-primary/10 hover:text-primary text-gray-700 text-sm font-medium transition-all"
+            >
+              <span class="mr-1.5">{categoryIcons[cat.id]}</span>
               {isZh ? cat.labelZh : cat.labelEn}
-            </h2>
-            <span class="px-3 py-1 bg-gray-100 text-gray-500 text-sm font-medium rounded-full">
-              {cat.plugins.length}
-            </span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Plugins by Category -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div id="no-results" class="hidden text-center py-20">
+        <div class="text-6xl mb-4">🔍</div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">{t('plugins.no_results.title')}</h3>
+        <p class="text-gray-500">{t('plugins.no_results.description')}</p>
+      </div>
+
+      {pluginsByCategory.map(cat => (
+        <section
+          data-category-section={cat.id}
+          class="mb-20 scroll-mt-36 transition-opacity duration-300"
+        >
+          <div class="flex items-center gap-4 mb-8">
+            <span class="text-4xl">{categoryIcons[cat.id]}</span>
+            <div>
+              <h2 class="text-3xl font-bold text-gray-900">{isZh ? cat.labelZh : cat.labelEn}</h2>
+              <p class="text-gray-600 mt-1">{isZh ? cat.descriptionZh : cat.descriptionEn}</p>
+            </div>
           </div>
-          
+
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cat.plugins.map(plugin => (
-              <a 
+              <a
                 href={`/docs/latest/${plugin.docPath}/`}
-                class="plugin-card group bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-lg hover:border-primary/30 transition duration-300"
-                data-plugin-category={plugin.category}
+                data-plugin-card
+                data-plugin-name={plugin.name.toLowerCase()}
+                data-plugin-name-en={plugin.nameEn.toLowerCase()}
+                data-plugin-description={plugin.description.toLowerCase()}
+                data-plugin-description-en={plugin.descriptionEn.toLowerCase()}
+                class="group bg-white rounded-xl border border-gray-200 p-6 hover:border-primary/30 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
               >
                 <div class="flex items-start justify-between mb-3">
-                  <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition">
+                  <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
                     {isZh ? plugin.name : plugin.nameEn}
                   </h3>
-                  <svg class="h-5 w-5 text-gray-400 group-hover:text-primary transition flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="h-5 w-5 text-gray-400 group-hover:text-primary group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                   </svg>
                 </div>
-                <p class="text-gray-600 text-sm line-clamp-2 mb-4">
+                <p class="text-sm text-gray-400 mb-3 font-medium uppercase tracking-wider">{plugin.nameEn}</p>
+                <p class="text-gray-600 text-sm line-clamp-3 leading-relaxed">
                   {isZh ? plugin.description : plugin.descriptionEn}
                 </p>
-                <div class="flex items-center justify-between">
-                  <span class={`inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-full border ${categoryColors[plugin.category]}`}>
-                    <span class="text-[10px]">{categoryIcons[plugin.category]}</span>
-                    {isZh ? PLUGIN_CATEGORIES.find(c => c.id === plugin.category)?.labelZh : PLUGIN_CATEGORIES.find(c => c.id === plugin.category)?.labelEn}
-                  </span>
-                  <span class="text-primary text-sm font-medium group-hover:underline">
-                    {t('plugins.view_docs')} →
-                  </span>
-                </div>
               </a>
             ))}
           </div>
-        </div>
+        </section>
       ))}
     </div>
 
     <!-- CTA Section -->
-    <div class="max-w-3xl mx-auto mt-16 text-center">
-      <div class="bg-gradient-to-r from-primary/5 to-purple-50 rounded-2xl p-10 border border-primary/10">
-        <div class="inline-flex items-center px-4 py-2 rounded-full bg-white text-primary text-sm font-semibold mb-6 shadow-sm">
-          <span class="mr-2">💡</span> {t('plugins.cta.title')}
-        </div>
+    <div class="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+          {t('plugins.cta.title')}
+        </h2>
         <p class="text-lg text-gray-600 mb-8">
           {t('plugins.cta.description')}
         </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <Button mode="primary" href="/docs/latest/plugins/custom/">
+        <div class="flex justify-center gap-4 flex-wrap">
+          <a
+            href="/docs/latest/plugins/custom/"
+            class="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition shadow-md hover:shadow-lg"
+          >
             {t('plugins.cta.custom_plugin')}
-          </Button>
-          <Button mode="normal" target="_blank" href={LINKS.higressGithub}>
+          </a>
+          <a
+            href={LINKS.higressGithub}
+            target="_blank"
+            class="px-8 py-3 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:border-primary hover:text-primary transition shadow-sm hover:shadow-md"
+          >
             {t('plugins.cta.contribute')}
-          </Button>
+          </a>
         </div>
       </div>
     </div>
   </div>
 </SiteLayout>
 
-<!-- Category Filter Script -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const tabs = document.querySelectorAll('.category-tab');
-    const sections = document.querySelectorAll('.category-section');
-    
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const category = tab.getAttribute('data-category');
-        
-        // Update tab styles
-        tabs.forEach(t => {
-          t.classList.remove('bg-primary', 'text-white', 'shadow-md');
-          t.classList.add('bg-white', 'text-gray-600', 'border', 'border-gray-200');
-        });
-        tab.classList.remove('bg-white', 'text-gray-600', 'border', 'border-gray-200');
-        tab.classList.add('bg-primary', 'text-white', 'shadow-md');
-        
-        // Show/hide sections
-        sections.forEach(section => {
-          const sectionCategory = section.getAttribute('data-category-section');
-          if (category === 'all' || sectionCategory === category) {
-            (section as HTMLElement).style.display = 'block';
-          } else {
-            (section as HTMLElement).style.display = 'none';
-          }
-        });
+  const searchInput = document.getElementById('plugin-search') as HTMLInputElement;
+  const categoryBtns = document.querySelectorAll('.category-btn');
+  const sections = document.querySelectorAll('[data-category-section]');
+  const cards = document.querySelectorAll('[data-plugin-card]');
+  const noResults = document.getElementById('no-results');
+
+  let currentCategory = 'all';
+  let currentSearch = '';
+
+  function filterPlugins() {
+    let hasVisiblePlugins = false;
+
+    sections.forEach(section => {
+      const categoryId = section.getAttribute('data-category-section');
+      const sectionCards = section.querySelectorAll('[data-plugin-card]');
+      let visibleInSection = false;
+
+      sectionCards.forEach(card => {
+        const name = card.getAttribute('data-plugin-name') || '';
+        const nameEn = card.getAttribute('data-plugin-name-en') || '';
+        const description = card.getAttribute('data-plugin-description') || '';
+        const descriptionEn = card.getAttribute('data-plugin-description-en') || '';
+
+        const matchesSearch = !currentSearch ||
+          name.includes(currentSearch) ||
+          nameEn.includes(currentSearch) ||
+          description.includes(currentSearch) ||
+          descriptionEn.includes(currentSearch);
+
+        const matchesCategory = currentCategory === 'all' || categoryId === currentCategory;
+
+        if (matchesSearch && matchesCategory) {
+          (card as HTMLElement).style.display = 'block';
+          visibleInSection = true;
+          hasVisiblePlugins = true;
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
       });
+
+      if (visibleInSection) {
+        (section as HTMLElement).style.display = 'block';
+      } else {
+        (section as HTMLElement).style.display = 'none';
+      }
+    });
+
+    if (noResults) {
+      noResults.classList.toggle('hidden', hasVisiblePlugins);
+    }
+  }
+
+  searchInput?.addEventListener('input', (e) => {
+    currentSearch = (e.target as HTMLInputElement).value.toLowerCase();
+    filterPlugins();
+  });
+
+  categoryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const categoryId = btn.getAttribute('data-category-filter') || 'all';
+
+      // Update UI
+      categoryBtns.forEach(b => {
+        b.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+        b.classList.add('bg-gray-100', 'text-gray-700');
+      });
+      btn.classList.add('bg-primary', 'text-white', 'shadow-sm');
+      btn.classList.remove('bg-gray-100', 'text-gray-700');
+
+      currentCategory = categoryId;
+      filterPlugins();
     });
   });
 </script>
@@ -210,3 +283,13 @@ const categoryColors: Record<PluginCategory, string> = {
     }
   ]
 })} />
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
