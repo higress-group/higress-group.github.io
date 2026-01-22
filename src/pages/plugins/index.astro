@@ -1,0 +1,214 @@
+---
+import SiteLayout from "../../layout/siteLayout.astro";
+import { PLUGINS, PLUGIN_CATEGORIES, type PluginCategory } from "../../utils/pSEOData";
+import { useTranslations } from "@/i18n/utils";
+import Button from "@/components/button/Button.astro";
+import { LINKS } from "@/constant";
+
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
+const isZh = locale === 'root' || locale === 'zh-cn';
+
+const title = isZh 
+  ? "Higress 插件市场 - 丰富的网关插件生态" 
+  : "Higress Plugin Marketplace - Rich Gateway Plugin Ecosystem";
+const description = isZh
+  ? "探索 Higress 官方插件库，涵盖 AI、认证鉴权、安全防护、流量管理等 40+ 款插件，满足 90% 以上的业务场景需求。"
+  : "Explore Higress official plugin library with 40+ plugins covering AI, authentication, security, traffic management and more.";
+
+// 按分类分组插件
+const pluginsByCategory = PLUGIN_CATEGORIES.map(cat => ({
+  ...cat,
+  plugins: PLUGINS.filter(p => p.category === cat.id)
+}));
+
+// 分类图标映射
+const categoryIcons: Record<PluginCategory, string> = {
+  ai: '🤖',
+  authentication: '🔐',
+  security: '🛡️',
+  traffic: '🚦',
+  transformation: '🔄',
+};
+
+// 分类颜色映射
+const categoryColors: Record<PluginCategory, string> = {
+  ai: 'bg-purple-100 text-purple-700 border-purple-200',
+  authentication: 'bg-blue-100 text-blue-700 border-blue-200',
+  security: 'bg-red-100 text-red-700 border-red-200',
+  traffic: 'bg-green-100 text-green-700 border-green-200',
+  transformation: 'bg-orange-100 text-orange-700 border-orange-200',
+};
+---
+
+<SiteLayout title={title} description={description} keywords="Higress插件,API网关插件,Wasm插件,AI插件,认证鉴权,限流,WAF">
+  <div class="bg-gray-50 py-24 px-4 sm:px-6 lg:px-8">
+    <!-- Hero Section -->
+    <div class="max-w-7xl mx-auto text-center mb-16">
+      <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
+        <span class="mr-2">🔌</span> {PLUGINS.length} {t('plugins.plugin_count')}
+      </div>
+      <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+        {t('plugins.title')}
+      </h1>
+      <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+        {t('plugins.description')}
+      </p>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="max-w-7xl mx-auto mb-12">
+      <div class="flex flex-wrap justify-center gap-3" id="category-tabs">
+        <button 
+          data-category="all" 
+          class="category-tab px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-200 bg-primary text-white shadow-md"
+        >
+          {t('plugins.category.all')}
+        </button>
+        {PLUGIN_CATEGORIES.map(cat => (
+          <button 
+            data-category={cat.id}
+            class="category-tab px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-200 bg-white text-gray-600 border border-gray-200 hover:border-primary/50 hover:text-primary"
+          >
+            <span class="mr-1">{categoryIcons[cat.id]}</span>
+            {isZh ? cat.labelZh : cat.labelEn}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Plugins Grid -->
+    <div class="max-w-7xl mx-auto">
+      {pluginsByCategory.map(cat => (
+        <div class="category-section mb-16" data-category-section={cat.id}>
+          <div class="flex items-center gap-3 mb-8">
+            <span class="text-3xl">{categoryIcons[cat.id]}</span>
+            <h2 class="text-2xl font-bold text-gray-900">
+              {isZh ? cat.labelZh : cat.labelEn}
+            </h2>
+            <span class="px-3 py-1 bg-gray-100 text-gray-500 text-sm font-medium rounded-full">
+              {cat.plugins.length}
+            </span>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {cat.plugins.map(plugin => (
+              <a 
+                href={`/docs/latest/${plugin.docPath}/`}
+                class="plugin-card group bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-lg hover:border-primary/30 transition duration-300"
+                data-plugin-category={plugin.category}
+              >
+                <div class="flex items-start justify-between mb-3">
+                  <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition">
+                    {isZh ? plugin.name : plugin.nameEn}
+                  </h3>
+                  <svg class="h-5 w-5 text-gray-400 group-hover:text-primary transition flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                <p class="text-gray-600 text-sm line-clamp-2 mb-4">
+                  {isZh ? plugin.description : plugin.descriptionEn}
+                </p>
+                <div class="flex items-center justify-between">
+                  <span class={`px-2.5 py-1 text-xs font-medium rounded-full border ${categoryColors[plugin.category]}`}>
+                    {isZh ? PLUGIN_CATEGORIES.find(c => c.id === plugin.category)?.labelZh : PLUGIN_CATEGORIES.find(c => c.id === plugin.category)?.labelEn}
+                  </span>
+                  <span class="text-primary text-sm font-medium group-hover:underline">
+                    {t('plugins.view_docs')} →
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA Section -->
+    <div class="max-w-3xl mx-auto mt-16 text-center">
+      <div class="bg-gradient-to-r from-primary/5 to-purple-50 rounded-2xl p-10 border border-primary/10">
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-white text-primary text-sm font-semibold mb-6 shadow-sm">
+          <span class="mr-2">💡</span> {t('plugins.cta.title')}
+        </div>
+        <p class="text-lg text-gray-600 mb-8">
+          {t('plugins.cta.description')}
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <Button mode="primary" href="/docs/latest/plugins/custom/">
+            {t('plugins.cta.custom_plugin')}
+          </Button>
+          <Button mode="normal" target="_blank" href={LINKS.higressGithub}>
+            {t('plugins.cta.contribute')}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</SiteLayout>
+
+<!-- Category Filter Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.category-tab');
+    const sections = document.querySelectorAll('.category-section');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const category = tab.getAttribute('data-category');
+        
+        // Update tab styles
+        tabs.forEach(t => {
+          t.classList.remove('bg-primary', 'text-white', 'shadow-md');
+          t.classList.add('bg-white', 'text-gray-600', 'border', 'border-gray-200');
+        });
+        tab.classList.remove('bg-white', 'text-gray-600', 'border', 'border-gray-200');
+        tab.classList.add('bg-primary', 'text-white', 'shadow-md');
+        
+        // Show/hide sections
+        sections.forEach(section => {
+          const sectionCategory = section.getAttribute('data-category-section');
+          if (category === 'all' || sectionCategory === category) {
+            (section as HTMLElement).style.display = 'block';
+          } else {
+            (section as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<!-- SEO: Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": title,
+  "description": description,
+  "numberOfItems": PLUGINS.length,
+  "itemListElement": PLUGINS.slice(0, 10).map((plugin, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": isZh ? plugin.name : plugin.nameEn,
+    "description": isZh ? plugin.description : plugin.descriptionEn,
+    "url": `https://higress.ai/docs/latest/${plugin.docPath}/`
+  }))
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": isZh ? "首页" : "Home",
+      "item": "https://higress.ai/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": isZh ? "插件市场" : "Plugin Marketplace",
+      "item": "https://higress.ai/plugins/"
+    }
+  ]
+})} />

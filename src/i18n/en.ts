@@ -748,4 +748,20 @@ export default {
     'glossary.category.cloud-native.description': 'Kubernetes, containers, and microservices concepts',
     'glossary.category.security': 'Security',
     'glossary.category.security.description': 'Authentication, authorization, and security protection terms',
+
+    // Plugins Directory Page
+    'plugins.title': 'Higress Plugin Marketplace',
+    'plugins.description': 'Rich official plugin library covering AI, traffic management, security and more, meeting over 90% of business scenarios',
+    'plugins.category.all': 'All Plugins',
+    'plugins.category.ai': 'AI Plugins',
+    'plugins.category.authentication': 'Authentication',
+    'plugins.category.security': 'Security',
+    'plugins.category.traffic': 'Traffic Management',
+    'plugins.category.transformation': 'Transformation',
+    'plugins.view_docs': 'View Docs',
+    'plugins.plugin_count': 'plugins',
+    'plugins.cta.title': "Can't find the plugin you need?",
+    'plugins.cta.description': 'Higress supports developing custom Wasm plugins in multiple languages to easily extend gateway capabilities',
+    'plugins.cta.custom_plugin': 'Develop Custom Plugin',
+    'plugins.cta.contribute': 'Contribute to Community',
 };

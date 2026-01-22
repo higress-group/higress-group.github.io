@@ -755,4 +755,20 @@ export default {
     'glossary.category.cloud-native.description': 'Kubernetes、容器和微服务相关概念',
     'glossary.category.security': '安全认证',
     'glossary.category.security.description': '身份认证、授权和安全防护相关术语',
+
+    // Plugins Directory Page
+    'plugins.title': 'Higress 插件市场',
+    'plugins.description': '丰富的官方插件库，覆盖 AI、流量管理、安全防护等常见功能，满足 90% 以上的业务场景需求',
+    'plugins.category.all': '全部插件',
+    'plugins.category.ai': 'AI 插件',
+    'plugins.category.authentication': '认证鉴权',
+    'plugins.category.security': '安全防护',
+    'plugins.category.traffic': '流量管理',
+    'plugins.category.transformation': '请求转换',
+    'plugins.view_docs': '查看文档',
+    'plugins.plugin_count': '款插件',
+    'plugins.cta.title': '没有找到您需要的插件？',
+    'plugins.cta.description': 'Higress 支持使用多种语言开发自定义 Wasm 插件，轻松扩展网关能力',
+    'plugins.cta.custom_plugin': '开发自定义插件',
+    'plugins.cta.contribute': '贡献插件到社区',
 };
