@@ -198,6 +198,57 @@
             },
             "collapsed": true,
             "link": "docs/plugins/custom"
+          },
+          {
+            "label": "Wasm 插件开发",
+            "translations": {
+              "en": "Wasm Plugin Development"
+            },
+            "collapsed": true,
+            "items": [
+              {
+                "label": "Wasm 插件介绍和开发自定义插件",
+                "translations": {
+                  "en": "Wasm Plugin Introduction"
+                },
+                "link": "docs/plugins/wasm-dev/wasm14"
+              },
+              {
+                "label": "Wasm 插件原理",
+                "translations": {
+                  "en": "Wasm Plugin Principle"
+                },
+                "link": "docs/plugins/wasm-dev/wasm15"
+              },
+              {
+                "label": "Higress 插件 Go SDK 与处理流程",
+                "translations": {
+                  "en": "Higress Go SDK Processing"
+                },
+                "link": "docs/plugins/wasm-dev/wasm16"
+              },
+              {
+                "label": "HTTP 调用",
+                "translations": {
+                  "en": "HTTP Call"
+                },
+                "link": "docs/plugins/wasm-dev/wasm17"
+              },
+              {
+                "label": "Redis 调用",
+                "translations": {
+                  "en": "Redis Call"
+                },
+                "link": "docs/plugins/wasm-dev/wasm18"
+              },
+              {
+                "label": "Wasm 生效原理",
+                "translations": {
+                  "en": "Wasm Effective Principle"
+                },
+                "link": "docs/plugins/wasm-dev/wasm19"
+              }
+            ]
           }
         ]
       },

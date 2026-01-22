@@ -139,7 +139,6 @@ export default defineConfig({
   },
 
   redirects: {
-    '/zh-cn/': '/',
 		'/en-us/': '/en/',
 		'/en/ai/': '/en/ai/quick-start',
     '/docs/': '/docs/latest/overview/what-is-higress/',
