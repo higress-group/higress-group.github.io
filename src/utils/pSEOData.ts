@@ -113,7 +113,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '统一的 AI 模型代理，支持多种大模型提供商，实现协议转换和负载均衡',
     descriptionEn: 'Unified AI model proxy supporting multiple LLM providers with protocol conversion and load balancing',
-    docPath: 'plugins/ai/api-provider/ai-proxy',
+    docPath: 'user/plugins/ai/api-provider/ai-proxy',
   },
   {
     id: 'ai-cache',
@@ -122,7 +122,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: 'LLM 结果缓存，支持语义化缓存和字符串匹配缓存，降低调用成本',
     descriptionEn: 'LLM response caching with semantic and string-matching support to reduce API costs',
-    docPath: 'plugins/ai/api-provider/ai-cache',
+    docPath: 'user/plugins/ai/api-provider/ai-cache',
   },
   {
     id: 'ai-token-ratelimit',
@@ -131,7 +131,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '基于 Token 的限流策略，精确控制 AI 调用成本和并发',
     descriptionEn: 'Token-based rate limiting for precise AI cost and concurrency control',
-    docPath: 'plugins/ai/api-consumer/ai-token-ratelimit',
+    docPath: 'user/plugins/ai/api-consumer/ai-token-ratelimit',
   },
   {
     id: 'ai-quota',
@@ -140,7 +140,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '管理调用方的 AI 使用配额，支持多维度配额策略',
     descriptionEn: 'Manage AI usage quotas for consumers with multi-dimensional quota policies',
-    docPath: 'plugins/ai/api-consumer/ai-quota',
+    docPath: 'user/plugins/ai/api-consumer/ai-quota',
   },
   {
     id: 'ai-data-masking',
@@ -149,7 +149,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '对请求/返回中的敏感词进行拦截或替换，保护敏感数据不出域',
     descriptionEn: 'Intercept or replace sensitive data in requests/responses to protect privacy',
-    docPath: 'plugins/ai/api-consumer/ai-data-masking',
+    docPath: 'user/plugins/ai/api-consumer/ai-data-masking',
   },
   {
     id: 'ai-prompt-decorator',
@@ -158,7 +158,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '在请求中自动添加系统提示词或前后缀，增强模型输出',
     descriptionEn: 'Automatically add system prompts or prefixes/suffixes to enhance model output',
-    docPath: 'plugins/ai/api-provider/ai-prompt-decorator',
+    docPath: 'user/plugins/ai/api-provider/ai-prompt-decorator',
   },
   {
     id: 'ai-prompt-template',
@@ -167,7 +167,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '使用预定义的提示词模版，简化 AI 应用开发',
     descriptionEn: 'Use predefined prompt templates to simplify AI application development',
-    docPath: 'plugins/ai/api-dev/ai-prompt-template',
+    docPath: 'user/plugins/ai/api-dev/ai-prompt-template',
   },
   {
     id: 'ai-security-guard',
@@ -176,7 +176,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '集成阿里云内容安全服务，对 AI 输入输出进行安全检测',
     descriptionEn: 'Integrate with Alibaba Cloud content security for AI input/output safety detection',
-    docPath: 'plugins/ai/api-provider/ai-security-guard',
+    docPath: 'user/plugins/ai/api-provider/ai-security-guard',
   },
   {
     id: 'ai-statistics',
@@ -185,7 +185,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '收集 AI 调用的统计指标，支持 Token 用量、延迟等多维度监控',
     descriptionEn: 'Collect AI call metrics including token usage, latency and multi-dimensional monitoring',
-    docPath: 'plugins/ai/api-o11y/ai-statistics',
+    docPath: 'user/plugins/ai/api-o11y/ai-statistics',
   },
   {
     id: 'ai-agent',
@@ -194,7 +194,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '支持 AI Agent 模式，实现工具调用和多轮对话编排',
     descriptionEn: 'Support AI Agent mode with tool calling and multi-turn conversation orchestration',
-    docPath: 'plugins/ai/api-dev/ai-agent',
+    docPath: 'user/plugins/ai/api-dev/ai-agent',
   },
   {
     id: 'ai-search',
@@ -203,7 +203,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '为 AI 模型提供联网搜索能力，增强实时信息获取',
     descriptionEn: 'Provide web search capabilities for AI models to enhance real-time information retrieval',
-    docPath: 'plugins/ai/api-dev/ai-search',
+    docPath: 'user/plugins/ai/api-dev/ai-search',
   },
   {
     id: 'ai-json-resp',
@@ -212,7 +212,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '强制 AI 返回结构化 JSON 格式，便于下游解析处理',
     descriptionEn: 'Force AI to return structured JSON format for easier downstream parsing',
-    docPath: 'plugins/ai/api-dev/ai-json-resp',
+    docPath: 'user/plugins/ai/api-dev/ai-json-resp',
   },
   {
     id: 'ai-history',
@@ -221,7 +221,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '自动管理多轮对话历史，支持上下文窗口控制',
     descriptionEn: 'Automatically manage multi-turn conversation history with context window control',
-    docPath: 'plugins/ai/others/ai-history',
+    docPath: 'user/plugins/ai/others/ai-history',
   },
   {
     id: 'ai-intent',
@@ -230,7 +230,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '识别用户意图，实现智能路由和分流',
     descriptionEn: 'Identify user intent for intelligent routing and traffic splitting',
-    docPath: 'plugins/ai/others/ai-intent',
+    docPath: 'user/plugins/ai/others/ai-intent',
   },
   {
     id: 'ai-rag',
@@ -239,7 +239,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '检索增强生成，结合知识库增强 AI 回答准确性',
     descriptionEn: 'Retrieval-Augmented Generation to enhance AI answer accuracy with knowledge bases',
-    docPath: 'plugins/ai/others/ai-rag',
+    docPath: 'user/plugins/ai/others/ai-rag',
   },
   {
     id: 'ai-transformer',
@@ -248,7 +248,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '灵活转换 AI 请求和响应格式，适配不同模型协议',
     descriptionEn: 'Flexibly transform AI request/response formats to adapt different model protocols',
-    docPath: 'plugins/ai/others/ai-transformer',
+    docPath: 'user/plugins/ai/others/ai-transformer',
   },
   {
     id: 'geo-ip',
@@ -257,7 +257,7 @@ export const PLUGINS: Plugin[] = [
     category: 'ai',
     description: '解析客户端 IP 地理位置信息，支持基于地域的访问控制',
     descriptionEn: 'Parse client IP geolocation for region-based access control',
-    docPath: 'plugins/ai/api-o11y/geo-ip',
+    docPath: 'user/plugins/ai/api-o11y/geo-ip',
   },
 
   // 认证鉴权插件
@@ -268,7 +268,7 @@ export const PLUGINS: Plugin[] = [
     category: 'authentication',
     description: '基于 JWT 的认证鉴权，支持多调用方配置和细粒度权限控制',
     descriptionEn: 'JWT-based authentication with multi-consumer configuration and fine-grained access control',
-    docPath: 'plugins/authentication/jwt-auth',
+    docPath: 'user/plugins/authentication/jwt-auth',
   },
   {
     id: 'key-auth',
@@ -277,7 +277,7 @@ export const PLUGINS: Plugin[] = [
     category: 'authentication',
     description: '基于 API Key 的简单认证方式，支持多种密钥传递方式',
     descriptionEn: 'Simple API Key-based authentication supporting multiple key delivery methods',
-    docPath: 'plugins/authentication/key-auth',
+    docPath: 'user/plugins/authentication/key-auth',
   },
   {
     id: 'basic-auth',
@@ -286,7 +286,7 @@ export const PLUGINS: Plugin[] = [
     category: 'authentication',
     description: 'HTTP Basic 认证，通过用户名密码进行身份验证',
     descriptionEn: 'HTTP Basic authentication with username and password verification',
-    docPath: 'plugins/authentication/basic-auth',
+    docPath: 'user/plugins/authentication/basic-auth',
   },
   {
     id: 'hmac-auth',
@@ -295,7 +295,7 @@ export const PLUGINS: Plugin[] = [
     category: 'authentication',
     description: '基于 HMAC 签名的认证方式，提供更高安全性',
     descriptionEn: 'HMAC signature-based authentication for enhanced security',
-    docPath: 'plugins/authentication/hmac-auth',
+    docPath: 'user/plugins/authentication/hmac-auth',
   },
   {
     id: 'oauth',
@@ -304,7 +304,7 @@ export const PLUGINS: Plugin[] = [
     category: 'authentication',
     description: '支持 OAuth2.0 协议，实现第三方授权登录',
     descriptionEn: 'OAuth 2.0 protocol support for third-party authorization',
-    docPath: 'plugins/authentication/oauth',
+    docPath: 'user/plugins/authentication/oauth',
   },
   {
     id: 'oidc',
@@ -313,7 +313,7 @@ export const PLUGINS: Plugin[] = [
     category: 'authentication',
     description: 'OpenID Connect 认证，支持主流身份提供商集成',
     descriptionEn: 'OpenID Connect authentication with major identity provider integration',
-    docPath: 'plugins/authentication/oidc',
+    docPath: 'user/plugins/authentication/oidc',
   },
   {
     id: 'ext-auth',
@@ -322,7 +322,7 @@ export const PLUGINS: Plugin[] = [
     category: 'authentication',
     description: '将认证请求转发到外部服务，实现自定义认证逻辑',
     descriptionEn: 'Forward authentication requests to external services for custom auth logic',
-    docPath: 'plugins/authentication/ext-auth',
+    docPath: 'user/plugins/authentication/ext-auth',
   },
   {
     id: 'opa',
@@ -331,7 +331,7 @@ export const PLUGINS: Plugin[] = [
     category: 'authentication',
     description: '基于 Open Policy Agent 的策略控制，实现灵活的访问决策',
     descriptionEn: 'Open Policy Agent-based policy control for flexible access decisions',
-    docPath: 'plugins/authentication/opa',
+    docPath: 'user/plugins/authentication/opa',
   },
   {
     id: 'hmac-auth-apisix',
@@ -340,7 +340,7 @@ export const PLUGINS: Plugin[] = [
     category: 'authentication',
     description: '兼容 APISIX 的 HMAC 认证格式，便于迁移',
     descriptionEn: 'APISIX-compatible HMAC authentication format for easy migration',
-    docPath: 'plugins/authentication/hmac-auth-apisix',
+    docPath: 'user/plugins/authentication/hmac-auth-apisix',
   },
 
   // 安全防护插件
@@ -351,7 +351,7 @@ export const PLUGINS: Plugin[] = [
     category: 'security',
     description: '基于 ModSecurity 的 Web 应用防火墙，支持 OWASP CRS 规则',
     descriptionEn: 'ModSecurity-based WAF with OWASP CRS rules support',
-    docPath: 'plugins/security/waf',
+    docPath: 'user/plugins/security/waf',
   },
   {
     id: 'cors',
@@ -360,7 +360,7 @@ export const PLUGINS: Plugin[] = [
     category: 'security',
     description: '配置 CORS 响应头，控制跨域资源访问策略',
     descriptionEn: 'Configure CORS response headers to control cross-origin resource access',
-    docPath: 'plugins/security/cors',
+    docPath: 'user/plugins/security/cors',
   },
   {
     id: 'ip-restriction',
@@ -369,7 +369,7 @@ export const PLUGINS: Plugin[] = [
     category: 'security',
     description: '基于 IP 地址的黑白名单控制，限制或允许特定 IP 访问',
     descriptionEn: 'IP-based blacklist/whitelist control to restrict or allow specific IP access',
-    docPath: 'plugins/security/ip-restriction',
+    docPath: 'user/plugins/security/ip-restriction',
   },
   {
     id: 'bot-detect',
@@ -378,7 +378,7 @@ export const PLUGINS: Plugin[] = [
     category: 'security',
     description: '检测并拦截机器人流量，保护服务免受爬虫攻击',
     descriptionEn: 'Detect and block bot traffic to protect services from crawler attacks',
-    docPath: 'plugins/security/bot-detect',
+    docPath: 'user/plugins/security/bot-detect',
   },
   {
     id: 'request-block',
@@ -387,7 +387,7 @@ export const PLUGINS: Plugin[] = [
     category: 'security',
     description: '基于规则屏蔽特定请求，支持 URL、Header 等多维度匹配',
     descriptionEn: 'Block specific requests based on rules with URL, Header and multi-dimensional matching',
-    docPath: 'plugins/security/request-block',
+    docPath: 'user/plugins/security/request-block',
   },
   {
     id: 'replay-protection',
@@ -396,7 +396,7 @@ export const PLUGINS: Plugin[] = [
     category: 'security',
     description: '防止请求重放攻击，保护 API 安全',
     descriptionEn: 'Prevent request replay attacks to protect API security',
-    docPath: 'plugins/security/replay-protection',
+    docPath: 'user/plugins/security/replay-protection',
   },
 
   // 流量管理插件
@@ -407,7 +407,7 @@ export const PLUGINS: Plugin[] = [
     category: 'traffic',
     description: '基于 Key 的分布式集群限流，支持 Redis 存储',
     descriptionEn: 'Key-based distributed cluster rate limiting with Redis storage',
-    docPath: 'plugins/traffic/cluster-key-rate-limit',
+    docPath: 'user/plugins/traffic/cluster-key-rate-limit',
   },
   {
     id: 'key-rate-limit',
@@ -416,7 +416,7 @@ export const PLUGINS: Plugin[] = [
     category: 'traffic',
     description: '基于 Key 的本地限流，无需外部依赖',
     descriptionEn: 'Key-based local rate limiting without external dependencies',
-    docPath: 'plugins/traffic/key-rate-limit',
+    docPath: 'user/plugins/traffic/key-rate-limit',
   },
   {
     id: 'traffic-tag',
@@ -425,7 +425,7 @@ export const PLUGINS: Plugin[] = [
     category: 'traffic',
     description: '为流量添加标签，支持灰度发布和流量分组',
     descriptionEn: 'Add tags to traffic for canary releases and traffic grouping',
-    docPath: 'plugins/traffic/traffic-tag',
+    docPath: 'user/plugins/traffic/traffic-tag',
   },
   {
     id: 'request-validation',
@@ -434,7 +434,7 @@ export const PLUGINS: Plugin[] = [
     category: 'traffic',
     description: '校验请求格式和参数，确保请求符合预期规范',
     descriptionEn: 'Validate request format and parameters to ensure compliance with expected specifications',
-    docPath: 'plugins/traffic/request-validation',
+    docPath: 'user/plugins/traffic/request-validation',
   },
 
   // 请求转换插件
@@ -445,7 +445,7 @@ export const PLUGINS: Plugin[] = [
     category: 'transformation',
     description: '灵活转换请求和响应内容，支持添加、删除、修改 Header 和 Body',
     descriptionEn: 'Flexibly transform request/response content with Header and Body modifications',
-    docPath: 'plugins/transformation/transformer',
+    docPath: 'user/plugins/transformation/transformer',
   },
   {
     id: 'de-graphql',
@@ -454,7 +454,7 @@ export const PLUGINS: Plugin[] = [
     category: 'transformation',
     description: '将 RESTful 请求转换为 GraphQL 查询',
     descriptionEn: 'Convert RESTful requests to GraphQL queries',
-    docPath: 'plugins/transformation/de-graphql',
+    docPath: 'user/plugins/transformation/de-graphql',
   },
   {
     id: 'custom-response',
@@ -463,7 +463,7 @@ export const PLUGINS: Plugin[] = [
     category: 'transformation',
     description: '自定义返回响应内容，可用于 Mock 测试或静态响应',
     descriptionEn: 'Customize response content for mock testing or static responses',
-    docPath: 'plugins/transformation/custom-response',
+    docPath: 'user/plugins/transformation/custom-response',
   },
   {
     id: 'frontend-gray',
@@ -472,7 +472,7 @@ export const PLUGINS: Plugin[] = [
     category: 'transformation',
     description: '前端资源灰度发布，支持多版本并行部署',
     descriptionEn: 'Frontend resource canary release with multi-version parallel deployment',
-    docPath: 'plugins/transformation/frontend-gray',
+    docPath: 'user/plugins/transformation/frontend-gray',
   },
   {
     id: 'cache-control',
@@ -481,6 +481,6 @@ export const PLUGINS: Plugin[] = [
     category: 'transformation',
     description: '设置浏览器缓存相关响应头，优化资源加载性能',
     descriptionEn: 'Set browser cache response headers to optimize resource loading performance',
-    docPath: 'plugins/transformation/cache-control',
+    docPath: 'user/plugins/transformation/cache-control',
   },
 ];

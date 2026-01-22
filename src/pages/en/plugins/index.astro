@@ -1,20 +1,16 @@
 ---
-import SiteLayout from "../../layout/siteLayout.astro";
-import { PLUGINS, PLUGIN_CATEGORIES, type PluginCategory } from "../../utils/pSEOData";
+import SiteLayout from "../../../layout/siteLayout.astro";
+import { PLUGINS, PLUGIN_CATEGORIES, type PluginCategory } from "../../../utils/pSEOData";
 import { useTranslations } from "@/i18n/utils";
 import Button from "@/components/button/Button.astro";
 import { LINKS } from "@/constant";
 
-const locale = 'root';
+const locale = 'en';
 const t = useTranslations(locale);
-const isZh = true;
+const isZh = false;
 
-const title = isZh 
-  ? "Higress 插件市场 - 丰富的网关插件生态" 
-  : "Higress Plugin Marketplace - Rich Gateway Plugin Ecosystem";
-const description = isZh
-  ? "探索 Higress 官方插件库，涵盖 AI、认证鉴权、安全防护、流量管理等 40+ 款插件，满足 90% 以上的业务场景需求。"
-  : "Explore Higress official plugin library with 40+ plugins covering AI, authentication, security, traffic management and more.";
+const title = "Higress Plugin Marketplace - Rich Gateway Plugin Ecosystem";
+const description = "Explore Higress official plugin library with 40+ plugins covering AI, authentication, security, traffic management and more.";
 
 // 按分类分组插件
 const pluginsByCategory = PLUGIN_CATEGORIES.map(cat => ({
@@ -41,7 +37,7 @@ const categoryColors: Record<PluginCategory, string> = {
 };
 ---
 
-<SiteLayout title={title} description={description} keywords="Higress插件,API网关插件,Wasm插件,AI插件,认证鉴权,限流,WAF">
+<SiteLayout title={title} description={description} keywords="Higress plugins,API gateway plugins,Wasm plugins,AI plugins,authentication,rate limiting,WAF">
   <div class="bg-gray-50 py-24 px-4 sm:px-6 lg:px-8">
     <!-- Hero Section -->
     <div class="max-w-7xl mx-auto text-center mb-16">
@@ -68,7 +64,7 @@ const categoryColors: Record<PluginCategory, string> = {
             class="category-tab px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-200 bg-white text-gray-600 border border-gray-200 hover:border-primary/50 hover:text-primary"
           >
             <span class="mr-1">{categoryIcons[cat.id]}</span>
-            {isZh ? cat.labelZh : cat.labelEn}
+            {cat.labelEn}
           </button>
         ))}
       </div>
@@ -81,7 +77,7 @@ const categoryColors: Record<PluginCategory, string> = {
           <div class="flex items-center gap-3 mb-8">
             <span class="text-3xl">{categoryIcons[cat.id]}</span>
             <h2 class="text-2xl font-bold text-gray-900">
-              {isZh ? cat.labelZh : cat.labelEn}
+              {cat.labelEn}
             </h2>
             <span class="px-3 py-1 bg-gray-100 text-gray-500 text-sm font-medium rounded-full">
               {cat.plugins.length}
@@ -97,19 +93,19 @@ const categoryColors: Record<PluginCategory, string> = {
               >
                 <div class="flex items-start justify-between mb-3">
                   <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition">
-                    {isZh ? plugin.name : plugin.nameEn}
+                    {plugin.nameEn}
                   </h3>
                   <svg class="h-5 w-5 text-gray-400 group-hover:text-primary transition flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                   </svg>
                 </div>
                 <p class="text-gray-600 text-sm line-clamp-2 mb-4">
-                  {isZh ? plugin.description : plugin.descriptionEn}
+                  {plugin.descriptionEn}
                 </p>
                 <div class="flex items-center justify-between">
                   <span class={`inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-full border ${categoryColors[plugin.category]}`}>
                     <span class="text-[10px]">{categoryIcons[plugin.category]}</span>
-                    {isZh ? PLUGIN_CATEGORIES.find(c => c.id === plugin.category)?.labelZh : PLUGIN_CATEGORIES.find(c => c.id === plugin.category)?.labelEn}
+                    {PLUGIN_CATEGORIES.find(c => c.id === plugin.category)?.labelEn}
                   </span>
                   <span class="text-primary text-sm font-medium group-hover:underline">
                     {t('plugins.view_docs')} →
@@ -186,8 +182,8 @@ const categoryColors: Record<PluginCategory, string> = {
   "itemListElement": PLUGINS.slice(0, 10).map((plugin, index) => ({
     "@type": "ListItem",
     "position": index + 1,
-    "name": isZh ? plugin.name : plugin.nameEn,
-    "description": isZh ? plugin.description : plugin.descriptionEn,
+    "name": plugin.nameEn,
+    "description": plugin.descriptionEn,
     "url": `https://higress.ai/docs/latest/${plugin.docPath}/`
   }))
 })} />
@@ -199,14 +195,14 @@ const categoryColors: Record<PluginCategory, string> = {
     {
       "@type": "ListItem",
       "position": 1,
-      "name": isZh ? "首页" : "Home",
-      "item": "https://higress.ai/"
+      "name": "Home",
+      "item": "https://higress.ai/en/"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": isZh ? "插件市场" : "Plugin Marketplace",
-      "item": "https://higress.ai/plugins/"
+      "name": "Plugin Marketplace",
+      "item": "https://higress.ai/en/plugins/"
     }
   ]
 })} />
