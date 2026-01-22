@@ -7,6 +7,7 @@ import { useTranslations, localizeUrl } from "../i18n/utils";
 import Button from '../components/button/Button.astro';
 import MobileNavbar from './mobile/MobileNavbar.astro';
 import { LINKS } from '@/constant';
+import { getNavbarConfig, isHomePage } from '../utils/navbarConfig';
 
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
@@ -15,11 +16,10 @@ const currentPath = Astro.url.pathname;
 const isEnglish = currentPath === '/en' || currentPath.startsWith('/en/');
 const homeUrl = isEnglish ? '/en' : '/';
 
-// Determine if we are on the home page
-const isHome = currentPath === '/' || currentPath === '/en' || currentPath === '/en/';
-const isProducts = /himarket|ai-gateway|api-gateway|blog|glossary/.test(currentPath);
-// Set default to transparent for all pages. Scroll effect only applies to Home.
-const navClass = "bg-transparent";
+// 获取当前页面的导航栏配置
+const navbarConfig = getNavbarConfig(currentPath);
+const isHome = isHomePage(currentPath);
+const navClass = navbarConfig.initialBackground;
 
 const navItems = [
   {
@@ -87,7 +87,7 @@ const isItemActive = (item: any) => {
 };
 ---
 
-<nav id="main-nav" class:list={["fixed top-0 left-0 right-0 z-50 transition-all duration-300", navClass]} data-is-home={String(isHome || isProducts)}>
+<nav id="main-nav" class:list={["fixed top-0 left-0 right-0 z-50 transition-all duration-300", navClass]} data-is-home={String(isHome)}>
   <div class="mx-auto px-4 lg:px-10">
     <div class="flex h-16 items-center justify-between">
       <!-- Left: Logo -->
@@ -175,23 +175,30 @@ const isItemActive = (item: any) => {
 </nav>
 
 <script>
+  import { getNavbarConfig } from '../utils/navbarConfig';
+  
   const nav = document.getElementById('main-nav');
-  const isHome = nav?.dataset.isHome === 'true';
 
-  // Scroll effect logic
-  if ((isHome) && nav) {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        nav.classList.remove('bg-transparent');
-        nav.classList.add('bg-white/20', 'backdrop-blur-sm', 'shadow-sm');
-      } else {
-        nav.classList.add('bg-transparent');
-        nav.classList.remove('bg-white/20', 'backdrop-blur-sm', 'shadow-sm');
-      }
-    };
+  if (nav) {
+    // 获取当前页面的导航栏配置
+    const currentPath = window.location.pathname;
+    const config = getNavbarConfig(currentPath);
+    
+    if (config.enableScrollEffect) {
+      const handleScroll = () => {
+        if (window.scrollY > config.scrollThreshold) {
+          nav.classList.remove(config.initialBackground);
+          nav.classList.add(...config.scrollClasses);
+        } else {
+          nav.classList.add(config.initialBackground);
+          nav.classList.remove(...config.scrollClasses);
+        }
+      };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
+      window.addEventListener('scroll', handleScroll);
+      // Initialize on page load
+      handleScroll();
+    }
   }
 </script>
 
