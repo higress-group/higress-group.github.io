@@ -2,11 +2,19 @@ import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import rehypeExternalLinks from "rehype-external-links";
 import { loadSidebarConfig } from "./src/utils/sidebarLoader";
 import { sidebarCategory } from "./src/utils/sign";
-import { rehypeFixMdLinks } from "./src/utils/rehypeFixMdLinks";
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import {
+  remarkRemoveMdLinks,
+  remarkRemovePlainLanguageCode,
+  remarkRemoveRepeatHeader,
+  addPrefixImageLink,
+  setLinkReferrer,
+} from "./src/utils/frontmatter.mjs";
+
+import fs from "node:fs/promises";
+import path from "node:path";
 
 // 加载所有 sidebar 配置
 const zhDocsSidebar = loadSidebarConfig("root", "docs");
@@ -16,11 +24,11 @@ const zhDeveloperSidebar = loadSidebarConfig("root", "developer");
 
 // Custom integration to copy markdown files
 const copyMarkdownIntegration = () => ({
-  name: 'copy-markdown',
+  name: "copy-markdown",
   hooks: {
-    'astro:build:done': async ({ dir }) => {
-      const srcDir = path.join(process.cwd(), 'src/content/docs');
-      const destDir = path.join(dir.pathname, 'overview'); // dir is a URL object
+    "astro:build:done": async ({ dir }) => {
+      const srcDir = path.join(process.cwd(), "src/content/docs");
+      const destDir = path.join(dir.pathname, "overview"); // dir is a URL object
 
       // Function to recursively copy files
       const copyDir = async (src, dest) => {
@@ -33,7 +41,10 @@ const copyMarkdownIntegration = () => ({
 
           if (entry.isDirectory()) {
             await copyDir(srcPath, destPath);
-          } else if (entry.isFile() && (entry.name.endsWith('.md') || entry.name.endsWith('.mdx'))) {
+          } else if (
+            entry.isFile() &&
+            (entry.name.endsWith(".md") || entry.name.endsWith(".mdx"))
+          ) {
             await fs.copyFile(srcPath, destPath);
           }
         }
@@ -42,9 +53,9 @@ const copyMarkdownIntegration = () => ({
       try {
         console.log(`Copying markdown files from ${srcDir} to ${destDir}...`);
         await copyDir(srcDir, destDir);
-        console.log('Markdown files copied successfully.');
+        console.log("Markdown files copied successfully.");
       } catch (err) {
-        console.error('Error copying markdown files:', err);
+        console.error("Error copying markdown files:", err);
       }
     },
   },
@@ -59,10 +70,10 @@ export default defineConfig({
   integrations: [
     sitemap({
       i18n: {
-        defaultLocale: 'zh-CN',
+        defaultLocale: "zh-CN",
         locales: {
-          'zh-CN': 'zh-CN',
-          'en': 'en',
+          "zh-CN": "zh-CN",
+          en: "en",
         },
       },
     }),
@@ -105,22 +116,22 @@ export default defineConfig({
           tag: "link",
           attrs: {
             rel: "icon",
-            href:"https://img.alicdn.com/imgextra/i4/O1CN01AViQMJ1J2lY4OPRgv_!!6000000000971-2-tps-376-375.png"
-          }
+            href: "https://img.alicdn.com/imgextra/i4/O1CN01AViQMJ1J2lY4OPRgv_!!6000000000971-2-tps-376-375.png",
+          },
         },
         {
           tag: "script",
           attrs: {
             src: "https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR",
             async: true,
-          }
+          },
         },
         {
           tag: "script",
           attrs: {
-            src: "/scripts.js"
-          }
-        }
+            src: "/scripts.js",
+          },
+        },
       ],
       components: {
         PageTitle: "./src/components/starlight/PageTitle.astro",
@@ -130,7 +141,7 @@ export default defineConfig({
         Sidebar: "./src/components/starlight/Sidebar.astro",
         PageFrame: "./src/components/starlight/PageFrame.astro",
         TwoColumnContent: "./src/components/starlight/TwoColumnContent.astro",
-        Search: "./src/components/starlight/Search.astro"
+        Search: "./src/components/starlight/Search.astro",
       },
     }),
   ],
@@ -140,16 +151,31 @@ export default defineConfig({
   },
 
   markdown: {
-    rehypePlugins: [rehypeFixMdLinks],
+    rehypePlugins: [
+      // 在这里添加 rehype-external-links 插件配置
+      [
+        rehypeExternalLinks,
+        {
+          target: "_blank",
+        },
+      ],
+    ],
+    remarkPlugins: [
+      remarkRemoveMdLinks,
+      remarkRemovePlainLanguageCode,
+      remarkRemoveRepeatHeader,
+      addPrefixImageLink,
+      setLinkReferrer,
+    ],
   },
 
   redirects: {
-    // 旧版 /zh-cn/docs/ 路径重定向到新路径
-    '/zh-cn/docs/[...slug]': '/docs/latest/[...slug]',
-		'/en-us/': '/en/',
-		'/en/ai/': '/en/ai/quick-start',
-    '/docs/': '/docs/latest/overview/what-is-higress/',
-    '/docs/latest/dev/CustomResourceDefinition/': '/docs/latest/dev/customresourcedefinition/',
-		'/en-us/docs/latest/dev/CustomResourceDefinition/': '/en/docs/latest/dev/customresourcedefinition/',
-  }
+    "/en-us/": "/en/",
+    "/en/ai/": "/en/ai/quick-start",
+    "/docs/": "/docs/latest/overview/what-is-higress/",
+    "/docs/latest/dev/CustomResourceDefinition/":
+      "/docs/latest/dev/customresourcedefinition/",
+    "/en-us/docs/latest/dev/CustomResourceDefinition/":
+      "/en/docs/latest/dev/customresourcedefinition/",
+  },
 });
