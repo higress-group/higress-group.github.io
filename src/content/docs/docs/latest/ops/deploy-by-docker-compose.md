@@ -11,7 +11,7 @@ Docker Compose 是用于定义和运行多容器 Docker 应用程序的工具。
 
 > **注意**
 > 
-> Standalone 模式没有大规模生产使用过，目前主要用于本地部署测试的场景，如果生产部署更建议[云原生模式](https://higress.io/zh-cn/docs/ops/deploy-by-helm)部署
+> Standalone 模式没有大规模生产使用过，目前主要用于本地部署测试的场景，如果生产部署更建议[云原生模式](/zh-cn/docs/ops/deploy-by-helm)部署
 
 ## 安装 Higress
 

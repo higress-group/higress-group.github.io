@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import { loadSidebarConfig } from "./src/utils/sidebarLoader";
 import { sidebarCategory } from "./src/utils/sign";
+import { rehypeFixMdLinks } from "./src/utils/rehypeFixMdLinks";
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -138,7 +139,13 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
+  markdown: {
+    rehypePlugins: [rehypeFixMdLinks],
+  },
+
   redirects: {
+    // 旧版 /zh-cn/docs/ 路径重定向到新路径
+    '/zh-cn/docs/[...slug]': '/docs/latest/[...slug]',
 		'/en-us/': '/en/',
 		'/en/ai/': '/en/ai/quick-start',
     '/docs/': '/docs/latest/overview/what-is-higress/',

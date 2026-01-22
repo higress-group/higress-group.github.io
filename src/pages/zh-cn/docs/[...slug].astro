@@ -1,29 +1,39 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-    const posts = await getCollection("docs");
-    return posts.map((post) => {
-        let newSlug = post.slug;
-        if (post.slug.includes("latest/zh-cn")) {
-            // @ts-ignore
-            newSlug = newSlug.replace("latest/zh-cn", "");
-            return {
-                params: { slug: newSlug },
-                props: post,
-            };
-        } else
-            return {
-                params: { slug: newSlug },
-                props: post,
-            };
-    });
+  const docs = await getCollection('docs');
+  
+  // Debug: 打印所有 slug
+  console.log('Total docs:', docs.length);
+  console.log('Sample slugs:', docs.slice(0, 5).map(d => d.slug));
+  
+  // Find all docs under docs/latest/
+  const latestDocs = docs.filter(doc => doc.slug.startsWith('docs/latest/'));
+  console.log('Matched docs/latest/:', latestDocs.length);
+
+  return latestDocs.map(doc => {
+    const slug = doc.slug.replace(/^docs\/latest\//, '');
+    console.log(`Creating path: /zh-cn/docs/${slug}/ -> /docs/latest/${slug}/`);
+    return {
+      params: { slug },
+      props: { destination: `/docs/latest/${slug}/` },
+    };
+  });
 }
 
-return Astro.redirect(
-    `/docs/latest${Astro.params.slug[0] !== "/" ? "/" : ""}${
-        Astro.params.slug
-    }/`,
-    301,
-);
+const { destination } = Astro.props;
 ---
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content={`0;url=${destination}`}>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href={destination}>
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting to <a href={destination}>{destination}</a></p>
+</body>
+</html>

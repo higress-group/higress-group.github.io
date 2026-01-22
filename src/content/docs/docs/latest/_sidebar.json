@@ -88,7 +88,7 @@
           "en": "LLM API Provide"
         },
         "autogenerate": {
-          "directory": "plugins/ai/api-provider"
+          "directory": "user/plugins/ai/api-provider"
         }
       },
       {
@@ -108,7 +108,7 @@
                   "en": "LLM API Consume"
                 },
                 "autogenerate": {
-                  "directory": "plugins/ai/api-consumer"
+                  "directory": "user/plugins/ai/api-consumer"
                 }
               },
               {
@@ -118,7 +118,7 @@
                   "en": "LLM API Develop"
                 },
                 "autogenerate": {
-                  "directory": "plugins/ai/api-dev"
+                  "directory": "user/plugins/ai/api-dev"
                 }
               },
               {
@@ -128,7 +128,7 @@
                   "en": "LLM API Observe"
                 },
                 "autogenerate": {
-                  "directory": "plugins/ai/api-o11y"
+                  "directory": "user/plugins/ai/api-o11y"
                 }
               },
               {
@@ -138,7 +138,7 @@
                   "en": "others"
                 },
                 "autogenerate": {
-                  "directory": "plugins/ai/others"
+                  "directory": "user/plugins/ai/others"
                 }
               }
             ]
@@ -150,7 +150,7 @@
             },
             "collapsed": true,
             "autogenerate": {
-              "directory": "plugins/authentication"
+              "directory": "user/plugins/authentication"
             }
           },
           {
@@ -160,7 +160,7 @@
             },
             "collapsed": true,
             "autogenerate": {
-              "directory": "plugins/transformation"
+              "directory": "user/plugins/transformation"
             }
           },
           {
@@ -170,7 +170,7 @@
             },
             "collapsed": true,
             "autogenerate": {
-              "directory": "plugins/traffic"
+              "directory": "user/plugins/traffic"
             }
           },
           {
@@ -180,7 +180,7 @@
             },
             "collapsed": true,
             "autogenerate": {
-              "directory": "plugins/security"
+              "directory": "user/plugins/security"
             }
           },
           {
@@ -189,7 +189,7 @@
               "en": "Wasm Plugin Doc"
             },
             "collapsed": true,
-            "link": "docs/plugins/intro"
+            "link": "docs/user/plugins/intro"
           },
           {
             "label": "自定义插件",
@@ -197,7 +197,7 @@
               "en": "Custom Plugin"
             },
             "collapsed": true,
-            "link": "docs/plugins/custom"
+            "link": "docs/user/plugins/custom"
           },
           {
             "label": "Wasm 插件开发",
@@ -211,42 +211,42 @@
                 "translations": {
                   "en": "Wasm Plugin Introduction"
                 },
-                "link": "docs/plugins/wasm-dev/wasm14"
+                "link": "docs/user/plugins/wasm-dev/wasm14"
               },
               {
                 "label": "Wasm 插件原理",
                 "translations": {
                   "en": "Wasm Plugin Principle"
                 },
-                "link": "docs/plugins/wasm-dev/wasm15"
+                "link": "docs/user/plugins/wasm-dev/wasm15"
               },
               {
                 "label": "Higress 插件 Go SDK 与处理流程",
                 "translations": {
                   "en": "Higress Go SDK Processing"
                 },
-                "link": "docs/plugins/wasm-dev/wasm16"
+                "link": "docs/user/plugins/wasm-dev/wasm16"
               },
               {
                 "label": "HTTP 调用",
                 "translations": {
                   "en": "HTTP Call"
                 },
-                "link": "docs/plugins/wasm-dev/wasm17"
+                "link": "docs/user/plugins/wasm-dev/wasm17"
               },
               {
                 "label": "Redis 调用",
                 "translations": {
                   "en": "Redis Call"
                 },
-                "link": "docs/plugins/wasm-dev/wasm18"
+                "link": "docs/user/plugins/wasm-dev/wasm18"
               },
               {
                 "label": "Wasm 生效原理",
                 "translations": {
                   "en": "Wasm Effective Principle"
                 },
-                "link": "docs/plugins/wasm-dev/wasm19"
+                "link": "docs/user/plugins/wasm-dev/wasm19"
               }
             ]
           }

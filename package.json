@@ -18,7 +18,8 @@
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.6",
     "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "unist-util-visit": "^5.0.0"
   },
   "repository": "git@gitlab.alibaba-inc.com:goat/goat-scaffold.git"
 }

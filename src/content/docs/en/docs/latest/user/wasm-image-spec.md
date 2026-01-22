@@ -11,7 +11,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 This specification aims to define the content and build method for Higress Wasm Plugin images. When writing this document, the author referenced the [Wasm Image Specification](https://github.com/solo-io/wasm/blob/master/spec/spec-compat.md).
 
-> Note: This specification uses the OCI image format, but it doesn't restrict plugins to only use OCI images. For custom plugin development, please refer to the simpler approach described in [Custom Plugins](../plugins/custom.md).
+> Note: This specification uses the OCI image format, but it doesn't restrict plugins to only use OCI images. For custom plugin development, please refer to the simpler approach described in [Custom Plugins](./plugins/custom.md).
 >
 > OCI images are used to standardize general-purpose plugins across all platforms.
 
