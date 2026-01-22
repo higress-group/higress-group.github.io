@@ -73,11 +73,11 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i1/O1CN01euie6r29FSh7sOzZ
           <div class="card flex flex-col gap-3">
             <div class="card-header rounded-lg">
               <div class="flex justify-center items-center w-full h-full">
-                <img src={s.img} alt="Feature Icon">
+                <img class="max-w-full max-h-full" src={s.img} alt="Feature Icon">
               </div>
             </div>
             <div class="flex flex-col gap-3">
-              <div class="text-black text-lg font-normal">{s.label}</div>
+              <div class="text-center md:text-left text-black text-lg font-normal">{s.label}</div>
               <div class="text-black text-sm leading-9">
                 {s.desc}
               </div>
