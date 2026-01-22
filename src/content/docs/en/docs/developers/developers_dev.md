@@ -22,6 +22,7 @@ This page shows the Higress development team. Please add your information to the
 | Tianyi Zhang | [johnlanni](https://github.com/johnlanni) | Alibaba Cloud |
 | Yan Yan | [JavaerJohn](https://github.com/JavaerJohn) | Alibaba Cloud |
 | Jingfeng Xu | [lexburner](https://github.com/lexburner) | Alibaba Cloud |
+| Kun Yuan | [heimanba](https://github.com/heimanba) | Alibaba Cloud        |
 
 
 ## Higress Approvers

@@ -592,6 +592,25 @@ export default {
     'ai.product.ready_to_start.btn_quickstart': '5 分钟快速部署',
     'ai.product.ready_to_start.btn_demo': '体验在线 Demo',
 
+    // Version Comparison
+    'ai.product.version_compare.title': '选择适合您的版本',
+    'ai.product.version_compare.subtitle': '开源版免费使用，企业版提供全托管服务与商业支持',
+    'ai.product.version_compare.opensource.badge': '社区版',
+    'ai.product.version_compare.opensource.title': 'Higress 社区版',
+    'ai.product.version_compare.opensource.desc': '完全开源免费，需自行构建和维护',
+    'ai.product.version_compare.opensource.feature1': '完整的 AI 网关核心能力',
+    'ai.product.version_compare.opensource.feature2': '社区支持与文档',
+    'ai.product.version_compare.opensource.feature3': '自行兜底稳定性与性能',
+    'ai.product.version_compare.enterprise.badge': '首购 6 折',
+    'ai.product.version_compare.enterprise.title': 'Higress 企业版',
+    'ai.product.version_compare.enterprise.desc': '开箱即用，全托管云服务，专业商业支持',
+    'ai.product.version_compare.enterprise.feature1': '全托管免运维，99.95% SLA',
+    'ai.product.version_compare.enterprise.feature2': '内核性能优化 90%+',
+    'ai.product.version_compare.enterprise.feature3': '多可用区部署，故障自动恢复',
+    'ai.product.version_compare.enterprise.feature4': '深度集成阿里云 WAF/KMS/IDAAS',
+    'ai.product.version_compare.enterprise.btn': '免费试用企业版',
+    'ai.product.version_compare.enterprise.tip': '工单、钉群、线下等商业服务支持',
+
     // AI Integrations Page
     'ai.integrations.title': 'AI 模型集成目录',
     'ai.integrations.description': 'Higress 提供了开箱即用的多模型集成能力。通过统一的 OpenAI 协议，您可以轻松管理、路由和保护各种主流 LLM 服务。',

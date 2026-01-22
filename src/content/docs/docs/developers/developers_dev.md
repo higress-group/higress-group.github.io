@@ -22,6 +22,7 @@ description: Higress 维护者名单
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | 阿里云        |
 | 严研 | [JavaerJohn](https://github.com/JavaerJohn) | 阿里云        |
 | 徐靖峰 | [lexburner](https://github.com/lexburner) | 阿里云        |
+| 袁坤 | [heimanba](https://github.com/heimanba) | 阿里云        |
 
 
 ## Higress Approvers

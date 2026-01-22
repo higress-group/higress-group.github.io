@@ -102,6 +102,75 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
     </div>
   </Section>
 
+  <!-- Version Comparison CTA Section -->
+  <div class="version-comparison-section">
+    <div class="version-comparison-header">
+      <h3 class="version-comparison-title">{t('ai.product.version_compare.title')}</h3>
+      <p class="version-comparison-subtitle">{t('ai.product.version_compare.subtitle')}</p>
+    </div>
+    <div class="version-cards">
+      <!-- Open Source Version -->
+      <div class="version-card opensource">
+        <div class="version-badge opensource-badge">{t('ai.product.version_compare.opensource.badge')}</div>
+        <h4 class="version-card-title">{t('ai.product.version_compare.opensource.title')}</h4>
+        <p class="version-card-desc">{t('ai.product.version_compare.opensource.desc')}</p>
+        <ul class="version-features">
+          <li>
+            <svg class="feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            {t('ai.product.version_compare.opensource.feature1')}
+          </li>
+          <li>
+            <svg class="feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            {t('ai.product.version_compare.opensource.feature2')}
+          </li>
+          <li>
+            <svg class="feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            {t('ai.product.version_compare.opensource.feature3')}
+          </li>
+        </ul>
+        <a href={LINKS.higressGithub} target="_blank" class="version-btn opensource-btn">
+          <svg class="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+      
+      <!-- Enterprise Version - Highlighted -->
+      <div class="version-card enterprise">
+        <div class="version-badge enterprise-badge">
+          <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          {t('ai.product.version_compare.enterprise.badge')}
+        </div>
+        <h4 class="version-card-title">{t('ai.product.version_compare.enterprise.title')}</h4>
+        <p class="version-card-desc">{t('ai.product.version_compare.enterprise.desc')}</p>
+        <ul class="version-features">
+          <li>
+            <svg class="feature-icon highlight" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            {t('ai.product.version_compare.enterprise.feature1')}
+          </li>
+          <li>
+            <svg class="feature-icon highlight" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            {t('ai.product.version_compare.enterprise.feature2')}
+          </li>
+          <li>
+            <svg class="feature-icon highlight" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            {t('ai.product.version_compare.enterprise.feature3')}
+          </li>
+          <li>
+            <svg class="feature-icon highlight" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            {t('ai.product.version_compare.enterprise.feature4')}
+          </li>
+        </ul>
+        <a href={LINKS.enterprise} target="_blank" class="version-btn enterprise-btn">
+          {t('ai.product.version_compare.enterprise.btn')}
+          <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+        <p class="enterprise-tip">{t('ai.product.version_compare.enterprise.tip')}</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Ready to Start CTA Section -->
   <div class="ready-to-start-section">
     <div class="ready-to-start-content">
@@ -272,5 +341,173 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
 .ready-btn.secondary:hover {
   background: rgba(62, 92, 244, 0.05);
   border-color: rgba(62, 92, 244, 0.5);
+}
+
+/* Version Comparison Section */
+.version-comparison-section {
+  margin-top: 3rem;
+  padding: 2.5rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-radius: 1.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+.version-comparison-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.version-comparison-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+}
+
+.version-comparison-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+}
+
+.version-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .version-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.version-card {
+  position: relative;
+  padding: 1.75rem;
+  border-radius: 1rem;
+  border: 2px solid #e2e8f0;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.version-card.opensource:hover {
+  border-color: #64748b;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.version-card.enterprise {
+  border-color: #3E5CF4;
+  background: linear-gradient(135deg, rgba(62, 92, 244, 0.02) 0%, rgba(109, 91, 255, 0.05) 100%);
+  box-shadow: 0 4px 24px rgba(62, 92, 244, 0.15);
+}
+
+.version-card.enterprise:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(62, 92, 244, 0.25);
+}
+
+.version-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.opensource-badge {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.enterprise-badge {
+  background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+  color: white;
+}
+
+.version-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+}
+
+.version-card-desc {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0 0 1.25rem 0;
+  line-height: 1.5;
+}
+
+.version-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.version-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #374151;
+  margin-bottom: 0.75rem;
+}
+
+.feature-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  color: #9ca3af;
+  margin-top: 1px;
+}
+
+.feature-icon.highlight {
+  color: #3E5CF4;
+}
+
+.version-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.opensource-btn {
+  background: #f8fafc;
+  color: #374151;
+  border: 1px solid #e2e8f0;
+}
+
+.opensource-btn:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.enterprise-btn {
+  background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+  color: white;
+  border: none;
+}
+
+.enterprise-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(62, 92, 244, 0.4);
+}
+
+.enterprise-tip {
+  font-size: 0.75rem;
+  color: #6D5BFF;
+  text-align: center;
+  margin: 0.75rem 0 0 0;
+  font-weight: 500;
 }
 </style>

@@ -585,6 +585,25 @@ export default {
     'ai.product.ready_to_start.btn_quickstart': '5-min Quick Deploy',
     'ai.product.ready_to_start.btn_demo': 'Try Online Demo',
 
+    // Version Comparison
+    'ai.product.version_compare.title': 'Choose the Right Version for You',
+    'ai.product.version_compare.subtitle': 'Community edition is free, Enterprise offers fully managed service with commercial support',
+    'ai.product.version_compare.opensource.badge': 'Community',
+    'ai.product.version_compare.opensource.title': 'Higress Community',
+    'ai.product.version_compare.opensource.desc': 'Fully open source and free, self-built and maintained',
+    'ai.product.version_compare.opensource.feature1': 'Full AI Gateway core capabilities',
+    'ai.product.version_compare.opensource.feature2': 'Community support & documentation',
+    'ai.product.version_compare.opensource.feature3': 'Self-managed stability & performance',
+    'ai.product.version_compare.enterprise.badge': '40% OFF First Purchase',
+    'ai.product.version_compare.enterprise.title': 'Higress Enterprise',
+    'ai.product.version_compare.enterprise.desc': 'Ready to use, fully managed cloud service with professional support',
+    'ai.product.version_compare.enterprise.feature1': 'Fully managed, 99.95% SLA',
+    'ai.product.version_compare.enterprise.feature2': '90%+ kernel performance optimization',
+    'ai.product.version_compare.enterprise.feature3': 'Multi-AZ deployment, auto failover',
+    'ai.product.version_compare.enterprise.feature4': 'Deep integration with Alibaba Cloud',
+    'ai.product.version_compare.enterprise.btn': 'Try Enterprise Free',
+    'ai.product.version_compare.enterprise.tip': 'Ticket, DingTalk & offline commercial support',
+
     // AI Integrations Page
     'ai.integrations.title': 'AI Model Integration Directory',
     'ai.integrations.description': 'Higress provides out-of-the-box multi-model integration capabilities. Through the unified OpenAI protocol, you can easily manage, route, and protect various mainstream LLM services.',
