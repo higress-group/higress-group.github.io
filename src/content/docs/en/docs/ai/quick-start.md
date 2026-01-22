@@ -99,3 +99,16 @@ Through these observation metrics, you can further compare the usage and latency
 > If you encounter any issues during deployment, feel free to leave your information in the [Higress Github Issue](https://github.com/alibaba/higress/issues).
 >
 > If you are interested in future updates of Higress or wish to provide feedback, welcome to star [Higress Github Repo](https://github.com/alibaba/higress/).
+
+---
+
+# Next Steps
+
+Congratulations on deploying the Higress AI Gateway! Here's what you can do next:
+
+| Scenario | Recommended Action |
+|----------|-------------------|
+| **Configure more models** | Add more provider API-KEYs in the AI Service Provider section of the console |
+| **Set up Token rate limiting** | Configure consumer quotas via AI Route Management to control costs |
+| **Connect MCP Server** | Check [MCP Server Quick Start](../ai/mcp-quick-start.md) to host your MCP services |
+| **Learn more features** | Visit [AI Gateway Product Page](/en/ai-gateway/) for the full capabilities |

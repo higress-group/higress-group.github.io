@@ -95,3 +95,16 @@ curl 'http://localhost:8080/v1/chat/completions' \
 > 如您在部署过程中遇到问题，可在 [Higress Github Issue](https://github.com/alibaba/higress/issues) 中留下您的信息。
 > 
 > 如您对 Higress 后续更新感兴趣，或希望给 Higress 提供反馈，欢迎 Star [Higress Github Repo](https://github.com/alibaba/higress/)。
+
+---
+
+# 下一步
+
+恭喜你完成了 Higress AI 网关的部署！接下来你可以：
+
+| 场景 | 推荐操作 |
+|------|----------|
+| **配置更多模型** | 在控制台的 AI 服务提供者中添加更多供应商的 API-KEY |
+| **设置 Token 限流** | 通过 AI 路由管理配置消费者额度，控制调用成本 |
+| **接入 MCP Server** | 查看 [MCP Server 快速开始](../ai/mcp-quick-start.md) 托管你的 MCP 服务 |
+| **了解更多功能** | 访问 [AI 网关产品介绍](/ai-gateway/) 了解完整能力 |

@@ -580,6 +580,11 @@ export default {
     'ai.product.integrations.supported': 'Higress supports unified access and governance for 100+ mainstream large models',
     'ai.product.integrations.view_directory': 'View Complete Model Integration Directory',
 
+    'ai.product.ready_to_start.title': 'Ready to get started?',
+    'ai.product.ready_to_start.desc': 'Deploy a fully functional AI Gateway locally in just 5 minutes and experience multi-model proxy, Token rate limiting, and more.',
+    'ai.product.ready_to_start.btn_quickstart': '5-min Quick Deploy',
+    'ai.product.ready_to_start.btn_demo': 'Try Online Demo',
+
     // AI Integrations Page
     'ai.integrations.title': 'AI Model Integration Directory',
     'ai.integrations.description': 'Higress provides out-of-the-box multi-model integration capabilities. Through the unified OpenAI protocol, you can easily manage, route, and protect various mainstream LLM services.',
@@ -682,9 +687,12 @@ export default {
     // Role Selector (Onboarding)
     'home.role.selector.title': 'Who are you?',
     'home.role.selector.developer': 'Developer',
-    'home.role.selector.developer.desc': 'Quick Start',
+    'home.role.selector.developer.desc': 'One-click Docker deploy, 100+ LLM support',
+    'home.role.selector.developer.time': '5 min',
     'home.role.selector.decision_maker': 'Decision Maker',
-    'home.role.selector.decision_maker.desc': 'Learn Solutions',
+    'home.role.selector.decision_maker.desc': 'Learn how AI Gateway saves cost',
+    'home.role.selector.decision_maker.time': '3 min',
+    'home.role.selector.or_try_demo': 'Or try the online Demo',
 
     // Scroll Progress
     'scroll.back_to_top': 'Back to Top',

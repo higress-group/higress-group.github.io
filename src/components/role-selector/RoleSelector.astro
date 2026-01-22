@@ -20,6 +20,7 @@ const roles = [
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
     label: t('home.role.selector.developer'),
     desc: t('home.role.selector.developer.desc'),
+    time: t('home.role.selector.developer.time'),
     href: localizeUrl('/ai/quick-start', locale),
   },
   {
@@ -27,6 +28,7 @@ const roles = [
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
     label: t('home.role.selector.decision_maker'),
     desc: t('home.role.selector.decision_maker.desc'),
+    time: t('home.role.selector.decision_maker.time'),
     href: localizeUrl('/ai-gateway', locale),
   }
 ];
@@ -42,7 +44,10 @@ const roles = [
       <a href={role.href} class="role-option group" data-role={role.id}>
         <div class="role-icon" set:html={role.icon} />
         <div class="role-content">
-          <div class="role-label">{role.label}</div>
+          <div class="role-label-row">
+            <span class="role-label">{role.label}</span>
+            <span class="role-time-badge">{role.time}</span>
+          </div>
           <div class="role-desc">{role.desc}</div>
         </div>
         <div class="role-arrow">
@@ -150,12 +155,36 @@ const roles = [
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
+    flex: 1;
+  }
+
+  .role-label-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .role-label {
     font-size: 0.9375rem;
     font-weight: 600;
     color: var(--color-gray-900);
+  }
+
+  .role-time-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: #3E5CF4;
+    background: rgba(62, 92, 244, 0.1);
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  :global(.dark) .role-time-badge {
+    color: #a5b4fc;
+    background: rgba(109, 91, 255, 0.2);
   }
 
   :global(.dark) .role-label {

@@ -1,5 +1,4 @@
 ---
-import Button from "../components/button/Button.astro";
 import RoleSelector from "../components/role-selector/RoleSelector.astro";
 import { LINKS } from "@/constant";
 import { localizeUrl, useTranslations } from "@/i18n/utils";
@@ -62,23 +61,20 @@ const newsItems = [
         {t('home.hero.description.line1')} <br class="hidden md:block" />
         {t('home.hero.description.line2')}
       </p>
-      <div class="flex flex-row gap-4 mb-10">
-        <Button
-          class="relative" mode="primary" width="160px"
-          href={LINKS.higressConsole} target="_blank"
-        >
-            {t('home.hero.button.experience')}
-        </Button>
-        <Button
-          href={localizeUrl('/ai/quick-start', locale)}
-          mode="normal" width="160px"
-         >
-          {t('home.hero.button.learn')}
-        </Button>
-      </div>
 
-      <!-- Role Selector for Onboarding Segmentation -->
-      <RoleSelector class="mb-16" />
+      <!-- Role Selector for Onboarding Segmentation (Primary CTA) -->
+      <RoleSelector class="mb-6" />
+
+      <!-- Secondary CTA: Direct Demo Link -->
+      <div class="flex items-center gap-2 mb-16">
+        <span class="text-sm text-gray-500 dark:text-gray-400">{t('home.role.selector.or_try_demo')}</span>
+        <a href={LINKS.higressConsole} target="_blank" class="demo-link inline-flex items-center text-sm font-medium text-primary hover:underline">
+          <span>{t('home.hero.button.experience')}</span>
+          <svg class="ml-1 w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
     </div>
 
     <!-- Bottom Section (News) -->
@@ -138,5 +134,22 @@ const newsItems = [
     0%, 45% { transform: translateY(0); }
     50%, 95% { transform: translateY(-33.333%); }
     100% { transform: translateY(-66.666%); }
+  }
+
+  .demo-link {
+    color: #3E5CF4;
+    transition: all 0.2s ease;
+  }
+
+  .demo-link:hover {
+    color: #6D5BFF;
+  }
+
+  :global(.dark) .demo-link {
+    color: #a5b4fc;
+  }
+
+  :global(.dark) .demo-link:hover {
+    color: #c7d2fe;
   }
 </style>

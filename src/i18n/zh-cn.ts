@@ -587,6 +587,11 @@ export default {
     'ai.product.integrations.supported': 'Higress 已支持 100+ 主流大模型的统一接入与治理',
     'ai.product.integrations.view_directory': '查看完整的模型集成目录',
 
+    'ai.product.ready_to_start.title': '准备好开始了吗？',
+    'ai.product.ready_to_start.desc': '只需 5 分钟，即可在本地部署一个功能完整的 AI 网关，体验多模型代理、Token 限流等能力。',
+    'ai.product.ready_to_start.btn_quickstart': '5 分钟快速部署',
+    'ai.product.ready_to_start.btn_demo': '体验在线 Demo',
+
     // AI Integrations Page
     'ai.integrations.title': 'AI 模型集成目录',
     'ai.integrations.description': 'Higress 提供了开箱即用的多模型集成能力。通过统一的 OpenAI 协议，您可以轻松管理、路由和保护各种主流 LLM 服务。',
@@ -689,9 +694,12 @@ export default {
     // Role Selector (Onboarding)
     'home.role.selector.title': '您是?',
     'home.role.selector.developer': '开发者',
-    'home.role.selector.developer.desc': '想快速体验',
+    'home.role.selector.developer.desc': 'Docker 一键部署，接入 100+ 大模型',
+    'home.role.selector.developer.time': '5 分钟',
     'home.role.selector.decision_maker': '决策者',
-    'home.role.selector.decision_maker.desc': '想了解方案',
+    'home.role.selector.decision_maker.desc': '了解 AI 网关如何降本增效',
+    'home.role.selector.decision_maker.time': '3 分钟',
+    'home.role.selector.or_try_demo': '或直接体验在线 Demo',
 
     // Scroll Progress
     'scroll.back_to_top': '返回顶部',

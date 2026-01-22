@@ -5,7 +5,7 @@ import Section from "../common/section.astro";
 import Layout from "./Layout.astro";
 import { LINKS } from "@/constant";
 
-import { useTranslations } from "@/i18n/utils";
+import { useTranslations, localizeUrl } from "@/i18n/utils";
 
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
@@ -101,6 +101,35 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
       </div>
     </div>
   </Section>
+
+  <!-- Ready to Start CTA Section -->
+  <div class="ready-to-start-section">
+    <div class="ready-to-start-content">
+      <div class="ready-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+      </div>
+      <div class="ready-text">
+        <h3 class="ready-title">{t('ai.product.ready_to_start.title')}</h3>
+        <p class="ready-desc">{t('ai.product.ready_to_start.desc')}</p>
+      </div>
+      <div class="ready-actions">
+        <a href={localizeUrl('/ai/quick-start', locale)} class="ready-btn primary">
+          <svg class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          {t('ai.product.ready_to_start.btn_quickstart')}
+        </a>
+        <a href={LINKS.higressConsole} target="_blank" class="ready-btn secondary">
+          {t('ai.product.ready_to_start.btn_demo')}
+          <svg class="ml-1 w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
 </Layout>
 <style>
 .card {
@@ -143,5 +172,105 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
 
 .detail-link:hover .detail-arrow {
   transform: translateX(4px);
+}
+
+/* Ready to Start Section */
+.ready-to-start-section {
+  background: linear-gradient(135deg, rgba(62, 92, 244, 0.05) 0%, rgba(109, 91, 255, 0.08) 100%);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+.ready-to-start-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .ready-to-start-content {
+    flex-direction: row;
+    text-align: left;
+    gap: 2rem;
+  }
+}
+
+.ready-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+  border-radius: 1rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.ready-text {
+  flex: 1;
+}
+
+.ready-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+}
+
+.ready-desc {
+  font-size: 0.9375rem;
+  color: #666;
+  margin: 0;
+}
+
+.ready-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .ready-actions {
+    flex-direction: row;
+  }
+}
+
+.ready-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.ready-btn.primary {
+  background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+  color: white;
+}
+
+.ready-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(62, 92, 244, 0.3);
+}
+
+.ready-btn.secondary {
+  background: white;
+  color: #3E5CF4;
+  border: 1px solid rgba(62, 92, 244, 0.3);
+}
+
+.ready-btn.secondary:hover {
+  background: rgba(62, 92, 244, 0.05);
+  border-color: rgba(62, 92, 244, 0.5);
 }
 </style>
