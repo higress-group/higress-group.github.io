@@ -80,6 +80,14 @@ export default defineConfig({
     copyMarkdownIntegration(),
     starlight({
       title: "Higress",
+      expressiveCode: {
+        // 使用高对比度的亮色主题，与网站强制亮色模式保持一致
+        themes: ["github-light"],
+        // 网站只有亮色模式，禁用暗色模式切换
+        useStarlightDarkModeSwitch: false,
+        // 使用 Starlight 的 UI 主题颜色
+        useStarlightUiThemeColors: true,
+      },
       customCss: ["./src/styles/global.css", "./src/styles/fonts.css"],
       defaultLocale: "root",
       locales: {

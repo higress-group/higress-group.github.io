@@ -11,7 +11,7 @@ Docker Compose is a tool for defining and running multi-container Docker applica
 
 > **Note**
 > 
-> The Standalone mode has not been extensively used in large-scale production environments. It is currently mainly used for local deployment and testing scenarios. For production deployments, the [Cloud-Native mode](https://higress.io/en/docs/ops/deploy-by-helm) is more recommended.
+> The Standalone mode has not been extensively used in large-scale production environments. It is currently mainly used for local deployment and testing scenarios. For production deployments, the [Cloud-Native mode](https://higress.io/en/docs/latest/ops/deploy-by-helm) is more recommended.
 
 ## Installing Higress
 
