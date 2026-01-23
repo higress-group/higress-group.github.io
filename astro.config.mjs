@@ -15,6 +15,7 @@ import {
 
 import fs from "node:fs/promises";
 import path from "node:path";
+import { writeLlmsTxt } from "./src/utils/llmsTxtGenerator.ts";
 
 // 加载所有 sidebar 配置
 const zhDocsSidebar = loadSidebarConfig("root", "docs");
@@ -61,6 +62,23 @@ const copyMarkdownIntegration = () => ({
   },
 });
 
+// Custom integration to generate llms.txt
+const llmsTxtIntegration = () => ({
+  name: "llms-txt",
+  hooks: {
+    "astro:build:done": async ({ dir }) => {
+      const contentDir = path.join(process.cwd(), "src/content");
+      const outputDir = dir.pathname; // dir is a URL object
+
+      try {
+        await writeLlmsTxt(outputDir, contentDir);
+      } catch (err) {
+        console.error("Error generating llms.txt:", err);
+      }
+    },
+  },
+});
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://higress.ai",
@@ -78,6 +96,7 @@ export default defineConfig({
       },
     }),
     copyMarkdownIntegration(),
+    llmsTxtIntegration(),
     starlight({
       title: "Higress",
       expressiveCode: {
