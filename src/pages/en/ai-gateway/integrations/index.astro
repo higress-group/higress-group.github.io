@@ -1,17 +1,17 @@
 ---
-import SiteLayout from "../../../layout/siteLayout.astro";
-import { AI_MODELS } from "../../../utils/pSEOData";
-import Section from "../../../container/common/section.astro";
+import SiteLayout from "../../../../layout/siteLayout.astro";
+import { AI_MODELS } from "../../../../utils/pSEOData";
+import Section from "../../../../container/common/section.astro";
 import { useTranslations } from "@/i18n/utils";
 
-const locale = Astro.currentLocale || 'root';
+const locale = Astro.currentLocale || 'en';
 const t = useTranslations(locale);
 
-const title = "Higress AI 网关模型集成目录 - 统一管理您的 LLM 服务";
-const description = "探索 Higress AI 网关支持的所有大模型集成，包括 DeepSeek, Qwen, OpenAI, Claude 等。统一协议、多模型灰度、智能路由，为您的 AI 应用保驾护航。";
+const title = "Higress AI Gateway Model Integrations - Unified LLM Service Management";
+const description = "Explore all LLM integrations supported by Higress AI Gateway, including DeepSeek, Qwen, OpenAI, Claude and more. Unified protocol, multi-model routing, and intelligent load balancing for your AI applications.";
 ---
 
-<SiteLayout title={title} description={description} keywords="AI网关, 大模型集成, DeepSeek, OpenAI, 通义千问, Kimi, Claude, Gemini">
+<SiteLayout title={title} description={description} keywords="AI Gateway, LLM Integration, DeepSeek, OpenAI, Qwen, Kimi, Claude, Gemini">
   <div class="bg-gray-50 py-24 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto text-center mb-16">
       <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
@@ -24,7 +24,7 @@ const description = "探索 Higress AI 网关支持的所有大模型集成，�
 
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {AI_MODELS.map(model => (
-        <a href={`/ai-gateway/integrations/${model.id}/`} class="group bg-white rounded-2xl shadow-sm border border-gray-200 p-8 hover:shadow-lg hover:border-primary/30 transition duration-300">
+        <a href={`/en/ai-gateway/integrations/${model.id}/`} class="group bg-white rounded-2xl shadow-sm border border-gray-200 p-8 hover:shadow-lg hover:border-primary/30 transition duration-300">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-2xl font-bold text-gray-900 group-hover:text-primary transition">{model.name}</h3>
             <svg class="h-6 w-6 text-gray-400 group-hover:text-primary transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -60,11 +60,11 @@ const description = "探索 Higress AI 网关支持的所有大模型集成，�
         <a href="https://github.com/alibaba/higress/issues/940" target="_blank" class="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition">
           {t('ai.integrations.cta.button')}
         </a>
-        <a href="/comparison/" class="px-8 py-3 bg-white text-primary font-medium rounded-lg border border-primary/30 hover:bg-primary/5 transition inline-flex items-center justify-center">
+        <a href="/en/comparison/" class="px-8 py-3 bg-white text-primary font-medium rounded-lg border border-primary/30 hover:bg-primary/5 transition inline-flex items-center justify-center">
           <svg class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
           </svg>
-          竞品对比分析
+          Gateway Comparison
         </a>
       </div>
     </div>

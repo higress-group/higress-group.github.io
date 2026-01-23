@@ -1,0 +1,168 @@
+---
+import SiteLayout from "../../../../layout/siteLayout.astro";
+import { AI_MODELS } from "../../../../utils/pSEOData";
+import Section from "../../../../container/common/section.astro";
+import { useTranslations } from "@/i18n/utils";
+import Button from "@/components/button/Button.astro";
+import { LINKS } from "@/constant";
+
+export async function getStaticPaths() {
+  return AI_MODELS.map((model) => ({
+    params: { model: model.id },
+    props: { model },
+  }));
+}
+
+const { model } = Astro.props;
+const locale = Astro.currentLocale || 'en';
+const t = useTranslations(locale);
+
+const title = `Higress AI Gateway ${model.name} Integration Guide - Quick Setup & Optimization`;
+const description = `Learn how to easily configure and optimize ${model.name} in Higress AI Gateway. Includes detailed YAML configuration examples, model mapping, security protection, and performance optimization recommendations.`;
+---
+
+<SiteLayout title={title} description={description} keywords={`Higress, AI Gateway, ${model.name}, Integration, Configuration, API Gateway`}>
+  <div class="bg-white py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="mb-12">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-4">
+          {t('ai.integrations.model.title').replace(/\{model\}/g, model.name)}
+        </h1>
+        <p class="text-xl text-gray-600">
+          {model.description}
+        </p>
+      </div>
+
+      <!-- Features -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">{t('ai.integrations.model.core_advantages')}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {model.features.map(feature => (
+            <div class="flex items-start">
+              <svg class="h-6 w-6 text-primary mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-700">{feature}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Config Example -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">{t('ai.integrations.model.quick_config')}</h2>
+        <div class="bg-gray-900 rounded-lg overflow-hidden p-6">
+          <pre class="text-sm text-gray-300 font-mono overflow-x-auto"><code>{model.configExample}</code></pre>
+        </div>
+        <p class="mt-4 text-gray-600 italic" set:html={t('ai.integrations.model.config_note').replace(/\{model\}/g, model.name)}>
+        </p>
+      </div>
+
+      <!-- Advanced Section -->
+      <div class="mb-12 prose max-w-none">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">{t('ai.integrations.model.why_choose').replace(/\{model\}/g, model.name)}</h2>
+        <p class="text-gray-700 leading-relaxed">
+          {t('ai.integrations.model.why_choose.desc').replace(/\{model\}/g, model.name)}
+        </p>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700 mt-4">
+          <li set:html={`<strong>${t('ai.integrations.model.feature.unified_protocol').split(/[：:]/)[0]}:</strong> ${t('ai.integrations.model.feature.unified_protocol').split(/[：:]/)[1].replace(/\{model\}/g, model.name)}`}></li>
+          <li set:html={`<strong>${t('ai.integrations.model.feature.retry_circuit').split(/[：:]/)[0]}:</strong> ${t('ai.integrations.model.feature.retry_circuit').split(/[：:]/)[1]}`}></li>
+          <li set:html={`<strong>${t('ai.integrations.model.feature.security_audit').split(/[：:]/)[0]}:</strong> ${t('ai.integrations.model.feature.security_audit').split(/[：:]/)[1]}`}></li>
+          <li set:html={`<strong>${t('ai.integrations.model.feature.semantic_cache').split(/[：:]/)[0]}:</strong> ${t('ai.integrations.model.feature.semantic_cache').split(/[：:]/)[1]}`}></li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-16 bg-indigo-20 rounded-2xl p-8 text-center border border-primary/10">
+        <h3 class="text-xl font-bold text-gray-900 mb-4">{t('ai.integrations.model.cta.ready')}</h3>
+        <p class="text-gray-600 mb-8">
+          {t('ai.integrations.model.cta.description')}
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <Button mode="primary" href="/en/docs/latest/plugins/ai/api-provider/ai-proxy/">
+            {t('ai.integrations.model.cta.view_docs')}
+          </Button>
+          <Button mode="normal" target="_blank" href={LINKS.higressGithub}>
+            {t('ai.integrations.model.cta.star_github')}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</SiteLayout>
+
+<!-- SEO: Structured Data for AI Model Integration -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": `Higress AI Gateway - ${model.name} Integration`,
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "description": description,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Higress",
+    "url": "https://higress.ai"
+  }
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": `How to integrate ${model.name} in Higress AI Gateway`,
+  "description": `Learn how to configure and optimize ${model.name} in Higress AI Gateway`,
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Configure Provider",
+      "text": `Add ${model.name} provider configuration in Higress`
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Set API Token",
+      "text": `Add your ${model.name} API Token to the configuration`
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Configure Model Mapping",
+      "text": "Configure model mapping as needed to use the unified OpenAI protocol"
+    }
+  ]
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://higress.ai/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "AI Gateway",
+      "item": "https://higress.ai/en/ai-gateway"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Model Integrations",
+      "item": "https://higress.ai/en/ai-gateway/integrations/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": model.name,
+      "item": `https://higress.ai/en/ai-gateway/integrations/${model.id}/`
+    }
+  ]
+})} />

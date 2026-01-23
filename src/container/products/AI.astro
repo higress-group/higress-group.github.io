@@ -109,19 +109,132 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
           })
         }
       </div>
-      <div class="mt-12 pt-12 border-t border-gray-200">
+      <div class="mt-8 pt-8 border-t border-gray-200">
         <div class="flex flex-col items-center justify-center gap-4">
           <p class="text-gray-600 text-base">{t('ai.product.integrations.supported')}</p>
-          <a href="/ai-gateway/integrations/" class="detail-link inline-flex items-center text-primary font-medium text-base group">
-            <span>{t('ai.product.integrations.view_directory')}</span>
-            <svg class="detail-arrow ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="flex flex-col sm:flex-row gap-3 items-center">
+            <a href="/ai-gateway/integrations/" class="detail-link inline-flex items-center text-primary font-medium text-base group">
+              <span>{t('ai.product.integrations.view_directory')}</span>
+              <svg class="detail-arrow ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+            <span class="text-gray-400 hidden sm:inline">|</span>
+            <a href={localizeUrl('/comparison', locale)} class="detail-link inline-flex items-center text-primary font-medium text-base group">
+              <svg class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              <span>竞品对比分析</span>
+              <svg class="detail-arrow ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Competitor Comparison Preview Section -->
+  <div class="competitor-comparison-preview-section">
+    <div class="competitor-comparison-header">
+      <h3 class="competitor-comparison-title">{t('ai.product.competitor_compare.title')}</h3>
+      <p class="competitor-comparison-subtitle">{t('ai.product.competitor_compare.subtitle')}</p>
+    </div>
+    
+    <!-- Preview Cards -->
+    <div class="comparison-preview-cards">
+      <a href={localizeUrl('/comparison#oneapi', locale)} class="comparison-preview-card-link">
+        <div class="comparison-preview-card">
+          <div class="preview-card-header">
+            <h4 class="preview-card-title">vs OneAPI</h4>
+            <span class="preview-card-badge">7 项对比</span>
+          </div>
+          <div class="preview-highlights">
+            <div class="preview-highlight">
+              <svg class="highlight-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>企业级维护团队</span>
+            </div>
+            <div class="preview-highlight">
+              <svg class="highlight-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>内容安全与数据脱敏</span>
+            </div>
+            <div class="preview-highlight">
+              <svg class="highlight-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>完整可观测性</span>
+            </div>
+          </div>
+          <div class="preview-card-arrow">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </div>
+      </a>
+      
+      <a href={localizeUrl('/comparison#litellm', locale)} class="comparison-preview-card-link">
+        <div class="comparison-preview-card">
+          <div class="preview-card-header">
+            <h4 class="preview-card-title">vs LiteLLM</h4>
+            <span class="preview-card-badge">9 项对比</span>
+          </div>
+          <div class="preview-highlights">
+            <div class="preview-highlight">
+              <svg class="highlight-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>高性能网关架构</span>
+            </div>
+            <div class="preview-highlight">
+              <svg class="highlight-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>开箱即用控制台</span>
+            </div>
+            <div class="preview-highlight">
+              <svg class="highlight-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>企业级特性支持</span>
+            </div>
+          </div>
+          <div class="preview-card-arrow">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- CTA to Full Comparison -->
+    <div class="comparison-preview-cta">
+      <div class="comparison-preview-cta-content">
+        <h4 class="comparison-preview-cta-title">查看完整对比分析</h4>
+        <p class="comparison-preview-cta-desc">深入了解 Higress 相比其他 AI 网关的技术优势和企业级特性</p>
+        <div class="comparison-preview-cta-buttons">
+          <a href={localizeUrl('/comparison', locale)} class="comparison-preview-btn primary">
+            <svg class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            详细对比分析
+          </a>
+          <a href={localizeUrl('/ai/quick-start', locale)} class="comparison-preview-btn secondary">
+            {t('ai.product.competitor_compare.cta.quickstart')}
+            <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </a>
         </div>
       </div>
     </div>
-  </Section>
+  </div>
 
   <!-- Version Comparison CTA Section -->
   <div class="version-comparison-section">
@@ -210,6 +323,12 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
           {t('ai.product.ready_to_start.btn_quickstart')}
+        </a>
+        <a href={localizeUrl('/comparison', locale)} class="ready-btn secondary">
+          <svg class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+          竞品对比
         </a>
         <a href={LINKS.higressConsole} target="_blank" class="ready-btn secondary">
           {t('ai.product.ready_to_start.btn_demo')}
@@ -328,6 +447,13 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
 @media (min-width: 640px) {
   .ready-actions {
     flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ready-actions {
+    flex-wrap: nowrap;
   }
 }
 
@@ -532,4 +658,254 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
   margin: 0.75rem 0 0 0;
   font-weight: 500;
 }
+
+/* Competitor Comparison Preview Section */
+.competitor-comparison-preview-section {
+  margin-top: 3rem;
+  padding: 2.5rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-radius: 1.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+.competitor-comparison-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.competitor-comparison-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+}
+
+.competitor-comparison-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Preview Cards */
+.comparison-preview-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .comparison-preview-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.comparison-preview-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.comparison-preview-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.75rem;
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.comparison-preview-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+}
+
+.comparison-preview-card-link:hover .comparison-preview-card {
+  border-color: #3E5CF4;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(62, 92, 244, 0.15);
+}
+
+.preview-card-arrow {
+  position: absolute;
+  top: 1.75rem;
+  right: 1.75rem;
+  color: #9ca3af;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+.comparison-preview-card-link:hover .preview-card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: #3E5CF4;
+}
+
+.preview-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.preview-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.preview-card-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background: linear-gradient(135deg, rgba(62, 92, 244, 0.1) 0%, rgba(109, 91, 255, 0.15) 100%);
+  color: #3E5CF4;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+.preview-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.preview-highlight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.highlight-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #10b981;
+  flex-shrink: 0;
+}
+
+/* Preview CTA */
+.comparison-preview-cta {
+  background: linear-gradient(135deg, rgba(62, 92, 244, 0.06) 0%, rgba(62, 92, 244, 0.08) 100%);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid rgba(62, 92, 244, 0.15);
+}
+
+.comparison-preview-cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.comparison-preview-cta-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+}
+
+.comparison-preview-cta-desc {
+  font-size: 1rem;
+  color: #666;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.6;
+}
+
+.comparison-preview-cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.comparison-preview-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.comparison-preview-btn.primary {
+  background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+  color: white;
+  border: none;
+}
+
+.comparison-preview-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(62, 92, 244, 0.4);
+}
+
+.comparison-preview-btn.secondary {
+  background: white;
+  color: #3E5CF4;
+  border: 1px solid rgba(62, 92, 244, 0.3);
+}
+
+.comparison-preview-btn.secondary:hover {
+  background: rgba(62, 92, 244, 0.05);
+  border-color: rgba(62, 92, 244, 0.5);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .competitor-comparison-preview-section {
+    padding: 1.5rem;
+  }
+  
+  .competitor-comparison-title {
+    font-size: 1.375rem;
+  }
+  
+  .comparison-preview-card {
+    padding: 1.25rem;
+  }
+  
+  .preview-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .preview-card-arrow {
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+  
+  .comparison-preview-cta {
+    padding: 1.5rem;
+  }
+  
+  .comparison-preview-cta-title {
+    font-size: 1.125rem;
+  }
+  
+  .comparison-preview-cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .comparison-preview-btn {
+    width: 100%;
+  }
+}
 </style>
+

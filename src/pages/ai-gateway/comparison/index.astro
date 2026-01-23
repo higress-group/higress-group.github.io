@@ -1,0 +1,781 @@
+---
+import SiteLayout from "../../../layout/siteLayout.astro";
+import Section from "../../../container/common/section.astro";
+import { useTranslations, localizeUrl } from "@/i18n/utils";
+import { LINKS } from "@/constant";
+
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
+
+const title = "Higress vs 其他 AI 网关 - 全方位对比分析";
+const description = "深入对比 Higress 与 OneAPI、LiteLLM 等主流 AI 网关方案，从架构、功能到企业级特性，帮您选择最适合的 AI 网关解决方案。";
+const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网关选择, 企业级AI网关, API网关对比";
+---
+
+<SiteLayout title={title} description={description} keywords={keywords}>
+  <div class="comparison-page">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center">
+          <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
+            <svg class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            竞品对比分析
+          </div>
+          <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
+            {t('ai.product.competitor_compare.title')}
+          </h1>
+          <p class="text-xl text-gray-600 max-w-4xl mx-auto mb-8">
+            {t('ai.product.competitor_compare.subtitle')}
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href={localizeUrl('/ai/quick-start', locale)} class="inline-flex items-center px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition">
+              <svg class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              立即体验 Higress
+            </a>
+            <a href="/ai-gateway/" class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 transition">
+              了解更多功能
+              <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison Section -->
+    <div class="competitor-comparison-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Tab Switcher -->
+        <div class="comparison-tabs" role="tablist" aria-label="竞品对比选项">
+          <button class="comparison-tab active" data-tab="oneapi" role="tab" aria-selected="true" aria-controls="oneapi-content" tabindex="0">
+            {t('ai.product.competitor_compare.tab.oneapi')}
+          </button>
+          <button class="comparison-tab" data-tab="litellm" role="tab" aria-selected="false" aria-controls="litellm-content" tabindex="-1">
+            {t('ai.product.competitor_compare.tab.litellm')}
+          </button>
+        </div>
+
+        <!-- OneAPI Comparison -->
+        <div class="comparison-content active" data-content="oneapi" role="tabpanel" id="oneapi-content" aria-labelledby="oneapi-tab">
+          <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th class="feature-col">对比项</th>
+                  <th class="competitor-col">OneAPI</th>
+                  <th class="higress-col">
+                    <div class="higress-header">
+                      <span>Higress</span>
+                      <svg class="crown-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.oneapi.core_function')}</td>
+                  <td class="competitor-value">{t('ai.product.competitor_compare.oneapi.core_function.oneapi')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.oneapi.core_function.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.oneapi.maintenance')}</td>
+                  <td class="competitor-value">{t('ai.product.competitor_compare.oneapi.maintenance.oneapi')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.oneapi.maintenance.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.oneapi.security')}</td>
+                  <td class="competitor-value negative">{t('ai.product.competitor_compare.oneapi.security.oneapi')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.oneapi.security.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.oneapi.content_safety')}</td>
+                  <td class="competitor-value negative">{t('ai.product.competitor_compare.oneapi.content_safety.oneapi')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.oneapi.content_safety.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.oneapi.model_management')}</td>
+                  <td class="competitor-value">{t('ai.product.competitor_compare.oneapi.model_management.oneapi')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.oneapi.model_management.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.oneapi.observability')}</td>
+                  <td class="competitor-value negative">{t('ai.product.competitor_compare.oneapi.observability.oneapi')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.oneapi.observability.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.oneapi.extensibility')}</td>
+                  <td class="competitor-value negative">{t('ai.product.competitor_compare.oneapi.extensibility.oneapi')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.oneapi.extensibility.higress')}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- LiteLLM Comparison -->
+        <div class="comparison-content" data-content="litellm" role="tabpanel" id="litellm-content" aria-labelledby="litellm-tab">
+          <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th class="feature-col">对比项</th>
+                  <th class="competitor-col">LiteLLM</th>
+                  <th class="higress-col">
+                    <div class="higress-header">
+                      <span>Higress</span>
+                      <svg class="crown-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.litellm.architecture')}</td>
+                  <td class="competitor-value negative">{t('ai.product.competitor_compare.litellm.architecture.litellm')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.litellm.architecture.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.litellm.load_balancing')}</td>
+                  <td class="competitor-value">{t('ai.product.competitor_compare.litellm.load_balancing.litellm')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.litellm.load_balancing.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.litellm.retry_fallback')}</td>
+                  <td class="competitor-value">{t('ai.product.competitor_compare.litellm.retry_fallback.litellm')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.litellm.retry_fallback.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.litellm.observability')}</td>
+                  <td class="competitor-value">{t('ai.product.competitor_compare.litellm.observability.litellm')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.litellm.observability.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.litellm.self_hosted')}</td>
+                  <td class="competitor-value">{t('ai.product.competitor_compare.litellm.self_hosted.litellm')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.litellm.self_hosted.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.litellm.extensibility')}</td>
+                  <td class="competitor-value negative">{t('ai.product.competitor_compare.litellm.extensibility.litellm')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.litellm.extensibility.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.litellm.usability')}</td>
+                  <td class="competitor-value negative">{t('ai.product.competitor_compare.litellm.usability.litellm')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.litellm.usability.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.litellm.security')}</td>
+                  <td class="competitor-value negative">{t('ai.product.competitor_compare.litellm.security.litellm')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.litellm.security.higress')}</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">{t('ai.product.competitor_compare.litellm.enterprise')}</td>
+                  <td class="competitor-value negative">{t('ai.product.competitor_compare.litellm.enterprise.litellm')}</td>
+                  <td class="higress-value highlighted">{t('ai.product.competitor_compare.litellm.enterprise.higress')}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Comparison CTA -->
+        <div class="comparison-cta">
+          <div class="comparison-cta-content">
+            <h4 class="comparison-cta-title">{t('ai.product.competitor_compare.cta.title')}</h4>
+            <p class="comparison-cta-desc">{t('ai.product.competitor_compare.cta.desc')}</p>
+            <div class="comparison-cta-buttons">
+              <a href={localizeUrl('/ai/quick-start', locale)} class="comparison-btn primary">
+                {t('ai.product.competitor_compare.cta.quickstart')}
+                <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Benefits Section -->
+    <div class="benefits-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">为什么选择 Higress AI 网关？</h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            基于阿里云多年大规模生产实践，Higress 为您提供企业级 AI 网关解决方案
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="benefit-title">高性能架构</h3>
+            <p class="benefit-desc">基于 Envoy 的高性能代理，支持每秒数十万级请求，毫秒级配置生效</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="benefit-title">企业级安全</h3>
+            <p class="benefit-desc">集成阿里云内容安全，提供实时内容过滤、数据脱敏和多种认证策略</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              </svg>
+            </div>
+            <h3 class="benefit-title">智能运维</h3>
+            <p class="benefit-desc">完整的监控仪表板、Token 消耗分析、延迟监控和智能负载均衡</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</SiteLayout>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ComparisonPage",
+  "name": "Higress vs 其他 AI 网关对比",
+  "description": "深入对比 Higress 与 OneAPI、LiteLLM 等主流 AI 网关方案的功能特性",
+  "url": "https://higress.ai/ai-gateway/comparison/",
+  "about": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Higress AI Gateway",
+      "applicationCategory": "DeveloperApplication",
+      "description": "企业级 AI 网关解决方案"
+    },
+    {
+      "@type": "SoftwareApplication", 
+      "name": "OneAPI",
+      "applicationCategory": "DeveloperApplication",
+      "description": "开源 AI 网关项目"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "LiteLLM", 
+      "applicationCategory": "DeveloperApplication",
+      "description": "Python SDK 代理模式 AI 网关"
+    }
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "Higress",
+    "url": "https://higress.ai"
+  }
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://higress.ai/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "AI 网关",
+      "item": "https://higress.ai/ai-gateway/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "竞品对比",
+      "item": "https://higress.ai/ai-gateway/comparison/"
+    }
+  ]
+})} />
+
+<style>
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, rgba(62, 92, 244, 0.05) 0%, rgba(109, 91, 255, 0.08) 100%);
+  border-bottom: 1px solid rgba(62, 92, 244, 0.1);
+}
+
+/* Benefits Section */
+.benefits-section {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.benefit-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-color: rgba(62, 92, 244, 0.3);
+}
+
+.benefit-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+  border-radius: 1rem;
+  color: white;
+  margin: 0 auto 1.5rem;
+}
+
+.benefit-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+}
+
+.benefit-desc {
+  font-size: 0.9375rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Competitor Comparison Section */
+.competitor-comparison-section {
+  padding: 4rem 0;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Tabs */
+.comparison-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.comparison-tab {
+  padding: 0.875rem 2.5rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid #e2e8f0;
+  background: white;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  user-select: none;
+  outline: none;
+}
+
+.comparison-tab:focus {
+  outline: 2px solid #3E5CF4;
+  outline-offset: 2px;
+}
+
+.comparison-tab:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-tab:hover {
+  border-color: #3E5CF4;
+  color: #3E5CF4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(62, 92, 244, 0.15);
+}
+
+.comparison-tab.active {
+  background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 20px rgba(62, 92, 244, 0.3);
+}
+
+/* Table */
+.comparison-content {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.comparison-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.comparison-table-wrapper {
+  overflow-x: auto;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  margin-bottom: 3rem;
+  border: 1px solid #e2e8f0;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  font-size: 0.9375rem;
+}
+
+.comparison-table thead {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.comparison-table th {
+  padding: 1.5rem 1.25rem;
+  text-align: left;
+  font-weight: 700;
+  color: #1a1a1a;
+  border-bottom: 2px solid #e2e8f0;
+  font-size: 1.125rem;
+}
+
+.feature-col {
+  width: 25%;
+  min-width: 160px;
+}
+
+.competitor-col {
+  width: 37.5%;
+  min-width: 220px;
+  color: #64748b;
+}
+
+.higress-col {
+  width: 37.5%;
+  min-width: 220px;
+  background: linear-gradient(135deg, rgba(62, 92, 244, 0.03) 0%, rgba(109, 91, 255, 0.05) 100%);
+}
+
+.higress-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #3E5CF4;
+  font-weight: 700;
+}
+
+.crown-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #f59e0b;
+}
+
+.comparison-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.comparison-table tbody tr:hover {
+  background-color: rgba(62, 92, 244, 0.02);
+}
+
+.comparison-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.comparison-table td {
+  padding: 1.375rem 1.25rem;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.feature-name {
+  font-weight: 600;
+  color: #374151;
+  font-size: 1rem;
+}
+
+.competitor-value {
+  color: #64748b;
+}
+
+.competitor-value.negative {
+  color: #9ca3af;
+}
+
+.higress-value {
+  font-weight: 500;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, rgba(62, 92, 244, 0.02) 0%, rgba(109, 91, 255, 0.03) 100%);
+  position: relative;
+}
+
+.higress-value.highlighted::before {
+  content: '✓';
+  position: absolute;
+  left: -2rem;
+  color: #10b981;
+  font-weight: 700;
+  font-size: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Comparison CTA */
+.comparison-cta {
+  background: linear-gradient(135deg, rgba(62, 92, 244, 0.08) 0%, rgba(109, 91, 255, 0.1) 100%);
+  border-radius: 1.5rem;
+  padding: 3rem;
+  text-align: center;
+  border: 1px solid rgba(62, 92, 244, 0.15);
+  margin-top: 2rem;
+}
+
+.comparison-cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.comparison-cta-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+}
+
+.comparison-cta-desc {
+  font-size: 1.125rem;
+  color: #666;
+  margin: 0 0 2rem 0;
+  line-height: 1.6;
+}
+
+.comparison-cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.comparison-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.comparison-btn.primary {
+  background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 16px rgba(62, 92, 244, 0.3);
+}
+
+.comparison-btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(62, 92, 244, 0.4);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 3rem 0;
+  }
+  
+  .hero-section h1 {
+    font-size: 2.25rem;
+  }
+  
+  .competitor-comparison-section {
+    padding: 2rem 0;
+  }
+  
+  .comparison-tabs {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .comparison-tab {
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+  
+  .comparison-table {
+    font-size: 0.875rem;
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    padding: 1rem 0.875rem;
+  }
+  
+  .comparison-table th {
+    font-size: 1rem;
+  }
+  
+  .feature-col {
+    min-width: 140px;
+  }
+  
+  .competitor-col,
+  .higress-col {
+    min-width: 200px;
+  }
+  
+  .higress-value.highlighted::before {
+    left: -1.5rem;
+    font-size: 1.125rem;
+  }
+  
+  .comparison-cta {
+    padding: 2rem 1.5rem;
+  }
+  
+  .comparison-cta-title {
+    font-size: 1.25rem;
+  }
+  
+  .comparison-cta-desc {
+    font-size: 1rem;
+  }
+  
+  .benefits-section {
+    padding: 3rem 0;
+  }
+  
+  .benefit-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .comparison-cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .comparison-btn {
+    width: 100%;
+  }
+}
+</style>
+
+<!-- Tab Switching Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.comparison-tab');
+    const contents = document.querySelectorAll('.comparison-content');
+    
+    console.log('Tab switching initialized:', tabs.length, 'tabs found');
+    
+    function switchTab(targetTab, clickedTab) {
+      console.log('Switching to tab:', targetTab);
+      
+      // Update active tab
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+      });
+      
+      clickedTab.classList.add('active');
+      clickedTab.setAttribute('aria-selected', 'true');
+      clickedTab.setAttribute('tabindex', '0');
+      
+      // Update active content
+      contents.forEach(c => c.classList.remove('active'));
+      const targetContent = document.querySelector(`[data-content="${targetTab}"]`);
+      if (targetContent) {
+        targetContent.classList.add('active');
+        console.log('Content switched to:', targetTab);
+      } else {
+        console.error('Target content not found:', targetTab);
+      }
+    }
+    
+    // Handle URL hash on page load
+    function handleHashChange() {
+      const hash = window.location.hash.substring(1); // Remove #
+      if (hash && (hash === 'oneapi' || hash === 'litellm')) {
+        const targetTab = document.querySelector(`[data-tab="${hash}"]`);
+        if (targetTab) {
+          switchTab(hash, targetTab);
+          // Smooth scroll to the comparison section
+          const comparisonSection = document.querySelector('.competitor-comparison-section');
+          if (comparisonSection) {
+            comparisonSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    }
+    
+    // Handle initial hash
+    handleHashChange();
+    
+    // Handle hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    
+    tabs.forEach((tab, index) => {
+      // Click handler
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetTab = tab.dataset.tab;
+        switchTab(targetTab, tab);
+        // Update URL hash
+        history.pushState(null, null, `#${targetTab}`);
+      });
+      
+      // Keyboard handler
+      tab.addEventListener('keydown', (e) => {
+        let targetIndex = index;
+        
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          targetIndex = index > 0 ? index - 1 : tabs.length - 1;
+        } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          targetIndex = index < tabs.length - 1 ? index + 1 : 0;
+        } else if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const targetTab = tab.dataset.tab;
+          switchTab(targetTab, tab);
+          history.pushState(null, null, `#${targetTab}`);
+          return;
+        }
+        
+        if (targetIndex !== index) {
+          const targetTab = tabs[targetIndex];
+          switchTab(targetTab.dataset.tab, targetTab);
+          targetTab.focus();
+          history.pushState(null, null, `#${targetTab.dataset.tab}`);
+        }
+      });
+    });
+  });
+</script>
