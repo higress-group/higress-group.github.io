@@ -674,7 +674,7 @@ export default {
     'ai.product.version_compare.enterprise.title': 'Higress 企业版',
     'ai.product.version_compare.enterprise.desc': '开箱即用，全托管云服务，专业商业支持',
     'ai.product.version_compare.enterprise.feature1': '全托管免运维，99.95% SLA',
-    'ai.product.version_compare.enterprise.feature2': '内核性能优化 90%+',
+    'ai.product.version_compare.enterprise.feature2': '软硬一体性能优化90%+',
     'ai.product.version_compare.enterprise.feature3': '多可用区部署，故障自动恢复',
     'ai.product.version_compare.enterprise.feature4': '深度集成阿里云 WAF/KMS/IDAAS',
     'ai.product.version_compare.enterprise.btn': '免费试用企业版',
@@ -814,7 +814,7 @@ export default {
     'home.role.selector.enterprise.time': '开箱即用',
     'home.role.selector.enterprise.badge': '免费试用',
     'home.role.selector.enterprise.feature1': '99.95% SLA 可用性保障',
-    'home.role.selector.enterprise.feature2': '内核性能优化 90%+',
+    'home.role.selector.enterprise.feature2': '软硬一体性能优化90%+',
     'home.role.selector.enterprise.feature3': '工单、钉群商业支持',
     
     'home.role.selector.or_try_demo': '或直接体验在线 Demo',

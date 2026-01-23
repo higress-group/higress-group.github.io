@@ -667,7 +667,7 @@ export default {
     'ai.product.version_compare.enterprise.title': 'Higress Enterprise',
     'ai.product.version_compare.enterprise.desc': 'Ready to use, fully managed cloud service with professional support',
     'ai.product.version_compare.enterprise.feature1': 'Fully managed, 99.95% SLA',
-    'ai.product.version_compare.enterprise.feature2': '90%+ kernel performance optimization',
+    'ai.product.version_compare.enterprise.feature2': 'Software-hardware integrated performance optimization 90%+',
     'ai.product.version_compare.enterprise.feature3': 'Multi-AZ deployment, auto failover',
     'ai.product.version_compare.enterprise.feature4': 'Deep integration with Alibaba Cloud',
     'ai.product.version_compare.enterprise.btn': 'Try Enterprise Free',
