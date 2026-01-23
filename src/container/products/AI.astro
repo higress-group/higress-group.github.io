@@ -266,6 +266,7 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
           <svg class="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           GitHub
         </a>
+        <p class="version-tip opensource-tip">开源免费，社区支持</p>
       </div>
       
       <!-- Enterprise Version - Highlighted -->
@@ -301,6 +302,41 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
           </svg>
         </a>
         <p class="enterprise-tip">{t('ai.product.version_compare.enterprise.tip')}</p>
+      </div>
+
+      <!-- Feitian Exclusive Version -->
+      <div class="version-card exclusive">
+        <div class="version-badge exclusive-badge">
+          <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 3.5a1.5 1.5 0 013 0V4a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-.5a1.5 1.5 0 000 3h.5a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-.5a1.5 1.5 0 00-3 0v.5a1 1 0 01-1 1H6a1 1 0 01-1-1v-3a1 1 0 00-1-1h-.5a1.5 1.5 0 010-3H4a1 1 0 001-1V6a1 1 0 011-1h3a1 1 0 001-1v-.5z"/></svg>
+          {t('ai.product.version_compare.exclusive.badge')}
+        </div>
+        <h4 class="version-card-title">{t('ai.product.version_compare.exclusive.title')}</h4>
+        <p class="version-card-desc">{t('ai.product.version_compare.exclusive.desc')}</p>
+        <ul class="version-features">
+          <li>
+            <svg class="feature-icon exclusive-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            {t('ai.product.version_compare.exclusive.feature1')}
+          </li>
+          <li>
+            <svg class="feature-icon exclusive-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            {t('ai.product.version_compare.exclusive.feature2')}
+          </li>
+          <li>
+            <svg class="feature-icon exclusive-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            {t('ai.product.version_compare.exclusive.feature3')}
+          </li>
+          <li>
+            <svg class="feature-icon exclusive-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            {t('ai.product.version_compare.exclusive.feature4')}
+          </li>
+        </ul>
+        <a href="https://survey.aliyun.com/apps/zhiliao/6Dd_gD6MB?spm=higress-website.topbar.0.0.0" target="_blank" class="version-btn exclusive-btn">
+          {t('ai.product.version_compare.exclusive.btn')}
+          <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+        <p class="version-tip exclusive-tip">{t('ai.product.version_compare.exclusive.tip')}</p>
       </div>
     </div>
   </div>
@@ -530,6 +566,12 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
   }
 }
 
+@media (min-width: 1024px) {
+  .version-cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
 .version-card {
   position: relative;
   padding: 1.75rem;
@@ -537,6 +579,9 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
   border: 2px solid #e2e8f0;
   background: white;
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
 }
 
 .version-card.opensource:hover {
@@ -555,14 +600,27 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
   box-shadow: 0 8px 32px rgba(62, 92, 244, 0.25);
 }
 
+.version-card.exclusive {
+  border-color: #FF6B35;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.02) 0%, rgba(255, 107, 53, 0.05) 100%);
+  box-shadow: 0 4px 24px rgba(255, 107, 53, 0.15);
+}
+
+.version-card.exclusive:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(255, 107, 53, 0.25);
+}
+
 .version-badge {
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   margin-bottom: 1rem;
+  width: fit-content;
+  white-space: nowrap;
 }
 
 .opensource-badge {
@@ -573,6 +631,13 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
 .enterprise-badge {
   background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
   color: white;
+  box-shadow: 0 2px 8px rgba(62, 92, 244, 0.3);
+}
+
+.exclusive-badge {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
 }
 
 .version-card-title {
@@ -592,7 +657,8 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
 .version-features {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.5rem 0;
+  margin: 0;
+  flex: 1;
 }
 
 .version-features li {
@@ -602,6 +668,10 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
   font-size: 0.875rem;
   color: #374151;
   margin-bottom: 0.75rem;
+}
+
+.version-features li:last-child {
+  margin-bottom: 0;
 }
 
 .feature-icon {
@@ -614,6 +684,10 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
 
 .feature-icon.highlight {
   color: #3E5CF4;
+}
+
+.feature-icon.exclusive-icon {
+  color: #FF6B35;
 }
 
 .version-btn {
@@ -651,12 +725,38 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i3/O1CN01rZX1sk1IPq23nQKI
   box-shadow: 0 4px 16px rgba(62, 92, 244, 0.4);
 }
 
+.exclusive-btn {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+  color: white;
+  border: none;
+}
+
+.exclusive-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+}
+
 .enterprise-tip {
   font-size: 0.75rem;
   color: #6D5BFF;
   text-align: center;
   margin: 0.75rem 0 0 0;
   font-weight: 500;
+}
+
+.version-tip {
+  font-size: 0.75rem;
+  text-align: center;
+  margin: 0.75rem 0 0 0;
+  font-weight: 500;
+}
+
+.opensource-tip {
+  color: #64748b;
+}
+
+.exclusive-tip {
+  color: #FF6B35;
 }
 
 /* Competitor Comparison Preview Section */
