@@ -17,6 +17,24 @@ interface Props {
 const { class: className } = Astro.props;
 
 const intents = [
+  // Enterprise first - optimized for B2B conversion
+  {
+    id: 'enterprise',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M22 10a3 3 0 0 0-3-3h-2.207a5.502 5.502 0 0 0-10.702.5"/></svg>`,
+    label: t('home.role.selector.enterprise'),
+    desc: t('home.role.selector.enterprise.desc'),
+    time: t('home.role.selector.enterprise.time'),
+    href: LINKS.enterprise,
+    features: [
+      t('home.role.selector.enterprise.feature1'),
+      t('home.role.selector.enterprise.feature2'),
+      t('home.role.selector.enterprise.feature3'),
+    ],
+    recommended: true, // Changed to recommended for enterprise focus
+    isExternal: true,
+    badge: t('home.role.selector.enterprise.badge'),
+    trustSignal: t('home.role.selector.enterprise.trust'), // New field
+  },
   {
     id: 'try_now',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
@@ -29,7 +47,7 @@ const intents = [
       t('home.role.selector.try_now.feature2'),
       t('home.role.selector.try_now.feature3'),
     ],
-    recommended: true,
+    recommended: false, // No longer primary recommendation
   },
   {
     id: 'learn_more',
@@ -44,22 +62,6 @@ const intents = [
       t('home.role.selector.learn_more.feature3'),
     ],
     recommended: false,
-  },
-  {
-    id: 'enterprise',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M22 10a3 3 0 0 0-3-3h-2.207a5.502 5.502 0 0 0-10.702.5"/></svg>`,
-    label: t('home.role.selector.enterprise'),
-    desc: t('home.role.selector.enterprise.desc'),
-    time: t('home.role.selector.enterprise.time'),
-    href: LINKS.enterprise,
-    features: [
-      t('home.role.selector.enterprise.feature1'),
-      t('home.role.selector.enterprise.feature2'),
-      t('home.role.selector.enterprise.feature3'),
-    ],
-    recommended: false,
-    isExternal: true,
-    badge: t('home.role.selector.enterprise.badge'),
   }
 ];
 ---
@@ -104,6 +106,11 @@ const intents = [
             </li>
           ))}
         </ul>
+        {intent.trustSignal && (
+          <div class="trust-signal">
+            {intent.trustSignal}
+          </div>
+        )}
         <div class="role-cta">
           <span class="role-cta-text">{intent.recommended ? t('home.role.selector.cta.start') : t('home.role.selector.cta.explore')}</span>
           {intent.isExternal ? (
@@ -381,6 +388,22 @@ const intents = [
     height: 14px;
     color: #10b981;
     flex-shrink: 0;
+  }
+
+  .trust-signal {
+    font-size: 0.75rem;
+    color: var(--color-gray-600);
+    padding: 0.625rem;
+    background: rgba(16, 185, 129, 0.05);
+    border-radius: 8px;
+    line-height: 1.4;
+    border: 1px solid rgba(16, 185, 129, 0.15);
+  }
+
+  :global(.dark) .trust-signal {
+    color: var(--color-gray-400);
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.2);
   }
 
   .role-cta {

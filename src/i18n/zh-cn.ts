@@ -786,36 +786,37 @@ export default {
     'glossary.copy_code': '复制代码',
     'glossary.copied': '已复制!',
 
-    // Role Selector (Intent-based Onboarding)
-    'home.role.selector.title': '您想做什么？',
-    'home.role.selector.recommended': '推荐',
-    'home.role.selector.cta.start': '立即开始',
+    // Role Selector (Intent-based Onboarding) - Optimized for Enterprise Conversion
+    'home.role.selector.title': '选择适合您的方案',
+    'home.role.selector.recommended': '企业首选',
+    'home.role.selector.cta.start': '立即咨询',
     'home.role.selector.cta.explore': '了解详情',
     
-    // Try Now Option
-    'home.role.selector.try_now': '立即体验',
-    'home.role.selector.try_now.desc': '5 分钟内部署并调用 AI 模型',
-    'home.role.selector.try_now.time': '5 分钟',
-    'home.role.selector.try_now.feature1': '无需注册，本地 Docker 一键启动',
-    'home.role.selector.try_now.feature2': '支持 100+ 主流大模型',
-    'home.role.selector.try_now.feature3': '配套完整文档与示例代码',
-    
-    // Learn More Option
-    'home.role.selector.learn_more': '了解产品',
-    'home.role.selector.learn_more.desc': '看看 Higress 能为您解决什么问题',
-    'home.role.selector.learn_more.time': '3 分钟',
-    'home.role.selector.learn_more.feature1': '核心功能与产品优势',
-    'home.role.selector.learn_more.feature2': '企业案例与最佳实践',
-    'home.role.selector.learn_more.feature3': '版本对比与定价信息',
-    
-    // Enterprise Option
+    // Enterprise Option (Primary for B2B conversion)
     'home.role.selector.enterprise': '企业版',
-    'home.role.selector.enterprise.desc': '全托管云服务，专业商业支持',
-    'home.role.selector.enterprise.time': '开箱即用',
-    'home.role.selector.enterprise.badge': '免费试用',
+    'home.role.selector.enterprise.desc': '全托管云服务，专业技术支持，生产级保障',
+    'home.role.selector.enterprise.time': '当日开通',
+    'home.role.selector.enterprise.badge': '限时免费试用',
     'home.role.selector.enterprise.feature1': '99.95% SLA 可用性保障',
-    'home.role.selector.enterprise.feature2': '软硬一体性能优化90%+',
-    'home.role.selector.enterprise.feature3': '工单、钉群商业支持',
+    'home.role.selector.enterprise.feature2': '性能优化 90%+，节省 50% 资源成本',
+    'home.role.selector.enterprise.feature3': '7×24 工单 + 钉群直连技术专家',
+    'home.role.selector.enterprise.trust': '🏢 已服务 Soul、快手、极氪汽车等头部企业',
+    
+    // Try Now Option (Secondary)
+    'home.role.selector.try_now': '快速体验',
+    'home.role.selector.try_now.desc': '本地部署，5 分钟验证核心能力',
+    'home.role.selector.try_now.time': '5 分钟',
+    'home.role.selector.try_now.feature1': '无需注册，Docker 一键启动',
+    'home.role.selector.try_now.feature2': '接入 OpenAI/Claude/国产大模型',
+    'home.role.selector.try_now.feature3': '完整文档 + 可运行示例代码',
+    
+    // Learn More Option (Tertiary)
+    'home.role.selector.learn_more': '产品介绍',
+    'home.role.selector.learn_more.desc': '深入了解产品能力与企业实践',
+    'home.role.selector.learn_more.time': '3 分钟阅读',
+    'home.role.selector.learn_more.feature1': 'AI 网关核心能力与技术架构',
+    'home.role.selector.learn_more.feature2': '头部企业客户案例与 ROI 分析',
+    'home.role.selector.learn_more.feature3': '版本对比、定价与 TCO 计算器',
     
     'home.role.selector.or_try_demo': '或直接体验在线 Demo',
 

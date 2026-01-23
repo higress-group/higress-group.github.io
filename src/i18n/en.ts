@@ -779,36 +779,37 @@ export default {
     'glossary.copy_code': 'Copy Code',
     'glossary.copied': 'Copied!',
 
-    // Role Selector (Intent-based Onboarding)
-    'home.role.selector.title': 'What do you want to do?',
-    'home.role.selector.recommended': 'Recommended',
-    'home.role.selector.cta.start': 'Get Started',
+    // Role Selector (Intent-based Onboarding) - Optimized for Enterprise Conversion
+    'home.role.selector.title': 'Choose Your Solution',
+    'home.role.selector.recommended': 'Enterprise Choice',
+    'home.role.selector.cta.start': 'Contact Sales',
     'home.role.selector.cta.explore': 'Learn More',
     
-    // Try Now Option
-    'home.role.selector.try_now': 'Try It Now',
-    'home.role.selector.try_now.desc': 'Deploy and call AI models in 5 minutes',
+    // Enterprise Option (Primary for B2B conversion)
+    'home.role.selector.enterprise': 'Enterprise Edition',
+    'home.role.selector.enterprise.desc': 'Fully managed cloud service with production-grade support',
+    'home.role.selector.enterprise.time': 'Same-day Setup',
+    'home.role.selector.enterprise.badge': 'Limited Free Trial',
+    'home.role.selector.enterprise.feature1': '99.95% SLA Availability Guarantee',
+    'home.role.selector.enterprise.feature2': '90%+ performance boost, 50% cost savings',
+    'home.role.selector.enterprise.feature3': '24/7 Support + Direct Expert Access',
+    'home.role.selector.enterprise.trust': '🏢 Trusted by Soul, Kuaishou, ZEEKR & more',
+    
+    // Try Now Option (Secondary)
+    'home.role.selector.try_now': 'Quick Start',
+    'home.role.selector.try_now.desc': 'Local deployment, verify core features in 5 min',
     'home.role.selector.try_now.time': '5 min',
     'home.role.selector.try_now.feature1': 'No signup, one-click Docker deploy',
-    'home.role.selector.try_now.feature2': 'Support for 100+ LLM models',
-    'home.role.selector.try_now.feature3': 'Complete docs & sample code',
+    'home.role.selector.try_now.feature2': 'Connect OpenAI/Claude/Local LLMs',
+    'home.role.selector.try_now.feature3': 'Complete docs & runnable examples',
     
-    // Learn More Option
-    'home.role.selector.learn_more': 'Learn About',
-    'home.role.selector.learn_more.desc': 'See how Higress can solve your challenges',
-    'home.role.selector.learn_more.time': '3 min',
-    'home.role.selector.learn_more.feature1': 'Core features & advantages',
-    'home.role.selector.learn_more.feature2': 'Enterprise cases & best practices',
-    'home.role.selector.learn_more.feature3': 'Version comparison & pricing',
-    
-    // Enterprise Option
-    'home.role.selector.enterprise': 'Enterprise Edition',
-    'home.role.selector.enterprise.desc': 'Fully managed cloud service with pro support',
-    'home.role.selector.enterprise.time': 'Ready to use',
-    'home.role.selector.enterprise.badge': 'Free Trial',
-    'home.role.selector.enterprise.feature1': '99.95% SLA availability',
-    'home.role.selector.enterprise.feature2': '90%+ kernel optimization',
-    'home.role.selector.enterprise.feature3': 'Commercial support included',
+    // Learn More Option (Tertiary)
+    'home.role.selector.learn_more': 'Product Overview',
+    'home.role.selector.learn_more.desc': 'Explore capabilities & enterprise practices',
+    'home.role.selector.learn_more.time': '3 min read',
+    'home.role.selector.learn_more.feature1': 'AI Gateway capabilities & architecture',
+    'home.role.selector.learn_more.feature2': 'Enterprise cases & ROI analysis',
+    'home.role.selector.learn_more.feature3': 'Version comparison & TCO calculator',
     
     'home.role.selector.or_try_demo': 'Or try the online Demo',
 
