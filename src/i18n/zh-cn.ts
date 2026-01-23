@@ -808,6 +808,15 @@ export default {
     'home.role.selector.learn_more.feature2': '企业案例与最佳实践',
     'home.role.selector.learn_more.feature3': '版本对比与定价信息',
     
+    // Enterprise Option
+    'home.role.selector.enterprise': '企业版',
+    'home.role.selector.enterprise.desc': '全托管云服务，专业商业支持',
+    'home.role.selector.enterprise.time': '开箱即用',
+    'home.role.selector.enterprise.badge': '免费试用',
+    'home.role.selector.enterprise.feature1': '99.95% SLA 可用性保障',
+    'home.role.selector.enterprise.feature2': '内核性能优化 90%+',
+    'home.role.selector.enterprise.feature3': '工单、钉群商业支持',
+    
     'home.role.selector.or_try_demo': '或直接体验在线 Demo',
 
     // Scroll Progress

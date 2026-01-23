@@ -5,6 +5,7 @@
  * Optimized for reducing Time-to-Value and providing clear guidance
  */
 import { useTranslations, localizeUrl } from "@/i18n/utils";
+import { LINKS } from "@/constant";
 
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
@@ -43,6 +44,22 @@ const intents = [
       t('home.role.selector.learn_more.feature3'),
     ],
     recommended: false,
+  },
+  {
+    id: 'enterprise',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M22 10a3 3 0 0 0-3-3h-2.207a5.502 5.502 0 0 0-10.702.5"/></svg>`,
+    label: t('home.role.selector.enterprise'),
+    desc: t('home.role.selector.enterprise.desc'),
+    time: t('home.role.selector.enterprise.time'),
+    href: LINKS.enterprise,
+    features: [
+      t('home.role.selector.enterprise.feature1'),
+      t('home.role.selector.enterprise.feature2'),
+      t('home.role.selector.enterprise.feature3'),
+    ],
+    recommended: false,
+    isExternal: true,
+    badge: t('home.role.selector.enterprise.badge'),
   }
 ];
 ---
@@ -54,9 +71,18 @@ const intents = [
   </div>
   <div class="role-selector-options">
     {intents.map((intent) => (
-      <a href={intent.href} class:list={["role-option", "group", { "recommended": intent.recommended }]} data-intent={intent.id}>
+      <a 
+        href={intent.href} 
+        class:list={["role-option", "group", { "recommended": intent.recommended, "enterprise": intent.id === 'enterprise' }]} 
+        data-intent={intent.id}
+        target={intent.isExternal ? "_blank" : undefined}
+        rel={intent.isExternal ? "noopener noreferrer" : undefined}
+      >
         {intent.recommended && (
           <span class="recommended-badge">{t('home.role.selector.recommended')}</span>
+        )}
+        {intent.badge && !intent.recommended && (
+          <span class="promo-badge">{intent.badge}</span>
         )}
         <div class="role-header">
           <div class="role-icon" set:html={intent.icon} />
@@ -80,10 +106,18 @@ const intents = [
         </ul>
         <div class="role-cta">
           <span class="role-cta-text">{intent.recommended ? t('home.role.selector.cta.start') : t('home.role.selector.cta.explore')}</span>
-          <svg class="role-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14"/>
-            <path d="m12 5 7 7-7 7"/>
-          </svg>
+          {intent.isExternal ? (
+            <svg class="role-arrow external-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          ) : (
+            <svg class="role-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"/>
+              <path d="m12 5 7 7-7 7"/>
+            </svg>
+          )}
         </div>
       </a>
     ))}
@@ -189,6 +223,68 @@ const intents = [
     background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
     border-radius: 9999px;
     box-shadow: 0 2px 8px rgba(62, 92, 244, 0.3);
+  }
+
+  .promo-badge {
+    position: absolute;
+    top: -12px;
+    right: 16px;
+    padding: 0.375rem 0.875rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+    border-radius: 9999px;
+    box-shadow: 0 4px 12px rgba(62, 92, 244, 0.4);
+    animation: badge-pulse 2s ease-in-out infinite;
+    z-index: 10;
+  }
+
+  @keyframes badge-pulse {
+    0%, 100% { box-shadow: 0 2px 8px rgba(62, 92, 244, 0.3); }
+    50% { box-shadow: 0 2px 16px rgba(109, 91, 255, 0.5); }
+  }
+
+  /* Enterprise Edition - Premium Style */
+  .role-option.enterprise {
+    border-width: 1.5px;
+    border-color: rgba(109, 91, 255, 0.5);
+    background: linear-gradient(135deg, rgba(62, 92, 244, 0.06) 0%, rgba(109, 91, 255, 0.1) 100%);
+  }
+
+  :global(.dark) .role-option.enterprise {
+    background: linear-gradient(135deg, rgba(62, 92, 244, 0.12) 0%, rgba(109, 91, 255, 0.18) 100%);
+    border-color: rgba(109, 91, 255, 0.6);
+  }
+
+  .role-option.enterprise:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(62, 92, 244, 0.22), 0 0 0 1px rgba(109, 91, 255, 0.3);
+    border-color: rgba(109, 91, 255, 0.7);
+  }
+
+  :global(.dark) .role-option.enterprise:hover {
+    box-shadow: 0 16px 40px rgba(109, 91, 255, 0.35), 0 0 0 1px rgba(109, 91, 255, 0.4);
+    border-color: rgba(109, 91, 255, 0.8);
+  }
+
+  .role-option.enterprise .role-icon {
+    background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+    box-shadow: 0 4px 12px rgba(62, 92, 244, 0.3);
+  }
+
+  .role-option.enterprise .role-cta {
+    background: linear-gradient(135deg, #3E5CF4 0%, #6D5BFF 100%);
+  }
+
+  .role-option.enterprise .role-cta .role-cta-text,
+  .role-option.enterprise .role-cta .role-arrow {
+    color: white;
+  }
+
+  .role-option.enterprise:hover .role-cta {
+    background: linear-gradient(135deg, #3E5CF4 0%, #5a4de8 100%);
+    box-shadow: 0 4px 16px rgba(62, 92, 244, 0.4);
   }
 
   .role-header {

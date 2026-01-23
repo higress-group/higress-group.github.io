@@ -801,6 +801,15 @@ export default {
     'home.role.selector.learn_more.feature2': 'Enterprise cases & best practices',
     'home.role.selector.learn_more.feature3': 'Version comparison & pricing',
     
+    // Enterprise Option
+    'home.role.selector.enterprise': 'Enterprise Edition',
+    'home.role.selector.enterprise.desc': 'Fully managed cloud service with pro support',
+    'home.role.selector.enterprise.time': 'Ready to use',
+    'home.role.selector.enterprise.badge': 'Free Trial',
+    'home.role.selector.enterprise.feature1': '99.95% SLA availability',
+    'home.role.selector.enterprise.feature2': '90%+ kernel optimization',
+    'home.role.selector.enterprise.feature3': 'Commercial support included',
+    
     'home.role.selector.or_try_demo': 'Or try the online Demo',
 
     // Scroll Progress
