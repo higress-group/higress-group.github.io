@@ -787,7 +787,7 @@ export default {
     
     // Enterprise Option (Primary for B2B conversion)
     'home.role.selector.enterprise': 'Enterprise Edition',
-    'home.role.selector.enterprise.desc': 'Fully managed cloud service with production-grade support',
+    'home.role.selector.enterprise.desc': 'Fully managed with production-grade SLA',
     'home.role.selector.enterprise.time': 'Same-day Setup',
     'home.role.selector.enterprise.badge': 'Limited Free Trial',
     'home.role.selector.enterprise.feature1': '99.95% SLA Availability Guarantee',

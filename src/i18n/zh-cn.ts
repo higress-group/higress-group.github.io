@@ -794,7 +794,7 @@ export default {
     
     // Enterprise Option (Primary for B2B conversion)
     'home.role.selector.enterprise': '企业版',
-    'home.role.selector.enterprise.desc': '全托管云服务，专业技术支持，生产级保障',
+    'home.role.selector.enterprise.desc': '全托管云服务，生产级保障',
     'home.role.selector.enterprise.time': '当日开通',
     'home.role.selector.enterprise.badge': '限时免费试用',
     'home.role.selector.enterprise.feature1': '99.95% SLA 可用性保障',
