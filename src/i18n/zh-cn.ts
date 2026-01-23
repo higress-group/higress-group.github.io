@@ -17,6 +17,7 @@ export default {
   "navbar.community.github": "GitHub",
   "navbar.community.developer": "开发者",
   "navbar.community.glossary": "技术词汇表",
+  "navbar.community.plugins": "插件市场",
 
 	// website
 	'commmon.header.menu.cloud': '企业版 NACOS',

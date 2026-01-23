@@ -17,6 +17,7 @@ export default {
   "navbar.community.github": "GitHub",
   "navbar.community.developer": "Developer",
   "navbar.community.glossary": "Glossary",
+  "navbar.community.plugins": "Plugins",
 
   // website
 	'commmon.header.menu.cloud': 'NACOS CLOUD',
