@@ -184,6 +184,37 @@ export async function generateLlmsTxt(contentDir: string): Promise<string> {
   // 处理配置生成文档分区
   const sections = await processSidebarConfig(sidebarConfig, docsBaseDir, "docs");
 
+  // 追加 AI 网关文档分区
+  try {
+    const aiBaseDir = path.join(contentDir, "docs/docs/ai");
+    const aiSidebarPath = path.join(aiBaseDir, "_sidebar.json");
+    const aiSidebarContent = await fs.readFile(aiSidebarPath, "utf-8");
+    const aiSidebarConfig: SidebarItem[] = JSON.parse(aiSidebarContent);
+    const aiSections = await processSidebarConfig(aiSidebarConfig, aiBaseDir, "ai");
+    const normalizedAiSections = aiSections.map((section) =>
+      section.title === "文档" ? { ...section, title: "AI 网关" } : section,
+    );
+    sections.push(...normalizedAiSections);
+  } catch (error) {
+    console.warn("Warning: Could not process AI docs sidebar for llms.txt");
+  }
+
+  // 追加 HiMarket 文档分区
+  try {
+    const himarketBaseDir = path.join(contentDir, "docs/docs/himarket");
+    const himarketSidebarPath = path.join(himarketBaseDir, "_sidebar.json");
+    const himarketSidebarContent = await fs.readFile(himarketSidebarPath, "utf-8");
+    const himarketSidebarConfig: SidebarItem[] = JSON.parse(himarketSidebarContent);
+    const himarketSections = await processSidebarConfig(
+      himarketSidebarConfig,
+      himarketBaseDir,
+      "himarket",
+    );
+    sections.push(...himarketSections);
+  } catch (error) {
+    console.warn("Warning: Could not process HiMarket docs sidebar for llms.txt");
+  }
+
   // 生成 llms.txt 内容
   let content = `# Higress
 
