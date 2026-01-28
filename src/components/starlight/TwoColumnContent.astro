@@ -10,7 +10,32 @@
 	}
 	<div class="main-pane"><slot /></div>
 </div>
-
+<style is:global>
+mobile-starlight-toc {
+  #starlight__mobile-toc {
+    .toggle {
+      border: none;
+    }
+  }
+}
+.right-sidebar-container {
+  .right-sidebar-panel {
+    .sl-container  {
+      width: 100%;
+    }
+    :where(a) {
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+}
+.main-pane {
+  #_top {
+    max-width: 80%;
+  }
+}
+</style>
 <style>
 @layer starlight.core {
 		.main-pane {
@@ -18,24 +43,28 @@
 		}
 
 
+
+
 		@media (min-width: 72rem) {
 			.right-sidebar-container {
 				order: 2;
 				position: relative;
-				width: calc(
-					var(--sl-sidebar-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
-				);
+				width: var(--sl-right-sidebar-width);
 			}
 
 			.right-sidebar {
 				position: fixed;
 				top: 0;
+				inset-inline-end: 0;
 				border-inline-start: 1px solid var(--sl-color-hairline);
 				padding-top: var(--sl-nav-height);
-				width: 100%;
+				width: var(--sl-right-sidebar-width);
 				height: 100vh;
 				overflow-y: auto;
 				scrollbar-width: none;
+				overflow-wrap: break-word;
+				white-space: normal;
+				padding-bottom: 2rem;
 			}
 
 			.main-pane {
@@ -46,9 +75,7 @@
 				--sl-content-margin-inline: auto 0;
 
 				order: 1;
-				width: calc(
-					var(--sl-content-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
-				);
+				width: calc(100% - var(--sl-right-sidebar-width));
 			}
 		}
 	}

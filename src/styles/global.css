@@ -34,9 +34,9 @@ site-search {
   display: none;
 }
 
-.sl-markdown-content a:hover:not(:where(.not-content *)) {
-  color: var(--sl-color-text-accent);
-}
+
+
+
 
 /* Force Light mode colors for everything. */
 :root,
@@ -67,6 +67,8 @@ site-search {
   --sl-color-text-strong: #121316;
 
   --sl-content-width: 100%;
+  --sl-nav-height: 4rem;
+  --sl-right-sidebar-width: 14rem;
   /*--sl-sidebar-width: 290px;*/
 }
 
@@ -115,4 +117,22 @@ site-search {
   --color-primary: var(--sl-color-accent);
   --color-black: #2e3038;
   --color-strong: var(--sl-color-text-strong);
+}
+
+/* 增加右侧目录栏宽度 */
+@media (min-width: 72rem) {
+  .right-sidebar-container {
+    width: var(--sl-right-sidebar-width) !important;
+  }
+  .right-sidebar {
+    width: var(--sl-right-sidebar-width) !important;
+    overflow-x: hidden !important;
+    padding-right: 0.5rem !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+  }
+}
+
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
+  color: var(--sl-color-text-accent);
 }

@@ -31,7 +31,7 @@ try {
 }
 ---
 
-<div class="page-header-wrapper">
+<div class="page-header-wrapper mt-10 md:mt-0">
   <!-- 隐藏的 markdown 内容存储 -->
   <div id="markdown-content-storage" style="display: none;">{markdownContent}</div>
 
@@ -46,7 +46,7 @@ try {
       <span class="button-text hidden sm:inline ml-2 sm:ml-0">{t('page.title.back')}</span>
     </Button>
 
-    <div class="absolute right-0 top-17">
+    <div class="absolute right-0 top-0 md:top-17">
       <!-- 组合按钮：外观是一个按钮，内部分两个点击区域 -->
       <div class="combined-button flex items-stretch border rounded-full overflow-hidden bg-white">
         <!-- 左侧：复制区域 -->
@@ -100,8 +100,8 @@ try {
   <Default {...Astro.props} />
 </div>
 
-<div id="i18n-data" 
-  data-copied={t('page.title.copied')} 
+<div id="i18n-data"
+  data-copied={t('page.title.copied')}
   data-copy-failed={t('page.title.copy_failed')}
   style="display: none;"
 ></div>
@@ -197,7 +197,7 @@ try {
 
     // 移除开头的斜杠
     let path = currentPath.replace(/^\//, '');
-    
+
     // 移除末尾的斜杠
     path = path.replace(/\/$/, '');
 
