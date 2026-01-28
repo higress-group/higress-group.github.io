@@ -26,12 +26,11 @@ Follow the prompts to enter the API-KEYs for model providers; you can also press
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
 
 
+The gateway uses 8080 as the default HTTP port, 8443 as the default HTTPS port. And the default port of console is 8001. If you'd like to use other ports, please use the command below with port number(s) changed accordingly.
 
-If your current port is occupied and need to use another port, download the installer script using `wget https://higress.cn/ai-gateway/install.sh`, modify *DEFAULT_GATEWAY_HTTP_PORT/DEFAULT_GATEWAY_HTTPS_PORT/DEFAULT_CONSOLE_PORT*, and then execute the script using bash.
-
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
-
-
+```bash
+curl -sS https://higress.cn/ai-gateway/install.sh | GATEWAY_HTTP_PORT=8080 GATEWAY_HTTPS_PORT=8443 CONSOLE_PORT=8001 bash
+```
 
 After the deployment is completed, the following command display will appear.
 
