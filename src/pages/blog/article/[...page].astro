@@ -19,7 +19,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
     const articlePosts = sortedPosts.filter((post) => {
         return post.data.category === "article";
     });
-    return paginate(articlePosts, { pageSize: 9 });
+    return paginate(articlePosts, { pageSize: 10 });
 }
 ---
 

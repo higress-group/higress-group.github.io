@@ -50,7 +50,7 @@ const author = post.data.author || post.data.authors;
             <h2 class="text-lg font-semibold mb-4 text-gray-900">{t('blog.post.toc')}</h2>
             <nav class="space-y-1">
               {displayHeadings.length > 0 ? (
-                <ul class="space-y-1">
+                <ul class="space-y-1 list-none pl-2">
                   {displayHeadings.map((heading) => (
                     <li>
                       <a

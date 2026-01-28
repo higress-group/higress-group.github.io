@@ -8,15 +8,13 @@ authors: "CH3CHO"
 ---
 
 > 作者：聪言
->
-
 
 
 **<font style="color:rgba(0, 0, 0, 0.9);">亲爱的开发者们：</font>**
 
 <font style="color:rgba(0, 0, 0, 0.9);">我们激动地宣布，Nacos Python SDK——nacos-sdk-python1.0.0 稳定版正式发布啦！Nacos 从 0.8.0 版本开始就一直参与 Python 生态建设，努力作为 Python 生态中分布式微服务发现和配置管理的解决方案一直往前演进。目前随着 AI 领域的发展，Nacos 社区的 Python 开发者用户越来越多，因此这次我们迭代了 Python 的 GA 稳定版本，对不少历史问题做了修复以及易用性层面的各项兼容优化，帮助大家可以更好的在大模型时代落地自己的业务场景。</font>
 
-### **<font style="color:rgb(46, 75, 227);">一、核心亮点</font>**
+## **<font style="color:rgb(46, 75, 227);">一、核心亮点</font>**
 **<font style="color:rgba(0, 0, 0, 0.9);">全面兼容性：</font>**<font style="color:rgba(0, 0, 0, 0.9);">支持 Python 2.7、3.6 及 3.7 版本，确保广泛的项目适配性。</font>
 
 **<font style="color:rgba(0, 0, 0, 0.9);">无缝对接 Nacos：</font>**<font style="color:rgba(0, 0, 0, 0.9);">兼容 Nacos 1.x 以及 Nacos 2.x with http protocol 版本，无论是现有项目升级还是新项目集成，都能平滑过渡。</font>
@@ -35,7 +33,7 @@ authors: "CH3CHO"
 
 **<font style="color:rgba(0, 0, 0, 0.9);">详尽 API 参考：</font>**<font style="color:rgba(0, 0, 0, 0.9);">详尽的 API 文档，涵盖从基础配置获取到高级服务管理的所有操作，助力您高效开发。</font>
 
-**<font style="color:rgb(46, 75, 227);">二、快速开始</font>**
+## **<font style="color:rgb(46, 75, 227);">二、快速开始</font>**
 
 **<font style="color:rgb(46, 75, 227);">Flask 篇 —— 简洁而优雅的配置之旅</font>**
 
@@ -143,7 +141,7 @@ config_manager = NacosConfigManager()
 
 ![](/img/1728551152012.png)
 
-**<font style="color:rgb(46, 75, 227);">三、加入我们</font>**<font style="color:rgb(51, 51, 51);">  
+## **<font style="color:rgb(46, 75, 227);">三、加入我们</font>**<font style="color:rgb(51, 51, 51);">  
 </font>
 
 <font style="color:rgba(0, 0, 0, 0.9);">最后，我们诚邀每一位 Python 开发者体验 nacos-sdk-python，并期待您的宝贵反馈。无论是功能建议还是遇到的问题，都请不吝告知。让我们携手推动 Python 微服务生态的发展，共创更加高效、稳定的开发环境。  
@@ -156,5 +154,3 @@ config_manager = NacosConfigManager()
 **<font style="color:rgba(0, 0, 0, 0.9);">GitHub 仓库：</font>**
 
 <font style="color:rgba(0, 0, 0, 0.9);">访问 nacos-sdk-python，查看文档、报告问题或贡献代码，共同构建更好的 Nacos Python 社区：</font>_<u><font style="color:rgb(0, 122, 170);">https://github.com/nacos-group/nacos-sdk-python</font></u>_
-
-

@@ -18,7 +18,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
     const casePosts = sortedPosts.filter((post) => {
         return post.data.category === "case";
     });
-    return paginate(casePosts, { pageSize: 9 });
+    return paginate(casePosts, { pageSize: 10 });
 }
 ---
 

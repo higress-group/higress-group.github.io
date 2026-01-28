@@ -30,6 +30,10 @@ site-search {
   }
 }
 
+#starlight__on-this-page {
+  display: none;
+}
+
 .sl-markdown-content a:hover:not(:where(.not-content *)) {
   color: var(--sl-color-text-accent);
 }

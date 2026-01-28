@@ -30,8 +30,7 @@ authors: "CH3CHO"
 
 详细信息请查看下方重要功能详述部分。
 
-##   
- 重要功能详述
+## 重要功能详述
 以下是本次发布中的重要功能和改进的详细说明：
 
 **1. feat(mcp-server): add server-level default authentication and MCP proxy server support**
