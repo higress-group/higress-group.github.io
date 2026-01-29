@@ -1,0 +1,415 @@
+---
+import type { MarkdownHeading } from "astro";
+import SiteLayout from "@/layout/siteLayout.astro";
+import Button from "@/components/button/Button.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  keywords: string | (string | number)[];
+  postTitle: string;
+  postDescription: string;
+  postDate?: string;
+  postCategory?: string;
+  author?: string;
+  slug: string;
+  headings: MarkdownHeading[];
+  locale: string;
+  // i18n texts
+  tocLabel: string;
+  noTocLabel: string;
+  backLabel: string;
+  categoryLabel: string;
+  // SEO
+  baseUrl: string;
+  inLanguage: string;
+  homeLabel: string;
+  blogLabel: string;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  postTitle,
+  postDescription,
+  postDate,
+  postCategory,
+  author,
+  slug,
+  headings,
+  locale,
+  tocLabel,
+  noTocLabel,
+  backLabel,
+  categoryLabel,
+  baseUrl,
+  inLanguage,
+  homeLabel,
+  blogLabel,
+} = Astro.props;
+
+const h2Headings = headings.filter((heading) => heading.depth === 2);
+const displayHeadings =
+  h2Headings.length > 0
+    ? h2Headings
+    : headings.filter((heading) => heading.depth === 3);
+
+const keywordsStr = Array.isArray(keywords) ? keywords.join(", ") : keywords;
+const defaultImage = "https://img.alicdn.com/imgextra/i1/O1CN01RkqfpB25G8opRrGqF_!!6000000007498-2-tps-700-648.png";
+---
+
+<SiteLayout title={title} description={description} keywords={keywords}>
+  <div class="blog-detail-container pt-16">
+    <div class="p-4 md:p-10">
+      <div class="flex gap-8 relative">
+        <!-- Left sidebar TOC -->
+        <aside class="hidden sticky top-16 pt-22 self-start md:flex w-64 shrink-0 max-h-screen overflow-y-auto">
+          <div class="top-24">
+            <h2 class="text-lg font-semibold mb-4 text-gray-900">{tocLabel}</h2>
+            <nav class="space-y-1">
+              {displayHeadings.length > 0 ? (
+                <ul class="space-y-1 list-none pl-2">
+                  {displayHeadings.map((heading) => (
+                    <li>
+                      <a
+                        href={`#${heading.slug}`}
+                        class="block py-1.5 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                      >
+                        {heading.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="text-sm text-gray-500">{noTocLabel}</p>
+              )}
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Right content -->
+        <main class="flex-1 min-w-0">
+          <slot name="back-button">
+            <a href="javascript:history.back()" class="inline-block mb-4">
+              <Button class="w-30" mode="normal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span class="ml-2">
+                  {backLabel}
+                </span>
+              </Button>
+            </a>
+          </slot>
+          <!-- Article header -->
+          <article class="prose overflow-auto prose-lg max-w-none mt-10">
+            <header class="mb-8 pb-8">
+              <div class="flex items-center gap-5">
+                <div class="rounded-xl overflow-hidden w-20 h-20 shrink-0">
+                  <img class="w-full h-full object-cover" src={defaultImage} alt="Author Avatar" />
+                </div>
+                <div class="flex flex-col justify-center md:justify-between min-h-20 gap-2 md:gap-0">
+                  <h1 class="text-2xl md:text-4xl font-medium leading-tight md:leading-none m-0 p-0 text-black">
+                    {postTitle}
+                  </h1>
+                  <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-07">
+                    {author && (
+                      <>
+                        <div class="flex items-center gap-2">
+                          <span>{author}</span>
+                        </div>
+                        <div class="h-3 w-px bg-gray-07"></div>
+                      </>
+                    )}
+                    {postDate && (
+                      <>
+                        <div class="flex items-center gap-2">
+                          <span>{postDate}</span>
+                        </div>
+                        <div class="h-3 w-px bg-gray-07"></div>
+                      </>
+                    )}
+                    {postCategory && (
+                      <div class="flex items-center gap-2">
+                        <span>{categoryLabel}:</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs font-medium">
+                          {postCategory}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div class="mt-6 md:mt-10 text-black text-sm font-light">
+                {postDescription}
+              </div>
+            </header>
+
+            <!-- Markdown content -->
+            <div class="markdown-content">
+              <slot />
+            </div>
+          </article>
+        </main>
+      </div>
+    </div>
+  </div>
+</SiteLayout>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": postTitle,
+  "description": description,
+  "image": defaultImage,
+  "datePublished": postDate ? new Date(postDate).toISOString() : undefined,
+  "dateModified": postDate ? new Date(postDate).toISOString() : undefined,
+  "author": {
+    "@type": "Person",
+    "name": author || "Higress Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Higress",
+    "logo": {
+      "@type": "ImageObject",
+      "url": defaultImage
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `${baseUrl}blog/${slug}/`
+  },
+  "keywords": keywordsStr,
+  "articleSection": postCategory,
+  "inLanguage": inLanguage
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": homeLabel,
+      "item": baseUrl
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": blogLabel,
+      "item": `${baseUrl}blog/`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": postTitle,
+      "item": `${baseUrl}blog/${slug}/`
+    }
+  ]
+})} />
+
+<style>
+  .blog-detail-container {
+    min-height: 100vh;
+  }
+
+  /* Markdown content styles */
+  .markdown-content :global(h1),
+  .markdown-content :global(h2),
+  .markdown-content :global(h3),
+  .markdown-content :global(h4),
+  .markdown-content :global(h5),
+  .markdown-content :global(h6) {
+    scroll-margin-top: 6rem;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #1f2937;
+  }
+
+  .markdown-content :global(h1) {
+    font-size: 2em;
+  }
+
+  .markdown-content :global(h2) {
+    font-size: 1.5em;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.3em;
+  }
+
+  .markdown-content :global(h3) {
+    font-size: 1.25em;
+  }
+
+  .markdown-content :global(p) {
+    margin-bottom: 1em;
+    line-height: 1.75;
+    color: #374151;
+  }
+
+  .markdown-content :global(a) {
+    color: #2563eb;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .markdown-content :global(a:hover) {
+    color: #1d4ed8;
+    text-decoration: underline;
+  }
+
+  .markdown-content :global(code) {
+    background-color: #f3f4f6;
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .markdown-content :global(pre) {
+    background-color: #f8fafc;
+    color: #1e293b;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1.5em 0;
+    border: 1px solid #e2e8f0;
+  }
+
+  .markdown-content :global(pre code) {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+  }
+
+  .markdown-content :global(blockquote) {
+    border-left: 4px solid #e5e7eb;
+    padding-left: 1em;
+    margin: 1.5em 0;
+    color: #6b7280;
+    font-style: italic;
+  }
+
+  .markdown-content :global(ul),
+  .markdown-content :global(ol) {
+    margin: 1em 0;
+    padding-left: 2em;
+  }
+
+  .markdown-content :global(li) {
+    margin: 0.5em 0;
+    line-height: 1.75;
+  }
+
+  .markdown-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1.5em 0;
+  }
+
+  .markdown-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+  }
+
+  .markdown-content :global(th),
+  .markdown-content :global(td) {
+    border: 1px solid #e5e7eb;
+    padding: 0.75em;
+    text-align: left;
+  }
+
+  .markdown-content :global(th) {
+    background-color: #f9fafb;
+    font-weight: 600;
+  }
+
+  .markdown-content :global(hr) {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 2em 0;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .markdown-content :global(h1) {
+      font-size: 1.75em;
+    }
+
+    .markdown-content :global(h2) {
+      font-size: 1.375em;
+    }
+
+    .markdown-content :global(h3) {
+      font-size: 1.125em;
+    }
+  }
+
+  .active-toc-item {
+    color: #2563eb !important;
+    font-weight: 600;
+    border-left: 2px solid #2563eb;
+    padding-left: 0.5rem;
+    margin-left: -0.5rem;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tocLinks = Array.from(document.querySelectorAll('aside nav a'));
+    const headings = tocLinks.map(link => {
+      const id = link.getAttribute('href')?.slice(1);
+      return id ? document.getElementById(id) : null;
+    }).filter((h): h is HTMLElement => h !== null);
+
+    const updateToc = () => {
+      let activeId: string | null = null;
+
+      // Offset to determine when a section is "active"
+      // Should match roughly with scroll-margin-top (6rem ~ 96px) plus some buffer
+      const offset = 150;
+
+      // Find the last heading that is above the offset line
+      for (const heading of headings) {
+        const rect = heading.getBoundingClientRect();
+        if (rect.top <= offset) {
+          activeId = heading.id;
+        } else {
+          // Since headings are in order, we can stop once we find one below the offset
+          break;
+        }
+      }
+
+      // Apply active class
+      tocLinks.forEach(link => {
+        link.classList.remove('active-toc-item');
+        if (activeId && link.getAttribute('href') === `#${activeId}`) {
+          link.classList.add('active-toc-item');
+        }
+      });
+    };
+
+    // Initial update
+    updateToc();
+
+    // Scroll listener with throttle/rAF
+    let ticking = false;
+    document.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateToc();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  });
+</script>
