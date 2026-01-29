@@ -7,9 +7,9 @@ import { LINKS } from "@/constant";
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
 
-const title = "Higress vs 其他 AI 网关 - 全方位对比分析";
-const description = "深入对比 Higress 与 OneAPI、LiteLLM 等主流 AI 网关方案，从架构、功能到企业级特性，帮您选择最适合的 AI 网关解决方案。";
-const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网关选择, 企业级AI网关, API网关对比";
+const title = t('ai.product.competitor_compare.meta.title');
+const description = t('ai.product.competitor_compare.meta.description');
+const keywords = t('ai.product.competitor_compare.meta.keywords');
 ---
 
 <SiteLayout title={title} description={description} keywords={keywords}>
@@ -22,7 +22,7 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
             <svg class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
-            竞品对比分析
+            {t('ai.product.competitor_compare.badge')}
           </div>
           <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
             {t('ai.product.competitor_compare.title')}
@@ -35,10 +35,10 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
               <svg class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
-              立即体验 Higress
+              {t('ai.product.competitor_compare.cta.experience')}
             </a>
-            <a href="/ai-gateway/" class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 transition">
-              了解更多功能
+            <a href={localizeUrl('/ai-gateway/', locale)} class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 transition">
+              {t('ai.product.competitor_compare.cta.learn_more')}
               <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
@@ -52,11 +52,11 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
     <div class="competitor-comparison-section">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Tab Switcher -->
-        <div class="comparison-tabs" role="tablist" aria-label="竞品对比选项">
-          <button class="comparison-tab active" data-tab="oneapi" role="tab" aria-selected="true" aria-controls="oneapi-content" tabindex="0">
+        <div class="comparison-tabs" role="tablist" aria-label={t('ai.product.competitor_compare.aria.tablist')}>
+          <button class="comparison-tab active" data-tab="oneapi" role="tab" aria-selected="true" aria-controls="oneapi-content" tabindex="0" id="oneapi-tab">
             {t('ai.product.competitor_compare.tab.oneapi')}
           </button>
-          <button class="comparison-tab" data-tab="litellm" role="tab" aria-selected="false" aria-controls="litellm-content" tabindex="-1">
+          <button class="comparison-tab" data-tab="litellm" role="tab" aria-selected="false" aria-controls="litellm-content" tabindex="-1" id="litellm-tab">
             {t('ai.product.competitor_compare.tab.litellm')}
           </button>
         </div>
@@ -67,11 +67,11 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
             <table class="comparison-table">
               <thead>
                 <tr>
-                  <th class="feature-col">对比项</th>
-                  <th class="competitor-col">OneAPI</th>
+                  <th class="feature-col">{t('ai.product.competitor_compare.table.feature_col')}</th>
+                  <th class="competitor-col">{t('ai.product.competitor_compare.competitor.oneapi')}</th>
                   <th class="higress-col">
                     <div class="higress-header">
-                      <span>Higress</span>
+                      <span>{t('ai.product.competitor_compare.higress_label')}</span>
                       <svg class="crown-icon" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                       </svg>
@@ -126,11 +126,11 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
             <table class="comparison-table">
               <thead>
                 <tr>
-                  <th class="feature-col">对比项</th>
-                  <th class="competitor-col">LiteLLM</th>
+                  <th class="feature-col">{t('ai.product.competitor_compare.table.feature_col')}</th>
+                  <th class="competitor-col">{t('ai.product.competitor_compare.competitor.litellm')}</th>
                   <th class="higress-col">
                     <div class="higress-header">
-                      <span>Higress</span>
+                      <span>{t('ai.product.competitor_compare.higress_label')}</span>
                       <svg class="crown-icon" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                       </svg>
@@ -211,9 +211,9 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
     <div class="benefits-section">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">为什么选择 Higress AI 网关？</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">{t('ai.product.competitor_compare.benefits.title')}</h2>
           <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-            基于阿里云多年大规模生产实践，Higress 为您提供企业级 AI 网关解决方案
+            {t('ai.product.competitor_compare.benefits.subtitle')}
           </p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -223,8 +223,8 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h3 class="benefit-title">高性能架构</h3>
-            <p class="benefit-desc">基于 Envoy 的高性能代理，支持每秒数十万级请求，毫秒级配置生效</p>
+            <h3 class="benefit-title">{t('ai.product.competitor_compare.benefits.performance.title')}</h3>
+            <p class="benefit-desc">{t('ai.product.competitor_compare.benefits.performance.desc')}</p>
           </div>
           <div class="benefit-card">
             <div class="benefit-icon">
@@ -232,8 +232,8 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
-            <h3 class="benefit-title">企业级安全</h3>
-            <p class="benefit-desc">集成阿里云内容安全，提供实时内容过滤、数据脱敏和多种认证策略</p>
+            <h3 class="benefit-title">{t('ai.product.competitor_compare.benefits.security.title')}</h3>
+            <p class="benefit-desc">{t('ai.product.competitor_compare.benefits.security.desc')}</p>
           </div>
           <div class="benefit-card">
             <div class="benefit-icon">
@@ -241,8 +241,8 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
               </svg>
             </div>
-            <h3 class="benefit-title">智能运维</h3>
-            <p class="benefit-desc">完整的监控仪表板、Token 消耗分析、延迟监控和智能负载均衡</p>
+            <h3 class="benefit-title">{t('ai.product.competitor_compare.benefits.ops.title')}</h3>
+            <p class="benefit-desc">{t('ai.product.competitor_compare.benefits.ops.desc')}</p>
           </div>
         </div>
       </div>
@@ -254,32 +254,32 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
 <script type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
   "@type": "ComparisonPage",
-  "name": "Higress vs 其他 AI 网关对比",
-  "description": "深入对比 Higress 与 OneAPI、LiteLLM 等主流 AI 网关方案的功能特性",
+  "name": t('ai.product.competitor_compare.ld.name'),
+  "description": t('ai.product.competitor_compare.ld.description'),
   "url": "https://higress.ai/ai-gateway/comparison/",
   "about": [
     {
       "@type": "SoftwareApplication",
-      "name": "Higress AI Gateway",
+      "name": t('ai.product.competitor_compare.ld.about.higress.name'),
       "applicationCategory": "DeveloperApplication",
-      "description": "企业级 AI 网关解决方案"
+      "description": t('ai.product.competitor_compare.ld.about.higress.description')
     },
     {
       "@type": "SoftwareApplication", 
-      "name": "OneAPI",
+      "name": t('ai.product.competitor_compare.ld.about.oneapi.name'),
       "applicationCategory": "DeveloperApplication",
-      "description": "开源 AI 网关项目"
+      "description": t('ai.product.competitor_compare.ld.about.oneapi.description')
     },
     {
       "@type": "SoftwareApplication",
-      "name": "LiteLLM", 
+      "name": t('ai.product.competitor_compare.ld.about.litellm.name'),
       "applicationCategory": "DeveloperApplication",
-      "description": "Python SDK 代理模式 AI 网关"
+      "description": t('ai.product.competitor_compare.ld.about.litellm.description')
     }
   ],
   "provider": {
     "@type": "Organization",
-    "name": "Higress",
+    "name": t('company.name'),
     "url": "https://higress.ai"
   }
 })} />
@@ -291,19 +291,19 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "首页",
+      "name": t('common.home'),
       "item": "https://higress.ai/"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "AI 网关",
+      "name": t('ai.product.title'),
       "item": "https://higress.ai/ai-gateway/"
     },
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "竞品对比",
+      "name": t('ai.product.competitor_compare.title'),
       "item": "https://higress.ai/ai-gateway/comparison/"
     }
   ]
@@ -689,12 +689,13 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
 <!-- Tab Switching Script -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const tabs = document.querySelectorAll('.comparison-tab');
-    const contents = document.querySelectorAll('.comparison-content');
+    // Use typed selectors so TS knows about dataset/focus on elements
+    const tabs = document.querySelectorAll<HTMLButtonElement>('.comparison-tab');
+    const contents = document.querySelectorAll<HTMLElement>('.comparison-content');
     
     console.log('Tab switching initialized:', tabs.length, 'tabs found');
     
-    function switchTab(targetTab, clickedTab) {
+    function switchTab(targetTab: string, clickedTab: HTMLElement) {
       console.log('Switching to tab:', targetTab);
       
       // Update active tab
@@ -710,7 +711,7 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
       
       // Update active content
       contents.forEach(c => c.classList.remove('active'));
-      const targetContent = document.querySelector(`[data-content="${targetTab}"]`);
+      const targetContent = document.querySelector<HTMLElement>(`[data-content="${targetTab}"]`);
       if (targetContent) {
         targetContent.classList.add('active');
         console.log('Content switched to:', targetTab);
@@ -723,11 +724,11 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
     function handleHashChange() {
       const hash = window.location.hash.substring(1); // Remove #
       if (hash && (hash === 'oneapi' || hash === 'litellm')) {
-        const targetTab = document.querySelector(`[data-tab="${hash}"]`);
-        if (targetTab) {
-          switchTab(hash, targetTab);
+        const targetTabEl = document.querySelector<HTMLElement>(`[data-tab="${hash}"]`);
+        if (targetTabEl) {
+          switchTab(hash, targetTabEl);
           // Smooth scroll to the comparison section
-          const comparisonSection = document.querySelector('.competitor-comparison-section');
+          const comparisonSection = document.querySelector<HTMLElement>('.competitor-comparison-section');
           if (comparisonSection) {
             comparisonSection.scrollIntoView({ behavior: 'smooth' });
           }
@@ -743,16 +744,17 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
     
     tabs.forEach((tab, index) => {
       // Click handler
-      tab.addEventListener('click', (e) => {
+      tab.addEventListener('click', (e: MouseEvent) => {
         e.preventDefault();
-        const targetTab = tab.dataset.tab;
+        const targetTab = tab.dataset.tab || '';
         switchTab(targetTab, tab);
-        // Update URL hash
-        history.pushState(null, null, `#${targetTab}`);
+        // Update URL hash (use valid pushState signature)
+        history.pushState({}, '', `#${targetTab}`);
       });
       
       // Keyboard handler
-      tab.addEventListener('keydown', (e) => {
+      tab.addEventListener('keydown', (ev) => {
+        const e = ev as KeyboardEvent;
         let targetIndex = index;
         
         if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
@@ -763,17 +765,18 @@ const keywords = "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网�
           targetIndex = index < tabs.length - 1 ? index + 1 : 0;
         } else if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          const targetTab = tab.dataset.tab;
+          const targetTab = tab.dataset.tab || '';
           switchTab(targetTab, tab);
-          history.pushState(null, null, `#${targetTab}`);
+          history.pushState({}, '', `#${targetTab}`);
           return;
         }
         
         if (targetIndex !== index) {
-          const targetTab = tabs[targetIndex];
-          switchTab(targetTab.dataset.tab, targetTab);
-          targetTab.focus();
-          history.pushState(null, null, `#${targetTab.dataset.tab}`);
+          const targetTabEl = tabs[targetIndex];
+          const targetKey = targetTabEl.dataset.tab || '';
+          switchTab(targetKey, targetTabEl);
+          (targetTabEl as HTMLElement).focus();
+          history.pushState({}, '', `#${targetKey}`);
         }
       });
     });

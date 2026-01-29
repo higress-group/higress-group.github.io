@@ -602,7 +602,26 @@ export default {
     'ai.product.competitor_compare.subtitle': '从架构、功能到企业级特性,全方位对比主流 AI 网关方案',
     'ai.product.competitor_compare.tab.oneapi': 'vs OneAPI',
     'ai.product.competitor_compare.tab.litellm': 'vs LiteLLM',
-        
+
+    // AI Product Page - Additional
+    'ai.product.competitor_compare.link': '竞品对比分析',
+    'ai.product.competitor_compare.card.oneapi.title': 'vs OneAPI',
+    'ai.product.competitor_compare.card.oneapi.badge': '7 项对比',
+    'ai.product.competitor_compare.card.oneapi.feature1': '企业级维护团队',
+    'ai.product.competitor_compare.card.oneapi.feature2': '内容安全与数据脱敏',
+    'ai.product.competitor_compare.card.oneapi.feature3': '完整可观测性',
+    'ai.product.competitor_compare.card.litellm.title': 'vs LiteLLM',
+    'ai.product.competitor_compare.card.litellm.badge': '9 项对比',
+    'ai.product.competitor_compare.card.litellm.feature1': '高性能网关架构',
+    'ai.product.competitor_compare.card.litellm.feature2': '开箱即用控制台',
+    'ai.product.competitor_compare.card.litellm.feature3': '企业级特性支持',
+    'ai.product.competitor_compare.cta.title_new': '查看完整对比分析',
+    'ai.product.competitor_compare.cta.desc_new': '深入了解 Higress 相比其他 AI 网关的技术优势和企业级特性',
+    'ai.product.competitor_compare.cta.btn_detail': '详细对比分析',
+    'ai.product.ready_to_start.btn_comparison': '竞品对比',
+    'ai.product.version_compare.opensource.btn_github': 'GitHub',
+    'ai.product.version_compare.opensource.tip_new': '开源免费，社区支持',
+
     // OneAPI Comparison
     'ai.product.competitor_compare.oneapi.core_function': '核心功能',
     'ai.product.competitor_compare.oneapi.core_function.oneapi': 'AI 网关',
@@ -625,7 +644,7 @@ export default {
     'ai.product.competitor_compare.oneapi.extensibility': '可扩展性',
     'ai.product.competitor_compare.oneapi.extensibility.oneapi': '无',
     'ai.product.competitor_compare.oneapi.extensibility.higress': '插件市场、自定义 Wasm 插件、热加载',
-        
+
     // LiteLLM Comparison
     'ai.product.competitor_compare.litellm.architecture': '架构',
     'ai.product.competitor_compare.litellm.architecture.litellm': '基于 Python SDK 的 proxy 模式,资源开销大,稳定性差',
@@ -654,12 +673,12 @@ export default {
     'ai.product.competitor_compare.litellm.enterprise': '企业级特性',
     'ai.product.competitor_compare.litellm.enterprise.litellm': '—',
     'ai.product.competitor_compare.litellm.enterprise.higress': '经过大规模验证,支持每秒数十万级请求,配置毫秒级生效',
-        
+
     'ai.product.competitor_compare.cta.title': '准备好尝试 Higress 了吗?',
     'ai.product.competitor_compare.cta.desc': '5 分钟体验企业级 AI 网关的强大能力',
     'ai.product.competitor_compare.cta.quickstart': '快速开始',
     'ai.product.competitor_compare.cta.docs': '查看完整对比',
-    
+
     // Version Comparison
     'ai.product.version_compare.title': '选择适合您的版本',
     'ai.product.version_compare.subtitle': '开源版免费使用,企业版提供全托管服务与商业支持',
@@ -691,6 +710,9 @@ export default {
     // AI Integrations Page
     'ai.integrations.title': 'AI 模型集成目录',
     'ai.integrations.description': 'Higress 提供了开箱即用的多模型集成能力。通过统一的 OpenAI 协议，您可以轻松管理、路由和保护各种主流 LLM 服务。',
+    'ai.integrations.meta.title': 'Higress AI 网关模型集成目录 - 统一管理您的 LLM 服务',
+    'ai.integrations.meta.description': '探索 Higress AI 网关支持的所有大模型集成，包括 DeepSeek, Qwen, OpenAI, Claude 等。统一协议、多模型灰度、智能路由，为您的 AI 应用保驾护航。',
+    'ai.integrations.meta.keywords': 'AI网关, 大模型集成, DeepSeek, OpenAI, 通义千问, Kimi, Claude, Gemini',
     'ai.integrations.cta.title': '没找到您需要的模型？',
     'ai.integrations.cta.heading': '轻松扩展，接入任何 AI 服务',
     'ai.integrations.cta.description': 'Higress 支持基于 Wasm 的插件扩展。您可以参考我们的开发指南，快速为您的私有模型或新兴 AI 服务编写适配插件。',
@@ -709,6 +731,52 @@ export default {
     'ai.integrations.model.cta.description': '点击下方按钮，查看 Higress 的详细文档，或者直接在控制台中体验。',
     'ai.integrations.model.cta.view_docs': '查看详细文档',
     'ai.integrations.model.cta.star_github': 'Star on GitHub',
+
+    // Competitor Comparison - Meta
+    "ai.product.competitor_compare.meta.title": "Higress vs 其他 AI 网关 - 全方位对比分析",
+    "ai.product.competitor_compare.meta.description": "深入对比 Higress 与 OneAPI、LiteLLM 等主流 AI 网关方案，从架构、功能到企业级特性，帮您选择最适合的 AI 网关解决方案。",
+    "ai.product.competitor_compare.meta.keywords": "AI网关对比, Higress vs OneAPI, Higress vs LiteLLM, AI网关选择, 企业级AI网关, API网关对比",
+
+    // Hero / Badge / CTA
+    "ai.product.competitor_compare.badge": "竞品对比分析",
+    "ai.product.competitor_compare.cta.experience": "立即体验 Higress",
+    "ai.product.competitor_compare.cta.learn_more": "了解更多功能",
+
+    // Accessibility
+    "ai.product.competitor_compare.aria.tablist": "竞品对比选项",
+
+    // Tabs / Competitors labels
+    "ai.product.competitor_compare.competitor.oneapi": "OneAPI",
+    "ai.product.competitor_compare.competitor.litellm": "LiteLLM",
+    "ai.product.competitor_compare.higress_label": "Higress",
+
+    // Table
+    "ai.product.competitor_compare.table.feature_col": "对比项",
+
+    // Benefits section
+    "ai.product.competitor_compare.benefits.title": "为什么选择 Higress AI 网关？",
+    "ai.product.competitor_compare.benefits.subtitle": "基于阿里云多年大规模生产实践，Higress 为您提供企业级 AI 网关解决方案",
+    "ai.product.competitor_compare.benefits.performance.title": "高性能架构",
+    "ai.product.competitor_compare.benefits.performance.desc": "基于 Envoy 的高性能代理，支持每秒数十万级请求，毫秒级配置生效",
+    "ai.product.competitor_compare.benefits.security.title": "企业级安全",
+    "ai.product.competitor_compare.benefits.security.desc": "集成阿里云内容安全，提供实时内容过滤、数据脱敏和多种认证策略",
+    "ai.product.competitor_compare.benefits.ops.title": "智能运维",
+    "ai.product.competitor_compare.benefits.ops.desc": "完整的监控仪表板、Token 消耗分析、延迟监控和智能负载均衡",
+
+    // Structured Data / LD
+    "ai.product.competitor_compare.ld.name": "Higress vs 其他 AI 网关对比",
+    "ai.product.competitor_compare.ld.description": "深入对比 Higress 与 OneAPI、LiteLLM 等主流 AI 网关方案的功能特性",
+    "ai.product.competitor_compare.ld.about.higress.name": "Higress AI Gateway",
+    "ai.product.competitor_compare.ld.about.higress.description": "企业级 AI 网关解决方案",
+    "ai.product.competitor_compare.ld.about.oneapi.name": "OneAPI",
+    "ai.product.competitor_compare.ld.about.oneapi.description": "开源 AI 网关项目",
+    "ai.product.competitor_compare.ld.about.litellm.name": "LiteLLM",
+    "ai.product.competitor_compare.ld.about.litellm.description": "Python SDK 代理模式 AI 网关",
+
+    // Breadcrumbs / Common small keys used by the page
+    "company.name": SITE.name || "Higress",
+    "common.home": "首页",
+    "ai.product.title": "AI 网关",
 
     // HiMarket Product Page
     'himarket.product.intro.desc': '助力企业构建 Agent、Model、MCP 市场，通过统一的 AI 能力 management 平台，解决 AI 资源分散、权限管控复杂、成本分摊困难等挑战，平台提供 HiChat AI 创新中心作为全员 AI 使用入口，打破团队间的能力孤岛，降低接入成本，释放 AI 创新潜能。',
@@ -799,7 +867,7 @@ export default {
     'home.role.selector.recommended': '企业首选',
     'home.role.selector.cta.start': '立即咨询',
     'home.role.selector.cta.explore': '了解详情',
-    
+
     // Enterprise Option (Primary for B2B conversion)
     'home.role.selector.enterprise': '企业版',
     'home.role.selector.enterprise.desc': '全托管云服务，生产级保障',
@@ -809,7 +877,7 @@ export default {
     'home.role.selector.enterprise.feature2': '性能优化 90%+，节省 50% 资源成本',
     'home.role.selector.enterprise.feature3': '7×24 工单 + 钉群直连技术专家',
     'home.role.selector.enterprise.trust': '🏢 已服务 Soul、快手、极氪汽车等头部企业',
-    
+
     // Try Now Option (Secondary)
     'home.role.selector.try_now': '快速体验',
     'home.role.selector.try_now.desc': '本地部署，5 分钟验证核心能力',
@@ -817,7 +885,7 @@ export default {
     'home.role.selector.try_now.feature1': '无需注册，Docker 一键启动',
     'home.role.selector.try_now.feature2': '接入 OpenAI/Claude/国产大模型',
     'home.role.selector.try_now.feature3': '完整文档 + 可运行示例代码',
-    
+
     // Learn More Option (Tertiary)
     'home.role.selector.learn_more': '产品介绍',
     'home.role.selector.learn_more.desc': '深入了解产品能力与企业实践',
@@ -825,7 +893,7 @@ export default {
     'home.role.selector.learn_more.feature1': 'AI 网关核心能力与技术架构',
     'home.role.selector.learn_more.feature2': '头部企业客户案例与 ROI 分析',
     'home.role.selector.learn_more.feature3': '版本对比、定价与 TCO 计算器',
-    
+
     'home.role.selector.or_try_demo': '或直接体验在线 Demo',
 
     // Scroll Progress
@@ -872,4 +940,13 @@ export default {
     'plugins.cta.contribute': '贡献插件到社区',
     'plugins.cta.docs': '查看文档',
     'plugins.cta.github': 'GitHub',
+
+    // Missing keys from en.ts
+    'home.features.1.summary': '动态配置服务',
+    'home.features.1.explain': '动态配置服务让您能够以中心化、外部化和动态化的方式管理所有环境的应用配置和服务配置。',
+    'home.features.1.explain.one': '动态配置服务让您能够以中心化、外部化和动态化的方式管理所有环境的应用配置和服务配置。',
+    'home.features.2.summary': '服务发现及管理',
+    'home.features.2.explain': '动态服务发现对以服务为中心（例如微服务和云原生）的应用架构方式至关重要。',
+    'rightSidebar.openCollective': '我们的 Open Collective',
+    'blog.activity.technical': '技术活动',
 };

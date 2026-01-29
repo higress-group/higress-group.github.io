@@ -595,7 +595,26 @@ export default {
     'ai.product.competitor_compare.subtitle': 'Comprehensive comparison from architecture, features to enterprise capabilities',
     'ai.product.competitor_compare.tab.oneapi': 'vs OneAPI',
     'ai.product.competitor_compare.tab.litellm': 'vs LiteLLM',
-    
+
+    // AI Product Page - Additional
+    'ai.product.competitor_compare.link': 'Competitor Analysis',
+    'ai.product.competitor_compare.card.oneapi.title': 'vs OneAPI',
+    'ai.product.competitor_compare.card.oneapi.badge': '7 Comparisons',
+    'ai.product.competitor_compare.card.oneapi.feature1': 'Enterprise Maintenance Team',
+    'ai.product.competitor_compare.card.oneapi.feature2': 'Content Security & Data Masking',
+    'ai.product.competitor_compare.card.oneapi.feature3': 'Complete Observability',
+    'ai.product.competitor_compare.card.litellm.title': 'vs LiteLLM',
+    'ai.product.competitor_compare.card.litellm.badge': '9 Comparisons',
+    'ai.product.competitor_compare.card.litellm.feature1': 'High Performance Architecture',
+    'ai.product.competitor_compare.card.litellm.feature2': 'Out-of-the-box Console',
+    'ai.product.competitor_compare.card.litellm.feature3': 'Enterprise Feature Support',
+    'ai.product.competitor_compare.cta.title_new': 'View Full Analysis',
+    'ai.product.competitor_compare.cta.desc_new': 'Deep dive into Higress vs other AI gateways technical advantages and enterprise features',
+    'ai.product.competitor_compare.cta.btn_detail': 'Detailed Analysis',
+    'ai.product.ready_to_start.btn_comparison': 'Competitor Comparison',
+    'ai.product.version_compare.opensource.btn_github': 'GitHub',
+    'ai.product.version_compare.opensource.tip_new': 'Free & Open Source, Community Support',
+
     // OneAPI Comparison
     'ai.product.competitor_compare.oneapi.core_function': 'Core Function',
     'ai.product.competitor_compare.oneapi.core_function.oneapi': 'AI Gateway',
@@ -618,7 +637,7 @@ export default {
     'ai.product.competitor_compare.oneapi.extensibility': 'Extensibility',
     'ai.product.competitor_compare.oneapi.extensibility.oneapi': 'None',
     'ai.product.competitor_compare.oneapi.extensibility.higress': 'Plugin marketplace, custom Wasm plugins, hot reload',
-    
+
     // LiteLLM Comparison
     'ai.product.competitor_compare.litellm.architecture': 'Architecture',
     'ai.product.competitor_compare.litellm.architecture.litellm': 'Python SDK proxy mode, high resource overhead, poor stability',
@@ -647,7 +666,7 @@ export default {
     'ai.product.competitor_compare.litellm.enterprise': 'Enterprise Features',
     'ai.product.competitor_compare.litellm.enterprise.litellm': '—',
     'ai.product.competitor_compare.litellm.enterprise.higress': 'Battle-tested at scale, handles 100k+ RPS, millisecond config updates',
-    
+
     'ai.product.competitor_compare.cta.title': 'Ready to Try Higress?',
     'ai.product.competitor_compare.cta.desc': 'Experience enterprise-grade AI Gateway capabilities in 5 minutes',
     'ai.product.competitor_compare.cta.quickstart': 'Quick Start',
@@ -684,6 +703,9 @@ export default {
     // AI Integrations Page
     'ai.integrations.title': 'AI Model Integration Directory',
     'ai.integrations.description': 'Higress provides out-of-the-box multi-model integration capabilities. Through the unified OpenAI protocol, you can easily manage, route, and protect various mainstream LLM services.',
+    'ai.integrations.meta.title': 'Higress AI Gateway Model Integration Directory - Unified Management of Your LLM Services',
+    'ai.integrations.meta.description': 'Explore all large model integrations supported by Higress AI Gateway, including DeepSeek, Qwen, OpenAI, Claude, etc. Unified protocol, multi-model grayscale, intelligent routing, safeguarding your AI applications.',
+    'ai.integrations.meta.keywords': 'AI Gateway, LLM Integration, DeepSeek, OpenAI, Qwen, Kimi, Claude, Gemini',
     'ai.integrations.cta.title': "Can't find the model you need?",
     'ai.integrations.cta.heading': 'Easy to extend, integrate any AI service',
     'ai.integrations.cta.description': 'Higress supports Wasm-based plugin extensions. You can refer to our development guide to quickly write adapter plugins for your private models or emerging AI services.',
@@ -792,7 +814,7 @@ export default {
     'home.role.selector.recommended': 'Enterprise Choice',
     'home.role.selector.cta.start': 'Contact Sales',
     'home.role.selector.cta.explore': 'Learn More',
-    
+
     // Enterprise Option (Primary for B2B conversion)
     'home.role.selector.enterprise': 'Enterprise Edition',
     'home.role.selector.enterprise.desc': 'Fully managed with production-grade SLA',
@@ -802,7 +824,7 @@ export default {
     'home.role.selector.enterprise.feature2': '90%+ performance boost, 50% cost savings',
     'home.role.selector.enterprise.feature3': '24/7 Support + Direct Expert Access',
     'home.role.selector.enterprise.trust': '🏢 Trusted by Soul, Kuaishou, ZEEKR & more',
-    
+
     // Try Now Option (Secondary)
     'home.role.selector.try_now': 'Quick Start',
     'home.role.selector.try_now.desc': 'Local deployment, verify core features in 5 min',
@@ -810,7 +832,7 @@ export default {
     'home.role.selector.try_now.feature1': 'No signup, one-click Docker deploy',
     'home.role.selector.try_now.feature2': 'Connect OpenAI/Claude/Local LLMs',
     'home.role.selector.try_now.feature3': 'Complete docs & runnable examples',
-    
+
     // Learn More Option (Tertiary)
     'home.role.selector.learn_more': 'Product Overview',
     'home.role.selector.learn_more.desc': 'Explore capabilities & enterprise practices',
@@ -818,7 +840,7 @@ export default {
     'home.role.selector.learn_more.feature1': 'AI Gateway capabilities & architecture',
     'home.role.selector.learn_more.feature2': 'Enterprise cases & ROI analysis',
     'home.role.selector.learn_more.feature3': 'Version comparison & TCO calculator',
-    
+
     'home.role.selector.or_try_demo': 'Or try the online Demo',
 
     // Scroll Progress
@@ -865,4 +887,50 @@ export default {
     'plugins.cta.contribute': 'Contribute to Community',
     'plugins.cta.docs': 'View Documentation',
     'plugins.cta.github': 'GitHub',
+
+    // Missing keys from zh-cn.ts
+    'home.website.edge.about': 'About Us',
+    'home.introduce.nacos.aim': 'We believe everything is a service. Each service node is conceived as a planet, and each service is a galaxy. Nacos is dedicated to helping build connections between these services, empowering every dream facing the stars to fly above the clouds and better connect the entire starry sky.',
+    'home.use.companies.about': 'Serving various industries, accelerating enterprise innovation',
+    'feedback.type': 'Feedback Issue Type',
+    'feedback.type.correct': 'Content Correctness',
+    'feedback.type.search': 'Search Issue',
+    'feedback.type.bug': 'Bug Report',
+    'feedback.type.link': 'Link Issue',
+    'feedback.type.other': 'Other Issue',
+    'feedback.description': 'Issue Description',
+    'feedback.description.placeholder': 'Please describe the scenario, details, and expected resolution of your problem as detailed as possible, to help us better optimize and solve the problem.',
+    'feedback.phone': 'Contact Information',
+    'feedback.phone.placeholder': 'Please provide your contact information',
+    'blog.article.technical': 'Technical Articles',
+    'ai.product.competitor_compare.meta.title': 'Higress vs Other AI Gateways - Comprehensive Comparison Analysis',
+    'ai.product.competitor_compare.meta.description': 'In-depth comparison of Higress with OneAPI, LiteLLM and other mainstream AI gateway solutions, from architecture, features to enterprise capabilities, helping you choose the most suitable AI gateway solution.',
+    'ai.product.competitor_compare.meta.keywords': 'AI Gateway Comparison, Higress vs OneAPI, Higress vs LiteLLM, AI Gateway Selection, Enterprise AI Gateway, API Gateway Comparison',
+    'ai.product.competitor_compare.badge': 'Competitor Analysis',
+    'ai.product.competitor_compare.cta.experience': 'Experience Higress Now',
+    'ai.product.competitor_compare.cta.learn_more': 'Learn More Features',
+    'ai.product.competitor_compare.aria.tablist': 'Competitor Comparison Options',
+    'ai.product.competitor_compare.competitor.oneapi': 'OneAPI',
+    'ai.product.competitor_compare.competitor.litellm': 'LiteLLM',
+    'ai.product.competitor_compare.higress_label': 'Higress',
+    'ai.product.competitor_compare.table.feature_col': 'Feature',
+    'ai.product.competitor_compare.benefits.title': 'Why Choose Higress AI Gateway?',
+    'ai.product.competitor_compare.benefits.subtitle': 'Based on Alibaba Cloud\'s years of large-scale production practice, Higress provides you with an enterprise-level AI gateway solution',
+    'ai.product.competitor_compare.benefits.performance.title': 'High Performance Architecture',
+    'ai.product.competitor_compare.benefits.performance.desc': 'High-performance proxy based on Envoy, supporting hundreds of thousands of requests per second, with millisecond-level configuration effect',
+    'ai.product.competitor_compare.benefits.security.title': 'Enterprise Security',
+    'ai.product.competitor_compare.benefits.security.desc': 'Integrated with Alibaba Cloud Content Security, providing real-time content filtering, data masking and multiple authentication strategies',
+    'ai.product.competitor_compare.benefits.ops.title': 'Intelligent O&M',
+    'ai.product.competitor_compare.benefits.ops.desc': 'Complete monitoring dashboard, Token consumption analysis, latency monitoring and intelligent load balancing',
+    'ai.product.competitor_compare.ld.name': 'Higress vs Other AI Gateways Comparison',
+    'ai.product.competitor_compare.ld.description': 'In-depth comparison of the functional features of Higress and OneAPI, LiteLLM and other mainstream AI gateway solutions',
+    'ai.product.competitor_compare.ld.about.higress.name': 'Higress AI Gateway',
+    'ai.product.competitor_compare.ld.about.higress.description': 'Enterprise-level AI Gateway Solution',
+    'ai.product.competitor_compare.ld.about.oneapi.name': 'OneAPI',
+    'ai.product.competitor_compare.ld.about.oneapi.description': 'Open Source AI Gateway Project',
+    'ai.product.competitor_compare.ld.about.litellm.name': 'LiteLLM',
+    'ai.product.competitor_compare.ld.about.litellm.description': 'Python SDK Proxy Mode AI Gateway',
+    'company.name': SITE.name || "Higress",
+    'common.home': "Home",
+    'ai.product.title': "AI Gateway",
 };

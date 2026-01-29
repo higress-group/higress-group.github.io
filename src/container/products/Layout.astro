@@ -43,9 +43,17 @@ const t = useTranslations(locale);
     <div class="text-white font-light text-base">
       {t('product.layout.enterprise.desc')}
     </div>
-    <Button target="_blank" href={LINKS.enterprise} class='w-39' mode="normal">
-      {t('product.layout.enterprise.title')}
-    </Button>
+    {
+      locale === 'en' ? (
+        <Button target="_blank" href={LINKS.enterprise} class='w-fit' mode="normal">
+          {t('product.layout.enterprise.title')}
+        </Button>
+      ) : (
+        <Button target="_blank" href={LINKS.enterprise} class='w-39' mode="normal">
+          {t('product.layout.enterprise.title')}
+        </Button>
+      )
+    }
   </div>
 </div>
 

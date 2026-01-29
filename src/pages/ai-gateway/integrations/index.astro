@@ -7,11 +7,12 @@ import { useTranslations } from "@/i18n/utils";
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
 
-const title = "Higress AI 网关模型集成目录 - 统一管理您的 LLM 服务";
-const description = "探索 Higress AI 网关支持的所有大模型集成，包括 DeepSeek, Qwen, OpenAI, Claude 等。统一协议、多模型灰度、智能路由，为您的 AI 应用保驾护航。";
+const title = t('ai.integrations.meta.title');
+const description = t('ai.integrations.meta.description');
+const keywords = t('ai.integrations.meta.keywords');
 ---
 
-<SiteLayout title={title} description={description} keywords="AI网关, 大模型集成, DeepSeek, OpenAI, 通义千问, Kimi, Claude, Gemini">
+<SiteLayout title={title} description={description} keywords={keywords}>
   <div class="bg-gray-50 py-24 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto text-center mb-16">
       <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
@@ -64,7 +65,7 @@ const description = "探索 Higress AI 网关支持的所有大模型集成，�
           <svg class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
           </svg>
-          竞品对比分析
+          {t('ai.product.competitor_compare.link')}
         </a>
       </div>
     </div>
