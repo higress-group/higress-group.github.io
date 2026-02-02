@@ -1,0 +1,38 @@
+import{c as p,__tla as c}from"./astro-component.YcfuVWta.js";import{r as I,m as d,u as g,__tla as f}from"./constant.9_4gXTQt.js";import{__tla as u}from"./astro/assets-service.r1ocst81.js";let r,a,o,e,l,i,n,A=Promise.all([(()=>{try{return c}catch{}})(),(()=>{try{return f}catch{}})(),(()=>{try{return u}catch{}})()]).then(async()=>{let t;t=`<p>AI \u6B63\u5728\u91CD\u5851\u4E16\u754C\uFF0C\u4E5F\u5728\u91CD\u5851\u6784\u5EFA AI \u5E94\u7528\u7684\u65B9\u5F0F</p>
+<p>AI \u4E2D\u95F4\u4EF6\u6B63\u6210\u4E3A\u8FDE\u63A5 AI \u6280\u672F\u4E0E\u4EA7\u4E1A\u5E94\u7528\u7684\u7EBD\u5E26</p>
+<p>2025 \u4E91\u6816\u5927\u4F1A\u201C\u4E91\u667A\u4E00\u4F53 \xB7 \u78B3\u7845\u5171\u751F\u201D\u7684\u4E3B\u9898\u4E0B</p>
+<p><strong><font style="color:#ed7d33;">9\u670826\u65E5\uFF0C\u4E91\u6816\u5C0F\u9547D1-3\u9986\u300CAI \u4E2D\u95F4\u4EF6\u8BBA\u575B\u300D</font></strong></p>
+<p>\u5C06\u805A\u7126 AI \u65F6\u4EE3\u4E2D\u95F4\u4EF6\u7684\u6280\u672F\u6F14\u8FDB\u4E0E\u521B\u65B0\u5B9E\u8DF5</p>
+<p>\u5E26\u6765\u6D88\u606F\u961F\u5217\u3001\u4E8B\u4EF6\u9A71\u52A8\u67B6\u6784\u53CA API \u7F51\u5173\u7B49\u5173\u952E\u6280\u672F\u5728 AI \u9886\u57DF\u7684\u524D\u6CBF\u6280\u672F\u63A2\u7D22\u3001\u6700\u65B0\u4EA7\u54C1\u53D1\u5E03\u3001\u843D\u5730\u5B9E\u8DF5\u7ECF\u9A8C</p>
+<p>\u4E91\u6816\u5927\u4F1A\u671F\u95F4\uFF089.24 - 9.26\uFF09\u4E91\u539F\u751F AI \u5E94\u7528\u5F00\u53D1\u5C55\u533A\u7279\u8BBE AI \u4E2D\u95F4\u4EF6\u6700\u65B0\u4EA7\u54C1\u80FD\u529B\u7684\u6F14\u793A\u8BB2\u89E3\u548C\u5B9E\u64CD\u4F53\u9A8C\u7B49\u73AF\u8282</p>
+<p><strong><font style="color:#ed7d33;">\u8BDA\u9080\u60A8\u5171\u8D74 2025 \u4E91\u6816\u5927\u4F1A</font></strong></p>
+<p><strong><font style="color:#ed7d33;">\u5B9A\u4E49\u4E0B\u4E00\u4EE3 AI \u4E2D\u95F4\u4EF6\uFF0C\u89E3\u9501 AI \u5E94\u7528\u67B6\u6784\u65B0\u8303\u5F0F\uFF0C\u52A0\u901F AI \u5E94\u7528\u89C4\u6A21\u5316\u843D\u5730\uFF01</font></strong></p>
+<p><strong><font style="color:#ed7d33;">\u6211\u4EEC\u4E0D\u89C1\u4E0D\u6563\uFF01</font></strong></p>
+<p><img src="https://img.alicdn.com/imgextra/i3/O1CN01IM4rqu23rZw6p9uER_!!6000000007309-2-tps-1080-5800.png" alt="" referrerpolicy="no-referrer"></p>
+<p><a href="https://yunqi.aliyun.com/2025/ticket?activityId=NTQ1Ng==&#x26;ticketId=MTMy&#x26;channelId=MzM0NA==" referrerpolicy="unsafe-url" rel="nofollow" target="_blank">\u70B9\u51FB\u7533\u9886\u4E91\u6816\u5927\u4F1A\u95E8\u7968</a></p>`,e={title:"\u706B\u901F\u6536\u85CF\uFF012025 \u4E91\u6816\u5927\u4F1A AI \u4E2D\u95F4\u4EF6\u8BAE\u7A0B\u770B\u70B9\u5168\u516C\u5F00\uFF08\u9644\u514D\u8D39\u62A5\u540D\u901A\u9053\uFF09",description:"\u706B\u901F\u6536\u85CF\uFF012025 \u4E91\u6816\u5927\u4F1A AI \u4E2D\u95F4\u4EF6\u8BAE\u7A0B\u770B\u70B9\u5168\u516C\u5F00\uFF08\u9644\u514D\u8D39\u62A5\u540D\u901A\u9053\uFF09",date:"2025-09-19",category:"article",keywords:["Higress"],authors:"CH3CHO"},o="/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/blog/Higress-gvr7dx_awbbpb_hbreugsdeqog2pcr.md",n=void 0,i=function(){return`
+AI \u6B63\u5728\u91CD\u5851\u4E16\u754C\uFF0C\u4E5F\u5728\u91CD\u5851\u6784\u5EFA AI \u5E94\u7528\u7684\u65B9\u5F0F
+
+AI \u4E2D\u95F4\u4EF6\u6B63\u6210\u4E3A\u8FDE\u63A5 AI \u6280\u672F\u4E0E\u4EA7\u4E1A\u5E94\u7528\u7684\u7EBD\u5E26
+
+2025 \u4E91\u6816\u5927\u4F1A\u201C\u4E91\u667A\u4E00\u4F53 \xB7 \u78B3\u7845\u5171\u751F\u201D\u7684\u4E3B\u9898\u4E0B
+
+**<font style="color:#ed7d33;">9\u670826\u65E5\uFF0C\u4E91\u6816\u5C0F\u9547D1-3\u9986\u300CAI \u4E2D\u95F4\u4EF6\u8BBA\u575B\u300D</font>**
+
+\u5C06\u805A\u7126 AI \u65F6\u4EE3\u4E2D\u95F4\u4EF6\u7684\u6280\u672F\u6F14\u8FDB\u4E0E\u521B\u65B0\u5B9E\u8DF5
+
+\u5E26\u6765\u6D88\u606F\u961F\u5217\u3001\u4E8B\u4EF6\u9A71\u52A8\u67B6\u6784\u53CA API \u7F51\u5173\u7B49\u5173\u952E\u6280\u672F\u5728 AI \u9886\u57DF\u7684\u524D\u6CBF\u6280\u672F\u63A2\u7D22\u3001\u6700\u65B0\u4EA7\u54C1\u53D1\u5E03\u3001\u843D\u5730\u5B9E\u8DF5\u7ECF\u9A8C
+
+\u4E91\u6816\u5927\u4F1A\u671F\u95F4\uFF089.24 - 9.26\uFF09\u4E91\u539F\u751F AI \u5E94\u7528\u5F00\u53D1\u5C55\u533A\u7279\u8BBE AI \u4E2D\u95F4\u4EF6\u6700\u65B0\u4EA7\u54C1\u80FD\u529B\u7684\u6F14\u793A\u8BB2\u89E3\u548C\u5B9E\u64CD\u4F53\u9A8C\u7B49\u73AF\u8282
+
+**<font style="color:#ed7d33;">\u8BDA\u9080\u60A8\u5171\u8D74 2025 \u4E91\u6816\u5927\u4F1A</font>**
+
+**<font style="color:#ed7d33;">\u5B9A\u4E49\u4E0B\u4E00\u4EE3 AI \u4E2D\u95F4\u4EF6\uFF0C\u89E3\u9501 AI \u5E94\u7528\u67B6\u6784\u65B0\u8303\u5F0F\uFF0C\u52A0\u901F AI \u5E94\u7528\u89C4\u6A21\u5316\u843D\u5730\uFF01</font>**
+
+**<font style="color:#ed7d33;">\u6211\u4EEC\u4E0D\u89C1\u4E0D\u6563\uFF01</font>**
+
+![](https://img.alicdn.com/imgextra/i3/O1CN01IM4rqu23rZw6p9uER_!!6000000007309-2-tps-1080-5800.png)
+
+[\u70B9\u51FB\u7533\u9886\u4E91\u6816\u5927\u4F1A\u95E8\u7968](https://yunqi.aliyun.com/2025/ticket?activityId=NTQ1Ng==&ticketId=MTMy&channelId=MzM0NA==)
+
+
+`},a=function(){return t},l=function(){return[]},r=p((y,m,_)=>{const{layout:h,...s}=e;return s.file=o,s.url=n,I`${d()}${g(t)}`})});export{r as Content,A as __tla,a as compiledContent,r as default,o as file,e as frontmatter,l as getHeadings,i as rawContent,n as url};

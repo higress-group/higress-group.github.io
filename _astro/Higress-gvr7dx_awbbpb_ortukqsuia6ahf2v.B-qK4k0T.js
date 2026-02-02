@@ -1,0 +1,181 @@
+const o="Higress-gvr7dx_awbbpb_ortukqsuia6ahf2v.md",t="blog",n="higress-gvr7dx_awbbpb_ortukqsuia6ahf2v",s=`
+\u4F5C\u8005\uFF1A\u671B\u5BB8
+
+<font style="color:rgb(38, 38, 38);">\u672C\u6587\u5E0C\u671B\u63D0\u4F9B\u4E00\u79CD\u66F4\u7B80\u5355\u7684\u65B9\u5F0F\uFF0C\u6765\u7406\u89E3\u8FD9\u4E9B\u5BB9\u6613\u6DF7\u6DC6\u7684\u6280\u672F\u6982\u5FF5\uFF1ANginx\u3001Ingress\u3001Ingress Controller\u3001Ingress API\u3001Nginx Ingress\u3001Higress\u3001Gateway API\u3002</font>
+
+<font style="color:#000000;"></font>
+
+### <font style="color:#000000;">01 </font><font style="color:#000000;">Nginx \u548C Kubernetes</font>
+<font style="color:#000000;">\u6211\u4EEC\u5148\u6309\u548C Kubernetes \u662F\u5426\u6709\u5173\uFF0C\u5206\u4E3A\u4E24\u7C7B\uFF1A</font>
+
+
+
+<font style="color:#000000;">Nginx \u662F\u5728\u6CA1\u6709 Kubernetes \u7684\u5E74\u4EE3\uFF0C\u6D41\u91CF\u5165\u53E3\u4E0A\u7684\u4E8B\u5B9E\u6807\u51C6\uFF0C\u662F\u72EC\u7ACB\u8FD0\u884C\u5728\u4EFB\u4F55 Linux/Windows \u670D\u52A1\u5668\u4E0A\u7684 Web \u670D\u52A1\u5668\u3002\u63D0\u4F9B\u4EE5\u4E0B\u4E3B\u8981\u529F\u80FD\uFF1A</font>
+
++ <font style="color:#000000;">\u63A5\u6536\u8BF7\u6C42</font>
++ <font style="color:#000000;">\u8F6C\u53D1\u8BF7\u6C42</font>
++ <font style="color:#000000;">\u8D1F\u8F7D\u5747\u8861</font>
++ <font style="color:#000000;">\u7B80\u5355\u7684\u6D41\u91CF\u6CBB\u7406\uFF0C\u4F8B\u5982\u9650\u6D41\u3001\u7F13\u5B58\u3001\u91CD\u5199</font>
+
+![](/img/1770005009522.png)
+
+<font style="color:#000000;"></font>
+
+<font style="color:#000000;">\u800C Ingress API\u3001Ingress Controller\u3001Nginx Ingress\u3001Higress\u3001Gateway API \u90FD\u4F9D\u8D56 Kubernetes\uFF0CKubernetes \u51FA\u73B0\u540E\uFF0C\u624D\u6709\u4E86\u8FD9\u4E9B\u6982\u5FF5\u3002\u5176\u4E2D\uFF0CIngress API \u662F Kubernetes \u7BA1\u7406\u6D41\u91CF\u7684\u89C4\u8303\uFF0CIngress Controller \u662F\u89C4\u8303\u7684\u5B9E\u73B0\u7EC4\u4EF6\uFF0CNginx Ingress \u548C Higress \u90FD\u662F\u89C4\u8303\u7684\u5B8C\u6574\u5B9E\u73B0\u548C\u529F\u80FD\u6269\u5C55\uFF0CGateway API \u5219\u662F Ingress API \u7684\u5347\u7EA7\u548C\u4E0B\u4E00\u4EE3\u3002</font>
+
+![](/img/1770005013582.png)
+
+<font style="color:#000000;"></font>
+
+<font style="color:#000000;">\u9700\u8981\u6CE8\u610F\u7684\u662F\uFF0CIngress \u7ECF\u5E38\u5355\u72EC\u51FA\u73B0\uFF0C\u9700\u8981\u57FA\u4E8E\u8BED\u5883\u6765\u5224\u65AD\uFF0C\u6709\u53EF\u80FD\u662F\u6307 Ingress API\uFF0C\u4E5F\u6709\u53EF\u80FD\u662F\u6307 Ingress \u8D44\u6E90\uFF0C\u5373\u7528\u6237\u7F16\u5199\u7684\u5177\u4F53\u914D\u7F6E\u5BF9\u8C61\uFF08YAML\uFF09\uFF0C\u9075\u5FAA Ingress API\u3002</font>
+
+
+
+### <font style="color:#000000;">02 </font><font style="color:#000000;">Ingress API \u548C Ingress Controller</font>
+<font style="color:#000000;">Ingress API \u548C Ingress Controller \u5206\u522B\u662F Kubernetes \u6D41\u91CF\u7BA1\u7406\u7684\u89C4\u8303\u548C\u6267\u884C\u5668\u3002</font>
+
+![](/img/1770005018211.png)
+
+
+
+<font style="color:#000000;">Ingress API\uFF1A\u7528\u58F0\u660E\u5F0F\u7684\u65B9\u5F0F\uFF0C\u63CF\u8FF0\u5916\u90E8\u6D41\u91CF\u5982\u4F55\u8FDB\u5165\u96C6\u7FA4\u91CC\u7684 Service\uFF0C\u5305\u62EC\uFF1A</font>
+
++ <font style="color:#000000;">\u5982\u4F55\u901A\u8FC7\u57DF\u540D\u8BBF\u95EE\u670D\u52A1</font>
++ <font style="color:#000000;">\u5982\u4F55\u6839\u636E URL \u8DEF\u5F84\u8DEF\u7531\u5230\u4E0D\u540C\u540E\u7AEF\u670D\u52A1</font>
++ <font style="color:#000000;">\u540E\u7AEF\u670D\u52A1\u662F\u8C01</font>
++ <font style="color:#000000;">\u662F\u5426\u542F\u7528 HTTPS \u52A0\u5BC6</font>
+
+<font style="color:#000000;"></font>
+
+<font style="color:#000000;">\u5F62\u8C61\u5730\u8BF4\uFF0CIngress API \u53EF\u4EE5\u7406\u89E3\u4F4D Kubernetes \u4E2D\u7BA1\u7406\u6D41\u91CF\u7684\u8BF4\u660E\u4E66\u3002</font>
+
+
+
+<font style="color:#000000;">Ingress Controller\uFF1A\u662F Ingress API \u7684\u5B9E\u73B0\u7EC4\u4EF6\uFF0C\u5373\u6267\u884C\u8005\uFF0C\u5305\u62EC</font>
+
++ <font style="color:#000000;">\u76D1\u542C Ingress \u8D44\u6E90\u53D8\u5316</font>
++ <font style="color:#000000;">\u5C06 Ingress \u89C4\u5219\u8F6C\u6362\u4E3A\u5B9E\u9645\u7684\u53CD\u5411\u4EE3\u7406\u914D\u7F6E</font>
++ <font style="color:#000000;">\u63A5\u6536\u5916\u90E8\u6D41\u91CF\u5E76\u6309\u89C4\u5219\u8DEF\u7531</font>
++ <font style="color:#000000;">\u5904\u7406 TLS \u7EC8\u6B62\uFF08HTTPS \u89E3\u5BC6\uFF09</font>
++ <font style="color:#000000;">\u63D0\u4F9B\u5065\u5EB7\u68C0\u67E5\u3001\u8D1F\u8F7D\u5747\u8861\u3001\u91CD\u8BD5\u7B49\u6D41\u91CF\u6CBB\u7406\u80FD\u529B</font>
+
+
+
+\u901A\u8FC7\u4EE5\u4E0A\u80FD\u529B\uFF0C<font style="color:#000000;">Ingress Controller \u5C31</font>\u5B9E\u73B0\u4E86 <font style="color:#000000;">Kubernetes \u5165\u53E3\u6D41\u91CF\u7684\u7BA1\u7406\u3002</font>
+
+
+
+### <font style="color:#000000;">03 </font><font style="color:#000000;">Nginx Ingress \u548C Higress</font>
+<font style="color:#000000;">Nginx Ingress \u548C Higress \u90FD\u662F Ingress API \u7684\u5B8C\u6574\u5B9E\u73B0\u548C\u529F\u80FD\u6269\u5C55\u3002</font>
+
+![](/img/1770005022600.png)
+
+
+
+<font style="color:#000000;">Nginx Ingress\uFF1A\u7528 Nginx \u4F5C\u4E3A\u5E95\u5C42\u5B9E\u73B0\u7684 Ingress API\uFF0C\u63A7\u5236\u9762\u548C\u6570\u636E\u9762\u8026\u5408\u5728\u540C\u4E00\u4E2A\u8FDB\u7A0B/\u5BB9\u5668\u4E2D\u3002\u4F18\u70B9\u662F\u7B80\u5355\u3001\u6613\u7528\u3001\u793E\u533A\u5E7F\u6CDB\u3002</font>
+
+<font style="color:#000000;">\u7F3A\u70B9\u662F\uFF1A</font>
+
++ <font style="color:#000000;">\u4E0D\u662F\u539F\u751F\u7684 Ingress API\uFF0CIngress API\u8BED\u4E49\u504F\u5F31</font>
++ <font style="color:#000000;">\u6269\u5C55\u9760 Annotation\uFF08\u5DE5\u7A0B\u5669\u68A6\uFF09</font>
++ <font style="color:#000000;">\u751F\u6210 nginx.conf + reload\uFF0C\u52A8\u6001\u914D\u7F6E\u80FD\u529B\u5F31\uFF08\u9891\u7E41 reload \u5F71\u54CD\u6027\u80FD\uFF09</font>
+
+
+
+<font style="color:#000000;">\u9002\u7528\u4E8E\u7B80\u5355\u3001\u7A33\u5B9A\u3001\u5C0F\u89C4\u6A21\u7684\u573A\u666F\u3002</font>
+
+
+
+<font style="color:#000000;">Higress\uFF1A\u6570\u636E\u9762\u662F\u57FA\u4E8E Enovy\uFF0C\u63A7\u5236\u9762\u7ED9\u57FA\u4E8E istio\uFF0C\u662F\u539F\u751F\u7684 Ingress API\u3002</font>
+
+<font style="color:#000000;">\u4F18\u70B9\u662F\uFF1A</font>
+
++ <font style="color:#000000;">\u63A7\u5236\u9762\u4E0E\u6570\u636E\u9762\u89E3\u8026\uFF0C\u53EF\u72EC\u7ACB\u6269\u7F29\u5BB9\u3002</font>
++ <font style="color:#000000;">\u57FA\u4E8E xDS \u534F\u8BAE\uFF0C\u5B9E\u73B0\u771F\u6B63\u7684\u52A8\u6001\u914D\u7F6E\uFF08\u65E0 reload\uFF0C\u96F6\u4E2D\u65AD\uFF09\u3002</font>
++ <font style="color:#000000;">\u539F\u751F\u652F\u6301\u63D2\u4EF6\u6269\u5C55</font><font style="color:#000000;">\uFF1AWasm\u3001Lua\u3001Go \u63D2\u4EF6\u7531\u63A7\u5236\u9762\u7EDF\u4E00\u7BA1\u7406\u5E76\u4E0B\u53D1\u3002</font>
++ **<font style="color:#000000;">\u517C\u5BB9\u591A\u534F\u8BAE & \u591A\u6807\u51C6\uFF1A\u540C\u65F6\u652F\u6301 Ingress API \u548C Gateway API\u3002</font>**
+
+
+
+\u7F3A\u70B9\u662F\uFF0C\u76F8\u6BD4 <font style="color:#000000;">Nginx \u5E7F\u6CDB\u7684\u793E\u533A\u57FA\u7840\uFF0CHigress \u4E3A\u4EE3\u8868\u7684\u539F\u751F Ingress API\uFF0C\u90E8\u7F72\u548C\u7EF4\u62A4\u5B58\u5728\u5B66\u4E60\u6210\u672C\u3002</font>
+
+
+
+<font style="color:#000000;">\u9002\u7528\u4E8E\u9AD8\u6027\u80FD\u3001\u9AD8\u6269\u5C55\u3001\u4F01\u4E1A\u7EA7\u7684\u573A\u666F\u3002</font>
+
+<font style="color:#000000;"></font>
+
+### <font style="color:#000000;">04 </font><font style="color:#000000;">Nginx Ingress \u9000\u5F79</font>
+<font style="color:#000000;">11\u6708\uFF0CKubernetes SIG Network \u548C\u5B89\u5168\u54CD\u5E94\u59D4\u5458\u4F1A\u5BA3\u5E03 Ingress NGINX \u9000\u5F79\u3002\uFF08</font><font style="color:#000000;">\u26A0\uFE0F</font><font style="color:#000000;"> NGINX \u5E76\u672A\u9000\u5F79\uFF09</font>
+
+![](/img/1770005026750.png)
+
+\u610F\u5473\u7740\uFF1A
+
++ <font style="color:#000000;">Ingress NGINX \u5C3D\u529B\u7EF4\u62A4\u670D\u52A1\u81F3 2026 \u5E74 3 \u6708</font>
++ <font style="color:#000000;">\u4E0D\u518D\u53D1\u5E03\u4EFB\u4F55\u65B0\u7248\u672C</font>
++ <font style="color:#000000;">\u4E0D\u518D\u4FEE\u590D\u4EFB\u4F55\u6F0F\u6D1E</font>
++ <font style="color:#000000;">\u4E5F\u4E0D\u4F1A\u66F4\u65B0\u4EFB\u4F55\u53EF\u80FD\u53D1\u73B0\u7684\u5B89\u5168\u6F0F\u6D1E</font>
++ <font style="color:#000000;">GitHub \u4EE3\u7801\u5E93\u5C06\u8BBE\u7F6E\u4E3A\u53EA\u8BFB\uFF0C\u4EC5\u4F9B\u53C2\u8003</font>
++ <font style="color:#000000;">\u73B0\u6709\u7684 Ingress NGINX \u90E8\u7F72\u5C06\u7EE7\u7EED\u8FD0\u884C\uFF0C\u5B89\u88C5\u6587\u4EF6\u4E5F\u5C06\u7EE7\u7EED\u53EF\u7528</font>
+
+
+
+<font style="color:rgba(0, 0, 0, 0.9);">\u5F15\u53D1\u9000\u5F79\u7684\u6839\u672C\u539F\u56E0\uFF1A</font>\uFF1A
+
++ \u591A\u5E74\u6765\uFF0C\u8BE5\u9879\u76EE\u53EA\u6709\u4E00\u4E24\u4E2A\u4EBA\u5229\u7528\u4E1A\u4F59\u65F6\u95F4\uFF0C\u5728\u5DE5\u4F5C\u4E4B\u4F59\u8FDB\u884C\u5F00\u53D1\u5DE5\u4F5C\u3002
++ \u5C1D\u8BD5\u548C Gateway API \u793E\u533A\u5408\u4F5C\u5F00\u53D1\u4E00\u4E2A\u66FF\u4EE3\u63A7\u5236\u5668\uFF0C\u4F46\u672A\u80FD\u6FC0\u53D1\u66F4\u591A\u4EBA\u53C2\u4E0E Ingress NGINX \u7684\u7EF4\u62A4\u3002
+
+
+
+### <font style="color:#000000;">05 Higress\uFF1ANginx Ingress \u9000\u5F79\u7684\u66FF\u4EE3\u4F18\u5148\u65B9\u6848</font>
+![](/img/1770005030907.png)
+
++ <font style="color:rgba(0, 0, 0, 0.9);">Kubernetes \u5B98\u65B9\u63A8\u8350\uFF0C\u5373\u5B98\u65B9\u793E\u533A\u6587\u6863\u4E2D\u8FDB\u884C\u4E86\u8BF4\u660E\u3002</font>
++ <font style="color:#000000;">\u5BF9 Nginx Ingress \u7684 Annotation \u517C\u5BB9\u5EA6\u6700\u9AD8\uFF0C\u652F\u630151\u79CD\uFF0C\u8986\u76D690%\u7684\u7528\u6237\u573A\u666F\uFF0C\u8FD9\u610F\u5473\u7740\u73B0\u6709\u7684 K8s Ingress YAML \u6587\u4EF6\u65E0\u9700\u5927\u91CF\u4FEE\u6539\u5373\u53EF\u5B8C\u6210\u8FC1\u79FB</font>
++ <font style="color:#000000;">\u957F\u671F\u6295\u5165\uFF0C\u5E76\u63D0\u4F9B\u4F01\u4E1A\u7248\u670D\u52A1\uFF0C\u5373\u963F\u91CC\u4E91 API \u7F51\u5173</font>
++ <font style="color:#000000;">\u63D0\u4F9B\u76D1\u542C K8s Ingress\uFF08Ingress \u6A21\u5F0F\uFF09\uFF0C\u9002\u7528\u4E8E\u5E0C\u671B\u4FDD\u6301 K8s \u539F\u751F\u5DE5\u4F5C\u6D41\uFF08\u5982GitOps\uFF09\u7684\u56E2\u961F \uFF1B\u548C\u63A7\u5236\u53F0\u914D\u7F6E API\uFF08API \u7BA1\u7406\u6A21\u5F0F\uFF09\uFF0C\u9002\u7528\u4E8E\u9700\u8981\u96C6\u4E2D\u6CBB\u7406\u548C\u7CBE\u7EC6\u5316\u7BA1\u7406\u7684\u573A\u666F \u3002</font>
+
+
+
+### <font style="color:#000000;">06 </font><font style="color:#000000;">Gateway API \u548C Ingress API</font>
+<font style="color:#000000;">\u6807\u9898\u662F\uFF1AGateway API \u548C Ingress API</font>
+
+<font style="color:#000000;">Gateway API \u662F Ingress API \u89C4\u8303\u7684\u8D85\u96C6\u548C\u4E0B\u4E00\u4EE3\u3002\u4ED6\u7684\u51FA\u73B0\uFF0C\u662F\u4E3A\u4E86\u89E3\u51B3 Ingress API \u81EA\u8EAB\u65E0\u6CD5\u641E\u5B9A\u7684\u95EE\u9898\u3002\u5176\u4E2D\uFF0CHigress \u5DF2\u7ECF\u652F\u6301 Gateway API \u6807\u51C6\uFF0C\u7528\u6237\u53EF\u4ECE Ingress API \u5E73\u6ED1\u8FC1\u79FB\u81F3 Gateway API\u3002</font>
+
+![](/img/1770005034973.png)
+
+
+
+<font style="color:#000000;">Ingress API \u5B58\u5728\u7684\u95EE\u9898\uFF0CGateway API \u8FD9\u6837\u53BB\u89E3\u51B3\uFF1A</font>
+
++ <font style="color:#000000;">\u804C\u8D23\u4E0D\u6E05\uFF0C\u540E\u679C\u662F Ingress \u662F\u201C\u4E00\u4EBA\u5199\u5168\u201D\uFF0C\u6CA1\u6709\u6743\u9650\u8FB9\u754C\u3002</font>
+
+<font style="color:#000000;">-> Gateway API \u901A\u8FC7\u89D2\u8272\u5206\u79BB\u89E3\u51B3\uFF0C\u5B9A\u4E49\u57FA\u7840\u8BBE\u65BD\u63D0\u4F9B\u8005\u3001\u96C6\u7FA4\u7BA1\u7406\u5458\u3001\u5E94\u7528\u5F00\u53D1\u8005\u3002</font>
+
+<font style="color:#000000;"></font>
+
++ <font style="color:#000000;">\u529F\u80FD\u8868\u8FBE\u80FD\u529B\u5F31\uFF0C\u4F9D\u8D56 Controller \u7279\u6709\u6269\u5C55\uFF0C\u540E\u679C\u662F\u4E0D\u6807\u51C6\u3001\u4E0D\u540C\u5B9E\u73B0\u4E4B\u95F4\u8FC1\u79FB\u6210\u672C\u9AD8\u3002</font>
+
+<font style="color:#000000;">-> Gateway API \u901A\u8FC7 Wasm\u3001\u63D2\u4EF6\u3001\u670D\u52A1\u7F51\u683C\u96C6\u6210\u89E3\u51B3\u6269\u5C55\u7684\u6807\u51C6\u5316\u3002</font>
+
+<font style="color:#000000;"></font>
+
++ <font style="color:#000000;">\u4EC5\u652F\u6301 HTTP/HTTPS\uFF0C\u65E0\u6CD5\u5904\u7406 TCP/UDP/gRPC \u7B49\u534F\u8BAE</font>
+
+<font style="color:#000000;">-> \u4E91\u539F\u751F\u5E94\u7528\u65E9\u5DF2\u4E0D\u53EA\u662F Web \u670D\u52A1\uFF0CGateway API \u901A\u8FC7\u7EDF\u4E00\u7684 API\uFF0C\u7BA1\u7406\u6240\u6709\u5357\u5317\u5411\u6D41\u91CF\u3002</font>
+
+<font style="color:#000000;"></font>
+
++ <font style="color:#000000;">\u65E0\u6CD5\u8868\u8FBE\u590D\u6742\u8DEF\u7531\u903B\u8F91\uFF0C\u5FAE\u670D\u52A1\u6CBB\u7406\u9700\u6C42\u8FDC\u8D85 Ingress \u80FD\u529B\u3002</font>
+
+<font style="color:#000000;">-> Gateway API \u652F\u6301 Wasm\u3001\u63D2\u4EF6\u3001\u670D\u52A1\u7F51\u683C\u96C6\u6210\uFF0C\u901A\u8FC7\u6807\u51C6\u5316\u7684\u9AD8\u7EA7\u8DEF\u7531\u89E3\u51B3\u3002</font>
+
+<font style="color:#000000;"></font>
+
++ <font style="color:#000000;">\u4E00\u4E2A Ingress Controller \u5168\u5C40\u5171\u4EAB\uFF0C\u7F3A\u4E4F\u591A\u79DF\u6237\u9694\u79BB\uFF0C\u591A\u79DF\u6237\u573A\u666F\u4E0B\u5B58\u5728\u5B89\u5168\u548C\u914D\u7F6E\u51B2\u7A81\u98CE\u9669\u3002</font>
+
+<font style="color:#000000;">-> Gateway API \u63D0\u4F9B\u4E86\u72EC\u7ACB Gateway \u7684\u5B9E\u4F8B\u3002</font>
+
+
+`,e={title:"\u5E94\u5BF9 Nginx Ingress \u9000\u5F79\uFF0C\u662F\u65F6\u5019\u7406\u6E05\u8FD9\u4E9B\u6613\u6DF7\u6DC6\u7684\u6982\u5FF5\u4E86",description:"\u5E94\u5BF9 Nginx Ingress \u9000\u5F79\uFF0C\u662F\u65F6\u5019\u7406\u6E05\u8FD9\u4E9B\u6613\u6DF7\u6DC6\u7684\u6982\u5FF5\u4E86",keywords:["Higress"],date:"2025-12-24",category:"article"},r={type:"content",filePath:"/home/runner/work/higress-group.github.io/higress-group.github.io/src/content/blog/Higress-gvr7dx_awbbpb_ortukqsuia6ahf2v.md",rawData:void 0};export{r as _internal,s as body,t as collection,e as data,o as id,n as slug};

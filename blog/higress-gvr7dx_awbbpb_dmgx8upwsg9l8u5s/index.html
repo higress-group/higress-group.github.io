@@ -1,0 +1,520 @@
+<!DOCTYPE html><span class="blog-slug-wrapper"> <html lang="zh-cn" data-theme="light"> <head><meta charset="utf-8"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"> <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Higress v2.1.9：44 项引擎更新 + 18 项控制台更新_博客-Higress官网</title><link rel="canonical" href="https://higress.cn/blog/higress-gvr7dx_awbbpb_dmgx8upwsg9l8u5s/"/><link rel="alternate" hreflang="zh-CN" href="https://higress.cn/blog/higress-gvr7dx_awbbpb_dmgx8upwsg9l8u5s/"/><link rel="alternate" hreflang="en" href="https://higress.cn/en/blog/higress-gvr7dx_awbbpb_dmgx8upwsg9l8u5s/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="shortcut icon" href="/higress_logo.png" type="image/png"/><meta name="aplus-core" content="aplus.js"/><meta property="og:title" content="Higress v2.1.9：44 项引擎更新 + 18 项控制台更新_博客"/><meta property="og:type" content="article"/><meta property="og:url" content="https://higress.cn/blog/higress-gvr7dx_awbbpb_dmgx8upwsg9l8u5s/"/><meta property="og:locale"/><meta property="og:site_name" content="Higress"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Higress v2.1.9：44 项引擎更新 + 18 项控制台更新_博客"/><meta name="baidu-site-verification" content="codeva-x6yW4DqCn3"/><meta name="msvalidate.01" content="418883CE9AE2CAD01E7FC1A7B9F20801"/><meta name="twitter:description" content="Higress v2.1.9：44 项引擎更新 + 18 项控制台更新"/><meta name="description" content="Higress v2.1.9：44 项引擎更新 + 18 项控制台更新"/><meta property="og:description" content="Higress v2.1.9：44 项引擎更新 + 18 项控制台更新"/><meta property="keywords" content="Higress"/> <!--初始化SDK-->   <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR"></script> <meta name="generator" content="Astro v4.9.1"><meta name="robots" content="index, follow"><meta name="applicable-device" content="pc,mobile"><meta property="og:image" content="https://img.alicdn.com/imgextra/i1/O1CN01Q9UWyF23bY1R0U0KE_!!6000000007274-2-tps-2560-1440.png"><link data-rh="true" rel="icon" href="https://img.alicdn.com/imgextra/i4/O1CN01AViQMJ1J2lY4OPRgv_!!6000000000971-2-tps-376-375.png"><link rel="stylesheet" href="/_astro/_page_.8CUVaieU.css">
+<style>.table-of-contents-wrapper ul{padding:0;list-style:none}.table-of-contents-wrapper a{--pad-inline: .5rem;display:block;border-radius:.25rem;padding-block:.25rem;padding-inline:calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);line-height:1.25}.table-of-contents-wrapper a[aria-current=true],.table-of-contents-wrapper a[aria-current=true]:hover,.table-of-contents-wrapper a[aria-current=true]:focus{color:var(--fallback-n,oklch(var(--n)/1))!important;background-color:var(--fallback-s,oklch(var(--s)/1))!important;border-left-style:solid;border-left-width:3px;border-left-color:var(--fallback-n,oklch(var(--n)/1));padding-left:.625rem!important;font-weight:400!important;border-radius:0!important}.table-of-contents-wrapper .isMobile a{--pad-inline: 1rem;display:flex;justify-content:space-between;gap:var(--pad-inline);border-top:1px solid var(--sl-color-gray-6);border-radius:0;padding-block:.5rem;color:var(--sl-color-text);font-size:var(--sl-text-sm);text-decoration:none;outline-offset:var(--sl-outline-offset-inside)}.table-of-contents-wrapper .isMobile:first-child>li:first-child>a{border-top:0}.table-of-contents-wrapper .isMobile a[aria-current=true],.table-of-contents-wrapper .isMobile a[aria-current=true]:hover,.table-of-contents-wrapper .isMobile a[aria-current=true]:focus{color:var(--sl-color-white);background-color:unset}.table-of-contents-wrapper .isMobile a[aria-current=true]:after{content:"";width:1rem;background-color:var(--sl-color-text-accent);-webkit-mask-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNCAxNCc+PHBhdGggZD0nTTEwLjkxNCA0LjIwNmEuNTgzLjU4MyAwIDAgMC0uODI4IDBMNS43NCA4LjU1NyAzLjkxNCA2LjcyNmEuNTk2LjU5NiAwIDAgMC0uODI4Ljg1N2wyLjI0IDIuMjRhLjU4My41ODMgMCAwIDAgLjgyOCAwbDQuNzYtNC43NmEuNTgzLjU4MyAwIDAgMCAwLS44NTdaJy8+PC9zdmc+Cg==);mask-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNCAxNCc+PHBhdGggZD0nTTEwLjkxNCA0LjIwNmEuNTgzLjU4MyAwIDAgMC0uODI4IDBMNS43NCA4LjU1NyAzLjkxNCA2LjcyNmEuNTk2LjU5NiAwIDAgMC0uODI4Ljg1N2wyLjI0IDIuMjRhLjU4My41ODMgMCAwIDAgLjgyOCAwbDQuNzYtNC43NmEuNTgzLjU4MyAwIDAgMCAwLS44NTdaJy8+PC9zdmc+Cg==);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;flex-shrink:0}
+</style>
+<link rel="stylesheet" href="/_astro/index.OSysTdOc.css">
+<style>.badge-wrapper .sl-badge{display:inline-block;border:1px solid var(--sl-color-border-badge);border-radius:.25rem;font-size:.75rem;padding:.125rem .375rem;line-height:1;color:var(--sl-color-bg-badge);overflow-wrap:anywhere;transform:scale(.83);transform-origin:0 0}.badge-wrapper .outline{outline-style:none!important;--sl-color-bg-badge: var(--fallback-wa,oklch(var(--wa)/1));--sl-color-border-badge: var(--fallback-p,oklch(var(--p)/1))}.badge-wrapper .default{--sl-color-bg-badge: var(--sl-color-accent-low);--sl-color-border-badge: var(--sl-color-accent)}.badge-wrapper .note{--sl-color-bg-badge: var(--sl-color-blue-low);--sl-color-border-badge: var(--sl-color-blue)}.badge-wrapper .danger{--sl-color-bg-badge: var(--sl-color-red-low);--sl-color-border-badge: var(--sl-color-red)}.badge-wrapper .success{--sl-color-bg-badge: var(--sl-color-green-low);--sl-color-border-badge: var(--sl-color-green)}.badge-wrapper .caution{--sl-color-bg-badge: var(--sl-color-orange-low);--sl-color-border-badge: var(--sl-color-orange)}.badge-wrapper .tip{--sl-color-bg-badge: var(--sl-color-purple-low);--sl-color-border-badge: var(--sl-color-purple)}.badge-wrapper [data-theme=light] .default{--sl-color-bg-badge: var(--sl-color-accent-high)}.badge-wrapper [data-theme=light] .note{--sl-color-bg-badge: var(--sl-color-blue-high)}.badge-wrapper [data-theme=light] .danger{--sl-color-bg-badge: var(--sl-color-red-high)}.badge-wrapper [data-theme=light] .success{--sl-color-bg-badge: var(--sl-color-green-high)}.badge-wrapper [data-theme=light] .caution{--sl-color-bg-badge: var(--sl-color-orange-high)}.badge-wrapper [data-theme=light] .tip{--sl-color-bg-badge: var(--sl-color-purple-high)}.sidebar-sublist-wrapper ul{--sl-sidebar-item-padding-inline: .5rem;list-style:none;padding:0}.sidebar-sublist-wrapper li{overflow-wrap:anywhere}.sidebar-sublist-wrapper ul ul li{margin-inline-start:var(--sl-sidebar-item-padding-inline);border-inline-start:1px solid var(--sl-color-hairline-light);padding-inline-start:var(--sl-sidebar-item-padding-inline)}.sidebar-sublist-wrapper .large{font-size:var(--sl-text-lg);font-weight:600;color:var(--sl-color-white)}.sidebar-sublist-wrapper .top-level>li+li{margin-top:.75rem}.sidebar-sublist-wrapper summary{display:flex;align-items:center;justify-content:space-between;padding:.2em var(--sl-sidebar-item-padding-inline);line-height:1.4;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;user-select:none}.sidebar-sublist-wrapper summary::marker,.sidebar-sublist-wrapper summary::-webkit-details-marker{display:none}.sidebar-sublist-wrapper .caret{transition:transform .2s ease-in-out;flex-shrink:0}.sidebar-sublist-wrapper [dir=rtl] .caret{transform:rotate(180deg)}.sidebar-sublist-wrapper [open]>summary .caret{transform:rotate(90deg)}.sidebar-sublist-wrapper a{display:block;border-radius:.25rem;text-decoration:none;color:var(--sl-color-gray-2);padding:.3em var(--sl-sidebar-item-padding-inline);line-height:1.4}.sidebar-sublist-wrapper a:hover,.sidebar-sublist-wrapper a:focus{color:var(--sl-color-white)}.sidebar-sublist-wrapper [aria-current=page],.sidebar-sublist-wrapper [aria-current=page]:hover,.sidebar-sublist-wrapper [aria-current=page]:focus{color:var(--fallback-n,oklch(var(--n)/1));background-color:var(--fallback-er,oklch(var(--er)/1));border-left-style:solid;border-left-width:4px;border-left-color:var(--fallback-n,oklch(var(--n)/1));padding-left:.625rem!important}.sidebar-sublist-wrapper a>*:not(:last-child),.sidebar-sublist-wrapper .group-label>*:not(:last-child){margin-inline-end:.25em}@media (min-width: 50rem){.sidebar-sublist-wrapper .top-level>li+li{margin-top:.5rem}.sidebar-sublist-wrapper .large{font-size:var(--sl-text-base)}.sidebar-sublist-wrapper a{font-size:var(--sl-text-sm)}}
+.blog-slug-wrapper .sidebar-content{height:100%;padding:1rem var(--sl-sidebar-pad-x) 0;flex-direction:column;gap:1rem}.blog-slug-wrapper .right-sidebar-panel{flex-direction:column;justify-content:space-between;height:calc(100vh - 3.5rem);width:0px;overflow:hidden}.blog-slug-wrapper .right-sidebar-panel h2{color:var(--sl-color-white);font-size:var(--sl-text-h5);font-weight:600;line-height:var(--sl-line-height-headings);margin-bottom:.5rem}.blog-slug-wrapper .right-sidebar-panel a{display:block;font-size:var(--sl-text-xs);text-decoration:none;color:var(--sl-color-gray-3);overflow-wrap:anywhere}.blog-slug-wrapper .right-sidebar-panel a:hover{color:var(--sl-color-white)}.blog-slug-wrapper #toggle-sidebar{display:none}@media (min-width: 72rem){.blog-slug-wrapper #toggle-sidebar{display:block;position:fixed;top:40%;z-index:2;transform:translate(-35px)}.blog-slug-wrapper #toggle-sidebar a{padding-top:8px}.blog-slug-wrapper .rotate{transform:rotate(0)}.blog-slug-wrapper .collapsed{width:18%;padding:1rem var(--sl-sidebar-pad-x)}.blog-slug-wrapper .blog-fold{width:60%!important}}
+</style>
+<link rel="stylesheet" href="/_astro/index.B0a9OMnn.css">
+<link rel="stylesheet" href="/_astro/_page_.BvVjd66q.css">
+<style>.header-wrapper my-layout{--header-content-width: var(--width);--logo-height: 2rem;--header-height: var(--height);--header-xl-padding: var(--xpadding)}.header-wrapper .header-content{width:var(--header-content-width);padding-left:var(--header-xl-padding);padding-right:var(--header-xl-padding)}.header-wrapper .left-content .logo{vertical-align:sub;height:var(--logo-height)}.header-wrapper .left-content .mobile-navbar{display:none}@media (max-width: 85.125rem){.header-wrapper .header-content{width:100%;padding-left:1.5rem;padding-right:1.5rem}}@media (max-width: 1070px){.header-wrapper .header-content{width:100%;padding-left:1.5rem;padding-right:1.5rem}.header-wrapper .left-content .mobile-navbar{display:block}.header-wrapper .center-content{display:none}.header-wrapper .code-toggle{padding:0!important;background-color:transparent!important}.header-wrapper .code-toggle span{display:none}.header-wrapper .code-toggle svg{width:1.5rem;height:1.5rem}}
+.link-icon:where(.astro-ld27styo){transition:width .3s ease}
+toggle-content:where(.astro-bxjx6km4){--toggle-ml-width: 7rem;--toggle-xl-width: 7.5rem;--toggle-ml-height: 2rem;--toggle-xl-height: 2.5rem;--toggle-ml-font: .75rem;--toggle-xl-font: .85rem;--toggle-ml-switch-width: 3.5rem;--toggle-xl-switch-width: 3.75rem;--toggle-ml-switch-height: 1.5rem;--toggle-xl-switch-height: 2rem}.switch:where(.astro-bxjx6km4){width:var(--toggle-ml-width)}.switch-inner:where(.astro-bxjx6km4){width:200%;margin-left:-100%}.switch-inner:where(.astro-bxjx6km4):before,.switch-inner:where(.astro-bxjx6km4):after{display:block;float:right;width:50%;height:var(--toggle-ml-height);padding:0;line-height:var(--toggle-ml-height);font-size:var(--toggle-ml-font);box-sizing:border-box}.switch-inner:where(.astro-bxjx6km4):after{content:attr(data-on);padding-left:1.25rem}.switch-inner:where(.astro-bxjx6km4):before{content:attr(data-off);padding-right:1.25rem;text-align:right}.switch-switch:where(.astro-bxjx6km4){height:var(--toggle-ml-switch-height);width:var(--toggle-ml-switch-width);bottom:.25rem;border-radius:2rem;transition:all .3s ease-in 0s;text-align:right}.switch-switch:where(.astro-bxjx6km4):before{display:flex;content:attr(data-off);height:100%;font-size:var(--toggle-ml-font);align-items:center;justify-content:center}.switch-checkbox:where(.astro-bxjx6km4):checked+.switch-label:where(.astro-bxjx6km4) .switch-inner:where(.astro-bxjx6km4){margin-left:0}.switch-checkbox:where(.astro-bxjx6km4):checked+.switch-label:where(.astro-bxjx6km4) .switch-switch:where(.astro-bxjx6km4){right:0}.switch-checkbox:where(.astro-bxjx6km4):checked+.switch-label:where(.astro-bxjx6km4) .switch-switch:where(.astro-bxjx6km4):before{display:flex;content:attr(data-on);height:100%;font-size:var(--toggle-ml-font);align-items:center;justify-content:center}
+.link-text:where(.astro-zb5a5pg4) .link-icon:where(.astro-zb5a5pg4){width:0;opacity:0;transition:transform .5s ease,width .3s ease,opacity .3s ease}.link-text:where(.astro-zb5a5pg4):hover .link-icon:where(.astro-zb5a5pg4){transform:translate(3px);opacity:1;width:8px}
+</style>
+<link rel="stylesheet" href="/_astro/tailwind.yDJ6ykU0.css">
+<link rel="stylesheet" href="/_astro/style.D0hgFy5U.css"><script type="module" src="/_astro/hoisted.BG6EV0qI.js"></script>
+<script type="module" src="/_astro/page.CIklkdzg.js"></script></head> <body> <!-- <HomeHeader align="home" position={position} lang={Astro.props.lang} {...Astro.props} /> --> <span class="header-wrapper" style="--width: 100%;--height: 3.5rem;--xpadding: 1.5rem;"> <div class="alert-bar w-full  h-12 flex align-center justify-between top-0 bg-cover bg-[url('https://img.alicdn.com/imgextra/i3/O1CN010OMCW91rMde4sifaA_!!6000000005617-0-tps-828-52.jpg')] md:bg-[url('https://img.alicdn.com/imgextra/i4/O1CN01wkq3Nl1O9FCjTbQNk_!!6000000001662-0-tps-2880-96.jpg')]" client:load><div class="md:text-base text-sm m-auto leading-6 "><span class=" text-muted mr-4 md:mr-6 opacity-30 hidden md:inline-block">&lt;/&gt;</span><span class="alert-text hidden md:inline-block bg-gradient-to-r from-link to-success font-medium">下载量破万，《AI 原生应用架构白皮书》免费下载</span><span class="alert-text bg-gradient-to-r from-link to-success text-muted  md:hidden font-medium">下载量破万，《AI 原生应用架构白皮书》免费下载</span><a href="https://developer.aliyun.com/ebook/8479" target="_blank" class="mx-auto flex justify-center md:inline text-primary font-medium md:ml-4 no-underline">点此了解</a></div><button class="close-button text-muted bg-transparent border-none cursor-pointer text-lg leading-6 mr-1 md:mr-4">
+&times;
+</button></div> <my-layout style="position: sticky; height: 3.5rem; --width: 100%;--height: 3.5rem;--xpadding: 1.5rem;" class="w-full backdrop-blur-md top-0 z-[10] bg-neutral flex justify-center"> <!-- 方便控制header宽度 --> <div class="header-content flex items-center justify-between" style="--width: 100%;--height: 3.5rem;--xpadding: 1.5rem;"> <div class="left-content h-full flex flex-1 items-center after:content-[''] after:grow after:invisible" style="--width: 100%;--height: 3.5rem;--xpadding: 1.5rem;"> <a class="no-underline flex" href="/" style="--width: 100%;--height: 3.5rem;--xpadding: 1.5rem;"> <img class="logo" src="https://img.alicdn.com/imgextra/i1/O1CN01aIB6n51zcgTM5vhku_!!6000000006735-2-tps-156-48.png" alt="Higress-logo" style="--width: 100%;--height: 3.5rem;--xpadding: 1.5rem;"> </a> <span class="mobile-navbar-wrapper" style="--top: 3.5rem;"> <div class="mobile-navbar mobile-navbar h-full ml-4" style="--top: 3.5rem;"> <mobile-menu-button style="--top: 3.5rem;"> <button aria-expanded="false" aria-label="mobile-menu-button" style="--top: 3.5rem;"> <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6304" width="28" height="28" style="--top: 3.5rem;"> <path d="M192.037 287.953h640.124c17.673 0 32-14.327 32-32s-14.327-32-32-32H192.037c-17.673 0-32 14.327-32 32s14.327 32 32 32zM832.161 479.169H438.553c-17.673 0-32 14.327-32 32s14.327 32 32 32h393.608c17.673 0 32-14.327 32-32s-14.327-32-32-32zM832.161 735.802H192.037c-17.673 0-32 14.327-32 32s14.327 32 32 32h640.124c17.673 0 32-14.327 32-32s-14.327-32-32-32zM319.028 351.594l-160 160 160 160z" class="fill-secondary" p-id="6305" style="--top: 3.5rem;"></path> </svg> </button> </mobile-menu-button> <div class="navbar-panel bg-secondary" style="--top: 3.5rem;"> <div class="navbar-content flex" style="--top: 3.5rem;"> <span class="mobile-nav-sublist-wrapper"> <ul class="top-level"> <li> <a href="https://higress.ai/" class="large flex items-center"> <span>AI 网关</span> </a> </li><li> <a href="/docs/latest/overview/what-is-higress/" class="large flex items-center"> <span>文档</span> </a> </li><li> <a href="/plugin/" class="large flex items-center"> <span>插件</span> </a> </li><li> <a href="/cloud/" class="large flex items-center"> <span>企业版 Higress</span> </a> </li><li> <a href="/blog/" class="large flex items-center"> <span>博客</span> </a> </li><li> <details> <summary> <div class="group-label"> <span class="large undefined">社区</span> </div> <svg aria-hidden="true" class="caret astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-color: #818598;--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <span class="mobile-nav-sublist-wrapper"> <ul>  </ul> </span>  </details> </li><li> <a href="/docs/developers/developers_dev/" class="large flex items-center"> <span>开发者</span> </a> </li><li> <details> <summary> <div class="group-label"> <span class="large undefined">控制台样例</span> </div> <svg aria-hidden="true" class="caret astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-color: #818598;--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <span class="mobile-nav-sublist-wrapper"> <ul>  </ul> </span>  </details> </li><li> <a href="https://github.com/higress-group/himarket/" class="large flex items-center"> <span>HiMarket</span> </a> </li> </ul> </span>  </div> </div> </div> </span>   </div> <div class="center-content justify-center flex-2 h-full" style="--width: 100%;--height: 3.5rem;--xpadding: 1.5rem;"> <span class="navbar-wrapper"> <navbar-component class="navbar-component h-full"> <div class="pc-navbar pc-navbar h-full"> <span class="toggle-wrapper"> <toggle-component data-trigger="click" class="toggle-component h-full relative"> <div class="toggle-trigger relative cursor-pointer flex items-center h-full item ">  <a href="https://higress.ai/" target="_blank" class="toggle-text flex items-center justify-center no-underline h-full "> AI 网关 <span class="toggle-text-ailogo text-xs text-center rounded-xl absolute top-[0.5rem] right-[-0.5rem] text-white bg-[red] w-[2rem] h-[1rem] font-medium">
+NEW
+</span> </a>   </div>  </toggle-component> </span>  <span class="toggle-wrapper"> <toggle-component data-trigger="click" class="toggle-component h-full relative"> <div class="toggle-trigger relative cursor-pointer flex items-center h-full item ">  <a href="/docs/latest/overview/what-is-higress/" target="_self" class="toggle-text flex items-center justify-center no-underline h-full "> 文档  </a>   </div>  </toggle-component> </span>  <span class="toggle-wrapper"> <toggle-component data-trigger="click" class="toggle-component h-full relative"> <div class="toggle-trigger relative cursor-pointer flex items-center h-full item ">  <a href="/plugin/" target="_self" class="toggle-text flex items-center justify-center no-underline h-full "> 插件  </a>   </div>  </toggle-component> </span>  <span class="toggle-wrapper"> <toggle-component data-trigger="click" class="toggle-component h-full relative"> <div class="toggle-trigger relative cursor-pointer flex items-center h-full item ">  <a href="/cloud/" target="_self" class="toggle-text flex items-center justify-center no-underline h-full "> 企业版 Higress  </a>   </div>  </toggle-component> </span>  <span class="toggle-wrapper"> <toggle-component data-trigger="click" class="toggle-component h-full relative"> <div class="toggle-trigger relative cursor-pointer flex items-center h-full item ">  <a href="/blog/" target="_self" class="toggle-text flex items-center justify-center no-underline h-full toggle-text-active"> 博客  </a>   </div>  </toggle-component> </span>  <span class="toggle-wrapper"> <toggle-component data-trigger="hover" class="toggle-component h-full static"> <div class="toggle-trigger relative cursor-pointer flex items-center h-full item ">  <div class="toggle-text flex items-center justify-center h-full toggle-text-active "> 社区 </div>  <svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" data-updown class="ml-2"> <path d="M8.05264 2L5.05264 5.00649L2.05264 2" stroke="#a3a6b3" stroke-width="1.25" stroke-linecap="square"></path> </svg> </div> <div class="toggle-dropdown w-fit inset-x-0 absolute t-3.5rem">   <menu-container class="menu-container dropdown-docs w-screen h-screen flex flex-col justify-start items-center"> <div class="bg-neutral p-10 w-full flex justify-center "> <div class="w-fit"> <div class="flex justify-between mb-[3.5rem]"> <div class="flex"> <!-- 社区label --> <div class="border-l border-warning flex flex-col px-7 min-w-[12rem]"> <span class="text-xs text-warning mb-2">社区</span> <a href="https://github.com/higress-group/higress-group.github.io/issues" target="_blank" class="link-text cursor-pointer no-underline flex items-center w-fit text-neutral text-sm mt-3 astro-zb5a5pg4"> 报告文档问题  <svg version="1.1" width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="link-icon  ml-2 fill-neutral astro-zb5a5pg4"> <g transform="matrix(-1,0,0,1,16,0)" class="astro-zb5a5pg4"> <path d="M9.27237,2.16302L9.27237,6.99801Q9.27237,7.26839,9.08915,7.45161Q8.905925,7.63483,8.636183,7.6342Q8.365805,7.6342,8.183221,7.45097Q8.000636137,7.26775,8,6.99801L8,0.636183Q8,0.365805,8.183221,0.183221Q8.366441,0.000636364,8.636183,0L14.99801,0Q15.26839,0,15.451609999999999,0.183221Q15.634830000000001,0.366441,15.63419,0.636183Q15.63419,0.906561,15.45097,1.08978Q15.26775,1.273,14.99801,1.27237L10.16302,1.27237L15.825050000000001,6.93439Q16,7.10935,16,7.37972Q16,7.6501,15.825050000000001,7.82505Q15.6501,8,15.379719999999999,8Q15.10935,8,14.93439,7.82505L9.27237,2.16302Z" fill-opacity="1" class="astro-zb5a5pg4"></path> </g> </svg>  </a> <a href="/docs/developers/contributor-guide/guide_dev/" target="_self" class="link-text cursor-pointer no-underline flex items-center w-fit text-neutral text-sm mt-3 astro-zb5a5pg4"> 贡献社区  <svg version="1.1" width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="link-icon  ml-2 fill-neutral astro-zb5a5pg4"> <g transform="matrix(-1,0,0,1,16,0)" class="astro-zb5a5pg4"> <path d="M9.27237,2.16302L9.27237,6.99801Q9.27237,7.26839,9.08915,7.45161Q8.905925,7.63483,8.636183,7.6342Q8.365805,7.6342,8.183221,7.45097Q8.000636137,7.26775,8,6.99801L8,0.636183Q8,0.365805,8.183221,0.183221Q8.366441,0.000636364,8.636183,0L14.99801,0Q15.26839,0,15.451609999999999,0.183221Q15.634830000000001,0.366441,15.63419,0.636183Q15.63419,0.906561,15.45097,1.08978Q15.26775,1.273,14.99801,1.27237L10.16302,1.27237L15.825050000000001,6.93439Q16,7.10935,16,7.37972Q16,7.6501,15.825050000000001,7.82505Q15.6501,8,15.379719999999999,8Q15.10935,8,14.93439,7.82505L9.27237,2.16302Z" fill-opacity="1" class="astro-zb5a5pg4"></path> </g> </svg>  </a> <a href="https://github.com/alibaba/higress/graphs/contributors" target="_blank" class="link-text cursor-pointer no-underline flex items-center w-fit text-neutral text-sm mt-3 astro-zb5a5pg4"> 贡献者  <svg version="1.1" width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="link-icon  ml-2 fill-neutral astro-zb5a5pg4"> <g transform="matrix(-1,0,0,1,16,0)" class="astro-zb5a5pg4"> <path d="M9.27237,2.16302L9.27237,6.99801Q9.27237,7.26839,9.08915,7.45161Q8.905925,7.63483,8.636183,7.6342Q8.365805,7.6342,8.183221,7.45097Q8.000636137,7.26775,8,6.99801L8,0.636183Q8,0.365805,8.183221,0.183221Q8.366441,0.000636364,8.636183,0L14.99801,0Q15.26839,0,15.451609999999999,0.183221Q15.634830000000001,0.366441,15.63419,0.636183Q15.63419,0.906561,15.45097,1.08978Q15.26775,1.273,14.99801,1.27237L10.16302,1.27237L15.825050000000001,6.93439Q16,7.10935,16,7.37972Q16,7.6501,15.825050000000001,7.82505Q15.6501,8,15.379719999999999,8Q15.10935,8,14.93439,7.82505L9.27237,2.16302Z" fill-opacity="1" class="astro-zb5a5pg4"></path> </g> </svg>  </a>  </div> <!-- 事件、资源label --> <div class="border-l border-warning flex flex-col px-7 mr-10"> <span class="text-xs text-warning mb-2">资源</span> <a href="/blog/" target="_self" class="link-text cursor-pointer no-underline flex items-center w-fit text-neutral text-sm mt-3 astro-zb5a5pg4"> 博客  <svg version="1.1" width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="link-icon  ml-2 fill-neutral astro-zb5a5pg4"> <g transform="matrix(-1,0,0,1,16,0)" class="astro-zb5a5pg4"> <path d="M9.27237,2.16302L9.27237,6.99801Q9.27237,7.26839,9.08915,7.45161Q8.905925,7.63483,8.636183,7.6342Q8.365805,7.6342,8.183221,7.45097Q8.000636137,7.26775,8,6.99801L8,0.636183Q8,0.365805,8.183221,0.183221Q8.366441,0.000636364,8.636183,0L14.99801,0Q15.26839,0,15.451609999999999,0.183221Q15.634830000000001,0.366441,15.63419,0.636183Q15.63419,0.906561,15.45097,1.08978Q15.26775,1.273,14.99801,1.27237L10.16302,1.27237L15.825050000000001,6.93439Q16,7.10935,16,7.37972Q16,7.6501,15.825050000000001,7.82505Q15.6501,8,15.379719999999999,8Q15.10935,8,14.93439,7.82505L9.27237,2.16302Z" fill-opacity="1" class="astro-zb5a5pg4"></path> </g> </svg>  </a> <a href="/docs/ebook/wasm14/" target="_self" class="link-text cursor-pointer no-underline flex items-center w-fit text-neutral text-sm mt-3 astro-zb5a5pg4"> 电子书  <svg version="1.1" width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="link-icon  ml-2 fill-neutral astro-zb5a5pg4"> <g transform="matrix(-1,0,0,1,16,0)" class="astro-zb5a5pg4"> <path d="M9.27237,2.16302L9.27237,6.99801Q9.27237,7.26839,9.08915,7.45161Q8.905925,7.63483,8.636183,7.6342Q8.365805,7.6342,8.183221,7.45097Q8.000636137,7.26775,8,6.99801L8,0.636183Q8,0.365805,8.183221,0.183221Q8.366441,0.000636364,8.636183,0L14.99801,0Q15.26839,0,15.451609999999999,0.183221Q15.634830000000001,0.366441,15.63419,0.636183Q15.63419,0.906561,15.45097,1.08978Q15.26775,1.273,14.99801,1.27237L10.16302,1.27237L15.825050000000001,6.93439Q16,7.10935,16,7.37972Q16,7.6501,15.825050000000001,7.82505Q15.6501,8,15.379719999999999,8Q15.10935,8,14.93439,7.82505L9.27237,2.16302Z" fill-opacity="1" class="astro-zb5a5pg4"></path> </g> </svg>  </a>  </div> </div> <div class="flex" id="blog-card-container"> <div class="relative blog-card w-[16.875] h-[22.5rem] rounded-2xl p-2 flex flex-col ml-4 "> <img src="https://img.alicdn.com/imgextra/i4/O1CN01bGnAVW1pFeLFnlaQL_!!6000000005331-2-tps-508-370.png" alt="Higress case" class="rounded-lg" width="254" height="185" loading="lazy" decoding="async"> <p class="w-[15.875rem] text-lg line-clamp-2 mt-3 text-base-100"> API赋能AI，AI网关零代码解决AI幻觉问题 </p> <span class="not-content"><a class="btn rounded-3xl w-[8.5rem] h-[2.5rem] absolute bottom-2 article-button border-none text-secondary no-underline" target="_self" rel="noopener noreferrer" id="article-button" href="/blog/higress-gvr7dx_awbbpb_im44tpldqyt8c97d/?source=blog_case">阅读文章</a></span> </div><div class="relative blog-card w-[16.875] h-[22.5rem] rounded-2xl p-2 flex flex-col ml-4 "> <img src="https://img.alicdn.com/imgextra/i4/O1CN01zfayJW1Lhe4kliPv9_!!6000000001331-2-tps-508-370.png" alt="Higress case" class="rounded-lg" width="254" height="185" loading="lazy" decoding="async"> <p class="w-[15.875rem] text-lg line-clamp-2 mt-3 text-base-100"> Higress 发布 v1.4，开放 AI 网关能力，增强云原生能力 </p> <span class="not-content"><a class="btn rounded-3xl w-[8.5rem] h-[2.5rem] absolute bottom-2 article-button border-none text-secondary no-underline" target="_self" rel="noopener noreferrer" id="article-button" href="/blog/higress-gvr7dx_awbbpb_picigqfume3k5lf3/?source=blog_article">阅读文章</a></span> </div> </div>  </div> <!-- 联系我们 --> <div class="w-[70rem] contact-us flex items-center justify-between rounded-2xl h-9 pl-10 pr-[8.5rem]"> <span class="text-success text-xs leading-9 tracking-[0.15em]"> 联系我们 </span> <div class="flex items-center cursor-pointer"> <a target="_blank" href="https://github.com/alibaba/higress" class="mr-16 flex items-center no-underline"> <svg viewBox="0 80 1024 800" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3233" width="16" height="16"> <path d="M20.48 503.72608c0 214.4256 137.4208 396.73856 328.94976 463.6672 25.8048 6.5536 21.87264-11.8784 21.87264-24.33024v-85.07392c-148.93056 17.44896-154.86976-81.1008-164.94592-97.52576-20.23424-34.52928-67.91168-43.33568-53.69856-59.76064 33.91488-17.44896 68.48512 4.42368 108.46208 63.61088 28.95872 42.88512 85.44256 35.6352 114.15552 28.4672a138.8544 138.8544 0 0 1 38.0928-66.7648c-154.25536-27.60704-218.60352-121.77408-218.60352-233.79968 0-54.31296 17.94048-104.2432 53.0432-144.54784-22.36416-66.43712 2.08896-123.24864 5.3248-131.6864 63.81568-5.7344 130.00704 45.6704 135.168 49.68448 36.2496-9.78944 77.57824-14.9504 123.82208-14.9504 46.4896 0 88.064 5.3248 124.5184 15.23712 12.288-9.4208 73.80992-53.53472 133.12-48.128 3.15392 8.43776 27.0336 63.93856 6.02112 129.4336 35.59424 40.38656 53.69856 90.76736 53.69856 145.24416 0 112.18944-64.7168 206.4384-219.42272 233.71776a140.0832 140.0832 0 0 1 41.7792 99.9424v123.4944c0.86016 9.87136 0 19.6608 16.50688 19.6608 194.31424-65.49504 334.2336-249.15968 334.2336-465.5104C1002.57792 232.48896 782.66368 12.77952 511.5904 12.77952 240.18944 12.65664 20.48 232.40704 20.48 503.72608z" fill="currentColor" p-id="3234"></path> </svg> <span class="ml-2 mt-1 text-sm text-secondary">GitHub</span> </a> <div class="mr-16 hoverable relative"> <img class="tooltip hidden w-40 absolute bottom-9" src="/img/dingding_3.jpg" alt="Higress Dingding Code"> <span class="text-neutral flex items-center"> <svg class="icon" viewBox="0 50 1024 800" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4747" width="16" height="16"> <path d="M0 0h1024v1024H0z" class="secondary-fill" fill-opacity="0" p-id="4748"></path><path d="M786.978133 481.6896c-153.770667-117.5552-327.133867-273.237333-517.188266-440.183467-14.984533-13.141333-28.2624-7.953067-34.952534 9.5232-42.8032 111.957333-1.297067 211.421867 65.774934 268.731734 67.345067 57.582933 167.492267 110.592 228.829866 138.683733 2.389333 1.092267 0.3072 4.573867-2.116266 3.515733-112.674133-49.152-191.044267-84.650667-297.3696-165.819733-11.434667-8.738133-23.04-5.3248-24.405334 11.707733-8.704 107.042133 60.484267 191.146667 137.728 219.5456 47.786667 17.6128 100.0448 27.3408 148.548267 33.109334 2.525867 0.341333 1.9456 4.027733-0.580267 4.027733-62.498133 0.2048-138.001067-14.609067-203.332266-39.458133-13.789867-5.256533-18.5344 5.632-16.418134 14.267733 11.1616 45.226667 67.652267 114.346667 157.5936 128.887467 16.827733 2.730667 34.747733 3.072 50.722134 2.628266 3.7888-0.136533 4.7104 1.9456 3.4816 4.846934 0 0-61.098667 103.6288-63.761067 108.066133-2.082133 3.447467-0.8192 6.212267 3.515733 6.212267h80.622934c3.754667 0 6.0416 2.389333 4.096 5.5296-1.877333 3.140267-107.656533 176.7424-112.64 185.0368-4.369067 7.202133 0.785067 12.731733 8.942933 6.826666 8.192-5.9392 346.180267-250.88 355.805867-257.911466 4.437333-3.208533 3.413333-7.5776-2.833067-7.5776h-72.2944c-4.744533 0-5.768533-3.140267-2.56-6.314667 3.242667-3.1744 82.090667-80.964267 110.08-110.08 29.184-30.378667 44.100267-86.050133-5.290667-123.8016" class="secondary-fill" p-id="4749"></path> </svg> <span class="ml-2 mt-1 text-sm text-secondary">钉钉</span> </span> </div> </div> </div> </div> </div> <div class="dropdown-overlay w-full flex-1 bg-neutral-900/[.4]"></div> </menu-container>    </div> </toggle-component> </span>  <span class="toggle-wrapper"> <toggle-component data-trigger="click" class="toggle-component h-full relative"> <div class="toggle-trigger relative cursor-pointer flex items-center h-full item ">  <a href="/docs/developers/developers_dev/" target="_self" class="toggle-text flex items-center justify-center no-underline h-full "> 开发者  </a>   </div>  </toggle-component> </span>  <span class="toggle-wrapper"> <toggle-component data-trigger="hover" class="toggle-component h-full relative"> <div class="toggle-trigger relative cursor-pointer flex items-center h-full item ">  <div class="toggle-text flex items-center justify-center h-full  "> 控制台样例 </div>  <svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" data-updown class="ml-2"> <path d="M8.05264 2L5.05264 5.00649L2.05264 2" stroke="#a3a6b3" stroke-width="1.25" stroke-linecap="square"></path> </svg> </div> <div class="toggle-dropdown w-fit inset-x-0 absolute t-3.5rem">   <div class="bg-neutral rounded-2xl shadow-lg py-2 px-1 min-w-[140px] mt-1"> <a href="http://demo.higress.io" target="_blank" class="rounded-2xl block pl-2 py-3 text-gray-800 hover:bg-warning"> <!-- Higress 控制台 --> <span>Higress 控制台</span> </a> <a href="http://himarket.higress.ai" target="_blank" class="rounded-2xl block py-3 pl-2 text-gray-800 hover:bg-warning"> <!-- HiMarket 控制台 --> <span>HiMarket 控制台</span> </a> </div>  </div> </toggle-component> </span>  <span class="toggle-wrapper"> <toggle-component data-trigger="click" class="toggle-component h-full relative"> <div class="toggle-trigger relative cursor-pointer flex items-center h-full item item-last-child">  <a href="https://github.com/higress-group/himarket/" target="_blank" class="toggle-text flex items-center justify-center no-underline h-full "> HiMarket <span class="toggle-text-ailogo text-xs text-center rounded-xl absolute top-[0.5rem] right-[-0.5rem] text-white bg-[red] w-[2rem] h-[1rem] font-medium">
+NEW
+</span> </a>   </div>  </toggle-component> </span>   </div> </navbar-component> </span>  </div> <div class="right-content flex flex-1 items-center md:gap-4  before:content-[''] before:grow before:invisible" style="--width: 100%;--height: 3.5rem;--xpadding: 1.5rem;"> <div class="astro-bxjx6km4"> <!-- pc --> <toggle-content class="switch float-left relative m-0 rounded-[2rem] max-md:hidden astro-bxjx6km4"> <input disabled data-switch class="switch-checkbox hidden astro-bxjx6km4" id="pc-toggle-switch" type="checkbox"> <!-- container --> <label class="switch-label block overflow-hidden cursor-pointer rounded-[2rem]  
+                bg-language
+             astro-bxjx6km4" for="pc-toggle-switch"> <!-- static --> <span class="switch-inner block 
+                    text-language-button
+                 astro-bxjx6km4" data-on="中文" data-off="EN"></span> <!-- active --> <span class="switch-switch absolute float-right mx-1 
+                    text-language-button-active
+                    bg-language-button
+                 astro-bxjx6km4" data-on="EN" data-off="中文"></span> </label> </toggle-content> <!-- mobile --> <div data-switch class="w-[3.5rem] h-[1.5rem] leading-[1.5rem] text-xs text-center rounded-2xl bg-gray-12 max-md:inline-block md:hidden border astro-bxjx6km4" id="pc-toggle-switch"> 中文 </div> </div>   <sl-doc-search data-translations="{&#34;translations&#34;:{&#34;button&#34;:{},&#34;modal&#34;:{&#34;searchBox&#34;:{},&#34;startScreen&#34;:{},&#34;errorScreen&#34;:{},&#34;footer&#34;:{},&#34;noResultsScreen&#34;:{}}}}"> <button type="button" class="DocSearch DocSearch-Button"> <span class="DocSearch-Button-Container"> <svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20"> <path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path> </svg> <span class="DocSearch-Button-Placeholder"></span> </span> <span class="DocSearch-Button-Keys"></span> </button> </sl-doc-search>   </div> </div> </my-layout> </span>      <div class="w-full"> <div class="w-[20%] sidebar-content fixed overflow-auto h-full hidden 2xl:inline-block xl:inline-block lg:inline-block md:inline-block"> <blog-theme> <span class="sidebar-sublist-wrapper"> <ul class="top-level"> <li> <details open> <summary> <div class="group-label"> <span class="large">技术文章</span>  </div> <svg aria-hidden="true" class="caret astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <span class="sidebar-sublist-wrapper"> <ul> <li> <a href="/blog/higress-gvr7dx_awbbpb_gcmv86kg0maazcub/" class="flex items-center"> <span>Kubernetes 官方再出公告，强调立即迁移 Ingress NGINX</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_yd3x4hsmbfyemvy4/" class="flex items-center"> <span>Skills 实战全记录：一个人一周完成开源官网重构</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_pgbmhyr9fxyh56ze/" class="flex items-center"> <span>阿里云为何要将数据采集开发套件开源</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_dlf3hnl3rs3sdt73/" class="flex items-center"> <span>AI 网关这一年，成了 AI 进化的缩影</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ra13rhoba09uz5ys/" class="flex items-center"> <span>恭喜以下选手！Higress AI 网关开发挑战赛获奖名单公布</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ortukqsuia6ahf2v/" class="flex items-center"> <span>应对 Nginx Ingress 退役，是时候理清这些易混淆的概念了</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_qsp4dkv4iigo6u70/" class="flex items-center"> <span>2025 智能体工程现状</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_lqbzot0mr1p3gfwe/" class="flex items-center"> <span>HiMarket 重磅升级：Agent 的下一站，AI 开放平台</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ghgh5gf3bfnh1unp/" class="flex items-center"> <span>AgentScope Java v1.0 发布，让 Java 开发者轻松构建企业级 Agentic 应用</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ahggmtqmxwndm22k/" class="flex items-center"> <span>MCP 网关实战：基于 Higress + Nacos 的零代码工具扩展方案</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_cgd0lkflotpwluzq/" class="flex items-center"> <span>Nginx Ingress 迁移指引</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_dmgx8upwsg9l8u5s/" aria-current="page" class="flex items-center"> <span>Higress v2.1.9：44 项引擎更新 + 18 项控制台更新</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_glwn7aov9cvqg8gx/" class="flex items-center"> <span>遗憾，Ingress NGINX 要退役了</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_uk8hrvq783d6x3u5/" class="flex items-center"> <span>森马如何用阿里云 AI 网关，轻松实现“AI+业务”高效落地</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ddggfxlwqbumxqq1/" class="flex items-center"> <span>这两个开源项目在世界互联网大会乌镇峰会获奖</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_blbydxozp3zi6ged/" class="flex items-center"> <span>Qoder CLI实战：全自动编码参加编程挑战赛</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_koqzk15f914nh8hk/" class="flex items-center"> <span>评估工程正成为下一轮 Agent 演进的重点</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_elxrgr8cncg3wy0i/" class="flex items-center"> <span>工具向上，架构向下</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_tng81uvf75an4l9u/" class="flex items-center"> <span>SOFA AI网关落地实践</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ytd5s96dci6g47si/" class="flex items-center"> <span>Higress AI 网关开发挑战赛参赛指引</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_zdwn00nf1k5aftrv/" class="flex items-center"> <span>Higress v2.1.8：30 项引擎更新 + 4 项控制台更新</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_hf16xin2213xf126/" class="flex items-center"> <span>分布式 Multi Agent 安全高可用探索与实践</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_kpl5gekk8dhpr2sr/" class="flex items-center"> <span>一等奖6万，Higress AI 网关开发挑战赛正式上线</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ltwkoq9tgfedxal7/" class="flex items-center"> <span>近期 AI 领域的新发布所带来的启示</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_lvr3aeonm2p3f503/" class="flex items-center"> <span>云原生进化论：加速构建 AI 应用</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_thdfm3faby4c8g95/" class="flex items-center"> <span>云栖热词：AI 原生</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_lhipfeeoa041r4gb/" class="flex items-center"> <span>解读阿里云发布的《AI 原生应用架构白皮书》</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ksx4ge93i5zcflry/" class="flex items-center"> <span>阿里云发布《AI 原生应用架构白皮书》</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_hbreugsdeqog2pcr/" class="flex items-center"> <span>火速收藏！2025 云栖大会 AI 中间件议程看点全公开（附免费报名通道）</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_tusq06iagusvz652/" class="flex items-center"> <span>使用 Nacos + HiMarket 构建MCP私有市场</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_gdmwwnrt9pkd7q12/" class="flex items-center"> <span>Claude Code用不了? 使用AI网关迁移至任意模型</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_bg7zwg5yg1g2pun9/" class="flex items-center"> <span>主流 API 协议的功能和应用场景解析</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_beyi36999zgzmblk/" class="flex items-center"> <span>基于 AI 网关的 LLM 高可用最佳实践</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_gzlg497xslm2zcsg/" class="flex items-center"> <span>Higress v2.1.7：42 项引擎更新 + 12 项控制台更新</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_qp271vn6iw24huxv/" class="flex items-center"> <span>HiMarket 正式开源，为企业落地开箱即用的 AI 开放平台</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_qyqcw4ixyxgnqgvb/" class="flex items-center"> <span>释放 RAG 潜能，用 AI 网关帮助 Dify 应用“开外挂”</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ed66rgr81ritgw7l/" class="flex items-center"> <span>Dify 性能瓶颈？Higress AI 网关为它注入「高可用之魂」！</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_bliqlsc51y8h7prl/" class="flex items-center"> <span>从体验到系统工程｜上手评测国内首款 AI 电商 APP</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_rlfz1bpof225nc9w/" class="flex items-center"> <span>Higress v2.1.6：31 项引擎更新 + 12 项控制台更新</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_qg6l3tk0zc4dughn/" class="flex items-center"> <span>不增加 GPU，首 Token 延迟下降50%｜LLM 服务负载均衡的新实践</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_qoy3r8sai9kfspve/" class="flex items-center"> <span>Higress 入选《AI Cloud 大模型推理与交互典型案例》</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ctf6uxyzat7wvipe/" class="flex items-center"> <span>Higress v2.1.5：41 项引擎更新 + 8 项控制台更新</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_hi9x7swfqgq1nqn2/" class="flex items-center"> <span>AI Gateway 分析：OpenRouter vs Higress</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_lup4w7e1cv6wktac/" class="flex items-center"> <span>手把手带你玩转基于 Nacos + Higress 的 MCP 开发新范式</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_nvygddyr4wff1g5v/" class="flex items-center"> <span>Higress MCP 服务管理，助力构建私有 MCP 市场</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_syyw2bkfzlsyfu9v/" class="flex items-center"> <span>这家公司使用 MCP，已向企业交付 1000 名数字员工</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ccb4wd51pyu5zuwt/" class="flex items-center"> <span>这家公司对网关性能的优化历程，在 Reddit 上爆了</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_pem8xsmhq1u0qqkp/" class="flex items-center"> <span>Higress 开源 Plugin Server，简化 Wasm 插件私有化部署难题</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_fnvq97dw8yrobq9v/" class="flex items-center"> <span>AI Agent 的工程化被低估了</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ggr2myyqe89ag3pv/" class="flex items-center"> <span>企业生产环境中，实现 MCP 服务的统一管理和智能路由的实践</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_lz2r5rwoshl3cyy8/" class="flex items-center"> <span>AI Agent 工程师绕不开的必修课：API 网关 vs API 管理</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_bwzuqa3vvxw3wrvs/" class="flex items-center"> <span>回归开源，Java 和 Go 程序员贡献 AI 的内心独白</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_xfxkvwg29c18g7hn/" class="flex items-center"> <span>Higress MCP Server 安全再升级：API 认证为 AI 连接保驾护航</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_vetuzf7sbuixi2b2/" class="flex items-center"> <span>阿里巴巴 MCP 分布式落地实践：快速转换 HSF 到 MCP server</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_mfm8mgpsfrkay78a/" class="flex items-center"> <span>MCP 最新版本 9 大差异解读：授权机制、传输协议、批处理、工具元数据...</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_fx38umcid680pvck/" class="flex items-center"> <span>API-to-MCP，并在 Dify 实现调用的实践</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_eq780z2lfai8p396/" class="flex items-center"> <span>AI Agent 十问十答，降低认知摩擦</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_vt50nsm76qkpi78w/" class="flex items-center"> <span>MCP 协议：为什么 Streamable HTTP 是最佳选择？</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_zs1iqivea02x8fl9/" class="flex items-center"> <span>Lobechat使用WolframAlpha MCP工具减少LLM幻觉</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_igk8hdx9xt83ptqg/" class="flex items-center"> <span>API 即 MCP｜Higress 发布 MCP Marketplace，加速存量 API 跨入 MCP 时代</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_zburfn8cw9ydu150/" class="flex items-center"> <span>MCP 架构下，提示词工程和标准化数据结构越加重要</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_mpavtgoff5h3odvq/" class="flex items-center"> <span>实用工具来了，存量 OpenAPI 批量转化为 MCP Server</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_zixhqugf2dp99bz8/" class="flex items-center"> <span>万字长文告诉你企业如何基于MCP实现AI应用架构新范式转型</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_xq8kol5ncmllabkk/" class="flex items-center"> <span>Higress 开源 Remote MCP Server 托管方案，并将上线 MCP 市场</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_adgy9xp3ktqf278s/" class="flex items-center"> <span>IngressNightmare：Ingress Nginx 再曝5个安全漏洞，可接管你的 K8s 集群</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_bangn9vn6pwzo5ar/" class="flex items-center"> <span>Java版Manus实现来了，Spring AI Alibaba发布开源OpenManus实现</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_bh9o6nnuri31ygvx/" class="flex items-center"> <span>大模型上下文协议 MCP 带来了哪些货币化机会</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_xscgcfbshtcv14hz/" class="flex items-center"> <span>Higress.ai 站点全新发布，轻松解锁 AI 新能力，开启全球服务！</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_kv7s0g9dy0g7p25z/" class="flex items-center"> <span>AI 网关代理LLMs最佳实践</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_hwuzgkuzpuru076d/" class="flex items-center"> <span>大模型 Token 的消耗可能是一笔糊涂账</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_yp80oe1sr5ryy3g0/" class="flex items-center"> <span>大模型带火 API 后，分享我对 API 安全之认证鉴权的实践</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_kbgwaftgw8315v0l/" class="flex items-center"> <span>大模型无缝切换，QwQ-32B 和 DeepSeek-R1  全都要</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_kr6gxodg2m79af28/" class="flex items-center"> <span>教程：使用开源Higress实现DeepSeek联网搜索</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_hlsz3id8cec7z1m3/" class="flex items-center"> <span>AI 网关需要具备的10大基本能力</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_sphafiske3o0xnqx/" class="flex items-center"> <span>玩转 DeepSeek：和 ChatGPT 对弈中国象棋</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ad4xkcyo1xtafkqg/" class="flex items-center"> <span>浏览量超10w的热图，描述 RAG 的主流架构</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_vl5iak7vsi3s1kpx/" class="flex items-center"> <span>大模型推理服务全景图</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_glmivtz04x6p3k91/" class="flex items-center"> <span>为何最近谈论 SSE 和 WebSocket 的人越来越多了？</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_qragv9vlxcxly5y1/" class="flex items-center"> <span>警惕！2万星开源AI工具遭挖矿木马入侵，这些隐患你必须知道！</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_cdecsfkegx4bc2n8/" class="flex items-center"> <span>网关技术债怎么还？分层、插件、统一，三件套</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_fca2piud7gdu32ho/" class="flex items-center"> <span>Envoy HTTP2 404 如何解决</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_auo7gh99bhwwahxm/" class="flex items-center"> <span>活动回顾丨云原生开源开发者沙龙，AI 应用工程化专场</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ss3ok5o9er9it0nb/" class="flex items-center"> <span>应用网关的演进历程和分类</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_ghwthc4xkdshgqgp/" class="flex items-center"> <span>上新｜统一多层网关架构系列视频课程</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_veqvz22q07nx7m2z/" class="flex items-center"> <span>AI 时代，网关的发展趋势和实践</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_dxp91huk34ts4nik/" class="flex items-center"> <span>多层网关统一成趋势，如何构建全能型网关</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_bo9gbceraxmft62n/" class="flex items-center"> <span>Wasm 实现 Higress 扩展，性能是 Spring Cloud Gateway 的 3 倍！</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_rggp2v9saa6gehsg/" class="flex items-center"> <span>Higress全新Wasm运行时，性能大幅提升</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_sgavomwlumko3kl7/" class="flex items-center"> <span>Higress 开源后，我们整理了开发者最关心的 15 个问题</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_xdxim253zzta4bun/" class="flex items-center"> <span>Higress + Nacos 微服务网关最佳实践</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_uddq0l7v5a5vadc6/" class="flex items-center"> <span>如何使用 Higress 快速构建 AI 应用？</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_picigqfume3k5lf3/" class="flex items-center"> <span>Higress 发布 v1.4，开放 AI 网关能力，增强云原生能力</span>   </a> </li><li> <a href="/blog/pilot-debug/" class="flex items-center"> <span>教程：如何在本地开发和调试 Higress Pilot</span>   </a> </li><li> <a href="/blog/console-dev/" class="flex items-center"> <span>教程：如何在本地开发和调试 Higress 控制台</span>   </a> </li><li> <a href="/blog/admin-sdk-intro/" class="flex items-center"> <span>如何使用 Higress Admin SDK 进行配置管理</span>   </a> </li><li> <a href="/blog/higress-code/" class="flex items-center"> <span>higress-core源码分析</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_tp0pgbnsg4bef0x1-copy/" class="flex items-center"> <span>迅速get云原生网关，阿里云商业版Ingress</span>   </a> </li><li> <a href="/blog/e2e-debug/" class="flex items-center"> <span>教程：如何在本地进行higress调试和端到端测试</span>   </a> </li><li> <a href="/blog/release-13/" class="flex items-center"> <span>Higress 开源一周年：新版本，新标准，新工具，新征程</span>   </a> </li><li> <a href="/blog/plugin-transformer/" class="flex items-center"> <span>通过 Higress Wasm 插件 3 倍性能实现 Spring-cloud-gateway 功能</span>   </a> </li><li> <a href="/blog/config-with-file/" class="flex items-center"> <span>基于文件配置实现 Higress 极简独立部署</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_un7afz9yhq61u2fk/" class="flex items-center"> <span>下一代云原生网关Higress：基于Wasm开发JWT认证插件</span>   </a> </li><li> <a href="/blog/configmap/" class="flex items-center"> <span>Higress 全局配置控制面原理分析</span>   </a> </li><li> <a href="/blog/ai_plugin/" class="flex items-center"> <span>Higress助力AI大模型企业级应用落地</span>   </a> </li><li> <a href="/blog/release-100/" class="flex items-center"> <span>上线控制台，降低使用门槛 ｜ Higress 1.0.0 RC 版本发布</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_gk5nkrhm7uvuulgg/" class="flex items-center"> <span>Higress GitHub star 突破 1k ，来自社区开发者和用户的寄语</span>   </a> </li><li> <a href="/blog/release-070/" class="flex items-center"> <span>Higress 0.7.0 版本发布：GA 进入倒计时</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_uwbg4wym8snz2m0z/" class="flex items-center"> <span>Higress 0.6.0 版本发布：更简单，更易用</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_fi4t7317cvughlzh/" class="flex items-center"> <span>Higress 实战：30 行代码写一个 Wasm Go插件</span>   </a> </li><li> <a href="/blog/higress-gvr7dx_awbbpb_pcctqnntrosrhh0d/" class="flex items-center"> <span>Higress 社区周会记要（2022/11/26）</span>   </a> </li><li> <a href="/blog/higress/" class="flex items-center"> <span>阿里巴巴重磅开源云原生网关</span>   </a> </li> </ul> </span>  </details> </li> </ul> </span>  </blog-theme>  </div> <div class="blog-slug-container w-full 2xl:ml-[20%] xl:ml-[20%] lg:ml-[20%] md:ml-[20%] md:w-[80%] inline-block"> <div id="back-btn" class="pt-4 pl-6"> <span class="not-content"><a class="btn btn btn-secondary rounded-3xl no-underline" target="_self" rel="noopener noreferrer"> <svg aria-hidden="true" class="text-lg align-middle astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg>  <span class="ml-0.5">BACK</span> </a></span> </div> <span class="markdown-detail-wrapper"> <div class="sl-markdown-content"> <div class="hero-image">  </div> <main> <div class="website-prose mx-auto"> <div class="title"> <h1 id="_top">Higress v2.1.9：44 项引擎更新 + 18 项控制台更新</h1> <div></div> <p class="text-left">发布时间 2025-11-18</p> <hr> </div>  <h1 id="01higress-引擎更新">01Higress 引擎更新</h1>
+<h2 id="本次发布概览">本次发布概览</h2>
+<p>本次发布包含 <strong>44</strong> 项更新，涵盖了功能增强、Bug 修复、性能优化等多个方面。</p>
+<p><strong>更新内容分布</strong></p>
+<p>新功能: 23项</p>
+<ul>
+<li><strong>Bug 修复: 14项</strong></li>
+<li><strong>重构优化: 2项</strong></li>
+<li><strong>文档更新: 1项</strong></li>
+<li><strong>测试改进: 4项</strong></li>
+</ul>
+<h3 id="重点关注">重点关注</h3>
+<p>本次发布包含 <strong>3</strong> 项重要更新，建议重点关注：</p>
+<ul>
+<li><strong>feat(mcp-server): add server-level default authentication and MCP proxy server support (<strong><strong>#3096</strong></strong>): 此特性增强了 Higress 对 MCP 流量的安全管理能力，允许用户通过统一接口进行认证设置，简化了安全策略的部署流程，提升了系统的安全性与灵活性。</strong></li>
+<li><strong>feat: add higress api mcp server (<strong><strong>#2923</strong></strong>): 通过添加 higress-ops MCP Server，用户可以使用 hgctl agent 命令来管理 Higress 配置和排查问题，提升了运维效率和用户体验。</strong></li>
+<li><strong>feat: implement <strong><code dir="auto">hgctl agent</code></strong> &#x26; <strong><code dir="auto">mcp add</code></strong> subcommand (<strong><strong>#3051</strong></strong>): 增强了 Higress 的运维能力，特别是通过 Agent 进行交互式管理和调试的能力，使得用户能够更便捷地配置和调试 MCP 流量治理，是 Higress 向 AI 原生运维迈进的重要一步。</strong></li>
+</ul>
+<p>详细信息请查看下方重要功能详述部分。</p>
+<h2 id=""></h2>
+<p>重要功能详述
+以下是本次发布中的重要功能和改进的详细说明：</p>
+<p><strong>1. feat(mcp-server): add server-level default authentication and MCP proxy server support</strong></p>
+<p><strong>相关PR: #3096 | 贡献者: @johnlanni</strong></p>
+<p><strong>使用背景</strong></p>
+<p>随着用户对 API 安全性、灵活性以及易用性的要求越来越高。在实际应用中，MCP（Model Context Protocol）协议被广泛用于 Agent 调用工具。然而，现有的 MCP 服务器缺乏统一的安全认证机制，导致在不同场景（MCP Server 直接代理，REST API转换 MCP Server）下需要配置差异化的认证机制。本次更新解决了这些问题，目标用户群体包括但不限于开发者、运维人员和系统管理员，他们需要一个更加安全、灵活且易于管理的 API 网关。</p>
+<hr>
+<p><strong>功能详述</strong></p>
+<p>此次更新主要实现了两个核心功能：1. 在 MCP 服务器级别添加了默认认证机制，包括客户端到网关及网关到后端的认证；2. 引入了一种新的 MCP 代理服务器类型，可以将客户端的 MCP 请求代理到后端的MCP服务器，并支持超时配置和完整的认证支持。从技术实现上来看，主要通过更新依赖库版本（如wasm-go 和 proxy-wasm-go-sdk）来支持新功能，同时对现有代码进行了重构以适应新的认证和代理逻辑。</p>
+<p><strong>使用方式</strong></p>
+<p>启用此功能需在 Higress 配置文件中设置相应的参数。例如，要配置默认的下游安全认证，可以在 <code dir="auto">defaultDownstreamSecurity</code>字段中指定认证策略；类似地，上游认证则通过 <code dir="auto">defaultUpstreamSecurity</code>字段进行配置。若要使用 MCP 代理服务器，需定义一个新的 <code dir="auto">mcp-proxy</code>类型的服务器，并通过 <code dir="auto">mcpServerURL</code>指定后端 MCP 服务器地址。此外，还可以通过 <code dir="auto">timeout</code>字段控制请求超时时间。最佳实践建议尽可能利用优先级配置机制，确保工具级设置能覆盖服务器级别默认值，从而获得更细粒度的控制。</p>
+<p><strong>功能价值</strong></p>
+<p>该功能显著提高了 Higress 的安全性和灵活性，使得 API 管理变得更加高效。通过引入服务器级别的默认认证，减少了重复配置工作量，降低了因配置错误引发的安全风险。新加的 MCP 代理服务器能力不仅简化了 MCP 服务治理的复杂性，还通过卸载状态保持任务至 Higress 侧，有效减轻了后端 MCP 服务器的压力。</p>
+<hr>
+<p><strong>2. feat: add higress api mcp server</strong></p>
+<p><strong>相关PR: #2923 | 贡献者: @Tsukilc</strong></p>
+<p><strong>使用背景</strong></p>
+<p>随着 AI 技术的发展，API 网关需要更好地支持AI相关的功能。Higress 作为一个 AI 原生的 API 网关，需要提供更强大的管理工具来统一管理 LLM API、MCP API 和 Agent API 等核心 API 资产。本次 PR 通过集成 Higress API MCP Server，提供了对 AI 路由、AI 提供商和 MCP 服务器的全面管理能力。这些新功能可以帮助用户更高效地配置和维护 Higress 的 AI 特性，满足现代应用的需求。目标用户群体包括 Higress 的运维人员和开发人员，尤其是那些在 AI 领域有深入需求的用户。</p>
+<p><strong>功能详述</strong></p>
+<p>该 PR 主要实现了以下功能：</p>
+<p><strong>AI 路由管理</strong>：新增了 <code dir="auto">list-ai-routes</code>、<code dir="auto">get-ai-route</code>、<code dir="auto">add-ai-route</code>、<code dir="auto">update-ai-route</code>和 <code dir="auto">delete-ai-route</code>等工具，允许用户管理 AI 路由。</p>
+<p><strong>AI 提供商管理</strong>：新增了 <code dir="auto">list-ai-providers</code>、<code dir="auto">get-ai-provider</code>、<code dir="auto">add-ai-provider</code>、<code dir="auto">update-ai-provider</code>和 <code dir="auto">delete-ai-provider</code>等工具，允许用户管理AI提供商。</p>
+<p><strong>MCP 服务器管理</strong>：新增了 <code dir="auto">list-mcp-servers</code>、<code dir="auto">get-mcp-server</code>、<code dir="auto">add-or-update-mcp-server</code>、<code dir="auto">delete-mcp-server</code>等工具，允许用户管理 MCP 服务器及其消费者。</p>
+<p><strong>认证配置</strong>：使用 HTTP Basic Authentication 进行鉴权，并在客户端请求头中携带 <code dir="auto">Authorization</code>头。</p>
+<p><strong>代码变更</strong>：移除了用户名和密码的硬编码，改为在运行时通过 MCP Client 提供，提高了安全性。同时，新增了<code dir="auto">higress-ops</code>模块，用于 hgctl agent 命令对接，实现 Agent 方式管理 Higress 的配置。</p>
+<hr>
+<p><strong>使用方式</strong></p>
+<p>要启用和配置这个功能，请按照以下步骤操作：</p>
+<p><strong>配置 Higress API MCP Server</strong> <strong>：在 Higress 配置文件中添加 Higress API MCP Server 的配置，指定 Higress Console 的 URL 地址。</strong></p>
+<p><strong>使用 hgctl agent</strong> ：通过 <code dir="auto">hgctl agent</code>命令启动交互式 Agent，可以使用自然语言的方式管理 Higress。例如，使用 <code dir="auto">mcp add </code>子命令添加 remote MCP Server 到 Higress 的 MCP 管理目录中。</p>
+<p><strong>管理 AI 路由</strong>：使用 <code dir="auto">list-ai-routes</code>、<code dir="auto">get-ai-route</code>、<code dir="auto">add-ai-route</code>、<code dir="auto">update-ai-route</code>和 <code dir="auto">delete-ai-route</code>等工具来管理 AI 路由。</p>
+<p><strong>管理 AI 提供商</strong>：使用<code dir="auto">list-ai-providers</code>、<code dir="auto">get-ai-provider</code>、<code dir="auto">add-ai-provider</code>、<code dir="auto">update-ai-provider</code>和 <code dir="auto">delete-ai-provider</code>等工具来管理AI提供商。</p>
+<p><strong>管理 MCP 服务器</strong>：使用<code dir="auto">list-mcp-servers</code>、<code dir="auto">get-mcp-server</code>、<code dir="auto">add-or-update-mcp-server</code>、<code dir="auto">delete-mcp-server</code>等工具来管理 MCP 服务器及其消费者。</p>
+<p>注意事项：确保在使用这些工具时，正确配置鉴权信息，并在请求头中携带<code dir="auto">Authorization</code>头。</p>
+<p><strong>功能价值</strong></p>
+<p>该功能为用户带来了以下具体好处：</p>
+<p><strong>增强的管理能力</strong> <strong>：用户可以通过新的 MCP 工具更方便地管理和调试 Higress 的 AI 路由、AI 提供商和 MCP 服务器配置，提高了管理效率。</strong></p>
+<p><strong>更高的安全性</strong> <strong>：通过在运行时通过 MCP Client 提供用户名和密码，而不是硬编码在配置文件中，提高了系统的安全性。</strong></p>
+<p><strong>更好的用户体验</strong> <strong>：通过 hgctl agent 的交互式管理方式，用户可以使用自然语言的方式管理 Higress，降低了学习成本和使用难度。</strong></p>
+<p><strong>系统性能和稳定性提升</strong> <strong>：新的 MCP 工具提供了更多的管理和调试手段，有助于及时发现和解决问题，提高系统的稳定性和性能。</strong></p>
+<p><strong>生态重要性</strong> <strong>：作为 Higress 从传统运维方式走向借助 Agent 运维方式迈出的第一步，该功能对于 Higress 生态的发展具有重要意义，为未来的更多创新打下了基础。</strong></p>
+<hr>
+<p><strong>3. feat: implement <strong><code dir="auto">hgctl agent</code></strong> &#x26; <strong><code dir="auto">mcp add</code></strong> subcommand</strong></p>
+<p><strong>相关PR: #3051 | 贡献者: @erasernoob</strong></p>
+<p><strong>使用背景</strong></p>
+<p>Higress 是一个 AI 原生的 API 网关，用于统一管理 LLM API、MCP API 和 Agent API。随着 Higress 的发展，传统的命令行工具已经不能满足用户的需求，特别是在 MCP 服务的管理和调试方面。本次 PR 引入了类似 Claude Code 的交互式 Agent，使得用户可以通过自然语言来管理 Higress。同时，新增的 <code dir="auto">mcp add</code>子命令可以方便地将 Remote MCP 服务添加到 Higress 的 MCP 管理目录中，实现 MCP 流量的治理。这些功能不仅简化了 MCP 服务的配置过程，还增强了系统的可维护性和易用性。</p>
+<p><strong>功能详述</strong></p>
+<p>本次 PR 主要实现了两个新的子命令：<code dir="auto">hgctl agent</code> 和 <code dir="auto">mcp add</code>。</p>
+<p><strong>hgctl agent</strong>：这个命令允许用户通过自然语言与 Higress 进行交互。它会调用底层的 <code dir="auto">claude-code</code>代理，并在首次使用时提示用户设置必要的环境。<code dir="auto">hgctl agent</code>提供了一个交互式的窗口，使用户能够以更直观的方式管理 Higress。</p>
+<p><strong>mcp add</strong>：这个命令允许用户通过简单的参数添加 MCP 服务。支持两种类型的 MCP 服务：直接代理类型和基于 OpenAPI 的类型。直接代理类型的 MCP 服务可以直接调用 Higress Console API 并发布到 Higress MCP Server 管理工具中。基于 OpenAPI 的 MCP 服务则通过解析 OpenAPI 规范来生成 MCP 配置。代码变更中，新增了多个文件和大量的代码，包括 <code dir="auto">agent.go</code>、<code dir="auto">base.go</code>、<code dir="auto">core.go</code>、<code dir="auto">mcp.go </code>和 <code dir="auto">client.go</code>，这些文件共同实现了上述功能。</p>
+<p><strong>使用方式</strong></p>
+<p>要启用和配置这些新功能，用户需要更新到最新版本的 <code dir="auto">hgctl</code>工具。</p>
+<ol>
+<li><strong>启用</strong> <code dir="auto">hgctl agent</code>：
+<ul>
+<li>运行 <code dir="auto">hgctl agent</code>命令，首次使用时会提示用户设置必要的环境，如安装 <code dir="auto">claude-code</code>代理。</li>
+<li>通过自然语言与 Higress 进行交互，例如查询或修改配置。</li>
+</ul>
+</li>
+<li><strong>使用</strong> <code dir="auto">mcp add</code><strong>添加 MCP 服务</strong>：
+<ul>
+<li>添加直接代理类型的 MCP 服务：hgctl mcp add mcp-deepwiki -t http <a href="https://mcp.deepwiki.com" referrerpolicy="unsafe-url" rel="nofollow" target="_blank">https://mcp.deepwiki.com</a> —user admin —password 123 —url <a href="http://localhost:8080" referrerpolicy="unsafe-url" rel="nofollow" target="_blank">http://localhost:8080</a></li>
+<li>添加基于 OpenAPI 的 MCP 服务：hgctl mcp add openapi-server -t openapi —spec openapi.yaml —user admin —password 123 —url <a href="http://localhost:8080" referrerpolicy="unsafe-url" rel="nofollow" target="_blank">http://localhost:8080</a></li>
+</ul>
+</li>
+</ol>
+<p>注意事项：确保在运行这些命令之前，系统已经正确配置了 Higress 和相关依赖。</p>
+<hr>
+<p><strong>功能价值</strong></p>
+<p>这些新功能为用户带来了显著的好处，包括：</p>
+<p><strong>提升用户体验</strong> <strong>：通过自然语言交互，降低了用户的学习曲线，使得 Higress 的管理更加直观和友好。</strong></p>
+<p><strong>简化配置过程</strong>： <strong><code dir="auto">mcp add</code>命令极大地简化了 MCP 服务的添加和配置过程，减少了手动操作的复杂性和出错率。</strong></p>
+<p><strong>增强系统稳定<strong><strong>性</strong></strong>：通过统一的 MCP 服务管理，可以更好地监控和维护 MCP 流量，提高系统的稳定性和可靠性。</strong></p>
+<p><strong>扩展生态系统</strong> <strong>：这些新功能使得 Higress 能够更好地支持不同的 MCP 服务类型，增强了其在 AI 时代的竞争力和生态影响力。</strong></p>
+<h2 id="完整变更日志">完整变更日志</h2>
+<h3 id="新功能-features">新功能 (Features)</h3>
+<ul>
+<li>
+<p>Related PR: #3126<br>
+<strong>Contributor</strong>: @johnlanni<br>
+<strong>Change Log</strong>: 更新了 Envoy 依赖，支持通过 WASM 设置 Redis 调用相关的参数，如 buffer_flush_timeout 和 max_buffer_size_before_flush。<br>
+<strong>Feature Value</strong>: 此功能增强了 WASM 插件的灵活性，允许用户通过 URL 查询参数自定义 Redis 客户端缓冲行为，提升了配置管理的便利性和效率。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3123<br>
+<strong>Contributor</strong>: @johnlanni<br>
+<strong>Change Log</strong>: 升级了 Higress 代理版本至v2.2.0，更新 Go 工具链及多个依赖包版本，并为 golang-filter 添加了特定架构的构建目标，修复了与 MCP 服务器、OpenAI 和 Milvus SDK 相关的依赖问题。<br>
+<strong>Feature Value</strong>: 提升了 Higress 的整体性能与稳定性，支持更多架构类型，同时增强了对最新技术栈的支持能力。对于用户而言，这意味着更广泛的兼容性、更好的安全性和更丰富的功能扩展可能性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3108<br>
+<strong>Contributor</strong>: @wydream<br>
+<strong>Change Log</strong>: 新增了与视频相关的 API 路径和能力，包括常量、默认能力和正则表达式路径处理，使代理能够正确解析多个视频相关端点，并更新 OpenAI 提供者以优化对这些新端点的支持。<br>
+<strong>Feature Value</strong>: 通过增加视频相关的 API 支持，增强了 Higress 管理 AI 服务的能力，特别是对于需要处理视频内容的应用场景，这将让用户能够更方便地集成和使用涉及视频的高级功能。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3071<br>
+<strong>Contributor</strong>: @rinfx<br>
+<strong>Change Log</strong>: PR 添加了<code dir="auto">inject_encoded_data_to_filter_chain_on_header</code>函数的使用示例，展示了如何在无响应 body 情况下为请求添加 body 数据。通过修改 README.md、go.mod 等文件实现。<br>
+<strong>Feature Value</strong>: 此功能允许用户在没有响应 body 的情况下向请求添加 body 数据，增强了 API 网关处理请求的能力和灵活性，特别是在需要动态生成或修改响应内容时提供了更多的可能性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3067<br>
+<strong>Contributor</strong>: @wydream<br>
+<strong>Change Log</strong>: 此 PR 为 Higress 的 ai-proxy 插件新增了对 vLLM 作为 AI 提供商的支持，实现了与 OpenAI 兼容的多个 API 接口，包括聊天和文本补全、模型列表展示等功能。<br>
+<strong>Feature Value</strong>: 通过引入 vLLM 作为新的 AI 服务提供者，用户现在可以直接通过 Higress 代理访问 vLLM 提供的各种 AI 能力，如生成文本等，这极大地丰富了 Higress 在 AI 应用场景中的可用性，简化了集成流程。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3060<br>
+<strong>Contributor</strong>: @erasernoob<br>
+<strong>Change Log</strong>: 此 PR 通过增强 <code dir="auto">hgctl mcp</code>和 <code dir="auto">hgctl agent</code>命令实现了从安装配置文件及 Kubernetes secrets 中自动获取 Higress Console 凭据的功能，优化了用户的使用体验。<br>
+<strong>Feature Value</strong>: 该功能减少了用户手动输入凭据的步骤，提升了操作便捷性和安全性，特别是在 Higress 通过 hgctl 安装的情况下，对用户来说是一个重要的便利性改进。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3043<br>
+<strong>Contributor</strong>: @2456868764<br>
+<strong>Change Log</strong>: 此 PR 修复了 Milvus 默认端口错误的问题，并在 README.md 中添加了 Python 示例代码。通过修改配置文件中的 match_rule_domain 字段解决了端口问题，同时提供了使用指导。<br>
+<strong>Feature Value</strong>: 修复了可能导致服务无法正确运行的端口配置问题，增强了文档的实用性，为用户提供了一个具体的 Python 示例来帮助理解和快速上手使用插件功能。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3040<br>
+<strong>Contributor</strong>: @victorserbu2709<br>
+<strong>Change Log</strong>: 此 PR 新增了 Anthropic 的 ApiNameAnthropicMessages 功能，并支持在没有设置 protocol=original 的情况下配置 anthropic 提供商，让/v1/messages 请求直接转发给 anthropic，而 /v1/chat/completion 则会将 OpenAI 格式的消息体转换为 Claude 兼容的格式。<br>
+<strong>Feature Value</strong>: 通过增加对 Anthropic 消息 API 的支持，提升了 Higress 管理不同类型 AI 服务的能力。用户现在可以更灵活地使用 Anthropic 提供的服务，特别是在需要与 Claude 进行交互时变得更加方便，增强了平台的多样性和灵活性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3038<br>
+<strong>Contributor</strong>: @Libres-coder<br>
+<strong>Change Log</strong>: 新增了 <code dir="auto">list-plugin-instances</code>工具，允许 AI 代理通过 MCP 协议查询特定作用域下的插件实例。该 PR 向 MCP Server 添加了两个新函数，并在文档中更新了相关说明。<br>
+<strong>Feature Value</strong>: 此功能使用户能够更方便地管理 Higress 中的插件配置，增强了系统的可管理性和透明度，特别是在需要对特定范围内的插件状态进行检查或调整时。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3032<br>
+<strong>Contributor</strong>: @johnlanni<br>
+<strong>Change Log</strong>: 此 PR 默认启用了 Qwen 兼容模式，并添加了缺失的 API 端点，包括 AsyncAIGC、AsyncTask 和 V1Rerank，以提供更完整的 API 覆盖。<br>
+<strong>Feature Value</strong>: 通过默认启用兼容模式并填补 API 接口缺口，提升了用户的开箱即用体验，同时增强了系统对于 Qwen AI 服务的支持力度，使开发者能够更加便捷地接入和使用 Qwen 相关功能。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3029<br>
+<strong>Contributor</strong>: @victorserbu2709<br>
+<strong>Change Log</strong>: 在 groq 提供者中添加了对 v1/responses 的支持，具体改动包括引入新的响应处理逻辑。<br>
+<strong>Feature Value</strong>: 新增的功能支持使得用户能够通过 Higress 更好地管理和利用groq插件提供的服务响应，提升了 API 管理的灵活性和功能完整性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3024<br>
+<strong>Contributor</strong>: @rinfx<br>
+<strong>Change Log</strong>: 新增恶意 URL 和模型幻觉检测功能，确保 AI 生成内容的安全性；同时调整了消费者级别的特定配置，以更好地适应不同场景下的需求。<br>
+<strong>Feature Value</strong>: 通过增加对恶意 URL 及模型幻觉的检测，提升了 Higress 平台处理 AI 生成内容时的安全性和准确性，有助于保护用户免受潜在威胁。此外，调整后的消费者级配置增强了系统的灵活性与适应性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3008<br>
+<strong>Contributor</strong>: @hellocn9<br>
+<strong>Change Log</strong>: 本次 PR 为 MCP SSE stateful sessions 增加了自定义参数名支持。通过在 ingress 配置中新增 <code dir="auto">higress.io/mcp-sse-stateful-param-name</code>注解，用户可以指定自己的参数名称。<br>
+<strong>Feature Value</strong>: 此功能允许用户根据自身需求灵活设置 MCP SSE stateful 会话的参数名称，提高了配置灵活性和用户体验。这使得 Higress 能更好地适应多样化的应用场景。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3006<br>
+<strong>Contributor</strong>: @SaladDay<br>
+<strong>Change Log</strong>: 此 PR 为 MCP Server 的 Redis 配置添加了 Secret 引用支持，允许通过 Kubernetes Secret 来存储 Redis 密码，增强了安全性，并修改了相关文档和测试代码。<br>
+<strong>Feature Value</strong>: 通过使用 Kubernetes Secret 存储 Redis 密码而不是明文写入 ConfigMap，提高了系统的安全性。用户可以更加安全地管理敏感信息，降低了密码泄露的风险。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2992<br>
+<strong>Contributor</strong>: @rinfx<br>
+<strong>Change Log</strong>: 该 PR 修改了 key_auth 插件中的认证逻辑，在日志中记录消费者名称，即使未被授权访问。通过在认证鉴权过程中增加对消费者识别的日志记录，增强了系统的可观察性。<br>
+<strong>Feature Value</strong>: 这项功能提高了系统监控和故障排查的效率，允许运营人员更清晰地了解请求来源，即便请求未被授权也能追踪到具体的消费者，从而更好地进行问题诊断和安全审计。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2978<br>
+<strong>Contributor</strong>: @rinfx<br>
+<strong>Change Log</strong>: 在确定消费者名称后，无论认证是否通过，都将消费者名称添加到请求头中，以供后续处理使用。<br>
+<strong>Feature Value</strong>: 此功能增强了对消费者行为的追踪能力，有助于更好地理解API调用情况及消费者活动模式，从而为用户提供更加个性化的服务体验。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2968<br>
+<strong>Contributor</strong>: @2456868764<br>
+<strong>Change Log</strong>: 增加了向量数据库映射功能，引入了字段映射系统与索引配置管理机制，支持多种索引类型，如 HNSW、IVF、SCANN 等，以提高系统的灵活性和适应性。<br>
+<strong>Feature Value</strong>: 通过提供灵活的字段映射及丰富的索引配置选项，增强了对不同向量数据库的支持能力，简化了开发者集成多样化存储方案的过程，提升了用户体验。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2943<br>
+<strong>Contributor</strong>: @Guo-Chenxu<br>
+<strong>Change Log</strong>: 此 PR 增加了在生成发布说明时支持自定义系统提示的功能，通过修改 GitHub Actions 工作流文件实现。<br>
+<strong>Feature Value</strong>: 允许用户在生成发布说明时添加个性化系统提示，提高了发布说明的灵活性和实用性，更好地满足不同项目的需求。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2942<br>
+<strong>Contributor</strong>: @2456868764<br>
+<strong>Change Log</strong>: 修复了 LLM 提供者为空时的处理逻辑，并优化了文档结构与内容，增加了对 MCP 工具的详细介绍。<br>
+<strong>Feature Value</strong>: 提高了系统在 LLM 配置缺失时的健壮性，增强了用户对 MCP 工具的理解和使用体验，使用户能够更清晰地了解不同工具的功能及其配置需求。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2916<br>
+<strong>Contributor</strong>: @imp2002<br>
+<strong>Change Log</strong>: 实现了 Nginx 迁移 MCP 服务器，并提供了7种 MCP 工具来自动化从 Nginx 配置/Lua 插件迁移到 Higress 的过程。包括了配置转换等重要功能。<br>
+<strong>Feature Value</strong>: 该功能极大简化了用户从 Nginx 向 Higress 迁移的工作量，通过提供一套完整的工具集使得迁移过程更加平滑和高效，有助于用户更快速地采用 Higress 作为其 API 网关解决方案。</p>
+</li>
+</ul>
+<h3 id="bug-修复-bug-fixes"><strong>Bug 修复 (Bug Fixes)</strong></h3>
+<ul>
+<li>
+<p>Related PR: #3120<br>
+<strong>Contributor</strong>: @lexburner<br>
+<strong>Change Log</strong>: 调整了 ai-proxy 组件中的日志级别，具体修改位于 wasm-go/extensions/ai-proxy/provider/qwen.go 文件中，减少了不必要的警告信息输出。<br>
+<strong>Feature Value</strong>: 通过降低特定部分的日志级别，减少了系统运行时产生的冗余警告信息，有助于提高开发和运维人员查看日志的效率，使他们能够更专注于真正的错误或重要信息。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3119<br>
+<strong>Contributor</strong>: @johnlanni<br>
+<strong>Change Log</strong>: 更新 istio 依赖，并将 Connection 中的 reqChan 和 deltaReqChan 替换为 channels.Unbounded，以防止 HTTP2 流控导致的死锁问题。<br>
+<strong>Feature Value</strong>: 通过解决 HTTP2 流控引起的死锁问题，确保了客户端请求和 ACK 请求可以正常无阻塞地处理，提升了系统的稳定性和响应速度。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3118<br>
+<strong>Contributor</strong>: @johnlanni<br>
+<strong>Change Log</strong>: 此 PR 修复了端口级别策略无条件覆盖已存在的由 Ingress 注解转换而来的配置的问题。通过在设置 policy.Tls 和 policy.LoadBalancer 前添加 nil 检查来避免覆写现有配置。<br>
+<strong>Feature Value</strong>: 解决了因 DestinationRule 中的 TLS 及负载均衡器设置导致的配置意外覆盖问题，确保了用户自定义的 Ingress 注解配置能够被正确保留并应用，增强了系统的稳定性和可靠性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3095<br>
+<strong>Contributor</strong>: @rinfx<br>
+<strong>Change Log</strong>: 修复了 claude2openai 转换过程中 usage 信息丢失的问题，并在 bedrock 流式工具响应中添加了 index 字段，以确保数据完整性和准确性。<br>
+<strong>Feature Value</strong>: 该修复提升了系统在处理 API 转换时的数据完整性，确保用户能够准确获取到所有必要的使用信息，特别是在涉及到流式响应的情况下，通过引入 index 字段增强了响应管理的灵活性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3084<br>
+<strong>Contributor</strong>: @rinfx<br>
+<strong>Change Log</strong>: 修复了 Claude 请求转换为 OpenAI 请求时未正确包含 include_usage: true 的问题，确保在流式响应模式下能够正常传递使用情况信息。<br>
+<strong>Feature Value</strong>: 该修复使得用户可以在使用流式 API 处理时获得更准确的资源使用反馈，提升了系统对资源消耗监控的准确性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3074<br>
+<strong>Contributor</strong>: @Jing-ze<br>
+<strong>Change Log</strong>: 此 PR 在 log-request-response 插件中添加了对 Content-Encoding 的检查，从而避免记录压缩后的请求/响应体导致日志出现乱码的情况。<br>
+<strong>Feature Value</strong>: 通过改进日志记录机制来防止输出难以阅读的日志条目，提高了系统运维人员排查问题时的工作效率和准确性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3069<br>
+<strong>Contributor</strong>: @Libres-coder<br>
+<strong>Change Log</strong>: 本 PR 修复了 CI 测试框架中的一个问题，即由于 <code dir="auto">go.mod</code>文件未被正确更新而导致的e2e测试失败。通过在 <code dir="auto">prebuild.sh</code>脚本中添加 <code dir="auto">go mod tidy</code>命令来确保根目录下的 <code dir="auto">go.mod</code>也得到更新。<br>
+<strong>Feature Value</strong>: 该修复解决了所有触发 wasm 插件端到端测试的 PR 都可能遇到的 CI 测试失败问题，保证了构建和测试流程的稳定性，提升了开发者的体验。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3010<br>
+<strong>Contributor</strong>: @rinfx<br>
+<strong>Change Log</strong>: 修复了 bedrock 返回响应时因拆包问题导致的解析失败情况，并调整了 maxtoken 转换逻辑，确保了事件流处理的准确性和完整性。<br>
+<strong>Feature Value</strong>: 解决了用户在使用 bedrock 服务时遇到的数据解析错误问题，提升了系统的稳定性和用户体验。通过优化边界条件处理，保证了数据传输的一致性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2997<br>
+<strong>Contributor</strong>: @hanxiantao<br>
+<strong>Change Log</strong>: 优化了集群限流和 AI Token 限流的逻辑，调整为累加方式统计请求次数和 token 使用量，避免在修改限流值时重置计数。<br>
+<strong>Feature Value</strong>: 通过改进限流机制，确保即使在更改限流阈值后，系统依然能够准确地追踪和限制请求流量，从而提高了系统的稳定性和可靠性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2988<br>
+<strong>Contributor</strong>: @johnlanni<br>
+<strong>Change Log</strong>: 此 PR 修复了 jsonrpc-converter 中 JSON 格式化错误的问题，改为使用原始 JSON 数据，避免了由于字符串格式化导致的数据解析问题。<br>
+<strong>Feature Value</strong>: 通过修正 JSON 处理方式，确保了数据传输的准确性和一致性，提升了系统的稳定性和可靠性，减少了因数据格式错误引发的潜在问题。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2973<br>
+<strong>Contributor</strong>: @CH3CHO<br>
+<strong>Change Log</strong>: 修复了当 <code dir="auto">match_rule_domain</code>设置为空字符串时 Higress 2.1.8 版本不支持的问题，通过使用通配符匹配所有域来消除兼容性风险。<br>
+<strong>Feature Value</strong>: 此修复确保了 MCP 服务器配置的生成与旧版本向后兼容，避免因配置错误导致的服务中断或行为异常，提升了系统的稳定性和用户体验。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2952<br>
+<strong>Contributor</strong>: @Erica177<br>
+<strong>Change Log</strong>: 修正了 ToolSecurity 结构体中字段 Id 的 JSON 标签，从 type 更改为 id，以确保序列化正确。<br>
+<strong>Feature Value</strong>: 此修复确保了 ToolSecurity 结构体在数据传输时的正确性，避免因字段标签错误导致的数据解析问题，提升了系统的稳定性和用户体验。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2948<br>
+<strong>Contributor</strong>: @johnlanni<br>
+<strong>Change Log</strong>: 修复了 Azure OpenAI Response API 的处理问题和服务 URL 类型检测逻辑，包括添加对自定义完整路径的支持和改进流式事件解析。<br>
+<strong>Feature Value</strong>: 增强了 Azure OpenAI 服务的支持，提高了 API 响应处理的准确性与效率，使得用户能够更稳定地使用 Azure OpenAI 相关功能。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2941<br>
+<strong>Contributor</strong>: @rinfx<br>
+<strong>Change Log</strong>: 此 PR 修复了 ai-security-guard 插件与旧配置不兼容的问题，通过调整 <code dir="auto">main.go </code>文件中的相关代码来确保向后兼容性。<br>
+<strong>Feature Value</strong>: 解决了因配置更新导致的兼容性问题，使得使用旧版配置的用户能够无缝过渡到新版本，提升了用户体验和系统的稳定性。</p>
+</li>
+</ul>
+<h3 id="重构优化-refactoring"><strong>重构优化 (Refactoring)</strong></h3>
+<ul>
+<li>
+<p>Related PR: #3113<br>
+<strong>Contributor</strong>: @johnlanni<br>
+<strong>Change Log</strong>: 该 PR 实现了 Protobuf 消息的哈希缓存功能，通过 xxHash 算法进行递归哈希计算，并对 google.protobuf.Any 类型和具有确定性排序的 map 字段进行了特殊处理，优化了 LDS 性能。<br>
+<strong>Feature Value</strong>: 此改动显著提升了 Envoy 在处理大量配置更新时的效率，减少了因重复序列化导致的性能开销，特别是在频繁变更或大规模部署环境中，能够加速配置传播速度，提高系统响应能力。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2945<br>
+<strong>Contributor</strong>: @rinfx<br>
+<strong>Change Log</strong>: 优化了 ai-load-balancer 中全局最小请求数选 pod 的 Lua 脚本逻辑，通过调整健康检查机制和负载均衡策略提高了请求分发效率。<br>
+<strong>Feature Value</strong>: 此次改动提升了 AI 负载均衡器对于请求处理的公平性和效率，减少了因单一节点过载导致的服务响应时间延长问题，对提高整体系统的稳定性和用户体验有正面影响。</p>
+</li>
+</ul>
+<h3 id="文档更新-documentation"><strong>文档更新 (Documentation)</strong></h3>
+<p>Related PR: #2965</p>
+<p>Contributor: @CH3CHO<br>
+<strong>Change Log</strong>: 更新了 ai-proxy README 文件中 azureServiceUrl 的描述，增加了关于该参数使用的详细信息，以帮助用户更好地理解和配置。<br>
+<strong>Feature Value</strong>: 通过提供更详细的 azureServiceUrl 参数说明，此更改有助于改善用户体验，使用户能够更容易地根据文档进行正确的配置设置，从而避免潜在的使用错误。</p>
+<h3 id="测试改进-testing"><strong>测试改进 (Testing)</strong></h3>
+<ul>
+<li>
+<p>Related PR: #3110<br>
+<strong>Contributor</strong>: @Jing-ze<br>
+<strong>Change Log</strong>: 本 PR 在 GitHub Actions 工作流中增加了 CODECOV_TOKEN 环境变量配置，以确保 Codecov 能够正确地进行身份验证并上传代码覆盖率数据。<br>
+<strong>Feature Value</strong>: 通过添加 CODECOV_TOKEN 环境变量，提升了 CI/CD 流程中的安全性与可靠性，保证了代码覆盖率报告的准确性和完整性，有助于维护项目质量。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #3097<br>
+<strong>Contributor</strong>: @johnlanni<br>
+<strong>Change Log</strong>: 此 PR 为 mcp-server 添加了单元测试，总共增加了2766行代码，主要集中在 main_test.go 文件中，增强了 mcp-server 的测试覆盖率。<br>
+<strong>Feature Value</strong>: 通过增加单元测试，提高了 mcp-server 模块的稳定性与可靠性，确保新功能或修复不会引入新的问题。对于用户而言，这提升了 Higress 整体的质量保证和使用体验。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2998<br>
+<strong>Contributor</strong>: @Patrisam<br>
+<strong>Change Log</strong>: 本 PR 实现了针对 Cloudflare 的端到端测试案例，增强了 Higress 项目的测试覆盖范围。通过在 go-wasm-ai-proxy.go 和 go-wasm-ai-proxy.yaml 中添加新的测试逻辑及配置，提高了系统集成度。<br>
+<strong>Feature Value</strong>: 新增加的 Cloudflare e2e 测试案例有助于确保 Higress 与 Cloudflare 服务之间的兼容性和稳定性，对于使用或计划使用 Cloudflare 作为其网络基础设施一部分的用户来说，这将极大提升他们对 Higress 可靠性的信心。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #2980<br>
+<strong>Contributor</strong>: @Jing-ze<br>
+<strong>Change Log</strong>: 增强了 WASM 插件单元测试的 CI 工作流，添加了覆盖率显示功能并设置了80%的覆盖率阈值。<br>
+<strong>Feature Value</strong>: 提高了测试流程的质量和透明度，确保 WASM 插件满足一定的代码覆盖率标准，有助于发现潜在问题，提高代码可靠性。</p>
+</li>
+</ul>
+<h2 id="发布统计">发布统计</h2>
+<ul>
+<li>新功能: 23项</li>
+<li>Bug 修复: 14项</li>
+<li>重构优化: 2项</li>
+<li>文档更新: 1项</li>
+<li>测试改进: 4项</li>
+</ul>
+<p><strong>总计</strong>: 44项更改（包含3项重要更新）</p>
+<h1 id="02-higress-控制台更新">02 Higress 控制台更新</h1>
+<h2 id="本次发布概览-1">本次发布概览</h2>
+<p>本次发布包含 <strong>18</strong> 项更新，涵盖了功能增强、Bug 修复、性能优化等多个方面。</p>
+<h3 id="更新内容分布"><strong>更新内容分布</strong></h3>
+<p>新功能: 7项</p>
+<p>Bug 修复: 10项</p>
+<p>文档更新: 1项</p>
+<hr>
+<h2 id="完整变更日志-1"><strong>完整变更日志</strong></h2>
+<h3 id="新功能-features-1">新功能 (Features)</h3>
+<ul>
+<li>
+<p>Related PR: #621<br>
+<strong>Contributor</strong>: @Thomas-Eliot<br>
+<strong>Change Log</strong>: 该 PR 优化了 MCP Server 的交互能力，包括重写 header host、修改交互方式以支持选择 transport，并改进了 DSN 字符处理逻辑，支持特殊字符@。<br>
+<strong>Feature Value</strong>: 通过这些改进，用户可以更灵活地配置和使用 MCP Server，特别是在直接路由场景下能更好地处理 DNS 地址和服务路径，提高了系统的灵活性和易用性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #612<br>
+<strong>Contributor</strong>: @zhwaaaaaa<br>
+<strong>Change Log</strong>: 在DashboardServiceImpl中添加了对hop-to-hop头部的忽略处理，防止如Transfer-Encoding: chunked这样的头部被误传递。<br>
+<strong>Feature Value</strong>: 通过正确处理hop-to-hop头部，确保了Grafana页面能正常工作于使用反向代理服务器的环境中，提升了系统的兼容性和用户体验。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #608<br>
+<strong>Contributor</strong>: @Libres-coder<br>
+<strong>Change Log</strong>: 此 PR 为 AI 路由管理页面添加了插件显示支持，允许用户展开 AI 路由行以查看已启用的插件，并在配置页面中看到“Enabled”标签。<br>
+<strong>Feature Value</strong>: 增强了 AI 路由管理功能，使用户能够更直观地管理与 AI 相关的插件状态，提升了用户体验和操作便捷性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #604<br>
+<strong>Contributor</strong>: @CH3CHO<br>
+<strong>Change Log</strong>: 此 PR 引入了使用 <code dir="auto">higress.io/rewrite-target</code>注解进行路径重写的功能，支持正则表达式，增强了路径配置的灵活性。<br>
+<strong>Feature Value</strong>: 通过增加基于正则表达式的路径重写能力，用户能够更灵活地控制和转换请求路径，提升了 Higress 网关的路由处理能力，满足更多场景下的需求。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #603<br>
+<strong>Contributor</strong>: @CH3CHO<br>
+<strong>Change Log</strong>: 此 PR 为静态服务源显示固定的服务端口80，通过在前端组件中硬编码该值实现。<br>
+<strong>Feature Value</strong>: 用户可以更直观地看到并理解特定于静态服务源的默认端口号，增强了 UI 的清晰度和用户体验。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #602<br>
+<strong>Contributor</strong>: @CH3CHO<br>
+<strong>Change Log</strong>: 该 PR 通过在前端页面中添加搜索功能，支持用户在选择 AI 路由的上游服务时进行搜索，提升了用户体验。<br>
+<strong>Feature Value</strong>: 此功能使用户能够更快速准确地找到所需的上游服务，简化了配置过程，提高了操作效率。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #566<br>
+<strong>Contributor</strong>: @OuterCyrex<br>
+<strong>Change Log</strong>: 该 PR 新增了对自定义 Qwen 服务的支持，包括启用互联网搜索、上传文件 ID 等功能。主要改动集中在后端 SDK 和前端 UI 部分。<br>
+<strong>Feature Value</strong>: 通过支持自定义 Qwen 服务，用户能够更灵活地配置 AI 服务，比如使用特定的互联网搜索功能或指定文件 ID，从而满足更多个性化需求。</p>
+</li>
+</ul>
+<h3 id="bug-修复-bug-fixes-1"><strong>Bug 修复 (Bug Fixes)</strong></h3>
+<ul>
+<li>
+<p>Related PR: #620<br>
+<strong>Contributor</strong>: @CH3CHO<br>
+<strong>Change Log</strong>: 修正了 sortWasmPluginMatchRules 逻辑中的拼写错误，确保匹配规则正确排序。<br>
+<strong>Feature Value</strong>: 修复此拼写错误提高了代码的可靠性和可读性，确保 Wasm 插件匹配规则能够按预期工作，减少了潜在的运行时错误。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #619<br>
+<strong>Contributor</strong>: @CH3CHO<br>
+<strong>Change Log</strong>: 此 PR 从 AiRoute 转换到 ConfigMap 的过程中移除了数据 JSON 中的版本信息，因为这些信息已经保存在 ConfigMap 的元数据中。<br>
+<strong>Feature Value</strong>: 通过移除冗余的数据，提高了配置的一致性和简洁性，减少了潜在的数据冲突和不一致问题。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #618<br>
+<strong>Contributor</strong>: @CH3CHO<br>
+<strong>Change Log</strong>: 该 PR 重构了 SystemController 中的 API 认证逻辑，以消除存在的安全漏洞。通过新增 AllowAnonymous 注解并调整 ApiStandardizationAspect 类，确保系统更安全。<br>
+<strong>Feature Value</strong>: 此修复增强了系统的安全性，防止未经授权的访问和潜在的安全威胁，提升了用户体验与信任度。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #617<br>
+<strong>Contributor</strong>: @CH3CHO<br>
+<strong>Change Log</strong>: 修复了前端控制台错误，包括列表元素 key 属性缺失、CSP 策略限制导致的图片加载失败以及 Consumer.name 字段类型错误等问题。<br>
+<strong>Feature Value</strong>: 解决了用户在使用过程中遇到的多个前端问题，提升了用户体验，确保了应用的稳定性和安全性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #614<br>
+<strong>Contributor</strong>: @lc0138<br>
+<strong>Change Log</strong>: 该 PR 修正了 ServiceSource 类中 type 字段的错误类型，并添加了字典值校验以确保数据准确性。<br>
+<strong>Feature Value</strong>: 通过修复服务来源类型的错误，提高了系统的数据一致性和可靠性，减少了因类型不匹配导致的潜在问题。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #613<br>
+<strong>Contributor</strong>: @lc0138<br>
+<strong>Change Log</strong>: 此 PR 通过修改前端 document.tsx 文件，新增了15行代码来修复 CSP 等安全风险问题，确保了网站的安全性。<br>
+<strong>Feature Value</strong>: 修复了与内容安全策略相关的安全风险，提升了应用程序的安全水平，保护用户免受潜在的安全威胁。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #611<br>
+<strong>Contributor</strong>: @qshuai<br>
+<strong>Change Log</strong>: 修正了 LlmProvidersController.java 文件中关于添加新路由API的描述错误，将标题从 ‘Add a new route’ 更正为 ‘Ad’。<br>
+<strong>Feature Value</strong>: 此修复解决了 API 文档中的误导性信息问题，确保开发者能够准确理解 API 的功能，提升开发体验和减少潜在的误用。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #609<br>
+<strong>Contributor</strong>: @CH3CHO<br>
+<strong>Change Log</strong>: 修复了 Consumer.name 字段类型错误的问题，将该字段的类型从 boolean 更正为 string。<br>
+<strong>Feature Value</strong>: 此修复确保了 Consumer.name 字段的数据一致性与准确性，避免因类型错误导致的数据处理问题，提升了系统的稳定性和用户体验。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #605<br>
+<strong>Contributor</strong>: @SaladDay<br>
+<strong>Change Log</strong>: 修正了 AI 路由名称验证规则，使其支持点号，并统一大小写限制与界面提示。此外，更新了多语言环境下的错误提示信息。<br>
+<strong>Feature Value</strong>: 解决了用户在设置AI路由名称时遇到的不一致问题，提升了用户体验及系统的易用性，确保了信息的一致性和准确性。</p>
+</li>
+<li>
+<p><strong>Related PR</strong>: #552<br>
+<strong>Contributor</strong>: @lcfang<br>
+<strong>Change Log</strong>: 该 PR 为解决服务实例端口不一致导致的兼容性问题，新增了 vport 属性，并在注册中心配置时提供了选择性配置虚拟端口的功能。<br>
+<strong>Feature Value</strong>: 通过引入 vport 属性，用户可以更灵活地处理后端实例端口变化的情况，避免因端口变动而导致的服务路由失效问题，提升了系统的稳定性和灵活性。</p>
+</li>
+</ul>
+<h3 id="文档更新-documentation-1"><strong>文档更新 (Documentation)</strong></h3>
+<p>Related PR: #610<br>
+Contributor: @heimanba<br>
+Change Log: 此 PR 更新了前端灰度插件的文档配置，包括修改必填字段说明、更新关联规则以及同步中英文 README 和 spec.yaml 文件中的内容。<br>
+Feature Value: 通过调整文档配置要求与描述，增强了配置的灵活性和兼容性，便于用户理解和使用前端灰度插件功能。</p>
+<h2 id="发布统计-1"><strong>发布统计</strong></h2>
+<ul>
+<li>新功能: 7项</li>
+<li>Bug 修复: 10项</li>
+<li>文档更新: 1项</li>
+</ul>
+<p><strong>总计</strong>: 18项更改</p>
+<p>感谢所有贡献者的辛勤付出！</p>  </div> </main> </div> </span> <div class="pb-6"> <div class="pagination-links astro-u2l5gyhi"> <a href="/blog/higress-gvr7dx_awbbpb_cgd0lkflotpwluzq/" rel="prev" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg>  <span class="astro-u2l5gyhi"> 上一篇 <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">Nginx Ingress 迁移指引</span> </span> </a> <a href="/blog/higress-gvr7dx_awbbpb_glwn7aov9cvqg8gx/" rel="next" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg>  <span class="astro-u2l5gyhi"> 下一篇 <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">遗憾，Ingress NGINX 要退役了</span> </span> </a> </div>  </div> </div> <div class="right-sidebar-panel fixed h-full hidden 2xl:inline-block xl:inline-block"> <div id="toggle-sidebar"> <span class="not-content"><a class="btn btn btn-secondary px-2 no-underline" id="toggle-btn"> <svg aria-hidden="true" class="right_caret text-lg align-middle rotate-180 astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </a></span> </div> <span class="toc-component-wrapper" style="--depth: 0;"> <markdown-toc data-min-h="1" data-max-h="4" class="isMobile" style="--depth: 0;"> <nav aria-labelledby="starlight__on-this-page" class="starlight__on-this-page" style="--depth: 0;"> <h2 id="starlight__on-this-page" class="heading" style="--depth: 0;"> 本页内容 </h2> <span class="table-of-contents-wrapper" style="--depth: 0;"> <ul style="--depth: 0;"> <li style="--depth: 0;"> <a href="#_top" class="py-1" style="--depth: 0;"> <span style="--depth: 0;">概述</span> </a>  </li><li style="--depth: 0;"> <a href="#01higress-引擎更新" class="py-1" style="--depth: 0;"> <span style="--depth: 0;">01Higress 引擎更新</span> </a> <span class="table-of-contents-wrapper" style="--depth: 1;"> <ul style="--depth: 1;"> <li style="--depth: 1;"> <a href="#本次发布概览" class="py-1" style="--depth: 1;"> <span style="--depth: 1;">本次发布概览</span> </a> <span class="table-of-contents-wrapper" style="--depth: 2;"> <ul style="--depth: 2;"> <li style="--depth: 2;"> <a href="#重点关注" class="py-1" style="--depth: 2;"> <span style="--depth: 2;">重点关注</span> </a>  </li> </ul> </span>  </li><li style="--depth: 1;"> <a href="#" class="py-1" style="--depth: 1;"> <span style="--depth: 1;"></span> </a>  </li><li style="--depth: 1;"> <a href="#完整变更日志" class="py-1" style="--depth: 1;"> <span style="--depth: 1;">完整变更日志</span> </a> <span class="table-of-contents-wrapper" style="--depth: 2;"> <ul style="--depth: 2;"> <li style="--depth: 2;"> <a href="#新功能-features" class="py-1" style="--depth: 2;"> <span style="--depth: 2;">新功能 (Features)</span> </a>  </li><li style="--depth: 2;"> <a href="#bug-修复-bug-fixes" class="py-1" style="--depth: 2;"> <span style="--depth: 2;">Bug 修复 (Bug Fixes)</span> </a>  </li><li style="--depth: 2;"> <a href="#重构优化-refactoring" class="py-1" style="--depth: 2;"> <span style="--depth: 2;">重构优化 (Refactoring)</span> </a>  </li><li style="--depth: 2;"> <a href="#文档更新-documentation" class="py-1" style="--depth: 2;"> <span style="--depth: 2;">文档更新 (Documentation)</span> </a>  </li><li style="--depth: 2;"> <a href="#测试改进-testing" class="py-1" style="--depth: 2;"> <span style="--depth: 2;">测试改进 (Testing)</span> </a>  </li> </ul> </span>  </li><li style="--depth: 1;"> <a href="#发布统计" class="py-1" style="--depth: 1;"> <span style="--depth: 1;">发布统计</span> </a>  </li> </ul> </span>  </li><li style="--depth: 0;"> <a href="#02-higress-控制台更新" class="py-1" style="--depth: 0;"> <span style="--depth: 0;">02 Higress 控制台更新</span> </a> <span class="table-of-contents-wrapper" style="--depth: 1;"> <ul style="--depth: 1;"> <li style="--depth: 1;"> <a href="#本次发布概览-1" class="py-1" style="--depth: 1;"> <span style="--depth: 1;">本次发布概览</span> </a> <span class="table-of-contents-wrapper" style="--depth: 2;"> <ul style="--depth: 2;"> <li style="--depth: 2;"> <a href="#更新内容分布" class="py-1" style="--depth: 2;"> <span style="--depth: 2;">更新内容分布</span> </a>  </li> </ul> </span>  </li><li style="--depth: 1;"> <a href="#完整变更日志-1" class="py-1" style="--depth: 1;"> <span style="--depth: 1;">完整变更日志</span> </a> <span class="table-of-contents-wrapper" style="--depth: 2;"> <ul style="--depth: 2;"> <li style="--depth: 2;"> <a href="#新功能-features-1" class="py-1" style="--depth: 2;"> <span style="--depth: 2;">新功能 (Features)</span> </a>  </li><li style="--depth: 2;"> <a href="#bug-修复-bug-fixes-1" class="py-1" style="--depth: 2;"> <span style="--depth: 2;">Bug 修复 (Bug Fixes)</span> </a>  </li><li style="--depth: 2;"> <a href="#文档更新-documentation-1" class="py-1" style="--depth: 2;"> <span style="--depth: 2;">文档更新 (Documentation)</span> </a>  </li> </ul> </span>  </li><li style="--depth: 1;"> <a href="#发布统计-1" class="py-1" style="--depth: 1;"> <span style="--depth: 1;">发布统计</span> </a>  </li> </ul> </span>  </li> </ul> </span>  </nav> </markdown-toc> </span>   </div> </div>   </body> </html> </span>  
