@@ -23,19 +23,19 @@ curl -sS https://higress.cn/ai-gateway/install.sh | bash
 
 按照指引可以分别录入模型供应商的 API-KEY ；也可以键入回车后跳过，之后在控制台中修改。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
+![](https://img.alicdn.com/imgextra/i4/O1CN01fYm6zP1jwLmK3OgTC_!!6000000004612-2-tps-1422-760.png)
 
 
 
 如您当前端口已被占用，需要使用其他端口，可使用 `wget https://higress.cn/ai-gateway/install.sh`命令下载部署脚本后，修改*DEFAULT_GATEWAY_HTTP_PORT_/_DEFAULT_GATEWAY_HTTPS_PORT_/_DEFAULT_CONSOLE_PORT*；然后使用bash执行脚本。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
+![](https://img.alicdn.com/imgextra/i3/O1CN01LLnBD11RRW1uTxMcD_!!6000000002108-2-tps-1562-248.png)
 
 
 
 部署完成后，会出现以下界面：
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063935811-ddf2eef7-967d-49a8-92e6-f99613b7dbf7.png)
+![](https://img.alicdn.com/imgextra/i3/O1CN01Wn8sOi1FpXPk6M0qC_!!6000000000536-2-tps-2472-1746.png)
 
 
 
@@ -44,21 +44,21 @@ curl -sS https://higress.cn/ai-gateway/install.sh | bash
 
 在AI服务提供者管理界面，可以配置已集成供应商的 API-KEY。当前已集成的供应商有阿里云、DeepSeek、Azure OpenAI、OpenAI、豆包等。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742801827479-cb1c559b-8be0-485c-a0e5-f91efb8e265a.png)
+![](https://img.alicdn.com/imgextra/i4/O1CN01JwDpA41KFseqAIxhg_!!6000000001135-2-tps-3034-1654.png)
 
 
 
 每个**AI服务提供商**都可以单独配置令牌降级策略，当某一认证令牌返回异常响应的数量超出阈值，Higress 将暂停使用该令牌发起请求，直至后续健康检测请求连续收到一定数量的正常响应。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742801862323-799a2480-78f9-45f2-a22e-ef6e3f40416b.png)
+![](https://img.alicdn.com/imgextra/i4/O1CN01kXIVEn1qokW1tuKhO_!!6000000005543-2-tps-1146-1660.png)
 
 在**AI路由管理**界面，支持配置不同路由的域名、模型匹配方式、降级配置、请求消费者等。也可以通过策略，配置不同认证鉴权方式、限流策略等，也支持如 RAG、Prompt 模板、语义缓存等功能。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742802104860-bd014ac1-ccf2-4a29-a22a-7af8c81e31df.png)
+![](https://img.alicdn.com/imgextra/i1/O1CN01IYtCA3209CkLhXSm7_!!6000000006806-2-tps-3028-1670.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742801984540-2b14e062-4c47-4e49-a0e8-666d9eec369d.png)
+![](https://img.alicdn.com/imgextra/i3/O1CN01zl8X9O1tWps6xhTjZ_!!6000000005910-2-tps-1158-1660.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742802143799-0c759460-e4f6-467e-8e6b-708496ae67eb.png)
+![](https://img.alicdn.com/imgextra/i2/O1CN014TDXMe1eaIdAIaVel_!!6000000003887-2-tps-3042-1672.png)
 
 # 调试
 打开系统自带命令行，通过以下命令进行请求（如 HTTP 服务未部署在8080端口上，修改为对应端口即可）
@@ -80,7 +80,7 @@ curl 'http://localhost:8080/v1/chat/completions' \
 
 请求结果示例：
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741074397724-5d96c60b-a61c-43cc-8eac-a1b9bebc244f.png)
+![](https://img.alicdn.com/imgextra/i4/O1CN01NLvfue1xrDxyjiMB9_!!6000000006496-2-tps-3168-1102.png)
 
 
 
@@ -89,7 +89,7 @@ curl 'http://localhost:8080/v1/chat/completions' \
 
 通过观测指标，可以进一步比较当前多个模型的使用情况及时延对比，帮助开发者进一步优化模型调用策略。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741077322520-55959b84-3f15-442c-a7fb-12cc333f1b0f.png)
+![](https://img.alicdn.com/imgextra/i1/O1CN018OYZ0J1Q22NgVvPmU_!!6000000001917-2-tps-3350-1574.png)
 
 
 > 如您在部署过程中遇到问题，可在 [Higress Github Issue](https://github.com/alibaba/higress/issues) 中留下您的信息。
