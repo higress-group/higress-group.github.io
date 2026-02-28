@@ -11,34 +11,34 @@ const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
 const isEn = locale === "en";
 
-const products = [
+const features = [
   {
-    label: t('hiclaw.product.ai_market'),
-    desc: t('hiclaw.product.ai_market.desc'),
-    link: LINKS.himarketConsole,
+    label: t('hiclaw.product.agent_teams'),
+    desc: t('hiclaw.product.agent_teams.desc'),
+    link: LINKS.hiclawGithub,
     img: "https://img.alicdn.com/imgextra/i2/O1CN01H62z3z1oVOXevp4zZ_!!6000000005230-55-tps-312-204.svg",
   },
   {
-    label: t('hiclaw.product.hichat'),
-    desc: t('hiclaw.product.hichat.desc'),
-    link: LINKS.himarketConsole,
+    label: t('hiclaw.product.human_loop'),
+    desc: t('hiclaw.product.human_loop.desc'),
+    link: LINKS.hiclawGithub,
     img: "https://img.alicdn.com/imgextra/i4/O1CN01VixIjB1VJ3AKQVKA4_!!6000000002631-55-tps-312-204.svg",
   },
   {
-    label: t('hiclaw.product.enterprise_capability'),
-    desc: t('hiclaw.product.enterprise_capability.desc'),
-    link: LINKS.himarketConsole,
+    label: t('hiclaw.product.ai_gateway'),
+    desc: t('hiclaw.product.ai_gateway.desc'),
+    link: LINKS.hiclawGithub,
     img: "https://img.alicdn.com/imgextra/i3/O1CN01pVExX328Xx4Iup8cj_!!6000000007943-55-tps-312-204.svg",
   },
   {
-    label: t('hiclaw.product.extension_capability'),
-    desc: t('hiclaw.product.extension_capability.desc'),
-    link: LINKS.himarketConsole,
+    label: t('hiclaw.product.mcp_integration'),
+    desc: t('hiclaw.product.mcp_integration.desc'),
+    link: LINKS.hiclawGithub,
     img: isEn ? "https://img.alicdn.com/imgextra/i1/O1CN01risH211CGmVOSmSLM_!!6000000000054-55-tps-268-214.svg" : "https://img.alicdn.com/imgextra/i2/O1CN018wcXBp27hjuucntK8_!!6000000007829-55-tps-268-214.svg",
   },
 ];
 
-const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i4/O1CN01k1kgpT1N8V7PEGqZG_!!6000000001525-55-tps-1360-744.svg" : "https://img.alicdn.com/imgextra/i4/O1CN01HpkiiO1spmdXNna5f_!!6000000005816-55-tps-1360-744.svg";
+const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i4/O1CN01k1kgpT1N8V7PEGqZG_!!6000000001525-55-tps-1360-744.svg" : "https://img.alicdn.com/imgextra/i4/O1CN01HpkiiO1spmdXNna5f_!!6000000005816-tps-1360-744.svg";
 
 ---
 
@@ -49,10 +49,10 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i4/O1CN01k1kgpT1N8V7PEGqZ
     desc={t('hiclaw.product.intro.desc')}
   >
     <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto" slot="buttonGroup">
-      <Button href={LINKS.himarketConsole} target="_blank" class="w-full md:w-59.5">
+      <Button href={LINKS.hiclawGithub} target="_blank" class="w-full md:w-59.5">
         {t('api.product.button.experience')}
       </Button>
-      <Button href={LINKS.himarketGithub} target="_blank" class="w-full md:w-59.5" mode="normal">
+      <Button href={LINKS.hiclawGithub} target="_blank" class="w-full md:w-59.5" mode="normal">
         <span class="mr-3">GitHub</span>
         <svg class="fill-black" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="8" height="8" viewBox="0 0 12 12">
           <g transform="matrix(-1,0,0,1,24,0)">
@@ -69,7 +69,7 @@ const imgSrc = isEn ? "https://img.alicdn.com/imgextra/i4/O1CN01k1kgpT1N8V7PEGqZ
   >
     <div slot="content" class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
       {
-        products.map(s => {
+        features.map(s => {
           return (
           <div class="card flex flex-col gap-3">
             <div class="card-header rounded-lg">
