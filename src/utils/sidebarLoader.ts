@@ -3,17 +3,19 @@ import enSidebarConfig from "../content/docs/en/docs/latest/_sidebar.json";
 import zhAiSidebarConfig from "../content/docs/docs/ai/_sidebar.json";
 import enAiSidebarConfig from "../content/docs/en/docs/ai/_sidebar.json";
 import zhHimarketSidebarConfig from "../content/docs/docs/himarket/_sidebar.json";
+import zhHiclawSidebarConfig from "../content/docs/docs/hiclaw/_sidebar.json";
 import zhDeveloperSidebarConfig from "../content/docs/docs/developers/_sidebar.json";
 import enDeveloperSidebarConfig from "../content/docs/en/docs/developers/_sidebar.json";
 // 暂时没有英文版配置，先用中文的或者空的
 const enHimarketSidebarConfig: any[] = [];
+const enHiclawSidebarConfig: any[] = [];
 
 /**
  * 动态加载指定语言的 sidebar 配置
  */
 function loadSidebarConfigByLocale(
   locale: string,
-  type: "docs" | "ai" | "himarket" | "developer" = "docs",
+  type: "docs" | "ai" | "himarket" | "hiclaw" | "developer" = "docs",
 ) {
   if (type === "ai") {
     // AI 文档配置
@@ -29,6 +31,14 @@ function loadSidebarConfigByLocale(
       return enHimarketSidebarConfig;
     }
     return zhHimarketSidebarConfig;
+  }
+
+  if (type === "hiclaw") {
+    // HiClaw 文档配置
+    if (locale === "en") {
+      return enHiclawSidebarConfig;
+    }
+    return zhHiclawSidebarConfig;
   }
 
   if (type === "developer") {
@@ -54,7 +64,7 @@ function loadSidebarConfigByLocale(
 function transformSidebarItem(
   item: any,
   locale: string = "root",
-  type: "docs" | "ai" | "himarket" | "developer" = "docs",
+  type: "docs" | "ai" | "himarket" | "hiclaw" | "developer" = "docs",
 ): any {
   const transformed: any = {
     label: item.label,
@@ -82,6 +92,15 @@ function transformSidebarItem(
       } else {
         // root locale (中文)
         transformed.link = `docs/himarket/${cleanLink}/`;
+      }
+    } else if (type === "hiclaw") {
+      // HiClaw 文档路径
+      const cleanLink = item.link.replace(/^docs\//, "");
+      if (locale === "en") {
+        transformed.link = `en/docs/hiclaw/${cleanLink}/`;
+      } else {
+        // root locale (中文)
+        transformed.link = `docs/hiclaw/${cleanLink}/`;
       }
     } else if (type === "developer") {
       // HiMarket 文档路径
@@ -136,6 +155,17 @@ function transformSidebarItem(
           directory: `docs/himarket/${item.autogenerate.directory}`,
         };
       }
+    } else if (type === "hiclaw") {
+      // HiClaw 文档自动生成
+      if (locale === "en") {
+        transformed.autogenerate = {
+          directory: `en/docs/hiclaw/${item.autogenerate.directory}`,
+        };
+      } else {
+        transformed.autogenerate = {
+          directory: `docs/hiclaw/${item.autogenerate.directory}`,
+        };
+      }
     } else if (type === "developer") {
       // HiMarket 文档自动生成
       if (locale === "en") {
@@ -187,7 +217,7 @@ function transformSidebarItem(
  */
 export function loadSidebarConfig(
   locale: string = "root",
-  type: "docs" | "ai" | "himarket" = "docs",
+  type: "docs" | "ai" | "himarket" | "hiclaw" | "developer" = "docs",
 ) {
   const sidebarConfig = loadSidebarConfigByLocale(locale, type);
   return sidebarConfig.map((item) => transformSidebarItem(item, locale, type));
