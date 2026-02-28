@@ -1,0 +1,53 @@
+---
+import SiteLayout from "../layout/siteLayout.astro";
+import HiClaw from "../container/products/HiClaw.astro";
+import { useTranslations } from "@/i18n/utils";
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
+---
+<SiteLayout 
+  title={t("page.header.hiclaw")} 
+  description={t("hiclaw.product.intro.desc")}
+>
+  <HiClaw />
+</SiteLayout>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "HiClaw",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "description": "助力企业构建 Agent、Model、MCP 市场，通过统一的 AI 能力管理平台，提供 HiChat AI 创新中心作为全员 AI 使用入口",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Higress",
+    "url": "https://higress.ai"
+  },
+  "url": "https://higress.ai/hiclaw"
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://higress.ai/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "HiClaw",
+      "item": "https://higress.ai/hiclaw"
+    }
+  ]
+})} />

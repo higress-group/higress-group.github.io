@@ -4,6 +4,7 @@ export default {
   "page.header.gateway": "API Gateway",
   "page.header.ai.gateway": "AI Gateway",
   "page.header.himarket": "HiMarket",
+  "page.header.hiclaw": "HiClaw",
   "navbar.product": "Product",
   "navbar.product.features": "Features",
   "navbar.product.benefits": "Benefits",
@@ -741,6 +742,23 @@ export default {
 
     'himarket.product.extension_capability': 'Extensibility',
     'himarket.product.extension_capability.desc': 'HiMarket offers flexible customization to quickly integrate with existing enterprise systems. The portal supports custom domains and branding styles, and homepage modules and product categories can be configured on demand. Identity authentication is compatible with username/password and enterprise OIDC/SSO/IDaaS integration, while key processes (registration, credential application, subscription) support automatic or manual approval configurations.',
+
+    // HiClaw Product Page
+    'hiclaw.product.intro.desc': 'Empower enterprises to build Agent, Model, and MCP markets. Through a unified AI capability management platform, it solves challenges such as dispersed AI resources, complex permission control, and difficult cost allocation. The platform provides HiChat AI Innovation Center as a unified AI entry for all staff, breaking down capability silos between teams, reducing access costs, and unleashing AI innovation potential.',
+    'hiclaw.product.core_features.title': 'Core Features',
+    'hiclaw.product.core_features.desc': 'HiClaw brings out-of-the-box, rapidly integrated AI capabilities to enterprises.',
+
+    'hiclaw.product.ai_market': 'AI Marketplace',
+    'hiclaw.product.ai_market.desc': 'Supports building a complete AI marketplace covering Agents, MCP Servers, and Models. It gathers various AI resources of the enterprise in a standardized way on a single platform, forming a unified supply and management of AI capabilities, rather than being scattered.',
+
+    'hiclaw.product.hichat': 'HiChat',
+    'hiclaw.product.hichat.desc': 'HiChat replaces search with conversation, covering market/product research and operational content generation. It serves as a unified AI entry point for all enterprise staff, centralizing multi-model selection and usage with security compliance control. The platform supports single-input multi-model comparison, session history retention and reuse, and enables unified web search and MCP tool association/conversion through Higress AI Gateway for rapid validation and capability extension.',
+
+    'hiclaw.product.enterprise_capability': 'Enterprise Capabilities',
+    'hiclaw.product.enterprise_capability.desc': 'Provides a closed-loop enterprise management system. Administrators can configure authentication and visibility for each API product, ensuring security and stability with capabilities like traffic control and IP allowlists. The platform also supports global observability analysis, metering and billing by Token/call count, as well as multi-version parallel canary releases and rapid rollbacks to support efficient operations and stable iteration.',
+
+    'hiclaw.product.extension_capability': 'Extensibility',
+    'hiclaw.product.extension_capability.desc': 'HiClaw offers flexible customization to quickly integrate with existing enterprise systems. The portal supports custom domains and branding styles, and homepage modules and product categories can be configured on demand. Identity authentication is compatible with username/password and enterprise OIDC/SSO/IDaaS integration, while key processes (registration, credential application, subscription) support automatic or manual approval configurations.',
 
     // Product Layout
     'product.layout.enterprise.title': 'Learn about Enterprise Edition',

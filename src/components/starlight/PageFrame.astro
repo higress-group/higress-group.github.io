@@ -12,7 +12,8 @@ const t = useTranslations(locale);
 const options = [
   { label: t('page.header.gateway'), value: 'gateway' },
   { label: t('page.header.ai.gateway'), value: 'ai' },
-  { label: t('page.header.himarket'), value: 'himarket' }
+  { label: t('page.header.himarket'), value: 'himarket' },
+  { label: t('page.header.hiclaw'), value: 'hiclaw' }
 ];
 
 // Determine current value based on URL
@@ -22,6 +23,8 @@ if (pathname.includes('/ai/')) {
   currentValue = 'ai';
 } else if (pathname.includes('/himarket')) {
   currentValue = 'himarket';
+} else if (pathname.includes('/hiclaw')) {
+  currentValue = 'hiclaw';
 }
 
 const isDevelopers = pathname.includes(sidebarCategory.developer)
@@ -151,7 +154,9 @@ const isDevelopers = pathname.includes(sidebarCategory.developer)
     if (value === 'ai') {
       url = sidebarCategoryDefaultLink.ai;
     } else if (value === 'himarket') {
-      url = sidebarCategoryDefaultLink.himarket; // Placeholder for HiMarket
+      url = sidebarCategoryDefaultLink.himarket;
+    } else if (value === 'hiclaw') {
+      url = sidebarCategoryDefaultLink.hiclaw;
     }
 
     // Handle Locale

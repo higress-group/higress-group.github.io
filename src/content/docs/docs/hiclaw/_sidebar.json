@@ -1,0 +1,25 @@
+[
+  {
+    "label": "HiClaw",
+    "translations": {
+      "en": "HiClaw"
+    },
+    "collapsed": false,
+    "items": [
+      {
+        "label": "HiClaw 介绍",
+        "translations": {
+          "en": "HiClaw Introduction"
+        },
+        "link": "docs/hiclaw-introduction"
+      },
+      {
+        "label": "HiClaw 部署",
+        "translations": {
+          "en": "HiClaw Deployment"
+        },
+        "link": "docs/hiclaw-deployment"
+      }
+    ]
+  }
+]
