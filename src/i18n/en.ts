@@ -744,21 +744,21 @@ export default {
     'himarket.product.extension_capability.desc': 'HiMarket offers flexible customization to quickly integrate with existing enterprise systems. The portal supports custom domains and branding styles, and homepage modules and product categories can be configured on demand. Identity authentication is compatible with username/password and enterprise OIDC/SSO/IDaaS integration, while key processes (registration, credential application, subscription) support automatic or manual approval configurations.',
 
     // HiClaw Product Page
-    'hiclaw.product.intro.desc': 'Empower enterprises to build Agent, Model, and MCP markets. Through a unified AI capability management platform, it solves challenges such as dispersed AI resources, complex permission control, and difficult cost allocation. The platform provides HiChat AI Innovation Center as a unified AI entry for all staff, breaking down capability silos between teams, reducing access costs, and unleashing AI innovation potential.',
+    'hiclaw.product.intro.desc': 'Open-source Agent Teams system with IM-based multi-Agent collaboration and human-in-the-loop oversight. Manager Agent coordinates multiple Worker Agents to complete complex tasks. All Agent communication happens in Matrix Rooms where humans can observe and intervene at any time.',
     'hiclaw.product.core_features.title': 'Core Features',
-    'hiclaw.product.core_features.desc': 'HiClaw brings out-of-the-box, rapidly integrated AI capabilities to enterprises.',
+    'hiclaw.product.core_features.desc': 'HiClaw provides out-of-the-box multi-Agent collaboration capabilities.',
 
-    'hiclaw.product.ai_market': 'AI Marketplace',
-    'hiclaw.product.ai_market.desc': 'Supports building a complete AI marketplace covering Agents, MCP Servers, and Models. It gathers various AI resources of the enterprise in a standardized way on a single platform, forming a unified supply and management of AI capabilities, rather than being scattered.',
+    'hiclaw.product.agent_teams': 'Agent Teams Collaboration',
+    'hiclaw.product.agent_teams.desc': 'Manager Agent automatically coordinates multiple Worker Agents to complete complex tasks. Create and destroy Workers on demand, enabling flexible Agent team management. Worker creation, task dispatch, and progress monitoring through natural language conversation.',
 
-    'hiclaw.product.hichat': 'HiChat',
-    'hiclaw.product.hichat.desc': 'HiChat replaces search with conversation, covering market/product research and operational content generation. It serves as a unified AI entry point for all enterprise staff, centralizing multi-model selection and usage with security compliance control. The platform supports single-input multi-model comparison, session history retention and reuse, and enables unified web search and MCP tool association/conversion through Higress AI Gateway for rapid validation and capability extension.',
+    'hiclaw.product.human_loop': 'Human-in-the-Loop',
+    'hiclaw.product.human_loop.desc': 'All Agent communication happens in Matrix Rooms where administrators can observe all conversations and intervene at any time. Human-in-the-Loop design ensures AI behavior is controllable, auditable, and intervenable.',
 
-    'hiclaw.product.enterprise_capability': 'Enterprise Capabilities',
-    'hiclaw.product.enterprise_capability.desc': 'Provides a closed-loop enterprise management system. Administrators can configure authentication and visibility for each API product, ensuring security and stability with capabilities like traffic control and IP allowlists. The platform also supports global observability analysis, metering and billing by Token/call count, as well as multi-version parallel canary releases and rapid rollbacks to support efficient operations and stable iteration.',
+    'hiclaw.product.ai_gateway': 'AI Gateway Integration',
+    'hiclaw.product.ai_gateway.desc': 'Unified LLM access management through Higress AI Gateway, with per-Worker credential assignment. Workers only hold their own consumer tokens - even if compromised, they cannot access upstream API credentials, ensuring security.',
 
-    'hiclaw.product.extension_capability': 'Extensibility',
-    'hiclaw.product.extension_capability.desc': 'HiClaw offers flexible customization to quickly integrate with existing enterprise systems. The portal supports custom domains and branding styles, and homepage modules and product categories can be configured on demand. Identity authentication is compatible with username/password and enterprise OIDC/SSO/IDaaS integration, while key processes (registration, credential application, subscription) support automatic or manual approval configurations.',
+    'hiclaw.product.mcp_integration': 'MCP Tool Integration',
+    'hiclaw.product.mcp_integration.desc': 'Access external tools (GitHub, etc.) via MCP Server with centralized credential management at the gateway. Workers never see real credentials. Supports dynamic permission control - grant or revoke Worker MCP Server access at any time.',
 
     // Product Layout
     'product.layout.enterprise.title': 'Learn about Enterprise Edition',

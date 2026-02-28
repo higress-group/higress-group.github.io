@@ -797,21 +797,21 @@ export default {
     'himarket.product.extension_capability.desc': 'HiMarket 提供灵活定制以快速对接企业现有系统。门户支持自定义域名与品牌样式，并可按需配置首页模块与产品分类等。身份认证兼容账号密码与企业 OIDC/SSO/IDaaS 集成，同时关键流程（注册、凭证申请、订阅）支持自动或人工审批配置。',
 
     // HiClaw Product Page
-    'hiclaw.product.intro.desc': '助力企业构建 Agent、Model、MCP 市场，通过统一的 AI 能力 management 平台，解决 AI 资源分散、权限管控复杂、成本分摊困难等挑战，平台提供 HiChat AI 创新中心作为全员 AI 使用入口，打破团队间的能力孤岛，降低接入成本，释放 AI 创新潜能。',
+    'hiclaw.product.intro.desc': '开源 Agent 团队系统，基于 IM 协议实现多 Agent 协作，支持人工全程监督介入。Manager Agent 协调多个 Worker Agent 完成复杂任务，所有 Agent 通信均发生在 Matrix 房间中，人类可随时观察并介入。',
     'hiclaw.product.core_features.title': '核心功能',
-    'hiclaw.product.core_features.desc': 'HiClaw 为企业带来开箱即用、快速集成的 AI 能力。',
+    'hiclaw.product.core_features.desc': 'HiClaw 提供开箱即用的多 Agent 协作能力。',
 
-    'hiclaw.product.ai_market': 'AI 市场',
-    'hiclaw.product.ai_market.desc': '支持构建涵盖 Agent、MCP Server、Model 的完整 AI 市场，让企业的各类 AI 资源不再分散，而是以标准化方式汇聚在一个平台上，形成 AI 能力的统一供给与管理。',
+    'hiclaw.product.agent_teams': 'Agent 团队协作',
+    'hiclaw.product.agent_teams.desc': 'Manager Agent 自动协调多个 Worker Agent 完成复杂任务，支持按需创建、销毁 Worker，实现灵活的 Agent 团队管理。通过自然语言对话即可完成 Worker 创建、任务派发和进度监控。',
 
-    'hiclaw.product.hichat': 'HiChat',
-    'hiclaw.product.hichat.desc': 'HiChat 以对话替代搜索，覆盖市场/产品调研与运营内容生成，并作为企业全员统一的 AI 使用入口，集中完成多模型选型使用与安全合规管控。平台支持一次输入多模型对比、会话历史沉淀复用，并通过 Higress AI 网关统一开启联网搜索与关联/转换 MCP 工具，实现快速验证与扩展能力。',
+    'hiclaw.product.human_loop': '人工监督介入',
+    'hiclaw.product.human_loop.desc': '所有 Agent 通信均发生在 Matrix 房间中，管理员可随时观察所有对话，并在任意时刻介入指导。Human-in-the-Loop 设计确保 AI 行为可控、可审计、可干预。',
 
-    'hiclaw.product.enterprise_capability': '企业级能力',
-    'hiclaw.product.enterprise_capability.desc': '提供企业级管理闭环，管理员可对各 API 产品配置鉴权与可见性，并结合流量控制、IP 白名单等能力保障安全稳定。平台还支持全局观测分析、按 Token/调用次数计量计费，以及多版本并行的灰度发布与快速回滚，支撑高效运营与稳定迭代。',
+    'hiclaw.product.ai_gateway': 'AI 网关集成',
+    'hiclaw.product.ai_gateway.desc': '通过 Higress AI 网关统一管理 LLM 访问，支持按 Worker 独立分配凭证。Worker 只持有自己的消费者令牌，即使被攻破也无法获取上游 API 凭证，确保安全性。',
 
-    'hiclaw.product.extension_capability': '扩展能力',
-    'hiclaw.product.extension_capability.desc': 'HiClaw 提供灵活定制以快速对接企业现有系统。门户支持自定义域名与品牌样式，并可按需配置首页模块与产品分类等。身份认证兼容账号密码与企业 OIDC/SSO/IDaaS 集成，同时关键流程（注册、凭证申请、订阅）支持自动或人工审批配置。',
+    'hiclaw.product.mcp_integration': 'MCP 工具集成',
+    'hiclaw.product.mcp_integration.desc': '通过 MCP Server 访问外部工具（GitHub 等），凭证集中在网关管理，Worker 永远看不到真实凭证。支持动态权限控制，可随时授予或撤销 Worker 的 MCP Server 访问权限。',
 
     // Product Layout
     'product.layout.enterprise.title': '了解企业版',

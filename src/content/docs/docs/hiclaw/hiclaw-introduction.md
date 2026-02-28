@@ -3,194 +3,150 @@ title: "HiClaw 介绍"
 description: "HiClaw 产品介绍与核心功能概览"
 date: "2025-12-11"
 category: "article"
-keywords: ["HiClaw", "介绍", "产品"]
+keywords: ["HiClaw", "介绍", "产品", "Agent", "AI"]
 authors: "Higress Team"
 ---
 
 # HiClaw 介绍
 
-随着AI浪潮面向全行业进行重塑，大量的企业需要进行 AI 场景在内部落地，企业架构逐步升级成 AI 原生架构，实际落地当中有很多问题：
+HiClaw 是一个**开源的 Agent 团队系统**，基于 IM 协议（Matrix）实现多 Agent 协作，支持人工全程监督介入。它让你能够部署一支 AI Agent 团队，通过即时通讯进行协作，借助集中式文件系统协调任务，管理员可随时观察和干预所有 Agent 的行为。
 
-+ 企业内各个团队分散使用各种模型，内部重复造轮子，规模增大，如何统一管理？
-+ 企业内个人使用公网模型、公网获取回来的 MCP ，是否安全，会不会泄露公司数据？
-+ 企业使用 AI 成本和效果怎么测算，SLA 如何量化，Token 用量如何量化，是否统一可量化可观测？
-+ 企业内部面向 AI 全员提升效率，面向私有模型、公网模型，如何分配账号和权限进行管理？
+## 核心特性
 
-当企业开始大规模部署 AI 应用时，往往会遇到这样的难题，当这些资源超过一定规模后，问题会变得越来越复杂，最终制约 AI 应用的进一步发展。
+### Agent 团队协作
 
-## 一、HiClaw 是什么
-HiClaw 正是为解决这些问题而生，它是一个基于 Higress AI 网关构建的 AI 开放平台，旨在帮助企业快速构建私有的 AI 能力市场，统一管理 Model、MCP Server、Agent 等 AI 资源，HiClaw 提供从资源管理到开发者生态构建的完整解决方案，可作为企业内部链接 AI 的最短路径，让企业内部 AI 入口统一。
+Manager Agent 自动协调多个 Worker Agent 完成复杂任务。通过自然语言对话即可：
+- 创建和销毁 Worker
+- 分配任务和监控进度
+- 管理 Worker 的技能和权限
 
-<div align="center">
+### 人工监督介入（Human-in-the-Loop）
 
-![](https://github.com/user-attachments/assets/f410002b-4932-4dc8-baf9-226709be7246)
+所有 Agent 通信均发生在 Matrix 房间中：
+- 人类可随时观察所有对话
+- 在任意时刻介入指导
+- 所有交互可见、可搜索、可中断
 
-</div>
+每个房间包含：人类 + Manager + Worker，确保 AI 行为可控、可审计。
 
-## 二、使用场景
+### 多渠道管理
 
-## AI 场景（面对企业员工）
-HiClaw 提供了 HiChat 能力，通过 Chat 模式替代搜索，做市场调研和产品调研，生成运营图片等工作。
+管理员可通过多种渠道联系 Manager：
+- Discord
+- 飞书
+- Telegram
+- 其他 OpenClaw 支持的渠道
 
-<div align="center">
+Manager 能识别管理员身份，并将日常通知路由到其首选渠道。
 
-![](https://github.com/user-attachments/assets/1d17f995-cf79-4ab9-bc36-8ccde5afcd47)
+### 编程 CLI 委托
 
-</div>
+当编程 CLI 工具（Claude Code、Gemini CLI）可用时：
+- Worker 可将编程任务委托给 CLI
+- Manager 在任务工作区运行 CLI 并实时回传结果
+- 实现超越标准 LLM 调用的代码生成能力
 
-+ **企业全员 AI 使用入口**：通过 HiClaw AI 开放平台，同时解决了员工不知道用哪些模型，企业如何管控员工用模型的两个问题；全员可以通过这个入口进行使用 AI 模型能力，企业可以进行整体安全合规审核，保证企业和员工使用 AI 范围安全可控。
-+ **多模型对比**：可以选择多个模型市场的模型，输入一次对比多个模型，快速直接对比模型返回内容差异，选取最优内容。
-+ **会话历史记录**：方便员工管理历史会话记录，可以快速基于历史信息进行对话回溯，并且计划后续基于对话可以形成知识点，知识点可以进行横向传递，提升数据共享效率。
-+ **联网搜索**：通过体验中心可以支持配置联网搜索能力，配置 Higress AI 网关联网搜索能力之后，所有模型都可以支持联网搜索，AI 网关会把对应搜索内容传递给模型使用摘取，扩大实时数据能力。
-+ **支持关联 MCP 工具**：体验中心聊天框支持关联 MCP 市场，可以实时快速的使用 MCP 能力，可以快速体验验证 MCP 本身能力情况，并且支持企业原本 API 快速配置化转换成 MCP 协议，结合模型做快速验证。
+### AI 网关集成
 
-## AI 市场（面对开发者）
-HiClaw 支持构建涵盖 Agent、MCP Server、Model 的完整 AI 市场，让企业的各类 AI 资源不再分散，而是以标准化方式汇聚在一个平台上。
+通过 Higress AI 网关统一管理 LLM 和 MCP Server 访问：
+- 按 Worker 独立管理凭证
+- Worker 只持有自己的消费者令牌
+- 即使 Worker 被攻破，也无法获取上游 API 凭证
 
-<div align="center">
+### 无状态 Worker
 
-![](https://github.com/user-attachments/assets/9caefd86-7bbe-44c9-8c77-b53b74ff05fb)
+- Worker 从集中存储（MinIO）加载所有配置
+- 可随时销毁和重建，不丢失状态
+- 支持水平扩展和容器级故障隔离
 
-</div>
+### MCP 工具集成
 
-+ **Agent 市场**：支持将复杂的 AI Agent 应用打包上架，可对接 AgentScope 等 Agent 开发平台，例如通过 AgentScope 构建的 Agent 可一键注册到 HiClaw，其他开发者订阅后即可直接使用，无需从零搭建；支持跨框架、跨语言的 agent 一键发布到 Agent 市场。
+通过 MCP Server 访问外部工具（GitHub 等）：
+- 凭证集中在网关管理
+- Worker 永远看不到真实凭证
+- 支持动态权限控制（授予/撤销访问权限）
 
-<div align="center">
+### 完全开源
 
-![](https://github.com/user-attachments/assets/4c0da704-47da-484c-9d18-1711084d72a5)
+基于以下开源项目构建：
+- [Higress](https://github.com/alibaba/higress) - AI 网关
+- [Tuwunel](https://github.com/nicepkg/tuwunel) - Matrix Homeserver
+- [MinIO](https://min.io/) - 对象存储
+- [OpenClaw](https://github.com/nicepkg/openclaw) - Agent 框架
+- [Element Web](https://github.com/element-hq/element-web) - IM 客户端
 
-</div>
+## 架构概览
 
-+ **MCP 市场**：支持接入不同平台的 MCP Server，并支持将外部 API 转换为标准化的 MCP Server，开发者订阅后，即可让 AI 应用轻松调用外部能力。
-
-<div align="center">
-
-![](https://github.com/user-attachments/assets/69184181-8cfe-498c-a0c5-494efa55d72e)
-
-</div>
-
-+ **模型市场**：支持公有云模型及企业自研私有模型的快速接入，平台以 Higress 作为模型服务的网关代理，提供内容安全、Token 限流等防护能力，保障模型服务对外开放的安全合规。
-
-<div align="center">
-
-![](https://github.com/user-attachments/assets/2ed00358-1031-4146-8eb0-2e372b89d82e)
-
-</div>
-
-+ **AI 资产生命周期管理**：管理员将资源接入平台，配置访问策略和使用文档，发布上架；开发者在门户浏览、订阅、获取调用凭证即可订阅使用。
-
-## AI 治理（面对AI维护者）
-HiClaw 实现了对 AI 资源的集中式治理，提供全方位的安全管控和协作能力：
-
-+ **安全合规保障**：通过 Higress 网关统一管控所有 AI 资源的访问，支持内容安全检测、敏感信息过滤、访问权限控制，确保企业 AI 能力对外开放时符合安全合规要求。
-+ **高效协作共享**：打破团队间的"能力孤岛"，一个模型或工具接入后，可被多个部门订阅复用，避免重复采购和重复开发。
-+ **降低使用门槛**：开发者无需逐一对接不同厂商的 API，HiClaw 提供统一的协议标准和开箱即用的调用凭证，大幅降低接入成本，让团队更专注于业务创新而非基础设施搭建。
-
-
-
-## 三、产品优势
-### 企业级能力
-HiClaw 内置完善的企业级管理能力，确保 AI 资源的安全开放与高效运营。
-
-+ **产品管理：** 管理员可为不同 API 产品配置独立的认证鉴权和可见性策略，同时提供流量控制、IP 白名单等防护能力，保障服务安全稳定。
-+ **观测分析：** 提供管理员视角的全局观测大盘，展示 AI API 的调用趋势、热门产品排行、异常流量预警等，支持按时间、产品类型、开发者等维度进行多维分析，为企业运营优化提供数据依据。
-+ **计量计费：** 支持基于 Token、调用次数等多种计量模式，自动统计资源消耗并生成账单明细，既能服务企业内部的成本核算，也能支撑对外商业化运营。
-+ **版本管理：** 支持 API 产品的多版本并行，管理员可以发布新版本、维护旧版本并平滑迁移用户，通过版本对比、灰度发布、快速回滚等功能，确保产品迭代的安全稳定。
-
-<div align="center">
-
-![](https://github.com/user-attachments/assets/07e120fa-20e9-4eff-a30d-6c8b2651b578)
-
-</div>
-
-### 丰富观测能力
-观测分析（目前 v0.5.0 版本依赖阿里云商业化 SLS，开源版本的观测分析实现计划在后续版本中提供）：
-
-<div align="center">
-
-![](https://github.com/user-attachments/assets/d5e7b54e-008a-439e-8753-6cd7d4f304fe)
-
-</div>
-
-### 灵活扩展能力
-
-
-为了能够快速对接企业现有的系统，HiClaw 提供了灵活的定制能力，包括：
-
-+ **门户品牌：** 管理员可为门户配置自定义域名、Logo、主题色、布局样式等元素，并灵活配置首页模块、产品分类、推荐栏等功能区域。
-+ **身份认证：** 支持内置账号密码和企业 OIDC 认证方式，可与企业 SSO、IDaaS 等身份系统无缝集成，实现统一的用户管理和身份认证。
-+ **审批流程：** 开发者注册、凭证申请、API 订阅等关键流程可灵活配置自动或人工审批。
-
-<div align="center">
-
-![](https://github.com/user-attachments/assets/06112d40-0883-4d32-8689-c0ed4c45b459)
-
-</div>
-
-## 四、快速体验
-HiClaw 提供多种部署方式，满足不同场景需求：
-
-+ 本地快速体验： [HiClaw 本地部署指南](https://github.com/higress-group/hiclaw/blob/main/README.md)。
-+ Docker Compose 部署： [HiClaw Docker 部署指南](https://github.com/higress-group/hiclaw/blob/main/deploy/docker/Docker%E9%83%A8%E7%BD%B2%E8%AF%B4%E6%98%8E.md)。
-+ Kubernetes 部署：[HiClaw Helm 部署指南](https://github.com/higress-group/hiclaw/blob/main/deploy/helm/Helm%E9%83%A8%E7%BD%B2%E8%AF%B4%E6%98%8E.md)。
-
-### 一键部署，开箱即用的完整方案
-HiClaw、Higress、Nacos 三大组件自动编排部署，无需人工干预。部署过程自动完成示例 MCP Server 的注册、配置和发布，让你在部署完成后即可体验 HiClaw 能力市场。无论是 Docker Compose 还是 Kubernetes 部署，均只需一条命令:
-
-```bash
-./deploy.sh install
+```
+┌─────────────────────────────────────────────┐
+│         hiclaw-manager-agent                │
+│  Higress │ Tuwunel │ MinIO │ Element Web    │
+│  Manager Agent (OpenClaw)                   │
+└──────────────────┬──────────────────────────┘
+                   │ Matrix + HTTP Files
+┌──────────────────┴──────┐  ┌────────────────┐
+│  hiclaw-worker-agent    │  │  hiclaw-worker │
+│  Worker Alice (OpenClaw)│  │  Worker Bob    │
+└─────────────────────────┘  └────────────────┘
 ```
 
-部署脚本会自动完成以下所有工作:
+### 组件说明
 
-+ **核心组件部署**：自动拉起 MySQL、Nacos 配置中心、Higress 网关服务
-+ **应用本体部署**：部署 HiClaw 全套服务(管理后台、开发者门户、后端服务)
-+ **智能初始化**：自动创建管理员账号、配置示例 MCP Server、发布演示 API 产品
-+ **即开即用**：部署完成后即可访问管理后台和开发者门户，无需任何手动配置
+| 组件 | 端口 | 说明 |
+|------|------|------|
+| Higress Gateway | 8080 | 统一入口，反向代理 |
+| Higress Console | 8001 | 管理控制台 |
+| Tuwunel | 6167 | Matrix Homeserver |
+| Element Web | 8088 | IM Web 客户端 |
+| MinIO | 9000/9001 | 文件存储 |
 
-方案支持灵活的场景适配：
+## 与 OpenClaw 原生的区别
 
-+ 支持使用内置 MySQL 或对接已有数据库
-+ 支持使用阿里云商业化 MSE 服务和 AI 网关服务
-+ 支持`./deploy.sh hiclaw-only`仅部署 HiClaw 本体
+HiClaw 基于 OpenClaw 构建，将其从单进程多 Agent 框架扩展为完整的托管 Agent 团队平台：
 
-详细步骤请参考：[HiClaw Docker 一键部署指南](https://github.com/higress-group/hiclaw/blob/main/deploy/docker/Docker%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC%E8%AF%B4%E6%98%8E.md)，[HiClaw Helm 一键部署指南](https://github.com/higress-group/hiclaw/blob/main/deploy/helm/Helm%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC%E8%AF%B4%E6%98%8E.md)
+| 特性 | OpenClaw 原生 | HiClaw |
+|------|--------------|--------|
+| **部署方式** | 单进程，共享网关 | 分布式容器，独立 Agent |
+| **拓扑结构** | 扁平对等 | 层级制 Manager + Workers |
+| **通信渠道** | 内部消息总线 | Matrix 房间（IM 协议） |
+| **人工可见性** | 可选 | **内置** - 人类在每个房间中 |
+| **凭证管理** | 每个 Agent 持有凭证 | 集中在网关，Agent 只持有令牌 |
+| **Agent 创建** | 手动配置 + 重启 | 对话式创建 |
 
+## 快速开始
 
+### 前置条件
 
-## 五、HiClaw Roadmap 规划
+- Docker 已安装
+- LLM API Key（如通义千问、OpenAI）
+- （可选）GitHub Personal Access Token
 
-<div align="center">
+### 一键安装
 
-![](https://github.com/user-attachments/assets/ebc9697c-c52c-4bd0-b71a-36bd3b9934f1)
+```bash
+# 交互式安装
+bash <(curl -sSL https://higress.ai/hiclaw/install.sh)
 
-</div>
+# 或克隆后安装
+git clone https://github.com/higress-group/hiclaw.git && cd hiclaw
+HICLAW_LLM_API_KEY="sk-xxx" make install
+```
 
-## 六、欢迎共建
-HiClaw 是多个开源社区共同发起的开源项目，核心参与者包括阿里云、蚂蚁数科、高德、淘天等团队，面向开源可以助力企业快速构建 AI 开放平台，提供开箱即用的能力。
+### 安装后步骤
 
-HiClaw 仓库：
+1. 配置 DNS：添加到 `/etc/hosts`
+   ```
+   127.0.0.1 matrix-local.hiclaw.io matrix-client-local.hiclaw.io aigw-local.hiclaw.io fs-local.hiclaw.io
+   ```
 
-[https://github.com/higress-group/HiClaw](https://github.com/higress-group/hiclaw)  
-基于 HiClaw 实现的 MCP 金融级市场
+2. 打开 Element Web：`http://matrix-client-local.hiclaw.io:8080`
 
-[https://antdigital.com/products/MCP](https://antdigital.com/products/MCP)
+3. 使用管理员账号登录
 
+4. Manager 会主动问候并介绍自身能力
 
+## 相关链接
 
-HiClaw 钉钉社区群（2群）：163370001036
-
-<div align="center">
-
-![](https://github.com/user-attachments/assets/b0705600-df08-42ef-9e1b-d28c77896415)
-
-</div>
-
-[https://qr.dingtalk.com/action/joingroup?code=v1,k1,d+MJWsDVtfHq6XanvQEUxsVX3vVL1m+7DWfkoUkYxVM=&_dt_no_comment=1&origin=11](https://qr.dingtalk.com/action/joingroup?code=v1,k1,d+MJWsDVtfHq6XanvQEUxsVX3vVL1m+7DWfkoUkYxVM=&_dt_no_comment=1&origin=11)
-
-
-
-推荐文章：
-
-《AgentScope Java v1.0 发布，让 Java 开发者轻松构建企业级 Agentic 应用》[https://mp.weixin.qq.com/s/vtb3t0JnSTau3XM6wJMEkw](https://mp.weixin.qq.com/s/vtb3t0JnSTau3XM6wJMEkw)
-
+- **GitHub 仓库**: [https://github.com/higress-group/HiClaw](https://github.com/higress-group/HiClaw)
+- **快速入门**: [docs/quickstart.md](https://github.com/higress-group/HiClaw/blob/main/docs/quickstart.md)
+- **架构文档**: [docs/architecture.md](https://github.com/higress-group/HiClaw/blob/main/docs/architecture.md)
