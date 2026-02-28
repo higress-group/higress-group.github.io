@@ -11,6 +11,7 @@ const pathname = Astro.url.pathname;
 const isLatestDocs = pathname.includes(sidebarCategory.latest);
 const isAi = pathname.includes(sidebarCategory.ai);
 const isHimarket = pathname.includes(sidebarCategory.himarket)
+const isHiclaw = pathname.includes(sidebarCategory.hiclaw)
 const isDevelopers = pathname.includes(sidebarCategory.developer)
 
 // Filter sidebar groups based on context
@@ -21,6 +22,8 @@ const filteredSidebar = sidebar.filter((entry) => {
     return entry.label.includes(sidebarCategory.ai);
   } else if (isHimarket) {
     return entry.label.includes(sidebarCategory.himarket);
+  } else if (isHiclaw) {
+    return entry.label.includes(sidebarCategory.hiclaw);
   } else if (isDevelopers) {
     return entry.label.includes(sidebarCategory.developer);
   } else {
