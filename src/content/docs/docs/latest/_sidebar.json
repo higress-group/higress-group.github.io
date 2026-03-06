@@ -184,6 +184,16 @@
             }
           },
           {
+            "label": "监控",
+            "translations": {
+              "en": "Monitor"
+            },
+            "collapsed": true,
+            "autogenerate": {
+              "directory": "user/plugins/monitor"
+            }
+          },
+          {
             "label": "Wasm 插件使用简介",
             "translations": {
               "en": "Wasm Plugin Doc"
