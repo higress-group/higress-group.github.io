@@ -1,7 +1,7 @@
 ---
 title: DB Log Pusher Plugin and Log Collector Service
 keywords: [db-log-pusher, db-log-collector, log collection, monitoring, audit]
-description: The DB Log Pusher plugin collects HTTP request/response logs and pushes them to external collector services, supporting various monitoring and audit scenarios. Contains two components: db-log-pusher (WASM plugin responsible for collecting and pushing logs) and db-log-collector (server-side component responsible for receiving and storing logs).
+description: "The DB Log Pusher plugin collects HTTP request/response logs and pushes them to external collector services, supporting various monitoring and audit scenarios. Contains two components: db-log-pusher (WASM plugin responsible for collecting and pushing logs) and db-log-collector (server-side component responsible for receiving and storing logs)."
 ---
 
 # DB Log Pusher Plugin and Log Collector Service
