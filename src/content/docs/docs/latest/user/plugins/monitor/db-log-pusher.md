@@ -1,12 +1,12 @@
 ---
-title: DB 日志收集器
-keywords: [db-log-collector, 日志收集, 监控, 审计]
-description: DB 日志收集器插件用于收集和转发 HTTP 请求/响应日志到外部收集器，支持多种监控和审计场景。
+title: DB 日志推送插件 (db-log-pusher) 和日志收集服务 (db-collector)
+keywords: [db-log-pusher, db-log-collector, 日志收集, 监控, 审计]
+description: DB 日志推送插件用于收集 HTTP 请求/响应日志并推送到外部收集器服务，支持多种监控和审计场景。包含两个组件：db-log-pusher（WASM插件，负责收集和推送日志）和 db-log-collector（服务端，负责接收和存储日志）。
 ---
 
-# DB 日志收集器
+# DB 日志推送插件 (db-log-pusher) 和日志收集服务 (db-log-collector)
 
-DB 日志收集器插件用于收集和转发 HTTP 请求/响应日志到外部收集器，支持多种监控和审计场景。该插件能够捕获完整的请求/响应生命周期信息，并将其发送到指定的目标服务。
+`db-log-pusher` 是一个 WASM 插件，用于收集 HTTP 请求/响应日志，并将这些日志推送到外部收集器服务 (`db-log-collector`) 进行存储和分析。这两个组件共同构成了完整的日志收集解决方案。该插件能够捕获完整的请求/响应生命周期信息，并将其发送到指定的目标服务。
 
 ## 功能特性
 
@@ -90,7 +90,7 @@ DB 日志收集器插件用于收集和转发 HTTP 请求/响应日志到外部�
 apiVersion: extensions.higress.io/v1alpha1
 kind: WasmPlugin
 metadata:
-  name: db-log-collector
+  name: db-log-pusher
   namespace: higress-system
 spec:
   selector:
@@ -104,7 +104,7 @@ spec:
 
 ## 配套组件：Log Collector 部署
 
-`db-log-collector` 插件需要配合日志收集服务一起使用。以下是一个简单的日志收集器部署示例。
+`db-log-pusher` 插件需要配合日志收集服务一起使用。以下是一个简单的日志收集器部署示例。
 
 ### 1. 准备数据库
 
@@ -264,11 +264,21 @@ kubectl exec -n higress-system deployment/log-collector -- wget -qO- http://loca
 
 ### 4. 自定义 Log Collector（可选）
 
-如果需要自定义日志收集器的功能，可以参考源码进行修改和重新构建：
+如果需要自定义日志推送器的功能，可以参考源码进行修改和重新构建：
 
 **源码位置：**
 ```
-higress/plugins/wasm-go/extensions/db-log-collector/log-collector/
+higress/plugins/wasm-go/extensions/db-log-pusher/
+```
+
+**Pusher 源码位置：**
+```
+higress/plugins/wasm-go/extensions/db-log-pusher/main.go
+```
+
+**Collector 源码位置：**
+```
+higress/plugins/wasm-go/extensions/db-log-pusher/log-collector/
 ```
 
 **主要功能：**
@@ -280,7 +290,7 @@ higress/plugins/wasm-go/extensions/db-log-collector/log-collector/
 
 **构建镜像：**
 ```bash
-cd higress/plugins/wasm-go/extensions/db-log-collector/log-collector
+cd higress/plugins/wasm-go/extensions/db-log-pusher/log-collector
 docker build -t your-registry/log-collector:latest .
 ```
 
@@ -307,8 +317,8 @@ docker build -t your-registry/log-collector:latest .
 
 ### 插件执行顺序
 如果需要读取 `ai-statistics` 插件写入的 AI 日志，请确保：
-1. 在 WasmPlugin 资源中，`db-log-collector` 的 phase 应该晚于 `ai-statistics`
-2. 或者在同一 phase 中，`db-log-collector` 的 priority 应该低于 `ai-statistics`（数字越大优先级越高）
+1. 在 WasmPlugin 资源中，`db-log-pusher` 的 phase 应该晚于 `ai-statistics`
+2. 或者在同一 phase 中，`db-log-pusher` 的 priority 应该低于 `ai-statistics`（数字越大优先级越高）
 
 ### 性能考虑
 - 插件采用异步方式发送日志，不会阻塞主请求流程
