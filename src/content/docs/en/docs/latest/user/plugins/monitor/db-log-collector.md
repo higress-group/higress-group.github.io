@@ -1,12 +1,12 @@
 ---
-title: HTTP Log Pusher
-keywords: [http-log-pusher, log collection, monitoring, audit]
-description: The HTTP Log Pusher plugin collects and forwards HTTP request/response logs to external collectors, supporting various monitoring and audit scenarios.
+title: DB Log Collector
+keywords: [db-log-collector, log collection, monitoring, audit]
+description: The DB Log Collector plugin collects and forwards HTTP request/response logs to external collectors, supporting various monitoring and audit scenarios.
 ---
 
-# HTTP Log Pusher
+# DB Log Collector
 
-The HTTP Log Pusher plugin collects and forwards HTTP request/response logs to external collectors, supporting various monitoring and audit scenarios. This plugin captures complete request/response lifecycle information and sends it to the specified target service.
+The DB Log Collector plugin collects and forwards HTTP request/response logs to external collectors, supporting various monitoring and audit scenarios. This plugin captures complete request/response lifecycle information and sends it to the specified target service.
 
 ## Features
 
@@ -18,7 +18,7 @@ The HTTP Log Pusher plugin collects and forwards HTTP request/response logs to e
 - **Smart Client**: Automatically creates internal cluster clients using `collector_service_name` and `collector_port` configuration
 - **Timeout Handling**: Includes 5-second timeout setting to prevent long-term blocking
 - **Error Handling**: Records sending failures and exceptions without affecting main business processes
-- **Memory Management**: Built-in rebuild mechanism (every 1000 requests or when reaching 200MB memory limit) prevents memory leaks
+- **Database Storage**: Built-in database storage mechanism for persistent log management
 
 ## Configuration Parameters
 
@@ -90,7 +90,7 @@ The plugin collects the following detailed information:
 apiVersion: extensions.higress.io/v1alpha1
 kind: WasmPlugin
 metadata:
-  name: http-log-pusher
+  name: db-log-collector
   namespace: higress-system
 spec:
   selector:
@@ -104,7 +104,7 @@ spec:
 
 ## Supporting Component: Log Collector Deployment
 
-The `http-log-pusher` plugin needs to be used with a log collection service. Below is a simple log collector deployment example.
+The `db-log-collector` plugin needs to be used with a log collection service. Below is a simple log collector deployment example.
 
 ### 1. Prepare Database
 
@@ -268,7 +268,7 @@ If you need to customize the log collector functionality, you can reference the 
 
 **Source Code Location:**
 ```
-higress/plugins/wasm-go/extensions/http-log-pusher/log-collector/
+higress/plugins/wasm-go/extensions/db-log-collector/log-collector/
 ```
 
 **Main Features:**
@@ -280,7 +280,7 @@ higress/plugins/wasm-go/extensions/http-log-pusher/log-collector/
 
 **Build Image:**
 ```bash
-cd higress/plugins/wasm-go/extensions/http-log-pusher/log-collector
+cd higress/plugins/wasm-go/extensions/db-log-collector/log-collector
 docker build -t your-registry/log-collector:latest .
 ```
 
@@ -307,8 +307,8 @@ docker build -t your-registry/log-collector:latest .
 
 ### Plugin Execution Order
 If you need to read AI logs written by the `ai-statistics` plugin, ensure that:
-1. In the WasmPlugin resource, the phase of `http-log-pusher` should be later than `ai-statistics`
-2. Or in the same phase, the priority of `http-log-pusher` should be lower than `ai-statistics` (higher numbers mean higher priority)
+1. In the WasmPlugin resource, the phase of `db-log-collector` should be later than `ai-statistics`
+2. Or in the same phase, the priority of `db-log-collector` should be lower than `ai-statistics` (higher numbers mean higher priority)
 
 ### Performance Considerations
 - The plugin uses asynchronous mode to send logs without blocking the main request flow
