@@ -37,12 +37,23 @@ aliyun oss cp "$SOURCE_DIR" "$BUCKET_URI" \
   --include "*.md" \
   "${COMMON_ARGS[@]}"
 
-# --- 步骤 2: 上传所有其他文件 ---
-# 使用 --exclude "*.md" 来排除已经上传过的 .md 文件
+# --- 步骤 2: 上传 .txt 文件 ---
+# 为 .txt 文件设置 Content-Type 包含 charset=utf-8
+echo "Uploading .txt files with special meta..."
+aliyun oss cp "$SOURCE_DIR" "$BUCKET_URI" \
+  --meta "Cache-Control:max-age=3600" \
+  --meta "Content-Type:text/plain; charset=utf-8" \
+  --include "*.txt" \
+  --exclude "*.md" \
+  "${COMMON_ARGS[@]}"
+
+# --- 步骤 3: 上传所有其他文件 ---
+# 使用 --exclude "*.md" --exclude "*.txt" 来排除已经上传过的文件
 echo "Uploading other files..."
 aliyun oss cp "$SOURCE_DIR" "$BUCKET_URI" \
   --meta "Cache-Control:max-age=3600" \
   --exclude "*.md" \
+  --exclude "*.txt" \
   "${COMMON_ARGS[@]}"
 
 echo "All files uploaded successfully."
