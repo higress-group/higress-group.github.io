@@ -12,7 +12,7 @@ Add `--set higress-console.swagger.enabled=true` arguments to the helm install o
 
 ## Docker Compose Deployment
 
-Add the following lines into `compose/console.env` file in the installation directory and restart Higress.
+Add the following lines into `compose/env/console.env` file in the installation directory and restart Higress.
 
 ```bash
 SPRINGDOC_API_DOCS_ENABLED=true

@@ -12,7 +12,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ## Docker Compose 部署
 
-进入安装目录，在 `compose/console.env` 文件内添加以下两行内容，并重启 Higress 即可：
+进入安装目录，在 `compose/env/console.env` 文件内添加以下两行内容，并重启 Higress 即可：
 
 ```bash
 SPRINGDOC_API_DOCS_ENABLED=true
