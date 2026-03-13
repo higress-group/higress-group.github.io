@@ -4,6 +4,10 @@ const t = useTranslations(Astro);
 import Button from "@components/common/Button.astro";
 import { SITE } from "@utils/config";
 
+// Only show ICP info on higress.cn (备案域名)
+const hostname = Astro.url.hostname;
+const showICP = hostname === 'higress.cn' || hostname.endsWith('.higress.cn');
+
 const friendLinks = [
   { 
     label: 'Nacos', 
@@ -152,8 +156,12 @@ const friendLinks = [
     target="_blank">CC-BY-4.0</a>
     <br />
     Copyright © 2022-2024, Alibaba. All rights reserved. Alibaba has registered trademarks and uses trademarks.
-    <br />
-    浙公网安备 33011002016922号 浙ICP备12022327号-1119
+    {showICP && (
+      <>
+        <br />
+        浙公网安备 33011002016922号 浙ICP备12022327号-1119
+      </>
+    )}
   </div>
 </footer-layout>
 
