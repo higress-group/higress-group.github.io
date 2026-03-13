@@ -9,6 +9,10 @@ const t = useTranslations(locale);
 const currentYear = new Date().getFullYear();
 const isEn = Astro.currentLocale === "en";
 
+// Only show ICP info on higress.cn (备案域名)
+const hostname = Astro.url.hostname;
+const showICP = hostname === 'higress.cn' || hostname.endsWith('.higress.cn');
+
 const links = [
   {
     label: "AgentScope",
@@ -197,7 +201,7 @@ const enContact = [
       <div>
         Copyright © 2022-{currentYear}, Alibaba. All rights reserved. Alibaba has registered trademarks and uses trademarks.
       </div>
-      <div>浙公网安备 33011002016922 号 浙 ICP 备 12022327 号-1119</div>
+      {showICP && <div>浙公网安备 33011002016922 号 浙 ICP 备 12022327 号-1119</div>}
     </div>
   </div>
 </footer>
