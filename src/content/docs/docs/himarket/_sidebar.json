@@ -35,6 +35,13 @@
         "link": "docs/himarket-statistics"
       },
       {
+        "label": "HiMarket 统计插件",
+        "translations": {
+          "en": "HiMarket Statistics Plugin"
+        },
+        "link": "docs/himarket-db-log-pusher"
+      },
+      {
         "label": "HiMarket AgentScope Agent",
         "translations": {
           "en": "HiMarket AgentScope Agent"

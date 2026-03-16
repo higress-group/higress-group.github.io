@@ -1,14 +1,14 @@
 ---
-title: DB 日志推送插件 (db-log-pusher) 和日志收集服务 (db-collector)
+title: DB 日志推送插件和日志收集服务
 keywords: [db-log-pusher, db-log-collector, 日志收集, 监控, 审计]
 description: DB 日志推送插件用于收集 HTTP 请求/响应日志并推送到外部收集器服务，支持多种监控和审计场景。包含两个组件：db-log-pusher（WASM插件，负责收集和推送日志）和 db-log-collector（服务端，负责接收和存储日志）。
 ---
 
-# DB 日志推送插件 (db-log-pusher) 和日志收集服务 (db-log-collector)
+## DB 日志推送插件 (db-log-pusher) 和日志收集服务 (db-log-collector)
 
 `db-log-pusher` 是一个 WASM 插件，用于收集 HTTP 请求/响应日志，并将这些日志推送到外部收集器服务 (`db-log-collector`) 进行存储和分析。这两个组件共同构成了完整的日志收集解决方案。该插件能够捕获完整的请求/响应生命周期信息，并将其发送到指定的目标服务。
 
-## 功能特性
+## 一、db-log-pusher 功能特性
 
 - **全面的日志收集**: 捕获请求/响应的完整信息，包括基础信息、流量统计、连接信息等
 - **AI 日志支持**: 特别针对 AI 应用场景，支持收集模型调用日志和 token 统计
@@ -90,19 +90,38 @@ description: DB 日志推送插件用于收集 HTTP 请求/响应日志并推送
 apiVersion: extensions.higress.io/v1alpha1
 kind: WasmPlugin
 metadata:
-  name: db-log-pusher
+  name: db-log-pusher-plugin
   namespace: higress-system
+  annotations:
+    higress.io/redeploy-timestamp: "20260309-122804"
+    higress.io/comment: "DB Log Pusher Plugin for collecting request logs"
+    higress.io/wasm-plugin-title: "DB Log Pusher"
+    higress.io/wasm-plugin-description: "Collect HTTP request logs to database"
+  labels:
+    higress.io/wasm-plugin-name: db-log-pusher
+    higress.io/wasm-plugin-category: logging
 spec:
-  selector:
-    matchLabels:
-      app: higress-gateway
-  config:
-    collector_service_name: "log-collector.higress-system.svc.cluster.local"
-    collector_port: 80
-    collector_path: "/ingest"
+  url: https://pysrc-test.oss-cn-beijing.aliyuncs.com/higress-plugin/plugin-20260309-122804.wasm
+  sha256: ""  # 建议填入WASM文件的SHA256校验和
+  defaultConfigDisable: true  # 默认关闭全局配置
+  failStrategy: FAIL_OPEN      # 失败时放行，避免影响业务
+  imagePullPolicy: Always  # 总是拉取最新版本
+  phase: AUTHN           # 插件执行阶段，用于统计和日志收集
+  priority: 1010           # 优先级
+  # 匹配规则：应用到所有服务
+  matchRules:
+    - configDisable: false
+      ingress:
+        - model-api-qwen3-plus-0
+        - travel-assistant
+      config:
+        log_level: info  # 必须在这里配置 log_level
+        collector_service_name: "log-collector.higress-system.svc.cluster.local"
+        collector_port: 80
+        collector_path: "/ingest"
 ```
 
-## 配套组件：Log Collector 部署
+## 二、配套组件：Log Collector 部署
 
 `db-log-pusher` 插件需要配合日志收集服务一起使用。以下是一个简单的日志收集器部署示例。
 
