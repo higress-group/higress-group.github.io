@@ -6,6 +6,11 @@ description: DB 日志推送插件用于收集 HTTP 请求/响应日志并推送
 
 ## DB 日志推送插件 (db-log-pusher) 和日志收集服务 (db-log-collector)
 
+> **源码仓库**：
+> - **主仓库**：[https://github.com/higress-group/db-log-pusher](https://github.com/higress-group/db-log-pusher) - 包含完整的插件和收集器源码
+> - **Higress 集成方式**：需要手动将源码克隆并集成到 [Higress 仓库](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions) 的 `plugins/wasm-go/extensions` 目录
+> - **独立插件仓库**：[https://github.com/higress-group/db-log-pusher](https://github.com/higress-group/db-log-pusher)
+
 `db-log-pusher` 是一个 WASM 插件，用于收集 HTTP 请求/响应日志，并将这些日志推送到外部收集器服务 (`db-log-collector`) 进行存储和分析。这两个组件共同构成了完整的日志收集解决方案。该插件能够捕获完整的请求/响应生命周期信息，并将其发送到指定的目标服务。
 
 ## 一、db-log-pusher 功能特性
@@ -416,27 +421,24 @@ docker logs -f log-collector
 curl http://localhost:8080/health
 ```
 
-正常响应应该返回类似：`{"status":"healthy"}` 的 JSON 响应。
+正常响应应该返回类似：`ok` 的响应。
 
 ### 4. 自定义 Log Collector（可选）
 
-如果需要自定义日志推送器的功能，可以参考源码进行修改和重新构建：
+如果需要自定义日志推送器的功能，可以参考源码进行修改和重新构建。
 
-**源码位置：**
-```
-https://github.com/higress-group/db-log-pusher
-```
+**源码仓库关系：**
+- **独立仓库**：[https://github.com/higress-group/db-log-pusher](https://github.com/higress-group/db-log-pusher) - 包含完整的插件和收集器源码
+- **Higress 集成**：[https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions) - Higress 官方仓库中的插件目录
 
-**Pusher 源码位置：**
+**源码结构：**
 ```
-https://github.com/higress-group/db-log-pusher
-> main.go
-```
-
-**Collector 源码位置：**
-```
-https://github.com/higress-group/db-log-pusher
-> log-collector/
+db-log-pusher/
+├── main.go                      # Pusher 插件主程序
+└── log-collector/               # Collector 服务端
+    ├── main.go                  # Collector 主程序
+    ├── Dockerfile               # Docker 镜像构建文件
+    └── ...                      # 其他依赖文件
 ```
 
 **主要功能：**
