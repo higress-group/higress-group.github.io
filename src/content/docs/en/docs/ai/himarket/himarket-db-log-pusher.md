@@ -1,5 +1,5 @@
 ---
-title: DB 日志推送插件和
+title: DB 日志推送插件和日志收集服务
 keywords: [db-log-pusher, db-log-collector, 日志收集, 监控, 审计]
 description: DB 日志推送插件用于收集 HTTP 请求/响应日志并推送到外部收集器服务，支持多种监控和审计场景。包含两个组件：db-log-pusher（WASM插件，负责收集和推送日志）和 db-log-collector（服务端，负责接收和存储日志）。
 ---
@@ -84,7 +84,64 @@ description: DB 日志推送插件用于收集 HTTP 请求/响应日志并推送
 - `mcp_server`: MCP Server
 - `mcp_tool`: MCP Tool
 
-## 配置示例
+## 配置方式
+
+### 方式一：通过 Higress Console 配置（推荐）
+
+这是最简单直接的配置方式，通过 Higress Console 的图形化界面即可完成插件安装和配置。
+
+#### 操作步骤
+
+1. **访问 Higress Console**
+   - 登录 Higress Console 管理页面
+   - 导航到 **插件配置** -> **添加插件**
+
+2. **填写插件信息**
+   - **插件名称**: `db-log-pusher-plugin`
+   - **插件描述**: `Collect HTTP request logs to database`
+   - **镜像地址**: `https://pysrc-test.oss-cn-beijing.aliyuncs.com/higress-plugin/plugin-20260323-101235.wasm`
+   - **插件执行阶段**: 选择 **认证阶段** (AUTHN)
+   - **插件执行优先级**: `1010` (范围 1~1000，值越大优先级越高)
+   - **插件拉取策略**: 选择 **总是拉取** (Always)
+
+3. **配置路由和策略**
+   - 在插件配置页面，点击"添加匹配规则"
+   - 在 **ingress** 列表中选择或输入需要应用此插件的服务名称，例如：
+     - `model-api-qwen3-plus-0`
+     - `travel-assistant`
+
+4. **配置插件参数**
+   - 在 **自定义插件配置** 区域，选择刚才创建的 `db-log-pusher` 插件
+   - 在参数配置表单中，逐行填写以下参数（每行一个参数，格式为 `key: value`）：
+   ```
+   log_level: info
+   collector_service_name: log-collector.higress-system.svc.cluster.local
+   collector_port: 80
+   collector_path: /ingest
+   ```
+   - 确保 **configDisable** 设置为 `false`（启用配置）
+
+5. **保存配置**
+   - 点击"保存"按钮完成配置
+   - Higress 会自动部署插件到网关
+
+#### 配置说明
+
+- **执行阶段**: 选择认证阶段（AUTHN），用于统计和日志收集
+- **优先级**: 设置为 1010，确保高于 `ai-statistics` 插件的优先级
+- **拉取策略**: 总是拉取最新版本，确保使用最新的插件功能
+
+#### 验证配置
+
+配置保存后，可以通过以下方式验证：
+- 查看 Higress Console 插件列表，确认插件状态正常
+- 访问配置的服务，检查日志是否正常发送到收集器
+
+---
+
+### 方式二：通过 Kubernetes YAML 配置
+
+如果您更喜欢使用 Kubernetes 原生配置方式，可以通过创建 WasmPlugin 资源来部署插件。
 
 ```yaml
 apiVersion: extensions.higress.io/v1alpha1
@@ -101,8 +158,8 @@ metadata:
     higress.io/wasm-plugin-name: db-log-pusher
     higress.io/wasm-plugin-category: logging
 spec:
-  url: https://pysrc-test.oss-cn-beijing.aliyuncs.com/higress-plugin/plugin-20260309-122804.wasm
-  sha256: ""  # 建议填入WASM文件的SHA256校验和
+  url: https://pysrc-test.oss-cn-beijing.aliyuncs.com/higress-plugin/plugin-20260323-101235.wasm
+  sha256: ""  # 建议填入 WASM 文件的 SHA256 校验和
   defaultConfigDisable: true  # 默认关闭全局配置
   failStrategy: FAIL_OPEN      # 失败时放行，避免影响业务
   imagePullPolicy: Always  # 总是拉取最新版本
@@ -120,6 +177,14 @@ spec:
         collector_port: 80
         collector_path: "/ingest"
 ```
+
+应用配置：
+
+```bash
+kubectl apply -f db-log-pusher.yaml
+```
+
+---
 
 ## 二、配套组件：Log Collector 部署
 
@@ -188,6 +253,8 @@ CREATE TABLE access_logs (
 ```
 
 ### 2. 部署 Log Collector 服务
+
+#### 方式一：Kubernetes 部署（推荐）
 
 将以下 YAML 保存为 `log-collector.yaml` 并应用：
 
@@ -261,7 +328,58 @@ spec:
 kubectl apply -f log-collector.yaml
 ```
 
+#### 方式二：Docker 单机部署
+
+如果您想在本地或单台服务器上快速部署，可以使用 Docker 运行日志收集服务。
+
+**部署命令：**
+
+```bash
+docker run -d \
+  --name log-collector \
+  -p 8080:8080 \
+  -e MYSQL_DSN="user:password@tcp(mysql-host:3306)/higress_poc?charset=utf8mb4&parseTime=True&loc=Local" \
+  --restart unless-stopped \
+  registry.cn-shanghai.aliyuncs.com/daofeng/log-collector:latest
+```
+
+**参数说明：**
+- `-d`: 后台运行容器
+- `--name log-collector`: 指定容器名称
+- `-p 8080:8080`: 将容器的 8080 端口映射到宿主机
+- `-e MYSQL_DSN`: 设置 MySQL 数据库连接字符串，请根据实际情况修改
+- `--restart unless-stopped`: 容器退出时自动重启（除非手动停止）
+
+**验证部署：**
+
+检查容器运行状态：
+```bash
+docker ps | grep log-collector
+```
+
+查看容器日志：
+```bash
+docker logs -f log-collector
+```
+
+测试健康检查端点：
+```bash
+curl http://localhost:8080/health
+```
+
+**停止和删除容器：**
+
+```bash
+# 停止容器
+docker stop log-collector
+
+# 删除容器
+docker rm log-collector
+```
+
 ### 3. 验证部署
+
+#### Kubernetes 部署验证
 
 检查 Pod 状态：
 
@@ -281,23 +399,44 @@ kubectl logs -n higress-system deployment/log-collector
 kubectl exec -n higress-system deployment/log-collector -- wget -qO- http://localhost:8080/health
 ```
 
+#### Docker 部署验证
+
+检查容器运行状态：
+```bash
+docker ps | grep log-collector
+```
+
+查看容器日志：
+```bash
+docker logs -f log-collector
+```
+
+测试健康检查端点：
+```bash
+curl http://localhost:8080/health
+```
+
+正常响应应该返回类似：`{"status":"healthy"}` 的 JSON 响应。
+
 ### 4. 自定义 Log Collector（可选）
 
 如果需要自定义日志推送器的功能，可以参考源码进行修改和重新构建：
 
 **源码位置：**
 ```
-higress/plugins/wasm-go/extensions/db-log-pusher/
+https://github.com/higress-group/db-log-pusher
 ```
 
 **Pusher 源码位置：**
 ```
-higress/plugins/wasm-go/extensions/db-log-pusher/main.go
+https://github.com/higress-group/db-log-pusher
+> main.go
 ```
 
 **Collector 源码位置：**
 ```
-higress/plugins/wasm-go/extensions/db-log-pusher/log-collector/
+https://github.com/higress-group/db-log-pusher
+> log-collector/
 ```
 
 **主要功能：**
@@ -309,6 +448,16 @@ higress/plugins/wasm-go/extensions/db-log-pusher/log-collector/
 
 **构建镜像：**
 ```bash
+# 克隆 db-log-pusher 仓库
+git clone git@github.com:higress-group/db-log-pusher.git
+
+# 克隆 higress 仓库
+git clone git@github.com:alibaba/higress.git
+
+# 将 db-log-collector 目录复制到 higress 插件目录
+cp -r db-log-pusher/log-collector higress/plugins/wasm-go/extensions/db-log-pusher/
+
+# 进入目录并构建镜像
 cd higress/plugins/wasm-go/extensions/db-log-pusher/log-collector
 docker build -t your-registry/log-collector:latest .
 ```
