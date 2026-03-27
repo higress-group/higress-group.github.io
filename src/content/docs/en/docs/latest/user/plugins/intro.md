@@ -132,4 +132,4 @@ Currently, the stable version for all plugins is 1.0.0, while the latest develop
 
 ## Wasm Plugin Principles Introduction
 
-Please check the e-book: ["Wasm Plugin Development"](https://higress.cn/docs/ebook/wasm19/)
+Please check the e-book: ["Wasm Plugin Development"](/docs/latest/user/plugins/wasm-dev/wasm19/)

@@ -7,7 +7,7 @@ description: Custom plugin configuration reference
 ## Edit the Wasm file
 
 1. [SDK](https://github.com/alibaba/higress/tree/main/plugins/wasm-go) for developing Higress Wasm plugins using Go language
-2. [Plugin development example](../user/wasm-go.md)
+2. [Plugin development example](../wasm-go.md)
 
 ## Build the Wasm image
 

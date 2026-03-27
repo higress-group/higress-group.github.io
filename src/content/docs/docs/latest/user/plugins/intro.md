@@ -132,4 +132,4 @@ https://github.com/higress-group/higress-console/blob/main/backend/sdk/src/main/
 
 ## Wasm 插件原理介绍
 
-请查看电子书：[《Wasm插件开发篇》](https://higress.cn/docs/ebook/wasm19/)
+请查看电子书：[《Wasm插件开发篇》](/docs/latest/user/plugins/wasm-dev/wasm19/)
