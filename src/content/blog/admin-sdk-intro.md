@@ -2,7 +2,7 @@
 title: 如何使用 Higress Admin SDK 进行配置管理
 keywords: [Higress,SDK,Config]
 description: 介绍如何使用 Higress Admin SDK 来管理 Higress 的服务来源、服务路由等各项配置。
-author: CH3CHO
+author: 阿里云高级工程师
 date: "2024-02-08"
 category: "article"
 ---

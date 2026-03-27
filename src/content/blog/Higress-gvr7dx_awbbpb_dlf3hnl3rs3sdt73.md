@@ -4,7 +4,7 @@ description: "AI 网关这一年，成了 AI 进化的缩影"
 date: "2025-12-31"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

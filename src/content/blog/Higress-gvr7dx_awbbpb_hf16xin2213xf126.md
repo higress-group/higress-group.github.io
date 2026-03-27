@@ -4,7 +4,7 @@ description: "分布式 Multi Agent 安全高可用探索与实践"
 date: "2025-10-10"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：亦盏

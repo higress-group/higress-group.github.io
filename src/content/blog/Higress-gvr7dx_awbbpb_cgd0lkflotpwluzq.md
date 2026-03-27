@@ -4,7 +4,7 @@ description: "Nginx Ingress 迁移指引"
 date: "2025-11-26"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：澄潭

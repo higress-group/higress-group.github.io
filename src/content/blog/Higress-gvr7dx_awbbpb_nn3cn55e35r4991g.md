@@ -4,7 +4,7 @@ description: "铭师堂的云原生升级实践"
 date: "2024-12-11"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：升学e网通研发部基建团队

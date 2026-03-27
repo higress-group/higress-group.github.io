@@ -4,7 +4,7 @@ description: "AI Agent 十问十答，降低认知摩擦"
 date: "2025-04-27"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

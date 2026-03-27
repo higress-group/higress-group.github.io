@@ -4,7 +4,7 @@ description: "Higress MCP Server 安全再升级：API 认证为 AI 连接保驾
 date: "2025-05-15"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 # Higress MCP Server 安全再升级：API 认证为 AI 连接保驾护航

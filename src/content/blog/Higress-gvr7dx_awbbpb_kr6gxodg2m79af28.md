@@ -4,7 +4,7 @@ description: "教程：使用开源Higress实现DeepSeek联网搜索"
 date: "2025-03-10"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 之前发了Higress支持DeepSeek联网搜索的文章，但里面没有提供Step-by-Step的指导，这篇文章是一个补充，希望对想使用这个功能的朋友有帮助。

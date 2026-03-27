@@ -4,7 +4,7 @@ description: "API 即 MCP｜Higress 发布 MCP Marketplace，加速存量 API �
 date: "2025-04-18"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸&澄潭

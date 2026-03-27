@@ -4,7 +4,7 @@ description: "MCP 架构下，提示词工程和标准化数据结构越加重�
 date: "2025-04-14"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 对于工程师而言，LLM 应用的最大区别之一是不确定的数据结构。非 LLM 应用的服务调用逻辑是确定的，由工程师们进行定义；而 LLM 应用的服务调用逻辑和输出，则是由 LLM 进行定义。  

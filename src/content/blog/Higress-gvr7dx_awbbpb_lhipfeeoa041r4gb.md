@@ -4,7 +4,7 @@ description: "解读阿里云发布的《AI 原生应用架构白皮书》"
 date: "2025-09-28"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 **<font style="color:rgba(0, 0, 0, 0.9);">作者： 彦林、麻芃、望宸</font>**

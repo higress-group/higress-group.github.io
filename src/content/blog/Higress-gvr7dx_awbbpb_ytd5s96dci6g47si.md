@@ -4,7 +4,7 @@ description: "Higress AI 网关开发挑战赛参赛指引"
 date: "2025-10-14"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ## <font style="color:rgb(27, 28, 29);">大赛技术栈核心解读</font>

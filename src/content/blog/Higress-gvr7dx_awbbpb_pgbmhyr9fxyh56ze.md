@@ -4,7 +4,7 @@ description: "阿里云为何要将数据采集开发套件开源"
 date: "2026-01-16"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

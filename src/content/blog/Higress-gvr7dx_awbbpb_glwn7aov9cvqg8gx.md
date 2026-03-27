@@ -4,7 +4,7 @@ description: "遗憾，Ingress NGINX 要退役了"
 date: "2025-11-14"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgb(33, 37, 41);">作者：望宸</font>

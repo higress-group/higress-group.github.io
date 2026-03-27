@@ -4,7 +4,7 @@ description: "Higress 邀您报名 2025 开源之夏"
 date: "2025-05-09"
 category: "event"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ### <font style="color:rgb(31, 35, 40);"></font><font style="color:rgb(31, 35, 40);"> 一、开源之夏是什么活动</font>

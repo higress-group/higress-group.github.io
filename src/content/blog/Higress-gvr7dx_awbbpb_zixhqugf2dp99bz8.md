@@ -4,7 +4,7 @@ description: "万字长文告诉你企业如何基于MCP实现AI应用架构新�
 date: "2025-04-09"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：计缘

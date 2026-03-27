@@ -4,7 +4,7 @@ description: "警惕！2万星开源AI工具遭挖矿木马入侵，这些隐患
 date: "2025-01-23"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ## 事情经过

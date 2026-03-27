@@ -4,7 +4,7 @@ description: "2025 智能体工程现状"
 date: "2025-12-22"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgba(0, 0, 0, 0.9);">作者：望宸</font>

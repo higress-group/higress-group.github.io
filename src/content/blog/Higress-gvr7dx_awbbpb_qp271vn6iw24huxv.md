@@ -4,7 +4,7 @@ description: "HiMarket 正式开源，为企业落地开箱即用的 AI 开放�
 date: "2025-09-02"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：岛风、十眠、严研

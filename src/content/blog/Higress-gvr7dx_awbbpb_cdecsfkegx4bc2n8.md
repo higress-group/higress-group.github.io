@@ -4,7 +4,7 @@ description: "网关技术债怎么还？分层、插件、统一，三件套"
 date: "2025-01-07"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 **团队和人员更迭的情况下，不可避免地会出现很多技术债。标准化是一种解决思路，分层、插件、统一技术栈是比较容易落地的路径。**

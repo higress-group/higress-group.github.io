@@ -4,7 +4,7 @@ description: "浏览量超10w的热图，描述 RAG 的主流架构"
 date: "2025-02-05"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

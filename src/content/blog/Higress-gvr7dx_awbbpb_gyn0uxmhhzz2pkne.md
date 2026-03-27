@@ -4,7 +4,7 @@ description: "20年金融投资数据沉淀，正式开放 MCP 能力"
 date: "2025-07-07"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：李勤

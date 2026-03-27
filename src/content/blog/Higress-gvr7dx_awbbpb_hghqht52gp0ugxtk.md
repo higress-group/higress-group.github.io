@@ -4,7 +4,7 @@ description: "大模型应用部署过程中流量管控的常见需求和应对
 date: "2025-02-10"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：<font style="color:rgba(0, 0, 0, 0.3);">梧同、望宸</font>

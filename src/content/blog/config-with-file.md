@@ -2,7 +2,7 @@
 title: 基于文件配置实现 Higress 极简独立部署
 keywords: [higress,file,config]
 description: 介绍如何使用文件来管理 Higress 配置信息并实现独立部署
-author: CH3CHO
+author: 阿里云高级工程师
 date: "2023-08-25"
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/blog/config-with-file.md
 category: "article"

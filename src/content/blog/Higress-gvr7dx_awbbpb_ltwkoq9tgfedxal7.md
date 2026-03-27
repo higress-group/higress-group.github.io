@@ -4,7 +4,7 @@ description: "近期 AI 领域的新发布所带来的启示"
 date: "2025-10-10"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

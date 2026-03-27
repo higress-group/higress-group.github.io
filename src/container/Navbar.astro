@@ -29,7 +29,7 @@ const navItems = [
       { label: t('page.header.gateway'), href: localizeUrl('/api-gateway', locale) },
       { label: t('page.header.ai.gateway'), href: localizeUrl('/ai-gateway', locale) },
       { label: 'HiMarket', href: localizeUrl('/himarket', locale) },
-      { label: 'HiClaw', href: 'https://hiclaw.io/' },
+      { label: 'HiClaw', href: localizeUrl('/hiclaw', locale) },
     ]
   },
   {
@@ -68,7 +68,7 @@ const checkIsActive = (href: string | undefined) => {
   if (target.includes('/docs/latest')) {
      return path.includes('/docs') && !path.includes('/docs/developers');
   }
-  
+
   // Blog
   if (target.includes('/blog')) {
     return path.includes('/blog');
@@ -90,7 +90,7 @@ const isItemActive = (item: any) => {
 };
 ---
 
-<nav id="main-nav" class:list={["fixed top-0 left-0 right-0 z-50 transition-all duration-300", navClass]} data-is-home={String(isHome)}>
+<nav id="main-nav" class:list={["fixed left-0 right-0 z-50 transition-all duration-300", navClass]} style="top: 0;" data-is-home={String(isHome)}>
   <div class="mx-auto px-4 lg:px-10">
     <div class="flex h-16 items-center justify-between">
       <!-- Left: Logo -->
@@ -105,7 +105,7 @@ const isItemActive = (item: any) => {
         {navItems.map((item) => {
           const isActive = isItemActive(item);
           // Calculate active state for dropdown items if they exist
-          const dropdownItems = item.type === 'dropdown' && item.items 
+          const dropdownItems = item.type === 'dropdown' && item.items
             ? item.items.map(sub => ({
                 ...sub,
                 active: checkIsActive(sub.href)
@@ -179,14 +179,14 @@ const isItemActive = (item: any) => {
 
 <script>
   import { getNavbarConfig } from '../utils/navbarConfig';
-  
+
   const nav = document.getElementById('main-nav');
 
   if (nav) {
     // 获取当前页面的导航栏配置
     const currentPath = window.location.pathname;
     const config = getNavbarConfig(currentPath);
-    
+
     if (config.enableScrollEffect) {
       const handleScroll = () => {
         if (window.scrollY > config.scrollThreshold) {

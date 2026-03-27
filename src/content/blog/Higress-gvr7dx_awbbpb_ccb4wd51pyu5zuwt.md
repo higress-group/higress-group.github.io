@@ -4,7 +4,7 @@ description: "这家公司对网关性能的优化历程，在 Reddit 上爆了"
 date: "2025-06-18"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

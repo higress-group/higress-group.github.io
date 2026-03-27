@@ -4,7 +4,7 @@ description: "阿里云云原生团队招人，简历直推，专人负责，支
 date: "2025-02-28"
 category: "event"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 **01 中间件团队介绍**  

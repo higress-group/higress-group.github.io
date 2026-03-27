@@ -4,7 +4,7 @@ description: "工具向上，架构向下"
 date: "2025-10-23"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

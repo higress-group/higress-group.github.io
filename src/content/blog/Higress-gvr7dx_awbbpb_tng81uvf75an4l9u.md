@@ -4,7 +4,7 @@ description: "SOFA AI网关落地实践"
 date: "2025-10-17"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 **<font style="color:rgb(38, 38, 38);">一. 背景</font>**

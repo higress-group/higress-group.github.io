@@ -4,7 +4,7 @@ description: "回归开源，Java 和 Go 程序员贡献 AI 的内心独白"
 date: "2025-05-21"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：岛风、十眠

@@ -4,7 +4,7 @@ description: "Kubernetes 官方再出公告，强调立即迁移 Ingress NGINX"
 date: "2026-02-02"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

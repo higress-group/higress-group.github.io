@@ -4,7 +4,7 @@ description: "不增加 GPU，首 Token 延迟下降50%｜LLM 服务负载均衡
 date: "2025-08-04"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：钰诚

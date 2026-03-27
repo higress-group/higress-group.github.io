@@ -2,7 +2,7 @@
 title: 教程：如何在本地开发和调试 Higress Pilot
 keywords: [higress,pilot]
 description: 介绍如何在本地开发和调试 Higress 中的 Pilot 组件
-author: CH3CHO
+author: 阿里云高级工程师
 date: "2024-03-16"
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/blog/pilot-debug.md
 category: "article"

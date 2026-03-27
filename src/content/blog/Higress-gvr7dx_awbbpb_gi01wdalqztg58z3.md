@@ -4,7 +4,7 @@ description: "携程旅游的 AI 网关落地实践"
 date: "2025-08-25"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgb(0,0,0);">本文整理自携程旅游研发总监董艺荃在2025中国可信云大会上的分享，董艺荃 GitHub ID CH3CHO，同时也是 Higress 的 Maintainer。分享内容分为以下4部分。</font>

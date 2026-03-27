@@ -4,7 +4,7 @@ description: "火速收藏！2025 云栖大会 AI 中间件议程看点全公开
 date: "2025-09-19"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 AI 正在重塑世界，也在重塑构建 AI 应用的方式

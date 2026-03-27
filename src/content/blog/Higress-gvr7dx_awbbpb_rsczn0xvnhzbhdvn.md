@@ -4,7 +4,7 @@ description: "OpenClaw 接入 GLM5/MiniMax M2.5 简易教程，来了"
 date: "2026-02-13"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 

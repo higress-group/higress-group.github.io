@@ -4,7 +4,7 @@ description: "基于 Higress 解锁通义千问更多玩法"
 date: "2024-09-19"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgba(0, 0, 0, 0.5);">作者：程治玮，Higress Reviewer，目前在 SAP 从事可观测性相关工作</font>

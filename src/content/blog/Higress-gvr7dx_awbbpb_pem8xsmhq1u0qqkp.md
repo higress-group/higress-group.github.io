@@ -4,7 +4,7 @@ description: "Higress 开源 Plugin Server，简化 Wasm 插件私有化部署�
 date: "2025-06-18"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：岛风

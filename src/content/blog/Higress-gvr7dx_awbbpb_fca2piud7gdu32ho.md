@@ -4,7 +4,7 @@ description: "Envoy HTTP2 404 如何解决"
 date: "2024-12-09"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ## 问题背景

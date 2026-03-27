@@ -4,7 +4,7 @@ description: "使用 Nacos + HiMarket 构建MCP私有市场"
 date: "2025-09-17"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：子葵

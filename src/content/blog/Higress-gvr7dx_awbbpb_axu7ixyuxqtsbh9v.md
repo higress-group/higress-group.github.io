@@ -4,7 +4,7 @@ description: "Higress x Kubesphere 开源沙龙广州站邀您参会"
 date: "2024-12-20"
 category: "activity-preview"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgb(24, 24, 24);">欢迎莅临广州市海珠区鼎新路88号广州阿里中心，O-N-10-02 春秋书院。报名成功后，您将在活动前一周收到短信通知。</font>

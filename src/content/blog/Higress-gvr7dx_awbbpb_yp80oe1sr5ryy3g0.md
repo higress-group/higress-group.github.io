@@ -4,7 +4,7 @@ description: "大模型带火 API 后，分享我对 API 安全之认证鉴权�
 date: "2025-03-11"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ## 前言

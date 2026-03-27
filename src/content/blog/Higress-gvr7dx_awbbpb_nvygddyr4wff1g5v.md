@@ -4,7 +4,7 @@ description: "Higress MCP 服务管理，助力构建私有 MCP 市场"
 date: "2025-07-03"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：岛风、绿水、十眠

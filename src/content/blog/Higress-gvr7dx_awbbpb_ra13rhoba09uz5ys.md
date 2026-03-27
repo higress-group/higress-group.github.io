@@ -4,7 +4,7 @@ description: "恭喜以下选手！Higress AI 网关开发挑战赛获奖名单�
 date: "2025-12-30"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ## 赛事概览

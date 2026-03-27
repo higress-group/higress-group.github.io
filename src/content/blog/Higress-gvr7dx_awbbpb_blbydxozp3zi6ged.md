@@ -4,7 +4,7 @@ description: "Qoder CLI实战：全自动编码参加编程挑战赛"
 date: "2025-10-31"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 # 前言

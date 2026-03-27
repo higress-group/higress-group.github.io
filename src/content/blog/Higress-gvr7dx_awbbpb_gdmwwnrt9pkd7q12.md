@@ -4,7 +4,7 @@ description: "Claude Code用不了? 使用AI网关迁移至任意模型"
 date: "2025-09-10"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 9月5日，Anthropic 宣布停止向中国资本控股（超50%股权）的企业及其子公司提供 Claude 服务。此前，Claude 系列模型因其编程能力出众受到开发者的好评和广泛应用。

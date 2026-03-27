@@ -4,7 +4,7 @@ description: "大模型上下文协议 MCP 带来了哪些货币化机会"
 date: "2025-03-24"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgb(0, 0, 0);">先带个货：</font>

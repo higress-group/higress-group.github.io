@@ -4,7 +4,7 @@ description: "基于 AI 网关的 LLM 高可用最佳实践"
 date: "2025-09-05"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 >  作者：桂楚，阿里云AI网关实习工程师

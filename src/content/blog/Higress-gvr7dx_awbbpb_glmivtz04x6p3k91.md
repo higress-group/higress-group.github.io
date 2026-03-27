@@ -4,7 +4,7 @@ description: "为何最近谈论 SSE 和 WebSocket 的人越来越多了？"
 date: "2025-01-26"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

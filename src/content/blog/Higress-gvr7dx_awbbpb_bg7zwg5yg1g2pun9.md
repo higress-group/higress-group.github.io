@@ -4,7 +4,7 @@ description: "主流 API 协议的功能和应用场景解析"
 date: "2025-09-08"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸
