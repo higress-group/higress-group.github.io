@@ -6,6 +6,10 @@ description: 基于 db-log-pusher（WASM 插件）+ db-log-collector（日志收
 
 # 使用数据库实现可观测
 
+:::caution[重要提示]
+使用数据库实现可观测目前为实验性功能，仅用于 PoC 演示。生产环境请使用 [阿里云 SLS 方案](/docs/himarket/himarket-sls-observability/)。
+:::
+
 ## 简介
 
 本方案基于 `db-log-pusher`（WASM 插件）+ `db-log-collector`（日志收集服务）+ MySQL，提供完全开源的可观测能力。适用于不使用阿里云环境、希望将日志数据存储在自有数据库中的中小流量场景。

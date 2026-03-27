@@ -42,9 +42,9 @@
             "link": "docs/himarket-observability-overview"
           },
           {
-            "label": "使用阿里云SLS实现可观测",
+            "label": "使用阿里云SLS实现可观测（推荐）",
             "translations": {
-              "en": "Observability with Alibaba Cloud SLS"
+              "en": "Observability with Alibaba Cloud SLS (Recommended)"
             },
             "link": "docs/himarket-sls-observability"
           },

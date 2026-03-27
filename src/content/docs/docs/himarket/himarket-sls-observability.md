@@ -1,13 +1,11 @@
 ---
-title: "使用阿里云 SLS 实现可观测"
+title: "使用阿里云 SLS 实现可观测（推荐）"
 description: "基于阿里云 SLS 日志服务的 HiMarket 可观测大盘配置指南"
 date: "2025-12-24"
 category: "article"
 keywords: ["HiMarket", "可观测", "计量", "SLS", "阿里云"]
 authors: "Higress Team"
 ---
-
-# 使用阿里云 SLS 实现可观测
 
 ## 简介
 

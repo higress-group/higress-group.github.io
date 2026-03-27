@@ -71,6 +71,11 @@ function transformSidebarItem(
     translations: item.translations,
   };
 
+  // 透传 badge 属性（Starlight 原生支持）
+  if (item.badge) {
+    transformed.badge = item.badge;
+  }
+
   // 处理链接 - 需要转换路径格式
   if (item.link) {
     if (type === "ai") {
