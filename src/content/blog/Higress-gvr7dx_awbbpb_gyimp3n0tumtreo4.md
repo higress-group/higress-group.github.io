@@ -4,7 +4,7 @@ description: "DeepSeek-R1来了，如何从OpenAI平滑迁移到DeepSeek"
 date: "2025-01-22"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ## 背景

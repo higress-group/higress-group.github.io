@@ -4,7 +4,7 @@ description: "玩转 DeepSeek：和 ChatGPT 对弈中国象棋"
 date: "2025-02-14"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/22499/1739184724526-54c2eb35-7e2f-45ce-beba-0a842ac286a4.png)

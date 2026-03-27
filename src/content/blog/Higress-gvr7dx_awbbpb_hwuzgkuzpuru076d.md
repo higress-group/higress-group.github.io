@@ -4,7 +4,7 @@ description: "大模型 Token 的消耗可能是一笔糊涂账"
 date: "2025-03-12"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

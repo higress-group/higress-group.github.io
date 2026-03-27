@@ -4,7 +4,7 @@ description: "OpenClaw 依赖的 LiteLLM 被投毒"
 date: "2026-03-25"
 category: "ecosystem"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 

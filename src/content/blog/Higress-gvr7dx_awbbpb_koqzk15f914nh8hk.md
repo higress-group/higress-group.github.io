@@ -4,7 +4,7 @@ description: "评估工程正成为下一轮 Agent 演进的重点"
 date: "2025-10-30"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：马云雷&望宸

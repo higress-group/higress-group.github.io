@@ -4,7 +4,7 @@ description: "阿里巴巴 MCP 分布式落地实践：快速转换 HSF 到 MCP 
 date: "2025-05-13"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：行词

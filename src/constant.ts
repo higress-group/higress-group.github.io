@@ -41,3 +41,12 @@ export const LINKS = {
   hiclawGithub: `https://github.com/higress-group/HiClaw?spm=${SPM.github}`,
   enterprise: `https://www.aliyun.com/product/api-gateway?spm=${SPM.website}`
 }
+
+// 吊顶提示文案
+export const TOPBAR = {
+  "text": "下载量破万，《AI 原生应用架构白皮书》免费下载",
+  "mobileText": "下载量破万，《AI 原生应用架构白皮书》免费下载",
+  "link": "https://developer.aliyun.com/ebook/8479",
+  "target": "_blank",
+  "display": true
+}

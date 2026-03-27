@@ -4,7 +4,7 @@ description: "Higress 已支持全新 Gateway API / Inference Extension"
 date: "2026-02-13"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：如漫

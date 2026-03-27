@@ -4,7 +4,7 @@ description: "企业生产环境中，实现 MCP 服务的统一管理和智能�
 date: "2025-06-16"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgb(52, 50, 45);background-color:rgb(248, 248, 247);">文：孤弋、正己</font>

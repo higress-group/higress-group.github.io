@@ -4,7 +4,7 @@ description: "AI Gateway 分析：OpenRouter vs Higress"
 date: "2025-07-24"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

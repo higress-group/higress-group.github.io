@@ -4,7 +4,7 @@ description: "新趋势、新开源、新实践｜云栖大会 AI 原生应用�
 date: "2024-09-13"
 category: "activity-preview"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ![](/img/1728551158042.png)

@@ -4,7 +4,7 @@ description: "HiClaw 重磅更新：轻量级 CoPaw Worker 来了，内存大幅
 date: "2026-03-13"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 

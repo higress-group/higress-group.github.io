@@ -4,7 +4,7 @@ description: "Lobechat使用WolframAlpha MCP工具减少LLM幻觉"
 date: "2025-04-24"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 # 为什么需要WolframAlpha

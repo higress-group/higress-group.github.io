@@ -4,7 +4,7 @@ description: "Higress 开源 Remote MCP Server 托管方案，并将上线 MCP �
 date: "2025-04-01"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 **导读：**MCP Server 的实施存在着诸多挑战，特别是在认证授权、服务可靠性和可观测性方面，Higress 作为 AI 原生的 API 网关，提供了完整的开源 MCP Server 托管解决方案。即将上线的 MCP 市场，将大幅降低开发者构建 MCP Server 的时间和人力成本。

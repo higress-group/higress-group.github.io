@@ -4,7 +4,7 @@ description: "AgentScope Java v1.0 发布，让 Java 开发者轻松构建企业
 date: "2025-12-10"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：亦盏

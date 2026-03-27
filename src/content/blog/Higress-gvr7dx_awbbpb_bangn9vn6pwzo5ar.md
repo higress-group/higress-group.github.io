@@ -4,7 +4,7 @@ description: "Java版Manus实现来了，Spring AI Alibaba发布开源OpenManus�
 date: "2025-03-27"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 此次官方发布的 Spring AI Alibaba OpenManus 实现，包含完整的多智能体任务规划、思考与执行流程，可以让开发者体验 Java 版本的多智能体效果。它<font style="color:rgb(0, 0, 0);">能够根据用户的问题进行分析，操作浏览器，执行代码等来完成复杂任务等。</font>

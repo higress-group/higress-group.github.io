@@ -4,7 +4,7 @@ description: "Higress 入选全球 Top 100 MCP Servers 榜单｜MCPMarket.com"
 date: "2025-05-12"
 category: "event"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 日前，MCPMarket.com 公布了全球 Top 100 MCP Servers 榜单，Higress 作为 MCP Hosting 方案入选。

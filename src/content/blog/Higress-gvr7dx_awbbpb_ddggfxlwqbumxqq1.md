@@ -4,7 +4,7 @@ description: "这两个开源项目在世界互联网大会乌镇峰会获奖"
 date: "2025-11-12"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgb(51, 51, 51);">作者：望宸</font>

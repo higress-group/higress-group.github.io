@@ -4,7 +4,7 @@ description: "AI 网关需要具备的10大基本能力"
 date: "2025-02-18"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸、澄潭

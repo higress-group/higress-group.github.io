@@ -4,7 +4,7 @@ description: "MCP 最新版本 9 大差异解读：授权机制、传输协议�
 date: "2025-05-09"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：梧同

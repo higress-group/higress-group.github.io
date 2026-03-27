@@ -4,7 +4,7 @@ description: "释放 RAG 潜能，用 AI 网关帮助 Dify 应用“开外挂”
 date: "2025-08-29"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：王灏廷、赵源筱

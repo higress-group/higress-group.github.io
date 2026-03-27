@@ -4,7 +4,7 @@ description: "邀您参加云原生高可用技术沙龙|云上高可用体系�
 date: "2024-12-25"
 category: "activity-preview"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgba(0, 0, 0, 0.9);">云原生高可用技术专场，邀您从理论到实践一起交流，探索云上高可用体系构建！</font>

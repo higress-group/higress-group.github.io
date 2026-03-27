@@ -4,7 +4,7 @@ description: "从体验到系统工程｜上手评测国内首款 AI 电商 APP"
 date: "2025-08-08"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

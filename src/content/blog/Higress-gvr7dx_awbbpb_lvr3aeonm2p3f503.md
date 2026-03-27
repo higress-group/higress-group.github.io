@@ -4,7 +4,7 @@ description: "云原生进化论：加速构建 AI 应用"
 date: "2025-10-10"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 大家好，我是来自阿里云智能集团的资深产品专家杨秋弟，今天很荣幸能在云栖大会的场合，和大家分享过去一年我们在支持企业构建 AI 应用过程的一些实践和思考。

@@ -4,7 +4,7 @@ description: "活动回顾丨云原生开源开发者沙龙，AI 应用工程化
 date: "2024-11-12"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1731382156261-6cb24f37-a48f-400d-a7b4-456c1c9aa46f.png)

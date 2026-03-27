@@ -4,7 +4,7 @@ description: "30分钟搞定 Ingress Nginx 到 Higress 迁移？AI 帮我干完�
 date: "2026-02-02"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
  

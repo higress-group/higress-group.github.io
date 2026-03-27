@@ -4,7 +4,7 @@ description: "Dify 性能瓶颈？Higress AI 网关为它注入「高可用之�
 date: "2025-08-19"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：赵源筱、王灏廷

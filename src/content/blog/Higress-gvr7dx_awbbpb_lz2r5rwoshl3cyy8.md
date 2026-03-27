@@ -4,7 +4,7 @@ description: "AI Agent 工程师绕不开的必修课：API 网关 vs API 管理
 date: "2025-05-23"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgba(0, 0, 0, 0.85);">作者：望宸</font>

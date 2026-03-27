@@ -4,7 +4,7 @@ description: "应对 Nginx Ingress 退役，是时候理清这些易混淆的概
 date: "2025-12-24"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

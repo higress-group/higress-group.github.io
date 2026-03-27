@@ -4,7 +4,7 @@ description: "Dify 官方上架 Higress 插件，轻松接入 AI 网关访问模
 date: "2026-02-10"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：如漫

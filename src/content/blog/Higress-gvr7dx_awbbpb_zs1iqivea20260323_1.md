@@ -4,7 +4,7 @@ description: "4个真实案例｜Harness 驾驭工程正成为新的护城河"
 date: "2026-03-23"
 category: "ecosystem"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 

@@ -4,7 +4,7 @@ description: "Higress.ai 站点全新发布，轻松解锁 AI 新能力，开启
 date: "2025-03-20"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 随着大模型技术的快速发展，AI服务的规模化落地对底层基础设施提出了新需求。在讨论到大模型规模化和安全使用时，AI网关是非常重要的AI 基础设施关键组件之一。

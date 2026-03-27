@@ -4,7 +4,7 @@ description: "API-to-MCP，并在 Dify 实现调用的实践"
 date: "2025-05-07"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ## <font style="color:rgb(13, 18, 57);">背景</font>

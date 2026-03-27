@@ -4,7 +4,7 @@ description: "自建DeepSeek时代已来，联网搜索如何高效实现"
 date: "2025-02-26"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 

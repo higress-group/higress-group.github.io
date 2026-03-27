@@ -4,7 +4,7 @@ description: "MCP 网关实战：基于 Higress + Nacos 的零代码工具扩展
 date: "2025-12-01"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：胤煜

@@ -4,7 +4,7 @@ description: "Claw 的普及，打开了AI 社交的叙事空间"
 date: "2026-02-28"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸

@@ -4,7 +4,7 @@ description: "AI 时代，网关的发展趋势和实践"
 date: "2024-10-16"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgb(24, 24, 24);">编者按：云原生 API 网关系列教程即将推出，欢迎文末查看教程内容。本文整理自阿里云智能集团资深技术专家，云原生产品线中间件负责人</font>**<font style="color:rgb(24, 24, 24);">谢吉宝（唐三）</font>**<font style="color:rgb(24, 24, 24);">的精彩分享。讲师深入浅出的分享了软件架构演进过程中，网关所扮演的各类角色，AI 应用的流量新特征对软件架构和网关所提出的新诉求，以及基于阿里自身实践所带来的开源贡献和商业能力。通过本文，您将收获：</font>

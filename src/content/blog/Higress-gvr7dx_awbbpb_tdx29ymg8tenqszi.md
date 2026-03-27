@@ -4,7 +4,7 @@ description: "对比5个开源网关项目，这家SaaS企业如何统一网关�
 date: "2024-08-12"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：古建国

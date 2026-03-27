@@ -4,7 +4,7 @@ description: "政采云业务网关实践——使用Higress统一替代APISIX/K
 date: "2024-12-27"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 > 作者简介：<font style="color:rgb(0, 0, 0);">政采云基础架构团队技术专家 朱海峰(片风)</font>

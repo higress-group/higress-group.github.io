@@ -4,7 +4,7 @@ description: "Higress MCP 市场上线 Product Hunt，快来搭把手"
 date: "2025-04-24"
 category: "event"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 # 01 什么是 Product Hunt

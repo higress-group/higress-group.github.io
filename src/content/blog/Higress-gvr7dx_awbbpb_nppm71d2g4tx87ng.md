@@ -4,7 +4,7 @@ description: "基于API网关践行API First开发实践"
 date: "2025-02-06"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：泮圣伟（十眠）

@@ -4,7 +4,7 @@ description: "智保未来：国泰产险的 AI 网关革新之旅"
 date: "2024-12-29"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgba(0, 0, 0, 0.9);">在数智化转型的大潮中，国泰产险以其前瞻性的视角，全面拥抱大模型技术，在外呼、客服、内容生成等多个业务场景中实现了大模型的深度应用。</font>

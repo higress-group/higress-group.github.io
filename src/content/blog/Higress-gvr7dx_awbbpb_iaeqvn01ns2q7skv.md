@@ -4,7 +4,7 @@ description: "热联集团：从 APISIX 迁移到云原生网关"
 date: "2024-11-12"
 category: "case"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 _<font style="color:rgb(136, 136, 136);">作者：金峰（项良）、朱永林、赵世振（寰奕）</font>_<font style="color:rgba(0, 0, 0, 0.9);">  

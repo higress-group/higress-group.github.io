@@ -4,7 +4,7 @@ description: "IngressNightmare：Ingress Nginx 再曝5个安全漏洞，可接�
 date: "2025-03-28"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：望宸&魁予

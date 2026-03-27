@@ -4,7 +4,7 @@ description: "Higress@深圳，AI 应用企业开发者沙龙邀您参会"
 date: "2024-11-26"
 category: "activity-preview"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 ![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/299576/1732616522341-515916f8-c0fc-4d9e-ae2e-3afbb2a41f97.png)

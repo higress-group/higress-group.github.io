@@ -4,7 +4,7 @@ description: "实用工具来了，存量 OpenAPI 批量转化为 MCP Server"
 date: "2025-04-11"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgb(33, 37, 41);">将存量 OpenAPI 批量转化为 MCP Server，这是 Higress 最新开源的能力，助力开发者们高效构建 MCP Server。[1]</font>

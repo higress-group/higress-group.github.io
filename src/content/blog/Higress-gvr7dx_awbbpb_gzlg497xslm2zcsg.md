@@ -4,7 +4,7 @@ description: "Higress v2.1.7：42 项引擎更新 + 12 项控制台更新"
 date: "2025-09-03"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 # Higress 引擎更新

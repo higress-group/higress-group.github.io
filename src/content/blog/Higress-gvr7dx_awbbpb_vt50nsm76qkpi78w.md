@@ -4,7 +4,7 @@ description: "MCP 协议：为什么 Streamable HTTP 是最佳选择？"
 date: "2025-04-25"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 MCP（Model Context Protocol）协议是一个用于 AI 模型和工具之间通信的标准协议。随着 AI 应用变得越来越复杂并被广泛部署，原有的通信机制面临着一系列挑战。近期 MCP 仓库的 [PR #206](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/206) *[1]* 引入了一个全新的 Streamable HTTP 传输层替代原有的 HTTP+SSE 传输层。本文将详细分析该协议的技术细节和实际优势。

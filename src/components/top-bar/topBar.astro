@@ -1,0 +1,113 @@
+---
+import { TOPBAR } from "@/constant";
+import { useTranslations } from "@/i18n/utils";
+
+const locale = Astro.currentLocale || 'root';
+const t = useTranslations(locale);
+const { text, mobileText, link, target, display } = TOPBAR;
+
+const displayAlertPaths = [
+  "/",
+  "/en",
+  "/cloud",
+  "/en/cloud",
+  "/news",
+  "/en/news",
+  "/activity",
+  "/en/activity",
+  "/blog",
+  "/en/blog",
+  "/wuyi",
+  "/en/wuyi",
+  "/plugin",
+  "/en/plugin",
+  "/api-gateway",
+  "/ai-gateway",
+  "/himarket",
+  "/hiclaw",
+  "/en/api-gateway",
+  "/en/ai-gateway",
+  "/en/himarket",
+  "/en/hiclaw",
+];
+const shouldDisplay = display && displayAlertPaths.includes(Astro.url.pathname);
+---
+
+{
+  shouldDisplay && (
+    <div
+      class={`alert-bar w-full h-12 z-[60] flex align-center justify-between relative bg-cover bg-[url('https://img.alicdn.com/imgextra/i4/O1CN01fcI5Iz1ThCpxRxzyE_!!6000000002413-2-tps-4320-120.png')] md:bg-[url('https://img.alicdn.com/imgextra/i4/O1CN01fcI5Iz1ThCpxRxzyE_!!6000000002413-2-tps-4320-120.png')]`}
+    >
+      <div class="md:text-base text-sm m-auto leading-6 ">
+        <span class=" text-blue-02 mr-4 md:mr-6 opacity-30 hidden md:inline-block">{`</>`}</span>
+        <span
+          class="alert-text hidden md:inline-block  text-black from-gray-01 to-gray-10 font-medium"
+          set:html={text}
+        />
+        <span
+          class="alert-text from-link to-success text-black from-gray-01 to-gray-10 text-muted  md:hidden font-medium"
+          set:html={mobileText}
+        />
+        <a
+          href={link}
+          target={target}
+          class="mx-auto flex justify-center md:inline text-primary font-medium md:ml-4! no-underline"
+        >
+          {t("commmon.header.alert.link")}
+        </a>
+      </div>
+      <button class="close-button text-blue-02 text-muted bg-transparent border-none cursor-pointer text-lg leading-6 mr-1 md:mr-4">
+        &times;
+      </button>
+    </div>
+  )
+}
+
+<script>
+  const ALERT_BAR_HEIGHT = 48;
+
+  function updateNavbarTop(offset) {
+    const nav = document.getElementById("main-nav");
+    if (nav) {
+      nav.style.top = offset + "px";
+    }
+  }
+
+  function handleAlertClose(button) {
+    button.parentNode.style.display = "none";
+    window.alertBarClosed = true;
+    window.removeEventListener("scroll", onScroll);
+    updateNavbarTop(0);
+  }
+
+  function onScroll() {
+    const offset = Math.max(0, ALERT_BAR_HEIGHT - window.scrollY);
+    updateNavbarTop(offset);
+  }
+
+  function initAlertBar() {
+    const alertBar = document.querySelector(".alert-bar");
+    if (!alertBar) return;
+
+    try {
+      const closeButton = document.querySelector(".close-button");
+      const isClosed = window.alertBarClosed || false;
+
+      if (isClosed === true) {
+        alertBar.style.display = "none";
+        updateNavbarTop(0);
+      } else {
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        closeButton.addEventListener("click", function () {
+          handleAlertClose(closeButton);
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", initAlertBar);
+  document.addEventListener("astro:after-swap", initAlertBar);
+</script>

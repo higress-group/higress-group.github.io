@@ -4,7 +4,7 @@ description: "AI 网关代理LLMs最佳实践"
 date: "2025-03-13"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：付宇轩(计缘)

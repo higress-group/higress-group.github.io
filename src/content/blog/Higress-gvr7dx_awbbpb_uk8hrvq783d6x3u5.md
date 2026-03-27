@@ -4,7 +4,7 @@ description: "森马如何用阿里云 AI 网关，轻松实现“AI+业务”�
 date: "2025-11-13"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 <font style="color:rgba(0, 0, 0, 0.9);">作者：森马 数字中心-杭州研发部| 基础运维部、阿里云 产品运营专家 刘森（延德）</font>

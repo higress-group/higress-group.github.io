@@ -4,7 +4,7 @@ description: "HiMarket 重磅升级：Agent 的下一站，AI 开放平台"
 date: "2025-12-12"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：赵恒、岛风、文想、彦林、于怀

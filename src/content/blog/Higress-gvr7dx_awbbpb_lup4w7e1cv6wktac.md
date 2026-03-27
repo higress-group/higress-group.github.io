@@ -4,7 +4,7 @@ description: "手把手带你玩转基于 Nacos + Higress 的 MCP 开发新范�
 date: "2025-07-22"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：子葵

@@ -4,7 +4,7 @@ description: "Nacos Python SDK 强势来袭，动态管理大模型 Prompt！"
 date: "2024-09-27"
 category: "ecosystem"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 > 作者：聪言

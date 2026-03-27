@@ -4,7 +4,7 @@ description: "Team 版 OpenClaw：HiClaw 开源，5 分钟完成本地安装"
 date: "2026-03-04"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 作者：澄潭、望宸

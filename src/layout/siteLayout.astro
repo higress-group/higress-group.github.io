@@ -2,6 +2,7 @@
 ---
 import Navbar from '../container/Navbar.astro';
 import PageFooter from '../container/page-footer.astro';
+import TopBar from '@/components/top-bar/topBar.astro';
 import ScrollProgress from '../components/scroll-progress/ScrollProgress.astro';
 import { useTranslations } from "@/i18n/utils";
 const locale = Astro.currentLocale || 'root';
@@ -59,15 +60,15 @@ const headEntry = {
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="index, follow" />
     <meta name="applicable-device" content="pc,mobile" />
-    
+
     <!-- SEO: Canonical URL -->
     <link rel="canonical" href={canonicalUrl} />
-    
+
     <!-- SEO: Hreflang for multilingual -->
     <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="x-default" href={zhUrl} />
-    
+
     <!-- SEO: Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={metaDescription} />
@@ -78,13 +79,13 @@ const headEntry = {
     <meta property="og:image" content="https://img.alicdn.com/imgextra/i1/O1CN01Q9UWyF23bY1R0U0KE_!!6000000007274-2-tps-2560-1440.png" />
     <meta property="og:image:width" content="2560" />
     <meta property="og:image:height" content="1440" />
-    
+
     <!-- SEO: Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content="https://img.alicdn.com/imgextra/i1/O1CN01Q9UWyF23bY1R0U0KE_!!6000000007274-2-tps-2560-1440.png" />
-    
+
     <link rel="preconnect" href="https://img.alicdn.com" />
     <link rel="preconnect" href="https://framerusercontent.com" />
     <link
@@ -96,6 +97,7 @@ const headEntry = {
   </head>
   <body>
     <ScrollProgress />
+    <TopBar />
     <Navbar />
     <!-- <main  class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8"> -->
     <main>

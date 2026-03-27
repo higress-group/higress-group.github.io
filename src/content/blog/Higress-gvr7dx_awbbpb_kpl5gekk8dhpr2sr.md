@@ -4,7 +4,7 @@ description: "一等奖6万，Higress AI 网关开发挑战赛正式上线"
 date: "2025-10-10"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 > **<font style="color:#000000;">报名地址：https://competition.atomgit.com/competitionInfo?id=c16f796963021f21711ad25819c664b4#heading-0-0</font>**

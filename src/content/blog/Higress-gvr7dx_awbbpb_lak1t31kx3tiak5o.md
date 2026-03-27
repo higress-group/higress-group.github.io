@@ -4,7 +4,7 @@ description: "HiClaw 1.0.6：企业级 MCP Server 管理 — 凭证零暴露，�
 date: "2026-03-17"
 category: "article"
 keywords: ["Higress"]
-authors: "CH3CHO"
+authors: "阿里云高级工程师"
 ---
 
 
