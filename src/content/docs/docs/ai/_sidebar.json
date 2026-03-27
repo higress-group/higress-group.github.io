@@ -35,13 +35,6 @@
     "link": "docs/mcp-with-sse"
   },
   {
-    "label": "MCP Server",
-    "translations": {
-      "en": "MCP Server"
-    },
-    "link": "docs/mcp-server"
-  },
-  {
     "label": "场景指南",
     "translations": {
       "en": "Scene Guide"
