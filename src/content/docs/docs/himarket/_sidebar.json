@@ -32,14 +32,30 @@
         "translations": {
           "en": "HiMarket Statistics"
         },
-        "link": "docs/himarket-statistics"
-      },
-      {
-        "label": "HiMarket 统计插件",
-        "translations": {
-          "en": "HiMarket Statistics Plugin"
-        },
-        "link": "docs/himarket-db-log-pusher"
+        "collapsed": false,
+        "items": [
+          {
+            "label": "HiMarket 可观测能力介绍",
+            "translations": {
+              "en": "HiMarket Observability Introduction"
+            },
+            "link": "docs/himarket-observability-overview"
+          },
+          {
+            "label": "使用阿里云SLS实现可观测（推荐）",
+            "translations": {
+              "en": "Observability with Alibaba Cloud SLS (Recommended)"
+            },
+            "link": "docs/himarket-sls-observability"
+          },
+          {
+            "label": "使用数据库实现可观测",
+            "translations": {
+              "en": "Observability with Database"
+            },
+            "link": "docs/himarket-db-observability"
+          }
+        ]
       },
       {
         "label": "HiMarket AgentScope Agent",

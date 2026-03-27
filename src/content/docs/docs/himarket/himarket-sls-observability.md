@@ -1,28 +1,28 @@
 ---
-title: "HiMarket 可观测大盘使用指南"
-description: "HiMarket 可观测大盘使用指南"
+title: "使用阿里云 SLS 实现可观测（推荐）"
+description: "基于阿里云 SLS 日志服务的 HiMarket 可观测大盘配置指南"
 date: "2025-12-24"
 category: "article"
-keywords: ["HiMarket", "可观测", "计量"]
+keywords: ["HiMarket", "可观测", "计量", "SLS", "阿里云"]
 authors: "Higress Team"
 ---
-
-# HiMarket 可观测大盘使用指南
 
 ## 简介
 
 HiMarket 集成了阿里云 SLS（日志服务）提供可观测能力，支持基于访问日志的指标聚合、图表展示和日志检索。本手册将指导您完成 SLS 可观测功能的配置。
 
-HiMarket 可观测功能模块依赖 SLS，暂未提供开源实现，目前只有以下情况可正常使用：
+以下情况适合使用 SLS 方案：
 
 - 使用阿里云商业化 AI 网关（阿里云 AI 网关或者飞天企业版），开启 SLS 投递即可（开箱即用）
 - 使用开源 Higress，通过配置 ai-statistics 插件和日志采集，投递到阿里云 SLS
+
+如果您不使用阿里云环境，可以选择 [使用数据库实现可观测](/docs/himarket/himarket-db-observability/) 方案。
 
 ## 功能概览
 
 - **可观测大盘**：模型调用统计、MCP 工具调用统计、请求成功率、响应时间等
 - **日志查询**：支持自定义 SQL 查询访问日志
-- **认证方式**：支持 AK/SK 认证方式，STS 待支持
+- **认证方式**：支持 STS（默认）和 AK/SK 两种认证方式
 - **自动降级**：SLS 未配置时自动返回空数据，不影响系统正常运行
 
 
@@ -89,65 +89,37 @@ HiMarket 提供了自动索引更新接口，启动后会自动配置索引（AK
 
 ### 步骤 2：配置 HiMarket
 
-#### 2.1 修改配置文件
+HiMarket 的 SLS 配置全部通过环境变量注入，无需修改配置文件。`application.yml` 中已预置了环境变量占位符和默认值：
 
-编辑 `himarket-bootstrap/src/main/resources/application.yml`：
+| 环境变量 | 说明 | 默认值 |
+|----------|------|--------|
+| `SLS_ENDPOINT` | SLS 服务端点（必填），格式：`<region>.log.aliyuncs.com` | 空（未配置时自动降级返回空数据） |
+| `SLS_AUTH_TYPE` | 认证方式 | `STS` |
+| `SLS_ACCESS_KEY_ID` | AccessKey ID（`AK_SK` 模式必填） | 空 |
+| `SLS_ACCESS_KEY_SECRET` | AccessKey Secret（`AK_SK` 模式必填） | 空 |
+| `SLS_DEFAULT_PROJECT` | SLS Project 名称 | `apigateway-csb-cop` |
+| `SLS_DEFAULT_LOGSTORE` | SLS Logstore 名称 | `apig-access-log` |
+| `OBSERVABILITY_LOG_SOURCE` | 日志数据源类型 | `SLS` |
 
-```yaml
-sls:
-  # SLS 服务端点（必填）
-  # 格式：<region-id>.log.aliyuncs.com
-  # 例如：cn-hangzhou.log.aliyuncs.com、cn-beijing.log.aliyuncs.com
-  endpoint: ${SLS_ENDPOINT:}
-  
-  # 认证方式：AK_SK
-  auth-type: ${SLS_AUTH_TYPE:AK_SK}
-  
-  # AK/SK 认证方式的密钥
-  access-key-id: ${SLS_ACCESS_KEY_ID:}
-  access-key-secret: ${SLS_ACCESS_KEY_SECRET:}
-  
-  # 默认 Project 名称
-  default-project: ${SLS_DEFAULT_PROJECT:apigateway-csb-cop}
-  
-  # 默认 Logstore 名称
-  default-logstore: ${SLS_DEFAULT_LOGSTORE:apig-access-log}
-  
-  # AliyunLogConfig CR 配置（K8s 环境使用）
-  aliyun-log-config:
-    # CR 所在的 namespace
-    namespace: ${SLS_ALIYUN_LOG_CONFIG_NAMESPACE:apigateway-system}
-    # CR 的名称
-    cr-name: ${SLS_ALIYUN_LOG_CONFIG_CR_NAME:apigateway-access-log}
-```
+> `SLS_AUTH_TYPE` 支持两种值：`STS`（适用于阿里云 ECS/ACK 等有实例角色的环境）和 `AK_SK`（适用于开发测试或非阿里云环境）。
 
-#### 2.2 使用环境变量配置（推荐）
+根据部署方式选择对应的配置方法：
 
-为了安全性，建议通过环境变量传递敏感信息，而不是直接写入配置文件：
+#### 本地开发 / 裸机部署
 
-**Linux/macOS：**
 ```bash
 export SLS_ENDPOINT="cn-hangzhou.log.aliyuncs.com"
 export SLS_AUTH_TYPE="AK_SK"
 export SLS_ACCESS_KEY_ID="your-access-key-id"
 export SLS_ACCESS_KEY_SECRET="your-access-key-secret"
+# 以下两项如果与默认值一致可省略
 export SLS_DEFAULT_PROJECT="apigateway-csb-cop"
 export SLS_DEFAULT_LOGSTORE="apig-access-log"
 ```
 
-**Windows：**
-```cmd
-set SLS_ENDPOINT=cn-hangzhou.log.aliyuncs.com
-set SLS_AUTH_TYPE=AK_SK
-set SLS_ACCESS_KEY_ID=your-access-key-id
-set SLS_ACCESS_KEY_SECRET=your-access-key-secret
-set SLS_DEFAULT_PROJECT=apigateway-csb-cop
-set SLS_DEFAULT_LOGSTORE=apig-access-log
-```
+#### Docker Compose 部署
 
-**Docker 部署：**
-
-编辑 `deploy/docker/docker-compose.yml`：
+在 `docker-compose.yml` 的 `environment` 中添加：
 
 ```yaml
 services:
@@ -157,47 +129,64 @@ services:
       - SLS_AUTH_TYPE=AK_SK
       - SLS_ACCESS_KEY_ID=your-access-key-id
       - SLS_ACCESS_KEY_SECRET=your-access-key-secret
-      - SLS_DEFAULT_PROJECT=apigateway-csb-cop
-      - SLS_DEFAULT_LOGSTORE=apig-access-log
 ```
 
-**Kubernetes 部署：**
+#### Kubernetes / Helm 部署
 
-编辑 `deploy/helm/values.yaml`：
+通过 Secret 或 ConfigMap 注入上述环境变量。推荐将 AK/SK 存入 Secret：
 
 ```yaml
-sls:
-  endpoint: "cn-hangzhou.log.aliyuncs.com"
-  authType: "AK_SK"
-  accessKeyId: "your-access-key-id"
-  accessKeySecret: "your-access-key-secret"
-  defaultProject: "apigateway-csb-cop"
-  defaultLogstore: "apig-access-log"
+apiVersion: v1
+kind: Secret
+metadata:
+  name: himarket-sls-secret
+type: Opaque
+stringData:
+  SLS_ACCESS_KEY_ID: "your-access-key-id"
+  SLS_ACCESS_KEY_SECRET: "your-access-key-secret"
+---
+# 在 Deployment 中引用
+env:
+  - name: SLS_ENDPOINT
+    value: "cn-hangzhou.log.aliyuncs.com"
+  - name: SLS_AUTH_TYPE
+    value: "AK_SK"
+  - name: SLS_ACCESS_KEY_ID
+    valueFrom:
+      secretKeyRef:
+        name: himarket-sls-secret
+        key: SLS_ACCESS_KEY_ID
+  - name: SLS_ACCESS_KEY_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: himarket-sls-secret
+        key: SLS_ACCESS_KEY_SECRET
 ```
 
 ### 步骤 3：启动并验证
 
-#### 3.1 启动 HiMarket
+启动 HiMarket 后查看日志，确认 SLS 配置加载成功：
 
 ```bash
 # 开发环境
-mvn clean install
-cd himarket-bootstrap
-mvn spring-boot:run
+mvn clean install -pl himarket-bootstrap -am
+cd himarket-bootstrap && mvn spring-boot:run
 
 # 生产环境
 java -jar himarket-bootstrap/target/himarket-bootstrap.jar
 ```
 
-#### 3.2 检查配置状态
-
-启动后查看日志，确认 SLS 配置加载成功：
+启动成功时日志输出：
 
 ```
-INFO  c.a.h.config.SlsConfig - SLS endpoint configured: cn-hangzhou.log.aliyuncs.com
-INFO  c.a.h.config.SlsConfig - SLS auth type: AK_SK
-INFO  c.a.h.config.SlsConfig - SLS default project: apigateway-csb-cop
-INFO  c.a.h.config.SlsConfig - SLS default logstore: apig-access-log
+INFO  c.a.h.config.ObservabilityConfig - Observability log source: SLS
+INFO  c.a.h.config.ObservabilityConfig - SLS endpoint: cn-hangzhou.log.aliyuncs.com, project: apigateway-csb-cop, logstore: apig-access-log, authType: AK_SK
+```
+
+如果 `SLS_ENDPOINT` 未配置，会输出以下警告（不影响系统运行，可观测接口会返回空数据）：
+
+```
+WARN  c.a.h.config.ObservabilityConfig - SLS endpoint is not configured! Queries will return empty results.
 ```
 
 ## Higress 插件配置
@@ -386,7 +375,7 @@ HiMarket 内置了丰富的预设查询场景，涵盖模型大盘、MCP 大盘�
 ### 卡片类（CARD）
 
 | 场景标识 | 说明 | 适用大盘 |
-||||
+|----------|------|----------|
 | `pv` | 总请求次数 | 模型、MCP |
 | `uv` | 独立调用者数量 | 模型、MCP |
 | `fallback_count` | Fallback 请求数 | 模型 |
@@ -399,7 +388,7 @@ HiMarket 内置了丰富的预设查询场景，涵盖模型大盘、MCP 大盘�
 ### 线图类（LINE）
 
 | 场景标识 | 说明 | 适用大盘 |
-||||
+|----------|------|----------|
 | `qps_stream` | 流式 QPS | 模型 |
 | `qps_normal` | 非流式 QPS | 模型 |
 | `qps_total` | 总体 QPS | 模型 |
@@ -421,7 +410,7 @@ HiMarket 内置了丰富的预设查询场景，涵盖模型大盘、MCP 大盘�
 ### 表格类（TABLE）
 
 | 场景标识 | 说明 | 适用大盘 |
-||||
+|----------|------|----------|
 | `model_token_table` | 模型 Token 使用统计 | 模型 |
 | `consumer_token_table` | 消费者 Token 使用统计 | 模型 |
 | `service_token_table` | 服务 Token 使用统计 | 模型 |
@@ -437,7 +426,7 @@ HiMarket 内置了丰富的预设查询场景，涵盖模型大盘、MCP 大盘�
 ### 筛选选项类（TABLE）
 
 | 场景标识 | 说明 |
-|||
+|----------|------|
 | `filter_service_options` | 实例列表 |
 | `filter_api_options` | API 列表 |
 | `filter_model_options` | 模型列表 |
@@ -445,7 +434,7 @@ HiMarket 内置了丰富的预设查询场景，涵盖模型大盘、MCP 大盘�
 | `filter_consumer_options` | 消费者列表 |
 | `filter_upstream_options` | 上游服务列表 |
 | `filter_mcp_tool_options` | MCP 工具名称列表 |
-
+| `filter_mcp_server_options` | MCP Server 列表 |
 
 
 ## 故障排查
@@ -536,53 +525,12 @@ LogException: AccessKeyId is required
 - 定期检查 SLS 使用量和费用
 
 
-
-## 配置示例
-
-### 开发环境完整配置
-
-```yaml
-sls:
-  endpoint: cn-hangzhou.log.aliyuncs.com
-  auth-type: AK_SK
-  access-key-id: LTAI5tXXXXXXXXXXXXXX
-  access-key-secret: YourAccessKeySecretHere
-  default-project: dev-apigateway
-  default-logstore: dev-access-log
-  aliyun-log-config:
-    namespace: apigateway-system
-    cr-name: apigateway-access-log
-```
-
-### 生产环境配置（使用环境变量）
-
-**application.yml：**
-```yaml
-sls:
-  endpoint: ${SLS_ENDPOINT:}
-  auth-type: ${SLS_AUTH_TYPE:AK_SK}
-  access-key-id: ${SLS_ACCESS_KEY_ID:}
-  access-key-secret: ${SLS_ACCESS_KEY_SECRET:}
-  default-project: ${SLS_DEFAULT_PROJECT:prod-apigateway}
-  default-logstore: ${SLS_DEFAULT_LOGSTORE:prod-access-log}
-```
-
-**环境变量：**
-```bash
-export SLS_ENDPOINT="cn-beijing.log.aliyuncs.com"
-export SLS_AUTH_TYPE="AK_SK"
-export SLS_ACCESS_KEY_ID="LTAI5tProdXXXXXXXXXX"
-export SLS_ACCESS_KEY_SECRET="ProdAccessKeySecretHere"
-```
-
-
-
 ## 附录
 
 ### A. SLS 区域 Endpoint 列表
 
 | 区域 | Endpoint |
-||-|
+|------|----------|
 | 华东1（杭州） | cn-hangzhou.log.aliyuncs.com |
 | 华东2（上海） | cn-shanghai.log.aliyuncs.com |
 | 华北1（青岛） | cn-qingdao.log.aliyuncs.com |
@@ -592,19 +540,6 @@ export SLS_ACCESS_KEY_SECRET="ProdAccessKeySecretHere"
 | 西南1（成都） | cn-chengdu.log.aliyuncs.com |
 
 更多区域请参考：https://help.aliyun.com/document_detail/29008.html
-
-### B. 配置参数完整列表
-
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-||||--||
-| `endpoint` | String | 是 | - | SLS 服务端点 |
-| `auth-type` | Enum | 否 | `AK_SK` | 认证方式：`AK_SK` |
-| `access-key-id` | String | 条件 | - | AccessKey ID（auth-type=AK_SK 时必填） |
-| `access-key-secret` | String | 条件 | - | AccessKey Secret（auth-type=AK_SK 时必填） |
-| `default-project` | String | 是 | - | 默认 Project 名称 |
-| `default-logstore` | String | 是 | - | 默认 Logstore 名称 |
-| `aliyun-log-config.namespace` | String | 否 | `apigateway-system` | AliyunLogConfig CR 所在 namespace |
-| `aliyun-log-config.cr-name` | String | 否 | `apigateway-access-log` | AliyunLogConfig CR 名称 |
 
 ## 相关链接
 
