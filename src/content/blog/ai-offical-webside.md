@@ -38,7 +38,7 @@ category: "article"
 *   **HiMarket**（[https://higress.ai/himarket](https://higress.ai/himarket)）：助力企业构建 Agent、Model、MCP 市场，通过统一的 AI 能力管理平台，解决 AI 资源分散、权限管控复杂、成本分摊困难等挑战。平台提供 HiChat AI 创新中心作为全员 AI 使用入口，打破团队间的能力孤岛，降低接入成本，释放 AI 创新潜能。
     
 
-Higress 以 Envoy 为内核，通过 [WASM](https://higress.ai/docs/ebook/wasm14) 插件进行能力边界拓展。然而，现有的官网架构逐渐成为发展的阻碍：
+Higress 以 Envoy 为内核，通过 [WASM](/docs/latest/user/plugins/wasm-dev/wasm14/) 插件进行能力边界拓展。然而，现有的官网架构逐渐成为发展的阻碍：
 
 1.  **产品孤岛**：所有的网关都需要独立的 Landing Page，以及独立产品文档，维护成本高。
     
