@@ -107,7 +107,6 @@ The following operational parameters can be configured using the `--set` or `--v
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `pilot.enabled` | Whether to enable Pilot. | `true` |
-| `pilot.replicaCount` | Number of Pilot replicas. | `1` |
 | `pilot.image.repository` | Pilot container image repository. | `docker.io/istio/pilot` |
 | `pilot.image.tag` | Pilot container image tag. | `1.15.0` |
 | `pilot.image.pullPolicy` | Image pull policy for the Pilot container. | `IfNotPresent` |

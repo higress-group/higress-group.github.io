@@ -107,12 +107,6 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ## Pilot参数
 | 参数                                                                | 参数说明                                                                                                           | 默认值    |       
 |-------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|--------|
-| higress-core.pilot.autoscaleEnabled	                              | 是否启用 Pilot 的自动伸缩。                                                                                              | false  |
-| higress-core.pilot.autoscaleMin	                                  | 自动伸缩时最小的副本数。                                                                                                   | 1      |
-| higress-core.pilot.autoscaleMax	                                  | 自动伸缩时最大的副本数。                                                                                                   | 5      |
-| higress-core.pilot.replicaCount	                                  | Pilot 的 pod 数量。                                                                                                | 1      |
-| higress-core.pilot.rollingMaxSurge	                               | 在进行滚动更新时，允许同时增加的 Pod 数量的最大比例。                                                                                  | 100%   |
-| higress-core.pilot.rollingMaxUnavailable	                         | 在进行滚动更新时，允许同时不可用的 Pod 数量的最大比例。                                                                                 | 25%    |
 | higress-core.pilot.traceSampling	                                 | 指定应用程序的跟踪采样率，这里是1.0（即100%）。                                                                                    | 1      |
 | higress-core.pilot.resources.requests.cpu	                        | 分配给 pilot 的 CPU 资源请求。                                                                                          | 500m   |
 | higress-core.pilot.resources.requests.memory                      | 分配给 pilot 的内存资源请求。                                                                                             | 2048Mi |
@@ -123,16 +117,9 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 | higress-core.pilot.cpu.targetAverageUtilization	                  | 指定 Pod 应该尝试达到的 CPU 利用率百分比，以便触发自动缩放。例如，如果设置为80，则当 Pod 的 CPU 利用率达到80％时，将启动更多的 Pod 以处理更多的负载。                      | 80     |
 | higress-core.pilot.enableProtocolSniffingForOutbound	             | 是否在出站流量上启用协议嗅探，这里是 true 。                                                                                      | true   |
 | higress-core.pilot.enableProtocolSniffingForInbound	              | 是否在入站流量上启用协议嗅探，这里是 true 。                                                                                      | true   |
-| higress-core.pilot.nodeSelector	                                  | 指定应该部署此应用程序的节点标签。                                                                                              | {}     |
-| higress-core.pilot.podAnnotations	                                | 指定要添加到 Pod 的注释。                                                                                                | {}     |
-| higress-core.pilot.serviceAnnotations	                            | 指定要添加到 Service 的注释。                                                                                            | {}     |
 | higress-core.pilot.jwksResolverExtraRootCA	                       | 提供 PEM 格式的根证书，以便在解析 JWKS URI 时由 pilot 信任。                                                                      | ""    |
-| higress-core.pilot.configSource.subscribedResources	              | 指定配置源的来源，如果未指定，则使用默认的 MCP 。指定订阅的 Kubernetes 资源列表。                                                              | []     |
 | higress-core.pilot.plugins	                                       | 指定要启用的插件列表。                                                                                                    | []     |
 | higress-core.pilot.keepaliveMaxServerConnectionAge	               | 限制 gateway 与 controller 连接的最长时间。                                                                                    | 30m    |
-| higress-core.pilot.deploymentLabels	                              | 为部署添加额外的标签。                                                                                                    | {}     |
-| higress-core.pilot.configMap	                                     | 安装由values.yaml生成的 mesh config ，如果为 false ，则 Pilot 将使用默认值（默认情况下）或用户提供的值，如果为 false ，则 Pilot 将使用默认值（默认情况下）或用户提供的值 | true   |
-| higress-core.pilot.podLabels	                                     | 为 Pod 添加额外的标签，以用于监控和日志记录配置。                                                                                    | {}     |
 
 
 
