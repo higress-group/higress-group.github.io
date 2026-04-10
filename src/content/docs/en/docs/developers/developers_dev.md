@@ -16,13 +16,12 @@ This page shows the Higress development team. Please add your information to the
 |-----|-------------------------------| --------------- |
 | Xinjun Wu | [2456868764](https://github.com/2456868764) | Independent Developer |
 | Yiquan Dong | [CH3CHO](https://github.com/CH3CHO) | Trip.com |
+| Yuanxiao Zhao | [EndlessSeeker](https://github.com/EndlessSeeker) | Alibaba Cloud        |
 | Leilei Geng | [gengleilei](https://github.com/gengleilei) | Alibaba Cloud |
 | Xiantao Han | [hanxiantao](https://github.com/hanxiantao) | XinYe Technology |
 | Zhiwei Cheng | [Se7en](https://github.com/cr7258) | NVIDIA |
 | Tianyi Zhang | [johnlanni](https://github.com/johnlanni) | Alibaba Cloud |
-| Yan Yan | [JavaerJohn](https://github.com/JavaerJohn) | Alibaba Cloud |
 | Jingfeng Xu | [lexburner](https://github.com/lexburner) | Alibaba Cloud |
-| Kun Yuan | [heimanba](https://github.com/heimanba) | Alibaba Cloud        |
 
 
 ## Higress Approvers
@@ -36,6 +35,8 @@ This page shows the Higress development team. Please add your information to the
 | Xiaorui Liu | [rinfx](https://github.com/rinfx) | Alibaba Cloud |
 | Min Ji | [slievrly](https://github.com/slievrly) | Alibaba Cloud |
 | Jingze Dai | [Jing-ze](https://github.com/Jing-ze) | Alibaba Cloud |
+| Kun Yuan | [heimanba](https://github.com/heimanba) | Alibaba Cloud        |
+| Yan Yan | [JavaerJohn](https://github.com/JavaerJohn) | Alibaba Cloud |
 
 ## Higress Reviewers
 | Name | GitHub | Organization |
