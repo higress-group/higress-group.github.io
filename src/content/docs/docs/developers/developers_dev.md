@@ -16,13 +16,12 @@ description: Higress 维护者名单
 |-----|-------------------------------| --------------- |
 | 吴新军 | [2456868764](https://github.com/2456868764) | 独立开发者      |
 | 董艺荃 | [CH3CHO](https://github.com/CH3CHO) | 携程        |
+| 赵源筱 | [EndlessSeeker](https://github.com/EndlessSeeker) | 阿里云        |
 | 耿蕾蕾 | [gengleilei](https://github.com/gengleilei) | 阿里云        |
 | 韩贤涛 | [hanxiantao](https://github.com/hanxiantao)         | 信也科技      |
 | 程治玮 | [Se7en](https://github.com/cr7258)   | NVIDIA  |
 | 张添翼 | [johnlanni](https://github.com/johnlanni) | 阿里云        |
-| 严研 | [JavaerJohn](https://github.com/JavaerJohn) | 阿里云        |
 | 徐靖峰 | [lexburner](https://github.com/lexburner) | 阿里云        |
-| 袁坤 | [heimanba](https://github.com/heimanba) | 阿里云        |
 
 
 ## Higress Approvers
@@ -31,12 +30,15 @@ description: Higress 维护者名单
 | 刘宏宇 | [aias00](https://github.com/aias00) | 联通数智        |
 | 邢国富 | [erasernoob](https://github.com/erasernoob) | 西南石油大学   |
 | 刘帅 | [EricaLiu](https://github.com/Erica177) | 阿里云        |
+| 袁坤 | [heimanba](https://github.com/heimanba) | 阿里云        |
 | 戴靖泽 | [Jing-ze](https://github.com/Jing-ze) | 阿里云        |
+| 严研 | [JavaerJohn](https://github.com/JavaerJohn) | 阿里云        |
 | 泮圣伟 | [panxiaojun233](https://github.com/panxiaojun233) | 阿里云        |
 | 季敏 | [slievrly](https://github.com/slievrly) | 阿里云        |
 | 范扬 | [SpecialYang](https://github.com/SpecialYang) | 字节跳动        |
 | 刘训灼 | [Xunzhuo](https://github.com/Xunzhuo) | 腾讯        |
 | 刘晓瑞 | [rinfx](https://github.com/rinfx) | 阿里云        |
+
 
 ## Higress Reviewers
 | 姓名  | github                        | 公司组织             |
