@@ -34,9 +34,9 @@ Each configuration field in `consumers` is described as follows:
 
 ## Configuration Example
 ### Global Authentication and Route Granularity Authorization
-The following configuration will enable Basic Auth authentication and authorization for specific routes or domains of the gateway. Note that the username and password in the credential information are separated by ":", and the `credential` field cannot be duplicated.
+The following configuration will enable Basic Auth authentication and authorization for specific routes or domains of the gateway. Note that the username and password in the credential information are separated by ":", and no same `credential` value shall be shared among different consumers.
 
-Make the following plugin configuration at the instance level:
+Make the following plugin configuration at the global level:
 ```yaml
 consumers:
 - credential: 'admin:123456'
