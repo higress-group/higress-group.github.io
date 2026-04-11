@@ -43,10 +43,10 @@ description: Basic 认证插件配置参考
 
 ### 全局配置认证和路由粒度进行鉴权
 
-以下配置将对网关特定路由或域名开启 Basic Auth 认证和鉴权，注意凭证信息中的用户名和密码之间使用":"分隔，`credential`字段不能重复
+以下配置将对网关特定路由或域名开启 Basic Auth 认证和鉴权，注意凭证信息中的用户名和密码之间使用":"分隔，不同的`consumer`对象不能使用相同的`credential`取值。
 
 
-在实例级别做如下插件配置：
+在全局级别如下插件配置：
 
 ```yaml
 consumers:
@@ -57,7 +57,7 @@ consumers:
 global_auth: false
 ```
 
-对 route-a 和 route-b 这两个路由做如下配置：
+然后对 route-a 和 route-b 这两个路由做如下配置：
 
 ```yaml
 allow: 

@@ -347,6 +347,13 @@
             "link": "docs/ops/deploy-by-docker-compose"
           },
           {
+            "label": "基于 Docker 容器进行独立部署",
+            "translations": {
+              "en": "Deploy Higress by Docker"
+            },
+            "link": "docs/ops/deploy-by-docker"
+          },
+          {
             "label": "通过阿里云计算巢快速部署",
             "translations": {
               "en": "Rapid deployment through Aliyun ComputeNest"
