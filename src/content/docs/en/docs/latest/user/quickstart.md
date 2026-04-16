@@ -33,7 +33,7 @@ kubectl get svc -n higress-system higress-gateway -o jsonpath='{.status.loadBala
 If you cannot obtain the LoadBalancer IP, it means your current K8s cluster does not support LoadBalancer type Services. Consider the following solutions:
 
 1. Use a cloud provider's K8s service, such as [Alibaba Cloud ACK](https://www.aliyun.com/product/kubernetes)
-2. Refer to the [Operations Parameter Configuration](https://higress.io/docs/latest/user/configurations) and enable `higress-core.gateway.hostNetwork` to make Higress listen on the host machine ports, then use other software/hardware load balancers to forward traffic to specific machine IPs
+2. Refer to the [Operations Parameter Configuration](./configurations) and enable `higress-core.gateway.hostNetwork` to make Higress listen on the host machine ports, then use other software/hardware load balancers to forward traffic to specific machine IPs
 3. (Not recommended for production) Use the open-source load balancing solution [MetalLB](https://metallb.universe.tf/)
 
 #### Scenario 2: Using in a Local K8s Environment
@@ -175,7 +175,7 @@ spec:
 
 #### Method 1: Configure Using Higress Console
 
-Use [hgctl](https://higress.io/en/docs/ops/hgctl) to open the console:
+Use [hgctl](../ops/hgctl) to open the console:
 
 ```bash
 hgctl dashboard console
