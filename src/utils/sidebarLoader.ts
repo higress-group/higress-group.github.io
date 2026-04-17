@@ -6,9 +6,9 @@ import zhHimarketSidebarConfig from "../content/docs/docs/himarket/_sidebar.json
 import zhHiclawSidebarConfig from "../content/docs/docs/hiclaw/_sidebar.json";
 import zhDeveloperSidebarConfig from "../content/docs/docs/developers/_sidebar.json";
 import enDeveloperSidebarConfig from "../content/docs/en/docs/developers/_sidebar.json";
-// 暂时没有英文版配置，先用中文的或者空的
-const enHimarketSidebarConfig: any[] = [];
-const enHiclawSidebarConfig: any[] = [];
+// 英文版复用中文 sidebar 配置（已包含 translations 字段）
+const enHimarketSidebarConfig = zhHimarketSidebarConfig;
+const enHiclawSidebarConfig = zhHiclawSidebarConfig;
 
 /**
  * 动态加载指定语言的 sidebar 配置
