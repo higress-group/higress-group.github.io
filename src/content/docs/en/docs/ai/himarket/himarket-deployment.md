@@ -51,117 +51,118 @@ npm run dev
 
 ## 2. Docker Compose Deployment
 
-Includes seven service components:
+Includes the following service components:
 
-+ **mysql:** Database service, providing data storage for backend services;
-+ **himarket-server:** Backend service, running on port 8081;
-+ **himarket-admin:** Management console interface, running on port 5174, for administrators to configure Portal;
-+ **himarket-frontend:** Frontend user interface, running on port 5173, for users to browse and use API Products;
-+ **Higress:** Higress all-in-one gateway service, running on ports 8443, 8082, 8001, with console running on port 8001 for user access;
++ **MySQL:** Database service, providing data storage for backend services and Nacos;
++ **Nacos:** Configuration center, running on port 8848;
++ **Higress:** AI gateway service, console running on port 8001, gateway HTTP endpoint on port 8082;
 + **Redis:** Higress cache service;
-+ **Nacos:** Nacos service, running on ports 8080, 8848, 9848, with console running on port 8080 for user access.
++ **HiMarket Server:** Backend API service, running on port 8081;
++ **HiMarket Admin:** Management console interface, running on port 5175;
++ **HiMarket Frontend:** Developer portal interface, running on port 5173;
++ **Sandbox:** Remote sandbox service for cloud IDE functionality.
 
 ### Installation Commands
 
 **Environment Dependencies:** docker, docker compose, curl, jq
 
-**One-Click Startup:** Use the `deploy.sh` script to complete full-stack deployment and data initialization of HiMarket, Higress, and Nacos.
+**Interactive Deployment (Recommended):**
 
 ```bash
 # Clone project
 git clone https://github.com/higress-group/himarket.git
-cd himarket/deploy/docker/scripts
+cd himarket/deploy/docker
 
-# Deploy full-stack services and initialize
-./deploy.sh install
-
-# Or deploy only Himarket services (without Nacos/Higress)
-./deploy.sh himarket-only
-
-# Uninstall all services
-./deploy.sh uninstall
-
-# Service addresses
-# Management console address: http://localhost:5174
-# Developer portal address: http://localhost:5173
-# Backend API address: http://localhost:8081
+# Interactive deployment, the script guides you through all configurations
+./install.sh
 ```
 
-The script will **execute data initialization hooks** after deployment: performs login data initialization, example MCP data initialization, and API product data initialization. Note that the script includes **deployment** and **data initialization** parts. Data initialization execution does not block deployment. If data initialization hooks fail, they can be retried in `/scripts/hooks/post_ready.d`. For example:
+The script guides you through image selection, password setup, AI model configuration, and more. On first install, database passwords and service credentials are automatically generated with random values.
+
+**Non-Interactive Mode (CI/CD):**
 
 ```bash
-cd docker/scripts/hooks/post_ready.d
+cp .env.example ~/himarket-install-docker.env
+# Edit ~/himarket-install-docker.env to modify configurations as needed
+./install.sh -n
+```
 
-# Retry failed script
+**Uninstall:**
+
+```bash
+./install.sh --uninstall
+```
+
+**Upgrade:**
+
+Re-run `./install.sh`, and the script will automatically detect existing deployments and provide upgrade options. Configurations are saved to `~/himarket-install-docker.env` and reused for subsequent upgrades.
+
+**Retry Data Initialization:**
+
+```bash
+# Retry initialization hooks only, without redeploying services
+./install.sh --init-data
+
+# Or manually execute individual hooks
+cd hooks/post_ready.d
 ./10-init-nacos-admin.sh
 ```
 
+### Service Ports
+
+| Service | Host Port | Description |
+|---------|-----------|-------------|
+| HiMarket Frontend | 5173 | Developer portal UI |
+| HiMarket Admin | 5175 | Management console UI |
+| HiMarket Server | 8081 | Backend API service |
+| Nacos | 8848 | Nacos console |
+| Higress Console | 8001 | Higress console |
+| Higress Gateway | 8082 | Gateway HTTP endpoint |
+| MySQL | 3306 | Database service |
+| Redis | 6379 | Redis service |
+
 ### Installation Configuration
 
-All configurations are centralized in the `scripts/data/.env` file:
+The configuration file is `~/himarket-install-docker.env` (auto-generated in interactive mode), or can be copied from the `.env.example` template. Key configuration items:
 
-```bash
-cd docker/scripts/data
-vi .env
-```
-
-| Configuration Name | Configuration Description | **Default Value** |
+| Configuration Name | Description | Default Value |
 | --- | --- | --- |
-| MYSQL_ROOT_PASSWORD | MySQL Root password | 123456 |
-| MYSQL_DATABASE | MySQL database name | portal_db |
-| MYSQL_USER | MySQL username | portal_user |
-| MYSQL_PASSWORD | MySQL password | portal_pass |
-| USE_BUILTIN_MYSQL | Whether to use built-in MySQL (true/false) | true |
-| DB_HOST | Database address (required when using external database) | mysql |
-| DB_PORT | Database port (required when using external database) | 3306 |
-| DB_NAME | Database name (required when using external database) | portal_db |
-| DB_USERNAME | Database username (required when using external database) | portal_user |
-| DB_PASSWORD | Database password (required when using external database) | portal_pass |
-| USE_COMMERCIAL_NACOS | Whether to use commercial Nacos (true/false), skips Nacos deployment if used | false |
-| COMMERCIAL_NACOS_NAME | Commercial Nacos instance name | Empty |
-| COMMERCIAL_NACOS_SERVER_URL | Commercial Nacos service address | Empty |
-| COMMERCIAL_NACOS_USERNAME | Commercial Nacos username (required for commercial Nacos MCP data import) | Empty |
-| COMMERCIAL_NACOS_PASSWORD | Commercial Nacos password (required for commercial Nacos MCP data import) | Empty |
-| COMMERCIAL_NACOS_ACCESS_KEY | Commercial Nacos AccessKey | Empty |
-| COMMERCIAL_NACOS_SECRET_KEY | Commercial Nacos SecretKey | Empty |
-| USE_AI_GATEWAY | Whether to use AI Gateway (true/false), skips Higress deployment and related initialization scripts if used | false |
-| AI_GATEWAY_ID | AI Gateway instance ID | Empty |
-| AI_GATEWAY_NAME | AI Gateway instance name | Empty |
-| AI_GATEWAY_REGION | AI Gateway region | Empty |
-| AI_GATEWAY_ACCESS_KEY | AI Gateway AccessKey | Empty |
-| AI_GATEWAY_SECRET_KEY | AI Gateway SecretKey | Empty |
-| NACOS_ADMIN_PASSWORD | Nacos administrator password | nacos |
+| HIMARKET_SERVER_IMAGE | HiMarket backend service image | opensource-registry...himarket-server:latest |
+| HIMARKET_ADMIN_IMAGE | HiMarket management console image | opensource-registry...himarket-admin:latest |
+| HIMARKET_FRONTEND_IMAGE | HiMarket frontend service image | opensource-registry...himarket-frontend:latest |
+| MYSQL_IMAGE | MySQL image address | opensource-registry...mysql:latest |
+| NACOS_IMAGE | Nacos image address | nacos-registry...nacos-server:v3.2.1-2026.03.30 |
+| HIGRESS_IMAGE | Higress image address | higress-registry...all-in-one:latest |
+| REDIS_IMAGE | Redis image address | higress-registry...redis-stack-server:7.4.0-v3 |
+| SANDBOX_IMAGE | Sandbox image address | opensource-registry...sandbox:latest |
+| MYSQL_ROOT_PASSWORD | MySQL root password | Auto-generated |
+| MYSQL_PASSWORD | MySQL application password | Auto-generated |
+| NACOS_ADMIN_PASSWORD | Nacos admin password | Auto-generated |
 | HIGRESS_USERNAME | Higress login username | admin |
-| HIGRESS_PASSWORD | Higress login password | admin |
-| ADMIN_USERNAME | Backend administrator username | admin |
-| ADMIN_PASSWORD | Backend administrator password | admin |
-| FRONT_USERNAME | Frontend default username | demo |
-| FRONT_PASSWORD | Frontend default password | demo123 |
-| NACOS_IMAGE | Nacos image address | nacos-registry.cn-hangzhou.cr.aliyuncs.com/nacos/nacos-server:v3.1.1 |
-| NACOS_AUTH_IDENTITY_KEY | Nacos authentication identity key | serverIdentity |
-| NACOS_AUTH_IDENTITY_VALUE | Nacos authentication identity value | security |
-| NACOS_AUTH_TOKEN | Nacos authentication token | VGhpc0lzTXlDdXN0b21TZWNyZXRLZXkwMTIzNDU2Nzg= |
-| HIGRESS_IMAGE | Higress image address | higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest |
-| HIMARKET_SERVER_IMAGE | Himarket backend service image | opensource-registry.cn-hangzhou.cr.aliyuncs.com/higress-group/himarket-server:latest |
-| HIMARKET_ADMIN_IMAGE | Himarket management console image | opensource-registry.cn-hangzhou.cr.aliyuncs.com/higress-group/himarket-admin:latest |
-| HIMARKET_FRONTEND_IMAGE | Himarket frontend service image | opensource-registry.cn-hangzhou.cr.aliyuncs.com/higress-group/himarket-frontend:latest |
-| REDIS_IMAGE | Redis image address | higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/redis-stack-server:7.4.0-v3 |
-| MYSQL_IMAGE | MySQL image address | opensource-registry.cn-hangzhou.cr.aliyuncs.com/higress-group/mysql:latest |
+| HIGRESS_PASSWORD | Higress login password | Auto-generated |
+| ADMIN_USERNAME | Backend admin username | admin |
+| ADMIN_PASSWORD | Backend admin password | Auto-generated |
+| FRONT_USERNAME | Frontend default username | user |
+| FRONT_PASSWORD | Frontend default password | Auto-generated |
+| SKIP_AI_MODEL_INIT | Skip AI model initialization | true |
+| AI_MODEL_COUNT | Number of AI models | 0 |
 
+> For the complete list of configuration items, refer to the `.env.example` file. Log file is located at `~/himarket-install-docker.log`.
 
 ## 3. Cloud-Native Deployment with Helm
 
-Helm is a package management system for automating Kubernetes software management and release. Through the Helm one-click deployment script, you can quickly deploy and install HiMarket+Higress+Nacos on a Kubernetes cluster, including ten service components:
+Helm is a package manager for Kubernetes. The `install.sh` script enables one-click deployment of HiMarket + Higress + Nacos full-stack services on a K8s cluster, including the following components:
 
 + **HiMarket:**
-    - himarket-server: HiMarket AI open platform backend service;
-    - himarket-admin: HiMarket AI open platform management console, administrators configure Portal through this interface;
-    - himarket-frontend: HiMarket AI open platform frontend service, users browse and use APIs through this interface;
-    - mysql: Optional built-in database.
+    - himarket-server: Backend API service;
+    - himarket-admin: Management console interface;
+    - himarket-frontend: Developer portal interface;
+    - mysql: Optional built-in database;
+    - sandbox-shared: Remote sandbox service.
 + **Higress:**
-    - higress-console: Console, users browse and use Higress service through this interface;
-    - higress-controller: Control plane component, responsible for managing configuration distribution;
-    - higress-gateway: Data plane component, responsible for carrying data traffic;
+    - higress-console: Higress console;
+    - higress-controller: Control plane component;
+    - higress-gateway: Data plane component;
     - redis-stack-server: Cache component.
 + **Nacos:**
     - nacos: Nacos application;
@@ -169,98 +170,81 @@ Helm is a package management system for automating Kubernetes software managemen
 
 **Service Type Description:**
 
-Default is LoadBalancer type service, suitable for cloud environments (Alibaba Cloud ACK, AWS EKS, etc.). If your environment does not support LoadBalancer (such as local minikube, self-built clusters), you can use NodePort or port forwarding to access. After configuring Himarket in the backend, resolve the domain name to the himarket-frontend service access address, and users can access the frontend site through the domain name.
+Default is LoadBalancer type service, suitable for cloud environments (Alibaba Cloud ACK, AWS EKS, etc.). If your environment does not support LoadBalancer (such as local minikube, self-built clusters), you can use NodePort or port forwarding to access.
 
 ### Installation Commands
 
-**Environment Dependencies:** kubectl, python3/python, curl, jq
+**Environment Dependencies:** kubectl (connected to a K8s cluster), helm, curl, jq, python3
 
-**One-Click Startup:** Use the `deploy.sh` script to deploy HiMarket to a Kubernetes cluster.
+**Interactive Deployment (Recommended):**
 
 ```bash
 # Clone project
 git clone https://github.com/higress-group/himarket.git
-cd himarket/deploy/helm/scripts
+cd himarket/deploy/helm
 
-# Deploy full-stack services and initialize
-./deploy.sh install
-
-# Or deploy only Himarket services (without Nacos/Higress)
-./deploy.sh himarket-only
-
-# Uninstall
-./deploy.sh uninstall
+# Interactive deployment
+./install.sh
 ```
 
-The script will **execute data initialization hooks** after deployment: performs login data initialization, example MCP data initialization, and API product data initialization. Note that the script includes **deployment** and **data initialization** parts. Data initialization execution does not block deployment. If data initialization hooks fail, they can be retried in `/scripts/hooks/post_ready.d`. For example:
+**Non-Interactive Mode (CI/CD):**
 
 ```bash
-cd helm/scripts/hooks/post_ready.d
+cp .env.example ~/himarket-install.env
+# Edit ~/himarket-install.env to modify configurations
+./install.sh -n
+```
 
-# Retry failed script
+**Uninstall:**
+
+```bash
+./install.sh --uninstall
+```
+
+**Upgrade:**
+
+Re-run `./install.sh`, and the script will automatically detect existing deployments and provide upgrade options. Configurations are saved to `~/himarket-install.env` and reused for subsequent upgrades.
+
+**Retry Data Initialization:**
+
+```bash
+# Retry initialization hooks only, without redeploying services
+./install.sh --init-data
+
+# Or manually execute individual hooks
+cd hooks/post_ready.d
 ./10-init-nacos-admin.sh
 ```
 
 ### Installation Configuration
 
-Related configurations are centralized in the `scripts/data/.env` file:
+The configuration file is `~/himarket-install.env` (auto-generated in interactive mode), or can be copied from the `.env.example` template. Key configuration items:
 
-```bash
-cd helm/scripts/data
-vi .env
-```
-
-| Configuration Name | Configuration Description | **Default Value** |
+| Configuration Name | Description | Default Value |
 | --- | --- | --- |
-| NAMESPACE | Kubernetes namespace | himarket-system |
-| HIMARKET_ONLY | Deploy only Himarket (skip Nacos/Higress) | false |
-| HIMARKET_IMAGE_TAG | Himarket image tag | latest |
-| HIMARKET_MYSQL_IMAGE_TAG | MySQL image tag | latest |
-| HIMARKET_MYSQL_ENABLED | Whether to use built-in MySQL (true/false) | true |
-| EXTERNAL_DB_HOST | External database address (used when HIMARKET_MYSQL_ENABLED=false) | Your_External_DB_Host |
-| EXTERNAL_DB_PORT | External database port | 3306 |
-| EXTERNAL_DB_NAME | External database name | Your_DB_Name |
-| EXTERNAL_DB_USERNAME | External database username | Your_DB_Username |
-| EXTERNAL_DB_PASSWORD | External database password | Your_DB_Password |
-| USE_COMMERCIAL_NACOS | Whether to use commercial Nacos (true/false), skips Nacos deployment if used | false |
-| COMMERCIAL_NACOS_NAME | Commercial Nacos instance name | Empty |
-| COMMERCIAL_NACOS_SERVER_URL | Commercial Nacos service address | Empty |
-| COMMERCIAL_NACOS_USERNAME | Commercial Nacos username (required for commercial Nacos MCP data import) | Empty |
-| COMMERCIAL_NACOS_PASSWORD | Commercial Nacos password (required for commercial Nacos MCP data import) | Empty |
-| COMMERCIAL_NACOS_ACCESS_KEY | Commercial Nacos AccessKey | Empty |
-| COMMERCIAL_NACOS_SECRET_KEY | Commercial Nacos SecretKey | Empty |
-| USE_AI_GATEWAY | Whether to use AI Gateway (true/false), skips Higress deployment and related initialization scripts if used | false |
-| AI_GATEWAY_ID | AI Gateway instance ID | Empty |
-| AI_GATEWAY_NAME | AI Gateway instance name | Empty |
-| AI_GATEWAY_REGION | AI Gateway region | Empty |
-| AI_GATEWAY_ACCESS_KEY | AI Gateway AccessKey | Empty |
-| AI_GATEWAY_SECRET_KEY | AI Gateway SecretKey | Empty |
-| NACOS_ADMIN_PASSWORD | Nacos administrator password | nacos |
+| NAMESPACE | Kubernetes namespace | himarket |
+| HIMARKET_HUB | HiMarket image registry address | opensource-registry...higress-group |
+| HIMARKET_IMAGE_TAG | HiMarket image tag | latest |
+| NACOS_VERSION | Nacos image version | v3.2.1-2026.03.30 |
+| MYSQL_ROOT_PASSWORD | MySQL root password | Auto-generated |
+| MYSQL_PASSWORD | MySQL application password | Auto-generated |
+| NACOS_ADMIN_PASSWORD | Nacos admin password | Auto-generated |
 | HIGRESS_USERNAME | Higress login username | admin |
-| HIGRESS_PASSWORD | Higress login password | admin |
-| ADMIN_USERNAME | Backend administrator username | admin |
-| ADMIN_PASSWORD | Backend administrator password | admin |
-| FRONT_USERNAME | Frontend default username | demo |
-| FRONT_PASSWORD | Frontend default password | demo123 |
-| NACOS_VERSION | Nacos image version | v3.1.1 |
-| NACOS_IMAGE_REGISTRY | Nacos image registry | nacos-registry.cn-hangzhou.cr.aliyuncs.com |
-| NACOS_IMAGE_REPOSITORY | Nacos image address | nacos/nacos-server |
-| HIGRESS_REPO_NAME | Higress Helm repository name | higress.io |
-| HIGRESS_REPO_URL | Higress Helm repository URL | https://higress.cn/helm-charts |
-| HIGRESS_CHART_REF | Higress Chart reference | higress.io/higress |
-| NACOS_REPO_NAME | Nacos Helm repository name | ygqygq2 |
-| NACOS_REPO_URL | Nacos Helm repository URL | https://ygqygq2.github.io/charts/ |
-| NACOS_CHART_REF | Nacos Chart reference | ygqygq2/nacos |
-| HIMARKET_HUB | Himarket image registry address | opensource-registry.cn-hangzhou.cr.aliyuncs.com/higress-group |
-| HIMARKET_IMAGE_TAG | Himarket image tag | latest |
-| HIMARKET_MYSQL_IMAGE_TAG | MySQL image tag | latest |
+| HIGRESS_PASSWORD | Higress login password | Auto-generated |
+| ADMIN_USERNAME | Backend admin username | admin |
+| ADMIN_PASSWORD | Backend admin password | Auto-generated |
+| FRONT_USERNAME | Frontend default username | user |
+| FRONT_PASSWORD | Frontend default password | Auto-generated |
+| MYSQL_STORAGE_CLASS | MySQL storage class | alicloud-disk-essd |
+| MYSQL_STORAGE_SIZE | MySQL storage size | 50Gi |
+| SANDBOX_STORAGE_CLASS | Sandbox storage class | alicloud-disk-essd |
+| SANDBOX_STORAGE_SIZE | Sandbox storage size | 50Gi |
+| HIGRESS_INGRESS_CLASS | Higress IngressClass | himarket |
+| SKIP_AI_MODEL_INIT | Skip AI model initialization | true |
+| AI_MODEL_COUNT | Number of AI models | 0 |
 
-
-Note: HiMarket's Helm package is adapted for Alibaba Cloud ACK cluster use. The storage class persistence.storageClass: "alicloud-disk-essd" value in the /helm/values.yaml file needs to be adjusted according to the actual environment.
+> For the complete list of configuration items, refer to the `.env.example` file. Storage classes `MYSQL_STORAGE_CLASS` and `SANDBOX_STORAGE_CLASS` should be adjusted according to your K8s environment. Log file is located at `~/himarket-install.log`.
 
 ## 4. Cloud Platform Deployment (Alibaba Cloud)
 
 Alibaba Cloud Computing Nest supports the out-of-the-box version of this project, with one-click deployment of the community edition: [![Deploy on AlibabaCloud ComputeNest](https://service-info-public.oss-cn-hangzhou.aliyuncs.com/computenest.svg)](https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?type=user&ServiceId=service-b96fefcb748f47b7b958)
-
-
-
