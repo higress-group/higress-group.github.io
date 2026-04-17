@@ -28,16 +28,44 @@
         "link": "docs/himarket-usage"
       },
       {
-        "label": "HiMarket 统计",
+        "label": "MCP Server 管理",
         "translations": {
-          "en": "HiMarket Statistics"
+          "en": "MCP Server Management"
+        },
+        "link": "docs/himarket-mcp-server"
+      },
+      {
+        "label": "Skills 市场",
+        "translations": {
+          "en": "Skills Marketplace"
+        },
+        "link": "docs/himarket-skills"
+      },
+      {
+        "label": "Worker 管理",
+        "translations": {
+          "en": "Worker Management"
+        },
+        "link": "docs/himarket-workers"
+      },
+      {
+        "label": "OIDC/SSO 集成",
+        "translations": {
+          "en": "OIDC/SSO Integration"
+        },
+        "link": "docs/himarket-oidc-integration"
+      },
+      {
+        "label": "HiMarket 可观测",
+        "translations": {
+          "en": "HiMarket Observability"
         },
         "collapsed": false,
         "items": [
           {
-            "label": "HiMarket 可观测能力介绍",
+            "label": "可观测能力介绍",
             "translations": {
-              "en": "HiMarket Observability Introduction"
+              "en": "Observability Introduction"
             },
             "link": "docs/himarket-observability-overview"
           },

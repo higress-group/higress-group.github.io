@@ -19,7 +19,7 @@ authors: "Higress Team"
 当企业开始大规模部署 AI 应用时，往往会遇到这样的难题，当这些资源超过一定规模后，问题会变得越来越复杂，最终制约 AI 应用的进一步发展。
 
 ## 一、HiMarket 是什么
-Himarket 正是为解决这些问题而生，它是一个基于 Higress AI 网关构建的 AI 开放平台，旨在帮助企业快速构建私有的 AI 能力市场，统一管理 Model、MCP Server、Agent 等 AI 资源，Himarket 提供从资源管理到开发者生态构建的完整解决方案，可作为企业内部链接 AI 的最短路径，让企业内部 AI 入口统一。
+HiMarket 是基于 Higress AI 网关构建的企业级 AI 开放平台，帮助企业构建私有 AI 能力市场，统一管理和分发 LLM、MCP Server、Agent、Agent Skill、Agent Worker 等 AI 资源。平台将分散的 AI 能力封装为标准化的 API 产品，支持多版本管理和灰度发布，内置 Skills 市场和 Worker 市场供开发者浏览和安装，提供 HiChat AI 对话和 HiCoding 在线编程等自助式开发者体验，并具备安全管控、观测分析、计量计费等完整的企业级运营能力，让 AI 资源的共享和复用变得高效便捷。
 
 <div align="center">
 
@@ -30,7 +30,7 @@ Himarket 正是为解决这些问题而生，它是一个基于 Higress AI 网�
 ## 二、使用场景
 
 ## AI 场景（面对企业员工）
-HiMarket 提供了 HiChat 能力，通过 Chat 模式替代搜索，做市场调研和产品调研，生成运营图片等工作。
+HiMarket 提供了 HiChat 和 HiCoding 能力，HiChat 通过 Chat 模式替代搜索，做市场调研和产品调研，生成运营图片等工作；HiCoding 提供在线 AI 编程环境，支持 Vibe Coding 和人机协作开发。
 
 <div align="center">
 
@@ -77,7 +77,17 @@ HiMarket 支持构建涵盖 Agent、MCP Server、Model 的完整 AI 市场，让
 
 </div>
 
++ **Skills 市场**：支持上传和分发 Agent Skill，开发者可浏览、订阅和安装 Skill 包，快速为 Agent 扩展能力，无需从零开发。
+
++ **Worker 市场**：Worker 是可装载 Skills 的 Agent Worker 执行单元，支持将 Worker 打包上传、版本化管理和分发。管理员可创建 Worker 产品并从 Nacos 批量导入，开发者可通过门户浏览、订阅、下载 Worker 包或通过 CLI 安装。
+
 + **AI 资产生命周期管理**：管理员将资源接入平台，配置访问策略和使用文档，发布上架；开发者在门户浏览、订阅、获取调用凭证即可订阅使用。
+
+## AI 体验中心（面对开发者）
+HiMarket 提供了丰富的自助式开发者体验能力：
+
++ **HiChat AI 对话**：支持单模型对话与多模型对比，结合 MCP 进行工具调用测试，支持联网问答等增强功能。通过 HiChat，开发者可以快速体验和验证模型及 MCP 能力。
++ **HiCoding 在线编程**：集成安全沙箱环境，支持 Vibe Coding 和人机协作开发，实时查看文件变更与代码预览，让开发者无需本地环境即可进行 AI 辅助编程。
 
 ## AI 治理（面对AI维护者）
 HiMarket 实现了对 AI 资源的集中式治理，提供全方位的安全管控和协作能力：
@@ -104,7 +114,7 @@ HiMarket 内置完善的企业级管理能力，确保 AI 资源的安全开放�
 </div>
 
 ### 丰富观测能力
-观测分析（目前 v0.5.0 版本依赖阿里云商业化 SLS，开源版本的观测分析实现计划在后续版本中提供）：
+观测分析（支持阿里云 SLS 和数据库两种实现方式）：
 
 <div align="center">
 
@@ -130,43 +140,18 @@ HiMarket 内置完善的企业级管理能力，确保 AI 资源的安全开放�
 ## 四、快速体验
 HiMarket 提供多种部署方式，满足不同场景需求：
 
-+ 本地快速体验： [HiMarket 本地部署指南](https://github.com/higress-group/himarket/blob/main/README.md)。
-+ Docker Compose 部署： [HiMarket Docker 部署指南](https://github.com/higress-group/himarket/blob/main/deploy/docker/Docker%E9%83%A8%E7%BD%B2%E8%AF%B4%E6%98%8E.md)。
-+ Kubernetes 部署：[HiMarket Helm 部署指南](https://github.com/higress-group/himarket/blob/main/deploy/helm/Helm%E9%83%A8%E7%BD%B2%E8%AF%B4%E6%98%8E.md)。
+| 部署方式 | 适用场景 | 说明 |
+|---------|---------|------|
+| 本地搭建 | 开发调试 | 适合开发者本地开发和调试，需要 JDK 17、Node.js 18+、Maven 3.6+、MySQL 8.0+ |
+| Docker Compose | 快速体验 / 测试环境 | 交互式脚本一键部署全栈服务（HiMarket + Higress + Nacos + MySQL），开箱即用 |
+| Helm Chart | 生产环境 / K8s 集群 | 云原生部署，适用于阿里云 ACK、AWS EKS 等 Kubernetes 环境 |
+| 阿里云计算巢 | 一键云上体验 | 无需本地环境，直接在阿里云上一键部署社区版 |
 
-### 一键部署，开箱即用的完整方案
-HiMarket、Higress、Nacos 三大组件自动编排部署，无需人工干预。部署过程自动完成示例 MCP Server 的注册、配置和发布，让你在部署完成后即可体验 HiMarket 能力市场。无论是 Docker Compose 还是 Kubernetes 部署，均只需一条命令:
+Docker Compose 和 Helm 部署均支持交互式引导，自动完成核心组件部署、智能初始化（创建管理员账号、配置示例 MCP Server、发布演示 API 产品），部署完成后即可访问管理后台和开发者门户。
 
-```bash
-./deploy.sh install
-```
+详细部署步骤请参考：[HiMarket 部署指南](/docs/himarket/himarket-deployment/)
 
-部署脚本会自动完成以下所有工作:
-
-+ **核心组件部署**：自动拉起 MySQL、Nacos 配置中心、Higress 网关服务
-+ **应用本体部署**：部署 HiMarket 全套服务(管理后台、开发者门户、后端服务)
-+ **智能初始化**：自动创建管理员账号、配置示例 MCP Server、发布演示 API 产品
-+ **即开即用**：部署完成后即可访问管理后台和开发者门户，无需任何手动配置
-
-方案支持灵活的场景适配：
-
-+ 支持使用内置 MySQL 或对接已有数据库
-+ 支持使用阿里云商业化 MSE 服务和 AI 网关服务
-+ 支持`./deploy.sh himarket-only`仅部署 HiMarket 本体
-
-详细步骤请参考：[HiMarket Docker 一键部署指南](https://github.com/higress-group/himarket/blob/main/deploy/docker/Docker%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC%E8%AF%B4%E6%98%8E.md)，[HiMarket Helm 一键部署指南](https://github.com/higress-group/himarket/blob/main/deploy/helm/Helm%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC%E8%AF%B4%E6%98%8E.md)
-
-
-
-## 五、HiMarket Roadmap 规划
-
-<div align="center">
-
-![](https://github.com/user-attachments/assets/ebc9697c-c52c-4bd0-b71a-36bd3b9934f1)
-
-</div>
-
-## 六、欢迎共建
+## 五、欢迎共建
 HiMarket 是多个开源社区共同发起的开源项目，核心参与者包括阿里云、蚂蚁数科、高德、淘天等团队，面向开源可以助力企业快速构建 AI 开放平台，提供开箱即用的能力。
 
 HiMarket 仓库：
