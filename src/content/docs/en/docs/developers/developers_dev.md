@@ -14,7 +14,6 @@ This page shows the Higress development team. Please add your information to the
 
 | Name | GitHub | Organization |
 |-----|-------------------------------| --------------- |
-| Xinjun Wu | [2456868764](https://github.com/2456868764) | Independent Developer |
 | Yiquan Dong | [CH3CHO](https://github.com/CH3CHO) | Trip.com |
 | Yuanxiao Zhao | [EndlessSeeker](https://github.com/EndlessSeeker) | Alibaba Cloud        |
 | Leilei Geng | [gengleilei](https://github.com/gengleilei) | Alibaba Cloud |
@@ -27,6 +26,7 @@ This page shows the Higress development team. Please add your information to the
 ## Higress Approvers
 | Name | GitHub | Organization |
 |-----|-------------------------------| --------------- |
+| Xinjun Wu | [2456868764](https://github.com/2456868764) | Independent Developer |
 | Hongyu Liu | [aias00](https://github.com/aias00) | chinaunicom        |
 | Guofu Xing | [erasernoob](https://github.com/erasernoob) | SouthWest Petroleum University   |
 | Shuai Liu | [EricaLiu](https://github.com/Erica177) | Alibaba Cloud |
