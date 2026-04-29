@@ -154,7 +154,7 @@ export default defineConfig({
         {
           tag: "script",
           attrs: {
-            src: "https://www.googletagmanager.com/gtag/js?id=G-YHS75WKFBR",
+            src: "https://www.googletagmanager.com/gtag/js?id=G-34NDHLSRQX",
             async: true,
           },
         },
