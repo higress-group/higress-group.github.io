@@ -58,4 +58,4 @@
   }
   gtag("js", new Date());
 
-  gtag("config", "G-YHS75WKFBR");
+  gtag("config", "G-34NDHLSRQX");
