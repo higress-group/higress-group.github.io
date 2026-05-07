@@ -4,8 +4,6 @@ keywords: [ops,console,swagger]
 description: 介绍如何启用 Higress Console 内的 Swagger UI
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/ops/how-tos/enable-swagger.md
 ---
-# 启用 Console 内的 Swagger UI
-
 ## K8s 部署
 
 在 helm 安装或升级命令中添加 `--set higress-console.swagger.enabled=true` 参数即可。
@@ -26,3 +24,7 @@ SPRINGDOC_SWAGGER_UI_ENABLED=true
 ## 访问地址
 
 `http://<higress-console-endpoint>/swagger-ui/index.html`
+
+## 查看线上版本
+
+https://higress.ai/swagger
