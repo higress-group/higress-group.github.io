@@ -196,11 +196,18 @@ const enContact = [
         ))}
       </div>
     </div>
-    <div class="text-xs text-gray-11 text-center flex flex-col gap-1">
-      <div>© Higress Authors {currentYear} | Documentation Distributed under CC-BY-4.0</div>
-      <div>
-        Copyright © 2022-{currentYear}, Alibaba. All rights reserved. Alibaba has registered trademarks and uses trademarks.
+    <div class="text-xs text-gray-11 text-center flex flex-col gap-4">
+      <div class="flex flex-col items-center gap-3 py-4">
+        <a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
+          <img src="/img/cncf-logo.svg" alt="CNCF" class="h-10 dark:hidden" loading="lazy" decoding="async" />
+          <img src="/img/cncf-logo-white.svg" alt="CNCF" class="h-10 hidden dark:block" loading="lazy" decoding="async" />
+        </a>
+        <div class="text-sm text-gray-11">
+          We are a <a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Cloud Native Computing Foundation</a> sandbox project.
+        </div>
       </div>
+      <div>Copyright © Higress, a Series of LF Projects, LLC.</div>
+      <div>Documentation Distributed under CC-BY-4.0</div>
       {showICP && <div>浙公网安备 33011002016922 号 浙 ICP 备 12022327 号-1119</div>}
     </div>
   </div>
