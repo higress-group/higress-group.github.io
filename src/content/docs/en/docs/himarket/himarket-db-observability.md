@@ -14,7 +14,7 @@ Database-based observability is currently an experimental feature intended for P
 
 > **Source Repositories**:
 > - **Plugin + Collector source code**: [https://github.com/higress-group/db-log-pusher](https://github.com/higress-group/db-log-pusher)
-> - **Higress integration**: You need to manually clone the source code and integrate it into the `plugins/wasm-go/extensions` directory of the [Higress repository](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions)
+> - **Official image release**: Both `db-log-pusher` and `db-log-collector` are published by the source repository CI to the official Higress open-source registry
 
 This solution is based on `db-log-pusher` (WASM plugin) + `db-log-collector` (log collection service) + MySQL, providing fully open-source observability capabilities. It is suitable for small-to-medium traffic scenarios where you are not using Alibaba Cloud and prefer to store log data in your own database.
 
@@ -39,69 +39,86 @@ Component descriptions:
 
 ### Step 1: Prepare the MySQL Database
 
-Create the database and the `access_logs` table.
+Create the database first. The latest `db-log-collector` automatically creates the missing `access_logs` table in the database pointed to by `MYSQL_DSN`, and creates any missing indexes.
 
 :::tip[About Database Selection]
-The `access_logs` table can be placed in the same MySQL instance as the HiMarket business tables (HiMarket will reuse the application datasource for queries), or in a separate MySQL instance. If you use a separate instance, you will need to configure an additional datasource connection in Step 4. For small-to-medium traffic scenarios, sharing the same instance is recommended to simplify deployment.
+HiMarket DB observability queries reuse the application datasource (`spring.datasource`). There is currently no separate log datasource configuration. Therefore, `access_logs` must exist in the database pointed to by the HiMarket application datasource. For small-to-medium traffic scenarios, sharing the same database with the HiMarket business tables is recommended to simplify deployment.
 :::
 
+If you need to create the table manually, use the schema below, which matches the current `db-log-collector` source code. `start_time` is stored as Unix epoch seconds, and the table includes the `request_body` and `response_body` columns.
+
 ```sql
-CREATE DATABASE IF NOT EXISTS higress_poc DEFAULT CHARACTER SET utf8mb4;
+CREATE DATABASE IF NOT EXISTS higress_poc
+  DEFAULT CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 USE higress_poc;
 
-CREATE TABLE access_logs (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    start_time DATETIME NOT NULL COMMENT 'Request start time',
-    trace_id VARCHAR(255) COMMENT 'X-B3-TraceID',
-    authority VARCHAR(255) COMMENT 'Host/Authority',
-    method VARCHAR(10) COMMENT 'HTTP method',
-    path TEXT COMMENT 'Request path',
-    protocol VARCHAR(20) COMMENT 'HTTP protocol version',
-    request_id VARCHAR(255) COMMENT 'X-Request-ID',
-    user_agent TEXT COMMENT 'User-Agent',
-    x_forwarded_for TEXT COMMENT 'X-Forwarded-For',
-    response_code INT COMMENT 'Response status code',
-    response_flags VARCHAR(100) COMMENT 'Envoy response flags',
-    response_code_details TEXT COMMENT 'Response code details',
-    bytes_received BIGINT COMMENT 'Bytes received',
-    bytes_sent BIGINT COMMENT 'Bytes sent',
-    duration BIGINT COMMENT 'Total request duration (ms)',
-    upstream_cluster VARCHAR(255) COMMENT 'Upstream cluster name',
-    upstream_host VARCHAR(255) COMMENT 'Upstream host',
-    upstream_service_time VARCHAR(50) COMMENT 'Upstream service time',
-    upstream_transport_failure_reason TEXT COMMENT 'Upstream transport failure reason',
-    upstream_local_address VARCHAR(255) COMMENT 'Upstream local address',
-    downstream_local_address VARCHAR(255) COMMENT 'Downstream local address',
-    downstream_remote_address VARCHAR(255) COMMENT 'Downstream remote address',
-    route_name VARCHAR(255) COMMENT 'Route name',
-    requested_server_name VARCHAR(255) COMMENT 'SNI',
-    istio_policy_status VARCHAR(100) COMMENT 'Istio policy status',
-    ai_log JSON COMMENT 'AI log (model, token, MCP, etc.)',
-    instance_id VARCHAR(255) COMMENT 'Instance ID',
-    api VARCHAR(255) COMMENT 'API name',
-    model VARCHAR(255) COMMENT 'Model name',
-    consumer VARCHAR(255) COMMENT 'Consumer info',
-    route VARCHAR(255) COMMENT 'Route name',
-    service VARCHAR(255) COMMENT 'Service name',
-    mcp_server VARCHAR(255) COMMENT 'MCP Server',
-    mcp_tool VARCHAR(255) COMMENT 'MCP Tool',
-    input_tokens BIGINT COMMENT 'Input token count',
-    output_tokens BIGINT COMMENT 'Output token count',
-    total_tokens BIGINT COMMENT 'Total token count',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_start_time (start_time),
-    INDEX idx_trace_id (trace_id),
-    INDEX idx_authority (authority),
-    INDEX idx_method (method),
-    INDEX idx_response_code (response_code),
-    INDEX idx_instance_id (instance_id),
-    INDEX idx_api (api),
-    INDEX idx_model (model),
-    INDEX idx_consumer (consumer),
-    INDEX idx_mcp_server (mcp_server)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Higress Access Logs';
+CREATE TABLE IF NOT EXISTS access_logs (
+  id bigint NOT NULL AUTO_INCREMENT COMMENT 'Primary key ID',
+  start_time bigint NULL DEFAULT NULL COMMENT 'Request start time (Unix epoch seconds)',
+  trace_id varchar(64) NULL DEFAULT NULL COMMENT 'X-B3-TraceID distributed tracing ID',
+  authority varchar(128) NULL DEFAULT NULL COMMENT 'Host/Authority domain',
+  method varchar(16) NULL DEFAULT NULL COMMENT 'HTTP method (GET/POST, etc.)',
+  path varchar(1024) NULL DEFAULT NULL COMMENT 'Request path',
+  protocol varchar(16) NULL DEFAULT NULL COMMENT 'HTTP protocol version (HTTP/1.1, etc.)',
+  request_id varchar(64) NULL DEFAULT NULL COMMENT 'X-Request-ID request identifier',
+  user_agent varchar(512) NULL DEFAULT NULL COMMENT 'User-Agent client information',
+  x_forwarded_for varchar(256) NULL DEFAULT NULL COMMENT 'X-Forwarded-For client IP',
+  response_code int NULL DEFAULT NULL COMMENT 'Response status code (200/404/500, etc.)',
+  response_flags varchar(64) NULL DEFAULT NULL COMMENT 'Envoy response flags',
+  response_code_details varchar(256) NULL DEFAULT NULL COMMENT 'Response code details',
+  bytes_received bigint NULL DEFAULT NULL COMMENT 'Bytes received',
+  bytes_sent bigint NULL DEFAULT NULL COMMENT 'Bytes sent',
+  duration int NULL DEFAULT NULL COMMENT 'Total request duration (ms)',
+  upstream_cluster varchar(256) NULL DEFAULT NULL COMMENT 'Upstream cluster name',
+  upstream_host varchar(256) NULL DEFAULT NULL COMMENT 'Upstream host address',
+  upstream_service_time varchar(32) NULL DEFAULT NULL COMMENT 'Upstream service time',
+  upstream_transport_failure_reason varchar(256) NULL DEFAULT NULL COMMENT 'Upstream transport failure reason',
+  upstream_local_address varchar(64) NULL DEFAULT NULL COMMENT 'Upstream local address',
+  downstream_local_address varchar(64) NULL DEFAULT NULL COMMENT 'Downstream local address',
+  downstream_remote_address varchar(64) NULL DEFAULT NULL COMMENT 'Downstream remote address',
+  route_name varchar(256) NULL DEFAULT NULL COMMENT 'Route name',
+  requested_server_name varchar(256) NULL DEFAULT NULL COMMENT 'SNI server name',
+  istio_policy_status varchar(64) NULL DEFAULT NULL COMMENT 'Istio policy status',
+  ai_log json NULL DEFAULT NULL COMMENT 'WASM AI log (JSON string)',
+  instance_id varchar(128) NULL DEFAULT NULL COMMENT 'Instance ID (Pod name or container ID)',
+  api varchar(128) NULL DEFAULT NULL COMMENT 'API name (for example, chat/completions)',
+  model varchar(128) NULL DEFAULT NULL COMMENT 'Model name (for example, qwen-max)',
+  consumer varchar(256) NULL DEFAULT NULL COMMENT 'Consumer information (username/API key, etc.)',
+  route varchar(256) NULL DEFAULT NULL COMMENT 'Route name (redundant field for easier queries)',
+  service varchar(256) NULL DEFAULT NULL COMMENT 'Service name (upstream service)',
+  mcp_server varchar(256) NULL DEFAULT NULL COMMENT 'MCP server name',
+  mcp_tool varchar(256) NULL DEFAULT NULL COMMENT 'MCP tool name',
+  input_tokens bigint NULL DEFAULT NULL COMMENT 'Input token count',
+  output_tokens bigint NULL DEFAULT NULL COMMENT 'Output token count',
+  total_tokens bigint NULL DEFAULT NULL COMMENT 'Total token count',
+  request_body mediumtext NULL DEFAULT NULL COMMENT 'Request body (up to 16MB)',
+  response_body mediumtext NULL DEFAULT NULL COMMENT 'Response body (up to 16MB)',
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='HTTP access log table';
+
+CREATE INDEX idx_start_time ON access_logs (start_time DESC);
+CREATE INDEX idx_trace_id ON access_logs (trace_id);
+CREATE INDEX idx_authority_time ON access_logs (authority, start_time DESC);
+CREATE INDEX idx_response_code_time ON access_logs (response_code, start_time DESC);
+CREATE INDEX idx_path ON access_logs (path(255));
+CREATE INDEX idx_method_authority ON access_logs (method, authority);
+CREATE INDEX idx_duration ON access_logs (duration DESC);
+CREATE INDEX idx_upstream_cluster ON access_logs (upstream_cluster, start_time DESC);
+CREATE INDEX idx_route_name ON access_logs (route_name, start_time DESC);
+CREATE INDEX idx_instance_id ON access_logs (instance_id, start_time DESC);
+CREATE INDEX idx_api ON access_logs (api, start_time DESC);
+CREATE INDEX idx_model ON access_logs (model, start_time DESC);
+CREATE INDEX idx_consumer ON access_logs (consumer, start_time DESC);
+CREATE INDEX idx_service ON access_logs (service, start_time DESC);
+CREATE INDEX idx_mcp_server ON access_logs (mcp_server, start_time DESC);
+CREATE INDEX idx_mcp_tool ON access_logs (mcp_tool, start_time DESC);
 ```
+
+:::caution[Existing Table Migration]
+If you already created an `access_logs` table from the old document with `start_time DATETIME`, the latest `db-log-collector` will not automatically alter existing columns or add request/response body columns. Migrate the table manually, or drop the old table and let the collector create the new schema.
+:::
 
 ### Step 2: Deploy the db-log-collector Service
 
@@ -131,7 +148,7 @@ spec:
     spec:
       containers:
       - name: collector
-        image: registry.cn-shanghai.aliyuncs.com/daofeng/log-collector:latest
+        image: opensource-registry.cn-hangzhou.cr.aliyuncs.com/higress-group/log-collector:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -194,7 +211,7 @@ docker run -d \
   -p 8080:8080 \
   -e MYSQL_DSN="user:password@tcp(mysql-host:3306)/higress_poc?charset=utf8mb4&parseTime=True&loc=Local" \
   --restart unless-stopped \
-  registry.cn-shanghai.aliyuncs.com/daofeng/log-collector:latest
+  opensource-registry.cn-hangzhou.cr.aliyuncs.com/higress-group/log-collector:latest
 ```
 
 **Parameter descriptions:**
@@ -246,9 +263,9 @@ This is the simplest and most straightforward approach — you can complete the 
 2. **Fill in the plugin information**
    - **Plugin Name**: `db-log-pusher-plugin`
    - **Plugin Description**: `Collect HTTP request logs to database`
-   - **Image URL**: `https://pysrc-test.oss-cn-beijing.aliyuncs.com/higress-plugin/plugin-20260323-101235.wasm`
+   - **Image URL**: `oci://opensource-registry.cn-hangzhou.cr.aliyuncs.com/plugins/db-log-pusher:latest`
    - **Plugin Execution Phase**: Select **Authentication Phase** (AUTHN)
-   - **Plugin Execution Priority**: `1010` (range 1~1000, higher values mean higher priority)
+   - **Plugin Execution Priority**: `1000` (must be higher than `ai-statistics`; within the same phase, higher numbers run earlier on the request path and later on the response path)
    - **Plugin Pull Policy**: Select **Always Pull** (Always)
 
 3. **Configure routes and policies**
@@ -273,9 +290,9 @@ This is the simplest and most straightforward approach — you can complete the 
    - Higress will automatically deploy the plugin to the gateway
 
 Configuration notes:
-- **Execution Phase**: Select the Authentication Phase (AUTHN) for statistics and log collection
-- **Priority**: Set to 1010 to ensure it is higher than the `ai-statistics` plugin's priority
-- **Pull Policy**: Always pull the latest version to ensure you are using the newest plugin features
+- **Execution Phase**: Select the Authentication Phase (AUTHN), so `db-log-pusher` is placed before `ai-statistics` in the request filter chain and therefore reads AI logs after `ai-statistics` on the response path
+- **Priority**: Set it to 1000 to keep it higher than `ai-statistics` when they are in the same phase; within the same phase, higher numbers run earlier on the request path and later on the response path
+- **Pull Policy**: When using `latest`, select Always so the gateway re-pulls the registry's current `latest` content; the actual version still depends on what the registry tag points to
 
 #### Option 2: Configure via Kubernetes YAML
 
@@ -291,13 +308,12 @@ metadata:
     higress.io/wasm-plugin-name: db-log-pusher
     higress.io/wasm-plugin-category: logging
 spec:
-  url: https://pysrc-test.oss-cn-beijing.aliyuncs.com/higress-plugin/plugin-20260323-101235.wasm
-  sha256: ""  # Recommended: fill in the SHA256 checksum of the WASM file
+  url: oci://opensource-registry.cn-hangzhou.cr.aliyuncs.com/plugins/db-log-pusher:latest
   defaultConfigDisable: true
   failStrategy: FAIL_OPEN
   imagePullPolicy: Always
   phase: AUTHN
-  priority: 1010
+  priority: 1000
   matchRules:
     - configDisable: false
       ingress:
@@ -308,6 +324,7 @@ spec:
         collector_service_name: "log-collector.higress-system.svc.cluster.local"
         collector_port: 80
         collector_path: "/ingest"
+        # instance_id: "higress-gateway"  # Optional. If unset, the plugin tries to read it from gateway metadata.
 ```
 
 Apply the configuration:
@@ -317,22 +334,23 @@ kubectl apply -f db-log-pusher.yaml
 ```
 
 :::note[Collector Address for Local Development]
-If db-log-collector is running locally (not in K8s), change `collector_service_name` to your machine's IP (e.g., `192.168.1.100`) and `collector_port` to the mapped port (e.g., `8081`).
+If db-log-collector runs outside the K8s cluster, set `collector_service_name` to an address that the Higress gateway pods can resolve and reach, and make sure the data plane has a matching outbound cluster, for example through a Kubernetes Service, ServiceEntry, or resolvable DNS/FQDN. Do not use a local `localhost` address that the gateway pods cannot access.
 :::
 
 Plugin configuration parameters:
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `collector_service_name` | string | Yes | - | Collector service address (K8s FQDN or IP) |
+| `collector_service_name` | string | Yes | - | Collector service address resolvable and reachable from the gateway data plane, such as a FQDN or service address |
 | `collector_port` | int | Yes | - | Collector port |
 | `collector_path` | string | No | `/` | API path for receiving logs |
+| `instance_id` | string | No | Automatically read from gateway metadata | Gateway instance ID for instance-level queries |
 
 #### Plugin Execution Order
 
-If you need to read AI logs written by the `ai-statistics` plugin, ensure that `db-log-pusher` executes after `ai-statistics`:
-- When in different phases, the phase of `db-log-pusher` should be later than that of `ai-statistics`
-- When in the same phase, the priority of `db-log-pusher` should be higher than that of `ai-statistics` (higher numbers execute first)
+`db-log-pusher` reads AI logs written by `ai-statistics` on the response path. Because HTTP filters run in reverse order on the response path, ensure that `db-log-pusher` is placed before `ai-statistics` in the request filter chain:
+- When in different phases, the phase of `db-log-pusher` should be earlier than that of `ai-statistics` (for example, AUTHN is earlier than the default phase)
+- When in the same phase, the priority of `db-log-pusher` should be higher than that of `ai-statistics` (higher numbers run earlier on the request path and later on the response path)
 
 ### Step 4: Configure HiMarket
 
@@ -350,7 +368,7 @@ observability:
 ```
 
 :::tip[Database Connection]
-By default, HiMarket reuses the application datasource (i.e., the `spring.datasource` configuration) to query the `access_logs` table. If the `access_logs` table and the HiMarket business tables are in the same MySQL instance, no additional configuration is needed. If you use a separate MySQL instance for log storage, you need to point HiMarket's database connection to that instance, or create the `access_logs` table in the HiMarket business database.
+By default, HiMarket reuses the application datasource (i.e., the `spring.datasource` configuration) to query the `access_logs` table. If the `access_logs` table and the HiMarket business tables are in the same database, no additional configuration is needed. Do not create `access_logs` only in a separate database and expect `OBSERVABILITY_LOG_SOURCE=DB` to connect to it automatically.
 :::
 
 ### Step 5: Start and Verify
@@ -374,7 +392,6 @@ If you need to customize db-log-pusher or db-log-collector, refer to the source 
 
 **Source repository relationships:**
 - **Standalone repository**: [https://github.com/higress-group/db-log-pusher](https://github.com/higress-group/db-log-pusher) - Contains the complete plugin and collector source code
-- **Higress integration**: [https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions) - The plugin directory in the official Higress repository
 
 **Source code structure:**
 ```
@@ -397,14 +414,8 @@ Build the image:
 # Clone the db-log-pusher repository
 git clone git@github.com:higress-group/db-log-pusher.git
 
-# Clone the higress repository
-git clone git@github.com:alibaba/higress.git
-
-# Copy the db-log-collector directory to the higress plugin directory
-cp -r db-log-pusher/log-collector higress/plugins/wasm-go/extensions/db-log-pusher/
-
 # Enter the directory and build the image
-cd higress/plugins/wasm-go/extensions/db-log-pusher/log-collector
+cd db-log-pusher/log-collector
 docker build -t your-registry/log-collector:latest .
 ```
 
