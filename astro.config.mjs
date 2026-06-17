@@ -16,6 +16,7 @@ import {
 import fs from "node:fs/promises";
 import path from "node:path";
 import { writeLlmsTxt } from "./src/utils/llmsTxtGenerator.ts";
+import { GA_MEASUREMENT_ID } from "./src/config/analytics.mjs";
 
 // 加载所有 sidebar 配置
 const zhDocsSidebar = loadSidebarConfig("root", "docs");
@@ -151,12 +152,19 @@ export default defineConfig({
             href: "https://img.alicdn.com/imgextra/i4/O1CN01AViQMJ1J2lY4OPRgv_!!6000000000971-2-tps-376-375.png",
           },
         },
+        // Google Analytics (gtag.js) — measurement ID lives in src/config/analytics.mjs
+        // so it stays in sync with src/components/analytics/GoogleAnalytics.astro
+        // (used by non-Starlight pages via src/layout/siteLayout.astro).
         {
           tag: "script",
           attrs: {
-            src: "https://www.googletagmanager.com/gtag/js?id=G-34NDHLSRQX",
+            src: `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`,
             async: true,
           },
+        },
+        {
+          tag: "script",
+          content: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '${GA_MEASUREMENT_ID}');`,
         },
         {
           tag: "script",

@@ -51,11 +51,8 @@
       s.parentNode.insertBefore(hm, s);
   })();
 
-
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-      dataLayer.push(arguments);
-  }
-  gtag("js", new Date());
-
-  gtag("config", "G-34NDHLSRQX");
+  // Google Analytics initialization moved to src/components/analytics/GoogleAnalytics.astro
+  // (via src/config/analytics.mjs). The gtag.js loader is now injected in two places:
+  //   - astro.config.mjs head[]                (Starlight-rendered docs pages)
+  //   - src/layout/siteLayout.astro <head>     (marketing / blog / etc.)
+  // Keeping the analytics ID in a single source-of-truth file.

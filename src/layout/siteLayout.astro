@@ -4,6 +4,7 @@ import Navbar from '../container/Navbar.astro';
 import PageFooter from '../container/page-footer.astro';
 import TopBar from '@/components/top-bar/topBar.astro';
 import ScrollProgress from '../components/scroll-progress/ScrollProgress.astro';
+import GoogleAnalytics from '../components/analytics/GoogleAnalytics.astro';
 import { useTranslations } from "@/i18n/utils";
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
@@ -93,6 +94,8 @@ const headEntry = {
       rel="icon"
       href="https://img.alicdn.com/imgextra/i4/O1CN01AViQMJ1J2lY4OPRgv_!!6000000000971-2-tps-376-375.png"
     />
+
+    <GoogleAnalytics />
 
   </head>
   <body>
