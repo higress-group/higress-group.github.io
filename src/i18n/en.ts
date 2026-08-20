@@ -4,7 +4,6 @@ export default {
   "page.header.gateway": "API Gateway",
   "page.header.ai.gateway": "AI Gateway",
   "page.header.himarket": "HiMarket",
-  "page.header.hiclaw": "HiClaw",
   "navbar.product": "Product",
   "navbar.product.features": "Features",
   "navbar.product.benefits": "Benefits",
@@ -747,23 +746,6 @@ export default {
 
     'himarket.product.extension_capability': 'Extensibility',
     'himarket.product.extension_capability.desc': 'HiMarket offers flexible customization to quickly integrate with existing enterprise systems. The portal supports custom domains and branding styles, and homepage modules and product categories can be configured on demand. Identity authentication is compatible with username/password and enterprise OIDC/SSO/IDaaS integration, while key processes (registration, credential application, subscription) support automatic or manual approval configurations.',
-
-    // HiClaw Product Page
-    'hiclaw.product.intro.desc': 'Open-source Agent Teams system with IM-based multi-Agent collaboration and human-in-the-loop oversight. Manager Agent coordinates multiple Worker Agents to complete complex tasks. All Agent communication happens in Matrix Rooms where humans can observe and intervene at any time.',
-    'hiclaw.product.core_features.title': 'Core Features',
-    'hiclaw.product.core_features.desc': 'HiClaw provides out-of-the-box multi-Agent collaboration capabilities.',
-
-    'hiclaw.product.agent_teams': 'Agent Teams Collaboration',
-    'hiclaw.product.agent_teams.desc': 'Manager Agent automatically coordinates multiple Worker Agents to complete complex tasks. Create and destroy Workers on demand, enabling flexible Agent team management. Worker creation, task dispatch, and progress monitoring through natural language conversation.',
-
-    'hiclaw.product.human_loop': 'Human-in-the-Loop',
-    'hiclaw.product.human_loop.desc': 'All Agent communication happens in Matrix Rooms where administrators can observe all conversations and intervene at any time. Human-in-the-Loop design ensures AI behavior is controllable, auditable, and intervenable.',
-
-    'hiclaw.product.ai_gateway': 'AI Gateway Integration',
-    'hiclaw.product.ai_gateway.desc': 'Unified LLM access management through Higress AI Gateway, with per-Worker credential assignment. Workers only hold their own consumer tokens - even if compromised, they cannot access upstream API credentials, ensuring security.',
-
-    'hiclaw.product.mcp_integration': 'MCP Tool Integration',
-    'hiclaw.product.mcp_integration.desc': 'Access external tools (GitHub, etc.) via MCP Server with centralized credential management at the gateway. Workers never see real credentials. Supports dynamic permission control - grant or revoke Worker MCP Server access at any time.',
 
     // Product Layout
     'product.layout.enterprise.title': 'Explore AI Gateway Enterprise',
