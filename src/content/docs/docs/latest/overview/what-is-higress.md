@@ -1,14 +1,14 @@
 ---
 title: Higress 是什么?
 keywords: [Higress]
-description: Higress 是什么
+description: Higress 是 CNCF Sandbox 开源 AI 网关，基于 Istio 与 Envoy 构建，统一治理 LLM API、AI Agent、MCP Server 与云原生流量。
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/zh-cn/overview/what-is-higress.md
 ---
 
 
 ## Higress 简介
 
-Higress 是一款云原生 API 网关，内核基于 Istio 和 Envoy，可以用 Go/Rust/JS 等编写 Wasm 插件，提供了数十个现成的通用插件，以及开箱即用的控制台（demo 点[这里](http://demo.higress.io/)）
+Higress 是 CNCF Sandbox 项目，是一款基于 Istio 和 Envoy 构建的开源 AI 原生 API 网关。它可以使用 Go/Rust/JS 等语言编写 Wasm 插件，提供数十个开箱即用的通用插件和管理控制台（demo 点[这里](http://demo.higress.io/)）。
 
 Higress 在阿里内部为解决 Tengine reload 对长连接业务有损，以及 gRPC/Dubbo 负载均衡能力不足而诞生。
 

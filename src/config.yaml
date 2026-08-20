@@ -25,16 +25,16 @@ metadata:
   title:
     default: AstroWind
     template: '%s — Higress'
-  description: "Higress - AI Native API 网关，为 AI 应用提供统一的流量管理、安全防护和服务治理能力"
+  description: "Higress 是 CNCF Sandbox 开源 AI 网关，为 LLM API、AI Agent 与 MCP Server 提供统一接入、流量治理、安全防护和可观测能力"
   robots:
     index: true
     follow: true
   openGraph:
     site_name: Higress
     images:
-      - url: '~/assets/images/default.png'
+      - url: '/img/higress-ai-gateway-og.png'
         width: 1200
-        height: 628
+        height: 630
     type: website
   twitter:
     handle: '@onwidget'

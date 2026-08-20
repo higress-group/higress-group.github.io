@@ -197,15 +197,17 @@ const enContact = [
       </div>
     </div>
     <div class="text-xs text-gray-11 text-center flex flex-col gap-4">
-      <div class="flex flex-col items-center gap-3 py-4">
-        <a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
-          <img src="/img/cncf-logo.svg" alt="CNCF" class="h-10 dark:hidden" loading="lazy" decoding="async" />
-          <img src="/img/cncf-logo-white.svg" alt="CNCF" class="h-10 hidden dark:block" loading="lazy" decoding="async" />
-        </a>
-        <div class="text-sm text-gray-11">
-          We are a <a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Cloud Native Computing Foundation</a> sandbox project.
-        </div>
-      </div>
+      <a
+        href="https://www.cncf.io/projects/higress/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mx-auto flex w-full max-w-2xl self-center flex-col items-center gap-3 rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 text-center transition-all hover:border-primary/30 hover:shadow-sm dark:border-gray-700 dark:bg-gray-900"
+      >
+        <img src="/img/cncf-logo.svg" alt="Cloud Native Computing Foundation" class="h-11 w-auto dark:hidden md:h-13" loading="lazy" decoding="async" />
+        <img src="/img/cncf-logo-white.svg" alt="Cloud Native Computing Foundation" class="hidden h-11 w-auto dark:block md:h-13" loading="lazy" decoding="async" />
+        <strong class="text-base font-semibold text-strong">{t('home.cncf.badge')}</strong>
+        <span class="max-w-xl text-sm leading-relaxed text-gray-11">{t('page.footer.cncf_project')}</span>
+      </a>
       <div>Copyright © Higress, a Series of LF Projects, LLC.</div>
       <div>For website terms of use, trademark policy and other project policies, please see <a href="https://lfprojects.org/policies/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">lfprojects.org/policies</a></div>
       <div>Documentation Distributed under CC-BY-4.0</div>

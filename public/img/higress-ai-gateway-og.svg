@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Higress AI Gateway</title>
+  <desc id="desc">Higress connects AI agents and applications to models, tools, and APIs.</desc>
+  <defs>
+    <linearGradient id="background" x1="62" y1="24" x2="1120" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F9FAFF"/>
+      <stop offset="0.55" stop-color="#F2F3FF"/>
+      <stop offset="1" stop-color="#E8E7FF"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3E5CF4"/>
+      <stop offset="1" stop-color="#7657FF"/>
+    </linearGradient>
+    <linearGradient id="route" x1="430" y1="315" x2="945" y2="315" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B1BCFF"/>
+      <stop offset="0.5" stop-color="#5F67F7"/>
+      <stop offset="1" stop-color="#A68EFF"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#343B91" flood-opacity="0.16"/>
+    </filter>
+    <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#4850A0" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="36" fill="url(#background)"/>
+  <circle cx="1050" cy="40" r="260" fill="#7657FF" opacity="0.07"/>
+  <circle cx="950" cy="610" r="310" fill="#3E5CF4" opacity="0.06"/>
+  <path d="M0 505C238 430 344 583 575 506s384-57 625 4v120H0Z" fill="#fff" opacity="0.54"/>
+
+  <g transform="translate(72 58)">
+    <rect width="64" height="64" rx="16" fill="url(#brand)"/>
+    <path d="M17 20v24M47 20v24M17 32h30" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="17" cy="20" r="4" fill="#fff"/>
+    <circle cx="47" cy="20" r="4" fill="#fff"/>
+    <circle cx="17" cy="44" r="4" fill="#fff"/>
+    <circle cx="47" cy="44" r="4" fill="#fff"/>
+    <text x="84" y="47" fill="#171A2A" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="-1">Higress</text>
+  </g>
+
+  <text x="72" y="192" fill="#171A2A" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700" letter-spacing="-1.5">Open-source AI Gateway</text>
+  <text x="72" y="240" fill="#5C6279" font-family="Inter, Arial, sans-serif" font-size="25">Unified traffic for LLM APIs, Agents, MCP Servers and tools</text>
+
+  <g filter="url(#soft-shadow)">
+    <g transform="translate(74 306)">
+      <rect width="210" height="72" rx="20" fill="#fff" stroke="#DDE1F7"/>
+      <circle cx="38" cy="36" r="16" fill="#ECF0FF"/>
+      <path d="M31 37l6 6 10-14" fill="none" stroke="#4D64F4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="67" y="44" fill="#30364E" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600">AI Agents</text>
+    </g>
+    <g transform="translate(74 398)">
+      <rect width="210" height="72" rx="20" fill="#fff" stroke="#DDE1F7"/>
+      <circle cx="38" cy="36" r="16" fill="#F0ECFF"/>
+      <path d="M29 29h18v14H29zM33 47h10" fill="none" stroke="#7457F6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="67" y="44" fill="#30364E" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600">Applications</text>
+    </g>
+  </g>
+
+  <path d="M284 342C353 342 363 365 431 365M284 434C354 434 365 397 431 397" fill="none" stroke="url(#route)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M769 365C841 365 854 332 930 332M769 397C842 397 852 424 930 424" fill="none" stroke="url(#route)" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="334" cy="351" r="6" fill="#6574F7"/>
+  <circle cx="865" cy="347" r="6" fill="#7657FF"/>
+
+  <g transform="translate(431 296)" filter="url(#shadow)">
+    <rect width="338" height="170" rx="34" fill="url(#brand)"/>
+    <circle cx="73" cy="69" r="33" fill="#fff" opacity="0.16"/>
+    <path d="M58 55v28M88 55v28M58 69h30" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <text x="122" y="78" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">Higress</text>
+    <text x="42" y="128" fill="#EDEEFFFF" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600">AI Gateway</text>
+    <text x="42" y="153" fill="#EDEEFFFF" font-family="Inter, Arial, sans-serif" font-size="16">Secure · Govern · Observe</text>
+  </g>
+
+  <g filter="url(#soft-shadow)">
+    <g transform="translate(930 296)">
+      <rect width="198" height="72" rx="20" fill="#fff" stroke="#DDE1F7"/>
+      <circle cx="38" cy="36" r="16" fill="#ECF0FF"/>
+      <path d="M31 31h14v10H31zM35 45h6" fill="none" stroke="#4D64F4" stroke-width="3" stroke-linejoin="round"/>
+      <text x="67" y="44" fill="#30364E" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600">Models</text>
+    </g>
+    <g transform="translate(930 388)">
+      <rect width="198" height="72" rx="20" fill="#fff" stroke="#DDE1F7"/>
+      <circle cx="38" cy="36" r="16" fill="#F0ECFF"/>
+      <path d="M32 36h12M38 30v12" fill="none" stroke="#7457F6" stroke-width="3" stroke-linecap="round"/>
+      <text x="67" y="44" fill="#30364E" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600">Tools &amp; APIs</text>
+    </g>
+  </g>
+
+  <g transform="translate(72 548)">
+    <rect width="226" height="42" rx="21" fill="#fff" stroke="#CFD5F5"/>
+    <circle cx="24" cy="21" r="8" fill="#0086FF"/>
+    <text x="43" y="28" fill="#3E4661" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">CNCF Sandbox Project</text>
+  </g>
+  <text x="1128" y="579" text-anchor="end" fill="#6E748A" font-family="Inter, Arial, sans-serif" font-size="20">higress.ai</text>
+</svg>

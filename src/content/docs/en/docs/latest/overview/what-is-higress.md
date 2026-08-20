@@ -1,14 +1,14 @@
 ---
 title: What Is Higress?
 keywords: [Higress]
-description: Higress introduction
+description: Higress is a CNCF Sandbox open-source AI gateway built on Istio and Envoy for LLM APIs, AI agents, MCP servers, and cloud-native traffic.
 custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/main/src/content/docs/latest/en/overview/what-is-higress.md
 ---
 
 
 ## Higress Introduction
 
-Higress is a cloud-native API gateway with a kernel based on Istio and Envoy. It allows writing Wasm plugins using Go/Rust/JS and other languages, provides dozens of ready-to-use general-purpose plugins, and comes with an out-of-the-box console (click [here](http://demo.higress.io/) for a demo).
+Higress is a CNCF Sandbox project and an open-source AI-native API gateway built on Istio and Envoy. It supports Wasm plugins written in Go, Rust, JavaScript, and other languages, provides dozens of ready-to-use plugins, and includes an out-of-the-box console (click [here](http://demo.higress.io/) for a demo).
 
 Higress was born within Alibaba to solve the issue of Tengine reload causing damage to long-connection services, as well as insufficient load balancing capabilities for gRPC/Dubbo.
 

@@ -9,8 +9,8 @@ export default {
   "navbar.product.features": "功能特性",
   "navbar.product.benefits": "核心优势",
   "navbar.docs": "文档",
-  "navbar.enterprise": "企业版",
-  "navbar.enterprise.intro": "企业版介绍",
+  "navbar.enterprise": "AI 网关企业版",
+  "navbar.enterprise.intro": "AI 网关企业版介绍",
   "navbar.enterprise.solutions": "解决方案",
   "navbar.community": "社区",
   "navbar.community.blog": "博客",
@@ -93,11 +93,13 @@ export default {
 	'commmon.footer.actions.edas': '云服务 EDAS',
 	'commmon.actions.download': '下载',
 
-	'home.title': `${SITE.name} | AI Gateway | AI Native API Gateway`,
+	'home.title': `${SITE.name} | 开源 AI 网关 | CNCF Sandbox 项目`,
 	'home.title.native.ai':'AI原生',
 	'home.title.native.api.gateway':'的API网关',
-	'home.description': 'Higress 是基于阿里内部两年多的 Envoy Gateway 实践沉淀，以开源 Istio + Envoy 为核心构建的云原生API网关，实现了流量调度 + 服务治理 +' +
-		' 安全防护三合一的高集成能力，深度集成Dubbo、Nacos、Sentinel等微服务技术栈，能够为您带来低成本的网关部署运维及高性能、易使用、易扩展、功能丰富的一站式网关解决方案。',
+	'home.description': 'Higress 是 CNCF Sandbox 开源 AI 网关，基于 Istio 与 Envoy 构建，为 LLM API、AI Agent 与 MCP Server 提供统一接入、流量治理、安全防护和可观测能力。',
+	'home.share_image.alt': 'Higress 开源 AI 网关连接 AI Agent、应用、模型、工具和 API',
+	'home.cncf.badge': 'CNCF Sandbox 项目',
+	'home.cncf.badge_aria': '查看 Higress 的 CNCF Sandbox 项目页面',
 	'home.introduce.about': `关于 ${SITE.name}`,
 	'home.introduce.title': ' 一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台',
 	'home.website.edge.about': '关于我们',
@@ -325,6 +327,7 @@ export default {
 	'blog.activity.release.statement':'发布声明',
 	'blog.activity.explore':'探索Nacos 博客，了解服务发现和配置管理的最新资讯、教程和技术分析。',
 	'blog.all.articles':'全部文章',
+	'blog.meta.description': 'Higress 社区博客，分享 AI 网关、API 网关、MCP、Ingress 迁移与企业落地实践。',
 	'blog.article.technical':'技术文章',
 	'blog.article.case.best.practices':'最佳实践',
 	'blog.article.ecosystem.articles':'生态文章',
@@ -496,8 +499,8 @@ export default {
 
 	// 首页 Hero 区域
 	'home.hero.title': 'AI 网关快速集成',
-	'home.hero.description.line1': '易用的生产级AI网关，为 Agent 开发、LLM API 管理提供可靠工具',
-	'home.hero.description.line2': 'Higress.ai 提供免费开源及云上商业化版本，针对 DeepSeek 进行功能增强',
+	'home.hero.description.line1': 'CNCF Sandbox 开源 AI 网关，为 Agent 开发、LLM API 管理提供生产级能力',
+	'home.hero.description.line2': '提供免费开源版与云上商业版，统一接入模型、工具和 MCP Server',
 	'home.hero.button.experience': '开源体验',
 	'home.hero.button.learn': '了解 AI 网关',
 	'home.hero.news.label': 'News',
@@ -515,6 +518,7 @@ export default {
 	// 网关解决方案
 	'home.gateway.solution.title': '网关解决方案',
 	'home.gateway.solution.description': '通过 AI 网关、API 网关及Himarket，解决模型、工具及Agent统一代理问题，并助力企业构建AI中台，加速AI落地。',
+	'home.gateway.solution.image_alt': 'Higress AI 网关、API 网关与 HiMarket 解决方案架构图',
 
 	// Customers
     'home.customers.title': 'AI 应用场景下的最佳实践\n服务于多领域企业级用户',
@@ -682,22 +686,22 @@ export default {
 
     // Version Comparison
     'ai.product.version_compare.title': '选择适合您的版本',
-    'ai.product.version_compare.subtitle': '开源版免费使用,企业版提供全托管服务与商业支持',
+    'ai.product.version_compare.subtitle': '开源版免费自建，阿里云 AI 网关提供 Serverless 与生产级企业版',
     'ai.product.version_compare.opensource.badge': '社区版',
     'ai.product.version_compare.opensource.title': 'Higress 社区版',
     'ai.product.version_compare.opensource.desc': '本地部署，5 分钟验证核心能力',
     'ai.product.version_compare.opensource.feature1': '完整的 AI 网关核心能力',
     'ai.product.version_compare.opensource.feature2': '社区支持与文档',
     'ai.product.version_compare.opensource.feature3': '自行兜底稳定性与性能',
-    'ai.product.version_compare.enterprise.badge': '免费试用',
-    'ai.product.version_compare.enterprise.title': 'Higress 企业版',
-    'ai.product.version_compare.enterprise.desc': '全托管云服务，生产级保障',
-    'ai.product.version_compare.enterprise.feature1': '全托管免运维，99.95% SLA',
-    'ai.product.version_compare.enterprise.feature2': '软硬一体性能优化90%+',
-    'ai.product.version_compare.enterprise.feature3': '多可用区部署，故障自动恢复',
-    'ai.product.version_compare.enterprise.feature4': '深度集成阿里云 WAF/KMS/IDAAS',
-    'ai.product.version_compare.enterprise.btn': '免费试用企业版',
-    'ai.product.version_compare.enterprise.tip': '工单、钉群等商业服务支持',
+    'ai.product.version_compare.enterprise.badge': 'Serverless',
+    'ai.product.version_compare.enterprise.title': '阿里云 AI 网关',
+    'ai.product.version_compare.enterprise.desc': 'Serverless 标准版 0 元起步，按实际用量付费',
+    'ai.product.version_compare.enterprise.feature1': '全托管免运维，按调用量自动弹性伸缩',
+    'ai.product.version_compare.enterprise.feature2': '统一承载 LLM API、Agent API、MCP Server',
+    'ai.product.version_compare.enterprise.feature3': '生产可选 Serverless 企业版，99.95% SLA',
+    'ai.product.version_compare.enterprise.feature4': '支持独立入口、自定义域名和传输加密配置',
+    'ai.product.version_compare.enterprise.btn': '了解阿里云 AI 网关',
+    'ai.product.version_compare.enterprise.tip': '标准版适合试用与 PoC，企业版适合正式生产业务',
     'ai.product.version_compare.exclusive.badge': '尊享服务',
     'ai.product.version_compare.exclusive.title': '飞天专属版',
     'ai.product.version_compare.exclusive.desc': '匹配业务规模，按需协商极致保障',
@@ -814,8 +818,8 @@ export default {
     'hiclaw.product.mcp_integration.desc': '通过 MCP Server 访问外部工具（GitHub 等），凭证集中在网关管理，Worker 永远看不到真实凭证。支持动态权限控制，可随时授予或撤销 Worker 的 MCP Server 访问权限。',
 
     // Product Layout
-    'product.layout.enterprise.title': '了解企业版',
-    'product.layout.enterprise.desc': '想获得深度整合的 API 管理、流量网关与微服务网关一体化能力？企业版提供更强大的统一治理与安全扩展，欢迎了解。',
+    'product.layout.enterprise.title': '了解 AI 网关企业版',
+    'product.layout.enterprise.desc': '需要全托管、免运维的生产级 AI 网关？阿里云 AI 网关提供 Serverless 企业版与实例型独享版，覆盖独立入口、自定义域名及更高服务等级等需求。',
 
     // Page Footer
     'page.footer.contact_us': '联系我们',
@@ -829,8 +833,9 @@ export default {
     'page.footer.menu.home': '主页',
     'page.footer.menu.docs': '文档',
     'page.footer.menu.community': '社区',
-    'page.footer.menu.enterprise': '企业版',
+    'page.footer.menu.enterprise': 'AI 网关企业版',
     'page.footer.friendly_links': '友情链接：',
+    'page.footer.cncf_project': 'Higress 已加入 Cloud Native Computing Foundation，作为 Sandbox 项目进行开放治理与社区共建。',
 
     // Blog Post Page
     'blog.post.toc': '目录',
@@ -882,19 +887,19 @@ export default {
 
     // Role Selector (Intent-based Onboarding) - Optimized for Enterprise Conversion
     'home.role.selector.title': '选择适合您的方案',
-    'home.role.selector.recommended': '企业首选',
-    'home.role.selector.cta.start': '立即咨询',
+    'home.role.selector.recommended': 'Serverless 0 元起步',
+    'home.role.selector.cta.start': '了解阿里云 AI 网关',
     'home.role.selector.cta.explore': '了解详情',
 
     // Enterprise Option (Primary for B2B conversion)
-    'home.role.selector.enterprise': '企业版',
-    'home.role.selector.enterprise.desc': '全托管云服务，生产级保障',
-    'home.role.selector.enterprise.time': '当日开通',
-    'home.role.selector.enterprise.badge': '限时免费试用',
-    'home.role.selector.enterprise.feature1': '99.95% SLA 可用性保障',
-    'home.role.selector.enterprise.feature2': '性能优化 90%+，节省 50% 资源成本',
-    'home.role.selector.enterprise.feature3': '7×24 工单 + 钉群直连技术专家',
-    'home.role.selector.enterprise.trust': '🏢 已服务 Soul、快手、极氪汽车等头部企业',
+    'home.role.selector.enterprise': '阿里云 AI 网关',
+    'home.role.selector.enterprise.desc': 'Serverless 标准版 0 元起步，按实际用量付费',
+    'home.role.selector.enterprise.time': 'Serverless',
+    'home.role.selector.enterprise.badge': '0 元起步',
+    'home.role.selector.enterprise.feature1': '全托管免运维，按调用量自动弹性伸缩',
+    'home.role.selector.enterprise.feature2': '统一承载 LLM / Agent / MCP 核心能力',
+    'home.role.selector.enterprise.feature3': '生产可选企业版，提供 99.95% SLA',
+    'home.role.selector.enterprise.trust': '企业版支持独立入口、自定义域名和传输加密配置',
 
     // Try Now Option (Secondary)
     'home.role.selector.try_now': '快速体验',

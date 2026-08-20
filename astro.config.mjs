@@ -149,7 +149,64 @@ export default defineConfig({
           tag: "link",
           attrs: {
             rel: "icon",
-            href: "https://img.alicdn.com/imgextra/i4/O1CN01AViQMJ1J2lY4OPRgv_!!6000000000971-2-tps-376-375.png",
+            href: "/img/higress-mark.svg",
+            type: "image/svg+xml",
+          },
+        },
+        {
+          tag: "link",
+          attrs: {
+            rel: "apple-touch-icon",
+            href: "/img/higress-mark.png",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            name: "robots",
+            content: "index, follow, max-image-preview:large",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            name: "theme-color",
+            content: "#3E5CF4",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            property: "og:image",
+            content: "https://higress.ai/img/higress-ai-gateway-og.png",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            property: "og:image:width",
+            content: "1200",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            property: "og:image:height",
+            content: "630",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            property: "og:image:alt",
+            content: "Higress open-source AI Gateway",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            name: "twitter:image",
+            content: "https://higress.ai/img/higress-ai-gateway-og.png",
           },
         },
         // Google Analytics (gtag.js) — measurement ID lives in src/config/analytics.mjs

@@ -111,7 +111,7 @@ Higress 以 Envoy 为内核，通过 [WASM](/docs/latest/user/plugins/wasm-d
 
 ### 用户引导分流
 
-首页增加三种**方案选择器**（[企业版](https://www.aliyun.com/product/api-gateway?spm=higress-website.topbar.0.0.0)、[快速体验](https://higress.ai/docs/ai/quick-start)、[产品介绍](https://higress.ai/ai-gateway)），根据用户不同需求和时间投入意愿，提供差异化的引导路径，降低决策成本，提升转化率。
+首页增加三种**方案选择器**（[AI 网关企业版](https://www.aliyun.com/product/api-gateway/ai-gateway?spm=higress-website.topbar.0.0.0)、[快速体验](https://higress.ai/docs/ai/quick-start)、[产品介绍](https://higress.ai/ai-gateway)），根据用户不同需求和时间投入意愿，提供差异化的引导路径，降低决策成本，提升转化率。
 
 ### 用户友好设计
 

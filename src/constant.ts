@@ -39,7 +39,7 @@ export const LINKS = {
   himarketGithub: `https://github.com/higress-group/himarket?spm=${SPM.github}`,
   himarketConsole: `http://himarket.higress.ai?spm=${SPM.console}`,
   hiclawGithub: `https://github.com/higress-group/HiClaw?spm=${SPM.github}`,
-  enterprise: `https://www.aliyun.com/product/api-gateway?spm=${SPM.website}`
+  enterprise: `https://www.aliyun.com/product/api-gateway/ai-gateway?spm=${SPM.website}`
 }
 
 // 吊顶提示文案

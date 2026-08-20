@@ -4,18 +4,23 @@ const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
 const imgSrc = locale === "en" ? "https://img.alicdn.com/imgextra/i4/O1CN01xObZKW242ZTA1j9Hz_!!6000000007333-2-tps-3873-2442.png" : "https://img.alicdn.com/imgextra/i4/O1CN01CjmViI21hqJQwndLu_!!6000000007017-2-tps-3873-2442.png"
 ---
-<section class="w-full py-14 px-4 md:px-6 lg:px-10">
-  <div class="mx-auto flex flex-col gap-10">
-    <div class="flex flex-col items-center justify-center">
+<section class="w-full px-4 py-10 md:px-6 md:py-12 lg:px-10">
+  <div class="mx-auto flex max-w-7xl flex-col gap-8">
+    <div class="flex flex-col items-center justify-center gap-3 text-center">
       <div class="text-[1.5rem] md:text-[2.5rem]">{t('home.gateway.solution.title')}</div>
-      <p class="text-gray-11">{t('home.gateway.solution.description')}</p>
+      <p class="m-0 max-w-4xl text-gray-11">{t('home.gateway.solution.description')}</p>
     </div>
 
-    <img
-    src={imgSrc}
-    loading="lazy"
-    decoding="async"
-    alt="Gateway Solution Architecture"
-    />
+    <div class="mx-auto w-full max-w-[920px] overflow-hidden rounded-2xl border border-gray-200 bg-white p-2 shadow-sm md:p-4 dark:border-gray-700 dark:bg-gray-900">
+      <img
+        src={imgSrc}
+        width="3873"
+        height="2442"
+        class="block h-auto w-full"
+        loading="lazy"
+        decoding="async"
+        alt={t('home.gateway.solution.image_alt')}
+      />
+    </div>
   </div>
 </section>

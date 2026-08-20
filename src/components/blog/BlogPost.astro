@@ -11,6 +11,7 @@ interface Props {
   postDescription: string;
   postDate?: string;
   postCategory?: string;
+  heroImage?: string;
   author?: string;
   slug: string;
   headings: MarkdownHeading[];
@@ -35,6 +36,7 @@ const {
   postDescription,
   postDate,
   postCategory,
+  heroImage,
   author,
   slug,
   headings,
@@ -56,10 +58,12 @@ const displayHeadings =
     : headings.filter((heading) => heading.depth === 3);
 
 const keywordsStr = Array.isArray(keywords) ? keywords.join(", ") : keywords;
-const defaultImage = "https://img.alicdn.com/imgextra/i1/O1CN01RkqfpB25G8opRrGqF_!!6000000007498-2-tps-700-648.png";
+const defaultImage = "https://higress.ai/img/higress-ai-gateway-og.png";
+const articleImage = heroImage || defaultImage;
+const publisherLogo = "https://higress.ai/img/higress-mark.png";
 ---
 
-<SiteLayout title={title} description={description} keywords={keywords}>
+<SiteLayout title={title} description={description} keywords={keywords} image={articleImage} imageAlt={postTitle}>
   <div class="blog-detail-container pt-16">
     <div class="p-4 md:p-10">
       <div class="flex gap-8 relative">
@@ -107,8 +111,8 @@ const defaultImage = "https://img.alicdn.com/imgextra/i1/O1CN01RkqfpB25G8opRrGqF
           <article class="prose overflow-auto prose-lg max-w-none mt-10">
             <header class="mb-8 pb-8">
               <div class="flex items-center gap-5">
-                <div class="rounded-xl overflow-hidden w-20 h-20 shrink-0">
-                  <img class="w-full h-full object-cover" src={defaultImage} alt="Author Avatar" />
+                <div class="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-gray-50 p-2">
+                  <img class="h-full w-full object-contain" src="/img/higress-mark.svg" alt="Higress" />
                 </div>
                 <div class="flex flex-col justify-center md:justify-between min-h-20 gap-2 md:gap-0">
                   <h1 class="text-2xl md:text-4xl font-medium leading-tight md:leading-none m-0 p-0 text-black">
@@ -164,7 +168,7 @@ const defaultImage = "https://img.alicdn.com/imgextra/i1/O1CN01RkqfpB25G8opRrGqF
   "@type": "BlogPosting",
   "headline": postTitle,
   "description": description,
-  "image": defaultImage,
+  "image": articleImage,
   "datePublished": postDate ? new Date(postDate).toISOString() : undefined,
   "dateModified": postDate ? new Date(postDate).toISOString() : undefined,
   "author": {
@@ -176,7 +180,7 @@ const defaultImage = "https://img.alicdn.com/imgextra/i1/O1CN01RkqfpB25G8opRrGqF
     "name": "Higress",
     "logo": {
       "@type": "ImageObject",
-      "url": defaultImage
+      "url": publisherLogo
     }
   },
   "mainEntityOfPage": {
