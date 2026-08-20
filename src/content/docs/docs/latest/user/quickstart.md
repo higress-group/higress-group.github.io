@@ -236,7 +236,7 @@ curl http://GatewayIP/foo -H 'host: foo.bar.com'
 
 ### 阶段一：安装
 
-如果您是在云上部署，生产环境推荐使用企业版（无需 K8s），开发测试可以使用下面一键部署社区版：
+如果您是在云上部署，生产环境推荐使用[阿里云 AI 网关企业版](https://www.aliyun.com/product/api-gateway/ai-gateway?spm=higress-website.topbar.0.0.0)（无需 K8s）；低成本试用或 PoC 也可以选择 0 元起步、按实际用量付费的 Serverless 标准版。开发测试可以使用下面一键部署社区版：
 
 [![Deploy on AlibabaCloud ComputeNest](https://service-info-public.oss-cn-hangzhou.aliyuncs.com/computenest.svg)](https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=Higress社区版)
 
@@ -286,4 +286,3 @@ curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a -c nacos
 点击左侧“路由管理”导航栏，然后点击页面右侧的“创建路由”按钮。按照下图片所示内容填写表单并点击“确定”按钮。
 
 ![image](/img/user/quickstart/zh-cn/route_management_standalone.png)
-

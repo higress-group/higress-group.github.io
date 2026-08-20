@@ -16,10 +16,12 @@ interface Props {
   description?: string;
   lang?: string;
   keywords?:(string | number)[] | string;
+  image?: string;
+  imageAlt?: string;
   align?: "home" | "docs";
 }
 
-const { title, description, keywords, align = "home", channel = "" } = Astro.props;
+const { title, description, keywords, image, imageAlt, align = "home", channel = "" } = Astro.props;
 
 // SEO: 构建规范 URL
 const siteUrl = "https://higress.ai";
@@ -40,6 +42,9 @@ const ogLocale = isEnglish ? 'en_US' : 'zh_CN';
 // SEO: 默认描述
 const defaultDescription = t("home.description");
 const metaDescription = description || defaultDescription;
+const defaultMetaImage = new URL('/img/higress-ai-gateway-og.png', siteUrl).href;
+const metaImage = image ? new URL(image, siteUrl).href : defaultMetaImage;
+const metaImageAlt = imageAlt || t('home.share_image.alt');
 
 const headEntry = {
   data: {
@@ -59,8 +64,9 @@ const headEntry = {
     <title>{title}</title>
     <meta name="description" content={metaDescription} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="applicable-device" content="pc,mobile" />
+    <meta name="theme-color" content="#3E5CF4" />
 
     <!-- SEO: Canonical URL -->
     <link rel="canonical" href={canonicalUrl} />
@@ -77,23 +83,24 @@ const headEntry = {
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:site_name" content="Higress" />
-    <meta property="og:image" content="https://img.alicdn.com/imgextra/i1/O1CN01Q9UWyF23bY1R0U0KE_!!6000000007274-2-tps-2560-1440.png" />
-    <meta property="og:image:width" content="2560" />
-    <meta property="og:image:height" content="1440" />
+    <meta property="og:image" content={metaImage} />
+    <meta property="og:image:secure_url" content={metaImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={metaImageAlt} />
 
     <!-- SEO: Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={metaDescription} />
-    <meta name="twitter:image" content="https://img.alicdn.com/imgextra/i1/O1CN01Q9UWyF23bY1R0U0KE_!!6000000007274-2-tps-2560-1440.png" />
+    <meta name="twitter:image" content={metaImage} />
+    <meta name="twitter:image:alt" content={metaImageAlt} />
 
     <link rel="preconnect" href="https://img.alicdn.com" />
     <link rel="preconnect" href="https://framerusercontent.com" />
-    <link
-      data-rh="true"
-      rel="icon"
-      href="https://img.alicdn.com/imgextra/i4/O1CN01AViQMJ1J2lY4OPRgv_!!6000000000971-2-tps-376-375.png"
-    />
+    <link rel="icon" href="/img/higress-mark.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/img/higress-mark.png" />
 
     <GoogleAnalytics />
 

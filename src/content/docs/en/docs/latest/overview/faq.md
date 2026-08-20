@@ -136,7 +136,7 @@ Already supported, you can see it here: https://higress.cn/en/docs/latest/user/q
 
 Not yet supported, open source will use Nacos for configuration management to support this requirement.
 
-You can also consider using [Higress Enterprise Edition] (https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0), this mode Higress is fully managed, no need to care about Higress Deployment and operation and maintenance, can directly connect to the back-end services deployed on virtual machines and physical machines.
+You can also consider using [Alibaba Cloud AI Gateway Enterprise](https://www.aliyun.com/product/api-gateway/ai-gateway?spm=higress-website.topbar.0.0.0). It is fully managed, so you do not need to deploy or operate Higress yourself, and it can connect directly to backend services on virtual or physical machines.
 
 ***********
 

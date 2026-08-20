@@ -234,7 +234,7 @@ curl http://GatewayIP/foo -H 'host: foo.bar.com'
 
 ### Stage 1: Installation
 
-If you are deploying in the cloud, the Enterprise Edition (no K8s required) is recommended for production environments. For development and testing, you can use the one-click deployment of the Community Edition below:
+For cloud deployments, [Alibaba Cloud AI Gateway Enterprise](https://www.aliyun.com/product/api-gateway/ai-gateway?spm=higress-website.topbar.0.0.0) is recommended for production and requires no K8s. For low-cost trials or PoCs, Serverless Standard starts at ¥0 and charges only for actual usage. For development and testing, you can use the one-click deployment of the Community Edition below:
 
 [![Deploy on AlibabaCloud ComputeNest](https://service-info-public.oss-cn-hangzhou.aliyuncs.com/computenest.svg)](https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=Higress社区版)
 

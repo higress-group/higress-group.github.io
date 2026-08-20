@@ -139,7 +139,7 @@ Higress 核心代码基本采用可插拔的 Filter 扩展，功能新增也尽�
 
 同上；
 
-也可以考虑使用 [Higress 企业版](https://www.aliyun.com/product/aliware/mse?spm=higress-website.topbar.0.0.0)，这个模式 Higress 是全托管的，无需关心 Higress 的部署和运维，可直接对接虚拟机和物理机上部署的后端服务。
+也可以考虑使用 [阿里云 AI 网关企业版](https://www.aliyun.com/product/api-gateway/ai-gateway?spm=higress-website.topbar.0.0.0)，这个模式 Higress 是全托管的，无需关心 Higress 的部署和运维，可直接对接虚拟机和物理机上部署的后端服务。
 
 ********
 

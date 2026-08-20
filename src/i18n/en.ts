@@ -9,8 +9,8 @@ export default {
   "navbar.product.features": "Features",
   "navbar.product.benefits": "Benefits",
   "navbar.docs": "Docs",
-  "navbar.enterprise": "Enterprise",
-  "navbar.enterprise.intro": "Introduction",
+  "navbar.enterprise": "AI Gateway Enterprise",
+  "navbar.enterprise.intro": "AI Gateway Enterprise Overview",
   "navbar.enterprise.solutions": "Solutions",
   "navbar.community": "Community",
   "navbar.community.blog": "Blog",
@@ -93,10 +93,13 @@ export default {
 	'commmon.footer.actions.edas': 'Cloud Service EDAS',
 	'commmon.actions.download': 'Download',
 
-	'home.title': `${SITE.name} | AI Gateway | AI Native API Gateway`,
+	'home.title': `${SITE.name} | Open-Source AI Gateway | CNCF Sandbox Project`,
 	'home.title.native.ai':'AI-Native',
 	'home.title.native.api.gateway':' API Gateway',
-	'home.description': 'Powered by Istio and Envoy, Higress realizes the integration of the triple gateway architecture of traffic gateway, microservice gateway and security gateway, thereby greatly reducing the costs of deployment, operation and maintenance.',
+	'home.description': 'Higress is a CNCF Sandbox open-source AI gateway built on Istio and Envoy, providing unified access, traffic governance, security, and observability for LLM APIs, AI agents, and MCP servers.',
+	'home.share_image.alt': 'Higress open-source AI Gateway connecting AI agents, applications, models, tools, and APIs',
+	'home.cncf.badge': 'CNCF Sandbox Project',
+	'home.cncf.badge_aria': 'View the Higress CNCF Sandbox project page',
 	'home.introduce.about': 'ABOUT Higress',
 	'home.introduce.title': 'An easy-to-use dynamic service discovery, configuration and service management platform for building cloud native applications',
 	'home.website.edge.title': 'Core Advantage',
@@ -317,6 +320,7 @@ export default {
 
 	'blog.activity.explore':'Explore the Nacos blog to learn about the latest information, tutorials, and technical analysis on service discovery and configuration management.',
 	'blog.all.articles':'All Articles',
+	'blog.meta.description': 'Higress community articles about AI gateways, API gateways, MCP, Ingress migration, and production practices.',
 	'blog.activity.technical':'Technical Articles',
 	'blog.article.case.best.practices':'Best Practices',
 	'blog.article.release.time':'Release Time',
@@ -489,8 +493,8 @@ export default {
 
 	// Home Hero Section
 	'home.hero.title': 'Rapid AI Gateway Integration',
-	'home.hero.description.line1': 'Production-grade AI Gateway for Agent development and LLM API management',
-	'home.hero.description.line2': 'Higress.ai offers free open-source and commercial cloud versions, enhanced for DeepSeek',
+	'home.hero.description.line1': 'CNCF Sandbox open-source AI Gateway for Agent development and LLM API management',
+	'home.hero.description.line2': 'Free open-source and commercial cloud editions for models, tools, and MCP Servers',
 	'home.hero.button.experience': 'Try Open Source',
 	'home.hero.button.learn': 'Learn AI Gateway',
 	'home.hero.news.label': 'News',
@@ -508,6 +512,7 @@ export default {
 	// Gateway Solution
 	'home.gateway.solution.title': 'Gateway Solutions',
 	'home.gateway.solution.description': 'Unified proxy for models, tools, and Agents through AI Gateway, API Gateway, and HiMarket, empowering enterprises to build AI platforms and accelerate AI adoption.',
+	'home.gateway.solution.image_alt': 'Higress AI Gateway, API Gateway, and HiMarket solution architecture',
 
 	// Customers
     'home.customers.title': 'Best Practices for AI Application Scenarios\nServing Enterprise Users in Multiple Fields',
@@ -675,22 +680,22 @@ export default {
 
     // Version Comparison
     'ai.product.version_compare.title': 'Choose the Right Version for You',
-    'ai.product.version_compare.subtitle': 'Community edition is free, Enterprise offers fully managed service with commercial support',
+    'ai.product.version_compare.subtitle': 'Self-host the Community Edition for free, or use Alibaba Cloud AI Gateway for Serverless and production workloads',
     'ai.product.version_compare.opensource.badge': 'Community',
     'ai.product.version_compare.opensource.title': 'Higress Community',
     'ai.product.version_compare.opensource.desc': 'Local deployment, verify core capabilities in 5 minutes',
     'ai.product.version_compare.opensource.feature1': 'Full AI Gateway core capabilities',
     'ai.product.version_compare.opensource.feature2': 'Community support & documentation',
     'ai.product.version_compare.opensource.feature3': 'Self-managed stability & performance',
-    'ai.product.version_compare.enterprise.badge': 'Free Trial',
-    'ai.product.version_compare.enterprise.title': 'Higress Enterprise',
-    'ai.product.version_compare.enterprise.desc': 'Fully managed cloud service, production-grade guarantee',
-    'ai.product.version_compare.enterprise.feature1': 'Fully managed, 99.95% SLA',
-    'ai.product.version_compare.enterprise.feature2': 'Software-hardware integrated performance optimization 90%+',
-    'ai.product.version_compare.enterprise.feature3': 'Multi-AZ deployment, auto failover',
-    'ai.product.version_compare.enterprise.feature4': 'Deep integration with Alibaba Cloud',
-    'ai.product.version_compare.enterprise.btn': 'Try Enterprise Free',
-    'ai.product.version_compare.enterprise.tip': 'Ticket, DingTalk and other commercial support',
+    'ai.product.version_compare.enterprise.badge': 'Serverless',
+    'ai.product.version_compare.enterprise.title': 'Alibaba Cloud AI Gateway',
+    'ai.product.version_compare.enterprise.desc': 'Serverless Standard starts at ¥0 and charges only for actual usage',
+    'ai.product.version_compare.enterprise.feature1': 'Fully managed with automatic request-based scaling',
+    'ai.product.version_compare.enterprise.feature2': 'Unified support for LLM APIs, Agent APIs, and MCP Servers',
+    'ai.product.version_compare.enterprise.feature3': 'Serverless Enterprise for production with a 99.95% SLA',
+    'ai.product.version_compare.enterprise.feature4': 'Dedicated endpoints, custom domains, and transport encryption',
+    'ai.product.version_compare.enterprise.btn': 'Explore Alibaba Cloud AI Gateway',
+    'ai.product.version_compare.enterprise.tip': 'Standard is ideal for trials and PoCs; Enterprise is built for production',
     'ai.product.version_compare.exclusive.badge': 'Premium Service',
     'ai.product.version_compare.exclusive.title': 'Feitian Exclusive Edition',
     'ai.product.version_compare.exclusive.desc': 'Match business scale with ultimate SLA guarantee',
@@ -761,8 +766,8 @@ export default {
     'hiclaw.product.mcp_integration.desc': 'Access external tools (GitHub, etc.) via MCP Server with centralized credential management at the gateway. Workers never see real credentials. Supports dynamic permission control - grant or revoke Worker MCP Server access at any time.',
 
     // Product Layout
-    'product.layout.enterprise.title': 'Learn about Enterprise Edition',
-    'product.layout.enterprise.desc': 'Looking for deeply integrated API management, traffic gateway, and microservice gateway capabilities? The Enterprise Edition offers more powerful unified governance and security extensions. Learn more.',
+    'product.layout.enterprise.title': 'Explore AI Gateway Enterprise',
+    'product.layout.enterprise.desc': 'Need a fully managed, production-grade AI gateway? Alibaba Cloud AI Gateway offers Serverless Enterprise and dedicated instances with dedicated endpoints, custom domains, and higher service levels.',
 
     // Page Footer
     'page.footer.contact_us': 'Contact Us',
@@ -776,8 +781,9 @@ export default {
     'page.footer.menu.home': 'Home',
     'page.footer.menu.docs': 'Docs',
     'page.footer.menu.community': 'Community',
-    'page.footer.menu.enterprise': 'Enterprise',
+    'page.footer.menu.enterprise': 'AI Gateway Enterprise',
     'page.footer.friendly_links': 'Friendly Links:',
+    'page.footer.cncf_project': 'Higress is hosted by the Cloud Native Computing Foundation as a Sandbox project with open governance and community collaboration.',
 
     // Blog Post Page
     'blog.post.toc': 'Table of Contents',
@@ -829,19 +835,19 @@ export default {
 
     // Role Selector (Intent-based Onboarding) - Optimized for Enterprise Conversion
     'home.role.selector.title': 'Choose Your Solution',
-    'home.role.selector.recommended': 'Enterprise Choice',
-    'home.role.selector.cta.start': 'Contact Sales',
+    'home.role.selector.recommended': 'Serverless from ¥0',
+    'home.role.selector.cta.start': 'Explore Alibaba Cloud AI Gateway',
     'home.role.selector.cta.explore': 'Learn More',
 
     // Enterprise Option (Primary for B2B conversion)
-    'home.role.selector.enterprise': 'Enterprise Edition',
-    'home.role.selector.enterprise.desc': 'Fully managed with production-grade SLA',
-    'home.role.selector.enterprise.time': 'Same-day Setup',
-    'home.role.selector.enterprise.badge': 'Limited Free Trial',
-    'home.role.selector.enterprise.feature1': '99.95% SLA Availability Guarantee',
-    'home.role.selector.enterprise.feature2': '90%+ performance boost, 50% cost savings',
-    'home.role.selector.enterprise.feature3': '24/7 Support + Direct Expert Access',
-    'home.role.selector.enterprise.trust': '🏢 Trusted by Soul, Kuaishou, ZEEKR & more',
+    'home.role.selector.enterprise': 'Alibaba Cloud AI Gateway',
+    'home.role.selector.enterprise.desc': 'Serverless Standard starts at ¥0 and charges only for actual usage',
+    'home.role.selector.enterprise.time': 'Serverless',
+    'home.role.selector.enterprise.badge': 'Starts at ¥0',
+    'home.role.selector.enterprise.feature1': 'Fully managed with automatic request-based scaling',
+    'home.role.selector.enterprise.feature2': 'Unified LLM, Agent, and MCP capabilities',
+    'home.role.selector.enterprise.feature3': 'Enterprise for production with a 99.95% SLA',
+    'home.role.selector.enterprise.trust': 'Enterprise supports dedicated endpoints, custom domains, and transport encryption',
 
     // Try Now Option (Secondary)
     'home.role.selector.try_now': 'Quick Start',

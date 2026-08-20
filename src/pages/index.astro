@@ -8,8 +8,10 @@ import BrandCarousel from "../container/BrandCarousel.astro";
 import { useTranslations } from "@/i18n/utils";
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
+const metaDescription = t('home.description');
+const metaImage = 'https://higress.ai/img/higress-ai-gateway-og.png';
 ---
-<SiteLayout title={t("home.title")}>
+<SiteLayout title={t("home.title")} description={metaDescription}>
     <MainHeroSection />
     <div class="flex flex-col gap-10 md:gap-20 lg:gap-30">
       <GatewaySolution />
@@ -25,10 +27,12 @@ const t = useTranslations(locale);
   "@type": "Organization",
   "name": "Higress",
   "url": "https://higress.ai",
-  "logo": "https://img.alicdn.com/imgextra/i1/O1CN01RkqfpB25G8opRrGqF_!!6000000007498-2-tps-700-648.png",
-  "description": "开源云原生 API 网关，提供流量网关 + 微服务网关 + 安全网关三合一的产品能力",
+  "logo": "https://higress.ai/img/higress-mark.png",
+  "image": metaImage,
+  "description": metaDescription,
   "sameAs": [
-    "https://github.com/alibaba/higress"
+    "https://github.com/alibaba/higress",
+    "https://www.cncf.io/projects/higress/"
   ],
   "contactPoint": {
     "@type": "ContactPoint",
@@ -42,13 +46,7 @@ const t = useTranslations(locale);
   "@type": "WebSite",
   "name": "Higress",
   "url": "https://higress.ai",
-  "description": "开源云原生 API 网关",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://higress.ai/search?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
+  "description": metaDescription,
+  "image": metaImage,
+  "inLanguage": "zh-CN"
 })} />
