@@ -38,7 +38,6 @@ export const LINKS = {
   higressGithub: `https://github.com/alibaba/higress?spm=${SPM.github}`,
   himarketGithub: `https://github.com/higress-group/himarket?spm=${SPM.github}`,
   himarketConsole: `http://himarket.higress.ai?spm=${SPM.console}`,
-  hiclawGithub: `https://github.com/higress-group/HiClaw?spm=${SPM.github}`,
   enterprise: `https://www.aliyun.com/product/api-gateway/ai-gateway?spm=${SPM.website}`
 }
 

@@ -22,7 +22,6 @@ import { GA_MEASUREMENT_ID } from "./src/config/analytics.mjs";
 const zhDocsSidebar = loadSidebarConfig("root", "docs");
 const zhAiSidebar = loadSidebarConfig("root", "ai");
 const zhHimarketSidebar = loadSidebarConfig("root", "himarket");
-const zhHiclawSidebar = loadSidebarConfig("root", "hiclaw");
 const zhDeveloperSidebar = loadSidebarConfig("root", "developer");
 
 // Custom integration to copy markdown files
@@ -134,10 +133,6 @@ export default defineConfig({
         {
           label: sidebarCategory.himarket,
           items: zhHimarketSidebar,
-        },
-        {
-          label: sidebarCategory.hiclaw,
-          items: zhHiclawSidebar,
         },
         {
           label: sidebarCategory.developer,

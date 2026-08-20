@@ -4,7 +4,6 @@ export default {
   "page.header.gateway": "云原生 API 网关",
   "page.header.ai.gateway": "AI 网关",
   "page.header.himarket": "HiMarket",
-  "page.header.hiclaw": "HiClaw",
   "navbar.product": "产品",
   "navbar.product.features": "功能特性",
   "navbar.product.benefits": "核心优势",
@@ -799,23 +798,6 @@ export default {
 
     'himarket.product.extension_capability': '扩展能力',
     'himarket.product.extension_capability.desc': 'HiMarket 提供灵活定制以快速对接企业现有系统。门户支持自定义域名与品牌样式，并可按需配置首页模块与产品分类等。身份认证兼容账号密码与企业 OIDC/SSO/IDaaS 集成，同时关键流程（注册、凭证申请、订阅）支持自动或人工审批配置。',
-
-    // HiClaw Product Page
-    'hiclaw.product.intro.desc': '开源 Agent 团队系统，基于 IM 协议实现多 Agent 协作，支持人工全程监督介入。Manager Agent 协调多个 Worker Agent 完成复杂任务，所有 Agent 通信均发生在 Matrix 房间中，人类可随时观察并介入。',
-    'hiclaw.product.core_features.title': '核心功能',
-    'hiclaw.product.core_features.desc': 'HiClaw 提供开箱即用的多 Agent 协作能力。',
-
-    'hiclaw.product.agent_teams': 'Agent 团队协作',
-    'hiclaw.product.agent_teams.desc': 'Manager Agent 自动协调多个 Worker Agent 完成复杂任务，支持按需创建、销毁 Worker，实现灵活的 Agent 团队管理。通过自然语言对话即可完成 Worker 创建、任务派发和进度监控。',
-
-    'hiclaw.product.human_loop': '人工监督介入',
-    'hiclaw.product.human_loop.desc': '所有 Agent 通信均发生在 Matrix 房间中，管理员可随时观察所有对话，并在任意时刻介入指导。Human-in-the-Loop 设计确保 AI 行为可控、可审计、可干预。',
-
-    'hiclaw.product.ai_gateway': 'AI 网关集成',
-    'hiclaw.product.ai_gateway.desc': '通过 Higress AI 网关统一管理 LLM 访问，支持按 Worker 独立分配凭证。Worker 只持有自己的消费者令牌，即使被攻破也无法获取上游 API 凭证，确保安全性。',
-
-    'hiclaw.product.mcp_integration': 'MCP 工具集成',
-    'hiclaw.product.mcp_integration.desc': '通过 MCP Server 访问外部工具（GitHub 等），凭证集中在网关管理，Worker 永远看不到真实凭证。支持动态权限控制，可随时授予或撤销 Worker 的 MCP Server 访问权限。',
 
     // Product Layout
     'product.layout.enterprise.title': '了解 AI 网关企业版',
