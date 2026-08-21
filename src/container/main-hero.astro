@@ -46,6 +46,21 @@ const newsItems = [
   <div class="px-8 pt-16 pb-16 sm:px-6 lg:px-8 lg:pt-36 lg:pb-24">
     <!-- Top Section -->
     <div class="flex flex-col items-start text-center">
+      <a
+        href="https://www.cncf.io/projects/higress/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="cncf-trust-badge mb-6 inline-flex items-center gap-3 rounded-full px-4 py-2.5 text-sm font-semibold text-gray-700 transition-all hover:-translate-y-0.5 hover:shadow-md"
+        aria-label={t('home.cncf.badge_aria')}
+      >
+        <img src="/img/cncf-logo.svg" alt="Cloud Native Computing Foundation" class="h-6 w-auto lg:h-7" decoding="async" />
+        <span class="h-5 w-px bg-gray-300" aria-hidden="true"></span>
+        <span>{t('home.cncf.hero_badge')}</span>
+        <svg class="h-3.5 w-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </a>
+
       <h1 class="text-4xl lg:text-6xl font-medium tracking-tight text-black dark:text-white mb-6">
         {t('home.hero.title')}
         <span class="scrolling-wrapper relative top-[0.1em] inline-block h-[1.2em] overflow-hidden text-left align-bottom">
@@ -61,22 +76,6 @@ const newsItems = [
         {t('home.hero.description.line1')} <br class="hidden md:block" />
         {t('home.hero.description.line2')}
       </p>
-
-      <a
-        href="https://www.cncf.io/projects/higress/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mb-8 inline-flex items-center gap-3 rounded-full border border-white/80 bg-white/70 px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md dark:border-white/15 dark:bg-black/20 dark:text-gray-200"
-        aria-label={t('home.cncf.badge_aria')}
-      >
-        <img src="/img/cncf-logo.svg" alt="CNCF" class="h-5 w-auto dark:hidden" decoding="async" />
-        <img src="/img/cncf-logo-white.svg" alt="CNCF" class="hidden h-5 w-auto dark:block" decoding="async" />
-        <span class="h-4 w-px bg-gray-300 dark:bg-gray-600" aria-hidden="true"></span>
-        <span>{t('home.cncf.badge')}</span>
-        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-        </svg>
-      </a>
 
       <!-- Role Selector for Onboarding Segmentation (Primary CTA) -->
       <RoleSelector class="mb-6" />
@@ -126,6 +125,14 @@ const newsItems = [
 </section>
 
 <style>
+  .cncf-trust-badge {
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent) 20%, var(--sl-color-gray-6));
+    background:
+      linear-gradient(var(--sl-color-black), var(--sl-color-black)) padding-box,
+      var(--higress-primary-gradient) border-box;
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--sl-color-accent) 10%, transparent);
+  }
+
   .news-card {
     background-color: rgba(224, 233, 251, 0.45);
     border-image: linear-gradient(164deg, rgba(255, 255, 255, 0.31) 7%, rgba(255, 255, 255, 0) 84%) 0;
