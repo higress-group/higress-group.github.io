@@ -1,26 +1,630 @@
 ---
 import { useTranslations } from "@/i18n/utils";
+
 const locale = Astro.currentLocale || 'root';
 const t = useTranslations(locale);
-const imgSrc = locale === "en" ? "https://img.alicdn.com/imgextra/i4/O1CN01xObZKW242ZTA1j9Hz_!!6000000007333-2-tps-3873-2442.png" : "https://img.alicdn.com/imgextra/i4/O1CN01CjmViI21hqJQwndLu_!!6000000007017-2-tps-3873-2442.png"
----
-<section class="w-full px-4 py-10 md:px-6 md:py-12 lg:px-10">
-  <div class="mx-auto flex max-w-7xl flex-col gap-8">
-    <div class="flex flex-col items-center justify-center gap-3 text-center">
-      <div class="text-[1.5rem] md:text-[2.5rem]">{t('home.gateway.solution.title')}</div>
-      <p class="m-0 max-w-4xl text-gray-11">{t('home.gateway.solution.description')}</p>
-    </div>
 
-    <div class="mx-auto w-full max-w-[920px] overflow-hidden rounded-2xl border border-gray-200 bg-white p-2 shadow-sm md:p-4 dark:border-gray-700 dark:bg-gray-900">
-      <img
-        src={imgSrc}
-        width="3873"
-        height="2442"
-        class="block h-auto w-full"
-        loading="lazy"
-        decoding="async"
-        alt={t('home.gateway.solution.image_alt')}
-      />
+const lanes = [
+  {
+    id: 'llm',
+    title: t('home.gateway.solution.lane.llm.title'),
+    description: t('home.gateway.solution.lane.llm.description'),
+    features: [
+      t('home.gateway.solution.lane.llm.feature1'),
+      t('home.gateway.solution.lane.llm.feature2'),
+    ],
+    target: t('home.gateway.solution.lane.llm.target'),
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9h8M8 13h5"/><path d="M18 4H6a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h3l3 3 3-3h3a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Z"/></svg>`,
+    targetIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v1a3 3 0 0 0-3 3v1a3 3 0 0 0 0 6v1a3 3 0 0 0 6 0 3 3 0 0 0 6 0v-1a3 3 0 0 0 0-6v-1a3 3 0 0 0-3-3V6a3 3 0 0 0-3-3Z"/><path d="M9 7.5a3 3 0 0 0 3 3m3-3a3 3 0 0 1-3 3m-3 6a3 3 0 0 1 3-3m3 3a3 3 0 0 0-3-3"/></svg>`,
+  },
+  {
+    id: 'mcp',
+    title: t('home.gateway.solution.lane.mcp.title'),
+    description: t('home.gateway.solution.lane.mcp.description'),
+    features: [
+      t('home.gateway.solution.lane.mcp.feature1'),
+      t('home.gateway.solution.lane.mcp.feature2'),
+    ],
+    target: t('home.gateway.solution.lane.mcp.target'),
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v4m8-4v4M5 7h14v3a7 7 0 0 1-7 7 7 7 0 0 1-7-7V7Z"/><path d="M12 17v4m-3 0h6"/></svg>`,
+    targetIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="m8.7 10.7 6.6-3.4m-6.6 6 6.6 3.4"/></svg>`,
+  },
+  {
+    id: 'model',
+    title: t('home.gateway.solution.lane.model.title'),
+    description: t('home.gateway.solution.lane.model.description'),
+    features: [
+      t('home.gateway.solution.lane.model.feature1'),
+      t('home.gateway.solution.lane.model.feature2'),
+    ],
+    target: t('home.gateway.solution.lane.model.target'),
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01m4-10h6m-6 10h6"/></svg>`,
+    targetIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 9h2v6H8zm6 2h2v4h-2zM6 19v2m12-2v2"/></svg>`,
+  },
+];
+
+const sharedCapabilities = [
+  t('home.gateway.solution.shared.security'),
+  t('home.gateway.solution.shared.governance'),
+  t('home.gateway.solution.shared.observability'),
+];
+---
+
+<section class="gateway-solution w-full px-4 py-8 md:px-6 md:py-10 lg:px-10" aria-labelledby="gateway-solution-title">
+  <div class="mx-auto flex max-w-7xl flex-col gap-7 lg:gap-8">
+    <header class="mx-auto flex max-w-4xl flex-col items-center gap-2.5 text-center">
+      <span class="architecture-eyebrow">{t('home.gateway.solution.eyebrow')}</span>
+      <h2 id="gateway-solution-title" class="m-0 text-[1.75rem] font-semibold tracking-tight text-strong md:text-[2.5rem]">
+        {t('home.gateway.solution.title')}
+      </h2>
+      <p class="m-0 text-base text-gray-11 md:text-lg">{t('home.gateway.solution.description')}</p>
+    </header>
+
+    <div class="architecture-map" role="img" aria-label={`${t('home.gateway.solution.title')}：${t('home.gateway.solution.description')}`}>
+      <div class="source-node">
+        <div class="source-orbit" aria-hidden="true">
+          <span class="orbit-dot orbit-dot-one"></span>
+          <span class="orbit-dot orbit-dot-two"></span>
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="16" cy="18" r="5" />
+            <circle cx="32" cy="16" r="4" />
+            <path d="M7 37c1.2-7 5.1-10.5 11.5-10.5S28 30 29 37M28 25c6.8 0 10.8 3.8 12 11" />
+          </svg>
+        </div>
+        <strong>{t('home.gateway.solution.source.title')}</strong>
+        <span>{t('home.gateway.solution.source.description')}</span>
+      </div>
+
+      <div class="branch-connectors branch-connectors-entry" aria-hidden="true">
+        {lanes.map((lane) => <span class:list={["vertical-flow", `vertical-flow-${lane.id}`]}></span>)}
+      </div>
+
+      <div class="gateway-core">
+        <div class="gateway-core-header">
+          <div class="gateway-core-title">
+            <div class="higress-mark" aria-hidden="true">
+              <img src="/img/higress-mark.svg" alt="" />
+            </div>
+            <strong>{t('home.gateway.solution.core.title')}</strong>
+          </div>
+          <span class="gateway-core-badge">{t('home.gateway.solution.core.badge')}</span>
+        </div>
+
+        <div class="gateway-lanes">
+          {lanes.map((lane) => (
+            <article class:list={["gateway-lane", `gateway-lane-${lane.id}`]}>
+              <div class="lane-icon" set:html={lane.icon}></div>
+              <div class="lane-heading">
+                <strong>{lane.title}</strong>
+                <span>{lane.description}</span>
+              </div>
+              <div class="lane-features">
+                {lane.features.map((feature) => <span>{feature}</span>)}
+              </div>
+              <div class="lane-mobile-target">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+                <span>{lane.target}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="shared-foundation">
+          {sharedCapabilities.map((capability, index) => (
+            <span>
+              {index === 0 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 5 6v5c0 4.6 2.8 8.4 7 10 4.2-1.6 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>}
+              {index === 1 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h10m4 0h2M4 17h2m4 0h10M4 12h4m4 0h8"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/><circle cx="10" cy="12" r="2"/></svg>}
+              {index === 2 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19V9m5 10V5m5 14v-7m5 7V8"/></svg>}
+              {capability}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="branch-connectors branch-connectors-exit" aria-hidden="true">
+        {lanes.map((lane) => <span class:list={["vertical-flow", `vertical-flow-${lane.id}`]}></span>)}
+      </div>
+
+      <div class="target-stack">
+        {lanes.map((lane) => (
+          <div class:list={["target-node", `target-node-${lane.id}`]}>
+            <div class="target-icon" set:html={lane.targetIcon}></div>
+            <strong>{lane.target}</strong>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .gateway-solution {
+    --architecture-primary: #5967f2;
+    --architecture-llm: #3f83f8;
+    --architecture-mcp: #665ce7;
+    --architecture-model: #9658df;
+    --architecture-border: #e1e4ef;
+    --architecture-border-strong: #cdd3e8;
+    --architecture-surface: #ffffff;
+    --architecture-soft: #f7f8fc;
+    --architecture-subtle: #f0f2f8;
+    --architecture-text: #202231;
+    --architecture-muted: #72778e;
+  }
+
+  .architecture-eyebrow {
+    color: var(--architecture-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  .architecture-map {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 1160px;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 18px 20px 20px;
+    overflow: hidden;
+    isolation: isolate;
+    border: 1px solid var(--architecture-border);
+    border-radius: 24px;
+    background:
+      radial-gradient(circle at 50% 5%, rgba(89, 103, 242, 0.08), transparent 32%),
+      var(--architecture-surface);
+    box-shadow: 0 18px 52px rgba(38, 44, 86, 0.1);
+  }
+
+  .architecture-map::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    opacity: 0.35;
+    background-image: radial-gradient(circle, rgba(89, 103, 242, 0.18) 0.8px, transparent 0.8px);
+    background-size: 18px 18px;
+    mask-image: linear-gradient(to bottom, black, transparent 78%);
+  }
+
+  .source-node {
+    display: grid;
+    width: min(430px, 52%);
+    min-height: 66px;
+    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-rows: 1fr 1fr;
+    column-gap: 12px;
+    align-items: center;
+    align-self: center;
+    padding: 9px 18px 9px 12px;
+    border: 1px solid var(--architecture-border-strong);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 24px rgba(53, 60, 105, 0.08);
+  }
+
+  .source-node strong {
+    align-self: end;
+    color: var(--architecture-text);
+    font-size: 0.92rem;
+    line-height: 1.25;
+  }
+
+  .source-node > span {
+    align-self: start;
+    color: var(--architecture-muted);
+    font-size: 0.72rem;
+  }
+
+  .source-orbit {
+    position: relative;
+    display: grid;
+    width: 46px;
+    height: 46px;
+    grid-row: 1 / -1;
+    place-items: center;
+    color: var(--architecture-primary);
+    border: 1px solid rgba(89, 103, 242, 0.2);
+    border-radius: 14px;
+    background: rgba(89, 103, 242, 0.07);
+  }
+
+  .source-orbit svg {
+    width: 100%;
+    height: 100%;
+    padding: 7px;
+  }
+
+  .orbit-dot {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border: 1px solid var(--architecture-surface);
+    border-radius: 50%;
+    background: var(--architecture-primary);
+  }
+
+  .orbit-dot-one { top: 5px; right: 6px; }
+  .orbit-dot-two { bottom: 6px; left: 5px; }
+
+  .branch-connectors {
+    position: relative;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .branch-connectors-entry { height: 38px; }
+
+  .branch-connectors-entry::before,
+  .branch-connectors-entry::after {
+    content: '';
+    position: absolute;
+    background: var(--architecture-border-strong);
+  }
+
+  .branch-connectors-entry::before {
+    top: 15px;
+    right: 16.666%;
+    left: 16.666%;
+    height: 1px;
+  }
+
+  .branch-connectors-entry::after {
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 16px;
+  }
+
+  .vertical-flow {
+    --flow-color: var(--architecture-primary);
+    position: relative;
+    display: block;
+    height: 100%;
+  }
+
+  .vertical-flow-llm { --flow-color: var(--architecture-llm); }
+  .vertical-flow-mcp { --flow-color: var(--architecture-mcp); }
+  .vertical-flow-model { --flow-color: var(--architecture-model); }
+
+  .vertical-flow::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    bottom: 5px;
+    left: 50%;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--architecture-border-strong), var(--flow-color));
+  }
+
+  .vertical-flow::after {
+    content: '';
+    position: absolute;
+    bottom: 1px;
+    left: calc(50% - 4px);
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+    border-right: 2px solid var(--flow-color);
+    border-bottom: 2px solid var(--flow-color);
+  }
+
+  .gateway-core {
+    position: relative;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(89, 103, 242, 0.34);
+    border-radius: 20px;
+    background: rgba(248, 249, 253, 0.94);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 12px 32px rgba(50, 57, 105, 0.08);
+  }
+
+  .gateway-core::before {
+    content: '';
+    position: absolute;
+    inset: 0 18px auto;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--higress-primary-gradient);
+  }
+
+  .gateway-core-header {
+    position: relative;
+    display: flex;
+    min-height: 38px;
+    align-items: center;
+    gap: 9px;
+    padding: 0 3px;
+    margin-bottom: 8px;
+  }
+
+  .gateway-core-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .gateway-core-title > strong {
+    color: var(--architecture-text);
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
+  .higress-mark {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 9px;
+    background: var(--higress-primary-gradient);
+  }
+
+  .higress-mark img { width: 100%; height: 100%; }
+
+  .gateway-core-badge {
+    margin-left: auto;
+    padding: 4px 9px;
+    color: var(--architecture-primary);
+    border: 1px solid rgba(89, 103, 242, 0.2);
+    border-radius: 999px;
+    background: rgba(89, 103, 242, 0.05);
+    font-size: 0.61rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .gateway-lanes,
+  .target-stack {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .gateway-lane {
+    --lane-color: var(--architecture-primary);
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-height: 112px;
+    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    gap: 8px 10px;
+    padding: 13px;
+    overflow: hidden;
+    border: 1px solid var(--architecture-border);
+    border-radius: 15px;
+    background: var(--architecture-surface);
+  }
+
+  .gateway-lane-llm { --lane-color: var(--architecture-llm); }
+  .gateway-lane-mcp { --lane-color: var(--architecture-mcp); }
+  .gateway-lane-model { --lane-color: var(--architecture-model); }
+
+  .gateway-lane::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 2px;
+    background: var(--lane-color);
+  }
+
+  .lane-icon,
+  .target-icon {
+    display: grid;
+    place-items: center;
+    color: var(--lane-color);
+    border: 1px solid color-mix(in srgb, var(--lane-color) 18%, transparent);
+    border-radius: 11px;
+    background: color-mix(in srgb, var(--lane-color) 8%, white);
+  }
+
+  .lane-icon { width: 40px; height: 40px; }
+  .lane-icon :global(svg) { width: 23px; height: 23px; }
+
+  .lane-heading {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+  }
+
+  .lane-heading strong {
+    color: var(--architecture-text);
+    font-size: 0.96rem;
+    line-height: 1.2;
+  }
+
+  .lane-heading span {
+    overflow: hidden;
+    color: var(--architecture-muted);
+    font-size: 0.68rem;
+    line-height: 1.3;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .lane-features {
+    display: flex;
+    grid-column: 1 / -1;
+    align-items: end;
+    gap: 6px;
+    padding-top: 2px;
+  }
+
+  .lane-features span {
+    padding: 5px 8px;
+    color: var(--architecture-muted);
+    border: 1px solid var(--architecture-border);
+    border-radius: 999px;
+    background: var(--architecture-soft);
+    font-size: 0.66rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .lane-mobile-target { display: none; }
+
+  .shared-foundation {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 9px;
+  }
+
+  .shared-foundation span {
+    display: flex;
+    min-height: 34px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--architecture-muted);
+    border: 1px solid var(--architecture-border);
+    border-radius: 10px;
+    background: var(--architecture-subtle);
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .shared-foundation svg {
+    width: 15px;
+    height: 15px;
+    color: var(--architecture-primary);
+  }
+
+  .branch-connectors-exit { height: 30px; }
+
+  .branch-connectors-exit .vertical-flow::before {
+    top: 0;
+    bottom: 5px;
+    background: linear-gradient(to bottom, var(--flow-color), var(--flow-color));
+  }
+
+  .target-node {
+    --lane-color: var(--architecture-primary);
+    display: flex;
+    min-width: 0;
+    min-height: 66px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--architecture-border);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 7px 20px rgba(45, 52, 94, 0.06);
+    text-align: center;
+  }
+
+  .target-node-llm { --lane-color: var(--architecture-llm); }
+  .target-node-mcp { --lane-color: var(--architecture-mcp); }
+  .target-node-model { --lane-color: var(--architecture-model); }
+
+  .target-node strong {
+    color: var(--architecture-text);
+    font-size: 0.86rem;
+    line-height: 1.25;
+  }
+
+  .target-icon {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+  }
+
+  .target-icon :global(svg) { width: 20px; height: 20px; }
+
+  @media (max-width: 900px) {
+    .architecture-map { padding-inline: 14px; }
+    .gateway-core { padding: 10px; }
+    .gateway-lanes,
+    .target-stack { gap: 7px; }
+    .gateway-lane { padding: 11px; }
+    .lane-features { flex-wrap: wrap; }
+    .lane-features span { padding-inline: 6px; }
+    .target-node { padding-inline: 8px; }
+  }
+
+  @media (max-width: 767px) {
+    .gateway-solution { padding-top: 1.75rem; padding-bottom: 1.75rem; }
+
+    .architecture-map {
+      padding: 14px;
+      border-radius: 20px;
+    }
+
+    .source-node {
+      width: 100%;
+      min-height: 62px;
+      padding-block: 7px;
+    }
+
+    .branch-connectors-entry { height: 30px; }
+    .branch-connectors-entry::before { display: none; }
+    .branch-connectors-entry::after { height: 25px; }
+    .branch-connectors-entry .vertical-flow { display: none; }
+
+    .gateway-core {
+      padding: 10px;
+      border-radius: 17px;
+    }
+
+    .gateway-core-header { min-height: 36px; margin-bottom: 7px; }
+    .gateway-core-title > strong { font-size: 0.94rem; }
+    .gateway-core-badge { display: none; }
+
+    .gateway-lanes {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .gateway-lane {
+      min-height: 0;
+      grid-template-columns: 38px minmax(0, 1fr);
+      padding: 11px;
+    }
+
+    .lane-icon { width: 38px; height: 38px; }
+    .lane-icon :global(svg) { width: 21px; height: 21px; }
+
+    .lane-features {
+      grid-column: 2;
+      padding-top: 0;
+    }
+
+    .lane-mobile-target {
+      display: flex;
+      grid-column: 2;
+      align-items: center;
+      gap: 5px;
+      color: var(--lane-color);
+      font-size: 0.68rem;
+      font-weight: 600;
+    }
+
+    .lane-mobile-target svg { width: 13px; height: 13px; }
+
+    .shared-foundation { gap: 4px; }
+    .shared-foundation span {
+      min-height: 38px;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 0.62rem;
+    }
+
+    .branch-connectors-exit,
+    .target-stack { display: none; }
+  }
+
+  @media (max-width: 374px) {
+    .gateway-core-title > strong { font-size: 0.88rem; }
+  }
+</style>
