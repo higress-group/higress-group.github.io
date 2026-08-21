@@ -500,14 +500,14 @@ export default {
 	'home.hero.news.label': 'News',
 
 	// Home News
-	'home.news.1.title': '200,000 RMB Prize Pool',
-	'home.news.1.content': 'Congratulations to the winners! The award list for the Higress AI Gateway Development Challenge has been announced.',
-	'home.news.2.title': 'Original Comic',
-	'home.news.2.content': 'This year of AI Gateway has become a microcosm of AI evolution.',
-	'home.news.3.title': 'A Simpler Way',
-	'home.news.3.content': 'With Nginx Ingress retiring, it\'s time to clarify these easily confused concepts.',
-	'home.news.4.title': 'Whitepaper Comparison',
-	'home.news.4.content': 'The State of AI Agent Engineering in 2025.',
+	'home.news.1.title': 'Higress v2.2.4',
+	'home.news.1.content': 'Key changes: new MCP capabilities and Gateway API inference extensions.',
+	'home.news.2.title': 'MCP Server Update',
+	'home.news.2.content': 'MCP 2026-07-28 support with compatibility for existing protocols.',
+	'home.news.3.title': 'MCP Returns to HTTP',
+	'home.news.3.content': 'Why sound architecture design and engineering practice remain scarce.',
+	'home.news.4.title': 'Qwen3Guard Integration',
+	'home.news.4.content': 'Bring AI content safety into the gateway path without application changes.',
 
 	// Gateway Solution
 	'home.gateway.solution.eyebrow': 'AI GATEWAY ARCHITECTURE',
