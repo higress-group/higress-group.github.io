@@ -506,14 +506,14 @@ export default {
 	'home.hero.news.label': 'News',
 
 	// 首页新闻
-	'home.news.1.title': '奖金 20 万',
-	'home.news.1.content': '恭喜以下选手！Higress AI 网关开发挑战赛获奖名单公布',
-	'home.news.2.title': '自制漫画',
-	'home.news.2.content': 'AI 网关这一年，成了 AI 进化的缩影',
-	'home.news.3.title': '一种更简单的方式',
-	'home.news.3.content': ' 应对 Nginx Ingress 退役，是时候理清这些易混淆的概念了',
-	'home.news.4.title': '与白皮书比对',
-	'home.news.4.content': '2025 智能体工程现状',
+	'home.news.1.title': 'Higress v2.2.4',
+	'home.news.1.content': '从新版 MCP 到 Gateway API 推理扩展，读懂关键变化',
+	'home.news.2.title': 'MCP Server 更新',
+	'home.news.2.content': '拥抱 MCP 2026-07-28，兼容既有协议',
+	'home.news.3.title': 'MCP 重回 HTTP',
+	'home.news.3.content': '再次证明架构设计和工程实践才是稀缺资源',
+	'home.news.4.title': '接入 Qwen3Guard',
+	'home.news.4.content': '不改一行业务代码，把 AI 内容安全做进网关主链路',
 
 	// 网关解决方案
 	'home.gateway.solution.eyebrow': 'AI GATEWAY ARCHITECTURE',
