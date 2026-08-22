@@ -26,18 +26,18 @@ curl -sS https://higress.cn/ai-gateway/install.sh | bash
 
 按照指引可以分别录入 Aliyun Dashscope或其他API-KEY；也可以键入回车后跳过，之后在控制台中修改。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
+![](/img/scene-guide/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
 
 
 上述命令的默认的HTTP的服务端口为8080，HTTPS的服务端口为8443，控制台的服务端口为8001。如您需要使用其他端口，可使用 `wget https://higress.cn/ai-gateway/install.sh`下载部署脚本后，修改*DEFAULT_GATEWAY_HTTP_PORT/DEFAULT_GATEWAY_HTTPS_PORT/DEFAULT_CONSOLE_PORT*结果；然后是使用bash执行脚本。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
+![](/img/scene-guide/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
 
 
 
 部署完成后，会出现以下界面：
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063935811-ddf2eef7-967d-49a8-92e6-f99613b7dbf7.png)
+![](/img/scene-guide/1741063935811-ddf2eef7-967d-49a8-92e6-f99613b7dbf7.png)
 
 
 
@@ -46,7 +46,7 @@ curl -sS https://higress.cn/ai-gateway/install.sh | bash
 
 在AI服务提供者管理界面，可以配置已集成供应商的API-KEY。当前已集成的供应商有阿里云、DeepSeek、Azure OpenAI、OpenAI、豆包等。这里我们为阿里云配置API-KEY，如您在上一步中已经配置，则直接忽略。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082187334-4ffee05e-04d9-49c0-b3e9-aa40c1d4ce9c.png)
+![](/img/scene-guide/1741082187334-4ffee05e-04d9-49c0-b3e9-aa40c1d4ce9c.png)
 
 
 
@@ -55,7 +55,7 @@ Higress语义缓存调用文本向量化服务进行embedding、调用向量数�
 
 在控制台服务来源界面中，创建服务来源。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742385778415-b004e604-a95c-4b4f-b15f-74f9a6336691.png)
+![](/img/scene-guide/1742385778415-b004e604-a95c-4b4f-b15f-74f9a6336691.png)
 
 在服务来源的界面，填写对应的字段：
 
@@ -67,18 +67,18 @@ Higress语义缓存调用文本向量化服务进行embedding、调用向量数�
 + 服务协议：HTTPS
 + SNI：和域名列表相同
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741158247961-49ea8c56-2e1b-4c0f-87a7-426acfafef47.png)
+![](/img/scene-guide/1741158247961-49ea8c56-2e1b-4c0f-87a7-426acfafef47.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741158647414-5582124c-0353-454b-b3a2-0c4cbebd4ec1.png)
+![](/img/scene-guide/1741158647414-5582124c-0353-454b-b3a2-0c4cbebd4ec1.png)
 
 
 
 ## 配置AI路由策略
 在AI路由管理界面中，为阿里云配置插件策略，选择AI缓存。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082325606-a8bed434-c49d-4daa-aba6-1a0e2bb8b7d8.png)
+![](/img/scene-guide/1741082325606-a8bed434-c49d-4daa-aba6-1a0e2bb8b7d8.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741159081909-6b3665ca-a0a9-47a4-b2ca-f4aef8538ec7.png)
+![](/img/scene-guide/1741159081909-6b3665ca-a0a9-47a4-b2ca-f4aef8538ec7.png)
 
 在AI缓存插件配置界面中，参考以下字段填写：
 
@@ -99,7 +99,7 @@ embedding:
 
 ```
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741159265275-a695f6d5-f614-4548-98d0-7c8cd649638f.png)
+![](/img/scene-guide/1741159265275-a695f6d5-f614-4548-98d0-7c8cd649638f.png)
 
 
 
@@ -131,14 +131,14 @@ curl 'http://localhost:8080/v1/chat/completions' \
 
 请求结果示例：
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741159983902-4f27c181-68d4-4bff-bad1-81fff4514038.png)
+![](/img/scene-guide/1741159983902-4f27c181-68d4-4bff-bad1-81fff4514038.png)
 
 
 
 # 结果观测
 在AI监控面板界面，可以对AI请求进行观测。观测指标包括每秒输入输出Token数量、各供应商/模型Token使用数量等。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741077322520-55959b84-3f15-442c-a7fb-12cc333f1b0f.png)
+![](/img/scene-guide/1741077322520-55959b84-3f15-442c-a7fb-12cc333f1b0f.png)
 
 
 > 如您在部署过程中遇到问题，可在 [Higress Github Issue](https://github.com/alibaba/higress/issues) 中留下您的信息。

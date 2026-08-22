@@ -26,19 +26,19 @@ curl -sS https://higress.cn/ai-gateway/install.sh | bash
 
 Follow the prompts to enter the Aliyun Dashscope or other API-KEY; you can also press Enter to skip and modify it later in the console. You can also press `Enter` to skip and modify it later in the console.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
+![](/img/scene-guide/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
 
 
 
 The default HTTP service port is 8080, the HTTPS service port is 8443, and the console service port is 8001. If you need to use other ports, download the deployment script using `wget https://higress.cn/ai-gateway/install.sh`, modify DEFAULT_GATEWAY_HTTP_PORT/DEFAULT_GATEWAY_HTTPS_PORT/DEFAULT_CONSOLE_PORT, and then execute the script using bash.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
+![](/img/scene-guide/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
 
 
 
 After the deployment is completed, the following command display will appear.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063935811-ddf2eef7-967d-49a8-92e6-f99613b7dbf7.png)
+![](/img/scene-guide/1741063935811-ddf2eef7-967d-49a8-92e6-f99613b7dbf7.png)
 
 
 
@@ -47,7 +47,7 @@ Access the Higress console via a browser at [http://localhost:8001/](http://loca
 
 In the `LLM Provider Management`, you can configure the API-KEYs for integrated suppliers. Currently integrated suppliers include Alibaba Cloud, DeepSeek, Azure OpenAI, OpenAI, DouBao, etc. Here we configure multi-model proxies for Tongyi Qwen, which can be ignored if already configured in the previous step.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742450604844-3e00e291-d68e-4873-a98a-6c98ada86b36.png)
+![](/img/scene-guide/1742450604844-3e00e291-d68e-4873-a98a-6c98ada86b36.png)
 
 
 
@@ -56,7 +56,7 @@ Semantic caching in Higress calls the text embedding service for embedding and t
 
 Create a service source in the console's `Service Sources`.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742385763061-e58ac0cd-7f18-430e-a032-954be26985fa.png)
+![](/img/scene-guide/1742385763061-e58ac0cd-7f18-430e-a032-954be26985fa.png)
 
 Fill in the corresponding fields in the `Service Sources`:
 
@@ -68,18 +68,18 @@ Fill in the corresponding fields in the `Service Sources`:
 + Service Protocol: HTTPS
 + SNI: Same as the domains
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742450867742-ede6faa3-cb64-4c59-81f5-361443facfa3.png)
+![](/img/scene-guide/1742450867742-ede6faa3-cb64-4c59-81f5-361443facfa3.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742450914179-3fa91e8f-8e01-4eb3-bbfc-d34e9a27a4eb.png)
+![](/img/scene-guide/1742450914179-3fa91e8f-8e01-4eb3-bbfc-d34e9a27a4eb.png)
 
 
 
 ## Configure AI Route Strategy
 In the `AI Route Config`, configure strategy for aliyun and select `AI Cache`.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742450947408-bf16a2af-5d46-493c-b201-0bae5adefee9.png)
+![](/img/scene-guide/1742450947408-bf16a2af-5d46-493c-b201-0bae5adefee9.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742450959559-b42d33a6-9054-43db-86cf-0e7b3d4ea2c6.png)
+![](/img/scene-guide/1742450959559-b42d33a6-9054-43db-86cf-0e7b3d4ea2c6.png)
 
 In the `AI Cache`, fill in the following fields as a reference:
 
@@ -100,7 +100,7 @@ embedding:
 
 ```
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742451004302-277663ed-4910-4bfc-8bae-72ee0333b1db.png)
+![](/img/scene-guide/1742451004302-277663ed-4910-4bfc-8bae-72ee0333b1db.png)
 
 
 
@@ -132,14 +132,14 @@ You can try the following questions:
 
 Sample response:
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742451101808-5dc19297-cf26-445d-9888-3c196abd4f3e.png)
+![](/img/scene-guide/1742451101808-5dc19297-cf26-445d-9888-3c196abd4f3e.png)
 
 
 
 # Observability
 In the `AI Dashboard`, you can observe AI requests. Observability metrics include the number of input/output tokens per second, token usage by each provider/model, etc.
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742354552167-7efc3978-1942-4935-83ce-fcf3a229e859.png)
+![](/img/scene-guide/1742354552167-7efc3978-1942-4935-83ce-fcf3a229e859.png)
 
 
 > If you encounter any issues during deployment, feel free to leave your information in the [Higress Github Issue](https://github.com/alibaba/higress/issues).
