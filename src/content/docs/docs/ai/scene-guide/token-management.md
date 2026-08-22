@@ -29,39 +29,39 @@ curl -sS https://higress.cn/ai-gateway/install.sh | bash
 
 按照指引可以分别录入 Aliyun Dashscope或其他API-KEY；也可以键入回车后跳过，之后在控制台中修改。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
+![](/img/scene-guide/1741063971166-0b83c7c9-b093-49f1-b38b-145994623f30.png)
 
 
 
 上述命令的默认的HTTP的服务端口为8080，HTTPS的服务端口为8443，控制台的服务端口为8001。如您需要使用其他端口，可使用 `wget https://higress.cn/ai-gateway/install.sh`下载部署脚本后，修改*DEFAULT_GATEWAY_HTTP_PORT/DEFAULT_GATEWAY_HTTPS_PORT/DEFAULT_CONSOLE_PORT*结果；然后是使用bash执行脚本。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
+![](/img/scene-guide/1741059869116-ab053c2c-0aaf-451b-8cad-21ac9664c28d.png)
 
 
 
 部署完成后，会出现以下界面：
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741063935811-ddf2eef7-967d-49a8-92e6-f99613b7dbf7.png)
+![](/img/scene-guide/1741063935811-ddf2eef7-967d-49a8-92e6-f99613b7dbf7.png)
 
 # 控制台配置
 通过浏览器访问控制台界面[http://localhost:8001/](http://localhost:8001/)，首次登录需要配置管理员及密码。
 
 在AI服务提供者管理界面，可以配置已集成供应商的API-KEY。当前已集成的供应商有阿里云、DeepSeek、Azure OpenAI、OpenAI、豆包等。这里我们为阿里云配置API-KEY，如您在上一步中已经配置，则直接忽略。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741082187334-4ffee05e-04d9-49c0-b3e9-aa40c1d4ce9c.png)
+![](/img/scene-guide/1741082187334-4ffee05e-04d9-49c0-b3e9-aa40c1d4ce9c.png)
 
 
 
 ## 配置消费者
 在控制台中的消费者管理界面，为当前网关添加消费者以管理配额、发送请求。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741163343009-d86b6ab1-ac65-4bff-85d5-b10470cdb5d2.png)
+![](/img/scene-guide/1741163343009-d86b6ab1-ac65-4bff-85d5-b10470cdb5d2.png)
 
 点击创建消费者，基于Key Auth创建3个消费者，依次为aliyun-admin、aliyun-user1、aliyun-user2，基于HTTP Header中的x-api-key字段进行认证。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741163423118-136460aa-2343-4d21-a650-2582cc54f7a5.png)
+![](/img/scene-guide/1741163423118-136460aa-2343-4d21-a650-2582cc54f7a5.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741163549425-932c37ba-dac9-479f-a8e4-4da178f2923b.png)
+![](/img/scene-guide/1741163549425-932c37ba-dac9-479f-a8e4-4da178f2923b.png)
 
 
 
@@ -80,13 +80,13 @@ docker run --name my-redis -p 6379:6379 -d redis
 2. 查看my-redis服务ip
    
    1. 使用`docker network ls`获取bridge网络的id
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741165645724-273cc80e-8999-4411-ad0e-5af7a5aebf08.png)
+![](/img/scene-guide/1741165645724-273cc80e-8999-4411-ad0e-5af7a5aebf08.png)
 
    2. 使用`docker network inspect <netword-id>`，检查bridge下是否有my-redis容器
         > 如果没有，通过`docker network connect bridge my-redis`命令连接到网络中
    
    1. 获取my-redis服务对应的ip
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741165741053-28f5caa1-e1d3-43ff-bfd0-af244893d8ad.png)
+![](/img/scene-guide/1741165741053-28f5caa1-e1d3-43ff-bfd0-af244893d8ad.png)
 
 
 
@@ -97,7 +97,7 @@ docker run --name my-redis -p 6379:6379 -d redis
 + 服务地址：my-redis的ip和服务端口拼接
 + 服务协议：HTTP
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741165841319-2c1310d2-253c-4127-8464-326c5dbbf305.png)
+![](/img/scene-guide/1741165841319-2c1310d2-253c-4127-8464-326c5dbbf305.png)
 
 
 
@@ -105,11 +105,11 @@ docker run --name my-redis -p 6379:6379 -d redis
 ### 消费者认证配置
 在AI路由管理界面中，为阿里云配置消费者，点击编辑。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741166983812-8a2d6ce9-4c09-4415-a591-2a7fe6eea38f.png)
+![](/img/scene-guide/1741166983812-8a2d6ce9-4c09-4415-a591-2a7fe6eea38f.png)
 
 在编辑界面中，打开启用请求认证，添加刚刚创建的消费者。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741166960430-81abef16-03f3-4580-8bd9-2c0b26d86763.png)
+![](/img/scene-guide/1741166960430-81abef16-03f3-4580-8bd9-2c0b26d86763.png)
 
 
 
@@ -118,9 +118,9 @@ docker run --name my-redis -p 6379:6379 -d redis
 ### Token配额配置
 在AI路由管理界面中，为阿里云配置Token配额，点击策略进行配置，选择AI配额管理。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742452483382-f7bf2cd4-b048-44b5-85d4-627e3a7216f5.png)
+![](/img/scene-guide/1742452483382-f7bf2cd4-b048-44b5-85d4-627e3a7216f5.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741167450711-b9d1b3da-b821-4e0a-88bf-4e48453387e1.png)
+![](/img/scene-guide/1741167450711-b9d1b3da-b821-4e0a-88bf-4e48453387e1.png)
 
 在AI配额管理插件配置界面中，参考以下字段填写：
 
@@ -134,14 +134,14 @@ redis:
   timeout: 2000
 ```
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741167559447-bd6ecc5b-9c07-4fdc-b006-526399707731.png)
+![](/img/scene-guide/1741167559447-bd6ecc5b-9c07-4fdc-b006-526399707731.png)
 
 ### Token限流配置
 在AI路由管理界面中，为阿里云配置Token限流，点击策略进行配置。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1742452483382-f7bf2cd4-b048-44b5-85d4-627e3a7216f5.png)
+![](/img/scene-guide/1742452483382-f7bf2cd4-b048-44b5-85d4-627e3a7216f5.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741190894349-a7790310-3f03-4fe6-80d8-e2b48bcce815.png)
+![](/img/scene-guide/1741190894349-a7790310-3f03-4fe6-80d8-e2b48bcce815.png)
 
 在AI Token限流插件配置界面中，参考以下字段填写：
 
@@ -158,7 +158,7 @@ redis:
   service_port: 80
 ```
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741190983553-93b83b07-345d-4315-a7e6-8269b37dd933.png)
+![](/img/scene-guide/1741190983553-93b83b07-345d-4315-a7e6-8269b37dd933.png)
 
 
 
@@ -201,16 +201,16 @@ curl 'http://localhost:8080/v1/chat/completions' \
 
 请求结果示例：
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741191138320-6be5d195-a26c-403d-a260-0588530d5813.png)
+![](/img/scene-guide/1741191138320-6be5d195-a26c-403d-a260-0588530d5813.png)
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741191958688-f724afa7-0dfc-43be-9798-8feb7fcf1c37.png)
+![](/img/scene-guide/1741191958688-f724afa7-0dfc-43be-9798-8feb7fcf1c37.png)
 
 
 
 # 结果观测
 在AI监控面板界面，可以对AI请求进行观测。观测指标包括每秒输入输出Token数量、各供应商/模型Token使用数量、消费者使用Token情况等。
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2025/png/66357218/1741191602518-6e6009a6-ee53-4450-9066-4a2dcc312bbf.png)
+![](/img/scene-guide/1741191602518-6e6009a6-ee53-4450-9066-4a2dcc312bbf.png)
 
 
 > 如您在部署过程中遇到问题，可在 [Higress Github Issue](https://github.com/alibaba/higress/issues) 中留下您的信息。
