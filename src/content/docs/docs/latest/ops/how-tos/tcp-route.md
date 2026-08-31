@@ -7,7 +7,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # 配置 TCP 四层路由
 
-**注意：**本文档不适用于版本 ≥ 2.2.0 且 < 2.2.4 的 Higress。如果你的 Higress 版本处于这一区间内，建议升级至 2.2.4 或更高版本。
+**注意：** 本文档不适用于版本 ≥ 2.2.0 且 < 2.2.4 的 Higress。如果你的 Higress 版本处于这一区间内，建议升级至 2.2.4 或更高版本。
 
 ## 前置准备
 
