@@ -7,6 +7,8 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 # Configure a TCP Layer-4 Route
 
+**Note:** This document does not apply to Higress versions ≥ 2.2.0 and < 2.2.4. If your Higress version falls within this range, it is recommended to upgrade to 2.2.4 or higher.
+
 ## Prerequisites
 
 1. Higress is installed in the higress-system namespace in K8s, with the gateway's Service name being higress-gateway;
@@ -15,14 +17,18 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 
 ## Configuration Steps
 
+> The specific configuration steps differ slightly across Higress versions. Please pay close attention.
+
 ### 1. Create GatewayClass
+
+> When the Higress version is ≥ 2.2.0, this step is not required. Please skip directly to the next step.
 
 1. Create a `gatewayclass.yaml` file with the following content:
     ```yaml
     apiVersion: gateway.networking.k8s.io/v1
     kind: GatewayClass
     metadata:
-      name: higress-gateway
+      name: higress
     spec:
       controllerName: "higress.io/gateway-controller"
     ```
@@ -41,7 +47,7 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
       name: higress-gateway
       namespace: higress-system
     spec:
-      gatewayClassName: higress-gateway
+      gatewayClassName: higress
       listeners:
       - name: default-tcp
         protocol: TCP
@@ -88,22 +94,40 @@ custom_edit_url: https://github.com/higress-group/higress-group.github.io/blob/m
 ### 4. Create TCPRoute
 
 1. Create a `tcproute.yaml` file with the following content:
-    ```yaml
-    apiVersion: gateway.networking.k8s.io/v1alpha2
-    kind: TCPRoute
-    metadata:
-      name: tcp-echo
-      namespace: default
-    spec:
-      parentRefs:
-      - name: higress-gateway
-        namespace: higress-system
-        port: 9000
-      rules:
-      - backendRefs:
-        - name: tcp-echo
-          port: 9000
-    ```
+    1. Higress ≥ 2.2.4 + Gateway API 1.6.0
+        ```yaml
+        apiVersion: gateway.networking.k8s.io/v1
+        kind: TCPRoute
+        metadata:
+          name: tcp-echo
+          namespace: default
+        spec:
+          parentRefs:
+          - name: higress-gateway
+            namespace: higress-system
+            port: 9000
+          rules:
+          - backendRefs:
+            - name: tcp-echo
+              port: 9000
+        ```
+    2. Higress < 2.2.4 + Gateway API ≤ 1.4.0
+        ```yaml
+        apiVersion: gateway.networking.k8s.io/v1alpha2
+        kind: TCPRoute
+        metadata:
+          name: tcp-echo
+          namespace: default
+        spec:
+          parentRefs:
+          - name: higress-gateway
+            namespace: higress-system
+            port: 9000
+          rules:
+          - backendRefs:
+            - name: tcp-echo
+              port: 9000
+        ```
 2. Execute the command to apply the configuration to the K8s cluster:
     ```bash
     kubectl apply -f tcproute.yaml
