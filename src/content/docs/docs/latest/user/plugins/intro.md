@@ -113,13 +113,13 @@ curl http://example.com?foo=Bar
 下面请求由于匹配到 foo 这个 Ingress，因此走路由级的配置，不受默认配置影响，不会被拒绝访问:
 
 ```bash
-curl http://exmaple.com/foo/Swagger.html
+curl http://example.com/foo/Swagger.html
 ```
 
 因为路由级配置屏蔽了请求 Header 中出现 `example-key` 字符的请求，所以下面这个请求会被拒绝访问:
 
 ```bash
-curl http://exmaple.com/foo -H 'exmaple-key: 123'
+curl http://example.com/foo -H 'example-key: 123'
 ```
 
 当 `matchRules` 中存在多个规则时，按规则排列顺序优先匹配，建议将 ingress 匹配配置放在 domain 匹配之前，这也是 Higress 控制台的做法。
