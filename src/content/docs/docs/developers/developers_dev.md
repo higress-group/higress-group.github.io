@@ -59,6 +59,7 @@ description: Higress 维护者名单
 | 屈晗煜 | [Ink-33](https://github.com/Ink-33)                   | 东莞理工 |
 | 李翠芳  | [lcfang](https://github.com/lcfang)         | 工行软开   |
 | 王小建 | [littlejian](https://github.com/littlejiancc)         | 金智塔 |
+| 毛瑞琪 | [maoruiqi-hub](https://github.com/maoruiqi-hub) | 东北大学 |
 | 邵佳成 | [sjcsjc123](https://github.com/sjcsjc123)             | 杭电 |
 | 宋鹏远 | [songpengyuan](https://github.com/songpengyuan)       | 小满科技 |
 | 彭万山 | [Uncle-Justice](https://github.com/Uncle-Justice)     | 华中科技 |

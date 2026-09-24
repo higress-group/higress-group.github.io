@@ -57,6 +57,7 @@ This page shows the Higress development team. Please add your information to the
 | Yatao Tian | [Hinsteny](https://github.com/Hinsteny) | Ant Group |
 | Hanyu Qu | [Ink-33](https://github.com/Ink-33) | Dongguan University of Technology |
 | Xiaojian Wang | [littlejian](https://github.com/littlejiancc) | Jinzhita |
+| Ruiqi Mao | [maoruiqi-hub](https://github.com/maoruiqi-hub) | Northeastern University |
 | Jiacheng Shao | [sjcsjc123](https://github.com/sjcsjc123) | Hangzhou Dianzi University |
 | Pengyuan Song | [songpengyuan](https://github.com/songpengyuan) | Xiaoman Technology |
 | Wanshan Peng | [Uncle-Justice](https://github.com/Uncle-Justice) | Huazhong University of Science and Technology |
