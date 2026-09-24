@@ -43,9 +43,9 @@ export const LINKS = {
 
 // 吊顶提示文案
 export const TOPBAR = {
-  "text": "下载量破万，《AI 原生应用架构白皮书》免费下载",
-  "mobileText": "下载量破万，《AI 原生应用架构白皮书》免费下载",
-  "link": "https://developer.aliyun.com/ebook/8479",
-  "target": "_blank",
-  "display": true
+    "text": "Alibaba Cloud AI Agent Handbook 已开源，汇集50+工程师的一手实践经验",
+    "mobileText": "Alibaba Cloud AI Agent Handbook 已开源，汇集50+工程师的一手实践经验",
+    "link": "https://github.com/aliyun/ai-agent-handbook",
+    "target": "_blank",
+    "display": true
 }
