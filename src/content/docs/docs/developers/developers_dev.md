@@ -51,6 +51,7 @@ description: Higress 维护者名单
 ## Higress Members
 | 姓名  | github                                                | 公司组织 |
 |-----|-------------------------------------------------------|---|
+| 杨濠宇 | [89799969](https://github.com/89799969) | 东北大学 |
 | 张正好 | [alexzzh](https://github.com/alexzzh)                 | 格尔软件 |
 | 李强林 | [Charlie17Li](https://github.com/Charlie17Li)         | 浙大 |
 | 冯晓强 | [Fengxq2014](https://github.com/Fengxq2014)           | 多飞科技 |
