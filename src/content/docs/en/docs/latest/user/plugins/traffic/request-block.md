@@ -32,7 +32,7 @@ According to the configuration above, following requests will be blocked:
 
 ```bash
 curl http://example.com?foo=Bar
-curl http://exmaple.com/Swagger.html
+curl http://example.com/Swagger.html
 ```
 
 ### Block Specific Request Headers
@@ -46,7 +46,7 @@ According to the configuration above, following requests will be blocked:
 
 ```bash
 curl http://example.com -H 'example-key: 123'
-curl http://exmaple.com -H 'my-header: example-value'
+curl http://example.com -H 'my-header: example-value'
 ```
 
 ### Block Specific Request Bodies
@@ -60,7 +60,7 @@ According to the configuration above, following requests will be blocked:
 
 ```bash
 curl http://example.com -d 'Hello World'
-curl http://exmaple.com -d 'hello world'
+curl http://example.com -d 'hello world'
 ```
 
 ### Only Enable for Specific Routes or Domains
