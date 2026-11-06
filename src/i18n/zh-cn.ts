@@ -507,7 +507,7 @@ export default {
 
 	// 首页新闻
 	'home.news.1.title': '社区 10 月进展',
-	'home.news.1.content': 'HiRoute 不到一个月发布 6 个版本，Windows 桌面版来了',
+	'home.news.1.content': 'Higress 为企业加固，HiRoute 为开发者省钱',
 	'home.news.2.title': 'Higress v2.2.4',
 	'home.news.2.content': '从新版 MCP 到 Gateway API 推理扩展，读懂关键变化',
 	'home.news.3.title': 'MCP Server 更新',

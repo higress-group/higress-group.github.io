@@ -501,7 +501,7 @@ export default {
 
 	// Home News
 	'home.news.1.title': 'October Community Update',
-	'home.news.1.content': 'HiRoute shipped six releases in under a month, now with a Windows desktop app.',
+	'home.news.1.content': 'Higress hardens for enterprises; HiRoute saves developers money.',
 	'home.news.2.title': 'Higress v2.2.4',
 	'home.news.2.content': 'Key changes: new MCP capabilities and Gateway API inference extensions.',
 	'home.news.3.title': 'MCP Server Update',
