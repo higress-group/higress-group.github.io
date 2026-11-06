@@ -500,14 +500,14 @@ export default {
 	'home.hero.news.label': 'News',
 
 	// Home News
-	'home.news.1.title': 'Higress v2.2.4',
-	'home.news.1.content': 'Key changes: new MCP capabilities and Gateway API inference extensions.',
-	'home.news.2.title': 'MCP Server Update',
-	'home.news.2.content': 'MCP 2026-07-28 support with compatibility for existing protocols.',
-	'home.news.3.title': 'MCP Returns to HTTP',
-	'home.news.3.content': 'Why sound architecture design and engineering practice remain scarce.',
-	'home.news.4.title': 'Qwen3Guard Integration',
-	'home.news.4.content': 'Bring AI content safety into the gateway path without application changes.',
+	'home.news.1.title': 'October Community Update',
+	'home.news.1.content': 'HiRoute shipped six releases in under a month, now with a Windows desktop app.',
+	'home.news.2.title': 'Higress v2.2.4',
+	'home.news.2.content': 'Key changes: new MCP capabilities and Gateway API inference extensions.',
+	'home.news.3.title': 'MCP Server Update',
+	'home.news.3.content': 'MCP 2026-07-28 support with compatibility for existing protocols.',
+	'home.news.4.title': 'MCP Returns to HTTP',
+	'home.news.4.content': 'Why sound architecture design and engineering practice remain scarce.',
 
 	// Gateway Solution
 	'home.gateway.solution.eyebrow': 'AI GATEWAY ARCHITECTURE',
