@@ -506,14 +506,14 @@ export default {
 	'home.hero.news.label': 'News',
 
 	// 首页新闻
-	'home.news.1.title': 'Higress v2.2.4',
-	'home.news.1.content': '从新版 MCP 到 Gateway API 推理扩展，读懂关键变化',
-	'home.news.2.title': 'MCP Server 更新',
-	'home.news.2.content': '拥抱 MCP 2026-07-28，兼容既有协议',
-	'home.news.3.title': 'MCP 重回 HTTP',
-	'home.news.3.content': '再次证明架构设计和工程实践才是稀缺资源',
-	'home.news.4.title': '接入 Qwen3Guard',
-	'home.news.4.content': '不改一行业务代码，把 AI 内容安全做进网关主链路',
+	'home.news.1.title': '社区 10 月进展',
+	'home.news.1.content': 'Higress 为企业加固，HiRoute 为开发者省钱',
+	'home.news.2.title': 'Higress v2.2.4',
+	'home.news.2.content': '从新版 MCP 到 Gateway API 推理扩展，读懂关键变化',
+	'home.news.3.title': 'MCP Server 更新',
+	'home.news.3.content': '拥抱 MCP 2026-07-28，兼容既有协议',
+	'home.news.4.title': 'MCP 重回 HTTP',
+	'home.news.4.content': '再次证明架构设计和工程实践才是稀缺资源',
 
 	// 网关解决方案
 	'home.gateway.solution.eyebrow': 'AI GATEWAY ARCHITECTURE',
