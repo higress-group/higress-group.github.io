@@ -88,6 +88,8 @@ For database connection string format, please refer to the [gorm documentation](
 ### Configure Nacos MCP Registry
 > **Note：**
 > Nacos version >= 3.0，Higress version >= 2.1.2
+>
+> If MCP Server dynamic discovery through Nacos returns 404 for `/nacos/v1/cs/configs` on Nacos 3.2.4 or later, see [Nacos 3 compatibility (legacy adapter)](/en/docs/latest/ops/how-tos/nacos-3-legacy-adapter/).
 
 Add Service Source  
 ![Add Service Source](https://img.alicdn.com/imgextra/i3/O1CN01Ksd48C1ru4g6ep9SU_!!6000000005690-2-tps-2422-198.png)

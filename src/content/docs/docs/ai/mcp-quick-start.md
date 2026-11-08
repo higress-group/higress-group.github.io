@@ -140,6 +140,8 @@ Cursor 中配置完成：
 
 > **注意：**
 > 需要Nacos版本为3.0及以上，Higress版本在2.1.2及以上
+>
+> 如果使用 Nacos 3.2.4 及以上版本并通过 Nacos 动态发现 MCP Server 时遇到 `/nacos/v1/cs/configs` 404，请参考 [Nacos 3 兼容（legacy adapter）](/docs/latest/ops/how-tos/nacos-3-legacy-adapter/)。
 
 
 创建Nacos3.x服务来源并完善相关信息

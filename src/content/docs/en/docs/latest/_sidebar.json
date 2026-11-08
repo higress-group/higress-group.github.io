@@ -380,6 +380,13 @@
                 "en": "Enable Swagger UI"
               },
               "link": "docs/ops/how-tos/enable-swagger"
+            },
+            {
+              "label": "Nacos 3 compatibility (legacy adapter)",
+              "translations": {
+                "en": "Nacos 3 compatibility (legacy adapter)"
+              },
+              "link": "docs/ops/how-tos/nacos-3-legacy-adapter"
             }
           ]
         },
