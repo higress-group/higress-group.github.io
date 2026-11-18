@@ -67,7 +67,7 @@ The following requests will be blocked immediately after configuration:
 
 ```bash
 curl http://example.com?foo=Bar
-curl http://exmaple.com/foo/Swagger.html
+curl http://example.com/foo/Swagger.html
 ```
 
 If you want to apply the following configuration to the Ingress named foo under the default namespace (matching requests whose path prefix is `/foo`):
@@ -113,13 +113,13 @@ curl http://example.com?foo=Bar
 Since the following request matches the Ingress of foo, the routing-level configuration is not affected by the default configuration and will not be denied access:
 
 ```bash
-curl http://exmaple.com/foo/Swagger.html
+curl http://example.com/foo/Swagger.html
 ```
 
 Because the route-level configuration blocks requests with `example-key` characters in the request header, the following request will be denied access:
 
 ```bash
-curl http://exmaple.com/foo -H 'exmaple-key: 123'
+curl http://example.com/foo -H 'example-key: 123'
 ```
 
 When there are multiple rules in `matchRules`, they will be matched according to the order of the rules. It is recommended to place the ingress matching configuration before the domain matching, which is also the practice of the Higress console
