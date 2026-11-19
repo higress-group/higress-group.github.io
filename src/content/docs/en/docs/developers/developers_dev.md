@@ -51,6 +51,7 @@ This page shows the Higress development team. Please add your information to the
 | Name | GitHub | Organization |
 |--|-------------------------------| --------------- |
 | Haoyu Yang | [89799969](https://github.com/89799969) | Northeastern University |
+| Rui Wang | [ai-yang](https://github.com/ai-yang) | Zhejiang University |
 | Zhenghao Zhang | [alexzzh](https://github.com/alexzzh) | Koal Software |
 | Qianglin Li | [Charlie17Li](https://github.com/Charlie17Li) | Zhejiang University |
 | Xiaoqiang Feng | [Fengxq2014](https://github.com/Fengxq2014) | Duofei Technology |
