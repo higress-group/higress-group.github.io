@@ -11,6 +11,7 @@ export default {
   "navbar.enterprise": "AI Gateway Enterprise",
   "navbar.enterprise.intro": "AI Gateway Enterprise Overview",
   "navbar.enterprise.solutions": "Solutions",
+  "navbar.rankings": "LLM Traffic Rankings (Chinese)",
   "navbar.community": "Community",
   "navbar.community.blog": "Blog",
   "navbar.community.events": "Events",

@@ -11,6 +11,7 @@ export default {
   "navbar.enterprise": "AI 网关企业版",
   "navbar.enterprise.intro": "AI 网关企业版介绍",
   "navbar.enterprise.solutions": "解决方案",
+  "navbar.rankings": "大模型流量榜",
   "navbar.community": "社区",
   "navbar.community.blog": "博客",
   "navbar.community.events": "活动",
