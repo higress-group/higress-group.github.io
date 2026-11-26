@@ -1,0 +1,2712 @@
+{
+  "schema_version": "1.0",
+  "title": "大模型流量榜",
+  "period": "2026-10",
+  "source_note": "基于 Higress 云上商业版聚合统计，不使用消息正文",
+  "format_notes": {
+    "percent": "百分比以 0–100 表示，例如 16.8 表示 16.8%。",
+    "pp": "pp 表示百分点，不是相对增幅。",
+    "precision": "value 保留页面显示的数值精度，display 保留显示文字与末尾零；合计不另行补足到 100%。",
+    "bounds": "comparison 为 lt 时表示小于 upper_bound；value 为 null，不表示零。",
+    "scope": "仅收录页面明确标注的数值（含展开内容及提示）；不从图形坐标反推逐日数值。"
+  },
+  "models": {
+    "title": "大模型 Token 用量排行",
+    "definitions": {
+      "eligibility": "归并规则：版本快照、量化版本及别名（含 latest）按已确认的具体型号归并，不同参数规模不一概合并。入榜标准：模型用户数 ≥ 10 家，用户数按去重计算。「定制及未识别模型」合并统计、不参与排名，见表下说明。",
+      "token_share": "Token 占比 = 100% × 该模型本期 Token 总量 ÷ 入榜模型与「定制及未识别模型」的 Token 总量之和。「定制及未识别模型」计入分母但不参与排名。",
+      "share_change": "本期 Token 占比与上期之差，单位为百分点（pp）。",
+      "user_coverage": "用户覆盖率 = 100% × 调用该模型的去重用户数 ÷ 本期全站去重用户数。"
+    },
+    "rows": [
+      {
+        "rank": 1,
+        "name": "DeepSeek-V4.1-Flash",
+        "previous_rank": 6,
+        "token_share": {
+          "value": 16.8,
+          "unit": "%",
+          "display": "16.8%"
+        },
+        "share_change": {
+          "value": 13.26,
+          "unit": "pp",
+          "display": "+13.26pp"
+        },
+        "user_coverage": {
+          "value": 40.9,
+          "unit": "%",
+          "display": "40.9%"
+        }
+      },
+      {
+        "rank": 2,
+        "name": "GLM-5.3",
+        "previous_rank": 7,
+        "token_share": {
+          "value": 11.6,
+          "unit": "%",
+          "display": "11.6%"
+        },
+        "share_change": {
+          "value": 8.37,
+          "unit": "pp",
+          "display": "+8.37pp"
+        },
+        "user_coverage": {
+          "value": 20,
+          "unit": "%",
+          "display": "20.0%"
+        }
+      },
+      {
+        "rank": 3,
+        "name": "Qwen3.7-Flash",
+        "previous_rank": 2,
+        "token_share": {
+          "value": 9.7,
+          "unit": "%",
+          "display": "9.7%"
+        },
+        "share_change": {
+          "value": 2.85,
+          "unit": "pp",
+          "display": "+2.85pp"
+        },
+        "user_coverage": {
+          "value": 18.6,
+          "unit": "%",
+          "display": "18.6%"
+        }
+      },
+      {
+        "rank": 4,
+        "name": "DeepSeek-V4-Flash",
+        "previous_rank": 1,
+        "token_share": {
+          "value": 9.5,
+          "unit": "%",
+          "display": "9.5%"
+        },
+        "share_change": {
+          "value": -4.98,
+          "unit": "pp",
+          "display": "-4.98pp"
+        },
+        "user_coverage": {
+          "value": 30.4,
+          "unit": "%",
+          "display": "30.4%"
+        }
+      },
+      {
+        "rank": 5,
+        "name": "GLM-5.2",
+        "previous_rank": 4,
+        "token_share": {
+          "value": 7.8,
+          "unit": "%",
+          "display": "7.8%"
+        },
+        "share_change": {
+          "value": 1.17,
+          "unit": "pp",
+          "display": "+1.17pp"
+        },
+        "user_coverage": {
+          "value": 21.6,
+          "unit": "%",
+          "display": "21.6%"
+        }
+      },
+      {
+        "rank": 6,
+        "name": "Qwen3.7-Plus",
+        "previous_rank": 3,
+        "token_share": {
+          "value": 6.7,
+          "unit": "%",
+          "display": "6.7%"
+        },
+        "share_change": {
+          "value": -0.03,
+          "unit": "pp",
+          "display": "-0.03pp"
+        },
+        "user_coverage": {
+          "value": 35.4,
+          "unit": "%",
+          "display": "35.4%"
+        }
+      },
+      {
+        "rank": 7,
+        "name": "Qwen3.8-Flash",
+        "previous_rank": 8,
+        "token_share": {
+          "value": 4.7,
+          "unit": "%",
+          "display": "4.7%"
+        },
+        "share_change": {
+          "value": 2.76,
+          "unit": "pp",
+          "display": "+2.76pp"
+        },
+        "user_coverage": {
+          "value": 32.8,
+          "unit": "%",
+          "display": "32.8%"
+        }
+      },
+      {
+        "rank": 8,
+        "name": "DeepSeek-V4-Pro",
+        "previous_rank": 9,
+        "token_share": {
+          "value": 3.8,
+          "unit": "%",
+          "display": "3.8%"
+        },
+        "share_change": {
+          "value": 1.8,
+          "unit": "pp",
+          "display": "+1.80pp"
+        },
+        "user_coverage": {
+          "value": 31.6,
+          "unit": "%",
+          "display": "31.6%"
+        }
+      },
+      {
+        "rank": 9,
+        "name": "Qwen3.8-Max",
+        "previous_rank": 5,
+        "token_share": {
+          "value": 3.3,
+          "unit": "%",
+          "display": "3.3%"
+        },
+        "share_change": {
+          "value": -0.26,
+          "unit": "pp",
+          "display": "-0.26pp"
+        },
+        "user_coverage": {
+          "value": 36.7,
+          "unit": "%",
+          "display": "36.7%"
+        }
+      },
+      {
+        "rank": 10,
+        "name": "GLM-5.3-Flash",
+        "previous_rank": 14,
+        "token_share": {
+          "value": 1.1,
+          "unit": "%",
+          "display": "1.1%"
+        },
+        "share_change": {
+          "value": 0.42,
+          "unit": "pp",
+          "display": "+0.42pp"
+        },
+        "user_coverage": {
+          "value": 12.6,
+          "unit": "%",
+          "display": "12.6%"
+        }
+      },
+      {
+        "rank": 11,
+        "name": "Qwen3.5-Plus",
+        "previous_rank": 21,
+        "token_share": {
+          "value": 0.9,
+          "unit": "%",
+          "display": "0.9%"
+        },
+        "share_change": {
+          "value": 0.61,
+          "unit": "pp",
+          "display": "+0.61pp"
+        },
+        "user_coverage": {
+          "value": 15.3,
+          "unit": "%",
+          "display": "15.3%"
+        }
+      },
+      {
+        "rank": 12,
+        "name": "Qwen3.6-Plus",
+        "previous_rank": 13,
+        "token_share": {
+          "value": 0.7,
+          "unit": "%",
+          "display": "0.7%"
+        },
+        "share_change": {
+          "value": -0.21,
+          "unit": "pp",
+          "display": "-0.21pp"
+        },
+        "user_coverage": {
+          "value": 23,
+          "unit": "%",
+          "display": "23.0%"
+        }
+      },
+      {
+        "rank": 13,
+        "name": "Kimi K2.6",
+        "previous_rank": 17,
+        "token_share": {
+          "value": 0.6,
+          "unit": "%",
+          "display": "0.6%"
+        },
+        "share_change": {
+          "value": 0.07,
+          "unit": "pp",
+          "display": "+0.07pp"
+        },
+        "user_coverage": {
+          "value": 9.1,
+          "unit": "%",
+          "display": "9.1%"
+        }
+      },
+      {
+        "rank": 14,
+        "name": "Kimi K3",
+        "previous_rank": 18,
+        "token_share": {
+          "value": 0.5,
+          "unit": "%",
+          "display": "0.5%"
+        },
+        "share_change": {
+          "value": 0.01,
+          "unit": "pp",
+          "display": "+0.01pp"
+        },
+        "user_coverage": {
+          "value": 18.6,
+          "unit": "%",
+          "display": "18.6%"
+        }
+      },
+      {
+        "rank": 15,
+        "name": "Qwen3.5-35B-A3B",
+        "previous_rank": 28,
+        "token_share": {
+          "value": 0.5,
+          "unit": "%",
+          "display": "0.5%"
+        },
+        "share_change": {
+          "value": 0.32,
+          "unit": "pp",
+          "display": "+0.32pp"
+        },
+        "user_coverage": {
+          "value": 2.1,
+          "unit": "%",
+          "display": "2.1%"
+        }
+      },
+      {
+        "rank": 16,
+        "name": "Qwen-Flash",
+        "previous_rank": 27,
+        "token_share": {
+          "value": 0.5,
+          "unit": "%",
+          "display": "0.5%"
+        },
+        "share_change": {
+          "value": 0.25,
+          "unit": "pp",
+          "display": "+0.25pp"
+        },
+        "user_coverage": {
+          "value": 9.8,
+          "unit": "%",
+          "display": "9.8%"
+        }
+      },
+      {
+        "rank": 17,
+        "name": "Qwen3.5-Flash",
+        "previous_rank": 24,
+        "token_share": {
+          "value": 0.4,
+          "unit": "%",
+          "display": "0.4%"
+        },
+        "share_change": {
+          "value": 0.2,
+          "unit": "pp",
+          "display": "+0.20pp"
+        },
+        "user_coverage": {
+          "value": 10.2,
+          "unit": "%",
+          "display": "10.2%"
+        }
+      },
+      {
+        "rank": 18,
+        "name": "Claude Opus 5",
+        "previous_rank": 60,
+        "token_share": {
+          "value": 0.4,
+          "unit": "%",
+          "display": "0.4%"
+        },
+        "share_change": {
+          "value": 0.41,
+          "unit": "pp",
+          "display": "+0.41pp"
+        },
+        "user_coverage": {
+          "value": 3.9,
+          "unit": "%",
+          "display": "3.9%"
+        }
+      },
+      {
+        "rank": 19,
+        "name": "Doubao-Seed-2.0-Pro",
+        "previous_rank": 16,
+        "token_share": {
+          "value": 0.4,
+          "unit": "%",
+          "display": "0.4%"
+        },
+        "share_change": {
+          "value": -0.16,
+          "unit": "pp",
+          "display": "-0.16pp"
+        },
+        "user_coverage": {
+          "value": 6.1,
+          "unit": "%",
+          "display": "6.1%"
+        }
+      },
+      {
+        "rank": 20,
+        "name": "Doubao-Seed-2.1-Turbo",
+        "previous_rank": 15,
+        "token_share": {
+          "value": 0.4,
+          "unit": "%",
+          "display": "0.4%"
+        },
+        "share_change": {
+          "value": -0.23,
+          "unit": "pp",
+          "display": "-0.23pp"
+        },
+        "user_coverage": {
+          "value": 5.6,
+          "unit": "%",
+          "display": "5.6%"
+        }
+      }
+    ],
+    "top_10_share": {
+      "value": 75,
+      "unit": "%",
+      "display": "75.0%"
+    },
+    "remaining_ranked_models": {
+      "after_rank": 20,
+      "model_count": 81,
+      "token_share": {
+        "value": 5.1,
+        "unit": "%",
+        "display": "5.1%"
+      }
+    },
+    "custom_and_unrecognized": {
+      "note": "关于「定制及未识别模型」：定制及未能对应已知型号的模型名称合并统计，不参与本榜排名，本期 Token 占比 14.6%。",
+      "token_share": {
+        "value": 14.6,
+        "unit": "%",
+        "display": "14.6%"
+      }
+    },
+    "growth": {
+      "definition": "按占比变化（pp）从高到低排序。上期无记录的模型单列在下方。",
+      "eligibility": "入榜门槛：两期 Token 占比均 ≥ 0.1%",
+      "rows": [
+        {
+          "name": "DeepSeek-V4.1-Flash",
+          "main_rank": 1,
+          "share_change": {
+            "value": 13.26,
+            "unit": "pp",
+            "display": "+13.26pp"
+          },
+          "previous_token_share": {
+            "value": 3.5,
+            "unit": "%",
+            "display": "3.5%"
+          },
+          "current_token_share": {
+            "value": 16.8,
+            "unit": "%",
+            "display": "16.8%"
+          }
+        },
+        {
+          "name": "GLM-5.3",
+          "main_rank": 2,
+          "share_change": {
+            "value": 8.37,
+            "unit": "pp",
+            "display": "+8.37pp"
+          },
+          "previous_token_share": {
+            "value": 3.2,
+            "unit": "%",
+            "display": "3.2%"
+          },
+          "current_token_share": {
+            "value": 11.6,
+            "unit": "%",
+            "display": "11.6%"
+          }
+        },
+        {
+          "name": "Qwen3.7-Flash",
+          "main_rank": 3,
+          "share_change": {
+            "value": 2.85,
+            "unit": "pp",
+            "display": "+2.85pp"
+          },
+          "previous_token_share": {
+            "value": 6.8,
+            "unit": "%",
+            "display": "6.8%"
+          },
+          "current_token_share": {
+            "value": 9.7,
+            "unit": "%",
+            "display": "9.7%"
+          }
+        },
+        {
+          "name": "Qwen3.8-Flash",
+          "main_rank": 7,
+          "share_change": {
+            "value": 2.76,
+            "unit": "pp",
+            "display": "+2.76pp"
+          },
+          "previous_token_share": {
+            "value": 2,
+            "unit": "%",
+            "display": "2.0%"
+          },
+          "current_token_share": {
+            "value": 4.7,
+            "unit": "%",
+            "display": "4.7%"
+          }
+        },
+        {
+          "name": "DeepSeek-V4-Pro",
+          "main_rank": 8,
+          "share_change": {
+            "value": 1.8,
+            "unit": "pp",
+            "display": "+1.80pp"
+          },
+          "previous_token_share": {
+            "value": 2,
+            "unit": "%",
+            "display": "2.0%"
+          },
+          "current_token_share": {
+            "value": 3.8,
+            "unit": "%",
+            "display": "3.8%"
+          }
+        }
+      ]
+    },
+    "newly_observed": {
+      "note": "本期新出现模型（上期无记录，不参与涨幅排序）",
+      "rows": [
+        {
+          "name": "Claude Haiku 5.5",
+          "token_share": {
+            "value": null,
+            "upper_bound": 0.01,
+            "comparison": "lt",
+            "unit": "%",
+            "display": "<0.01%"
+          }
+        }
+      ]
+    }
+  },
+  "agents": {
+    "title": "Agent 产品与框架排行",
+    "definitions": {
+      "eligibility": "仅统计可识别的 Agent 产品与框架。收录门槛为去重用户数 ≥ 10 家且 Token 占比 ≥ 0.01%；未识别的调用不计入本榜。",
+      "token_share": "Token 用量占比 = 100% × 该对象的 Token 总量 ÷ 已收录对象的 Token 总量之和。各行占比在四舍五入前合计为 100%。",
+      "user_coverage": "用户覆盖率 = 100% × 通过该 Agent 发起调用的去重用户数 ÷ 对应样本期内的全站去重用户数。",
+      "average_dialogue_depth": "每次调用时，大模型收到的用户输入平均有多少条，包括携带的历史消息，部分工具结果也可能计入用户消息，不完全代表一个完整会话聊了多少轮。仅统计已记录且至少含1条用户消息的有效请求。"
+    },
+    "rows": [
+      {
+        "rank": 1,
+        "name": "Claude Code",
+        "token_share": {
+          "value": 61.57,
+          "unit": "%",
+          "display": "61.57%"
+        },
+        "user_coverage": {
+          "value": 24.7,
+          "unit": "%",
+          "display": "24.7%"
+        },
+        "average_dialogue_depth": {
+          "value": 54.8,
+          "unit": "条",
+          "display": "54.8条"
+        }
+      },
+      {
+        "rank": 2,
+        "name": "Codex",
+        "token_share": {
+          "value": 20.19,
+          "unit": "%",
+          "display": "20.19%"
+        },
+        "user_coverage": {
+          "value": 21.2,
+          "unit": "%",
+          "display": "21.2%"
+        },
+        "average_dialogue_depth": {
+          "value": 15.4,
+          "unit": "条",
+          "display": "15.4条"
+        }
+      },
+      {
+        "rank": 3,
+        "name": "OpenCode",
+        "token_share": {
+          "value": 15.27,
+          "unit": "%",
+          "display": "15.27%"
+        },
+        "user_coverage": {
+          "value": 16.8,
+          "unit": "%",
+          "display": "16.8%"
+        },
+        "average_dialogue_depth": {
+          "value": 10.9,
+          "unit": "条",
+          "display": "10.9条"
+        }
+      },
+      {
+        "rank": 4,
+        "name": "Spring AI",
+        "token_share": {
+          "value": 1.98,
+          "unit": "%",
+          "display": "1.98%"
+        },
+        "user_coverage": {
+          "value": 9.9,
+          "unit": "%",
+          "display": "9.9%"
+        },
+        "average_dialogue_depth": {
+          "value": 1.3,
+          "unit": "条",
+          "display": "1.3条"
+        }
+      },
+      {
+        "rank": 5,
+        "name": "Qwen Code",
+        "token_share": {
+          "value": 0.53,
+          "unit": "%",
+          "display": "0.53%"
+        },
+        "user_coverage": {
+          "value": 3.9,
+          "unit": "%",
+          "display": "3.9%"
+        },
+        "average_dialogue_depth": {
+          "value": 11.7,
+          "unit": "条",
+          "display": "11.7条"
+        }
+      },
+      {
+        "rank": 6,
+        "name": "Cursor",
+        "token_share": {
+          "value": 0.27,
+          "unit": "%",
+          "display": "0.27%"
+        },
+        "user_coverage": {
+          "value": 4.1,
+          "unit": "%",
+          "display": "4.1%"
+        },
+        "average_dialogue_depth": {
+          "value": 4.9,
+          "unit": "条",
+          "display": "4.9条"
+        }
+      },
+      {
+        "rank": 7,
+        "name": "LangChain",
+        "token_share": {
+          "value": 0.16,
+          "unit": "%",
+          "display": "0.16%"
+        },
+        "user_coverage": {
+          "value": 10.8,
+          "unit": "%",
+          "display": "10.8%"
+        },
+        "average_dialogue_depth": {
+          "value": 1.8,
+          "unit": "条",
+          "display": "1.8条"
+        }
+      },
+      {
+        "rank": 8,
+        "name": "Cline",
+        "token_share": {
+          "value": 0.02,
+          "unit": "%",
+          "display": "0.02%"
+        },
+        "user_coverage": {
+          "value": 2.5,
+          "unit": "%",
+          "display": "2.5%"
+        },
+        "average_dialogue_depth": {
+          "value": 23.1,
+          "unit": "条",
+          "display": "23.1条"
+        }
+      }
+    ],
+    "not_included_count": 12,
+    "not_included_note": "本期另有 12 项未达到收录门槛：去重用户数不足 10 家，或 Token 占比低于 0.01%。"
+  },
+  "usage": {
+    "sample_note": "「输入输出比」「用户使用模型数量」为整期样本。",
+    "input_output_ratio": {
+      "definition": "输入输出比 = 全站输入 Token ÷ 全站输出 Token。输出含推理型模型的思维链 Token。折线为本期的逐日值，末点标注为最后一天的值。",
+      "sample": "全站 · 整期样本",
+      "whole_period": {
+        "value": 30.5,
+        "unit": "比值（输出为1）",
+        "display": "30.5 : 1"
+      },
+      "daily_min": {
+        "value": 24.6,
+        "unit": "比值（输出为1）",
+        "display": "24.6∶1"
+      },
+      "daily_max": {
+        "value": 35,
+        "unit": "比值（输出为1）",
+        "display": "35.0∶1"
+      },
+      "last_day": {
+        "value": 34,
+        "unit": "比值（输出为1）",
+        "display": "34.0 : 1"
+      }
+    },
+    "cache": {
+      "definition": "缓存命中率 = 100% × 命中前缀缓存的输入 Token ÷ 全站输入 Token，两者均以对应样本期为准。这里按输入 Token 计算前缀缓存命中情况，不是按请求数计算的命中比例。分母包含不支持前缀缓存的模型。",
+      "sample": "全站 · 样本短于整期",
+      "hit_rate": {
+        "value": 67.8,
+        "unit": "%",
+        "display": "67.8%"
+      },
+      "input_token_cache_information_coverage": {
+        "value": 93,
+        "unit": "%",
+        "display": "93.0%"
+      }
+    },
+    "weekday_hour_token_share": {
+      "title": "日内 Token 分布（按星期）",
+      "definition": "各格占比 = 同一星期几各天「该小时 Token ÷ 当天全站 Token」的平均值，每行 24 格在四舍五入前合计 100%。按北京时间统计。",
+      "timezone": "Asia/Shanghai",
+      "cells": [
+        {
+          "weekday": "周一",
+          "hour": 0,
+          "share": {
+            "value": 2.2,
+            "unit": "%",
+            "display": "2.2%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 1,
+          "share": {
+            "value": 2,
+            "unit": "%",
+            "display": "2.0%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 2,
+          "share": {
+            "value": 1.9,
+            "unit": "%",
+            "display": "1.9%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 3,
+          "share": {
+            "value": 1.9,
+            "unit": "%",
+            "display": "1.9%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 4,
+          "share": {
+            "value": 1.8,
+            "unit": "%",
+            "display": "1.8%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 5,
+          "share": {
+            "value": 1.6,
+            "unit": "%",
+            "display": "1.6%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 6,
+          "share": {
+            "value": 1.6,
+            "unit": "%",
+            "display": "1.6%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 7,
+          "share": {
+            "value": 1.8,
+            "unit": "%",
+            "display": "1.8%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 8,
+          "share": {
+            "value": 3,
+            "unit": "%",
+            "display": "3.0%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 9,
+          "share": {
+            "value": 5.3,
+            "unit": "%",
+            "display": "5.3%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 10,
+          "share": {
+            "value": 6.9,
+            "unit": "%",
+            "display": "6.9%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 11,
+          "share": {
+            "value": 6.8,
+            "unit": "%",
+            "display": "6.8%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 12,
+          "share": {
+            "value": 4.2,
+            "unit": "%",
+            "display": "4.2%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 13,
+          "share": {
+            "value": 4.9,
+            "unit": "%",
+            "display": "4.9%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 14,
+          "share": {
+            "value": 6.8,
+            "unit": "%",
+            "display": "6.8%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 15,
+          "share": {
+            "value": 7.3,
+            "unit": "%",
+            "display": "7.3%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 16,
+          "share": {
+            "value": 7.3,
+            "unit": "%",
+            "display": "7.3%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 17,
+          "share": {
+            "value": 7,
+            "unit": "%",
+            "display": "7.0%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 18,
+          "share": {
+            "value": 5.8,
+            "unit": "%",
+            "display": "5.8%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 19,
+          "share": {
+            "value": 4.9,
+            "unit": "%",
+            "display": "4.9%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 20,
+          "share": {
+            "value": 4.5,
+            "unit": "%",
+            "display": "4.5%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 21,
+          "share": {
+            "value": 4.2,
+            "unit": "%",
+            "display": "4.2%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 22,
+          "share": {
+            "value": 3.6,
+            "unit": "%",
+            "display": "3.6%"
+          }
+        },
+        {
+          "weekday": "周一",
+          "hour": 23,
+          "share": {
+            "value": 2.9,
+            "unit": "%",
+            "display": "2.9%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 0,
+          "share": {
+            "value": 2.2,
+            "unit": "%",
+            "display": "2.2%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 1,
+          "share": {
+            "value": 2,
+            "unit": "%",
+            "display": "2.0%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 2,
+          "share": {
+            "value": 1.8,
+            "unit": "%",
+            "display": "1.8%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 3,
+          "share": {
+            "value": 1.8,
+            "unit": "%",
+            "display": "1.8%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 4,
+          "share": {
+            "value": 1.6,
+            "unit": "%",
+            "display": "1.6%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 5,
+          "share": {
+            "value": 1.5,
+            "unit": "%",
+            "display": "1.5%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 6,
+          "share": {
+            "value": 1.5,
+            "unit": "%",
+            "display": "1.5%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 7,
+          "share": {
+            "value": 1.7,
+            "unit": "%",
+            "display": "1.7%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 8,
+          "share": {
+            "value": 3.1,
+            "unit": "%",
+            "display": "3.1%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 9,
+          "share": {
+            "value": 5.8,
+            "unit": "%",
+            "display": "5.8%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 10,
+          "share": {
+            "value": 7.2,
+            "unit": "%",
+            "display": "7.2%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 11,
+          "share": {
+            "value": 6.8,
+            "unit": "%",
+            "display": "6.8%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 12,
+          "share": {
+            "value": 4.1,
+            "unit": "%",
+            "display": "4.1%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 13,
+          "share": {
+            "value": 4.9,
+            "unit": "%",
+            "display": "4.9%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 14,
+          "share": {
+            "value": 6.7,
+            "unit": "%",
+            "display": "6.7%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 15,
+          "share": {
+            "value": 7.2,
+            "unit": "%",
+            "display": "7.2%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 16,
+          "share": {
+            "value": 7.2,
+            "unit": "%",
+            "display": "7.2%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 17,
+          "share": {
+            "value": 6.8,
+            "unit": "%",
+            "display": "6.8%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 18,
+          "share": {
+            "value": 5.7,
+            "unit": "%",
+            "display": "5.7%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 19,
+          "share": {
+            "value": 4.8,
+            "unit": "%",
+            "display": "4.8%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 20,
+          "share": {
+            "value": 4.7,
+            "unit": "%",
+            "display": "4.7%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 21,
+          "share": {
+            "value": 4.2,
+            "unit": "%",
+            "display": "4.2%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 22,
+          "share": {
+            "value": 3.7,
+            "unit": "%",
+            "display": "3.7%"
+          }
+        },
+        {
+          "weekday": "周二",
+          "hour": 23,
+          "share": {
+            "value": 2.9,
+            "unit": "%",
+            "display": "2.9%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 0,
+          "share": {
+            "value": 2.5,
+            "unit": "%",
+            "display": "2.5%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 1,
+          "share": {
+            "value": 2.2,
+            "unit": "%",
+            "display": "2.2%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 2,
+          "share": {
+            "value": 2.1,
+            "unit": "%",
+            "display": "2.1%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 3,
+          "share": {
+            "value": 2,
+            "unit": "%",
+            "display": "2.0%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 4,
+          "share": {
+            "value": 1.9,
+            "unit": "%",
+            "display": "1.9%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 5,
+          "share": {
+            "value": 1.7,
+            "unit": "%",
+            "display": "1.7%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 6,
+          "share": {
+            "value": 1.7,
+            "unit": "%",
+            "display": "1.7%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 7,
+          "share": {
+            "value": 1.9,
+            "unit": "%",
+            "display": "1.9%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 8,
+          "share": {
+            "value": 3.3,
+            "unit": "%",
+            "display": "3.3%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 9,
+          "share": {
+            "value": 5.6,
+            "unit": "%",
+            "display": "5.6%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 10,
+          "share": {
+            "value": 6.6,
+            "unit": "%",
+            "display": "6.6%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 11,
+          "share": {
+            "value": 6.4,
+            "unit": "%",
+            "display": "6.4%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 12,
+          "share": {
+            "value": 4.3,
+            "unit": "%",
+            "display": "4.3%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 13,
+          "share": {
+            "value": 4.8,
+            "unit": "%",
+            "display": "4.8%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 14,
+          "share": {
+            "value": 6.3,
+            "unit": "%",
+            "display": "6.3%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 15,
+          "share": {
+            "value": 6.8,
+            "unit": "%",
+            "display": "6.8%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 16,
+          "share": {
+            "value": 6.8,
+            "unit": "%",
+            "display": "6.8%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 17,
+          "share": {
+            "value": 6.5,
+            "unit": "%",
+            "display": "6.5%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 18,
+          "share": {
+            "value": 5.5,
+            "unit": "%",
+            "display": "5.5%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 19,
+          "share": {
+            "value": 4.8,
+            "unit": "%",
+            "display": "4.8%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 20,
+          "share": {
+            "value": 4.7,
+            "unit": "%",
+            "display": "4.7%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 21,
+          "share": {
+            "value": 4.4,
+            "unit": "%",
+            "display": "4.4%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 22,
+          "share": {
+            "value": 3.9,
+            "unit": "%",
+            "display": "3.9%"
+          }
+        },
+        {
+          "weekday": "周三",
+          "hour": 23,
+          "share": {
+            "value": 3.3,
+            "unit": "%",
+            "display": "3.3%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 0,
+          "share": {
+            "value": 2.3,
+            "unit": "%",
+            "display": "2.3%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 1,
+          "share": {
+            "value": 2.1,
+            "unit": "%",
+            "display": "2.1%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 2,
+          "share": {
+            "value": 2.1,
+            "unit": "%",
+            "display": "2.1%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 3,
+          "share": {
+            "value": 1.9,
+            "unit": "%",
+            "display": "1.9%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 4,
+          "share": {
+            "value": 1.8,
+            "unit": "%",
+            "display": "1.8%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 5,
+          "share": {
+            "value": 1.7,
+            "unit": "%",
+            "display": "1.7%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 6,
+          "share": {
+            "value": 1.7,
+            "unit": "%",
+            "display": "1.7%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 7,
+          "share": {
+            "value": 1.8,
+            "unit": "%",
+            "display": "1.8%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 8,
+          "share": {
+            "value": 3.2,
+            "unit": "%",
+            "display": "3.2%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 9,
+          "share": {
+            "value": 5.6,
+            "unit": "%",
+            "display": "5.6%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 10,
+          "share": {
+            "value": 7,
+            "unit": "%",
+            "display": "7.0%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 11,
+          "share": {
+            "value": 6.8,
+            "unit": "%",
+            "display": "6.8%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 12,
+          "share": {
+            "value": 4.1,
+            "unit": "%",
+            "display": "4.1%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 13,
+          "share": {
+            "value": 4.8,
+            "unit": "%",
+            "display": "4.8%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 14,
+          "share": {
+            "value": 6.7,
+            "unit": "%",
+            "display": "6.7%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 15,
+          "share": {
+            "value": 7.2,
+            "unit": "%",
+            "display": "7.2%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 16,
+          "share": {
+            "value": 7.1,
+            "unit": "%",
+            "display": "7.1%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 17,
+          "share": {
+            "value": 6.8,
+            "unit": "%",
+            "display": "6.8%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 18,
+          "share": {
+            "value": 5.6,
+            "unit": "%",
+            "display": "5.6%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 19,
+          "share": {
+            "value": 4.8,
+            "unit": "%",
+            "display": "4.8%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 20,
+          "share": {
+            "value": 4.5,
+            "unit": "%",
+            "display": "4.5%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 21,
+          "share": {
+            "value": 4.1,
+            "unit": "%",
+            "display": "4.1%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 22,
+          "share": {
+            "value": 3.5,
+            "unit": "%",
+            "display": "3.5%"
+          }
+        },
+        {
+          "weekday": "周四",
+          "hour": 23,
+          "share": {
+            "value": 2.8,
+            "unit": "%",
+            "display": "2.8%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 0,
+          "share": {
+            "value": 2.2,
+            "unit": "%",
+            "display": "2.2%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 1,
+          "share": {
+            "value": 2,
+            "unit": "%",
+            "display": "2.0%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 2,
+          "share": {
+            "value": 2,
+            "unit": "%",
+            "display": "2.0%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 3,
+          "share": {
+            "value": 1.9,
+            "unit": "%",
+            "display": "1.9%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 4,
+          "share": {
+            "value": 1.8,
+            "unit": "%",
+            "display": "1.8%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 5,
+          "share": {
+            "value": 1.6,
+            "unit": "%",
+            "display": "1.6%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 6,
+          "share": {
+            "value": 1.6,
+            "unit": "%",
+            "display": "1.6%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 7,
+          "share": {
+            "value": 1.8,
+            "unit": "%",
+            "display": "1.8%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 8,
+          "share": {
+            "value": 3.3,
+            "unit": "%",
+            "display": "3.3%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 9,
+          "share": {
+            "value": 6,
+            "unit": "%",
+            "display": "6.0%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 10,
+          "share": {
+            "value": 7.2,
+            "unit": "%",
+            "display": "7.2%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 11,
+          "share": {
+            "value": 6.9,
+            "unit": "%",
+            "display": "6.9%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 12,
+          "share": {
+            "value": 4.3,
+            "unit": "%",
+            "display": "4.3%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 13,
+          "share": {
+            "value": 5,
+            "unit": "%",
+            "display": "5.0%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 14,
+          "share": {
+            "value": 7,
+            "unit": "%",
+            "display": "7.0%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 15,
+          "share": {
+            "value": 7.4,
+            "unit": "%",
+            "display": "7.4%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 16,
+          "share": {
+            "value": 7.3,
+            "unit": "%",
+            "display": "7.3%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 17,
+          "share": {
+            "value": 6.9,
+            "unit": "%",
+            "display": "6.9%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 18,
+          "share": {
+            "value": 5.4,
+            "unit": "%",
+            "display": "5.4%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 19,
+          "share": {
+            "value": 4.2,
+            "unit": "%",
+            "display": "4.2%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 20,
+          "share": {
+            "value": 4,
+            "unit": "%",
+            "display": "4.0%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 21,
+          "share": {
+            "value": 3.8,
+            "unit": "%",
+            "display": "3.8%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 22,
+          "share": {
+            "value": 3.5,
+            "unit": "%",
+            "display": "3.5%"
+          }
+        },
+        {
+          "weekday": "周五",
+          "hour": 23,
+          "share": {
+            "value": 2.9,
+            "unit": "%",
+            "display": "2.9%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 0,
+          "share": {
+            "value": 3.1,
+            "unit": "%",
+            "display": "3.1%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 1,
+          "share": {
+            "value": 2.7,
+            "unit": "%",
+            "display": "2.7%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 2,
+          "share": {
+            "value": 2.6,
+            "unit": "%",
+            "display": "2.6%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 3,
+          "share": {
+            "value": 2.5,
+            "unit": "%",
+            "display": "2.5%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 4,
+          "share": {
+            "value": 2.4,
+            "unit": "%",
+            "display": "2.4%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 5,
+          "share": {
+            "value": 2.2,
+            "unit": "%",
+            "display": "2.2%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 6,
+          "share": {
+            "value": 2.2,
+            "unit": "%",
+            "display": "2.2%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 7,
+          "share": {
+            "value": 2.4,
+            "unit": "%",
+            "display": "2.4%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 8,
+          "share": {
+            "value": 3.7,
+            "unit": "%",
+            "display": "3.7%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 9,
+          "share": {
+            "value": 5.3,
+            "unit": "%",
+            "display": "5.3%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 10,
+          "share": {
+            "value": 5.9,
+            "unit": "%",
+            "display": "5.9%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 11,
+          "share": {
+            "value": 5.9,
+            "unit": "%",
+            "display": "5.9%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 12,
+          "share": {
+            "value": 4.6,
+            "unit": "%",
+            "display": "4.6%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 13,
+          "share": {
+            "value": 4.7,
+            "unit": "%",
+            "display": "4.7%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 14,
+          "share": {
+            "value": 5.6,
+            "unit": "%",
+            "display": "5.6%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 15,
+          "share": {
+            "value": 6,
+            "unit": "%",
+            "display": "6.0%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 16,
+          "share": {
+            "value": 6,
+            "unit": "%",
+            "display": "6.0%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 17,
+          "share": {
+            "value": 5.7,
+            "unit": "%",
+            "display": "5.7%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 18,
+          "share": {
+            "value": 4.8,
+            "unit": "%",
+            "display": "4.8%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 19,
+          "share": {
+            "value": 4.3,
+            "unit": "%",
+            "display": "4.3%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 20,
+          "share": {
+            "value": 4.4,
+            "unit": "%",
+            "display": "4.4%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 21,
+          "share": {
+            "value": 4.6,
+            "unit": "%",
+            "display": "4.6%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 22,
+          "share": {
+            "value": 4.4,
+            "unit": "%",
+            "display": "4.4%"
+          }
+        },
+        {
+          "weekday": "周六",
+          "hour": 23,
+          "share": {
+            "value": 3.8,
+            "unit": "%",
+            "display": "3.8%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 0,
+          "share": {
+            "value": 3.6,
+            "unit": "%",
+            "display": "3.6%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 1,
+          "share": {
+            "value": 3.3,
+            "unit": "%",
+            "display": "3.3%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 2,
+          "share": {
+            "value": 3.2,
+            "unit": "%",
+            "display": "3.2%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 3,
+          "share": {
+            "value": 3,
+            "unit": "%",
+            "display": "3.0%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 4,
+          "share": {
+            "value": 2.9,
+            "unit": "%",
+            "display": "2.9%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 5,
+          "share": {
+            "value": 2.7,
+            "unit": "%",
+            "display": "2.7%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 6,
+          "share": {
+            "value": 2.6,
+            "unit": "%",
+            "display": "2.6%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 7,
+          "share": {
+            "value": 2.8,
+            "unit": "%",
+            "display": "2.8%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 8,
+          "share": {
+            "value": 3.7,
+            "unit": "%",
+            "display": "3.7%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 9,
+          "share": {
+            "value": 4.4,
+            "unit": "%",
+            "display": "4.4%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 10,
+          "share": {
+            "value": 4.7,
+            "unit": "%",
+            "display": "4.7%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 11,
+          "share": {
+            "value": 4.8,
+            "unit": "%",
+            "display": "4.8%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 12,
+          "share": {
+            "value": 4.6,
+            "unit": "%",
+            "display": "4.6%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 13,
+          "share": {
+            "value": 4.6,
+            "unit": "%",
+            "display": "4.6%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 14,
+          "share": {
+            "value": 4.7,
+            "unit": "%",
+            "display": "4.7%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 15,
+          "share": {
+            "value": 4.9,
+            "unit": "%",
+            "display": "4.9%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 16,
+          "share": {
+            "value": 4.9,
+            "unit": "%",
+            "display": "4.9%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 17,
+          "share": {
+            "value": 4.7,
+            "unit": "%",
+            "display": "4.7%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 18,
+          "share": {
+            "value": 4.6,
+            "unit": "%",
+            "display": "4.6%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 19,
+          "share": {
+            "value": 4.8,
+            "unit": "%",
+            "display": "4.8%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 20,
+          "share": {
+            "value": 5.1,
+            "unit": "%",
+            "display": "5.1%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 21,
+          "share": {
+            "value": 5.4,
+            "unit": "%",
+            "display": "5.4%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 22,
+          "share": {
+            "value": 5.3,
+            "unit": "%",
+            "display": "5.3%"
+          }
+        },
+        {
+          "weekday": "周日",
+          "hour": 23,
+          "share": {
+            "value": 4.5,
+            "unit": "%",
+            "display": "4.5%"
+          }
+        }
+      ],
+      "note": "峰值多出现在 15 时、16 时、21 时，谷值多出现在 6 时、5 时；单小时占比最高为 周五 15 时（7.4%）。"
+    },
+    "models_per_user": {
+      "title": "用户使用模型数量",
+      "definition": "各档占比 = 100% × 该档用户数 ÷ 本期有 Token 用量的去重用户数。每家用户仅计入有 Token 用量的模型；同一已识别型号合并计数，未识别名称不统一合并为一个模型。",
+      "rows": [
+        {
+          "label": "1 个",
+          "share": {
+            "value": 17.2,
+            "unit": "%",
+            "display": "17.2%"
+          }
+        },
+        {
+          "label": "2 个",
+          "share": {
+            "value": 9.4,
+            "unit": "%",
+            "display": "9.4%"
+          }
+        },
+        {
+          "label": "3–4 个",
+          "share": {
+            "value": 11.5,
+            "unit": "%",
+            "display": "11.5%"
+          }
+        },
+        {
+          "label": "5–9 个",
+          "share": {
+            "value": 17.7,
+            "unit": "%",
+            "display": "17.7%"
+          }
+        },
+        {
+          "label": "≥ 10 个",
+          "share": {
+            "value": 44.1,
+            "unit": "%",
+            "display": "44.1%"
+          }
+        }
+      ],
+      "multiple_model_user_share": {
+        "value": 82.8,
+        "unit": "%",
+        "display": "82.8%"
+      },
+      "average_models_per_user": {
+        "value": 13.71,
+        "unit": "个",
+        "display": "13.71"
+      }
+    },
+    "input_length_request_share": {
+      "title": "输入长度 · 请求数占比",
+      "definition": "各档占比 = 100% × 该档请求数 ÷ 全部已记录输入长度的请求数。输入长度为单次请求的输入 Token 数，1K = 1024 Token。",
+      "rows": [
+        {
+          "label": "< 1K",
+          "share": {
+            "value": 32,
+            "unit": "%",
+            "display": "32.0%"
+          }
+        },
+        {
+          "label": "1K–<4K",
+          "share": {
+            "value": 42.8,
+            "unit": "%",
+            "display": "42.8%"
+          }
+        },
+        {
+          "label": "4K–<32K",
+          "share": {
+            "value": 22.8,
+            "unit": "%",
+            "display": "22.8%"
+          }
+        },
+        {
+          "label": "≥ 32K",
+          "share": {
+            "value": 2.4,
+            "unit": "%",
+            "display": "2.4%"
+          }
+        }
+      ]
+    },
+    "input_length_token_share": {
+      "title": "输入长度 · Token 占比",
+      "definition": "各档占比 = 100% × 该档 Token 总量 ÷ 全部已记录输入长度的请求对应的 Token 总量。分档与「输入长度 · 请求数占比」一致。",
+      "rows": [
+        {
+          "label": "< 1K",
+          "share": {
+            "value": 9.7,
+            "unit": "%",
+            "display": "9.7%"
+          }
+        },
+        {
+          "label": "1K–<4K",
+          "share": {
+            "value": 18.1,
+            "unit": "%",
+            "display": "18.1%"
+          }
+        },
+        {
+          "label": "4K–<32K",
+          "share": {
+            "value": 29.3,
+            "unit": "%",
+            "display": "29.3%"
+          }
+        },
+        {
+          "label": "≥ 32K",
+          "share": {
+            "value": 42.8,
+            "unit": "%",
+            "display": "42.8%"
+          }
+        }
+      ]
+    },
+    "dialogue_depth": {
+      "title": "对话深度分布",
+      "definition": "按单次请求携带的用户消息条数分档，各档占比 = 100% × 该档对应请求的总 Token（包含缓存 Token）÷ 有效样本对应请求的总 Token（包含缓存 Token）。仅统计已记录且至少含1条用户消息的有效请求；分档不代表会话轮数。",
+      "rows": [
+        {
+          "label": "1 条",
+          "share": {
+            "value": 26.3,
+            "unit": "%",
+            "display": "26.3%"
+          }
+        },
+        {
+          "label": "2–3 条",
+          "share": {
+            "value": 14.3,
+            "unit": "%",
+            "display": "14.3%"
+          }
+        },
+        {
+          "label": "4–9 条",
+          "share": {
+            "value": 17.8,
+            "unit": "%",
+            "display": "17.8%"
+          }
+        },
+        {
+          "label": "≥ 10 条",
+          "share": {
+            "value": 41.5,
+            "unit": "%",
+            "display": "41.5%"
+          }
+        }
+      ],
+      "average": {
+        "value": 4.43,
+        "unit": "条",
+        "display": "4.43 条"
+      },
+      "average_definition": "每次调用时，大模型收到的用户输入平均有多少条，包括携带的历史消息，部分工具结果也可能计入用户消息，不完全代表一个完整会话聊了多少轮。仅统计已记录且至少含1条用户消息的有效请求。"
+    },
+    "non_success": {
+      "title": "非成功调用的原因",
+      "definition": "非成功调用占比 = 100% × 样本内非成功模型请求数 ÷ 样本内模型请求总数。该比例不代表全部网关 HTTP 请求的统计，也不等同于网关故障率。各类原因占比 = 100% × 该类非成功请求数 ÷ 同一样本内非成功请求总数。下游连接中断：客户端在响应结束前断开连接；上游返回错误：错误响应由上游服务返回；用户配置限流：命中用户配置的限流策略；其他异常：路由、连接、超时、协议与响应传输等过程异常，以及信息不足无法归类的请求。",
+      "rows": [
+        {
+          "label": "下游连接中断",
+          "share": {
+            "value": 57.9,
+            "unit": "%",
+            "display": "57.9%"
+          }
+        },
+        {
+          "label": "上游返回错误",
+          "share": {
+            "value": 29,
+            "unit": "%",
+            "display": "29.0%"
+          }
+        },
+        {
+          "label": "其他异常",
+          "share": {
+            "value": 7.3,
+            "unit": "%",
+            "display": "7.3%"
+          }
+        },
+        {
+          "label": "用户配置限流",
+          "share": {
+            "value": 5.7,
+            "unit": "%",
+            "display": "5.7%"
+          }
+        }
+      ],
+      "non_success_share": {
+        "value": 3.1,
+        "unit": "%",
+        "display": "3.1%"
+      }
+    }
+  },
+  "regions": {
+    "sample_note": "本板块使用整期样本，仅统计入榜模型（模型用户数 ≥ 10 家）的调用。",
+    "token_share": {
+      "title": "Token 用量占比",
+      "definition": "Token 用量占比 = 100% × 该省用户本期入榜模型 Token 总量 ÷ 全站入榜模型 Token 总量。",
+      "rows": [
+        {
+          "rank": 1,
+          "province": "浙江",
+          "share": {
+            "value": 21.7,
+            "unit": "%",
+            "display": "21.7%"
+          }
+        },
+        {
+          "rank": 2,
+          "province": "上海",
+          "share": {
+            "value": 15.9,
+            "unit": "%",
+            "display": "15.9%"
+          }
+        },
+        {
+          "rank": 3,
+          "province": "广东",
+          "share": {
+            "value": 13.6,
+            "unit": "%",
+            "display": "13.6%"
+          }
+        },
+        {
+          "rank": 4,
+          "province": "河南",
+          "share": {
+            "value": 13.1,
+            "unit": "%",
+            "display": "13.1%"
+          }
+        },
+        {
+          "rank": 5,
+          "province": "北京",
+          "share": {
+            "value": 7.5,
+            "unit": "%",
+            "display": "7.5%"
+          }
+        },
+        {
+          "rank": 6,
+          "province": "安徽",
+          "share": {
+            "value": 7.2,
+            "unit": "%",
+            "display": "7.2%"
+          }
+        },
+        {
+          "rank": 7,
+          "province": "江苏",
+          "share": {
+            "value": 5.5,
+            "unit": "%",
+            "display": "5.5%"
+          }
+        },
+        {
+          "rank": 8,
+          "province": "湖南",
+          "share": {
+            "value": 4.8,
+            "unit": "%",
+            "display": "4.8%"
+          }
+        },
+        {
+          "rank": 9,
+          "province": "重庆",
+          "share": {
+            "value": 4,
+            "unit": "%",
+            "display": "4.0%"
+          }
+        },
+        {
+          "rank": 10,
+          "province": "山东",
+          "share": {
+            "value": 1.7,
+            "unit": "%",
+            "display": "1.7%"
+          }
+        }
+      ],
+      "top_10_share": {
+        "value": 94.9,
+        "unit": "%",
+        "display": "94.9%"
+      }
+    },
+    "user_share": {
+      "title": "用户数占比",
+      "definition": "用户数占比 = 100% × 该省调用入榜模型的用户数 ÷ 调用入榜模型的用户总数。",
+      "rows": [
+        {
+          "rank": 1,
+          "province": "上海",
+          "share": {
+            "value": 27.2,
+            "unit": "%",
+            "display": "27.2%"
+          }
+        },
+        {
+          "rank": 2,
+          "province": "广东",
+          "share": {
+            "value": 17.8,
+            "unit": "%",
+            "display": "17.8%"
+          }
+        },
+        {
+          "rank": 3,
+          "province": "北京",
+          "share": {
+            "value": 13.7,
+            "unit": "%",
+            "display": "13.7%"
+          }
+        },
+        {
+          "rank": 4,
+          "province": "浙江",
+          "share": {
+            "value": 8.2,
+            "unit": "%",
+            "display": "8.2%"
+          }
+        },
+        {
+          "rank": 5,
+          "province": "江苏",
+          "share": {
+            "value": 4.3,
+            "unit": "%",
+            "display": "4.3%"
+          }
+        },
+        {
+          "rank": 6,
+          "province": "河南",
+          "share": {
+            "value": 1.7,
+            "unit": "%",
+            "display": "1.7%"
+          }
+        },
+        {
+          "rank": 7,
+          "province": "湖南",
+          "share": {
+            "value": 1.7,
+            "unit": "%",
+            "display": "1.7%"
+          }
+        },
+        {
+          "rank": 8,
+          "province": "山东",
+          "share": {
+            "value": 1.4,
+            "unit": "%",
+            "display": "1.4%"
+          }
+        },
+        {
+          "rank": 9,
+          "province": "安徽",
+          "share": {
+            "value": 1.2,
+            "unit": "%",
+            "display": "1.2%"
+          }
+        },
+        {
+          "rank": 10,
+          "province": "重庆",
+          "share": {
+            "value": 1,
+            "unit": "%",
+            "display": "1.0%"
+          }
+        }
+      ],
+      "top_10_share": {
+        "value": 78.3,
+        "unit": "%",
+        "display": "78.3%"
+      }
+    }
+  }
+}
